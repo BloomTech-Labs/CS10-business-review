@@ -1,5 +1,4 @@
-{
-  "dependencies": {
-    "mern-cli": "^2.5.0"
-  }
-}
+
+    "axios": "^0.18.0",
+    "reactstrap": "^6.4.0"
+
