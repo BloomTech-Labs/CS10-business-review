@@ -1,0 +1,32 @@
+{
+  "name": "true-business-backend",
+  "version": "1.0.0",
+  "description": "Backend for 'true-business.'",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "8.10.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  },
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "helmet": "^3.12.0",
+    "mongoose": "^5.0.17"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lambda-School-Labs/CS10-business-review"
+  },
+  "bugs": {
+    "url": "https://github.com/Lambda-School-Labs/CS10-business-review/issues"
+  },
+  "homepage": "https://github.com/Lambda-School-Labs/CS10-business-review#readme"
+}
