@@ -14,7 +14,7 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 
 //Database name
-const db = process.env.MONGOLAB_URI || 'mongodb://localhost/notes';
+const db = process.env.MONGOLAB_URI || 'mongodb://localhost/trueBusiness';
 
 //Connect Database
 mongoose
