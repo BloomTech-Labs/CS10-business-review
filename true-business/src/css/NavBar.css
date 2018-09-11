@@ -1,4 +1,6 @@
-.navbar-container {
+.navbar-container {   
+  position: fixed;  
+  background: darkslategray;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
