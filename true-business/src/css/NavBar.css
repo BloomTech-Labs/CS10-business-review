@@ -1,6 +1,6 @@
-.navbar-container {   
-  position: fixed;  
-  background: darkslategray;
+.navbar-container {
+  position: fixed;
+  z-index: 2;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -13,6 +13,7 @@
   padding: 0;
   margin: 0;
   max-height: 20vh;
+  background-color: darkslategrey;
 }
 .navbar-container .navbar-container__logo {
   max-width: 30%;
@@ -37,6 +38,7 @@
   margin-top: 2rem;
   min-width: 80%;
   font-size: 1.5rem;
+  padding: 0.2rem;
 }
 .navbar-container .navbar-container__center .navbar-container__buttons {
   display: flex;
@@ -88,15 +90,16 @@
   justify-content: center;
   align-items: center;
   height: 15%;
-  width: 50%;
+  width: 60%;
   font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
   font-size: 1.5rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  background: black;
+  background: darkslategrey;
   color: white;
   text-align: center;
+  top: -40px !important;
 }
 .popover .popover-header {
   padding: 0.2rem;
