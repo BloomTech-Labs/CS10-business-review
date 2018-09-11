@@ -40,7 +40,6 @@ class LandingPage extends Component {
 
   closeModal() {
     this.setState({ modalIsOpen: false });
-    console.log(this.state.modalInfo.title);
   }
 
   render() {
