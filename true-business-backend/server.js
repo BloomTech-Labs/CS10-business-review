@@ -1,4 +1,4 @@
-//We bring the server 
+//We bring the server
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -8,13 +8,13 @@ const bodyParser = require('body-parser');
 const server = express();
 
 //Bringin Mongoose Database
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 //Bringing the route
-const routes = require("./routes");
+const routes = require('./routes');
 
 //Database name
-const db = process.env.MONGOLAB_URI || 'mongodb://localhost/trueBusiness';
+const db = 'mongodb://localhost/trueBusiness';
 
 //Connect Database
 mongoose
@@ -23,7 +23,7 @@ mongoose
   .catch(err => console.log('database is not connected'));
 
 //Security
-server.use(helmet())
+server.use(helmet());
 
 //Permissions
 server.use(cors());
@@ -33,7 +33,7 @@ server.use(express.json());
 //server.use(bodyParser.json()); //express.jason
 
 //Connect the route to the server
-server.use("/", routes);
+server.use('/', routes);
 
 //Status server
 const port = process.env.PORT || 3000;

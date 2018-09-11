@@ -16,12 +16,12 @@ router.post('/login', (request, response) => {
   UserController.login(request, response);
 });
 
-router.post('/API/businessModel', (req, res) => {
-  const { business, contact } = req.body;
-  console.log(businessInformation);
+router.post('/api/Business', (req, res) => {
+  const business = req.body;
+  console.log(business);
 
-  if (business.name && business.type && contact.type) {
-    const Business = new Business(business, contact);
+  if (business.name && business.type && business.contact) {
+    const Business = new Business(business);
 
     Business.save() // returns a promise
       .then(function(business) {
@@ -40,7 +40,9 @@ router.post('/API/businessModel', (req, res) => {
 });
 
 router.get('/api/business', function(req, res) {
-  Business.find({})
+  console.log(res);
+  business
+    .find({})
     .then(function(business) {
       res.status(200).json(business);
     })
