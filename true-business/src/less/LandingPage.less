@@ -1,0 +1,115 @@
+@import 'mixins.less';
+
+.landing-container {
+  .containers();
+  .landing-container__reviews-container {
+    .containers();
+    padding: 2rem 0;
+    .landing-container__title {
+      font-size: 3rem;
+      color: white;
+      text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+    }
+    .landing-container__reviews {
+      .containers(@flexDirection: row, @width: 90%);
+      padding: 1rem 0;
+      flex-wrap: wrap;
+      min-height: 100%;
+      .landing-container__review {
+        .containers(@width: 20%, @fontSize: 1.25rem);
+        min-width: 10rem;
+        margin: 0 1rem;
+        flex-wrap: nowrap;
+        color: white;
+        text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+        opacity: 0.7;
+        padding: 1rem 0;
+        .landing-container__picture {
+          width: 10rem;
+          height: 10rem;
+          background-color: black;
+        }
+        .landing-container__picture:hover {
+          cursor: pointer;
+        }
+        .landing-container__item {
+          width: 10rem;
+          padding: 0.2rem 0;
+          text-align: center;
+          text-overflow: ellipsis;
+        }
+        .landing-container__item--hover {
+          width: 10rem;
+          padding: 0.2rem 0;
+          text-align: center;
+          cursor: pointer;
+          text-overflow: ellipsis;
+        }
+        .landing-container__item--hover:hover {
+          cursor: pointer;
+        }
+      }
+      .landing-container__review:hover {
+        opacity: 1;
+        .landing-container__item {
+          background: black;
+        }
+        .landing-container__item--hover {
+          background: black;
+        }
+      }
+    }
+  }
+}
+.landing-container__modal {
+  .modal-container {
+    .containers();
+    .modal__header {
+      .containers(@alignItems:flex-start);
+      margin: 1rem;
+      color: black;
+      .header__title {
+        font-size: 3rem;
+      }
+      .header__review {
+        font-size: 2rem;
+      }
+    }
+    .modal__body {
+      .containers(@height: 50%);
+      color: black;
+      .body__image {
+        width: 25rem;
+        height: 25rem;
+        background:black;
+      }
+      .body__stars {
+        text-align: center;
+        width: 50%;
+      }
+      .body__review {
+        font-size: 1.25rem;
+        padding: .5rem;
+        border: .1rem solid black;
+        width: 75%;
+        height: 25vh;
+      }
+    }
+    .modal__footer {
+      .containers();
+      color: black;
+      .footer__button {
+        border: outset;
+        width: 15%;
+        padding: 0.5rem;
+        margin: 0 2rem;
+        font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+        font-size: 1.5rem;
+      }
+      .modal__button:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,190 @@
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.landing-container .landing-container__reviews-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  padding: 2rem 0;
+}
+.landing-container .landing-container__reviews-container .landing-container__title {
+  font-size: 3rem;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 90%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  padding: 1rem 0;
+  flex-wrap: wrap;
+  min-height: 100%;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 20%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  min-width: 10rem;
+  margin: 0 1rem;
+  flex-wrap: nowrap;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  opacity: 0.7;
+  padding: 1rem 0;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture {
+  width: 10rem;
+  height: 10rem;
+  background-color: black;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture:hover {
+  cursor: pointer;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__item {
+  width: 10rem;
+  padding: 0.2rem 0;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__item--hover {
+  width: 10rem;
+  padding: 0.2rem 0;
+  text-align: center;
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__item--hover:hover {
+  cursor: pointer;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review:hover {
+  opacity: 1;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review:hover .landing-container__item {
+  background: black;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review:hover .landing-container__item--hover {
+  background: black;
+}
+.landing-container__modal .modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.landing-container__modal .modal-container .modal__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  margin: 1rem;
+  color: black;
+}
+.landing-container__modal .modal-container .modal__header .header__title {
+  font-size: 3rem;
+}
+.landing-container__modal .modal-container .modal__header .header__review {
+  font-size: 2rem;
+}
+.landing-container__modal .modal-container .modal__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  color: black;
+}
+.landing-container__modal .modal-container .modal__body .body__image {
+  width: 25rem;
+  height: 25rem;
+  background: black;
+}
+.landing-container__modal .modal-container .modal__body .body__stars {
+  text-align: center;
+  width: 50%;
+}
+.landing-container__modal .modal-container .modal__body .body__review {
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  border: 0.1rem solid black;
+  width: 75%;
+  height: 25vh;
+}
+.landing-container__modal .modal-container .modal__footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  color: black;
+}
+.landing-container__modal .modal-container .modal__footer .footer__button {
+  border: outset;
+  width: 15%;
+  padding: 0.5rem;
+  margin: 0 2rem;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-size: 1.5rem;
+}
+.landing-container__modal .modal-container .modal__footer .modal__button:hover {
+  cursor: pointer;
+}
