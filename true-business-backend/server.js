@@ -14,7 +14,7 @@ const mongoose = require('mongoose');
 const routes = require('./routes');
 
 //Database name
-const db = 'mongodb://localhost/trueBusiness';
+const db = 'mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness';
 
 //Connect Database
 mongoose

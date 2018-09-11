@@ -21,9 +21,10 @@ router.post('/api/Business', (req, res) => {
   console.log(business);
 
   if (business.name && business.type && business.contact) {
-    const Business = new Business(business);
+    const chicken = new Business(business);
 
-    Business.save() // returns a promise
+    chicken
+      .save() // returns a promise
       .then(function(business) {
         res.status(201).json(business);
       })
@@ -40,7 +41,6 @@ router.post('/api/Business', (req, res) => {
 });
 
 router.get('/api/business', function(req, res) {
-  console.log(res);
   business
     .find({})
     .then(function(business) {
