@@ -1,0 +1,95 @@
+.signin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.signin-container .signin-container__header {
+  font-size: 3rem;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  height: auto;
+}
+.signin-container .signin-container__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.signin-container .signin-container__form .signin-container__input {
+  border: 0.1rem solid black;
+  margin-top: 2rem;
+  min-width: 40%;
+  font-size: 1.5rem;
+}
+.signin-container .signin-container__form .signin-container__error--hidden {
+  display: none;
+}
+.signin-container .signin-container__form .signin-container__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.signin-container .signin-container__form .signin-container__buttons .signin-container__button {
+  border: outset;
+  padding: 0.5rem;
+  margin: 2rem;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-size: 1.5rem;
+  border-color: black;
+}
+.signin-container .signin-container__form .signin-container__buttons .signin-container__button:hover {
+  cursor: pointer;
+}
+.popover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+  width: 50%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  background: black;
+  color: white;
+  text-align: center;
+}
+.popover .popover-header {
+  padding: 0.2rem;
+}
+.popover .popover-body {
+  padding: 0.2rem;
+}
+.popover .popover-button {
+  border: outset;
+  width: 30%;
+  padding: 0.2rem;
+  margin: 0 2rem;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-size: 1.5rem;
+}

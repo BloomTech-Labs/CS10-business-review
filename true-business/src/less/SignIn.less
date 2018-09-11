@@ -1,0 +1,59 @@
+@import 'mixins.less';
+
+.signin-container {
+  .containers(@height: 100vh);
+  .signin-container__header {
+    font-size: 3rem;
+    color: white;
+    text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+    height: auto;
+  }
+  .signin-container__form {
+    .containers(@height: auto);
+    .signin-container__input {
+      border: 0.1rem solid black;
+      margin-top: 2rem;
+      min-width: 40%;
+      font-size: 1.5rem;
+    }
+    .signin-container__error {
+    }
+    .signin-container__error--hidden {
+      display: none;
+    }
+    .signin-container__buttons {
+      .containers(@flexDirection:row);
+      .signin-container__button {
+        border: outset;
+        padding: 0.5rem;
+        margin: 2rem;
+        font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+        font-size: 1.5rem;
+        border-color: black;
+      }
+      .signin-container__button:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+.popover {
+  .containers(@width: 50%, @height: 15%, @fontSize: 1.5rem);
+  background: black;
+  color: white;
+  text-align: center;
+  .popover-header {
+    padding: 0.2rem;
+  }
+  .popover-body {
+    padding: 0.2rem;
+  }
+  .popover-button {
+    border: outset;
+    width: 30%;
+    padding: 0.2rem;
+    margin: 0 2rem;
+    font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+    font-size: 1.5rem;
+  }
+}
