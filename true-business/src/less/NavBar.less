@@ -3,6 +3,7 @@
 .navbar-container {
   position: fixed; 
   border-bottom: .1rem solid white;
+  z-index: 1;
   .containers(@flexDirection:row, @justifyContent: space-between, @height: 20vh);
   max-height: 20vh;
   background-color: darkslategrey;
@@ -51,12 +52,14 @@
   }
 }
 .popover {
-  .containers(@width: 60%, @height: 15%, @fontSize: 1.5rem);
+  .containers(@height: 15%, @fontSize: 1.5rem);
   background: rgb(38, 63, 63) !important;
   border: .1rem solid black;
   color: white;
   text-align: center;
   top: -40px !important;
+  width: 60% !important;
+  z-index: 2;
   .popover-header {
     padding: 0.2rem;
   }
@@ -70,5 +73,8 @@
     margin: 0 2rem;
     font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
     font-size: 1.5rem;
+  }
+  .popover-button:hover {
+    cursor: pointer;
   }
 }
