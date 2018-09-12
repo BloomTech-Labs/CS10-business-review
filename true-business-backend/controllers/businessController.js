@@ -24,28 +24,44 @@ const createBusiness = (req, res) => {
     }
 };
 
-const getBusiness = (req, res) => {
-    const { name } = req.params;
+const getBusinessByName = (request, response) => {
+    const { name } = request.params;
     console.log("Getting Business: " + name)
     Business
         .findOne({"name": name})
         .then(business => {
             if(business) {
-                res.status(200).json(business);
+                response.status(200).json(business);
             } else {
-                res.status(400).json({
+                response.status(400).json({
                     error: "Business not found."
                 })
             }
         })
         .catch(function(error) {
-            res.status(500).json({ 
+            response.status(500).json({ 
                 error: 'The business information could not be retrieved. (' + error + ')' 
+            });
+        });
+};
+
+const getBusinessById = (request, response) => {
+    const { id } = request.params;
+
+    Business
+        .findById(id)
+        .then(function(business) {
+            response.status(200).json(business);
+        })
+        .catch(function(error) {
+            response.status(500).json({ 
+                error: 'The information could not be retrieved.' 
             });
         });
 };
 
 module.exports = {
     createBusiness,
-    getBusiness
+    getBusinessByName,
+    getBusinessById
 };

@@ -3,7 +3,6 @@ const express = require('express');
 const UserController = require('../controllers/userController');
 const BusinessController = require('../controllers/businessController');
 const router = express.Router();
-const Business = require('../API/businessModel');
 
 router.get('/', (request, response) => {
   response.status(200).json({ api: 'Server running OK.' });
@@ -21,22 +20,12 @@ router.post('/api/Business', (request, response) => {
   BusinessController.createBusiness(request, response);
 });
 
-router.get('/api/business/:name', function(request, response) {
-  BusinessController.getBusiness(request, response);
+router.get('/api/business/ByName/:name', function(request, response) {
+  BusinessController.getBusinessByName(request, response);
 });
 
 router.get('/api/business/:id', function(req, res) {
-  const { id } = req.params;
-
-  Business.findById(id)
-    .then(function(business) {
-      res.status(200).json(business);
-    })
-    .catch(function(error) {
-      res
-        .status(500)
-        .json({ error: 'The information could not be retrieved.' });
-    });
+  BusinessController.getBusinessById(req, res);
 });
 
 // router.get("/API/Business", function(req, res) {
