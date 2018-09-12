@@ -11,6 +11,7 @@
   padding: 0;
   margin: 0;
   padding-top: 20vh;
+  cursor: default;
 }
 .landing-container .landing-container__reviews-container {
   display: flex;
@@ -64,7 +65,7 @@
   flex-wrap: nowrap;
   color: white;
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
-  opacity: 0.7;
+  opacity: 0.5;
   padding: 1rem 0;
 }
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture {
@@ -80,13 +81,14 @@
   padding: 0.2rem 0;
   text-align: center;
   text-overflow: ellipsis;
+  padding: 0.3rem;
 }
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__item--hover {
   width: 10rem;
   padding: 0.2rem 0;
   text-align: center;
-  cursor: pointer;
   text-overflow: ellipsis;
+  padding: 0.3rem;
 }
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__item--hover:hover {
   cursor: pointer;
@@ -100,33 +102,13 @@
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review:hover .landing-container__item--hover {
   background: black;
 }
-.landing-container__modal .modal-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
-  font-size: 2rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-}
 .landing-container__modal .modal-container .modal__header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
-  height: 100%;
-  width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
-  font-size: 2rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
+  flex-direction: column;
   margin: 1rem;
-  color: black;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
 }
 .landing-container__modal .modal-container .modal__header .header__title {
   font-size: 3rem;
@@ -137,16 +119,9 @@
 .landing-container__modal .modal-container .modal__body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 50%;
-  width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
-  font-size: 2rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  color: black;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
 }
 .landing-container__modal .modal-container .modal__body .body__image {
   width: 25rem;
@@ -156,6 +131,7 @@
 .landing-container__modal .modal-container .modal__body .body__stars {
   text-align: center;
   width: 50%;
+  margin: 1rem 0;
 }
 .landing-container__modal .modal-container .modal__body .body__review {
   font-size: 1.25rem;
@@ -163,20 +139,13 @@
   border: 0.1rem solid black;
   width: 75%;
   height: 25vh;
+  overflow: auto;
 }
 .landing-container__modal .modal-container .modal__footer {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
-  font-size: 2rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
   color: black;
+  margin-top: 1rem;
 }
 .landing-container__modal .modal-container .modal__footer .footer__button {
   border: outset;
@@ -188,4 +157,10 @@
 }
 .landing-container__modal .modal-container .modal__footer .modal__button:hover {
   cursor: pointer;
+}
+.ReactModal__Overlay {
+  z-index: 1000;
+}
+.ReactModal__Body--open {
+  overflow-y: hidden;
 }

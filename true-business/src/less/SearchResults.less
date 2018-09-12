@@ -1,0 +1,57 @@
+@import 'mixins.less';
+
+.search-container {
+  .containers(@height: 100vh, @justifyContent: flex-start);
+  padding-top: 25vh;
+  cursor: default;
+  .search-container__title {
+    font-size: 3rem;
+    color: white;
+  }
+  .search-container__results {
+    .containers(@flexDirection: row, @width: 90%, @height: auto);
+    padding: 3rem 0;
+    flex-wrap: wrap;
+    color: white;
+    .results__result {
+      .containers(@width: 20%, @fontSize: 1.25rem);
+      min-width: 10rem;
+      margin: 0 1rem;
+      flex-wrap: wrap;
+      color: white;
+      text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+      opacity: 0.5;
+      padding: 1rem 0;
+      float: left;
+      .result__picture {
+        width: 10rem;
+        height: 10rem;
+        background-color: black;
+      }
+      .result__picture {
+        width: 10rem;
+        height: 10rem;
+        background-color: black;
+      }
+      .result__picture:hover {
+        cursor: pointer;
+      }
+      .result__item {
+        width: 10rem;
+        padding: 0.2rem 0;
+        text-align: center;
+        text-overflow: ellipsis;
+        padding: 0.3rem;
+      }
+    }
+    .results__result:hover {
+      opacity: 1;
+      .result__item {
+        background: black;
+      }
+      .result__item--hover {
+        background: black;
+      }
+    }
+  }
+}
