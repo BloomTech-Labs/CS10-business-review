@@ -3,5 +3,8 @@
     "less": "^3.8.1",
     "less-watch-compiler": "^1.11.3",
     "react-modal": "^3.5.1"
+  },
+  "scripts": {
+    "start": "node server.js"
   }
 }
