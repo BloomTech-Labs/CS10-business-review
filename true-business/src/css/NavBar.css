@@ -1,6 +1,5 @@
 .navbar-container {
   position: fixed;
-  z-index: 2;
   border-bottom: 0.1rem solid white;
   display: flex;
   flex-direction: row;
@@ -100,7 +99,8 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  background: darkslategrey;
+  background: #263f3f !important;
+  border: 0.1rem solid black;
   color: white;
   text-align: center;
   top: -40px !important;

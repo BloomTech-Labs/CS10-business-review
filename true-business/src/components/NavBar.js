@@ -7,7 +7,7 @@ import logo from '../imgs/logo.png';
 
 import '../css/NavBar.css';
 
-let customStyles = {
+let modalStyles = {
   content: {
     top: '15%',
     left: '50%',
@@ -17,7 +17,14 @@ let customStyles = {
     transform: 'translate(-50%, -50%)',
     height: '20%',
     width: '40%',
-    zIndex:'5',
+    zIndex: '5',
+    backgroundColor: 'darkslategrey',
+  },
+};
+
+let popoverStyles = {
+  content: {
+    backgroundColor: 'darkslategrey',
   },
 };
 
@@ -49,10 +56,13 @@ class NavBar extends Component {
   }
 
   toggle = event => {
+    console.log(this.state.popoverFired, this.state.popoverOpen);
     // Only fires the popover the first time they click on the search bar
     if (!this.state.popoverFired) {
+      console.log('what the fuck');
       this.setState({ popoverOpen: true, popoverFired: true });
     } else {
+      console.log('double what the fuck');
       this.setState({ popoverOpen: false });
     }
   };
@@ -74,6 +84,7 @@ class NavBar extends Component {
   };
 
   render() {
+    console.log('in render', this.state.popoverOpen);
     return (
       <div className="navbar-container">
         <img
@@ -103,7 +114,7 @@ class NavBar extends Component {
             <Modal
               isOpen={this.state.modalIsOpen}
               onRequestClose={this.closeModal}
-              style={customStyles}
+              style={modalStyles}
               contentLabel="No Input Modal">
               <div className="navbar-container__modal">
                 {this.state.modalIsOpen ? (
@@ -120,7 +131,12 @@ class NavBar extends Component {
               </div>
             </Modal>
           </div>
-          <Popover placement="top" isOpen={this.state.popoverOpen} target="signInPop" toggle={this.toggle}>
+          <Popover
+            styles={{ popoverStyles }}
+            placement="top"
+            isOpen={this.state.popoverOpen}
+            target="signInPop"
+            toggle={this.toggle}>
             <PopoverHeader>Sign In?</PopoverHeader>
             <PopoverBody>Users who sign can see unlimited reviews!</PopoverBody>
             <button className="popover-button" onClick={this.toggle}>
