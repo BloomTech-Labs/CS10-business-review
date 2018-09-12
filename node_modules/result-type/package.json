@@ -1,0 +1,17 @@
+{
+  "name": "result-type",
+  "version": "1.0.0",
+  "description": "nothing but a Result type",
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jkroso/result-type.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jkroso/result-type/issues"
+  },
+  "keywords": ["result", "type", "spec"],
+  "author": "Jake Rosoman",
+  "license": "MIT"
+}
