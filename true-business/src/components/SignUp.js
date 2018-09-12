@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import NavBar from './NavBar';
 
 import '../css/SignUp.css';
@@ -10,11 +11,44 @@ class SignUp extends Component {
     this.state = {
       username: '',
       email: '',
+      confirmEmail: '',
       password: '',
       confirmPassword: '',
       error: '',
       errorMessage: '',
     };
+  }
+
+  confirmPassword = () => {
+    return this.state.password === this.state.confirmPassword;
+  }
+
+  confirmEmail = () => {
+    return this.state.email === this.state.confirmEmail;
+  }
+
+  createUser = event => {
+    event.preventDefault();
+    const user = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    
+    axios.post('https://cryptic-brook-22003.herokuapp.com/register', user)
+    .then(response => {
+      console.log("fire", response.data)
+      // localStorage.setItem('token', response.data.token)
+      this.setState({
+        error: false
+      });
+      this.props.history.push(`/signin`)
+    })
+    .catch(err => {
+      this.setState({
+        error: true,
+        errorMessage: err.response.data.error
+      })
+    })
   }
 
   handleInputChange = event => {
@@ -28,6 +62,14 @@ class SignUp extends Component {
         <div className="signup-container">
           <div className="signup-container__header"> Sign Up </div>
           <form className="signup-container__form">
+          <input
+            className="signup-container__input"
+            placeholder="E-mail"
+            name="email"
+            type="email"
+            value={this.state.email}
+            onChange={this.handleInputChange}
+          />
             <input
               className="signup-container__input"
               placeholder="Username"
@@ -36,32 +78,24 @@ class SignUp extends Component {
               value={this.state.username}
               onChange={this.handleInputChange}
             />
+              <input
+                className="signup-container__input"
+                placeholder="Password"
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+              />
             <input
               className="signup-container__input"
-              placeholder="E-mail"
-              name="email"
-              type="email"
-              value={this.state.username}
-              onChange={this.handleInputChange}
-            />
-            <input
-              className="signup-container__input"
-              placeholder="Password"
+              placeholder="confirmPassword"
               name="confirmPassword"
               type="password"
               value={this.state.confirmPassword}
               onChange={this.handleInputChange}
             />
-            <input
-              className="signup-container__input"
-              placeholder="Confirm Password"
-              name="password"
-              type="password"
-              value={this.state.password}
-              onChange={this.handleInputChange}
-            />
             <div className="signup-container__buttons ">
-              <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.handleLogin}>
+              <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createUser}>
                 Confirm
               </button>
             </div>
@@ -73,7 +107,7 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);
 
 /* <Link to="/">
     <button className="signup-container__button">Home</button>

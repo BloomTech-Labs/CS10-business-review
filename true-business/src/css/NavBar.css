@@ -1,6 +1,6 @@
 .navbar-container {
   position: fixed;
-  border-bottom: 0.1rem solid white;
+  border-bottom: .1rem solid white;
   z-index: 1;
   display: flex;
   flex-direction: row;
@@ -42,7 +42,7 @@
   margin-top: 2rem;
   min-width: 80%;
   font-size: 1.5rem;
-  padding: 0.2rem;
+  padding: .2rem;
 }
 .navbar-container .navbar-container__center .navbar-container__buttons {
   display: flex;
@@ -101,7 +101,7 @@
   padding: 0;
   margin: 0;
   background: #263f3f !important;
-  border: 0.1rem solid black;
+  border: .1rem solid black;
   color: white;
   text-align: center;
   top: -40px !important;
