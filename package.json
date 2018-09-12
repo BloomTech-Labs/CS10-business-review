@@ -8,5 +8,8 @@
   },
   "scripts": {
     "start": "nodemon server.js"
+  },
+  "engines": {
+    "node": "8.10.0"
   }
 }
