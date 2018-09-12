@@ -2,7 +2,9 @@
   "dependencies": {
     "less": "^3.8.1",
     "less-watch-compiler": "^1.11.3",
-    "react-modal": "^3.5.1"
+    "nodemon": "^1.18.4",
+    "react-modal": "^3.5.1",
+    "yarn": "^1.9.4"
   },
   "scripts": {
     "start": "nodemon server.js"
