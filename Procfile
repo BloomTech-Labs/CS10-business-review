@@ -1,1 +1,1 @@
-web: npm start
+web: node ./true-business-backend/server.js
