@@ -3,6 +3,7 @@
 .landing-container {
   .containers();
   padding-top: 20vh;
+  cursor: default;
   .landing-container__reviews-container {
     .containers();
     padding: 2rem 0;
@@ -23,7 +24,7 @@
         flex-wrap: nowrap;
         color: white;
         text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
-        opacity: 0.7;
+        opacity: 0.5;
         padding: 1rem 0;
         .landing-container__picture {
           width: 10rem;
@@ -38,13 +39,14 @@
           padding: 0.2rem 0;
           text-align: center;
           text-overflow: ellipsis;
+          padding: 0.3rem;
         }
         .landing-container__item--hover {
           width: 10rem;
           padding: 0.2rem 0;
           text-align: center;
-          cursor: pointer;
           text-overflow: ellipsis;
+          padding: 0.3rem;
         }
         .landing-container__item--hover:hover {
           cursor: pointer;
@@ -64,11 +66,13 @@
 }
 .landing-container__modal {
   .modal-container {
-    .containers();
     .modal__header {
-      .containers(@alignItems:flex-start);
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
       margin: 1rem;
-      color: black;
+      color: white;
+      text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
       .header__title {
         font-size: 3rem;
       }
@@ -77,28 +81,35 @@
       }
     }
     .modal__body {
-      .containers(@height: 50%);
-      color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
       .body__image {
         width: 25rem;
         height: 25rem;
-        background:black;
+        background: black;
       }
       .body__stars {
         text-align: center;
         width: 50%;
+        margin: 1rem 0;
       }
       .body__review {
         font-size: 1.25rem;
-        padding: .5rem;
-        border: .1rem solid black;
+        padding: 0.5rem;
+        border: 0.1rem solid black;
         width: 75%;
         height: 25vh;
+        overflow: auto;
       }
     }
     .modal__footer {
-      .containers();
+      display: flex;
+      justify-content: center;
       color: black;
+      margin-top: 1rem;
       .footer__button {
         border: outset;
         width: 15%;
@@ -114,3 +125,10 @@
   }
 }
 
+.ReactModal__Overlay {
+  z-index: 1000;
+}
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}

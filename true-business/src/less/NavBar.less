@@ -3,12 +3,16 @@
 .navbar-container {
   position: fixed; 
   z-index: 2;
+  border-bottom: .1rem solid white;
   .containers(@flexDirection:row, @justifyContent: space-between, @height: 20vh);
   max-height: 20vh;
   background-color: darkslategrey;
   .navbar-container__logo {
     max-width: 30%;
     height: 100%;
+  }
+  .navbar-container__logo:hover {
+    cursor: pointer;
   }
   .navbar-container__center {
     .containers();
