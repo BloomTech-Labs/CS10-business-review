@@ -1,0 +1,97 @@
+@import './mixins.less';
+
+.business {
+  .containers(@width: inherit, @justifyContent: flex-start, @alignItems: flex-start, @padding: 25vh 2rem 2rem 2rem);
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  .business__title {
+    padding: 2rem 0 0 0;
+    font-size: 3rem;
+  }
+  .business__street {
+    padding: 1rem 0 0 0;
+    font-size: 2rem;
+  }
+  .business__city {
+    padding: 0 0 1rem 0;
+    font-size: 1.5rem;
+  }
+  .business__info {
+    .containers(@flexDirection: row, @height: 25vh, @justifyContent: space-around);
+    flex-grow: 1;
+    .info__hours {
+      .containers(@flexDirection: column, @width:25%);
+      .hours__title {
+        font-size: 2rem;
+      }
+      .hours__day {
+        font-size: 1.5rem;
+      }
+    }
+    .info__description {
+      width: 50%;
+      height: 25vh;
+      font-size: 1.5rem;
+    }
+    .info__contact {
+      .containers(@height: 25vh, @width: 25%, @justifyContent: space-around);
+      .contact__phone {
+        font-size: 1.5rem;
+      }
+      .contact__website {
+        font-size: 1.25rem;
+      }
+    }
+  }
+  .business__reviews-container {
+    .containers();
+    .reviews-container__title{
+        font-size: 2.5rem;
+    }
+    .reviews-container__dropdowns {
+      .containers(@flexDirection: row, @justifyContent: space-between);
+      padding: 1rem;
+      .dropdowns__dropdown {
+        padding: 1rem;
+      }
+    }
+    .reviews-container__reviews {
+      .containers(@flexDirection: row);
+      .reviews__review {
+        .containers(@width: 20%, @fontSize: 1.25rem);
+        min-width: 10rem;
+        margin: 2rem;
+        flex-wrap: nowrap;
+        color: white;
+        text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+        opacity: 0.5;
+        .review__image {
+          width: 10rem;
+          height: 10rem;
+          background-color: black;
+        }
+        .review__image:hover {
+            cursor: pointer;
+        }
+        .review__stars {
+          text-align: center;
+          width: 50%;
+          margin: 1rem 0;
+        }
+        .review__reviewer {
+          width: 10rem;
+          padding: 0.2rem 0;
+          text-align: center;
+          text-overflow: ellipsis;
+          padding: 0.3rem;
+        }
+        .review__reviewer:hover {
+          cursor: pointer;
+        }
+      }
+      .reviews__review:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

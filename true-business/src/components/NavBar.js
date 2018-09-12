@@ -16,7 +16,7 @@ let modalStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     height: '20%',
-    width: '40%',
+    width: '60%',
     zIndex: '5',
     backgroundColor: 'darkslategrey',
   },
@@ -56,13 +56,10 @@ class NavBar extends Component {
   }
 
   toggle = event => {
-    console.log(this.state.popoverFired, this.state.popoverOpen);
     // Only fires the popover the first time they click on the search bar
     if (!this.state.popoverFired) {
-      console.log('what the fuck');
       this.setState({ popoverOpen: true, popoverFired: true });
     } else {
-      console.log('double what the fuck');
       this.setState({ popoverOpen: false });
     }
   };
@@ -84,7 +81,6 @@ class NavBar extends Component {
   };
 
   render() {
-    console.log('in render', this.state.popoverOpen);
     return (
       <div className="navbar-container">
         <img
@@ -139,7 +135,7 @@ class NavBar extends Component {
             toggle={this.toggle}>
             <PopoverHeader>Sign In?</PopoverHeader>
             <PopoverBody>Users who sign can see unlimited reviews!</PopoverBody>
-            <button className="popover-button" onClick={this.toggle}>
+            <button type="submit" className="popover-button" onClick={this.toggle}>
               Close
             </button>
           </Popover>

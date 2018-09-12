@@ -38,6 +38,9 @@
   min-width: 40%;
   font-size: 1.5rem;
 }
+.signup-container .signup-container__form .signup-container__error {
+  content: none;
+}
 .signup-container .signup-container__form .signup-container__error--hidden {
   display: none;
 }
