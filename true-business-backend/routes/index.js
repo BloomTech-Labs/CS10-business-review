@@ -17,14 +17,18 @@ router.post('/login', (request, response) => {
 });
 
 router.post('/api/Business', (req, res) => {
-  const business = req.body;
+  const { name, type, contact } = req.body;
+  Business.create(req.body).then({ name, type, contact });
+  console.log('Fire', req.body.name);
+  res.status(200).json({ name, type, contact });
+
   console.log(business);
 
   if (business.name && business.type && business.contact) {
-    const chicken = new Business(business);
+    const business = new Business(business);
 
-    chicken
-      .save() // returns a promise
+    business
+      .create() // returns a promise
       .then(function(business) {
         res.status(201).json(business);
       })
