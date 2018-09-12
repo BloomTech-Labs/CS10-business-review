@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axio from 'axios';
 import NavBar from './NavBar';
 
 import '../css/SignIn.css';
@@ -13,6 +13,10 @@ class SignIn extends Component {
       error: '',
       errorMessage: '',
     };
+  }
+
+  signIn = event => {
+  
   }
 
   handleInputChange = event => {

@@ -74,3 +74,9 @@
   text-overflow: ellipsis;
   padding: 0.3rem;
 }
+.search-container .search-container__results .results__result:hover {
+  opacity: 1;
+}
+.search-container .search-container__results .results__result:hover .result__item {
+  background: black;
+}

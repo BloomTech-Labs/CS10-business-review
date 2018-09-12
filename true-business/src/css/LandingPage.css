@@ -93,6 +93,15 @@
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__item--hover:hover {
   cursor: pointer;
 }
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review:hover {
+  opacity: 1;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review:hover .landing-container__item {
+  background: black;
+}
+.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review:hover .landing-container__item--hover {
+  background: black;
+}
 .landing-container__modal .modal-container .modal__header {
   display: flex;
   align-items: flex-start;

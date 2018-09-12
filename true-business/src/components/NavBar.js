@@ -71,11 +71,7 @@ class NavBar extends Component {
       // Eventually, Have it bring up a random business like Yelp.
       this.openModal();
     }
-  };
-
-  handleInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  };  
 
   render() {
     return (

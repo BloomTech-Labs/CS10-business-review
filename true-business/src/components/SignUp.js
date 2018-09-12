@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import NavBar from './NavBar';
 
@@ -10,11 +11,43 @@ class SignUp extends Component {
     this.state = {
       username: '',
       email: '',
+      confirmEmail: '',
       password: '',
       confirmPassword: '',
       error: '',
       errorMessage: '',
     };
+  }
+
+  confirmPassword = () => {
+    return this.state.password === this.state.confirmPassword;
+  }
+
+  confirmEmail = () => {
+    return this.state.email === this.state.confirmEmail;
+  }
+
+  createUser = event => {
+    event.preventDefault();
+    const user = {
+      username: this.state.username,
+      password: this.state.password
+    };
+
+    axios.post('http://localhost:3000/register', user)
+    .then(response => {
+      localStorage.setItem('token', response.data.token)
+      this.props.history.push(`/signin`)
+      this.setState({
+        error: false
+      });
+    })
+    .catch(err => {
+      this.setState({
+        error: true,
+        errorMessage: err.response.data.error
+      })
+    })
   }
 
   handleInputChange = event => {
@@ -41,7 +74,7 @@ class SignUp extends Component {
               placeholder="E-mail"
               name="email"
               type="email"
-              value={this.state.username}
+              value={this.state.email}
               onChange={this.handleInputChange}
             />
             <input
@@ -61,7 +94,7 @@ class SignUp extends Component {
               onChange={this.handleInputChange}
             />
             <div className="signup-container__buttons ">
-              <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.handleLogin}>
+              <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createUser}>
                 Confirm
               </button>
             </div>
