@@ -1,50 +1,50 @@
-.signup-container {
+.navbar-container {
+  position: fixed;
+  border-bottom: .1rem solid white;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  height: 20vh;
   width: 100%;
   font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  padding-top: 20vh;
-  cursor: default;
+  max-height: 20vh;
+  background-color: darkslategrey;
 }
-.signup-container .signup-container__header {
-  font-size: 3rem;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
-  height: auto;
+.navbar-container .navbar-container__logo {
+  max-width: 30%;
+  height: 100%;
 }
-.signup-container .signup-container__form {
+.navbar-container .navbar-container__logo:hover {
+  cursor: pointer;
+}
+.navbar-container .navbar-container__center {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: auto;
+  height: 100%;
   width: 100%;
   font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  min-width: 40%;
 }
-.signup-container .signup-container__form .signup-container__input {
+.navbar-container .navbar-container__center .navbar-container__input {
   border: 0.1rem solid black;
   margin-top: 2rem;
-  min-width: 40%;
+  min-width: 80%;
   font-size: 1.5rem;
+  padding: .2rem;
 }
-.signup-container .signup-container__form .signup-container__error {
-  content: none;
-}
-.signup-container .signup-container__form .signup-container__error--hidden {
-  display: none;
-}
-.signup-container .signup-container__form .signup-container__buttons {
+.navbar-container .navbar-container__center .navbar-container__buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -57,15 +57,35 @@
   padding: 0;
   margin: 0;
 }
-.signup-container .signup-container__form .signup-container__buttons .signup-container__button {
+.navbar-container .navbar-container__center .navbar-container__buttons .navbar-container__button {
   border: outset;
+  width: 15%;
   padding: 0.5rem;
-  margin: 2rem;
+  margin: 0 2rem;
   font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 1.5rem;
-  border-color: black;
 }
-.signup-container .signup-container__form .signup-container__buttons .signup-container__button:hover {
+.navbar-container .navbar-container__center .navbar-container__buttons .navbar-container__button:hover {
+  cursor: pointer;
+}
+.navbar-container .navbar-container__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 20%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.navbar-container .navbar-container__right .navbar-container__sign {
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+}
+.navbar-container .navbar-container__right .navbar-container__sign:hover {
   cursor: pointer;
 }
 .popover {
@@ -74,15 +94,19 @@
   justify-content: center;
   align-items: center;
   height: 15%;
-  width: 50%;
+  width: 100%;
   font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
   font-size: 1.5rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  background: black;
+  background: #263f3f !important;
+  border: .1rem solid black;
   color: white;
   text-align: center;
+  top: -40px !important;
+  width: 60% !important;
+  z-index: 2;
 }
 .popover .popover-header {
   padding: 0.2rem;
@@ -97,4 +121,7 @@
   margin: 0 2rem;
   font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 1.5rem;
+}
+.popover .popover-button:hover {
+  cursor: pointer;
 }

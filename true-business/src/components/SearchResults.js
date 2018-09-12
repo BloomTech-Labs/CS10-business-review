@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import NavBar from './NavBar';
 
 import '../css/SearchResults.css';
 
-export default class SearchResults extends Component {
+class SearchResults extends Component {
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     return (
       <div>
@@ -15,7 +20,7 @@ export default class SearchResults extends Component {
             {this.props.searchResults ? (
               this.props.searchResults.map((result, i) => {
                 return (
-                  <div key={i} className="results__result">
+                  <div key={i} className="results__result" onClick={this.handleBusiness.bind(this, result)}>
                     <div id="picture1" className="result__picture" onClick={this.openModal} />
                     <ul className="result__item">Stars</ul>
                     <ul className="result__item">{result.name}</ul>
@@ -32,4 +37,10 @@ export default class SearchResults extends Component {
       </div>
     );
   }
+  handleBusiness = (business, event) => {
+    this.props.business(business);
+    this.props.history.push(`/business`);
+  }
 }
+
+export default withRouter(SearchResults);

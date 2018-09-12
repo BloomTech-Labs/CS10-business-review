@@ -4,6 +4,7 @@ import LandingPage from './components/LandingPage';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import SearchResults from './components/SearchResults';
+import Business from './components/Business';
 import './css/App.css';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
       { name: 'Taco Bell', location: 'South' },
       { name: 'Taco Bell', location: 'Out of the way' },
     ],
+    business: null,
   };
 
   componentDidMount = () => {
@@ -27,7 +29,6 @@ class App extends Component {
 
   componentDidUpdate = prevState => {
     if (prevState.searchResults === null) {
-      console.log(this.state.searchResults);
       this.resetSearch();
     }
   };
@@ -36,17 +37,29 @@ class App extends Component {
     return (
       <div className="app-container">
         <Switch>
-          <Route exact path="/" render={() => <LandingPage search={this.searchResults} />} />
+          <Route
+            exact
+            path="/"
+            render={() => <LandingPage business={this.getBusiness} search={this.searchResults} />}
+          />
           <Route
             path="/results"
-            render={() => <SearchResults search={this.searchResults} searchResults={this.state.searchResults} />}
+            render={() => <SearchResults business={this.getBusiness} search={this.searchResults} searchResults={this.state.searchResults} />}
           />
           <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
           <Route path="/signin" render={() => <SignIn search={this.searchResults} />} />
+          <Route
+            path="/business"
+            render={() => <Business search={this.searchResults} business={this.state.business} />}
+          />
         </Switch>
       </div>
     );
   }
+  getBusiness = business => {
+    console.log('getbusiness in app working')
+    this.setState({ business });
+  };
   searchResults = searchTerm => {
     let searchResults = this.state.businesses.filter(business => {
       return business.name.toLowerCase().includes(searchTerm.toLowerCase());

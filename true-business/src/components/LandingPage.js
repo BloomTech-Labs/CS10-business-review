@@ -35,6 +35,10 @@ class LandingPage extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  }
+
   openModal(info, event) {
     this.setState({ modalIsOpen: true, modalInfo: info });
   }

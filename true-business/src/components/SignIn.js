@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
-import axio from 'axios';
+import axios from 'axios';
 import NavBar from './NavBar';
-
+import { withRouter } from 'react-router-dom';
 import '../css/SignIn.css';
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      username: '',
       password: '',
       error: '',
       errorMessage: '',
     };
   }
 
-  signIn = event => {
+  signIn = event => {   
   
-    axios.post('http://localhost:3000/login', this.state)
+    axios.post('https://cryptic-brook-22003.herokuapp.com/login', this.state)
     .then(response => {
-      localStorage.setItem('token', response.data.token)
-      localStorage.setItem('username', this.state.username)
+      // localStorage.setItem('token', response.data.token)
+      // localStorage.setItem('username', this.state.username)
       this.setState({
         error: false
       });
@@ -75,7 +75,7 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);
 
 // <Link to="/">
 //  <button className="signin-container__button">Home</button>
