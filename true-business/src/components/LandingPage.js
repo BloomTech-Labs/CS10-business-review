@@ -5,7 +5,7 @@ import '../css/LandingPage.css';
 
 import NavBar from './NavBar';
 
-let customStyles = {
+let modalStyles = {
   content: {
     top: '50%',
     left: '50%',
@@ -223,7 +223,7 @@ class LandingPage extends Component {
           <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
-            style={customStyles}
+            style={modalStyles}
             contentLabel="Review Modal">
             <div className="landing-container__modal">
               {this.state.modalIsOpen ? (

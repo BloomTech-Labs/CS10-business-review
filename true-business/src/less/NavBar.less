@@ -2,7 +2,6 @@
 
 .navbar-container {
   position: fixed; 
-  z-index: 2;
   border-bottom: .1rem solid white;
   .containers(@flexDirection:row, @justifyContent: space-between, @height: 20vh);
   max-height: 20vh;
@@ -53,7 +52,8 @@
 }
 .popover {
   .containers(@width: 60%, @height: 15%, @fontSize: 1.5rem);
-  background: darkslategrey;
+  background: rgb(38, 63, 63) !important;
+  border: .1rem solid black;
   color: white;
   text-align: center;
   top: -40px !important;
