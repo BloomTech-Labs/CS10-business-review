@@ -4,7 +4,7 @@
   "description": "Backend for 'true-business.'",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "engines": {
     "node": "8.10.0"
@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^1.17.3"
+    "nodemon": "^1.18.4"
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
