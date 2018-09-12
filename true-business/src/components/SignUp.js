@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Popover, PopoverBody, PopoverHeader } from 'reactstrap';
-import axios from 'axios';
+
+import NavBar from './NavBar';
 
 import '../css/SignUp.css';
 
@@ -9,8 +8,10 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: '',
       email: '',
       password: '',
+      confirmPassword: '',
       error: '',
       errorMessage: '',
     };
@@ -22,56 +23,50 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className="signup-container">
-        <div className="signup-container__header"> Sign Up </div>
-        <div className="signup-container__form">
-          <input
-            className="signup-container__input"
-            placeholder="Username"
-            name="username"
-            type="text"
-            value={this.state.username}
-            onChange={this.handleInputChange}
-          />
-          <input
-            className="signup-container__input"
-            placeholder="E-mail"
-            name="email"
-            type="email"
-            value={this.state.username}
-            onChange={this.handleInputChange}
-          />
-          <input
-            className="signup-container__input"
-            placeholder="Password"
-            name="confirmPassword"
-            type="password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-          />
-          <input
-            className="signup-container__input"
-            placeholder="Confirm Password"
-            name="password"
-            type="password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-          />
-          <div className="signup-container__buttons ">
-            <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.login}>
-              Sign In
-            </button>
-            <Popover placement="bottom" isOpen={this.state.popoverOpen} target="signup-submit" toggle={this.toggle}>
-              <PopoverHeader>Login Failed</PopoverHeader>
-              <PopoverBody>Failed To Proved Proper Username or Password</PopoverBody>
-              <button className="popover-button" onClick={this.toggle}>
-                Close
+      <div>
+        <NavBar search={this.props.search} />
+        <div className="signup-container">
+          <div className="signup-container__header"> Sign Up </div>
+          <form className="signup-container__form">
+            <input
+              className="signup-container__input"
+              placeholder="Username"
+              name="username"
+              type="text"
+              value={this.state.username}
+              onChange={this.handleInputChange}
+            />
+            <input
+              className="signup-container__input"
+              placeholder="E-mail"
+              name="email"
+              type="email"
+              value={this.state.username}
+              onChange={this.handleInputChange}
+            />
+            <input
+              className="signup-container__input"
+              placeholder="Password"
+              name="confirmPassword"
+              type="password"
+              value={this.state.confirmPassword}
+              onChange={this.handleInputChange}
+            />
+            <input
+              className="signup-container__input"
+              placeholder="Confirm Password"
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.handleInputChange}
+            />
+            <div className="signup-container__buttons ">
+              <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.handleLogin}>
+                Confirm
               </button>
-            </Popover>
-            <Link to="/">
-              <button className="signup-container__button">Home</button>
-            </Link>
-          </div>
+            </div>
+          </form>
+          <div className="signup-container__form" />
         </div>
       </div>
     );
@@ -79,3 +74,7 @@ class SignUp extends Component {
 }
 
 export default SignUp;
+
+/* <Link to="/">
+    <button className="signup-container__button">Home</button>
+</Link> */

@@ -5,7 +5,7 @@ import '../css/LandingPage.css';
 
 import NavBar from './NavBar';
 
-var customStyles = {
+let customStyles = {
   content: {
     top: '50%',
     left: '50%',
@@ -15,7 +15,8 @@ var customStyles = {
     transform: 'translate(-50%, -50%)',
     height: '75%',
     width: '50%',
-    overflow: 'scroll'
+    zIndex: '5',
+    backgroundColor: 'darkslategrey'
   },
 };
 
@@ -45,15 +46,26 @@ class LandingPage extends Component {
   render() {
     return (
       <div>
-        <NavBar id="navbar" />
+        <NavBar search={this.props.search} />
         <div className="landing-container">
           <div className="landing-container__reviews-container">
             <div className="landing-container__title">Featured Reviews</div>
             <div className="landing-container__reviews">
               <div className="landing-container__review">
-                <div id="picture1" className="landing-container__picture" onClick={this.openModal} />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <div
+                  id="picture1"
+                  className="landing-container__picture"
+                  onClick={this.openModal.bind(this, {
+                    title: 'review title',
+                    reviewer: '@reviewer',
+                    image: 'image',
+                    stars: 'stars',
+                    review: 'review',
+                  })}
+                />
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
@@ -68,22 +80,43 @@ class LandingPage extends Component {
                     review: 'review',
                   })}
                 />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <div
+                  className="landing-container__picture"
+                  onClick={this.openModal.bind(this, {
+                    title: 'review title',
+                    reviewer: '@reviewer',
+                    image: 'image',
+                    stars: 'stars',
+                    review: 'review',
+                  })}
+                />
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <div
+                  className="landing-container__picture"
+                  onClick={this.openModal.bind(this, {
+                    title: 'review title',
+                    reviewer: '@reviewer',
+                    image: 'image',
+                    stars: 'stars',
+                    review: 'review',
+                  })}
+                />
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
@@ -93,51 +126,59 @@ class LandingPage extends Component {
             <div className="landing-container__title">Popular Businesses</div>
             <div className="landing-container__reviews">
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
-                <ul className="landing-container__item--hover">Stars</ul>
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item">Stars</ul>
                 <ul className="landing-container__item">Restaurant Name</ul>
+                <ul className="landing-container__item">Restaurant Location</ul>
                 <ul className="landing-container__item">Restaurant Type</ul>
               </div>
             </div>
@@ -146,35 +187,35 @@ class LandingPage extends Component {
             <div className="landing-container__title">Popular Reviewers</div>
             <div className="landing-container__reviews">
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
+                <div className="landing-container__picture" />
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
+                <div className="landing-container__picture" />
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
+                <div className="landing-container__picture" />
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
+                <div className="landing-container__picture" />
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
+                <div className="landing-container__picture" />
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
+                <div className="landing-container__picture" />
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
+                <div className="landing-container__picture" />
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
               <div className="landing-container__review">
-                <div className="landing-container__picture" onClick={this.openModal} />
+                <div className="landing-container__picture" />
                 <ul className="landing-container__item--hover">@Reviewer</ul>
               </div>
             </div>
