@@ -1,16 +1,9 @@
 const mongoose = require('mongoose');
 
 const businessSchema = new mongoose.Schema({
-  business: {
-    name: String,
-    type: String,
-    contact: String,
-    // image: String,
-    // stars: Number,
-    // popularity: Boolean,
-    // totalReviews: Number,
-    required: true
-  },
+  name: String,
+  type: String,
+  contact: String,
   createdOn: {
     type: Date,
     required: true,

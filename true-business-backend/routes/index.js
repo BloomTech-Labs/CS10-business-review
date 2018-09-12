@@ -1,6 +1,7 @@
 const express = require('express');
 
 const UserController = require('../controllers/userController');
+const BusinessController = require('../controllers/businessController');
 const router = express.Router();
 const Business = require('../API/businessModel');
 
@@ -16,45 +17,12 @@ router.post('/login', (request, response) => {
   UserController.login(request, response);
 });
 
-router.post('/api/Business', (req, res) => {
-  const { name, type, contact } = req.body;
-  Business.create(req.body).then({ name, type, contact });
-  console.log('Fire', req.body.name);
-  res.status(200).json({ name, type, contact });
-
-  console.log(business);
-
-  if (business.name && business.type && business.contact) {
-    const business = new Business(business);
-
-    business
-      .create() // returns a promise
-      .then(function(business) {
-        res.status(201).json(business);
-      })
-      .catch(function(error) {
-        res.status(500).json({
-          error: 'There was an error while saving the Business to the Database'
-        });
-      });
-  } else {
-    res.status(400).json({
-      errorMessage: 'Please provide both name and type for the Business.'
-    });
-  }
+router.post('/api/Business', (request, response) => {
+  BusinessController.createBusiness(request, response);
 });
 
-router.get('/api/business', function(req, res) {
-  business
-    .find({})
-    .then(function(business) {
-      res.status(200).json(business);
-    })
-    .catch(function(error) {
-      res
-        .status(500)
-        .json({ error: 'The information could not be retrieved.' });
-    });
+router.get('/api/business/:name', function(request, response) {
+  BusinessController.getBusiness(request, response);
 });
 
 router.get('/api/business/:id', function(req, res) {
