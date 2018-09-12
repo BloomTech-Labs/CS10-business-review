@@ -38,6 +38,9 @@
   min-width: 40%;
   font-size: 1.5rem;
 }
+.signin-container .signin-container__form .signin-container__error {
+  content: none;
+}
 .signin-container .signin-container__form .signin-container__error--hidden {
   display: none;
 }
