@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Popover, PopoverBody, PopoverHeader } from 'reactstrap';
 
 import NavBar from './NavBar';
 
@@ -77,8 +75,6 @@ class SignUp extends Component {
 
 export default SignUp;
 
-{
-  /* <Link to="/">
-                <button className="signup-container__button">Home</button>
-              </Link> */
-}
+/* <Link to="/">
+    <button className="signup-container__button">Home</button>
+</Link> */
