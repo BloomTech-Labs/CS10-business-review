@@ -9,5 +9,5 @@
 
 [build]
   base    = "true-business/"
-  publish = "build/"
+  publish = "true-business/build/"
   command = "yarn build"
