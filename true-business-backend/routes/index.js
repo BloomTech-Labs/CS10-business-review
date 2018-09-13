@@ -10,13 +10,13 @@ router.get('/', (request, response) => {
   response.status(200).json({ api: 'Server running OK.' });
 });
 
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
-});
+// passport.serializeUser(function(user, cb) {
+//   cb(null, user);
+// });
 
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
-});
+// passport.deserializeUser(function(obj, cb) {
+//   cb(null, obj);
+// });
 
 router.post('/register', (request, response) => {
   UserController.register(request, response);
