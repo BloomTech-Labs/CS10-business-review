@@ -1,11 +1,47 @@
 const express = require('express');
+const server = require('../server');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const keys = require('../config/keys');
 
 const UserController = require('../controllers/userController');
 const BusinessController = require('../controllers/businessController');
 const router = express.Router();
 
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: keys.googleAuthClientID,
+      clientSecret: keys.googleAuthSecret,
+      callbackURL: '/auth/google/callback'
+    },
+    function(accessToken, refreshToken, profile, done) {
+      console.log(accessToken);
+      console.log(accessToken);
+      console.log(accessToken);
+    }
+  )
+);
+
+router.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email']
+  })
+);
+
+router.get('/auth/google/callback', passport.authenticate('google'));
+
 router.get('/', (request, response) => {
   response.status(200).json({ api: 'Server running OK.' });
+});
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
 });
 
 router.post('/register', (request, response) => {
