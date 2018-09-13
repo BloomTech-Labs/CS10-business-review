@@ -12,10 +12,14 @@ passport.use(
   new GoogleStrategy(
     {
       clientID: keys.googleAuthClientID,
-      clientASecret: keys.googleAuthSecret,
+      clientSecret: keys.googleAuthSecret,
       callbackURL: '/auth/google/callback'
     },
-    function(accessToken, refreshToken, profile, done) {}
+    function(accessToken, refreshToken, profile, done) {
+      console.log(accessToken);
+      console.log(accessToken);
+      console.log(accessToken);
+    }
   )
 );
 
@@ -26,7 +30,7 @@ router.get(
   })
 );
 
-router.get('/auth/google/callback'), passport.authenticate('google');
+router.get('/auth/google/callback', passport.authenticate('google'));
 
 router.get('/', (request, response) => {
   response.status(200).json({ api: 'Server running OK.' });
