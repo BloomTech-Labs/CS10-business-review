@@ -1,11 +1,11 @@
 const Business = require('../models/business');
 
 const createBusiness = (req, res) => {
-    const { name, type, contact } = req.body;
+    const { name, type, contact, image, stars, popularity, totalReviews } = req.body;
     console.log("Creating a Business: " + name)
 
     if (name && type && contact) {
-        const business = new Business({ name, type, contact });
+        const business = new Business({ name, type, contact, image, stars, popularity, totalReviews});
 
         business
             .save() // returns a promise
@@ -72,7 +72,7 @@ const deleteBusinessById = (request, response) => {
             response.status(500).json({ 
                 error: 'The business could not be removed.' 
             });
-        });
+        });       
 };
 
 module.exports = {
