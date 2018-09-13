@@ -26,6 +26,18 @@ router.post('/login', (request, response) => {
   UserController.login(request, response);
 });
 
+router.get('/api/user/:id', function(req, res) {
+  UserController.getUserById(req, res);
+});
+
+router.delete('/api/user/:id', function(req, res) {
+  UserController.deleteUserById(req, res);
+});
+
+router.get('/api/user/', function(req, res) {
+  UserController.getAllUsers(req, res);
+});
+
 router.post('/api/Business', (request, response) => {
   BusinessController.createBusiness(request, response);
 });
@@ -49,6 +61,13 @@ router.get(
   '/auth/google/callback',
   PassportController.passport.authenticate('google')
 );
+router.delete('/api/business/:id', function(req, res) {
+  BusinessController.deleteBusinessById(req, res);
+});
+
+router.get('/api/business/', function(req, res) {
+  BusinessController.getAllBusiness(req, res);
+});
 
 // router.get("/API/Business", function(req, res) {
 //     Business.find({}, function(err, allbusiness))
