@@ -60,8 +60,24 @@ const getBusinessById = (request, response) => {
         });
 };
 
+const deleteBusinessById = (request, response) => {
+    const { id } = request.params;
+
+    Business
+        .findByIdAndRemove(id)
+        .then(function(business) {
+            response.status(200).json(business);
+        })
+        .catch(function(error) {
+            response.status(500).json({ 
+                error: 'The business could not be removed.' 
+            });
+        });
+};
+
 module.exports = {
     createBusiness,
     getBusinessByName,
-    getBusinessById
+    getBusinessById,
+    deleteBusinessById
 };
