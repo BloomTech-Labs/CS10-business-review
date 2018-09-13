@@ -16,6 +16,14 @@ router.post('/login', (request, response) => {
   UserController.login(request, response);
 });
 
+router.get('/api/user/:id', function(req, res) {
+  UserController.getUserById(req, res);
+});
+
+router.delete('/api/user/:id', function(req, res) {
+  UserController.deleteUserById(req, res);
+});
+
 router.post('/api/Business', (request, response) => {
   BusinessController.createBusiness(request, response);
 });
@@ -31,6 +39,7 @@ router.get('/api/business/:id', function(req, res) {
 router.delete('/api/business/:id', function(req, res) {
   BusinessController.deleteBusinessById(req, res);
 });
+
 // router.get("/API/Business", function(req, res) {
 //     Business.find({}, function(err, allbusiness))
 //     if(err){

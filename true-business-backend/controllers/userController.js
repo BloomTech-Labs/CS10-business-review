@@ -55,7 +55,39 @@ const login = (request, response) => {
     })
 };
 
+const getUserById = (request, response) => {
+    const { id } = request.params;
+
+    User
+        .findById(id)
+        .then(function(user) {
+            response.status(200).json(user);
+        })
+        .catch(function(error) {
+            response.status(500).json({ 
+                error: 'The user could not be retrieved.' 
+            });
+        });
+};
+
+const deleteUserById = (request, response) => {
+    const { id } = request.params;
+
+    User
+        .findByIdAndRemove(id)
+        .then(function(user) {
+            response.status(200).json(user);
+        })
+        .catch(function(error) {
+            response.status(500).json({ 
+                error: 'The user could not be removed.' 
+            });
+        });       
+};
+
 module.exports = {
     register,
-    login
+    login,
+    getUserById,
+    deleteUserById
 };

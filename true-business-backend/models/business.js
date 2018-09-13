@@ -8,6 +8,7 @@ const businessSchema = new mongoose.Schema({
   stars: Number,
   popularity: Boolean,
   totalReviews: Number,  
+  
   createdOn: {
     type: Date,
     required: true,
