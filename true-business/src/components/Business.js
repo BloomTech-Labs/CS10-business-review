@@ -68,7 +68,6 @@ class Business extends Component {
               <div className="reviews-container__dropdowns">
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__title"> Filter By: </div>
-<<<<<<< HEAD
                   <div className="dropdown__drop-container">
                     <button className="drop-container__button" name="showfilterBy" onClick={this.toggleDropDown}>
                       {this.state.filterBy}
@@ -114,49 +113,6 @@ class Business extends Component {
                       </div>
                     ) : null}
                   </div>
-=======
-                  <button className="dropdown__button"name="showfilterBy" onClick={this.toggleDropDown}>
-                    {this.state.filterBy}
-                  </button>
-                  {this.state.showfilterBy ? (
-                    <div className="dropdown__menu">
-                      <button onClick={this.toggleFilterChoice} name="No Filter" className="menu__button">
-                        No Filter
-                      </button>
-                      <button onClick={this.toggleFilterChoice} name="4 Stars or Higher" className="menu__button">
-                        4 Stars or Higher
-                      </button>
-                      <button onClick={this.toggleFilterChoice} name="3 Stars or Higher" className="menu__button">
-                        3 Stars or Higher
-                      </button>
-                      <button onClick={this.toggleFilterChoice} name="2 Stars or Higher" className="menu__button">
-                        2 Stars or Higher
-                      </button>
-                    </div>
-                  ) : null}
-                </div>
-                <div className="dropdowns__dropdown">
-                  <div className="dropdown__title"> Sort By: </div>
-                  <button className="dropdown__button" name="showsortBy" onClick={this.toggleDropdown}>
-                    {this.state.sortBy}
-                  </button>
-                  {this.state.showsortBy ? (
-                    <div className="dropdown__menu">
-                      <button onClick={this.toggleSortChoice} name="Date Descending" className="menu__button">
-                        Date Descending
-                      </button>
-                      <button onClick={this.toggleSortChoice} name="Date Ascending" className="menu__button">
-                        Date Ascending
-                      </button>
-                      <button onClick={this.toggleSortChoice} name="Rating Descending" className="menu__button">
-                        Rating Descending
-                      </button>
-                      <button onClick={this.toggleSortChoice} name="Rating Descending" className="menu__button">
-                        Rating Descending
-                      </button>
-                    </div>
-                  ) : null}
->>>>>>> 7340e1ba0ab851a42d2f57c5aa1f2988a03038a5
                 </div>
               </div>
               <div className="reviews-container__reviews">
