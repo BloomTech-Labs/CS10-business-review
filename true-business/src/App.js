@@ -57,7 +57,6 @@ class App extends Component {
     );
   }
   getBusiness = business => {
-    console.log('getbusiness in app working')
     this.setState({ business });
   };
   searchResults = searchTerm => {
