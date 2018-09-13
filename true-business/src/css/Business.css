@@ -112,9 +112,12 @@
   margin: 0;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown {
+  display: flex;
+  flex-direction: row;
   z-index: 2;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__button {
+  margin-left: 2rem;
   width: 10rem;
   border: none;
   background-color: #213131;

@@ -51,10 +51,13 @@
     .reviews-container__dropdowns {
       .containers(@flexDirection: row, @justifyContent: space-between);
       .dropdowns__dropdown {
+        display: flex;
+        flex-direction: row;
         z-index: 2;
         .dropdown__title {
         }
         .dropdown__button {
+          margin-left: 2rem;
           width: 10rem;
           border: none;
           background-color: rgb(33, 49, 49);
