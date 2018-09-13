@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 
 import NavBar from './NavBar';
@@ -10,14 +9,30 @@ class Business extends Component {
   state = {
     dropdownOpenFilter: false,
     dropdownOpenSort: false,
+    filterBy: 'No Filter',
+    showfilterBy: false,
+    sortBy: 'Date Descending',
+    showsortBy: false,
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
   };
 
-  toggle = event => {
-    this.setState({ [event.target.name]: !event.target.name });
+  toggleDropDown = event => {
+    let toggle = event.target.name;
+    let inverse = this.state[toggle];
+    this.setState({ [toggle]: !inverse });
+  };
+
+  toggleFilterChoice = event => {
+    let toggle = event.target.name;
+    this.setState({ filterBy: toggle, showfilterBy: false });
+  };
+
+  toggleSortChoice = event => {
+    let toggle = event.target.name;
+    this.setState({ sortBy: toggle, showsortBy: false });
   };
 
   render() {
@@ -51,8 +66,50 @@ class Business extends Component {
             <div className="business__reviews-container">
               <div className="reviews-container__title">Reviews</div>
               <div className="reviews-container__dropdowns">
-                <div className="dropdowns__dropdown"> Filter By: </div>
-                <div className="dropdowns__dropdown"> Sort By: </div>
+                <div className="dropdowns__dropdown">
+                  <div className="dropdown__title"> Filter By: </div>
+                  <button className="dropdown__button"name="showfilterBy" onClick={this.toggleDropDown}>
+                    {this.state.filterBy}
+                  </button>
+                  {this.state.showfilterBy ? (
+                    <div className="dropdown__menu">
+                      <button onClick={this.toggleFilterChoice} name="No Filter" className="menu__button">
+                        No Filter
+                      </button>
+                      <button onClick={this.toggleFilterChoice} name="4 Stars or Higher" className="menu__button">
+                        4 Stars or Higher
+                      </button>
+                      <button onClick={this.toggleFilterChoice} name="3 Stars or Higher" className="menu__button">
+                        3 Stars or Higher
+                      </button>
+                      <button onClick={this.toggleFilterChoice} name="2 Stars or Higher" className="menu__button">
+                        2 Stars or Higher
+                      </button>
+                    </div>
+                  ) : null}
+                </div>
+                <div className="dropdowns__dropdown">
+                  <div className="dropdown__title"> Sort By: </div>
+                  <button className="dropdown__button" name="showsortBy" onClick={this.toggleDropdown}>
+                    {this.state.sortBy}
+                  </button>
+                  {this.state.showsortBy ? (
+                    <div className="dropdown__menu">
+                      <button onClick={this.toggleSortChoice} name="Date Descending" className="menu__button">
+                        Date Descending
+                      </button>
+                      <button onClick={this.toggleSortChoice} name="Date Ascending" className="menu__button">
+                        Date Ascending
+                      </button>
+                      <button onClick={this.toggleSortChoice} name="Rating Descending" className="menu__button">
+                        Rating Descending
+                      </button>
+                      <button onClick={this.toggleSortChoice} name="Rating Descending" className="menu__button">
+                        Rating Descending
+                      </button>
+                    </div>
+                  ) : null}
+                </div>
               </div>
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
@@ -77,7 +134,7 @@ class Business extends Component {
                   <div className="review__reviewer">@person</div>
                 </div>
               </div>
-            </div>{' '}
+            </div>
           </div>
         ) : (
           <div>{this.props.history.push('/')}</div>
