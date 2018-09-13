@@ -75,9 +75,24 @@ const deleteBusinessById = (request, response) => {
         });       
 };
 
+const getAllBusiness = (request, response) => {
+
+    Business
+        .find({})
+        .then(function(business) {
+            response.status(200).json(business);
+        })
+        .catch(function(error) {
+            response.status(500).json({ 
+                error: 'The information could not be retrieved.' 
+            });
+        });
+};
+
 module.exports = {
     createBusiness,
     getBusinessByName,
     getBusinessById,
-    deleteBusinessById
+    deleteBusinessById,
+    getAllBusiness
 };
