@@ -12,6 +12,9 @@
     "mongoose": "^5.0.17"
   },
   "scripts": {
-    "run": "nodemon server.js"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
