@@ -44,7 +44,13 @@ class App extends Component {
           />
           <Route
             path="/results"
-            render={() => <SearchResults business={this.getBusiness} search={this.searchResults} searchResults={this.state.searchResults} />}
+            render={() => (
+              <SearchResults
+                business={this.getBusiness}
+                search={this.searchResults}
+                searchResults={this.state.searchResults}
+              />
+            )}
           />
           <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
           <Route path="/signin" render={() => <SignIn search={this.searchResults} />} />
