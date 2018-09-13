@@ -24,6 +24,10 @@ router.delete('/api/user/:id', function(req, res) {
   UserController.deleteUserById(req, res);
 });
 
+router.get('/api/user/', function(req, res) {
+  UserController.getAllUsers(req, res);
+});
+
 router.post('/api/Business', (request, response) => {
   BusinessController.createBusiness(request, response);
 });

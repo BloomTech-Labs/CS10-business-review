@@ -85,9 +85,24 @@ const deleteUserById = (request, response) => {
         });       
 };
 
+const getAllUsers = (request, response) => {
+
+    User
+        .find({})
+        .then(function(userList) {
+            response.status(200).json(userList);
+        })
+        .catch(function(error) {
+            response.status(500).json({ 
+                error: 'The users could not be found.' 
+            });
+        });
+};
+
 module.exports = {
     register,
     login,
     getUserById,
-    deleteUserById
+    deleteUserById,
+    getAllUsers
 };
