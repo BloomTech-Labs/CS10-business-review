@@ -110,10 +110,44 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  padding: 1rem;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown {
-  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  z-index: 2;
+}
+.business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container {
+  margin-left: 2rem;
+  width: 15rem;
+}
+.business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__button {
+  width: inherit;
+  background-color: white;
+  font-size: 1.5rem;
+  color: darkslategray;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+.business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__button:hover {
+  cursor: pointer;
+}
+.business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__menu {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+}
+.business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__menu .menu__button {
+  width: inherit;
+  border: none;
+  background-color: white;
+  font-size: 1.5rem;
+  color: darkslategray;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+.business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__menu .menu__button:hover {
+  filter: brightness(120%);
+  cursor: pointer;
 }
 .business .business__reviews-container .reviews-container__reviews {
   display: flex;
