@@ -1,4 +1,4 @@
-const Business = require('../API/businessModel');
+const Business = require('../models/business');
 
 const createBusiness = (req, res) => {
     const { name, type, contact } = req.body;
