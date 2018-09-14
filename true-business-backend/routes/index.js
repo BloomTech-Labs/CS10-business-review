@@ -61,6 +61,7 @@ router.get(
   '/auth/google/callback',
   PassportController.passport.authenticate('google')
 );
+
 router.delete('/api/business/:id', function(req, res) {
   BusinessController.deleteBusinessById(req, res);
 });
