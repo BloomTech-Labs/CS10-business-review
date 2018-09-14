@@ -23,7 +23,7 @@ class SignIn extends Component {
       this.setState({
         error: false
       });
-      this.props.history.push(`/`)
+      this.props.history.push(`/user`)
     })
     .catch(err => {
       this.setState({

@@ -130,7 +130,7 @@ class User extends Component {
         return (
           <div className="content__solo-add">
             <div className="solo-add__image">
-              <i className="fas fa-plus-square fa-10x" />
+              <i className="fas fa-plus-square fa-7x" />
             </div>
             <div className="solo-add__text">Add a review</div>
           </div>

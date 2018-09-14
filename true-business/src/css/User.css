@@ -141,7 +141,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: auto;
+  height: 15rem;
   width: 20%;
   font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
   font-size: 2rem;
@@ -169,7 +169,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 20rem;
+  height: 15rem;
   width: 20%;
   font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
   font-size: 2rem;
