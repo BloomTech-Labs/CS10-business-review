@@ -2,15 +2,15 @@
 
 .search-container {
   .containers(@height: 100vh, @justifyContent: flex-start);
-  padding-top: 25vh + 2rem;
+  padding-top: 25vh;
   cursor: default;
   .search-container__title {
     font-size: 3rem;
     color: white;
+    text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
   }
   .search-container__results {
     .containers(@flexDirection: row, @width: 90%, @height: auto, @justifyContent: space-between);
-    padding: 2rem 0;
     flex-wrap: wrap;
     color: white;
     .results__result {
