@@ -3,20 +3,13 @@ const server = require('../server');
 
 const UserController = require('../controllers/userController');
 const BusinessController = require('../controllers/businessController');
-const PassportController = require('../controllers/passportController');
+require('../services/passport');
 const router = express.Router();
+require('../routes/authRoutes')(router);
 
 router.get('/', (request, response) => {
   response.status(200).json({ api: 'Server running OK.' });
 });
-
-// passport.serializeUser(function(user, cb) {
-//   cb(null, user);
-// });
-
-// passport.deserializeUser(function(obj, cb) {
-//   cb(null, obj);
-// });
 
 router.post('/register', (request, response) => {
   UserController.register(request, response);
@@ -50,17 +43,7 @@ router.get('/api/business/:id', function(req, res) {
   BusinessController.getBusinessById(req, res);
 });
 
-router.get(
-  '/auth/google',
-  PassportController.passport.authenticate('google', {
-    scope: ['profile', 'email']
-  })
-);
 
-router.get(
-  '/auth/google/callback',
-  PassportController.passport.authenticate('google')
-);
 router.delete('/api/business/:id', function(req, res) {
   BusinessController.deleteBusinessById(req, res);
 });
@@ -68,28 +51,5 @@ router.delete('/api/business/:id', function(req, res) {
 router.get('/api/business/', function(req, res) {
   BusinessController.getAllBusiness(req, res);
 });
-
-// router.get("/API/Business", function(req, res) {
-//     Business.find({}, function(err, allbusiness))
-//     if(err){
-//         console.log(err);
-//     } else {
-//         res.render("business", {business:allBusiness});
-//     }
-// });
-
-// const target = new Business({
-//   name: 'Target',
-//   type: 'Big Box Retail',
-//   contact: 'scott@target.com'
-// });
-
-// target.save(function(err, business) {
-//   if (err) {
-//     console.log('Something went wrong!');
-//   } else {
-//     console.log(business);
-//   }
-// });
 
 module.exports = router;
