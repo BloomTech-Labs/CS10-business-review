@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 require('../services/passport');
 const bcryptRounds = 10;
@@ -41,6 +42,14 @@ const bcryptRounds = 10;
 const register = (request, response) => {
     const { username, password, email } = request.body;
 
+=======
+const Validator = require("email-validator");
+const bcryptRounds = 10;
+
+const register = (request, response) => {
+    const { username, password, email } = request.body;
+
+>>>>>>> b88106a9cda71530c7e0c895a3efafb1b5869660
     // Check for empty username, password or email.
     if(!username.trim() || !password.trim() || !email.trim()) {
         response.status(400).send({
@@ -52,6 +61,9 @@ const register = (request, response) => {
     if(!Validator.validate(email)) {
         response.status(400).send({
             errorMessage: "Email is not valid."
+<<<<<<< HEAD
+>>>>>>> b88106a9cda71530c7e0c895a3efafb1b5869660
+=======
 >>>>>>> b88106a9cda71530c7e0c895a3efafb1b5869660
         });
         return;
