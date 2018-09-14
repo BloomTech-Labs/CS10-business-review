@@ -8,5 +8,11 @@ module.exports = router => {
     })
   );
 
-  router.get('/auth/google/callback', passport.authenticate('google'));
+  router.get(
+    '/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function(req, res) {
+      res.redirect('/');
+    }
+  );
 };

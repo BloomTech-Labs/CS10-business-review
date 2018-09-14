@@ -1,9 +1,8 @@
 const express = require('express');
 const server = require('../server');
-
 const UserController = require('../controllers/userController');
 const BusinessController = require('../controllers/businessController');
-require('../services/passport');
+
 const router = express.Router();
 require('../routes/authRoutes')(router);
 
