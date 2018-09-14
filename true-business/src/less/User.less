@@ -11,9 +11,14 @@
     .header__breadcrumbs {
       .containers(@flexDirection:row, @height:inherit, @alignItems:flex-start, @justifyContent: flex-start);
       font-size: 1.5rem;
-    }
-    .header__breadcrumbs {
       .breadcrumbs__breadcrumb {
+        border: none;
+        width: auto;
+        font-size: 1.5rem;
+        background-color: darkslategray;
+        color: white;
+        text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+        margin: 0 1rem;
         .breadcrumb__arrow {
           padding: 0 1rem;
         }
@@ -71,6 +76,9 @@
             height: 10rem;
             background-color: black;
           }
+          .item__image:hover {
+            cursor: pointer;
+          }
           .item__info {
             font-size: 1.25rem;
             text-align: center;
@@ -82,8 +90,8 @@
           margin: 0 1rem 1rem 1rem;
           border: 0.1rem solid black;
           padding: 1rem;
-          .add__image:hover{
-              cursor: pointer;
+          .add__image:hover {
+            cursor: pointer;
           }
           .add__text {
             color: white;
@@ -92,16 +100,55 @@
           }
         }
       }
-      .content__solo-add{
+      .content__solo-add {
         .containers();
         padding: 1rem 20rem 1rem 0;
-        .solo-add__image:hover{
-            cursor: pointer;
+        .solo-add__image:hover {
+          cursor: pointer;
         }
-        .solo-add__text{
-            color: white;
-            text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
-            font-size: 2rem;
+        .solo-add__text {
+          color: white;
+          text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+          font-size: 2rem;
+        }
+      }
+      .content__profile {
+        .containers(@flexDirection: row, @justifyContent: space-between);
+        .profile__image {
+          margin: 1rem 3rem;
+          width: 15rem;
+          height: 20rem;
+          background-color: black;
+        }
+        .profile__image:hover {
+          cursor: pointer;
+        }
+        .profile__container {
+          .containers(@width: 70%);
+          .container__info {
+            .containers(@flexDirection: row);
+            margin: 1rem;
+            .info__label {
+              font-size: 1.5rem;
+              width: 20%;
+            }
+            .info__data {
+              width:50%;
+              font-size: 1.5rem;
+            }
+            .info__button {
+              width: 20%;
+              border: none;
+              font-size: 1.25rem;
+              background-color: rgb(34, 49, 49);
+              color: white;
+              text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+              padding: 1rem;
+            }
+            .info__button:hover{
+              cursor: pointer;
+            }
+          }
         }
       }
     }

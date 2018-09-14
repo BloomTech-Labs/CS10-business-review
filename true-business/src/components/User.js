@@ -53,16 +53,21 @@ class User extends Component {
           <div className="user__header">
             <div className="header__breadcrumbs">
               {this.state.breadcrumbs.map((crumb, i) => {
+                console.log(this.state.breadcrumbs);
+                console.log(this.state.breadcrumbs.length);
                 if (i + 1 === this.state.breadcrumbs.length) {
                   return (
-                    <div key={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
+                    <button key={i} name={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
                       {crumb}
-                    </div>
+                    </button>
                   );
                 }
                 return (
-                  <div key={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
-                    {crumb} <i className="fas fa-arrow-right" />
+                  <div>
+                    <button key={i} name={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
+                      {crumb}
+                    </button>
+                    <i className="fas fa-arrow-right" />
                   </div>
                 );
               })}
@@ -95,7 +100,24 @@ class User extends Component {
   }
   updateCurrent = event => {
     let breadcrumbs = this.state.breadcrumbs;
-    event.target.name === 'Home' ? (breadcrumbs = ['Home']) : (breadcrumbs = ['Home', event.target.name]);
+    // Home => Home
+    if (breadcrumbs === ['Home'] && event.target.name === 'Home'){
+      breadcrumbs = breadcrumbs;
+    }
+    // Home => Home->Whatever
+    else if (breadcrumbs.length === 1 && event.target.name !== 'Home') {
+      breadcrumbs.push(event.target.name);
+    }
+    // Home->Whatever => Home=> Whatever
+    else if (breadcrumbs.length === 2 && event.target.name !== 'Home') {
+      breadcrumbs.pop();
+      breadcrumbs.push(event.target.name);
+    }
+    // Home->Whatever => Home
+    else {
+      breadcrumbs.pop();
+    }
+
     this.setState({ current: event.target.name, breadcrumbs });
   };
   loadContent = () => {
@@ -141,11 +163,29 @@ class User extends Component {
         return (
           <div className="content__profile">
             <div className="profile__image" />
-            <div className="profile__info">UserName: Dude McFearson</div>
-            <div className="profile__info">E-mail: thedudeabides@gmail.com</div>
             {/* Have this open a modal to change their password */}
-            <div className="profile__password">
-              Password: ************ <button onClick={this.changePassword}> Change</button>
+            <div className="profile__container">
+              <div className="container__info">
+                <div className="info__label">Username:</div>
+                <div className="info__data">Amanda Holdenkiss</div>
+                <button className="info__button" onClick={this.changeUsername}>
+                  Change
+                </button>
+              </div>
+              <div className="container__info">
+                <div className="info__label">Email:</div>
+                <div className="info__data">I.P.@Freely.com</div>
+                <button className="info__button" onClick={this.changeEmail}>
+                  Change
+                </button>
+              </div>
+              <div className="container__info">
+                <div className="info__label">Password:</div>
+                <div className="info__data">****************</div>
+                <button className="info__button" onClick={this.changeUsername}>
+                  Change
+                </button>
+              </div>
             </div>
           </div>
         );
