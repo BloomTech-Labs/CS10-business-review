@@ -10,13 +10,9 @@ passport.use(
       callbackURL: '/auth/google/callback'
     },
     function(accessToken, refreshToken, profile, done) {
-      console.log(accessToken);
-      console.log(accessToken);
-      console.log(accessToken);
+      console.log('access token', accessToken);
+      console.log('refresh token', refreshToken);
+      console.log('profile', profile);
     }
   )
 );
-
-module.exports = {
-  passport
-};
