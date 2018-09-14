@@ -42,11 +42,10 @@ class User extends Component {
   };
 
   logout = () => {
-    console.log("Log")   
-      localStorage.removeItem('token');
-      localStorage.removeItem('userId');       
-      this.props.history.push('/');
-          
+    console.log('Log');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    this.props.history.push('/');
   };
   componentDidMount = () => {
     window.scrollTo(0, 0);
@@ -108,25 +107,23 @@ class User extends Component {
   updateCurrent = event => {
     let breadcrumbs = this.state.breadcrumbs;
     // Home => Home
-    if (breadcrumbs === ['Home'] && event.target.name === 'Home'){
-      breadcrumbs = breadcrumbs;
+    if (event.target.name === 'Home') {
+      if (breadcrumbs.length === 2) {
+        breadcrumbs.pop();
+      }
     }
     // Home => Home->Whatever
-    else if (breadcrumbs.length === 1 && event.target.name !== 'Home') {
+    else if (breadcrumbs.length === 1) {
       breadcrumbs.push(event.target.name);
     }
     // Home->Whatever => Home=> Whatever
-    else if (breadcrumbs.length === 2 && event.target.name !== 'Home') {
+    else if (breadcrumbs.length === 2) {
       breadcrumbs.pop();
       breadcrumbs.push(event.target.name);
     }
-    // Home->Whatever => Home
-    else {
-      breadcrumbs.pop();
-    }
-
     this.setState({ current: event.target.name, breadcrumbs });
   };
+  
   loadContent = () => {
     switch (this.state.current) {
       case 'Add a Review':
