@@ -203,7 +203,7 @@
   margin: 0;
   padding: 1rem 20rem 1rem 0;
 }
-.user .user__body .body__content .content__solo-add .solo__image:hover {
+.user .user__body .body__content .content__solo-add .solo-add__image:hover {
   cursor: pointer;
 }
 .user .user__body .body__content .content__solo-add .solo-add__text {

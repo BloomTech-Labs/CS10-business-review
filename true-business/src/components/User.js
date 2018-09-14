@@ -7,7 +7,7 @@ import '../css/User.css';
 
 class User extends Component {
   state = {
-    breadcrumbs: ['Home', 'My Reviews'],
+    breadcrumbs: ['Home'],
     userReviews: [
       {
         business: 'Taco Bell',
@@ -38,7 +38,7 @@ class User extends Component {
         updated: '1/1/1',
       },
     ],
-    current: 'Add',
+    current: 'Home',
   };
 
   componentDidMount = () => {
@@ -55,13 +55,13 @@ class User extends Component {
               {this.state.breadcrumbs.map((crumb, i) => {
                 if (i + 1 === this.state.breadcrumbs.length) {
                   return (
-                    <div key={crumb} className="breadcrumbs__breadcrumb">
+                    <div key={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
                       {crumb}
                     </div>
                   );
                 }
                 return (
-                  <div key={crumb} className="breadcrumbs__breadcrumb">
+                  <div key={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
                     {crumb} <i className="fas fa-arrow-right" />
                   </div>
                 );
@@ -94,10 +94,21 @@ class User extends Component {
     );
   }
   updateCurrent = event => {
-    this.setState({ current: event.target.name });
+    let breadcrumbs = this.state.breadcrumbs;
+    event.target.name === 'Home' ? (breadcrumbs = ['Home']) : (breadcrumbs = ['Home', event.target.name]);
+    this.setState({ current: event.target.name, breadcrumbs });
   };
   loadContent = () => {
     switch (this.state.current) {
+      case 'Add a Review':
+        return (
+          <div className="content__solo-add">
+            <div className="solo-add__image">
+              <i className="fas fa-plus-square fa-7x" />
+            </div>
+            <div className="solo-add__text">Add a review</div>
+          </div>
+        );
       case 'My Reviews':
         return (
           <div className="content__user-reviews">
@@ -128,11 +139,14 @@ class User extends Component {
         return <div className="content__settings">Also no idea for this. Just following the wireframe...</div>;
       default:
         return (
-          <div className="content__solo-add">
-            <div className="solo-add__image">
-              <i className="fas fa-plus-square fa-7x" />
+          <div className="content__profile">
+            <div className="profile__image" />
+            <div className="profile__info">UserName: Dude McFearson</div>
+            <div className="profile__info">E-mail: thedudeabides@gmail.com</div>
+            {/* Have this open a modal to change their password */}
+            <div className="profile__password">
+              ************ <button onClick={this.changePassword}> Change</button>
             </div>
-            <div className="solo-add__text">Add a review</div>
           </div>
         );
     }
