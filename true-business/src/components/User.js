@@ -41,6 +41,13 @@ class User extends Component {
     current: 'Home',
   };
 
+  logout = () => {
+    console.log("Log")   
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');       
+      this.props.history.push('/');
+          
+  };
   componentDidMount = () => {
     window.scrollTo(0, 0);
   };
@@ -73,7 +80,7 @@ class User extends Component {
               })}
             </div>
             {/* Eventually have this actually sign out the person obviously... */}
-            <div className="header__signout" onClick={() => this.props.history.push('/')}>
+            <div className="header__signout" onClick={this.logout}>
               Sign Out
             </div>
           </div>
