@@ -145,7 +145,7 @@ class User extends Component {
             <div className="profile__info">E-mail: thedudeabides@gmail.com</div>
             {/* Have this open a modal to change their password */}
             <div className="profile__password">
-              ************ <button onClick={this.changePassword}> Change</button>
+              Password: ************ <button onClick={this.changePassword}> Change</button>
             </div>
           </div>
         );

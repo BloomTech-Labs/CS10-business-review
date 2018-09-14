@@ -6,14 +6,14 @@ import '../css/NewReview.css';
 
 let modalStyles = {
   content: {
-    top: '15%',
+    top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    height: '20%',
-    width: '60%',
+    height: '90%',
+    width: '75%',
     zIndex: '5',
     backgroundColor: 'darkslategrey',
     overflow: 'hidden',
@@ -51,8 +51,16 @@ export default class NewReview extends Component {
     this.props.showModal(false);
   }
 
+  starRating = rating => {
+    this.setState({ rating });
+  };
+
+  submiteReview = () => {
+    this.closeModal();
+    // I'll focus on this after we do some db stuff
+  };
+
   render() {
-    console.log(this.props.open);
     return (
       <Modal
         isOpen={this.state.modalIsOpen}
@@ -61,12 +69,20 @@ export default class NewReview extends Component {
         contentLabel="New Review Modal">
         <div className="new-review">
           {this.state.modalIsOpen ? (
-            <div className="modal-container">
-              <div className="modal-container__title">New Review</div>
-              <div className="modal-container__body">
+            <div className="new-review__modal">
+              <div className="modal__header">New Review</div>
+              <div className="modal__body">
+                <div className="body__image">
+                  <i className="image__add fas fa-plus-square fa-5x" />
+                  <div className="image__text">Add an Image</div>
+                </div>
                 <div className="body__title">
-                  Review Title:
-                  <div className="title__info"> This place sucks. </div>
+                  <div className="title__label">Title:</div>
+                  <input className="title__info" />
+                </div>
+                <div className="body__review">
+                  <div className="review__label">Review:</div>
+                  <textarea className="review__info" />
                 </div>
                 <div className="body__stars">
                   Star Rating:
@@ -81,9 +97,9 @@ export default class NewReview extends Component {
                   </div>
                 </div>
               </div>
-              <div className="modal-container__footer">
-                <button className="footer__button" onClick={this.closeModal}>
-                  Submit Review
+              <div className="modal__footer">
+                <button className="footer__button" onClick={this.submitReview}>
+                  Submit
                 </button>
                 <button className="footer__button" onClick={this.closeModal}>
                   Close
@@ -95,8 +111,4 @@ export default class NewReview extends Component {
       </Modal>
     );
   }
-
-  starRating = rating => {
-    this.setState({ rating });
-  };
 }
