@@ -42,6 +42,7 @@ router.get('/api/business/:id', function(req, res) {
   BusinessController.getBusinessById(req, res);
 });
 
+
 router.delete('/api/business/:id', function(req, res) {
   BusinessController.deleteBusinessById(req, res);
 });

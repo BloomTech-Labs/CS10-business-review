@@ -1,8 +1,8 @@
 @import './mixins.less';
 
 .navbar-container {
-  position: fixed; 
-  border-bottom: .1rem solid white;
+  position: fixed;
+  border-bottom: 0.1rem solid white;
   z-index: 1;
   .containers(@flexDirection:row, @justifyContent: space-between, @height: 20vh);
   max-height: 20vh;
@@ -22,7 +22,7 @@
       margin-top: 2rem;
       min-width: 80%;
       font-size: 1.5rem;
-      padding: .2rem;
+      padding: 0.2rem;
     }
     .navbar-container__buttons {
       .containers(@flexDirection: row);
@@ -33,7 +33,6 @@
         margin: 0 2rem;
         font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
         font-size: 1.5rem;
-
       }
       .navbar-container__button:hover {
         cursor: pointer;
@@ -54,7 +53,7 @@
 .popover {
   .containers(@height: 15%, @fontSize: 1.5rem);
   background: rgb(38, 63, 63) !important;
-  border: .1rem solid black;
+  border: 0.1rem solid black;
   color: white;
   text-align: center;
   top: -40px !important;
@@ -76,5 +75,37 @@
   }
   .popover-button:hover {
     cursor: pointer;
+  }
+}
+
+.navbar-container__modal {
+  .modal-container {
+    .containers();
+    color: white;
+    text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+    .modal-container__title {
+      font-size: 2rem;
+    }
+    .modal-container__body {
+      font-size: 1.5rem;
+    }
+    .modal-container__footer {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      color: black;
+      margin-top: 1rem;
+      .footer__button {
+        border: outset;
+        width: 15%;
+        padding: 0.5rem;
+        margin: 0 2rem;
+        font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+        font-size: 1.5rem;
+      }
+      .modal__button:hover {
+        cursor: pointer;
+      }
+    }
   }
 }

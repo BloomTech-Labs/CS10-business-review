@@ -39,6 +39,10 @@ class SignIn extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   render() {
     return (
       <div>

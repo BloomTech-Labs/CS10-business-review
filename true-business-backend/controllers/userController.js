@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+<<<<<<< HEAD
 
 require('../services/passport');
 const bcryptRounds = 10;
@@ -33,9 +34,60 @@ const register = (request, response) => {
           response.status(500).send({
             errorMessage: 'Error occurred while saving: ' + err
           });
+=======
+const Validator = require("email-validator");
+const bcryptRounds = 10;
+
+const register = (request, response) => {
+    const { username, password, email } = request.body;
+
+    // Check for empty username, password or email.
+    if(!username.trim() || !password.trim() || !email.trim()) {
+        response.status(400).send({
+            errorMessage: "Missing username, password or email."
         });
+        return;
     }
+ 
+    if(!Validator.validate(email)) {
+        response.status(400).send({
+            errorMessage: "Email is not valid."
+>>>>>>> b88106a9cda71530c7e0c895a3efafb1b5869660
+        });
+        return;
+    }
+<<<<<<< HEAD
   });
+=======
+
+    // Check to see if the user exists.
+    User
+    .findOne({
+            $or:[
+                { "username": username},
+                { "email": email} 
+            ]}
+    ).then(userFound => {
+        if(userFound) {
+            response.status(500).send({
+                errorMessage: "User name or email already exists."
+            });
+        } else {
+            // Create User.
+            const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
+            const user = new User({username, password:encryptedPassword, email});
+            user.save()
+                .then(savedUser => {
+                    response.status(200).send(savedUser);
+                })
+                .catch(err => {
+                    response.status(500).send({
+                        errorMessage: "Error occurred while saving: " + err
+                    });
+                });
+        }
+    })
+>>>>>>> b88106a9cda71530c7e0c895a3efafb1b5869660
 };
 
 const login = (request, response) => {
