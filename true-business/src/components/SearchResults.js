@@ -9,7 +9,7 @@ class SearchResults extends Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
   };
-  
+
   render() {
     return (
       <div>
@@ -40,7 +40,7 @@ class SearchResults extends Component {
   handleBusiness = (business, event) => {
     this.props.business(business);
     this.props.history.push(`/business`);
-  }
+  };
 }
 
 export default withRouter(SearchResults);
