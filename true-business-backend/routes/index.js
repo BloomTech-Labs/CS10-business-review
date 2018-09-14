@@ -70,27 +70,4 @@ router.get('/api/business/', function(req, res) {
   BusinessController.getAllBusiness(req, res);
 });
 
-// router.get("/API/Business", function(req, res) {
-//     Business.find({}, function(err, allbusiness))
-//     if(err){
-//         console.log(err);
-//     } else {
-//         res.render("business", {business:allBusiness});
-//     }
-// });
-
-// const target = new Business({
-//   name: 'Target',
-//   type: 'Big Box Retail',
-//   contact: 'scott@target.com'
-// });
-
-// target.save(function(err, business) {
-//   if (err) {
-//     console.log('Something went wrong!');
-//   } else {
-//     console.log(business);
-//   }
-// });
-
 module.exports = router;
