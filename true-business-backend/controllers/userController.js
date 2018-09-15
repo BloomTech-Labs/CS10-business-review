@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-//const Validator = require("email-validator");
+const Validator = require("email-validator");
 const bcryptRounds = 10;
 
 const register = (request, response) => {
@@ -14,13 +14,12 @@ const register = (request, response) => {
         return;
     }
  
-    /* Sophie: REMOVED Until I figure out how to make it work.
     if(!Validator.validate(email)) {
         response.status(400).send({
             errorMessage: "Email is not valid."
         });
         return;
-    }*/
+    }
 
     // Check to see if the user exists.
     User
