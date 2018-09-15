@@ -7,7 +7,7 @@ import '../css/User.css';
 
 class User extends Component {
   state = {
-    breadcrumbs: ['Home', 'My Reviews'],
+    breadcrumbs: ['Home'],
     userReviews: [
       {
         business: 'Taco Bell',
@@ -38,15 +38,14 @@ class User extends Component {
         updated: '1/1/1',
       },
     ],
-    current: 'Add',
+    current: 'Home',
   };
 
   logout = () => {
-    console.log("Log")   
-      localStorage.removeItem('token');
-      localStorage.removeItem('userId');       
-      this.props.history.push('/');
-          
+    console.log('Log');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    this.props.history.push('/');
   };
   componentDidMount = () => {
     window.scrollTo(0, 0);
@@ -60,16 +59,21 @@ class User extends Component {
           <div className="user__header">
             <div className="header__breadcrumbs">
               {this.state.breadcrumbs.map((crumb, i) => {
+                console.log(this.state.breadcrumbs);
+                console.log(this.state.breadcrumbs.length);
                 if (i + 1 === this.state.breadcrumbs.length) {
                   return (
-                    <div key={crumb} className="breadcrumbs__breadcrumb">
+                    <button key={i} name={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
                       {crumb}
-                    </div>
+                    </button>
                   );
                 }
                 return (
-                  <div key={crumb} className="breadcrumbs__breadcrumb">
-                    {crumb} <i className="fas fa-arrow-right" />
+                  <div>
+                    <button key={i} name={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
+                      {crumb}
+                    </button>
+                    <i className="fas fa-arrow-right" />
                   </div>
                 );
               })}
@@ -101,10 +105,36 @@ class User extends Component {
     );
   }
   updateCurrent = event => {
-    this.setState({ current: event.target.name });
+    let breadcrumbs = this.state.breadcrumbs;
+    // Home => Home
+    if (event.target.name === 'Home') {
+      if (breadcrumbs.length === 2) {
+        breadcrumbs.pop();
+      }
+    }
+    // Home => Home->Whatever
+    else if (breadcrumbs.length === 1) {
+      breadcrumbs.push(event.target.name);
+    }
+    // Home->Whatever => Home=> Whatever
+    else if (breadcrumbs.length === 2) {
+      breadcrumbs.pop();
+      breadcrumbs.push(event.target.name);
+    }
+    this.setState({ current: event.target.name, breadcrumbs });
   };
+  
   loadContent = () => {
     switch (this.state.current) {
+      case 'Add a Review':
+        return (
+          <div className="content__solo-add">
+            <div className="solo-add__image">
+              <i className="fas fa-plus-square fa-7x" />
+            </div>
+            <div className="solo-add__text">Add a review</div>
+          </div>
+        );
       case 'My Reviews':
         return (
           <div className="content__user-reviews">
@@ -135,11 +165,32 @@ class User extends Component {
         return <div className="content__settings">Also no idea for this. Just following the wireframe...</div>;
       default:
         return (
-          <div className="content__solo-add">
-            <div className="solo-add__image">
-              <i className="fas fa-plus-square fa-10x" />
+          <div className="content__profile">
+            <div className="profile__image" />
+            {/* Have this open a modal to change their password */}
+            <div className="profile__container">
+              <div className="container__info">
+                <div className="info__label">Username:</div>
+                <div className="info__data">Amanda Holdenkiss</div>
+                <button className="info__button" onClick={this.changeUsername}>
+                  Change
+                </button>
+              </div>
+              <div className="container__info">
+                <div className="info__label">Email:</div>
+                <div className="info__data">I.P.@Freely.com</div>
+                <button className="info__button" onClick={this.changeEmail}>
+                  Change
+                </button>
+              </div>
+              <div className="container__info">
+                <div className="info__label">Password:</div>
+                <div className="info__data">****************</div>
+                <button className="info__button" onClick={this.changeUsername}>
+                  Change
+                </button>
+              </div>
             </div>
-            <div className="solo-add__text">Add a review</div>
           </div>
         );
     }
