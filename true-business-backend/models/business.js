@@ -8,7 +8,11 @@ const businessSchema = new mongoose.Schema({
   stars: Number,
   popularity: Boolean,
   totalReviews: Number,  
-  
+  location: {
+    address: String,
+    longitude: Number,
+    latitude: Number
+  },
   createdOn: {
     type: Date,
     required: true,
