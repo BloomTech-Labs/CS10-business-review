@@ -2,9 +2,21 @@ const express = require('express');
 const server = require('../server');
 const UserController = require('../controllers/userController');
 const BusinessController = require('../controllers/businessController');
-
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 const router = express.Router();
+const keys = require('../config/keys');
 require('../routes/authRoutes')(router);
+
+router.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey]
+  })
+);
+
+router.use(passport.initialize());
+router.use(passport.session());
 
 router.get('/', (request, response) => {
   response.status(200).json({ api: 'Server running OK.' });
@@ -41,7 +53,6 @@ router.get('/api/business/ByName/:name', function(request, response) {
 router.get('/api/business/:id', function(req, res) {
   BusinessController.getBusinessById(req, res);
 });
-
 
 router.delete('/api/business/:id', function(req, res) {
   BusinessController.deleteBusinessById(req, res);
