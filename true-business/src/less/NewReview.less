@@ -7,16 +7,41 @@
     color: white;
     text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
     .modal__header {
+      height: auto;
       font-size: 3rem;
     }
     .modal__body {
       .containers();
-      .body__image {
-        .image__add:hover {
-          cursor: pointer;
+      .body__images {
+        .containers(@height: 6em, @flexDirection: row);
+        .images__previews {
+          height:inherit;
+          .previews__preview {
+            width: auto;
+            height: 5em;
+            margin: 0 1rem;
+          }
+          .previews__preview:hover{
+            cursor: pointer;
+          }
+          .previews__text {
+            font-size: 1.25rem;
+          }
         }
-        .image__text {
-          font-size: 1.25rem;
+        .images__image {
+          background: black;
+          width: 5em;
+          height: 5em;
+          margin: 0 1rem 2rem 1rem;
+          .image__add:hover {
+            cursor: pointer;
+          }
+          .image__text {
+            font-size: 1.25rem;
+          }
+        }
+        input[type='file'] {
+          display: none;
         }
       }
       .body__title {
