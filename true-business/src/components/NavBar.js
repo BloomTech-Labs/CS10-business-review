@@ -95,7 +95,7 @@ class NavBar extends Component {
     this.setState({ open: true });
   };
 
-  showModal = show => {
+  showModal = (show,state) => {
     this.setState({ open: show });
   };
 
@@ -123,7 +123,7 @@ class NavBar extends Component {
           />
           <div className="navbar-container__buttons">
             <button className="navbar-container__button" onClick={this.displayNewReview}>
-              New Review{' '}
+              New Review
             </button>
             <NewReview open={this.state.open} showModal={this.showModal} />
             <button type="submit" id="Search" className="navbar-container__button" onClick={this.handleSearch}>

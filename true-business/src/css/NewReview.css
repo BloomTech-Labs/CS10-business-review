@@ -15,6 +15,7 @@
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
 }
 .new-review .new-review__modal .modal__header {
+  height: auto;
   font-size: 3rem;
 }
 .new-review .new-review__modal .modal__body {
@@ -30,11 +31,47 @@
   padding: 0;
   margin: 0;
 }
-.new-review .new-review__modal .modal__body .body__image .image__add:hover {
+.new-review .new-review__modal .modal__body .body__images {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 6em;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.new-review .new-review__modal .modal__body .body__images .images__previews {
+  height: inherit;
+}
+.new-review .new-review__modal .modal__body .body__images .images__previews .previews__preview {
+  width: auto;
+  height: 5em;
+  margin: 0 1rem;
+}
+.new-review .new-review__modal .modal__body .body__images .images__previews .previews__preview:hover {
   cursor: pointer;
 }
-.new-review .new-review__modal .modal__body .body__image .image__text {
+.new-review .new-review__modal .modal__body .body__images .images__previews .previews__text {
   font-size: 1.25rem;
+}
+.new-review .new-review__modal .modal__body .body__images .images__image {
+  background: black;
+  width: 5em;
+  height: 5em;
+  margin: 0 1rem 2rem 1rem;
+}
+.new-review .new-review__modal .modal__body .body__images .images__image .image__add:hover {
+  cursor: pointer;
+}
+.new-review .new-review__modal .modal__body .body__images .images__image .image__text {
+  font-size: 1.25rem;
+}
+.new-review .new-review__modal .modal__body .body__images input[type='file'] {
+  display: none;
 }
 .new-review .new-review__modal .modal__body .body__title {
   display: flex;
