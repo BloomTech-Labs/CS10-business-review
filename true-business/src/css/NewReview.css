@@ -50,6 +50,7 @@
 .new-review .new-review__modal .modal__body .body__images .images__previews .previews__preview {
   width: auto;
   height: 5em;
+  margin: 0 1rem;
 }
 .new-review .new-review__modal .modal__body .body__images .images__previews .previews__preview:hover {
   cursor: pointer;
