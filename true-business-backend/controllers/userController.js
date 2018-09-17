@@ -1,8 +1,7 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/user');
+const bcrypt = require("bcrypt");
+const User = require("../models/user");
 
-
-require('../services/passport');
+require("../services/passport");
 const bcryptRounds = 10;
 
 const register = (request, response) => {
@@ -11,7 +10,7 @@ const register = (request, response) => {
   // Check for empty username or password.
   if (!username.trim() || !password.trim()) {
     response.status(400).send({
-      errorMessage: 'Missing username or password.'
+      errorMessage: "Missing username or password."
     });
   }
 
@@ -19,7 +18,7 @@ const register = (request, response) => {
   User.findOne({ username: username }).then(userFound => {
     if (userFound) {
       response.status(500).send({
-        errorMessage: 'User name already exists.'
+        errorMessage: "User name already exists."
       });
     } else {
       // Create User.
@@ -32,40 +31,9 @@ const register = (request, response) => {
         })
         .catch(err => {
           response.status(500).send({
-            errorMessage: 'Error occurred while saving: ' + err
+            errorMessage: "Error occurred while saving: " + err
           });
-
-const Validator = require("email-validator");
-const bcryptRounds = 10;
-
-const register = (request, response) => {
-    const { username, password, email } = request.body;
-
-const Validator = require("email-validator");
-const bcryptRounds = 10;
-
-const register = (request, response) => {
-    const { username, password, email } = request.body;
-
->>>>>>> b88106a9cda71530c7e0c895a3efafb1b5869660
-    // Check for empty username, password or email.
-    if(!username.trim() || !password.trim() || !email.trim()) {
-        response.status(400).send({
-            errorMessage: "Missing username, password or email."
         });
-        return;
-    }
- 
-    /* Sophie: REMOVED Until I figure out how to make it work.
-    if(!Validator.validate(email)) {
-        response.status(400).send({
-            errorMessage: "Email is not valid."
-<<<<<<< HEAD
->>>>>>> b88106a9cda71530c7e0c895a3efafb1b5869660
-=======
->>>>>>> b88106a9cda71530c7e0c895a3efafb1b5869660
-        });
-        return;
     }
   });
 };
@@ -76,14 +44,14 @@ const login = (request, response) => {
   User.findOne({ username: username }).then(userFound => {
     if (!userFound) {
       response.status(500).send({
-        errorMessage: 'Login Failed.'
+        errorMessage: "Login Failed."
       });
     } else {
       if (bcrypt.compareSync(password, userFound.password)) {
         response.status(200).send({ username: userFound.username });
       } else {
         response.status(500).send({
-          errorMessage: 'Login Failed.'
+          errorMessage: "Login Failed."
         });
       }
     }
@@ -99,7 +67,7 @@ const getUserById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: 'The user could not be retrieved.'
+        error: "The user could not be retrieved."
       });
     });
 };
@@ -113,7 +81,7 @@ const deleteUserById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: 'The user could not be removed.'
+        error: "The user could not be removed."
       });
     });
 };
@@ -125,7 +93,7 @@ const getAllUsers = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: 'The users could not be found.'
+        error: "The users could not be found."
       });
     });
 };
