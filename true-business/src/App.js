@@ -5,6 +5,7 @@ import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import SearchResults from './components/SearchResults';
 import Business from './components/Business';
+import User from './components/User';
 import './css/App.css';
 
 class App extends Component {
@@ -24,7 +25,7 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     this.resetSearch();
   };
 
@@ -59,6 +60,7 @@ class App extends Component {
             path="/business"
             render={() => <Business search={this.searchResults} business={this.state.business} />}
           />
+          <Route path="/user" render={() => <User search={this.searchResults} />} />
         </Switch>
       </div>
     );

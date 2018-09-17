@@ -56,6 +56,7 @@ const register = (request, response) => {
         return;
     }
  
+    /* Sophie: REMOVED Until I figure out how to make it work.
     if(!Validator.validate(email)) {
         response.status(400).send({
             errorMessage: "Email is not valid."

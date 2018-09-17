@@ -1,0 +1,294 @@
+.user {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  width: auto;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  padding-top: 25vh;
+  padding-left: 5rem;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+}
+.user .user__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.user .user__header .header__breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: inherit;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+}
+.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb {
+  border: none;
+  width: auto;
+  font-size: 1.5rem;
+  background-color: darkslategray;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  margin: 0 1rem;
+}
+.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow {
+  padding: 0 1rem;
+}
+.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow:hover {
+  cursor: default;
+}
+.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb:hover {
+  cursor: pointer;
+}
+.user .user__header .header__signout {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  padding-right: 5rem;
+  font-size: 1.5rem;
+}
+.user .user__header .header__signout:hover {
+  cursor: pointer;
+}
+.user .user__body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.user .user__body .body__left-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  width: 20vw;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  border: 0.1rem solid black;
+}
+.user .user__body .body__left-bar .left-bar__button {
+  border: none;
+  width: 100%;
+  font-size: 1.5rem;
+  background-color: #223131;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  padding: 1rem;
+}
+.user .user__body .body__left-bar .left-bar__button:hover {
+  filter: brightness(120%);
+  cursor: pointer;
+}
+.user .user__body .body__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.user .user__body .body__content .content__user-reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+.user .user__body .body__content .content__user-reviews .user-reviews__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 15rem;
+  width: 20%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  margin: 0 1rem 1rem 1rem;
+  border: 0.1rem solid black;
+  padding: 1rem;
+  background-color: #223131;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+}
+.user .user__body .body__content .content__user-reviews .user-reviews__item .item__image {
+  width: 10rem;
+  height: 10rem;
+  background-color: black;
+}
+.user .user__body .body__content .content__user-reviews .user-reviews__item .item__image:hover {
+  cursor: pointer;
+}
+.user .user__body .body__content .content__user-reviews .user-reviews__item .item__info {
+  font-size: 1.25rem;
+  text-align: center;
+}
+.user .user__body .body__content .content__user-reviews .user-reviews__add {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 15rem;
+  width: 20%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  background-color: #223131;
+  margin: 0 1rem 1rem 1rem;
+  border: 0.1rem solid black;
+  padding: 1rem;
+}
+.user .user__body .body__content .content__user-reviews .user-reviews__add .add__image:hover {
+  cursor: pointer;
+}
+.user .user__body .body__content .content__user-reviews .user-reviews__add .add__text {
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  font-size: 2rem;
+}
+.user .user__body .body__content .content__solo-add {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  padding: 1rem 20rem 1rem 0;
+}
+.user .user__body .body__content .content__solo-add .solo-add__image:hover {
+  cursor: pointer;
+}
+.user .user__body .body__content .content__solo-add .solo-add__text {
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  font-size: 2rem;
+}
+.user .user__body .body__content .content__profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.user .user__body .body__content .content__profile .profile__image {
+  margin: 1rem 3rem;
+  width: 15rem;
+  height: 20rem;
+  background-color: black;
+}
+.user .user__body .body__content .content__profile .profile__image:hover {
+  cursor: pointer;
+}
+.user .user__body .body__content .content__profile .profile__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 70%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.user .user__body .body__content .content__profile .profile__container .container__info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  margin: 1rem;
+}
+.user .user__body .body__content .content__profile .profile__container .container__info .info__label {
+  font-size: 1.5rem;
+  width: 20%;
+}
+.user .user__body .body__content .content__profile .profile__container .container__info .info__data {
+  width: 50%;
+  font-size: 1.5rem;
+}
+.user .user__body .body__content .content__profile .profile__container .container__info .info__button {
+  width: 20%;
+  border: none;
+  font-size: 1.25rem;
+  background-color: #223131;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  padding: 1rem;
+}
+.user .user__body .body__content .content__profile .profile__container .container__info .info__button:hover {
+  cursor: pointer;
+}

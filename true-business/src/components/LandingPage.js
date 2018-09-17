@@ -16,7 +16,8 @@ let modalStyles = {
     height: '75%',
     width: '50%',
     zIndex: '5',
-    backgroundColor: 'darkslategrey'
+    backgroundColor: 'darkslategrey',
+    overflow: 'hidden',
   },
 };
 

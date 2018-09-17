@@ -1417,7 +1417,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.3:
+classnames@^2.2.1, classnames@^2.2.3:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
@@ -5364,7 +5364,7 @@ promise@8.0.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -5616,6 +5616,14 @@ react-scripts@1.1.5:
   optionalDependencies:
     fsevents "^1.1.3"
 
+react-star-ratings@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-star-ratings/-/react-star-ratings-2.3.0.tgz#311a68f8f44492439a5b306ed743e63a63fe0fa7"
+  dependencies:
+    classnames "^2.2.1"
+    prop-types "^15.6.0"
+    react "^16.1.0"
+
 react-transition-group@^2.3.1:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.4.0.tgz#1d9391fabfd82e016f26fabd1eec329dbd922b5a"
@@ -5624,6 +5632,15 @@ react-transition-group@^2.3.1:
     loose-envify "^1.3.1"
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
+
+react@^16.1.0:
+  version "16.5.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.5.1.tgz#8cb8e9f8cdcb4bde41c9a138bfbf907e66132372"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    schedule "^0.4.0"
 
 react@^16.5.0:
   version "16.5.0"
@@ -6010,6 +6027,12 @@ sax@^1.2.1, sax@^1.2.4, sax@~1.2.1:
 schedule@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.3.0.tgz#1be2ab2fc2e768536269ce7326efb478d6c045e8"
+  dependencies:
+    object-assign "^4.1.1"
+
+schedule@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.4.0.tgz#fa20cfd0bfbf91c47d02272fd7096780d3170bbb"
   dependencies:
     object-assign "^4.1.1"
 

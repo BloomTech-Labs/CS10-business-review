@@ -16,7 +16,6 @@ class SignIn extends Component {
   }
 
   signIn = event => {   
-  
     axios.post('https://cryptic-brook-22003.herokuapp.com/login', this.state)
     .then(response => {
       // localStorage.setItem('token', response.data.token)
@@ -24,7 +23,7 @@ class SignIn extends Component {
       this.setState({
         error: false
       });
-      this.props.history.push(`/`)
+      this.props.history.push(`/user`)
     })
     .catch(err => {
       this.setState({
@@ -32,7 +31,6 @@ class SignIn extends Component {
         errorMessage: err.response.data.error
       })
     })
-  
   }
 
   handleInputChange = event => {
@@ -72,7 +70,6 @@ class SignIn extends Component {
               </button>
             </div>
           </div>
-          {/* <div style={{height:'1000px', width:'0px'}} /> */}
         </div>
       </div>
     );

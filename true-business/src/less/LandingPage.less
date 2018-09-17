@@ -6,7 +6,6 @@
   cursor: default;
   .landing-container__reviews-container {
     .containers();
-    padding: 2rem 0;
     .landing-container__title {
       font-size: 3rem;
       color: white;
@@ -14,11 +13,10 @@
     }
     .landing-container__reviews {
       .containers(@flexDirection: row, @width: 90%, @justifyContent: space-between);
-      padding: 1rem 0;
       flex-wrap: wrap;
       min-height: 100%;
       .landing-container__review {
-        .containers(@width: 20%, @fontSize: 1.25rem);
+        .containers(@width: 20%, @height: 30rem, @fontSize: 1.25rem);
         min-width: 10rem;
         margin: 2rem;
         flex-wrap: nowrap;

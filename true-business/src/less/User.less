@@ -1,0 +1,156 @@
+@import 'mixins.less';
+
+.user {
+  .containers(@width: auto, @justifyContent: flex-start, @alignItems: flex-start);
+  padding-top: 25vh;
+  padding-left: 5rem;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  .user__header {
+    .containers(@flexDirection: row, @height: 5rem);
+    .header__breadcrumbs {
+      .containers(@flexDirection:row, @height:inherit, @alignItems:flex-start, @justifyContent: flex-start);
+      font-size: 1.5rem;
+      .breadcrumbs__breadcrumb {
+        border: none;
+        width: auto;
+        font-size: 1.5rem;
+        background-color: darkslategray;
+        color: white;
+        text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+        margin: 0 1rem;
+        .breadcrumb__arrow {
+          padding: 0 1rem;
+        }
+        .breadcrumb__arrow:hover {
+          cursor: default;
+        }
+      }
+      .breadcrumbs__breadcrumb:hover {
+        cursor: pointer;
+      }
+    }
+    .header__signout {
+      .containers(@alignItems: flex-end, @justifyContent: flex-start);
+      padding-right: 5rem;
+      font-size: 1.5rem;
+    }
+    .header__signout:hover {
+      cursor: pointer;
+    }
+  }
+  .user__body {
+    .containers(@flexDirection: row, @alignItems:flex-start, @justifyContent:space-between);
+    .body__left-bar {
+      .containers(@width: 20vw, @height: auto, @justifyContent:flex-start, @alignItems: flex-start);
+      border: 0.1rem solid black;
+      .left-bar__button {
+        border: none;
+        width: 100%;
+        font-size: 1.5rem;
+        background-color: rgb(34, 49, 49);
+        color: white;
+        text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+        padding: 1rem;
+      }
+      .left-bar__button:hover {
+        filter: brightness(120%);
+        cursor: pointer;
+      }
+    }
+    .body__content {
+      .containers(@justifyContent: flex-start, @alignItems: flex-start);
+      .content__user-reviews {
+        .containers(@justifyContent: flex-start, @alignItems: flex-start, @flexDirection: row);
+        flex-wrap: wrap;
+        .user-reviews__item {
+          .containers(@width: 20%, @height: 15rem);
+          margin: 0 1rem 1rem 1rem;
+          border: 0.1rem solid black;
+          padding: 1rem;
+          background-color: rgb(34, 49, 49);
+          color: white;
+          text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+          .item__image {
+            width: 10rem;
+            height: 10rem;
+            background-color: black;
+          }
+          .item__image:hover {
+            cursor: pointer;
+          }
+          .item__info {
+            font-size: 1.25rem;
+            text-align: center;
+          }
+        }
+        .user-reviews__add {
+          .containers(@width: 20%, @height: 15rem);
+          background-color: rgb(34, 49, 49);
+          margin: 0 1rem 1rem 1rem;
+          border: 0.1rem solid black;
+          padding: 1rem;
+          .add__image:hover {
+            cursor: pointer;
+          }
+          .add__text {
+            color: white;
+            text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+            font-size: 2rem;
+          }
+        }
+      }
+      .content__solo-add {
+        .containers();
+        padding: 1rem 20rem 1rem 0;
+        .solo-add__image:hover {
+          cursor: pointer;
+        }
+        .solo-add__text {
+          color: white;
+          text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+          font-size: 2rem;
+        }
+      }
+      .content__profile {
+        .containers(@flexDirection: row, @justifyContent: space-between);
+        .profile__image {
+          margin: 1rem 3rem;
+          width: 15rem;
+          height: 20rem;
+          background-color: black;
+        }
+        .profile__image:hover {
+          cursor: pointer;
+        }
+        .profile__container {
+          .containers(@width: 70%);
+          .container__info {
+            .containers(@flexDirection: row);
+            margin: 1rem;
+            .info__label {
+              font-size: 1.5rem;
+              width: 20%;
+            }
+            .info__data {
+              width:50%;
+              font-size: 1.5rem;
+            }
+            .info__button {
+              width: 20%;
+              border: none;
+              font-size: 1.25rem;
+              background-color: rgb(34, 49, 49);
+              color: white;
+              text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+              padding: 1rem;
+            }
+            .info__button:hover{
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}
