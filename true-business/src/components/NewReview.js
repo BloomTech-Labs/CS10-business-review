@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import StarRatings from 'react-star-ratings';
+// We'll need this eventually
+// import axios from 'axios';
 
 import '../css/NewReview.css';
 
@@ -30,6 +32,10 @@ export default class NewReview extends Component {
       rating: 0,
       modalIsOpen: false,
       modalInfo: null,
+      // the files that will be uploaded to DB or wherever
+      images: [],
+      imagePreviews: [],
+      currentImageID: 0,
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -55,9 +61,38 @@ export default class NewReview extends Component {
     this.setState({ rating });
   };
 
-  submiteReview = () => {
+  submitReview = () => {
     this.closeModal();
     // I'll focus on this after we do some db stuff
+  };
+
+  handleImageChange = event => {
+    let reader = new FileReader();
+    let file = event.target.files[0];
+    // keep track of images to allow removal
+    let currentImageID = this.state.currentImageID;
+    // makes sure that an image was selected
+    if (file) {
+      reader.onloadend = () => {
+        let { imagePreviews, images } = this.state;
+        imagePreviews.push({ id: currentImageID, preview: reader.result });
+        images.push({id: currentImageID, file});
+        this.setState({ currentImageID: currentImageID++, imagePreviews, images });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  removeImage = event => {
+    // update the images
+    let images = this.state.images.filter(image => {
+      return image.id !== Number(event.target.id);
+    });
+    // update the image previews
+    let imagePreviews = this.state.imagePreviews.filter(image => {
+      return image.preview !== event.target.src;
+    });
+    this.setState({ images, imagePreviews });
   };
 
   render() {
@@ -72,9 +107,32 @@ export default class NewReview extends Component {
             <div className="new-review__modal">
               <div className="modal__header">New Review</div>
               <div className="modal__body">
-                <div className="body__image">
-                  <i className="image__add fas fa-plus-square fa-5x" />
-                  <div className="image__text">Add an Image</div>
+                <div className="body__images">
+                  {this.state.imagePreviews.length
+                    ? this.state.imagePreviews.map((image, i) => {
+                        return (
+                          <div key={i} className="images__previews">
+                            <img
+                              alt="preview"
+                              id={image.id}
+                              src={image.preview}
+                              className="previews__preview"
+                              onClick={this.removeImage}
+                            />
+                            <div className="previews__text"> Click Image to Remove </div>
+                          </div>
+                        );
+                      })
+                    : null}
+                  {this.state.images.length < 4 ? (
+                    <div className="images__image">
+                      <label htmlFor="file-upload">
+                        <i className="image__add fas fa-plus-square fa-5x" />
+                      </label>
+                      <input id="file-upload" type="file" onChange={this.handleImageChange} />
+                      <div className="image__text">Add an Image</div>
+                    </div>
+                  ) : null}
                 </div>
                 <div className="body__title">
                   <div className="title__label">Title:</div>

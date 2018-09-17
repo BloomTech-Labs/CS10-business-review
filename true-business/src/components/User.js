@@ -59,8 +59,6 @@ class User extends Component {
           <div className="user__header">
             <div className="header__breadcrumbs">
               {this.state.breadcrumbs.map((crumb, i) => {
-                console.log(this.state.breadcrumbs);
-                console.log(this.state.breadcrumbs.length);
                 if (i + 1 === this.state.breadcrumbs.length) {
                   return (
                     <button key={i} name={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
@@ -108,6 +106,7 @@ class User extends Component {
     let breadcrumbs = this.state.breadcrumbs;
     // Home => Home
     if (event.target.name === 'Home') {
+      // Home->Whatever => Home
       if (breadcrumbs.length === 2) {
         breadcrumbs.pop();
       }
