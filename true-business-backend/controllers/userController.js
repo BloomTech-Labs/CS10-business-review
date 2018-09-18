@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
-require("../services/passport");
 const bcryptRounds = 10;
 
 const register = (request, response) => {
