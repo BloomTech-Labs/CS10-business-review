@@ -1,7 +1,10 @@
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
-const bodyParser = require("body-parser");
+
+const cookieSession = require("cookie-session");
+const passport = require("passport");
+const keys = require("./config/keys");
 
 //Instantiate Server
 const server = express();
@@ -30,6 +33,16 @@ server.use(cors());
 //Enable to parse Json object
 server.use(express.json());
 //server.use(bodyParser.json()); //express.jason
+
+server.use(express.json());
+server.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey]
+  })
+);
+server.use(passport.initialize());
+server.use(passport.session());
 
 //Connect the route to the server
 server.use("/", routes);
