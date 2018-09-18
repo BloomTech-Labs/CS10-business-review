@@ -1,46 +1,46 @@
-const Business = require("../models/business");
+const Business = require('../models/business');
+const googleMapsClient = require('@google/maps').createClient({
+    key: 'AIzaSyCy5ymI0_0Ko4q0K0JHfe3d2JASObGcHaw',
+    Promise: Promise
+});
 
 const createBusiness = (req, res) => {
-  const {
-    name,
-    type,
-    contact,
-    image,
-    stars,
-    popularity,
-    totalReviews
-  } = req.body;
-  console.log("Creating a Business: " + name);
+    const { name, type, contact, image, stars, popularity, totalReviews, location } = req.body;
+    console.log("Creating a Business: " + name);
 
-  if (name && type && contact) {
-    const business = new Business({
-      name,
-      type,
-      contact,
-      image,
-      stars,
-      popularity,
-      totalReviews
-    });
-
-    business
-      .save() // returns a promise
-      .then(function(business) {
-        res.status(201).json(business);
-      })
-      .catch(function(error) {
-        res.status(500).json({
-          error:
-            "There was an error while saving the Business to the Database. (" +
-            error +
-            ")"
+    if (!name || !type || !contact) {
+        response.status(500).json({ 
+            error: 'The business information could not be retrieved. (' + error + ')' 
         });
-      });
-  } else {
-    res.status(400).json({
-      errorMessage: "Please provide both name and type for the Business."
-    });
-  }
+        return;
+    }
+
+    googleMapsClient
+        .geocode({ address: location.address })
+        .asPromise()
+        .then((response) => {
+            const loc = {
+                address: location.address, 
+                latitude: response.json.results[0].geometry.location.lat,
+                longitude: response.json.results[0].geometry.location.lng
+            };
+
+            const business = new Business({ name, type, contact, image, stars, popularity, totalReviews, location: loc});
+
+            business
+            .save() // returns a promise
+            .then(function(business) {
+                res.status(201).json(business);
+            })
+            .catch(function(error) {
+                res.status(500).json({
+                    error: 'There was an error while saving the Business to the Database. (' + error + ')'
+                });
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 };
 
 const getBusinessByName = (request, response) => {
