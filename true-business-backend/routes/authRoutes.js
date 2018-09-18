@@ -1,18 +1,27 @@
 const passport = require("passport");
 
-module.exports = router => {
-  router.get(
+module.exports = app => {
+  app.get(
     "/auth/google",
     passport.authenticate("google", {
       scope: ["profile", "email"]
     })
   );
 
-  router.get(
+  app.get(
     "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/login" }),
-    function(req, res) {
-      res.redirect("/");
+    passport.authenticate("google"),
+    (req, res) => {
+      res.redirect("/LandingPage");
     }
   );
+
+  app.get("/api/logout", (req, res) => {
+    req.logout();
+    res.redirect("/");
+  });
+
+  app.get("/api/current_user", (req, res) => {
+    res.send(req.user);
+  });
 };
