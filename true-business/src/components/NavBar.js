@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Popover, PopoverBody, PopoverHeader } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import Modal from 'react-modal';
+import NewReview from './NewReview';
 
 import logo from '../imgs/logo.png';
 
@@ -30,6 +31,8 @@ let popoverStyles = {
   },
 };
 
+Modal.setAppElement('div');
+
 class NavBar extends Component {
   constructor() {
     super();
@@ -47,6 +50,8 @@ class NavBar extends Component {
     this.toggle = this.toggle.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.displayNewReview = this.displayNewReview.bind(this);
+    this.open = false;
   }
 
   componentDidMount = () => {
@@ -86,6 +91,14 @@ class NavBar extends Component {
     }
   };
 
+  displayNewReview = () => {
+    this.setState({ open: true });
+  };
+
+  showModal = (show,state) => {
+    this.setState({ open: show });
+  };
+
   render() {
     return (
       <div className="navbar-container">
@@ -109,7 +122,10 @@ class NavBar extends Component {
             className="navbar-container__input"
           />
           <div className="navbar-container__buttons">
-            <button className="navbar-container__button">Review </button>
+            <button className="navbar-container__button" onClick={this.displayNewReview}>
+              New Review
+            </button>
+            <NewReview open={this.state.open} showModal={this.showModal} />
             <button type="submit" id="Search" className="navbar-container__button" onClick={this.handleSearch}>
               Search
             </button>
@@ -125,7 +141,7 @@ class NavBar extends Component {
                     <div className="modal-container__body">You can't very well search for nothing...</div>
                     <div className="modal-container__footer">
                       <button className="footer__button" onClick={this.closeModal}>
-                        close
+                        Close
                       </button>
                     </div>
                   </div>
