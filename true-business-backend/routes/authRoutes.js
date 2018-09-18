@@ -12,7 +12,7 @@ module.exports = app => {
     "/auth/google/callback",
     passport.authenticate("google"),
     (req, res) => {
-      res.redirect("/LandingPage");
+      res.redirect("https://true-business.netlify.com/");
     }
   );
 
