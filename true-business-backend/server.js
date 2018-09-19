@@ -48,5 +48,5 @@ server.use(passport.session());
 server.use("/", routes);
 
 //Status server
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 server.listen(port, () => console.log(`\n=== API up on port: ${port} ===\n`));
