@@ -13,6 +13,9 @@
   padding-top: 25vh;
   cursor: default;
 }
+.signup-container .signup-container__stripe {
+  width: 100vw;
+}
 .signup-container .signup-container__header {
   font-size: 3rem;
   color: white;
