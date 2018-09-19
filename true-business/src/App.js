@@ -7,6 +7,7 @@ import SearchResults from './components/SearchResults';
 import Business from './components/Business';
 import User from './components/User';
 import './css/App.css';
+import axios from 'axios'
 
 class App extends Component {
   state = {
@@ -14,20 +15,26 @@ class App extends Component {
     searchTerm: '',
     searchResults: null,
     // Temporary until we have a DB
-    businesses: [
-      { name: 'Taco Bell', location: 'East' },
-      { name: 'Taco Bell', location: 'West' },
-      { name: 'Taco Bell', location: 'North' },
-      { name: 'Taco Bell', location: 'South' },
-      { name: 'Taco Bell', location: 'Out of the way' },
-    ],
+    businesses: [],
     business: null,
   };
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-    this.resetSearch();
-  };
+
+  componentDidMount() {    
+    axios.get('https://cryptic-brook-22003.herokuapp.com/api/business/')
+    .then(business => {
+      console.log("Business", business);
+      this.setState({ businesses: business.data })
+      console.log("State", this.state.businesses);
+     })
+     .catch(err => {
+       console.log("Error:", err);
+     })
+   }
+  // componentDidMount = () => {
+  //   window.scrollTo(0, 0);
+  //   this.resetSearch();
+  // };
 
   componentDidUpdate = prevState => {
     if (prevState.searchResults === null) {
@@ -42,7 +49,7 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={() => <LandingPage business={this.getBusiness} search={this.searchResults} />}
+            render={() => <LandingPage business={this.getBusiness} businesses={this.state.businesses} search={this.searchResults} />}
           />
           <Route
             path="/results"
@@ -57,8 +64,7 @@ class App extends Component {
           <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
           <Route path="/signin" render={() => <SignIn search={this.searchResults} />} />
           <Route
-            path="/business"
-            render={() => <Business search={this.searchResults} business={this.state.business} />}
+            path="/business/:_id"  render={() => <Business search={this.searchResults} business={this.state.businesses} />}
           />
           <Route path="/user" render={() => <User search={this.searchResults} />} />
         </Switch>
