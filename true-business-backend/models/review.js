@@ -40,6 +40,11 @@ const reviewSchema = new mongoose.Schema({
       type: String,
     },
   ],
+  numberOfLikes: {
+    type: Number,
+    required: true,
+    default: 0,
+  }
 });
 
 module.exports = mongoose.model('Review', reviewSchema);

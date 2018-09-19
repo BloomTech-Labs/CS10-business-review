@@ -17,7 +17,6 @@ const createBusiness = (req, res) => {
         phone: result.formatted_phone_number,
         website: result.website,
         images: result.photos,
-        googleStars: result.rating,
         googleID: result.place_id,
         hours: result.opening_hours.weekday_text,
         description: result.address_components.long_name,
@@ -26,8 +25,8 @@ const createBusiness = (req, res) => {
       business
         .save() // returns a promise
         .then(business => {
-          console.log("response from axios in business controller", business.googleID)
-          res.status(201).json(business.googleID);
+          console.log("response from axios in business controller")
+          res.status(201).json(business._id);
         })
         .catch(error => {
           res.status(500).json({

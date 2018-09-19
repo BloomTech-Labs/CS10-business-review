@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import axios from 'axios';
+import { withRouter } from 'react-router-dom';
+
 import LandingPage from './components/LandingPage';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import SearchResults from './components/SearchResults';
 import Business from './components/Business';
 import User from './components/User';
+
 import './css/App.css';
 
 class App extends Component {
@@ -14,14 +18,9 @@ class App extends Component {
     searchTerm: '',
     searchResults: null,
     // Temporary until we have a DB
-    businesses: [
-      { name: 'Taco Bell', location: 'East' },
-      { name: 'Taco Bell', location: 'West' },
-      { name: 'Taco Bell', location: 'North' },
-      { name: 'Taco Bell', location: 'South' },
-      { name: 'Taco Bell', location: 'Out of the way' },
-    ],
+    businesses: [],
     business: null,
+    newBusinessId: null,
   };
 
   componentDidMount = () => {
@@ -36,6 +35,7 @@ class App extends Component {
   };
 
   render() {
+    console.log('this.state.newBusinessID in App', this.state.newBusinessId);
     return (
       <div className="app-container">
         <Switch>
@@ -58,7 +58,14 @@ class App extends Component {
           <Route path="/signin" render={() => <SignIn search={this.searchResults} />} />
           <Route
             path="/business"
-            render={() => <Business search={this.searchResults} business={this.state.business} />}
+            render={() => (
+              <Business
+                search={this.searchResults}
+                business={this.state.business}
+                createBusiness={this.createBusiness}
+                newBusinessId={this.state.newBusinessId}
+              />
+            )}
           />
           <Route path="/user" render={() => <User search={this.searchResults} />} />
         </Switch>
@@ -66,17 +73,43 @@ class App extends Component {
     );
   }
   getBusiness = business => {
-    this.setState({ business });
+    axios
+      .post('http://localhost:3001/api/business/placeSearch', { id: business.place_id })
+      .then(response => {
+        this.setState({ business: response.data });
+      })
+      .then(() => {
+        this.props.history.push(`/business`);
+      })
+      .catch(error => console.log('Error', error));
   };
+
   searchResults = searchTerm => {
-    let searchResults = this.state.businesses.filter(business => {
-      return business.name.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-    searchResults.length ? this.setState({ searchResults }) : this.setState({ searchResults: null });
+    axios
+      .post('http://localhost:3001/api/business/placesSearch', { query: searchTerm })
+      .then(response => {
+        response.data.length ? this.setState({ searchResults: response.data }) : this.setState({ searchResults: null });
+      })
+      .then(() => {
+        this.props.history.push(`/results`);
+      })
+      .catch(error => console.log('Error', error));
   };
+
+  createBusiness = id => {
+    console.log("ID In CREATE BusINESS", id)
+    axios
+      .post('http://localhost:3001/api/business/create', { id })
+      .then(response => {
+        console.log("newBusinessId in create business", response.data)
+        this.setState({ newBusinessId: response.data });
+      })
+      .catch(error => console.log('error', error));
+  };
+
   resetSearch = () => {
     this.setState({ searchResults: null });
   };
 }
 
-export default App;
+export default withRouter(App);

@@ -63,9 +63,9 @@ const businessSchema = new mongoose.Schema({
     type: String,
   },
   // aggregate (may be the wrong word...) number thus far from the reviews
-  // Ex. two reviews, 1 star and 5 star, this number would be 6
-  // There is a way to do aggregate (right word this time) operations on mongo/mongoose
-  // but It looks confusing, will have to look at this at a later date.
+  // Ex. two reviews, 1 star and 5 star, this number would be 3
+  // When new review is added, this is calculated; grab the number of reviews, increment that by 1
+  // grab the stars, add the star rating from the new review to this rating, divide by 2
   trueStars: {
     type: Number,
     default: 0,
