@@ -96,11 +96,9 @@ class App extends Component {
   };
 
   createBusiness = id => {
-    console.log("ID In CREATE BusINESS", id)
     axios
       .post('http://localhost:3001/api/business/create', { id })
       .then(response => {
-        console.log("newBusinessId in create business", response.data)
         this.setState({ newBusinessId: response.data });
       })
       .catch(error => console.log('error', error));

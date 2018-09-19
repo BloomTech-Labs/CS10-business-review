@@ -22,15 +22,14 @@ class Business extends Component {
     window.scrollTo(0, 0);
   };
 
+  // Not sure if this is necessary, need to check
   componentDidUpdate = prevProps => {
     if (prevProps !== this.props) {
-      console.log('COMPONENT DID UPDATE --- this.props.newBusinessID', this.props)
       this.setState({ newBusinessID: this.props.newBusinessID });
     }
   };
 
   componentWillReceiveProps = (nextProps) => {
-    console.log('COMPONENT WILL RECEIVE PROPS --- this.props.newBusinessID', this.props)
     this.setState({ newBusinessID: nextProps.newBusinessID });
   }
 
@@ -103,9 +102,6 @@ class Business extends Component {
                 </button>
                 {/* For whatever reason, I couldn't base this on this.state.open, so while this may be poor
                 practice, for the time being, I'm going with it. */}
-                {console.log('props in business', this.props)}
-                {console.log('newbusinessID in business props', this.props.newBusinessId)}
-                {console.log('newbusinessID in business state', this.state.newBusinessId)}
                 {this.props.business ? (
                   <NewReview
                     newBusinessId={this.props.newBusinessId}
