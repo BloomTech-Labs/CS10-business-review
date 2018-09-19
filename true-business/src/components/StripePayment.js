@@ -8,33 +8,26 @@ class CheckoutForm extends Component {
     this.complete = false;
   }
 
-  handleSubmit = ev => {
-    // We don't want to let default form submission happen here, which would refresh the page.
-    ev.preventDefault();
-
-    // Within the context of `Elements`, this call to createToken knows which Element to
-    // tokenize, since there's only one in this group.
-    this.props.stripe.createToken({ name: 'Jenny Rosen' }).then(({ token }) => {
-      console.log('Received Stripe token:', token);
+  async submit(ev) {
+    let { token } = await this.props.stripe.createToken({ name: 'Name' });
+    let response = await fetch('/charge', {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: token.id,
     });
 
-    // However, this line of code will do the same thing:
-    //
-    // this.props.stripe.createToken({type: 'card', name: 'Jenny Rosen'});
-
-    // You can also use createSource to create Sources. See our Sources
-    // documentation for more: https://stripe.com/docs/stripe-js/reference#stripe-create-source
-    //
-    // this.props.stripe.createSource({type: 'card', name: 'Jenny Rosen'});
-  };
+    if (response.ok) console.log('Purchase Complete!');
+  }
 
   render() {
+      
     return (
-      <form onSubmit={this.handleSubmit}>
-        <AddressSection />
-        <CardSection />
-        <button>Confirm order</button>
-      </form>
+      <div className="checkout">
+        <p>Would you like to complete the purchase?</p>
+        <CardElement />
+        <button onClick={this.submit}>Send</button>
+        {/* {this.complete ? <div>Payement Complete!</div> : null} */}
+      </div>
     );
   }
 }
