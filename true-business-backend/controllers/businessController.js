@@ -1,65 +1,84 @@
 const Business = require('../models/business');
 const googleMapsClient = require('@google/maps').createClient({
-    key: 'AIzaSyCy5ymI0_0Ko4q0K0JHfe3d2JASObGcHaw',
-    Promise: Promise
+  key: 'AIzaSyDDwj-ds3jn5qKAo0WUPeT6USveLRurAng',
+  Promise: Promise,
 });
 
 const createBusiness = (req, res) => {
-    const { name, type, contact, image, stars, popularity, totalReviews, location } = req.body;
-    console.log("Creating a Business: " + name);
-
-    if (!name || !type || !contact) {
-        response.status(500).json({ 
-            error: 'The business information could not be retrieved. (' + error + ')' 
-        });
-        return;
-    }
-
-    googleMapsClient
-        .geocode({ address: location.address })
-        .asPromise()
-        .then((response) => {
-            const loc = {
-                address: location.address, 
-                latitude: response.json.results[0].geometry.location.lat,
-                longitude: response.json.results[0].geometry.location.lng
-            };
-
-            const business = new Business({ name, type, contact, image, stars, popularity, totalReviews, location: loc});
-
-            business
-            .save() // returns a promise
-            .then(function(business) {
-                res.status(201).json(business);
-            })
-            .catch(function(error) {
-                res.status(500).json({
-                    error: 'There was an error while saving the Business to the Database. (' + error + ')'
-                });
-            });
+  googleMapsClient
+    .place({ placeid: req.body.id })
+    .asPromise()
+    .then(response => {
+      let result = response.json.result;
+      const business = new Business({
+        name: result.name,
+        types: result.types,
+        address: result.formatted_address,
+        phone: result.formatted_phone_number,
+        website: result.website,
+        images: result.photos,
+        googleID: result.place_id,
+        hours: result.opening_hours.weekday_text,
+        description: result.address_components.long_name,
+        location: result.geometry.location,
+      });
+      business
+        .save() // returns a promise
+        .then(business => {
+          console.log("response from axios in business controller")
+          res.status(201).json(business._id);
         })
-        .catch((err) => {
-            console.log(err);
+        .catch(error => {
+          res.status(500).json({
+            error: 'There was an error while saving the Business to the Database. (' + error + ')',
+          });
         });
+    })
+    .catch(error => {
+      console.log({ error });
+    });
+};
+
+const placesSearch = (req, res) => {
+  googleMapsClient
+    .places({ query: req.body.query })
+    .asPromise()
+    .then(response => {
+      res.status(200).json(response.json.results);
+    })
+    .catch(error => {
+      console.log({ error });
+    });
+};
+
+const placeSearch = (req, res) => {
+  googleMapsClient
+    .place({ placeid: req.body.id })
+    .asPromise()
+    .then(response => {
+      res.status(200).json(response.json.result);
+    })
+    .catch(error => {
+      console.log({ error });
+    });
 };
 
 const getBusinessByName = (request, response) => {
   const { name } = request.params;
-  console.log("Getting Business: " + name);
+  console.log('Getting Business: ' + name);
   Business.findOne({ name: name })
     .then(business => {
       if (business) {
         response.status(200).json(business);
       } else {
         response.status(400).json({
-          error: "Business not found."
+          error: 'Business not found.',
         });
       }
     })
     .catch(function(error) {
       response.status(500).json({
-        error:
-          "The business information could not be retrieved. (" + error + ")"
+        error: 'The business information could not be retrieved. (' + error + ')',
       });
     });
 };
@@ -73,7 +92,7 @@ const getBusinessById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The information could not be retrieved."
+        error: 'The information could not be retrieved.',
       });
     });
 };
@@ -87,7 +106,7 @@ const deleteBusinessById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The business could not be removed."
+        error: 'The business could not be removed.',
       });
     });
 };
@@ -99,7 +118,7 @@ const getAllBusiness = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The information could not be retrieved."
+        error: 'The information could not be retrieved.',
       });
     });
 };
@@ -109,5 +128,7 @@ module.exports = {
   getBusinessByName,
   getBusinessById,
   deleteBusinessById,
-  getAllBusiness
+  getAllBusiness,
+  placesSearch,
+  placeSearch,
 };

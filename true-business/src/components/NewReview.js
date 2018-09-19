@@ -46,6 +46,9 @@ export default class NewReview extends Component {
     if (this.state.modalIsOpen !== this.props.open) {
       this.openModal();
     }
+    if (this.state.newBusinessID !== this.props.newBusinessID) {
+      this.setState({ newBusinessID: this.props.newBusinessID });
+    }
   };
 
   openModal() {
@@ -118,8 +121,10 @@ export default class NewReview extends Component {
   };
 
   render() {
+    console.log('this.props.newBusinessId in newReview', this.props);
     return (
       <Modal
+        shouldCloseOnOverlayClick={false}
         isOpen={this.state.modalIsOpen}
         onRequestClose={this.closeModal}
         style={modalStyles}
