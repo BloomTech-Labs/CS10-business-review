@@ -80,7 +80,7 @@ class SignIn extends Component {
                 src={googleLogo}
                 className="signin-container__google-auth"
                 onClick={() => {
-                  this.props.history.push("/auth/google");
+                  this.props.authUser();
                 }}
               />
             </div>
