@@ -1,6 +1,7 @@
 const Business = require('../models/business');
+const keys = require("../config/keys");
 const googleMapsClient = require('@google/maps').createClient({
-  key: 'AIzaSyDDwj-ds3jn5qKAo0WUPeT6USveLRurAng',
+  key: keys.googlePlaces || process.env.googlePlaces,
   Promise: Promise,
 });
 
