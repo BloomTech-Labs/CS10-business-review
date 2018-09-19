@@ -35,7 +35,6 @@ class App extends Component {
   };
 
   render() {
-    console.log('this.state.newBusinessID in App', this.state.newBusinessId);
     return (
       <div className="app-container">
         <Switch>
