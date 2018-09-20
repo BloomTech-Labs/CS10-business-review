@@ -26,7 +26,7 @@ const createBusiness = (req, res) => {
       business
         .save() // returns a promise
         .then(business => {
-          console.log("response from axios in business controller")
+          console.log("Business successfully saved in DB.")
           res.status(201).json(business._id);
         })
         .catch(error => {

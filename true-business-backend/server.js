@@ -5,6 +5,7 @@ const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const keys = require("./config/keys");
+const bodyparser = require("body-parser");
 
 
 //Instantiate Server
@@ -33,7 +34,7 @@ server.use(cors());
 
 //Enable to parse Json object
 server.use(express.json());
-//server.use(bodyParser.json()); //express.jason
+server.use(bodyparser.json()); //express.jason
 
 server.use(express.json());
 server.use(

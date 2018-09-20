@@ -22,17 +22,18 @@ class Business extends Component {
     window.scrollTo(0, 0);
   };
 
+  // Not entirely sure if both of these are necessary.
+  // Or either for that matter... I just didn't want to break it
+  // and haven't tested it with one / the other / neither yet.
   componentDidUpdate = prevProps => {
     if (prevProps !== this.props) {
-      console.log('COMPONENT DID UPDATE --- this.props.newBusinessID', this.props)
       this.setState({ newBusinessID: this.props.newBusinessID });
     }
   };
 
-  componentWillReceiveProps = (nextProps) => {
-    console.log('COMPONENT WILL RECEIVE PROPS --- this.props.newBusinessID', this.props)
+  componentWillReceiveProps = nextProps => {
     this.setState({ newBusinessID: nextProps.newBusinessID });
-  }
+  };
 
   toggleDropDown = event => {
     let toggle = event.target.name;
@@ -101,11 +102,9 @@ class Business extends Component {
                 <button id="NewReview" className="navbar-container__button" onClick={this.displayNewReview}>
                   New Review
                 </button>
-                {/* For whatever reason, I couldn't base this on this.state.open, so while this may be poor
-                practice, for the time being, I'm going with it. */}
-                {console.log('props in business', this.props)}
-                {console.log('newbusinessID in business props', this.props.newBusinessId)}
-                {console.log('newbusinessID in business state', this.state.newBusinessId)}
+                {/* I couldn't base this on this.state.open (i.e. I couldn't figure out the proper
+                life cycle hook to use to make it work), so while this may be poor practice, for the 
+                time being, I'm going with it. */}
                 {this.props.business ? (
                   <NewReview
                     newBusinessId={this.props.newBusinessId}

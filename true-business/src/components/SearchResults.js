@@ -11,7 +11,6 @@ class SearchResults extends Component {
   };
 
   render() {
-    console.log('props in search results', this.props.searchResults);
     return (
       <div>
         <NavBar search={this.props.search} />
