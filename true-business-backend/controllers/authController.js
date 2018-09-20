@@ -1,4 +1,3 @@
-//THIS CONTROLLER IS NOT NEEDED
 const axios = require("axios");
 
 const authUser = () => {
