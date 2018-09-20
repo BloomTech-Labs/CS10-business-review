@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 
+import '../css/Stripe.css';
+
 class StripePayment extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,7 @@ class StripePayment extends Component {
       city: '',
       state: '',
       zip: '',
+      error: false,
     };
   }
 
@@ -29,18 +32,24 @@ class StripePayment extends Component {
       billing_address_city: this.state.city,
       billing_address_country_code: 'US',
     };
-    let { token } = await this.props.stripe.createToken({ args });
+    if (this.state.name && this.state.state && this.state.street && this.state.city) {
+      let { token } = await this.props.stripe.createToken({ args });
 
-    this.setState({ loading: true });
-    axios
-      .post('http://localhost:3001/charge', { token, selectedRadio: this.state.selectedRadio })
-      .then(response => {
-        this.setState({ complete: true });
-        this.props.checkPayment(true);
-      })
-      .catch(error => {
-        console.log({ error });
-      });
+      this.setState({ loading: true });
+
+      axios
+        .post('http://localhost:3001/charge', { token, selectedRadio: this.state.selectedRadio })
+        .then(response => {
+          this.setState({ complete: true });
+          this.props.checkPayment(true);
+        })
+        .catch(error => {
+          this.setState({ loading: false, error: 'Failed, Check Information, Click to Try Again' });
+          console.log({ error });
+        });
+    } else {
+      window.alert('Missing information in payment section.');
+    }
   }
 
   handleRadioChange = event => {
@@ -51,12 +60,15 @@ class StripePayment extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  reset = () => {
+    this.setState({ complete: false });
+  };
+
   render() {
     return (
       <div className="stripe">
-        <CardElement />
         <div className="stripe__info">
-          <label>
+          <div className="info__label">
             Name on the credit card:
             <input
               className="info__input"
@@ -66,11 +78,8 @@ class StripePayment extends Component {
               value={this.state.name}
               onChange={this.handleInputChange}
             />
-          </label>
-        </div>
-        <div className="stripe__info">
-          Address:
-          <label>
+          </div>
+          <div className="info__label">
             Street:
             <input
               className="info__input"
@@ -80,8 +89,8 @@ class StripePayment extends Component {
               value={this.state.street}
               onChange={this.handleInputChange}
             />
-          </label>
-          <label>
+          </div>
+          <div className="info__label">
             City:
             <input
               className="info__input"
@@ -91,9 +100,9 @@ class StripePayment extends Component {
               value={this.state.city}
               onChange={this.handleInputChange}
             />
-          </label>
+          </div>
           {/* Turn this into a dropdown eventually */}
-          <label>
+          <div className="info__label">
             State Initials:
             <input
               className="info__input"
@@ -103,38 +112,65 @@ class StripePayment extends Component {
               value={this.state.state}
               onChange={this.handleInputChange}
             />
-          </label>
+          </div>
         </div>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              id="oneMonth"
-              checked={this.state.selectedRadio === 'oneMonth'}
-              onChange={this.handleRadioChange}
-            />
-            -- 1 Month: $9.99
-          </label>
+        <div className="stripe__radio">
+          <div>
+            <label className="radio__label">
+              <input
+                className="radio__button"
+                type="radio"
+                id="oneMonth"
+                checked={this.state.selectedRadio === 'oneMonth'}
+                onChange={this.handleRadioChange}
+              />
+              -- 1 Month: $9.99
+            </label>
+          </div>
+          <div>
+            <label className="radio__label">
+              <input
+                className="radio__button"
+                type="radio"
+                id="oneYear"
+                checked={this.state.selectedRadio === 'oneYear'}
+                onChange={this.handleRadioChange}
+              />
+              -- 1 Year: $49.99 (Save $69.89)
+            </label>
+          </div>
         </div>
-        <div className="radio">
-          <label>
-            <input
-              type="radio"
-              id="oneYear"
-              checked={this.state.selectedRadio === 'oneYear'}
-              onChange={this.handleRadioChange}
-            />
-            -- 1 Year: $49.99 (Save $69.89)
-          </label>
-        </div>
+        <CardElement
+          className="stripe__element"
+          style={{
+            base: {
+              iconColor: '#666EE8',
+              color: '#31325F',
+              fontWeight: 300,
+              fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+              fontSize: '25px',
+              
+
+              '::placeholder': {
+                color: '#CFD7E0',
+              },
+            },
+          }}
+        />
         {!this.state.complete ? (
           this.state.loading ? (
             <div>Verifying...</div>
           ) : (
-            <button onClick={this.submit.bind()}>Submit Payment</button>
+            <button className="stripe__button" onClick={this.submit.bind()}>
+              Submit Payment
+            </button>
           )
         ) : null}
-        {this.state.complete ? <div>Payment Complete!</div> : null}
+        {this.state.complete && !this.state.error ? (
+          <div>Payment Complete!</div>
+        ) : (
+          <div onClick={this.reset}>{this.state.error}</div>
+        )}
       </div>
     );
   }

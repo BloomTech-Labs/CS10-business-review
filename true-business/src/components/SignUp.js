@@ -109,8 +109,7 @@ class SignUp extends Component {
               onChange={this.handleInputChange}
             />
             <StripeProvider apiKey="pk_test_a80QBoWXww54ttxUn5cMQO1o">
-              <div className="example">
-                <h1>Complete Payment</h1>
+              <div className="signup-container__stripe">
                 <Elements>
                   <StripePayment checkPayment={this.checkPayment} />
                 </Elements>

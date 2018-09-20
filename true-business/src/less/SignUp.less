@@ -1,24 +1,25 @@
 @import 'mixins.less';
 
 .signup-container {
-  .containers(@height: 100vh, @justifyContent: flex-start);
+  .containers(@justifyContent: flex-start);
   padding-top: 25vh;
   cursor: default;
+  color: white;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
   .signup-container__stripe {
-    width: 100vw;
-  }
-  .signup-container__header {
-    font-size: 3rem;
-    color: white;
-    text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
-    height: auto;
+    .containers();
   }
   .signup-container__form {
     .containers(@height: auto);
-
+    .signup-container__stripe {
+      .containers();
+      .stripe_header {
+        font-size: 3rem;
+      }
+    }
     .signup-container__input {
       border: 0.1rem solid black;
-      margin-top: 2rem;
+      margin: 1rem;
       min-width: 40%;
       font-size: 1.5rem;
     }
