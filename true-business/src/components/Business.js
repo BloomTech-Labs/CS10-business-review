@@ -24,7 +24,9 @@ class Business extends Component {
     window.scrollTo(0, 0);
   };
 
-  // Not sure if this is necessary, need to check
+  // Not entirely sure if both of these are necessary.
+  // Or either for that matter... I just didn't want to break it
+  // and haven't tested it with one / the other / neither yet.
   componentDidUpdate = prevProps => {
     if (prevProps !== this.props) {
       this.setState({ newBusinessID: this.props.newBusinessID });
@@ -135,8 +137,10 @@ class Business extends Component {
                 >
                   New Review
                 </button>
-                {/* For whatever reason, I couldn't base this on this.state.open, so while this may be poor
-                practice, for the time being, I'm going with it. */}
+
+                {/* I couldn't base this on this.state.open (i.e. I couldn't figure out the proper
+                life cycle hook to use to make it work), so while this may be poor practice, for the 
+                time being, I'm going with it. */}
                 {this.props.business ? (
                   <NewReview
                     newBusinessId={this.props.newBusinessId}

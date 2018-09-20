@@ -17,10 +17,13 @@ const userSchema = new mongoose.Schema({
   // For old-school way of registering I presume
   email: {
     type: String,
+    unique: true,
   },
   // Displayed on reviews and what not
   username: {
-    type: String
+    type: String,
+    unique: true,
+    default: 'User' + (Math.floor(Math.random() * 1000000000) + 123456),
   },
   // Guessing also only necessary for old-school way of registering
   password: {

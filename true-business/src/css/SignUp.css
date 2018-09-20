@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
   font-size: 2rem;
@@ -12,15 +12,21 @@
   margin: 0;
   padding-top: 25vh;
   cursor: default;
-}
-.signup-container .signup-container__stripe {
-  width: 100vw;
-}
-.signup-container .signup-container__header {
-  font-size: 3rem;
   color: white;
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
-  height: auto;
+}
+.signup-container .signup-container__stripe {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
 }
 .signup-container .signup-container__form {
   display: flex;
@@ -35,9 +41,25 @@
   padding: 0;
   margin: 0;
 }
+.signup-container .signup-container__form .signup-container__stripe {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.signup-container .signup-container__form .signup-container__stripe .stripe_header {
+  font-size: 3rem;
+}
 .signup-container .signup-container__form .signup-container__input {
   border: 0.1rem solid black;
-  margin-top: 2rem;
+  margin: 1rem;
   min-width: 40%;
   font-size: 1.5rem;
 }

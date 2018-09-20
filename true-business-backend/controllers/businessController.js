@@ -1,7 +1,6 @@
 const Business = require('../models/business');
-const keys = require("../config/keys");
 const googleMapsClient = require('@google/maps').createClient({
-  key: keys.googlePlaces || process.env.googlePlaces,
+  key: process.env.REACT_APP_GOOGLEPLACESKEY || process.env.googlePlaces,
   Promise: Promise,
 });
 
@@ -26,6 +25,7 @@ const createBusiness = (req, res) => {
       business
         .save()
         .then(business => {
+          console.log("Business successfully saved in DB.")
           res.status(201).json(business._id);
         })
         .catch(error => {

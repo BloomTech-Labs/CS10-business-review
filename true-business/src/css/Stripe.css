@@ -1,0 +1,76 @@
+.stripe {
+  height: 100%;
+  font-size: 2rem !important;
+  color: white !important;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black !important;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+.stripe .stripe__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.stripe .stripe__info .info__label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: initial;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  margin: 1rem;
+}
+.stripe .stripe__info .info__label .info__input {
+  border: 0.1rem solid black;
+  font-size: 1.5rem;
+}
+.stripe .stripe__radio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  margin-left: 20%;
+}
+.stripe .stripe__radio .radio__button:hover {
+  cursor: pointer;
+}
+.stripe .stripe__button {
+  border: outset;
+  width: 30%;
+  padding: 0.2rem;
+  margin: 0 2rem;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-size: 1.5rem;
+}
+.stripe .stripe-button:hover {
+  cursor: pointer;
+}
+.stripe .stripe__elemnt {
+  width: 70%;
+  float: right;
+  position: relative;
+  top: 50%;
+  font-size: 2rem;
+  margin: 2rem;
+}

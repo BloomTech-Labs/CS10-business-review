@@ -6,9 +6,9 @@ require("../services/passport");
 const UserController = require("../controllers/userController");
 const BusinessController = require("../controllers/businessController");
 mongoose.Promise = global.Promise;
-mongoose.connect(
-  "mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness"
-);
+
+mongoose.connect('mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness');
+const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
 
 const router = express.Router();
 require("../routes/authRoutes")(router);
@@ -65,19 +65,21 @@ router.get("/api/business/", function(req, res) {
   BusinessController.getAllBusiness(req, res);
 });
 
-router.post("/charge", async (req, res) => {
-  try {
-    let { status } = await stripe.charges.create({
-      amount: 2000,
-      currency: "usd",
-      description: "An example charge",
-      source: req.body
-    });
 
-    res.json({ status });
-  } catch (err) {
-    res.status(500).end();
-  }
+// Guessing we should put this in a StripeController at some point.
+router.post('/charge', async (req, res) => {
+  let amount = req.body.selectedRadio === 'oneMonth' ? 999 : 4999;
+  stripe.charges
+    .create({ amount, currency: 'usd', description: 'An example charge', source: req.body.token.id })
+    .then((status) => {
+      console.log("Charge Status", status);
+      res.json({ status });
+    })
+    .catch(err => {
+      res.status(500).end();
+
+    });
 });
+
 
 module.exports = router;
