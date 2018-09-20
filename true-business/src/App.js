@@ -95,8 +95,7 @@ class App extends Component {
  .then(() => {
    let found = this.state.businesses.filter(landingbusiness => {
       return landingbusiness._id === business._id;
-    console.log("What", landingbusiness._id === business._id )
-   })[0]
+       })[0]
    this.setState({
      business: found
    })
