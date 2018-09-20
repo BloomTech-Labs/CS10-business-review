@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import axios from 'axios';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import axios from "axios";
+import { withRouter } from "react-router-dom";
 
-import LandingPage from './components/LandingPage';
-import SignUp from './components/SignUp';
-import SignIn from './components/SignIn';
-import SearchResults from './components/SearchResults';
-import Business from './components/Business';
-import User from './components/User';
+import LandingPage from "./components/LandingPage";
+import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
+import SearchResults from "./components/SearchResults";
+import Business from "./components/Business";
+import User from "./components/User";
 
-import './css/App.css';
+import "./css/App.css";
 
 class App extends Component {
   state = {
     searchFired: false,
-    searchTerm: '',
+    searchTerm: "",
     searchResults: null,
     // Temporary until we have a DB
     businesses: [],
     business: null,
-    newBusinessId: null,
+    newBusinessId: null
   };
 
   componentDidMount = () => {
@@ -41,7 +41,12 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={() => <LandingPage business={this.getBusiness} search={this.searchResults} />}
+            render={() => (
+              <LandingPage
+                business={this.getBusiness}
+                search={this.searchResults}
+              />
+            )}
           />
           <Route
             path="/results"
@@ -53,8 +58,16 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
-          <Route path="/signin" render={() => <SignIn search={this.searchResults} />} />
+          <Route
+            path="/signup"
+            render={() => <SignUp search={this.searchResults} />}
+          />
+          <Route
+            path="/signin"
+            render={() => (
+              <SignIn search={this.searchResults} authUser={this.authUser} />
+            )}
+          />
           <Route
             path="/business"
             render={() => (
@@ -66,42 +79,65 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/user" render={() => <User search={this.searchResults} />} />
+          <Route
+            path="/user"
+            render={() => <User search={this.searchResults} />}
+          />
         </Switch>
       </div>
     );
   }
   getBusiness = business => {
     axios
-      .post('http://localhost:3001/api/business/placeSearch', { id: business.place_id })
+      .post("http://localhost:3001/api/business/placeSearch", {
+        id: business.place_id
+      })
       .then(response => {
         this.setState({ business: response.data });
       })
       .then(() => {
         this.props.history.push(`/business`);
       })
-      .catch(error => console.log('Error', error));
+      .catch(error => console.log("Error", error));
   };
 
   searchResults = searchTerm => {
     axios
-      .post('http://localhost:3001/api/business/placesSearch', { query: searchTerm })
+      .post("http://localhost:3001/api/business/placesSearch", {
+        query: searchTerm
+      })
       .then(response => {
-        response.data.length ? this.setState({ searchResults: response.data }) : this.setState({ searchResults: null });
+        response.data.length
+          ? this.setState({ searchResults: response.data })
+          : this.setState({ searchResults: null });
       })
       .then(() => {
         this.props.history.push(`/results`);
       })
-      .catch(error => console.log('Error', error));
+      .catch(error => console.log("Error", error));
   };
+
+  /* NOT NEEDED.
+  authUser = () => {
+    console.log("Getting to auth user function");
+    axios
+      .post("http://localhost:3001/authuser", "fuckyou")
+      .then(response => {
+        this.props.history.push("/");
+      })
+      .catch(error => {
+        console.log("Error", error);
+      });
+  };
+  */
 
   createBusiness = id => {
     axios
-      .post('http://localhost:3001/api/business/create', { id })
+      .post("http://localhost:3001/api/business/create", { id })
       .then(response => {
         this.setState({ newBusinessId: response.data });
       })
-      .catch(error => console.log('error', error));
+      .catch(error => console.log("error", error));
   };
 
   resetSearch = () => {
