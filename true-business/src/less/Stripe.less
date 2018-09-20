@@ -1,0 +1,50 @@
+@import './mixins.less';
+
+.stripe {
+  height: 100%;
+  font-size: 2rem !important;
+  color: white !important;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black !important;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  .stripe__info {
+    .containers();
+    .info__label {
+      .containers(@justifyContent: space-between, @flexDirection: row, @alignItems: initial);
+      margin: 1rem;
+      .info__input {
+        border: 0.1rem solid black;
+        font-size: 1.5rem;
+      }
+    }
+  }
+  .stripe__radio {
+    .containers(@alignItems: flex-start);
+    margin-left: 20%;
+    .radio__label {
+    }
+    .radio__button:hover {
+      cursor: pointer;
+    }
+  }
+  .stripe__button {
+    border: outset;
+    width: 30%;
+    padding: 0.2rem;
+    margin: 0 2rem;
+    font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+    font-size: 1.5rem;
+  }
+  .stripe-button:hover {
+    cursor: pointer;
+  }
+  .stripe__elemnt {
+    width: 70%;
+    float: right;
+    position: relative;
+    top: 50%;
+    font-size: 2rem;
+    margin: 2rem;
+  }
+}

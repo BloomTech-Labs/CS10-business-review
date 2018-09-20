@@ -19,6 +19,7 @@ class SignUp extends Component {
       confirmPassword: '',
       error: '',
       errorMessage: '',
+      payment: false,
     };
   }
 
@@ -38,22 +39,26 @@ class SignUp extends Component {
       password: this.state.password,
     };
 
-    axios
-      .post('https://cryptic-brook-22003.herokuapp.com/register', user)
-      .then(response => {
-        console.log('fire', response.data);
-        // localStorage.setItem('token', response.data.token)
-        this.setState({
-          error: false,
-        });
-        this.props.history.push(`/signin`);
-      })
-      .catch(err => {
-        this.setState({
-          error: true,
-          errorMessage: err.response.data.error,
-        });
-      });
+    
+    this.state.payment
+      ? 
+      axios
+          .post('https://cryptic-brook-22003.herokuapp.com/register', user)
+          .then(response => {
+            console.log('fire', response.data);
+            // localStorage.setItem('token', response.data.token)
+            this.setState({
+              error: false,
+            });
+            this.props.history.push(`/signin`);
+          })
+          .catch(err => {
+            this.setState({
+              error: true,
+              errorMessage: err.response.data.error,
+            });
+          })
+      : window.alert('You must submit payment first');
   };
 
   handleInputChange = event => {
@@ -103,24 +108,26 @@ class SignUp extends Component {
               value={this.state.confirmPassword}
               onChange={this.handleInputChange}
             />
+            <StripeProvider apiKey="pk_test_a80QBoWXww54ttxUn5cMQO1o">
+              <div className="signup-container__stripe">
+                <Elements>
+                  <StripePayment checkPayment={this.checkPayment} />
+                </Elements>
+              </div>
+            </StripeProvider>
             <div className="signup-container__buttons ">
               <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createUser}>
                 Confirm
               </button>
             </div>
           </form>
-          <StripeProvider apiKey="pk_test_a80QBoWXww54ttxUn5cMQO1o">
-            <div className="example">
-              <h1>React Stripe Elements Example</h1>
-              <Elements>
-                <StripePayment />
-              </Elements>
-            </div>
-          </StripeProvider>
         </div>
       </div>
     );
   }
+  checkPayment = payment => {
+    this.setState({ payment });
+  };
 }
 
 export default withRouter(SignUp);
