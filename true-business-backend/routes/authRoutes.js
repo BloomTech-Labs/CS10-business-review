@@ -10,7 +10,9 @@ module.exports = router => {
 
   router.get(
     "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "http://localhost:3000/signin" }),
+    passport.authenticate("google", {
+      failureRedirect: "http://localhost:3000/signin"
+    }),
     function(req, res) {
       res.redirect("http://localhost:3000/");
     }
