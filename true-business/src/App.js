@@ -9,8 +9,7 @@ import SignIn from "./components/SignIn";
 import SearchResults from "./components/SearchResults";
 import Business from "./components/Business";
 import User from "./components/User";
-import './css/App.css';
-import axios from 'axios'
+import "./css/App.css";
 
 class App extends Component {
   state = {
@@ -23,18 +22,18 @@ class App extends Component {
     newBusinessId: null
   };
 
-
-  componentDidMount() {    
-    axios.get('https://cryptic-brook-22003.herokuapp.com/api/business/')
-    .then(business => {
-      console.log("Business", business);
-      this.setState({ businesses: business.data })
-      console.log("State", this.state.businesses);
-     })
-     .catch(err => {
-       console.log("Error:", err);
-     })
-   }
+  componentDidMount() {
+    axios
+      .get("https://cryptic-brook-22003.herokuapp.com/api/business/")
+      .then(business => {
+        console.log("Business", business);
+        this.setState({ businesses: business.data });
+        console.log("State", this.state.businesses);
+      })
+      .catch(err => {
+        console.log("Error:", err);
+      });
+  }
   // componentDidMount = () => {
   //   window.scrollTo(0, 0);
   //   this.resetSearch();
@@ -50,10 +49,7 @@ class App extends Component {
     return (
       <div className="app-container">
         <Switch>
-          <Route
-            exact
-            path="/"
-          />
+          <Route exact path="/" />
           <Route
             path="/results"
             render={() => (
@@ -75,9 +71,7 @@ class App extends Component {
             )}
           />
           <Route
-          landingpage
-           
-
+            landingpage
             path="/business/:_id"
             render={() => (
               <Business
@@ -85,7 +79,7 @@ class App extends Component {
                 business={this.state.business}
                 createBusiness={this.createBusiness}
                 newBusinessId={this.state.newBusinessId}
-            businesses={this.state.businesses}
+                businesses={this.state.businesses}
               />
             )}
           />
