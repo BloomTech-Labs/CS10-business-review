@@ -11,7 +11,7 @@ import Business from './components/Business';
 import User from './components/User';
 
 import './css/App.css';
-import axios from 'axios'
+
 
 class App extends Component {
   state = {
@@ -79,7 +79,7 @@ class App extends Component {
                 business={this.state.business}
                 createBusiness={this.createBusiness}
                 newBusinessId={this.state.newBusinessId}
-            businesses={this.state.businesses}
+                businesses={this.state.businesses}
               />
             )}
           />

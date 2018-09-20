@@ -70,7 +70,7 @@ class LandingPage extends Component {
             <div className="landing-container__title">Popular Businesses</div>
             <div className="landing-container__reviews">    
             <Row className="business-section">{this.props.businesses.map(business => {
-              // Using this until we decide what will constitute Featured Reviews        
+              // Using this until we decide what will constitute Popular Reviews        
               if (business.popularity) {                    
                   return < BusinessThumbnail business={business} key={business._id}/>                   
                }})} </Row>   

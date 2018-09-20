@@ -71,7 +71,7 @@ class Business extends Component {
 <div className="business">
           <Container>
           {
-        this.props.business.map((business) => {                            
+        this.props.businesses.map((business) => {                            
             if(this.props.match.params._id === business._id.toString()) {                           
             return ( <div key={business._id}>                                
               <Card className ="business-thumbnail">
