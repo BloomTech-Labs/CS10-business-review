@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Popover, PopoverBody, PopoverHeader } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import Modal from 'react-modal';
-import NewReview from './NewReview';
 
 import logo from '../imgs/logo.png';
 
@@ -50,7 +49,6 @@ class NavBar extends Component {
     this.toggle = this.toggle.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.displayNewReview = this.displayNewReview.bind(this);
     this.open = false;
   }
 
@@ -82,21 +80,12 @@ class NavBar extends Component {
   handleSearch = event => {
     if (this.state.search !== '') {
       this.props.search(this.state.search);
-      this.props.history.push(`/results`);
       this.setState({ search: '' });
     } else {
       // For the time being, do this.
       // Eventually, Have it bring up a random business like Yelp.
       this.openModal();
     }
-  };
-
-  displayNewReview = () => {
-    this.setState({ open: true });
-  };
-
-  showModal = (show,state) => {
-    this.setState({ open: show });
   };
 
   render() {
@@ -122,10 +111,6 @@ class NavBar extends Component {
             className="navbar-container__input"
           />
           <div className="navbar-container__buttons">
-            <button className="navbar-container__button" onClick={this.displayNewReview}>
-              New Review
-            </button>
-            <NewReview open={this.state.open} showModal={this.showModal} />
             <button type="submit" id="Search" className="navbar-container__button" onClick={this.handleSearch}>
               Search
             </button>

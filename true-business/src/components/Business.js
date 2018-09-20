@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Container,   Card, CardBody,  CardText, CardImg } from 'reactstrap';
 
+import NewReview from './NewReview';
 import NavBar from './NavBar';
 
 import '../css/Business.css';
@@ -15,11 +16,24 @@ class Business extends Component {
     showfilterBy: false,
     sortBy: 'Date Descending',
     showsortBy: false,
+    businessID: null,
+    newBusinessID: null,
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
   };
+
+  // Not sure if this is necessary, need to check
+  componentDidUpdate = prevProps => {
+    if (prevProps !== this.props) {
+      this.setState({ newBusinessID: this.props.newBusinessID });
+    }
+  };
+
+  componentWillReceiveProps = (nextProps) => {
+    this.setState({ newBusinessID: nextProps.newBusinessID });
+  }
 
   toggleDropDown = event => {
     let toggle = event.target.name;
@@ -35,6 +49,19 @@ class Business extends Component {
   toggleSortChoice = event => {
     let toggle = event.target.name;
     this.setState({ sortBy: toggle, showsortBy: false });
+  };
+
+  // this is now a promise, in hopes that it will wait to open the modal after the business is created, but
+  // so far no bueno.
+  displayNewReview = () => {
+    Promise.resolve()
+      .then(() => this.props.createBusiness(this.props.business.place_id))
+      .then(() => this.setState({ open: true }))
+      .catch(error => console.log('Error creating business', error));
+  };
+
+  showModal = show => {
+    this.setState({ open: show });
   };
 
   render() {
@@ -67,30 +94,48 @@ class Business extends Component {
         </div>
         {this.props.business ? (
           <div className="business">
-            <div className="business__title">Business Type - {this.props.business.name}</div>
-            <div className="business__street">{this.props.business.location}</div>
-            <div className="business__city">{this.props.business.location}</div>
+            <div className="business__title">{this.props.business.name}</div>
+            <div className="business__street">{this.props.business.formatted_address}</div>
             <div className="business__info">
               <div className="info__hours">
                 <div className="hours__title"> Hours </div>
-                <div className="hours__day">Monday: 8am - 8pm</div>
-                <div className="hours__day">Tuesday: 8am - 8pm</div>
-                <div className="hours__day">Wednesday: 8am - 8pm</div>
-                <div className="hours__day">Thursday: 8am - 8pm</div>
-                <div className="hours__day">Friday: 8am - 8pm</div>
-                <div className="hours__day">Saturday: 8am - 8pm</div>
-                <div className="hours__day">Sunday: 8am - 8pm</div>
+                {this.props.business.opening_hours.weekday_text.map((day, i) => {
+                  return <div key={i}>{day}</div>;
+                })}
               </div>
-              <div className="info__description">Awesome taco place</div>
               <div className="info__contact">
-                <div className="contact__phone">(865) 867-5309</div>
+                <div className="contact__phone">
+                  <div>Phone Number</div>
+                  <div>(865) 867-5309</div>
+                </div>
                 <div className="contact__website">
-                  {this.props.business.website ? this.props.business.website : 'No Website Listed'}
+                  {this.props.business.website ? (
+                    <a href={this.props.business.website}>
+                      {this.props.business.name}
+                      's Website
+                    </a>
+                  ) : (
+                    'No Website Listed'
+                  )}
                 </div>
               </div>
             </div>
             <div className="business__reviews-container">
-              <div className="reviews-container__title">Reviews</div>
+              <div className="reviews-container__title">
+                Reviews
+                <button id="NewReview" className="navbar-container__button" onClick={this.displayNewReview}>
+                  New Review
+                </button>
+                {/* For whatever reason, I couldn't base this on this.state.open, so while this may be poor
+                practice, for the time being, I'm going with it. */}
+                {this.props.business ? (
+                  <NewReview
+                    newBusinessId={this.props.newBusinessId}
+                    open={this.state.open}
+                    showModal={this.showModal}
+                  />
+                ) : null}
+              </div>
               <div className="reviews-container__dropdowns">
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__title"> Filter By: </div>
@@ -119,7 +164,7 @@ class Business extends Component {
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__title"> Sort By: </div>
                   <div className="dropdown__drop-container">
-                  <button className="drop-container__button" name="showsortBy" onClick={this.toggleDropDown}>
+                    <button className="drop-container__button" name="showsortBy" onClick={this.toggleDropDown}>
                       {this.state.sortBy}
                     </button>
                     {this.state.showsortBy ? (

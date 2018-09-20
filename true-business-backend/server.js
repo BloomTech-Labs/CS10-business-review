@@ -1,10 +1,11 @@
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
-
+const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const keys = require("./config/keys");
+
 
 //Instantiate Server
 const server = express();
@@ -46,6 +47,8 @@ server.use(passport.session());
 
 //Connect the route to the server
 server.use("/", routes);
+
+server.use(require("body-parser").text());
 
 //Status server
 const port = process.env.PORT || 3001;

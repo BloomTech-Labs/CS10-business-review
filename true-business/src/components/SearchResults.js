@@ -20,12 +20,21 @@ class SearchResults extends Component {
             {this.props.searchResults ? (
               this.props.searchResults.map((result, i) => {
                 return (
-                  <div key={i} className="results__result" onClick={this.handleBusiness.bind(this, result)}>
-                    <div id="picture1" className="result__picture" onClick={this.openModal} />
-                    <ul className="result__item">Stars</ul>
+                  <div key={i} className="results__result">
+                    <div
+                      id="picture1"
+                      src={result}
+                      className="result__picture"
+                      onClick={this.handleBusiness.bind(this, result)}
+                    />
                     <ul className="result__item">{result.name}</ul>
+                    <ul className="result__item">{result.formatted_address}</ul>
                     <ul className="result__item">{result.location}</ul>
-                    <ul className="result__item">Restaurant Type</ul>
+                    <ul className="result__item">
+                      {result.types.map((type,i) => (
+                        <span key={i}>{type.replace(/_/g, ' ') + ', '}</span>
+                      ))}
+                    </ul>
                   </div>
                 );
               })
@@ -39,7 +48,6 @@ class SearchResults extends Component {
   }
   handleBusiness = (business, event) => {
     this.props.business(business);
-    this.props.history.push(`/business`);
   };
 }
 
