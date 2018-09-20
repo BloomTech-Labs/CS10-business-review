@@ -80,7 +80,7 @@ class App extends Component {
       .then(() => {
         this.props.history.push(`/business`);
       })
-      .catch(error => console.log({'Error', error});
+      .catch(error => console.log('Error', error));
   };
 
   searchResults = searchTerm => {
