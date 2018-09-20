@@ -117,20 +117,6 @@ class App extends Component {
       .catch(error => console.log("Error", error));
   };
 
-  /* NOT NEEDED.
-  authUser = () => {
-    console.log("Getting to auth user function");
-    axios
-      .post("http://localhost:3001/authuser", "fuckyou")
-      .then(response => {
-        this.props.history.push("/");
-      })
-      .catch(error => {
-        console.log("Error", error);
-      });
-  };
-  */
-
   createBusiness = id => {
     axios
       .post("http://localhost:3001/api/business/create", { id })
