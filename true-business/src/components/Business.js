@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Container,   Card, CardBody,  CardText, CardImg } from 'reactstrap';
 
 import NewReview from './NewReview';
 import NavBar from './NavBar';
 
 import '../css/Business.css';
+import '../css/GeneralStyles.css';
 
 class Business extends Component {
   state = {
@@ -66,6 +68,30 @@ class Business extends Component {
     return (
       <div>
         <NavBar search={this.props.search} />
+<div className="business">
+          <Container>
+          {
+        this.props.business.map((business) => {                            
+            if(this.props.match.params._id === business._id.toString()) {                           
+            return ( <div key={business._id}>                                
+              <Card className ="business-thumbnail">
+                <CardBody>
+                  <CardImg className="business-title heading"
+                     src={business.image}
+                     />                                         
+                     <CardText>Business name: {business.name}</CardText>
+                     <CardText>Stars: {business.stars}</CardText>
+                     {/* <CardText>{business.location}</CardText> */}
+                     <CardText>Business type: {business.type}</CardText>                              
+                     </CardBody>
+                     </Card>
+                     <button className="Review-button" >Review</button>                                
+                      </div>)
+                      }                                
+                    })} 
+            </Container>
+
+        </div>
         {this.props.business ? (
           <div className="business">
             <div className="business__title">{this.props.business.name}</div>
@@ -188,6 +214,7 @@ class Business extends Component {
         ) : (
           <div>{this.props.history.push('/')}</div>
         )}
+
       </div>
     );
   }
