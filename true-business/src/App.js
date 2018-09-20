@@ -78,7 +78,7 @@ class App extends Component {
             )}
           />
           <Route            
-            path="/business
+            path="/business"
 
             render={() => (
               <Business 
