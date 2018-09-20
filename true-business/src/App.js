@@ -117,6 +117,7 @@ class App extends Component {
       .catch(error => console.log("Error", error));
   };
 
+  /* NOT NEEDED.
   authUser = () => {
     console.log("Getting to auth user function");
     axios
@@ -128,6 +129,7 @@ class App extends Component {
         console.log("Error", error);
       });
   };
+  */
 
   createBusiness = id => {
     axios

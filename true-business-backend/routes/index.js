@@ -17,10 +17,12 @@ router.get("/", (request, response) => {
   response.status(200).json({ api: "Server running OK." });
 });
 
+/* Not Needed
 router.get("/authuser", (request, response) => {
   console.log("getting to /authuser in routes/index");
   authController.authUser(request, response);
 });
+*/
 
 router.post("/register", (request, response) => {
   UserController.register(request, response);
