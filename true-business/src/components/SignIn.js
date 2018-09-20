@@ -80,7 +80,7 @@ class SignIn extends Component {
                 src={googleLogo}
                 className="signin-container__google-auth"
                 onClick={() => {
-                  window.location = 'http://localhost:3001/auth/google'
+                  window.location = "http://localhost:3001/auth/google";
                 }}
               />
             </div>

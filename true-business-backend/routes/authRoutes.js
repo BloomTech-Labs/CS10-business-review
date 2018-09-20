@@ -11,10 +11,14 @@ module.exports = router => {
   router.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-      failureRedirect: "http://localhost:3000/signin"
+      failureRedirect:
+        "http://localhost:3000/signin" ||
+        "https://true-business.netlify.com/signin"
     }),
     function(req, res) {
-      res.redirect("http://localhost:3000/");
+      res.redirect(
+        "http://localhost:3000/" || "https://true-business.netlify.com/"
+      );
     }
   );
 };
