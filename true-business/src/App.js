@@ -54,7 +54,8 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={() => <LandingPage business={this.getBusiness} businesses={this.state.businesses} search={this.searchResults} />}
+            render={() => <LandingPage business={this.getBusiness} businesses={this.state.businesses}
+             search={this.searchResults} getBusiness={this.getBusiness} />}
           />
           <Route
             path="/results"
@@ -72,9 +73,9 @@ class App extends Component {
           landingpage
            
 
-            path="/business/:_id"
+            path="/business"
             render={() => (
-              <Business
+              <Business 
                 search={this.searchResults}
                 business={this.state.business}
                 createBusiness={this.createBusiness}
@@ -88,16 +89,35 @@ class App extends Component {
       </div>
     );
   }
-  getBusiness = business => {
-    axios
-      .post('http://localhost:3001/api/business/placeSearch', { id: business.place_id })
-      .then(response => {
-        this.setState({ business: response.data });
-      })
-      .then(() => {
-        this.props.history.push(`/business`);
-      })
-      .catch(error => console.log('Error', error));
+  getBusiness = (business, landingpage=false) => {
+    if(landingpage) {
+ Promise.resolve()
+ .then(() => {
+   let found = this.state.businesses.filter(landingbusiness => {
+      return landingbusiness._id === business._id;
+    console.log("What", landingbusiness._id === business._id )
+   })[0]
+   this.setState({
+     business: found
+   })
+ })
+ .then(() => {
+   this.props.history.push("/business")
+ })
+
+    }
+    else {
+
+      axios
+        .post('http://localhost:3001/api/business/placeSearch', { id: business.place_id })
+        .then(response => {
+          this.setState({ business: response.data });
+        })
+        .then(() => {
+          this.props.history.push(`/business`);
+        })
+        .catch(error => console.log('Error', error));
+    }
   };
 
   searchResults = searchTerm => {

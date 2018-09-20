@@ -61,7 +61,7 @@ class LandingPage extends Component {
                   // Using this until we decide what will constitute Featured Reviews
                   if (business.stars >= 5) {
                     
-                  return < BusinessThumbnail business={business} key={business._id}/>                 
+                  return <div onClick={()=>this.props.getBusiness(business, true)}> < BusinessThumbnail business={business} key={business._id}/> </div>                 
                   
                }})} </div>                     
             
