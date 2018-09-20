@@ -80,7 +80,9 @@ class SignIn extends Component {
                 src={googleLogo}
                 className="signin-container__google-auth"
                 onClick={() => {
-                  this.props.history.push("/auth/google");
+                  window.location =
+                    "http://localhost:3001/auth/google" ||
+                    "https://cryptic-brook-22003.herokuapp.com/";
                 }}
               />
             </div>
