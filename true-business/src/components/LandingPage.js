@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-
+import {  Row } from 'reactstrap';
+import BusinessThumbnail from './BusinessThumbnail';
 import '../css/LandingPage.css';
+import '../css/GeneralStyles.css';
 
 import NavBar from './NavBar';
 
@@ -37,155 +39,42 @@ class LandingPage extends Component {
   }
 
   componentDidMount = () => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0);    
   };
 
   openModal(info, event) {
     this.setState({ modalIsOpen: true, modalInfo: info });
   }
-
+  
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
-
+  
   render() {
     return (
-      <div>
+      <div>      
         <NavBar search={this.props.search} />
         <div className="landing-container">
           <div className="landing-container__reviews-container">
-            <div className="landing-container__title">Featured Reviews</div>
-            <div className="landing-container__reviews">
-              <div className="landing-container__review">
-                <div
-                  id="picture1"
-                  className="landing-container__picture"
-                  onClick={this.openModal.bind(this, {
-                    title: 'review title',
-                    reviewer: '@reviewer',
-                    image: 'image',
-                    stars: 'stars',
-                    review: 'review',
-                  })}
-                />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
-              <div className="landing-container__review">
-                <div
-                  className="landing-container__picture"
-                  onClick={this.openModal.bind(this, {
-                    title: 'review title',
-                    reviewer: '@reviewer',
-                    image: 'image',
-                    stars: 'stars',
-                    review: 'review',
-                  })}
-                />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
-              <div className="landing-container__review">
-                <div
-                  className="landing-container__picture"
-                  onClick={this.openModal.bind(this, {
-                    title: 'review title',
-                    reviewer: '@reviewer',
-                    image: 'image',
-                    stars: 'stars',
-                    review: 'review',
-                  })}
-                />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
-              <div className="landing-container__review">
-                <div
-                  className="landing-container__picture"
-                  onClick={this.openModal.bind(this, {
-                    title: 'review title',
-                    reviewer: '@reviewer',
-                    image: 'image',
-                    stars: 'stars',
-                    review: 'review',
-                  })}
-                />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
-            </div>
-          </div>
+            <div className="landing-container__title">Featured Reviews</div>           
+                <div className="business-section">{this.props.businesses.map(business => { 
+                  // Using this until we decide what will constitute Featured Reviews
+                  if (business.stars >= 5) {
+                    
+                  return < BusinessThumbnail business={business} key={business._id}/>                 
+                  
+               }})} </div>                     
+            
+          </div>            
           <div className="landing-container__reviews-container">
             <div className="landing-container__title">Popular Businesses</div>
-            <div className="landing-container__reviews">
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item">Stars</ul>
-                <ul className="landing-container__item">Restaurant Name</ul>
-                <ul className="landing-container__item">Restaurant Location</ul>
-                <ul className="landing-container__item">Restaurant Type</ul>
-              </div>
+            <div className="landing-container__reviews">    
+            <Row className="business-section">{this.props.businesses.map(business => {
+              // Using this until we decide what will constitute Featured Reviews        
+              if (business.popularity) {                    
+                  return < BusinessThumbnail business={business} key={business._id}/>                   
+               }})} </Row>   
+           
             </div>
           </div>
           <div className="landing-container__reviews-container">
