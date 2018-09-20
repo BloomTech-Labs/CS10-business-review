@@ -11,13 +11,27 @@ class StripePayment extends Component {
       loading: false,
       selectedRadio: 'oneMonth',
       name: '',
+      street: '',
+      city: '',
+      state: '',
+      zip: '',
     };
   }
 
   async submit(event) {
     event.preventDefault();
-    this.setState({loading: true})
-    let { token } = await this.props.stripe.createToken({ name: this.state.name });
+
+    let args = {
+      billing_name: this.state.name,
+      billing_address_country: 'United States',
+      billing_address_state: this.state.state,
+      billing_address_line1: this.state.street,
+      billing_address_city: this.state.city,
+      billing_address_country_code: 'US',
+    };
+    let { token } = await this.props.stripe.createToken({ args });
+
+    this.setState({ loading: true });
     axios
       .post('http://localhost:3001/charge', { token, selectedRadio: this.state.selectedRadio })
       .then(response => {
@@ -41,15 +55,52 @@ class StripePayment extends Component {
     return (
       <div className="stripe">
         <CardElement />
-        <div className="stripe__name">
+        <div className="stripe__info">
           <label>
             Name on the credit card:
             <input
-              className="name__input"
+              className="info__input"
               placeholder="John M. Smith..."
               name="name"
               type="name"
               value={this.state.name}
+              onChange={this.handleInputChange}
+            />
+          </label>
+        </div>
+        <div className="stripe__info">
+          Address:
+          <label>
+            Street:
+            <input
+              className="info__input"
+              placeholder="123 Main St...."
+              name="street"
+              type="street"
+              value={this.state.street}
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <label>
+            City:
+            <input
+              className="info__input"
+              placeholder="Knoxville..."
+              name="city"
+              type="city"
+              value={this.state.city}
+              onChange={this.handleInputChange}
+            />
+          </label>
+          {/* Turn this into a dropdown eventually */}
+          <label>
+            State Initials:
+            <input
+              className="info__input"
+              placeholder="TN..."
+              name="state"
+              type="state"
+              value={this.state.state}
               onChange={this.handleInputChange}
             />
           </label>
