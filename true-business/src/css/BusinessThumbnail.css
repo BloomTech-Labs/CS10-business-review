@@ -1,0 +1,12 @@
+.note-thumbnail {
+  margin: 20px 0;
+  padding: 0px 10px;
+  max-width: 300px;
+  height: 150px;
+  color: #f5efef;
+  font-size: 60%;
+}
+.image {
+  height: 100px;
+  width: 200px;
+}

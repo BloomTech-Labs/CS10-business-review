@@ -46,7 +46,7 @@
 }
 .signin-container .signin-container__form .signin-container__buttons {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -57,11 +57,18 @@
   padding: 0;
   margin: 0;
 }
+.signin-container .signin-container__form .signin-container__buttons .signin-container__google-auth {
+  max-width: 50%;
+  height: 50%;
+}
+.signin-container .signin-container__form .signin-container__buttons .signin-container__google-auth:hover {
+  cursor: pointer;
+}
 .signin-container .signin-container__form .signin-container__buttons .signin-container__button {
   border: outset;
   padding: 0.5rem;
   margin: 2rem;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
   font-size: 1.5rem;
   border-color: black;
 }
@@ -95,6 +102,6 @@
   width: 30%;
   padding: 0.2rem;
   margin: 0 2rem;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
   font-size: 1.5rem;
 }

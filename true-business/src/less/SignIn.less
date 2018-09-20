@@ -1,4 +1,4 @@
-@import 'mixins.less';
+@import "mixins.less";
 
 .signin-container {
   .containers(@justifyContent: flex-start);
@@ -20,18 +20,26 @@
     }
     .signin-container__error {
       // temporary placeholder since we can't have error messages yet without backend to get the warnings off my back
-      content:none;
+      content: none;
     }
     .signin-container__error--hidden {
       display: none;
     }
     .signin-container__buttons {
-      .containers(@flexDirection:row);
+      .containers();
+      .signin-container__google-auth {
+        max-width: 50%;
+        height: 50%;
+      }
+      .signin-container__google-auth:hover {
+        cursor: pointer;
+      }
       .signin-container__button {
         border: outset;
         padding: 0.5rem;
         margin: 2rem;
-        font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+        font-family: Garamond, Baskerville, "Baskerville Old Face",
+          "Hoefler Text", "Times New Roman", serif;
         font-size: 1.5rem;
         border-color: black;
       }
@@ -41,6 +49,7 @@
     }
   }
 }
+
 .popover {
   .containers(@width: 50%, @height: 15%, @fontSize: 1.5rem);
   background: black;
@@ -57,7 +66,8 @@
     width: 30%;
     padding: 0.2rem;
     margin: 0 2rem;
-    font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+    font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text",
+      "Times New Roman", serif;
     font-size: 1.5rem;
   }
 }

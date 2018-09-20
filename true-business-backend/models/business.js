@@ -66,7 +66,7 @@ const businessSchema = new mongoose.Schema({
   // Ex. two reviews, 1 star and 5 star, this number would be 3
   // When new review is added, this is calculated; grab the number of reviews, increment that by 1
   // grab the stars, add the star rating from the new review to this rating, divide by 2
-  trueStars: {
+  stars: {
     type: Number,
     default: 0,
   },
@@ -93,14 +93,23 @@ const businessSchema = new mongoose.Schema({
     required: true,
     default: Date.now(),
   },
+  updatedOn: {
+    type: Date,
+    required: true,
+    default: Date.now(),
+  },
+  popularity: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 let businessModel = mongoose.model('Business', businessSchema);
-/**
- * Pre-save hook
- */
-businessSchema.pre('save', function(next) {
-  businessModel.find({ address: this.address }, (err, docs) => {
+
+// Pre-save hook
+businessSchema.pre('save', next => {
+  businessModel.find({ _id: this._id }, (err, docs) => {
     if (!docs.length) {
       next();
     } else {
@@ -108,6 +117,14 @@ businessSchema.pre('save', function(next) {
       next(new Error('Business exists!'));
     }
   });
+});
+
+// Post-save hook
+businessSchema.post('save', (doc,next) => {
+  if (doc.stars >= 3 && doc.totalReviews > 100) {
+    doc.popularity = true;
+  }
+  next();
 });
 
 module.exports = businessModel;

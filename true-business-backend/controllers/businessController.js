@@ -16,22 +16,20 @@ const createBusiness = (req, res) => {
         address: result.formatted_address,
         phone: result.formatted_phone_number,
         website: result.website,
-        images: result.photos,
+        images: result.photos[0],
         googleID: result.place_id,
         hours: result.opening_hours.weekday_text,
         description: result.address_components.long_name,
         location: result.geometry.location,
       });
       business
-        .save() // returns a promise
+        .save()
         .then(business => {
           console.log("Business successfully saved in DB.")
           res.status(201).json(business._id);
         })
         .catch(error => {
-          res.status(500).json({
-            error: 'There was an error while saving the Business to the Database. (' + error + ')',
-          });
+          res.status(500).json({ error });
         });
     })
     .catch(error => {
