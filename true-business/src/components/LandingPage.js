@@ -56,10 +56,10 @@ class LandingPage extends Component {
         <NavBar search={this.props.search} />
         <div className="landing-container">
           <div className="landing-container__reviews-container">
-            <div className="landing-container__title">Featured Reviews</div>           
+            <div className="landing-container__title">High Rated Business</div>           
                 <div className="business-section">{this.props.businesses.map(business => { 
                   // Using this until we decide what will constitute Featured Reviews
-                  if (business.stars >= 5) {
+                  if (business.stars == 0) {
                     
                   return <div onClick={()=>this.props.getBusiness(business, true)}> < BusinessThumbnail business={business} key={business._id}/> </div>                 
                   
