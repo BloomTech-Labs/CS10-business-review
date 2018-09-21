@@ -20,6 +20,7 @@ class SignUp extends Component {
       error: '',
       errorMessage: '',
       payment: false,
+      type: null,
     };
   }
 
@@ -37,12 +38,11 @@ class SignUp extends Component {
       email: this.state.email,
       username: this.state.username,
       password: this.state.password,
+      accountType: this.state.type,
     };
 
-    
     this.state.payment
-      ? 
-      axios
+      ? axios
           .post('https://cryptic-brook-22003.herokuapp.com/register', user)
           .then(response => {
             console.log('fire', response.data);
@@ -65,68 +65,66 @@ class SignUp extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
   render() {
     return (
       <div>
         <NavBar search={this.props.search} />
-        <div className="signup-container">
-          <div className="signup-container__header"> Sign Up </div>
-          <form className="signup-container__form">
-            <input
-              className="signup-container__input"
-              placeholder="E-mail"
-              name="email"
-              type="email"
-              value={this.state.email}
-              onChange={this.handleInputChange}
-            />
-            <input
-              className="signup-container__input"
-              placeholder="Username"
-              name="username"
-              type="text"
-              value={this.state.username}
-              onChange={this.handleInputChange}
-            />
-            <input
-              className="signup-container__input"
-              placeholder="Password"
-              name="password"
-              type="password"
-              value={this.state.password}
-              onChange={this.handleInputChange}
-            />
-            <input
-              className="signup-container__input"
-              placeholder="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              value={this.state.confirmPassword}
-              onChange={this.handleInputChange}
-            />
-            <StripeProvider apiKey="pk_test_a80QBoWXww54ttxUn5cMQO1o">
-              <div className="signup-container__stripe">
-                <Elements>
-                  <StripePayment checkPayment={this.checkPayment} />
-                </Elements>
+        <div className="signup">
+          <div className="signup-container">
+            <div className="signup-container__header"> Sign Up </div>
+            <form className="signup-container__form">
+              <input
+                className="signup-container__input"
+                placeholder="E-mail"
+                name="email"
+                type="email"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+              />
+              <input
+                className="signup-container__input"
+                placeholder="Username"
+                name="username"
+                type="text"
+                value={this.state.username}
+                onChange={this.handleInputChange}
+              />
+              <input
+                className="signup-container__input"
+                placeholder="Password"
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+              />
+              <input
+                className="signup-container__input"
+                placeholder="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                value={this.state.confirmPassword}
+                onChange={this.handleInputChange}
+              />
+              <StripeProvider apiKey="pk_test_a80QBoWXww54ttxUn5cMQO1o">
+                <div className="signup-container__stripe">
+                  <Elements>
+                    <StripePayment checkPayment={this.checkPayment} />
+                  </Elements>
+                </div>
+              </StripeProvider>
+              <div className="signup-container__buttons ">
+                <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createUser}>
+                  Confirm
+                </button>
               </div>
-            </StripeProvider>
-            <div className="signup-container__buttons ">
-              <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createUser}>
-                Confirm
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     );
   }
-  checkPayment = payment => {
-    this.setState({ payment });
+  checkPayment = (payment, type) => {
+    this.setState({ payment, type });
   };
 }
 

@@ -1,11 +1,12 @@
 .stripe {
   height: 100%;
-  font-size: 2rem !important;
-  color: white !important;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black !important;
-  width: 40%;
+  font-size: 1.5rem;
+  color: #383838;
+  width: 75%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .stripe .stripe__info {
   display: flex;
@@ -14,7 +15,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
@@ -27,12 +28,13 @@
   align-items: initial;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
   margin: 1rem;
+  font-size: 1.5rem;
 }
 .stripe .stripe__info .info__label .info__input {
   border: 0.1rem solid black;
@@ -45,7 +47,7 @@
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;

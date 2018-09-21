@@ -1,7 +1,8 @@
 @import 'mixins.less';
 
 .search-container {
-  .containers(@height: 100vh, @justifyContent: flex-start);
+  .containers(@justifyContent: flex-start);
+  min-height: 100vh;
   padding-top: 25vh;
   cursor: default;
   .search-container__title {

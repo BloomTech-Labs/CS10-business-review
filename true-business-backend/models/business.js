@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-let objectID = mongoose.Schema.Types.ObjectId;
-
 const businessSchema = new mongoose.Schema({
   // places_details: name
   // returns a formatted string
@@ -36,8 +34,8 @@ const businessSchema = new mongoose.Schema({
   // places_details: photos
   // returns an array of objects
   // Unlikely, but possible there won't be any, no required
-  images: {
-    type: Array,
+  image: {
+    type: String,
   },
   // places_details: rating
   // returns a number from 1.0 to 5.0
@@ -47,7 +45,7 @@ const businessSchema = new mongoose.Schema({
   },
   // places_details: place_id
   // returns a string
-  googleID: {
+  place_id: {
     type: String,
     required: true,
   },

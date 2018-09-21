@@ -1,24 +1,28 @@
 import React from 'react';
-import { Card, CardBody, CardTitle, CardImg, CardText, Col } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import StarRatings from 'react-star-ratings';
 
 import '../css/BusinessThumbnail.css';
 
-const BusinessThumbnail = (props) => {
-    
-    return (
-        <Col sm="4">
-            <Card className="note-thumbnail">
-                <CardBody>
-                    <CardTitle className="note-title heading"> <Link className="note-link" to={`business/${props.business._id}`}><CardImg className ="image" src={props.business.image} /> </Link></CardTitle>
-                    <CardText>Business name: {props.business.name}</CardText>
-                    <CardText>Stars: {props.business.stars}</CardText>
-                    {/* <CardText>{props.business.location}</CardText> */}
-                    <CardText>Business type: {props.business.type}</CardText>
-                </CardBody>
-            </Card>
-        </Col>
-    )
-}
- 
+const BusinessThumbnail = props => {
+  return (
+    <div className="thumbnail">
+      <img className="thumbnail__image" alt={props.business.name + ' image'} src={props.business.images[0]} />
+      <div className="thumbnail__text"> {props.business.name}</div>
+      <div className="thumbnail__text">
+        <StarRatings
+          starDimension="20px"
+          starSpacing="5px"
+          rating={props.business.stars}
+          starRatedColor="gold"
+          starEmptyColor="grey"
+          numberOfStars={5}
+          name="rating"
+        />
+      </div>
+      <div className="thumbnail__text">{props.business.address}</div>
+      <div className="thumbnail__text">{props.business.types[0].charAt(0).toUpperCase() + props.business.types[0].slice(1)}</div>
+    </div>
+  );
+};
+
 export default BusinessThumbnail;

@@ -1,73 +1,56 @@
-@import "mixins.less";
+@import 'mixins.less';
 
-.signin-container {
-  .containers(@justifyContent: flex-start);
+.signin {
+  .containers();
   padding-top: 25vh;
   cursor: default;
-  .signin-container__header {
-    font-size: 3rem;
-    color: white;
-    text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
-    height: auto;
-  }
-  .signin-container__form {
-    .containers(@height: auto);
-    .signin-container__input {
-      border: 0.1rem solid black;
-      margin-top: 2rem;
-      min-width: 40%;
-      font-size: 1.5rem;
+  .signin-container {
+    .containers(@width: 50%);
+    color: @color;
+    background: @elementBackground;
+    padding: 1rem;
+    cursor: default;
+    .signin-container__header {
+      font-size: 3rem;
+      color: @color;
+      height: auto;
     }
-    .signin-container__error {
-      // temporary placeholder since we can't have error messages yet without backend to get the warnings off my back
-      content: none;
-    }
-    .signin-container__error--hidden {
-      display: none;
-    }
-    .signin-container__buttons {
-      .containers();
-      .signin-container__google-auth {
-        max-width: 50%;
-        height: 50%;
-      }
-      .signin-container__google-auth:hover {
-        cursor: pointer;
-      }
-      .signin-container__button {
-        border: outset;
-        padding: 0.5rem;
-        margin: 2rem;
-        font-family: Garamond, Baskerville, "Baskerville Old Face",
-          "Hoefler Text", "Times New Roman", serif;
+    .signin-container__form {
+      .containers(@height: auto);
+      .signin-container__input {
+        border: 0.1rem solid black;
+        margin-top: 2rem;
+        width: 50%;
         font-size: 1.5rem;
-        border-color: black;
       }
-      .signin-container__button:hover {
-        cursor: pointer;
+      .signin-container__error {
+        // temporary placeholder since we can't have error messages yet without backend to get the warnings off my back
+        content: none;
+      }
+      .signin-container__error--hidden {
+        display: none;
+      }
+      .signin-container__buttons {
+        .containers();
+        .signin-container__google-auth {
+          max-width: 75%;
+          height: 50%;
+        }
+        .signin-container__google-auth:hover {
+          cursor: pointer;
+        }
+        .signin-container__button {
+          border: outset;
+          padding: 0.5rem;
+          margin: 2rem;
+          font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+          font-size: 1.5rem;
+          border-color: black;
+        }
+        .signin-container__button:hover {
+          cursor: pointer;
+        }
       }
     }
-  }
-}
-
-.popover {
-  .containers(@width: 50%, @height: 15%, @fontSize: 1.5rem);
-  background: black;
-  color: white;
-  text-align: center;
-  .popover-header {
-    padding: 0.2rem;
-  }
-  .popover-body {
-    padding: 0.2rem;
-  }
-  .popover-button {
-    border: outset;
-    width: 30%;
-    padding: 0.2rem;
-    margin: 0 2rem;
-    font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text",
-      "Times New Roman", serif;
-    font-size: 1.5rem;
   }
 }

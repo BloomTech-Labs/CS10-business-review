@@ -144,16 +144,9 @@ class StripePayment extends Component {
           className="stripe__element"
           style={{
             base: {
-              iconColor: '#666EE8',
+              iconColor: 'rgb(0,0,0)',
               color: '#31325F',
-              fontWeight: 300,
-              fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
               fontSize: '25px',
-              
-
-              '::placeholder': {
-                color: '#CFD7E0',
-              },
             },
           }}
         />

@@ -6,10 +6,6 @@ import NavBar from './NavBar';
 import '../css/SearchResults.css';
 
 class SearchResults extends Component {
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
   render() {
     return (
       <div>
