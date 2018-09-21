@@ -15,17 +15,27 @@ const createBusiness = (req, res) => {
         types: result.types,
         address: result.formatted_address,
         phone: result.formatted_phone_number,
-        website: result.website,
         images: result.photos[0],
+        website: result.website,
         googleID: result.place_id,
-        hours: result.opening_hours.weekday_text,
+        opening_hours: result.opening_hours.weekday_text,
         description: result.address_components.long_name,
         location: result.geometry.location,
       });
+      // business.images = result.photos[0].getUrl({ maxWidth: 35, maxHeight: 35 }),
+      // if (result.photos) {
+      //   console.log(result.photos[0]);
+      //   console.log(
+      //     result.photos[0].getUrl({
+      //       maxWidth: 640,
+      //     }),
+      //   );
+      // }
+
       business
         .save()
         .then(business => {
-          console.log("Business successfully saved in DB.")
+          console.log('Business successfully saved in DB.');
           res.status(201).json(business._id);
         })
         .catch(error => {
@@ -35,6 +45,20 @@ const createBusiness = (req, res) => {
     .catch(error => {
       console.log({ error });
     });
+};
+
+createPhotoMarker = photo => {
+  var photos = place.photos;
+  if (!photos) {
+    return;
+  }
+
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location,
+    title: place.name,
+    icon: photos[0].getUrl({ maxWidth: 35, maxHeight: 35 }),
+  });
 };
 
 const placesSearch = (req, res) => {

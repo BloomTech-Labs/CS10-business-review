@@ -7,17 +7,17 @@
   justify-content: space-between;
   align-items: center;
   height: 20vh;
-  width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  width: 100vw;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
   max-height: 20vh;
-  background-color: darkslategrey;
+  background-color: #aa9a3e;
 }
 .navbar-container .navbar-container__logo {
-  max-width: 30%;
+  width: 20%;
   height: 100%;
 }
 .navbar-container .navbar-container__logo:hover {
@@ -30,12 +30,12 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  min-width: 40%;
+  width: 60%;
 }
 .navbar-container .navbar-container__center .navbar-container__input {
   border: 0.1rem solid black;
@@ -51,13 +51,15 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
 }
 .navbar-container .navbar-container__center .navbar-container__buttons .navbar-container__button {
+  background: #e4e4e4;
+  color: #383838;
   border: outset;
   width: 15%;
   padding: 0.5rem;
@@ -75,15 +77,18 @@
   align-items: center;
   height: 100%;
   width: 20%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
 }
 .navbar-container .navbar-container__right .navbar-container__sign {
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  width: 50%;
+  background-color: #aa9a3e;
+  color: #383838;
+  text-align: center;
+  padding: 0.2rem 0;
 }
 .navbar-container .navbar-container__right .navbar-container__sign:hover {
   cursor: pointer;
@@ -95,12 +100,12 @@
   align-items: center;
   height: 15%;
   width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 1.5rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  background: #263f3f !important;
+  background: #928538 !important;
   border: 0.1rem solid black;
   color: white;
   text-align: center;
@@ -115,7 +120,9 @@
   padding: 0.2rem;
 }
 .popover .popover-button {
-  border: outset;
+  background: #e4e4e4;
+  color: #383838;
+  border: #383838;
   width: 30%;
   padding: 0.2rem;
   margin: 0 2rem;
@@ -132,13 +139,12 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  color: #383838;
 }
 .navbar-container__modal .modal-container .modal-container__title {
   font-size: 2rem;
@@ -150,10 +156,12 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  color: black;
+  color: #383838;
   margin-top: 1rem;
 }
 .navbar-container__modal .modal-container .modal-container__footer .footer__button {
+  background: #e4e4e4;
+  color: #383838;
   border: outset;
   width: 15%;
   padding: 0.5rem;

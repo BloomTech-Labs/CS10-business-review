@@ -47,9 +47,6 @@ class User extends Component {
     localStorage.removeItem('userId');
     this.props.history.push('/');
   };
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
 
   render() {
     return (
