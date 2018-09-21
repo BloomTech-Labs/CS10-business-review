@@ -13,6 +13,7 @@ passport.deserializeUser((id, done) => {
   });
 });
 
+console.log("press", process.env)
 passport.use(
   new GoogleStrategy(
     {
