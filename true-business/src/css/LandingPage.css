@@ -5,7 +5,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
@@ -19,17 +19,18 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 100%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  width: 80%;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  margin-bottom: 2rem;
+  background: #aa9a3e;
 }
 .landing-container .landing-container__reviews-container .landing-container__title {
   font-size: 3rem;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  color: #383838;
 }
 .landing-container .landing-container__reviews-container .landing-container__reviews {
   display: flex;
@@ -37,8 +38,8 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  width: 90%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  width: 100%;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
@@ -51,19 +52,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 30rem;
-  width: 20%;
-  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
-  font-size: 1.25rem;
+  height: 100%;
+  width: auto;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-size: 1.5rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  min-width: 10rem;
-  margin: 2rem;
-  flex-wrap: nowrap;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
-  opacity: 0.5;
+  color: #383838;
+  opacity: 0.7;
+  margin: 0 1rem;
+  padding: 1rem;
+  height: inherit;
 }
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture {
   width: 10rem;
@@ -98,8 +98,7 @@
   align-items: flex-start;
   flex-direction: column;
   margin: 1rem;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  color: #383838;
 }
 .landing-container__modal .modal-container .modal__header .header__title {
   font-size: 3rem;
@@ -111,8 +110,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  color: #383838;
 }
 .landing-container__modal .modal-container .modal__body .body__image {
   width: 25rem;
@@ -135,7 +133,7 @@
 .landing-container__modal .modal-container .modal__footer {
   display: flex;
   justify-content: center;
-  color: black;
+  color: #383838;
   margin-top: 1rem;
 }
 .landing-container__modal .modal-container .modal__footer .footer__button {

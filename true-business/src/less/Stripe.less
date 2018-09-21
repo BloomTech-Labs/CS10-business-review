@@ -2,17 +2,19 @@
 
 .stripe {
   height: 100%;
-  font-size: 2rem !important;
-  color: white !important;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black !important;
-  width: 40%;
+  font-size: 1.5rem;
+  color: @color;
+  width: 75%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   .stripe__info {
     .containers();
     .info__label {
       .containers(@justifyContent: space-between, @flexDirection: row, @alignItems: initial);
       margin: 1rem;
+      font-size: 1.5rem;
       .info__input {
         border: 0.1rem solid black;
         font-size: 1.5rem;

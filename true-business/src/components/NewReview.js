@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import StarRatings from 'react-star-ratings';
-// We'll need this eventually
-// import axios from 'axios';
 
 import '../css/NewReview.css';
 
@@ -17,7 +15,7 @@ let modalStyles = {
     height: '90%',
     width: '75%',
     zIndex: '5',
-    backgroundColor: 'darkslategrey',
+    backgroundColor: 'rgb(146, 133, 56)',
     overflow: 'hidden',
   },
 };

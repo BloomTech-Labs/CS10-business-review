@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import {  Row } from 'reactstrap';
 import BusinessThumbnail from './BusinessThumbnail';
 import '../css/LandingPage.css';
 import '../css/GeneralStyles.css';
@@ -18,7 +17,7 @@ let modalStyles = {
     height: '75%',
     width: '50%',
     zIndex: '5',
-    backgroundColor: 'darkslategrey',
+    backgroundColor: 'green',
     overflow: 'hidden',
   },
 };
@@ -38,60 +37,46 @@ class LandingPage extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);    
-  };
-
   openModal(info, event) {
     this.setState({ modalIsOpen: true, modalInfo: info });
   }
-  
+
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
-  
+
   render() {
     return (
-      <div>      
+      <div>
         <NavBar search={this.props.search} />
         <div className="landing-container">
           <div className="landing-container__reviews-container">
-            <div className="landing-container__title">High Rated Business</div>           
-                <div className="business-section">{this.props.businesses.map(business => { 
-                  // Using this until we decide what will constitute Featured Reviews
-                  if (business.stars === 0) {
-                    
-                  return <div onClick={()=>this.props.getBusiness(business, true)}> < BusinessThumbnail business={business} key={business._id}/> </div>                 
-                  
-               }})} </div>                     
-            
-          </div>            
+            <div className="landing-container__title">Popular Businesses</div>
+            <div className="landing-container__reviews">
+              {this.props.businesses.map(business => {
+                return (
+                  <div key={business._id} onClick={() => this.props.getBusiness(business, true)}>
+                    <BusinessThumbnail business={business} key={business._id} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
           <div className="landing-container__reviews-container">
             <div className="landing-container__title">Popular Businesses</div>
-            <div className="landing-container__reviews">    
-            <Row className="business-section">{this.props.businesses.map(business => {
-              // Using this until we decide what will constitute Popular Reviews        
-              if (business.popularity) {                    
-                  return < BusinessThumbnail business={business} key={business._id}/>                   
-               }})} </Row>   
-           
+            <div className="landing-container__reviews">
+              {this.props.businesses.map(business => {
+                return (
+                  <div key={business._id} onClick={() => this.props.getBusiness(business, true)}>
+                    <BusinessThumbnail business={business} key={business._id} />
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="landing-container__reviews-container">
             <div className="landing-container__title">Popular Reviewers</div>
             <div className="landing-container__reviews">
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
               <div className="landing-container__review">
                 <div className="landing-container__picture" />
                 <ul className="landing-container__item--hover">@Reviewer</ul>

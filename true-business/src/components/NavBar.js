@@ -18,14 +18,14 @@ let modalStyles = {
     height: '20%',
     width: '60%',
     zIndex: '5',
-    backgroundColor: 'darkslategrey',
+    backgroundColor: 'rgb(146, 133, 56)',
     overflow: 'hidden',
   },
 };
 
 let popoverStyles = {
   content: {
-    backgroundColor: 'darkslategrey',
+    backgroundColor: 'rgb(146, 133, 56)',
     overflow: 'hidden',
   },
 };
@@ -51,10 +51,6 @@ class NavBar extends Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.open = false;
   }
-
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
 
   openModal(info, event) {
     this.setState({ modalIsOpen: true, modalInfo: info });
