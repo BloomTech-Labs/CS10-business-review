@@ -59,7 +59,7 @@ class LandingPage extends Component {
             <div className="landing-container__title">High Rated Business</div>           
                 <div className="business-section">{this.props.businesses.map(business => { 
                   // Using this until we decide what will constitute Featured Reviews
-                  if (business.stars == 0) {
+                  if (business.stars === 0) {
                     
                   return <div onClick={()=>this.props.getBusiness(business, true)}> < BusinessThumbnail business={business} key={business._id}/> </div>                 
                   
