@@ -86,9 +86,8 @@ class App extends Component {
     );
   }
   getDBBusinesses = () => {
-    console.log("Safe to assume this happening right here?")
     axios
-      .get("https://cryptic-brook-22003.herokuapp.com/api/business/")
+      .get("http://localhost:3001/api/business")
       .then(businesses => {
         let featuredBusinesses = businesses.data.filter(business => {
           return business.stars >= 0;
@@ -117,7 +116,6 @@ class App extends Component {
         })
         .catch(error => console.log({ error }));
     } else {
-      console.log("Here", business)
       axios
         .post(
           "http://localhost:3001/api/business/placeSearch",

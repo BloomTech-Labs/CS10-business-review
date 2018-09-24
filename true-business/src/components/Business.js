@@ -69,11 +69,6 @@ class Business extends Component {
   };
 
   render() {
-    let hours = this.props.business.opening_hours;
-    if(hours.hasOwnProperty('weekday_text')) {
-      hours = hours.weekday_text;
-      console.log("Hourse", hours)
-    }
     return (
       <div>
         <NavBar search={this.props.search} />

@@ -1,15 +1,13 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
-const jwt = require('jsonwebtoken');
-const wala = require('../wala');
+const jwt = require("jsonwebtoken");
 
 function generateToken(user) {
-    const options = {
-        expiresIn: '1h',
-    };
-    const payload = { name: user.username };
-
-    return jwt.sign(payload, process.env.REACT_APP_SECRET, options);
+  const options = {
+    expiresIn: "1h",
+  };
+  const payload = { name: user.username };
+  return jwt.sign(payload, process.env.REACT_APP_SECRET, options);
 }
 
 const bcryptRounds = 10;
@@ -17,27 +15,19 @@ const bcryptRounds = 10;
 const register = (request, response) => {
   const { username, password } = request.body;
   const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
-  const user = new User({ username: username, password: encryptedPassword });
-  user.save(function(err, savedUser) {
-    if (err) {
-      response.status(500).json({ err });
-    } else {
-      // Create User.
-      const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
-      const token = generateToken({ username });
-      const user = new User({ username, password: encryptedPassword, token });
-      user
-        .save()
-        .then(savedUser => {
-          response.status(200).send(savedUser);
-        })
-        .catch(err => {
-          response.status(500).send({
-            errorMessage: "Error occurred while saving: " + err
-          });
-        });
-    }
-  });
+  const token = generateToken({ username });
+  const user = new User({ username, password: encryptedPassword, token });
+  console.log("USER", user);
+  user
+    .save()
+    .then(savedUser => {
+      response.status(200).send(savedUser);
+    })
+    .catch(err => {
+      response.status(500).send({
+        errorMessage: "Error occurred while saving: " + err,
+      });
+    });
 };
 
 const login = (request, response) => {
