@@ -1,4 +1,5 @@
 const passport = require("passport");
+let frontend = process.env.REACT_APP_LOCAL_FRONTEND ? process.env.REACT_APP_LOCAL_FRONTEND : 'https://true-business.netlify.com/';
 
 module.exports = router => {
   router.get(
@@ -12,12 +13,11 @@ module.exports = router => {
     "/auth/google/callback",
     passport.authenticate("google", {
       failureRedirect:
-        "http://localhost:3000/signin" ||
-        "https://true-business.netlify.com/signin"
+        frontend + "/signin"
     }),
     function(req, res) {
       res.redirect(
-        "http://localhost:3000/" || "https://true-business.netlify.com/"
+        frontend
       );
     }
   );

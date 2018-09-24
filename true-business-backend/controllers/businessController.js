@@ -34,6 +34,11 @@ const createBusiness = (req, res) => {
         description,
         location: result.geometry.location,
       });
+      console.log(
+        typeof result.photos !== "undefined"
+          ? result.photos[0].getUrl({ maxWidth: 100, maxHeight: 100 })
+          : undefined,
+      );
       business
         .save()
         .then(business => {
