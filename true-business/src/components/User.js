@@ -1,51 +1,55 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
-import NavBar from './NavBar.js';
+import NavBar from "./NavBar.js";
 
-import '../css/User.css';
+import "../css/User.css";
 
 class User extends Component {
   state = {
-    breadcrumbs: ['Home'],
+    breadcrumbs: ["Home"],
     userReviews: [
       {
-        business: 'Taco Bell',
+        business: "Taco Bell",
         businessType: '"Tacos" *cough*',
-        businessstreet: '123 West',
-        businessCity: 'Knoxville, TN 37919',
-        updated: '1/1/1',
+        businessstreet: "123 West",
+        businessCity: "Knoxville, TN 37919",
+        updated: "1/1/1",
       },
       {
-        business: 'Taco Bell',
+        business: "Taco Bell",
         businessType: '"Tacos" *cough*',
-        businessstreet: '123 West',
-        businessCity: 'Knoxville, TN 37919',
-        updated: '1/1/1',
+        businessstreet: "123 West",
+        businessCity: "Knoxville, TN 37919",
+        updated: "1/1/1",
       },
       {
-        business: 'Taco Bell',
+        business: "Taco Bell",
         businessType: '"Tacos" *cough*',
-        businessstreet: '123 West',
-        businessCity: 'Knoxville, TN 37919',
-        updated: '1/1/1',
+        businessstreet: "123 West",
+        businessCity: "Knoxville, TN 37919",
+        updated: "1/1/1",
       },
       {
-        business: 'Taco Bell',
+        business: "Taco Bell",
         businessType: '"Tacos" *cough*',
-        businessstreet: '123 West',
-        businessCity: 'Knoxville, TN 37919',
-        updated: '1/1/1',
+        businessstreet: "123 West",
+        businessCity: "Knoxville, TN 37919",
+        updated: "1/1/1",
       },
     ],
-    current: 'Home',
+    current: "Home",
+  };
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
   };
 
   logout = () => {
-    console.log('Log');
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    this.props.history.push('/');
+    console.log("Log");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    this.props.history.push("/");
   };
 
   render() {
@@ -102,7 +106,7 @@ class User extends Component {
   updateCurrent = event => {
     let breadcrumbs = this.state.breadcrumbs;
     // Home => Home
-    if (event.target.name === 'Home') {
+    if (event.target.name === "Home") {
       // Home->Whatever => Home
       if (breadcrumbs.length === 2) {
         breadcrumbs.pop();
@@ -119,10 +123,10 @@ class User extends Component {
     }
     this.setState({ current: event.target.name, breadcrumbs });
   };
-  
+
   loadContent = () => {
     switch (this.state.current) {
-      case 'Add a Review':
+      case "Add a Review":
         return (
           <div className="content__solo-add">
             <div className="solo-add__image">
@@ -131,7 +135,7 @@ class User extends Component {
             <div className="solo-add__text">Add a review</div>
           </div>
         );
-      case 'My Reviews':
+      case "My Reviews":
         return (
           <div className="content__user-reviews">
             {this.state.userReviews.map((review, i) => {
@@ -155,9 +159,9 @@ class User extends Component {
             </div>
           </div>
         );
-      case 'Billing':
+      case "Billing":
         return <div className="content__billing">No idea what will go here, I guess something for Stripe?</div>;
-      case 'Settings':
+      case "Settings":
         return <div className="content__settings">Also no idea for this. Just following the wireframe...</div>;
       default:
         return (

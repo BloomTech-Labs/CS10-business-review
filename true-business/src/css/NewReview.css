@@ -11,8 +11,7 @@
   padding: 0;
   margin: 0;
   text-align: center;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  color: #383838;
 }
 .new-review .new-review__modal .modal__header {
   height: auto;

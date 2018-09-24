@@ -6,7 +6,7 @@ import '../css/BusinessThumbnail.css';
 const BusinessThumbnail = props => {
   return (
     <div className="thumbnail">
-      <img className="thumbnail__image" alt={props.business.name + ' image'} src={props.business.images[0]} />
+      <img className="thumbnail__image" alt={props.business.name + ' image'} />
       <div className="thumbnail__text"> {props.business.name}</div>
       <div className="thumbnail__text">
         <StarRatings

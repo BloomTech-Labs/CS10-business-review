@@ -6,7 +6,9 @@ const UserController = require("../controllers/userController");
 const BusinessController = require("../controllers/businessController");
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness');
+mongoose.connect('mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness',{}, function(err){
+  if(err)console.log(err);
+});
 const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
 
 const router = express.Router();
@@ -71,12 +73,10 @@ router.post('/charge', async (req, res) => {
   stripe.charges
     .create({ amount, currency: 'usd', description: 'An example charge', source: req.body.token.id })
     .then((status) => {
-      console.log("Charge Status", status);
       res.json({ status });
     })
     .catch(err => {
       res.status(500).end();
-
     });
 });
 

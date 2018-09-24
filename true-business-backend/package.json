@@ -4,7 +4,7 @@
   "description": "Backend for 'true-business.'",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon ./bin/www"
   },
   "engines": {
     "node": ">=8.10.0"

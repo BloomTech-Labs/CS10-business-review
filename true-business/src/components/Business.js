@@ -1,23 +1,27 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import StarRatings from 'react-star-ratings';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import StarRatings from "react-star-ratings";
 
-import NewReview from './NewReview';
-import NavBar from './NavBar';
+import NewReview from "./NewReview";
+import NavBar from "./NavBar";
 
-import '../css/Business.css';
-import '../css/GeneralStyles.css';
+import "../css/Business.css";
+import "../css/GeneralStyles.css";
 
 class Business extends Component {
   state = {
     dropdownOpenFilter: false,
     dropdownOpenSort: false,
-    filterBy: 'No Filter',
+    filterBy: "No Filter",
     showfilterBy: false,
-    sortBy: 'Date Descending',
+    sortBy: "Date Descending",
     showsortBy: false,
     businessID: null,
     newBusinessID: null,
+  };
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
   };
 
   // Not entirely sure if both of these are necessary.
@@ -57,7 +61,7 @@ class Business extends Component {
       : Promise.resolve()
           .then(() => this.props.createBusiness(this.props.business.place_id))
           .then(() => this.setState({ open: true }))
-          .catch(error => console.log('Error creating business', error));
+          .catch(error => console.log("Error creating business", error));
   };
 
   showModal = show => {
@@ -65,11 +69,6 @@ class Business extends Component {
   };
 
   render() {
-    let hours = this.props.business.opening_hours;
-    if(hours.hasOwnProperty('weekday_text')) {
-      hours = hours.weekday_text;
-      console.log("Hourse", hours)
-    }
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -81,20 +80,39 @@ class Business extends Component {
               <div className="info__details">
                 <div className="details__hours">
                   <div className="hours__title"> Hours </div>
-                  {(this.props.business.hasOwnProperty('hours')
-                    ? this.props.business.hours
-                    : this.props.business.opening_hours.weekday_text
-                  ).map((day, i) => {
-                    return (
-                      <div className="hours__day" key={i}>
-                        {day}
-                      </div>
-                    );
-                  })}
+                  {/* DB records have hours, google API returns opening_hours */}
+                  {(this.props.business.hasOwnProperty("hours") ? (
+                    this.props.business.hours
+                  ) : (
+                    this.props.business.opening_hours
+                  )) ? (
+                    // If the hours exist, render them, otherwise return "No Hours Listed"
+                    (this.props.business.hours || this.props.business.opening_hours.weekday_text).map((day, i) => {
+                      return (
+                        <div className="hours__day" key={i}>
+                          {day}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div>No Hours Listed</div>
+                  )}
                 </div>
                 <div className="details__contact">
                   <div className="contact__phone">
-                    <div>(865) 867-5309</div>
+                    {/* DB records have phone, google API returns formatted phone_number */}
+                    {(this.props.business.hasOwnProperty("phone") ? (
+                      this.props.business.phone
+                    ) : (
+                      this.props.business.formatted_phone_number
+                    )) ? (
+                      // If the hours exist, render them, otherwise return "No Hours Listed"
+                      <div className="phone__number">
+                        {this.props.business.phone || this.props.business.formatted_phone_number}
+                      </div>
+                    ) : (
+                      <div className="phone__number">No Phone Listed</div>
+                    )}
                   </div>
                   <div className="contact__website">
                     {this.props.business.website ? (
@@ -103,7 +121,7 @@ class Business extends Component {
                         's Website
                       </a>
                     ) : (
-                      'No Website Listed'
+                      "No Website Listed"
                     )}
                   </div>
                 </div>
@@ -235,7 +253,7 @@ class Business extends Component {
             </div>
           </div>
         ) : (
-          <div>{this.props.history.push('/')}</div>
+          <div>{this.props.history.push("/")}</div>
         )}
       </div>
     );
