@@ -17,8 +17,8 @@ let modalStyles = {
     height: '75%',
     width: '50%',
     zIndex: '5',
-    backgroundColor: 'green',
-    overflow: 'hidden',
+    backgroundColor: 'rgb(62, 56, 146)',
+    overflowY: 'scroll',
   },
 };
 
@@ -45,17 +45,21 @@ class LandingPage extends Component {
     this.setState({ modalIsOpen: false });
   }
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   render() {
     return (
       <div>
         <NavBar search={this.props.search} />
         <div className="landing-container">
           <div className="landing-container__reviews-container">
-            <div className="landing-container__title">Popular Businesses</div>
+            <div className="landing-container__title">Popular Reviews</div>
             <div className="landing-container__reviews">
               {this.props.businesses.map(business => {
                 return (
-                  <div key={business._id} onClick={() => this.props.getBusiness(business, true)}>
+                  <div key={business._id} onClick={() => this.openModal(this, business)}>
                     <BusinessThumbnail business={business} key={business._id} />
                   </div>
                 );

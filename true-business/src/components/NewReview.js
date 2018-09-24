@@ -15,7 +15,7 @@ let modalStyles = {
     height: '90%',
     width: '75%',
     zIndex: '5',
-    backgroundColor: 'rgb(146, 133, 56)',
+    backgroundColor: 'rgb(62, 56, 146)',
     overflow: 'hidden',
   },
 };
@@ -39,6 +39,10 @@ export default class NewReview extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.openModal = this.openModal.bind(this);
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
 
   componentDidUpdate = () => {
     if (this.state.modalIsOpen !== this.props.open) {
@@ -119,7 +123,6 @@ export default class NewReview extends Component {
   };
 
   render() {
-    console.log('this.props.newBusinessId in newReview', this.props);
     return (
       <Modal
         shouldCloseOnOverlayClick={false}

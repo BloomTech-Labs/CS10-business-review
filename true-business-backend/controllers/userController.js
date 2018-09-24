@@ -5,34 +5,13 @@ const bcryptRounds = 10;
 
 const register = (request, response) => {
   const { username, password } = request.body;
-
-  // Check for empty username or password.
-  if (!username.trim() || !password.trim()) {
-    response.status(400).send({
-      errorMessage: "Missing username or password."
-    });
-  }
-
-  // Check to see if the user exists.
-  User.findOne({ username: username }).then(userFound => {
-    if (userFound) {
-      response.status(500).send({
-        errorMessage: "User name already exists."
-      });
+  const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
+  const user = new User({ username: username, password: encryptedPassword });
+  user.save(function(err, savedUser) {
+    if (err) {
+      response.status(500).json({ err });
     } else {
-      // Create User.
-      const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
-      const user = new User({ username, password: encryptedPassword });
-      user
-        .save()
-        .then(savedUser => {
-          response.status(200).send(savedUser);
-        })
-        .catch(err => {
-          response.status(500).send({
-            errorMessage: "Error occurred while saving: " + err
-          });
-        });
+      response.status(200).json({ savedUser });
     }
   });
 };
@@ -43,14 +22,14 @@ const login = (request, response) => {
   User.findOne({ username: username }).then(userFound => {
     if (!userFound) {
       response.status(500).send({
-        errorMessage: "Login Failed."
+        errorMessage: "Login Failed.",
       });
     } else {
       if (bcrypt.compareSync(password, userFound.password)) {
         response.status(200).send({ username: userFound.username });
       } else {
         response.status(500).send({
-          errorMessage: "Login Failed."
+          errorMessage: "Login Failed.",
         });
       }
     }
@@ -66,7 +45,7 @@ const getUserById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The user could not be retrieved."
+        error: "The user could not be retrieved.",
       });
     });
 };
@@ -80,7 +59,7 @@ const deleteUserById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The user could not be removed."
+        error: "The user could not be removed.",
       });
     });
 };
@@ -92,7 +71,7 @@ const getAllUsers = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The users could not be found."
+        error: "The users could not be found.",
       });
     });
 };
@@ -102,5 +81,5 @@ module.exports = {
   login,
   getUserById,
   deleteUserById,
-  getAllUsers
+  getAllUsers,
 };

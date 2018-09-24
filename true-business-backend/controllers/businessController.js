@@ -1,5 +1,5 @@
-const Business = require('../models/business');
-const googleMapsClient = require('@google/maps').createClient({
+const Business = require("../models/business");
+const googleMapsClient = require("@google/maps").createClient({
   key: process.env.REACT_APP_GOOGLEPLACESKEY || process.env.googlePlaces,
   Promise: Promise,
 });
@@ -10,32 +10,38 @@ const createBusiness = (req, res) => {
     .asPromise()
     .then(response => {
       let result = response.json.result;
+      let name = result.hasOwnProperty("name") ? result.name : "No Name Listed";
+      let types = result.hasOwnProperty("types") ? result.types : "No Types Listed";
+      let address = result.hasOwnProperty("formatted_address") ? result.formatted_address : "No Address Listed";
+      let phone = result.hasOwnProperty("formatted_phone_number")
+        ? result.formatted_phone_number
+        : "No Phone Number Listed";
+      let images = result.hasOwnProperty("iamges") ? result.images : "No Images Listed";
+      let website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
+      let hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
+      let description = result.hasOwnProperty("description")
+        ? result.address_components.long_name
+        : "No Description Listed";
       const business = new Business({
-        name: result.name,
-        types: result.types,
-        address: result.formatted_address,
-        phone: result.formatted_phone_number,
-        images: result.photos[0],
-        website: result.website,
-        googleID: result.place_id,
-        opening_hours: result.opening_hours.weekday_text,
-        description: result.address_components.long_name,
+        name,
+        types,
+        address,
+        phone,
+        images,
+        website,
+        place_id: result.place_id,
+        hours,
+        description,
         location: result.geometry.location,
       });
-      // business.images = result.photos[0].getUrl({ maxWidth: 35, maxHeight: 35 }),
-      // if (result.photos) {
-      //   console.log(result.photos[0]);
-      //   console.log(
-      //     result.photos[0].getUrl({
-      //       maxWidth: 640,
-      //     }),
-      //   );
-      // }
-
+      console.log(
+        typeof result.photos !== "undefined"
+          ? result.photos[0].getUrl({ maxWidth: 100, maxHeight: 100 })
+          : undefined,
+      );
       business
         .save()
         .then(business => {
-          console.log('Business successfully saved in DB.');
           res.status(201).json(business._id);
         })
         .catch(error => {
@@ -87,20 +93,19 @@ const placeSearch = (req, res) => {
 
 const getBusinessByName = (request, response) => {
   const { name } = request.params;
-  console.log('Getting Business: ' + name);
   Business.findOne({ name: name })
     .then(business => {
       if (business) {
         response.status(200).json(business);
       } else {
         response.status(400).json({
-          error: 'Business not found.',
+          error: "Business not found.",
         });
       }
     })
     .catch(function(error) {
       response.status(500).json({
-        error: 'The business information could not be retrieved. (' + error + ')',
+        error: "The business information could not be retrieved. (" + error + ")",
       });
     });
 };
@@ -114,7 +119,7 @@ const getBusinessById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: 'The information could not be retrieved.',
+        error: "The information could not be retrieved.",
       });
     });
 };
@@ -128,7 +133,7 @@ const deleteBusinessById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: 'The business could not be removed.',
+        error: "The business could not be removed.",
       });
     });
 };
@@ -140,7 +145,7 @@ const getAllBusiness = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: 'The information could not be retrieved.',
+        error: "The information could not be retrieved.",
       });
     });
 };

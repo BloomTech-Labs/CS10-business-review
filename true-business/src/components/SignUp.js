@@ -1,28 +1,32 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { withRouter } from 'react-router-dom';
-import NavBar from './NavBar';
+import React, { Component } from "react";
+import axios from "axios";
+import { withRouter } from "react-router-dom";
+import NavBar from "./NavBar";
 
-import { Elements, StripeProvider } from 'react-stripe-elements';
-import StripePayment from './StripePayment';
+import { Elements, StripeProvider } from "react-stripe-elements";
+import StripePayment from "./StripePayment";
 
-import '../css/SignUp.css';
+import "../css/SignUp.css";
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      email: '',
-      confirmEmail: '',
-      password: '',
-      confirmPassword: '',
-      error: '',
-      errorMessage: '',
+      username: "",
+      email: "",
+      confirmEmail: "",
+      password: "",
+      confirmPassword: "",
+      error: "",
+      errorMessage: "",
       payment: false,
       type: null,
     };
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
 
   confirmPassword = () => {
     return this.state.password === this.state.confirmPassword;
@@ -40,13 +44,10 @@ class SignUp extends Component {
       password: this.state.password,
       accountType: this.state.type,
     };
-
     this.state.payment
       ? axios
-          .post('https://cryptic-brook-22003.herokuapp.com/register', user)
-          .then(response => {
-            console.log('fire', response.data);
-            // localStorage.setItem('token', response.data.token)
+          .post('http://localhost:3001/register' || 'https://cryptic-brook-22003.herokuapp.com/register', user)
+          .then(() => {
             this.setState({
               error: false,
             });
@@ -55,10 +56,10 @@ class SignUp extends Component {
           .catch(err => {
             this.setState({
               error: true,
-              errorMessage: err.response.data.error,
+              errorMessage: err,
             });
           })
-      : window.alert('You must submit payment first');
+      : window.alert("You must submit payment first");
   };
 
   handleInputChange = event => {
