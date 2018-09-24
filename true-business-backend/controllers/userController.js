@@ -3,15 +3,13 @@ const User = require("../models/user");
 const jwt = require('jsonwebtoken');
 const wala = require('../wala');
 
-const secret = wala.secret;
-
 function generateToken(user) {
     const options = {
         expiresIn: '1h',
     };
     const payload = { name: user.username };
 
-    return jwt.sign(payload, secret, options);
+    return jwt.sign(payload, process.env.REACT_APP_SECRET, options);
 }
 
 const bcryptRounds = 10;
