@@ -103,7 +103,7 @@ class StripePayment extends Component {
           </div>
           {/* Turn this into a dropdown eventually */}
           <div className="info__label">
-            State Initials:
+            State:
             <input
               className="info__input"
               placeholder="TN..."
