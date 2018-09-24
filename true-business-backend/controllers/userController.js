@@ -1,5 +1,18 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
+const jwt = require('jsonwebtoken');
+const wala = require('../wala');
+
+const secret = wala.secret;
+
+function generateToken(user) {
+    const options = {
+        expiresIn: '1h',
+    };
+    const payload = { name: user.username };
+
+    return jwt.sign(payload, secret, options);
+}
 
 const bcryptRounds = 10;
 
@@ -11,7 +24,20 @@ const register = (request, response) => {
     if (err) {
       response.status(500).json({ err });
     } else {
-      response.status(200).json({ savedUser });
+      // Create User.
+      const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
+      const token = generateToken({ username });
+      const user = new User({ username, password: encryptedPassword, token });
+      user
+        .save()
+        .then(savedUser => {
+          response.status(200).send(savedUser);
+        })
+        .catch(err => {
+          response.status(500).send({
+            errorMessage: "Error occurred while saving: " + err
+          });
+        });
     }
   });
 };
@@ -26,7 +52,8 @@ const login = (request, response) => {
       });
     } else {
       if (bcrypt.compareSync(password, userFound.password)) {
-        response.status(200).send({ username: userFound.username });
+        const token = generateToken({ userFound });
+        response.status(200).send({ username: userFound.username, token });
       } else {
         response.status(500).send({
           errorMessage: "Login Failed.",
