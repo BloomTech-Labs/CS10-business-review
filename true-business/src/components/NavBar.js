@@ -18,14 +18,14 @@ let modalStyles = {
     height: '20%',
     width: '60%',
     zIndex: '5',
-    backgroundColor: 'rgb(146, 133, 56)',
+    backgroundColor: 'rgb(62, 56, 146)',
     overflow: 'hidden',
   },
 };
 
 let popoverStyles = {
   content: {
-    backgroundColor: 'rgb(146, 133, 56)',
+    backgroundColor: 'rgb(62, 56, 146)',
     overflow: 'hidden',
   },
 };

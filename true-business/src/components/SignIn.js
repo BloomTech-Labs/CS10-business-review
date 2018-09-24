@@ -16,9 +16,13 @@ class SignIn extends Component {
     };
   }
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   signIn = event => {
     axios
-      .post('https://cryptic-brook-22003.herokuapp.com/login', this.state)
+      .post('http://localhost:3001/login" || "https://cryptic-brook-22003.herokuapp.com/login', this.state)
       .then(response => {
         // localStorage.setItem('token', response.data.token)
         // localStorage.setItem('username', this.state.username)

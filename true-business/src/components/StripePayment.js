@@ -25,21 +25,18 @@ class StripePayment extends Component {
     event.preventDefault();
 
     let args = {
-      billing_name: this.state.name,
-      billing_address_country: 'United States',
-      billing_address_state: this.state.state,
-      billing_address_line1: this.state.street,
-      billing_address_city: this.state.city,
-      billing_address_country_code: 'US',
+      name: this.state.name,
+      address_country: 'United States',
+      address_state: this.state.state,
+      address_line1: this.state.street,
+      address_city: this.state.city,
     };
     if (this.state.name && this.state.state && this.state.street && this.state.city) {
-      let { token } = await this.props.stripe.createToken({ args });
-
+      let { token } = await this.props.stripe.createToken({...args});
       this.setState({ loading: true });
-
       axios
-        .post('http://localhost:3001/charge', { token, selectedRadio: this.state.selectedRadio })
-        .then(response => {
+        .post('http://localhost:3001/charge' || 'https://cryptic-brook-22003.herokuapp.com/charge', { args, token, selectedRadio: this.state.selectedRadio })
+        .then(() => {
           this.setState({ complete: true });
           this.props.checkPayment(true);
         })
@@ -144,8 +141,6 @@ class StripePayment extends Component {
           className="stripe__element"
           style={{
             base: {
-              iconColor: 'rgb(0,0,0)',
-              color: '#31325F',
               fontSize: '25px',
             },
           }}

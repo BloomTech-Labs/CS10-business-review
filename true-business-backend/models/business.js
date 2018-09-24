@@ -34,8 +34,8 @@ const businessSchema = new mongoose.Schema({
   // places_details: photos
   // returns an array of objects
   // Unlikely, but possible there won't be any, no required
-  image: {
-    type: String,
+  images: {
+    type: Array,
   },
   // places_details: rating
   // returns a number from 1.0 to 5.0
@@ -106,23 +106,19 @@ const businessSchema = new mongoose.Schema({
 let businessModel = mongoose.model('Business', businessSchema);
 
 // Pre-save hook
-businessSchema.pre('save', next => {
+businessSchema.pre('save', function(next) {
   businessModel.find({ _id: this._id }, (err, docs) => {
     if (!docs.length) {
       next();
     } else {
-      console.log('Business exists already: ', this.name);
+      console.log('Business exists already: ', this);
       next(new Error('Business exists!'));
     }
   });
 });
 
-// Post-save hook
-businessSchema.post('save', (doc,next) => {
-  if (doc.stars >= 3 && doc.totalReviews > 100) {
-    doc.popularity = true;
-  }
-  next();
-});
+// // Post-save hook
+// businessSchema.pre('save', function(next) {
+// });
 
 module.exports = businessModel;
