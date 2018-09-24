@@ -19,7 +19,6 @@ router.get("/", (request, response) => {
 });
 
 router.post("/register", (request, response) => {
-  console.log("REGISTERING WOOOOOO /REGISTER")
   UserController.register(request, response);
 });
 

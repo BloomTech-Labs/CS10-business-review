@@ -17,7 +17,6 @@ const register = (request, response) => {
   const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
   const token = generateToken({ username });
   const user = new User({ username, password: encryptedPassword, token });
-  console.log("USER", user);
   user
     .save()
     .then(savedUser => {

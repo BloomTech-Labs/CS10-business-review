@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import NavBar from './NavBar';
-import { withRouter } from 'react-router-dom';
-import '../css/SignIn.css';
-import googleLogo from '../imgs/google-signin.png';
+import React, { Component } from "react";
+import axios from "axios";
+import NavBar from "./NavBar";
+import { withRouter } from "react-router-dom";
+import "../css/SignIn.css";
+import googleLogo from "../imgs/google-signin.png";
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
-      error: '',
-      errorMessage: '',
+      username: "",
+      password: "",
+      error: "",
+      errorMessage: "",
     };
   }
 
@@ -22,7 +22,7 @@ class SignIn extends Component {
 
   signIn = event => {
     axios
-      .post('http://localhost:3001/login', this.state)
+      .post("http://localhost:3001/login", this.state)
       .then(response => {
         // localStorage.setItem('token', response.data.token)
         // localStorage.setItem('username', this.state.username)
@@ -79,7 +79,7 @@ class SignIn extends Component {
                   className="signin-container__google-auth"
                   onClick={() => {
                     window.location =
-                      'http://localhost:3001/auth/google' || 'https://cryptic-brook-22003.herokuapp.com/';
+                      "http://localhost:3001/auth/google" || "https://cryptic-brook-22003.herokuapp.com/auth/google";
                   }}
                 />
               </div>

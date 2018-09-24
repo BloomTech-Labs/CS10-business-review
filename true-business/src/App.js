@@ -132,7 +132,6 @@ class App extends Component {
   };
 
   searchResults = searchTerm => {
-    console.log("there");
     axios
       .post(
         "http://localhost:3001/api/business/placesSearch",
