@@ -86,6 +86,7 @@ class App extends Component {
     );
   }
   getDBBusinesses = () => {
+    console.log("Safe to assume this happening right here?")
     axios
       .get("https://cryptic-brook-22003.herokuapp.com/api/business/")
       .then(businesses => {
@@ -119,8 +120,7 @@ class App extends Component {
       console.log("Here", business)
       axios
         .post(
-          "http://localhost:3001/api/business/placeSearch" ||
-            "https://cryptic-brook-22003.herokuapp.com/api/business/placeSearch",
+          "http://localhost:3001/api/business/placeSearch",
           { id: business.place_id },
         )
         .then(response => {
@@ -137,8 +137,7 @@ class App extends Component {
     console.log("there");
     axios
       .post(
-        "http://localhost:3001/api/business/placesSearch" ||
-          "https://cryptic-brook-22003.herokuapp.com/api/business/placesSearch",
+        "http://localhost:3001/api/business/placesSearch",
         {
           query: searchTerm,
         },
@@ -155,7 +154,7 @@ class App extends Component {
   createBusiness = id => {
     axios
       .post(
-        "http://localhost:3001/api/business/create" || "https://cryptic-brook-22003.herokuapp.com/api/business/create",
+        "http://localhost:3001/api/business/create",
         { id },
       )
       .then(response => {

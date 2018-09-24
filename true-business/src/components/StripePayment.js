@@ -35,7 +35,7 @@ class StripePayment extends Component {
       let { token } = await this.props.stripe.createToken({...args});
       this.setState({ loading: true });
       axios
-        .post('http://localhost:3001/charge' || 'https://cryptic-brook-22003.herokuapp.com/charge', { args, token, selectedRadio: this.state.selectedRadio })
+        .post('http://localhost:3001/charge', { args, token, selectedRadio: this.state.selectedRadio })
         .then(() => {
           this.setState({ complete: true });
           this.props.checkPayment(true);
