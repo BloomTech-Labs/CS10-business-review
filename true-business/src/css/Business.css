@@ -10,7 +10,7 @@
   line-height: 1;
   padding: 25vh 2rem 2rem 2rem;
   margin: 0;
-  color: #383838;
+  color: black;
 }
 .business .business__info {
   display: flex;
@@ -24,7 +24,7 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  background: #4b73a1;
+  background: #e6e6e6;
   padding: 1rem;
   margin: 1rem;
 }
@@ -105,16 +105,16 @@
   padding: 0;
   margin: 0;
   padding: 1rem;
-  background: #4b73a1;
+  background: #e6e6e6;
 }
 .business .business__reviews-container .reviews-container__title {
   font-size: 2.5rem;
   margin-bottom: 2rem;
-  color: #383838;
+  color: black;
 }
 .business .business__reviews-container .reviews-container__button {
-  background: z;
-  color: #383838;
+  background: #2687a1;
+  color: black;
   border: outset;
   width: 20%;
   padding: 0.5rem;
@@ -146,13 +146,13 @@
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container {
   margin-left: 2rem;
   width: 15rem;
-  background-color: z;
+  background-color: #2687a1;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__button {
   width: inherit;
   font-size: 1.5rem;
-  color: #383838;
-  background-color: z;
+  color: black;
+  background-color: #2687a1;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__button:hover {
   cursor: pointer;
@@ -167,9 +167,9 @@
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__menu .menu__button {
   width: inherit;
   border: none;
-  background-color: z;
+  background-color: #2687a1;
   font-size: 1.5rem;
-  color: #383838;
+  color: black;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__menu .menu__button:hover {
   filter: brightness(80%);

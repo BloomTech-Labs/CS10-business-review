@@ -224,9 +224,6 @@ class Business extends Component {
                 <div className="reviews__review">
                   {this.state.reviews.length ? (
                     this.state.reviews.map(review => {
-                      {
-                        console.log(review);
-                      }
                       return (
                         <div key={review._id} className="review__info">
                           <div className="review__image" onClick={() => this.openModal(this, review)}>

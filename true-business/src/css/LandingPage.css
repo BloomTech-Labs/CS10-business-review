@@ -26,11 +26,11 @@
   padding: 0;
   margin: 0;
   margin-bottom: 2rem;
-  background: #4b73a1;
+  background: #e6e6e6;
 }
 .landing-container .landing-container__reviews-container .landing-container__title {
   font-size: 3rem;
-  color: #383838;
+  color: black;
 }
 .landing-container .landing-container__reviews-container .landing-container__reviews {
   display: flex;
@@ -59,7 +59,7 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  color: #383838;
+  color: black;
   opacity: 0.7;
   margin: 0 1rem;
   padding: 1rem;
@@ -98,7 +98,7 @@
   align-items: flex-start;
   flex-direction: column;
   margin: 1rem;
-  color: #383838;
+  color: black;
 }
 .landing-container__modal .modal-container .modal__header .header__title {
   font-size: 3rem;
@@ -110,7 +110,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #383838;
+  color: black;
 }
 .landing-container__modal .modal-container .modal__body .body__image {
   width: 25rem;
@@ -133,7 +133,7 @@
 .landing-container__modal .modal-container .modal__footer {
   display: flex;
   justify-content: center;
-  color: #383838;
+  color: black;
   margin-top: 1rem;
 }
 .landing-container__modal .modal-container .modal__footer .footer__button {
