@@ -68,7 +68,7 @@
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture {
   width: 10rem;
   height: 10rem;
-  background-color: black;
+  background-color: #56879e;
 }
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture:hover {
   cursor: pointer;

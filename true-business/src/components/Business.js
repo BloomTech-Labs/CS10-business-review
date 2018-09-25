@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import StarRatings from "react-star-ratings";
+import axios from "axios";
 
 import NewReview from "./NewReview";
 import NavBar from "./NavBar";
@@ -18,23 +19,12 @@ class Business extends Component {
     showsortBy: false,
     businessID: null,
     newBusinessID: null,
+    reviews: [],
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-  };
-
-  // Not entirely sure if both of these are necessary.
-  // Or either for that matter... I just didn't want to break it
-  // and haven't tested it with one / the other / neither yet.
-  componentDidUpdate = prevProps => {
-    if (prevProps !== this.props) {
-      this.setState({ newBusinessID: this.props.newBusinessID });
-    }
-  };
-
-  componentWillReceiveProps = nextProps => {
-    this.setState({ newBusinessID: nextProps.newBusinessID });
+    if (this.props.business !== null) this.getReviews();
   };
 
   toggleDropDown = event => {
@@ -68,7 +58,19 @@ class Business extends Component {
     this.setState({ open: show });
   };
 
+  getReviews = () => {
+    axios
+      .get(`http://localhost:3001/api/review/getReviewsByBusinessId/${this.props.business._id}`)
+      .then(reviews => {
+        this.setState({ reviews: reviews.data, newBusinessID: this.props.newBusinessID });
+      })
+      .catch(error => {
+        console.log("Error", error);
+      });
+  };
+
   render() {
+    console.log("reviews", this.state.reviews);
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -84,7 +86,7 @@ class Business extends Component {
                     this.props.business.opening_hours.hasOwnProperty("weekday_text") ? (
                       this.props.business.opening_hours.weekday_text.map(day => {
                         return (
-                          <div key={this.props.business.place_id} className="hours__day">
+                          <div key={day} className="hours__day">
                             {day}
                           </div>
                         );
@@ -183,57 +185,23 @@ class Business extends Component {
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
                 <div className="reviews__review">
-                  <div className="review__image">image</div>
-                  <StarRatings
-                    starDimension="20px"
-                    starSpacing="5px"
-                    rating={this.props.business.stars}
-                    starRatedColor="gold"
-                    starEmptyColor="grey"
-                    numberOfStars={5}
-                    name="rating"
-                  />
-                  <div className="review__reviewer">@person</div>
-                </div>
-                <div className="reviews__review">
-                  <div className="review__image">image</div>
-                  <StarRatings
-                    starDimension="20px"
-                    starSpacing="5px"
-                    // Change these to review ratings
-                    rating={this.props.business.stars}
-                    starRatedColor="gold"
-                    starEmptyColor="grey"
-                    numberOfStars={5}
-                    name="rating"
-                  />
-                  <div className="review__reviewer">@person</div>
-                </div>
-                <div className="reviews__review">
-                  <div className="review__image">image</div>
-                  <StarRatings
-                    starDimension="20px"
-                    starSpacing="5px"
-                    rating={this.props.business.stars}
-                    starRatedColor="gold"
-                    starEmptyColor="grey"
-                    numberOfStars={5}
-                    name="rating"
-                  />
-                  <div className="review__reviewer">@person</div>
-                </div>
-                <div className="reviews__review">
-                  <div className="review__image">image</div>
-                  <StarRatings
-                    starDimension="20px"
-                    starSpacing="5px"
-                    rating={this.props.business.stars}
-                    starRatedColor="gold"
-                    starEmptyColor="grey"
-                    numberOfStars={5}
-                    name="rating"
-                  />
-                  <div className="review__reviewer">@person</div>
+                  {this.state.reviews.map(review => {
+                    return (
+                      <div key={review._id} className="review__info">
+                        <div className="review__image">image</div>
+                        <StarRatings
+                          starDimension="20px"
+                          starSpacing="5px"
+                          rating={review.stars}
+                          starRatedColor="gold"
+                          starEmptyColor="grey"
+                          numberOfStars={5}
+                          name="rating"
+                        />
+                        <div className="review__reviewer">@{review.reviewer.username}</div>{" "}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

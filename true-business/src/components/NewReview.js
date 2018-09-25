@@ -70,7 +70,6 @@ export default class NewReview extends Component {
   };
 
   submitReview = () => {
-    console.log(this.state.photos);
     let review = {
       businessReviewed: this.props.newBusinessId,
       title: this.state.title,
@@ -146,7 +145,6 @@ export default class NewReview extends Component {
   };
 
   render() {
-    console.log(this.state.photos);
     return (
       <Modal
         shouldCloseOnOverlayClick={false}

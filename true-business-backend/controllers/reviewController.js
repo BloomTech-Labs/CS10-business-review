@@ -16,17 +16,16 @@ const createReview = (req, res) => {
 };
 
 const updateReview = (req, res) => {
-//   let updatedReview = req.body;
-
-//   Review.findByIdAndUpdate(id)
-//     .then(review => {
-//       response.status(200).json(business);
-//     })
-//     .catch(error => {
-//       response.status(500).json({
-//         error: "The information could not be retrieved.",
-//       });
-//     });
+  //   let updatedReview = req.body;
+  //   Review.findByIdAndUpdate(id)
+  //     .then(review => {
+  //       response.status(200).json(business);
+  //     })
+  //     .catch(error => {
+  //       response.status(500).json({
+  //         error: "The information could not be retrieved.",
+  //       });
+  //     });
 };
 
 const deleteReview = (req, res) => {
@@ -43,21 +42,42 @@ const deleteReview = (req, res) => {
     });
 };
 
-const getAllReviews = (req, res) => {
-  Business.find({})
+// For User Component
+const getReviewsByReviewerId = (req, res) => {
+  // Reviews.find({reviewer: req.body.id})
+};
+
+// For Business Component
+const getReviewsByBusinessId = (req, res) => {
+  Review.find({ businessReviewed: req.params.id })
+    .populate('reviewer')
     .then(reviews => {
-      response.status(200).json(reviews);
+      console.log("reviews", reviews)
+      res.status(200).json(reviews);
     })
     .catch(error => {
-      response.status(500).json({
-        error: "The information could not be retrieved.",
-      });
+      res.status(500).json(error);
     });
 };
 
+// For Landing Page I suppose?
+const getAllReviews = (req, res) => {
+  // Review.find({})
+  //   .then(reviews => {
+  //     response.status(200).json(reviews);
+  //   })
+  //   .catch(error => {
+  //     response.status(500).json({
+  //       error: "The information could not be retrieved.",
+  //     });
+  //   });
+};
+
 module.exports = {
-    createReview, 
-    updateReview,
-    deleteReview,
-    getAllReviews
+  createReview,
+  updateReview,
+  deleteReview,
+  getAllReviews,
+  getReviewsByBusinessId,
+  getReviewsByReviewerId
 };

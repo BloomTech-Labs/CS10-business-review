@@ -58,7 +58,7 @@
   margin: 0;
 }
 .navbar-container .navbar-container__center .navbar-container__buttons .navbar-container__button {
-  background: #e4e4e4;
+  background: z;
   color: #383838;
   border: outset;
   width: 15%;
@@ -120,7 +120,7 @@
   padding: 0.2rem;
 }
 .popover .popover-button {
-  background: #e4e4e4;
+  background: z;
   color: #383838;
   border: #383838;
   width: 30%;
@@ -160,7 +160,7 @@
   margin-top: 1rem;
 }
 .navbar-container__modal .modal-container .modal-container__footer .footer__button {
-  background: #e4e4e4;
+  background: z;
   color: #383838;
   border: outset;
   width: 15%;
