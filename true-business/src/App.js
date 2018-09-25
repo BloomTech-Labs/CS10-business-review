@@ -41,7 +41,6 @@ class App extends Component {
   };
 
   render() {
-    console.log("Business in App", this.state.business)
     return (
       <div className="app-container">
         <Switch>
@@ -118,10 +117,7 @@ class App extends Component {
         .catch(error => console.log({ error }));
     } else {
       axios
-        .post(
-          "http://localhost:3001/api/business/placeSearch",
-          { id: business.place_id },
-        )
+        .post("http://localhost:3001/api/business/placeSearch", { id: business.place_id })
         .then(response => {
           this.setState({ business: response.data, landingBusiness: false });
         })
@@ -134,12 +130,9 @@ class App extends Component {
 
   searchResults = searchTerm => {
     axios
-      .post(
-        "http://localhost:3001/api/business/placesSearch",
-        {
-          query: searchTerm,
-        },
-      )
+      .post("http://localhost:3001/api/business/placesSearch", {
+        query: searchTerm,
+      })
       .then(response => {
         response.data.length ? this.setState({ searchResults: response.data }) : this.setState({ searchResults: null });
       })
@@ -151,10 +144,7 @@ class App extends Component {
 
   createBusiness = id => {
     axios
-      .post(
-        "http://localhost:3001/api/business/create",
-        { id },
-      )
+      .post("http://localhost:3001/api/business/create", { id })
       .then(response => {
         this.setState({ newBusinessId: response.data });
       })

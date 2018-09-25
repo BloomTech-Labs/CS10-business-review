@@ -78,6 +78,7 @@ export default class NewReview extends Component {
       stars: this.state.rating,
       photos: ['http://grossfood.com'],
     };
+    console.log("review.mongoid", review.newMongoId);
     axios
       .post("http://localhost:3001/api/review/create", review)
       .then(response => {

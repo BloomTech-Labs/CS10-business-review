@@ -18,7 +18,7 @@ class Business extends Component {
     sortBy: "Date Descending",
     showsortBy: false,
     businessID: null,
-    newBusinessID: null,
+    newBusinessId: null,
     reviews: [],
   };
 
@@ -27,12 +27,15 @@ class Business extends Component {
     if (this.props.business !== null) this.getReviews();
   };
 
-  // Updates the reviews with the new review
-  componentDidUpdate = (prevState) => {
-    if(this.state.reviews !== prevState.reviews){
-      this.getReviews();
+  componentDidUpdate = prevProps => {
+    if (prevProps !== this.props) {
+      this.setState({ newBusinessId: this.props.newBusinessId });
     }
-  }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    this.setState({ newBusinessId: nextProps.newBusinessId });
+  };
 
   toggleDropDown = event => {
     let toggle = event.target.name;
@@ -68,7 +71,7 @@ class Business extends Component {
     axios
       .get(`http://localhost:3001/api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}`)
       .then(reviews => {
-        this.setState({ reviews: reviews.data, newBusinessID: this.props.newBusinessID });
+        this.setState({ reviews: reviews.data, newBusinessId: this.props.newBusinessId });
       })
       .catch(error => {
         console.log("Error", error);
@@ -128,7 +131,7 @@ class Business extends Component {
                 time being, I'm going with it. */}
                 {this.props.business ? (
                   <NewReview
-                    newMongoId={this.props.business._id}
+                    newMongoId={this.props.business._id ? this.props.business._id : this.props.newBusinessId}
                     newGoogleId={this.props.business.place_id}
                     open={this.state.open}
                     showModal={this.showModal}
@@ -191,23 +194,27 @@ class Business extends Component {
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
                 <div className="reviews__review">
-                  {this.state.reviews.length ? this.state.reviews.map(review => {
-                    return (
-                      <div key={review._id} className="review__info">
-                        <div className="review__image">image</div>
-                        <StarRatings
-                          starDimension="20px"
-                          starSpacing="5px"
-                          rating={review.stars}
-                          starRatedColor="gold"
-                          starEmptyColor="grey"
-                          numberOfStars={5}
-                          name="rating"
-                        />
-                        <div className="review__reviewer">@{review.reviewer.username}</div>{" "}
-                      </div>
-                    );
-                  }) : <div>No Reviews</div>}
+                  {this.state.reviews.length ? (
+                    this.state.reviews.map(review => {
+                      return (
+                        <div key={review._id} className="review__info">
+                          <div className="review__image">image</div>
+                          <StarRatings
+                            starDimension="20px"
+                            starSpacing="5px"
+                            rating={review.stars}
+                            starRatedColor="gold"
+                            starEmptyColor="grey"
+                            numberOfStars={5}
+                            name="rating"
+                          />
+                          <div className="review__reviewer">@{review.reviewer.username}</div>{" "}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div>No Reviews</div>
+                  )}
                 </div>
               </div>
             </div>

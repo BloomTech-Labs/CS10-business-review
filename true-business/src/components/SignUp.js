@@ -46,7 +46,7 @@ class SignUp extends Component {
     };
     this.state.payment
       ? axios
-          .post('http://localhost:3001/register', user)
+          .post('http://localhost:3001/api/user/register', user)
           .then(() => {
             this.setState({
               error: false,

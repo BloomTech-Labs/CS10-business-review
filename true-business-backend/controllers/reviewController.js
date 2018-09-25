@@ -4,8 +4,7 @@ const createReview = (req, res) => {
   // Todo:
   // Upload user images to cloudinary
   // Sign In Users so a review can be assigned to the actual reviewer
-  let { newMongoId, newGoogleId, title, body, stars, photos } = req.body;
-  let newReview = new Review({ newMongoId, newGoogleId, title, body, stars, photos });
+  let newReview = new Review({ ...req.body });
   newReview
     .save()
     .then(review => {
@@ -50,9 +49,6 @@ const getReviewsByReviewerId = (req, res) => {
 // For Business Component
 const getReviewsByBusinessId = (req, res) => {
   let search = req.params.landing === 'true' ? "newMongoId" : "newGoogleId";
-  console.log("req.params.landing", req.params.landing);
-  console.log("Search", search);
-  console.log("req.params.id", req.params.id);
   Review.find({ [search]: req.params.id })
     .populate("reviewer")
     .then(reviews => {
