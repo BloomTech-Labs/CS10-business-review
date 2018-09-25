@@ -17,11 +17,15 @@ class App extends Component {
     searchTerm: "",
     searchResults: null,
     featuredBusinesses: [],
+    featuredReviews: [],
+    featuredUsers: [],
     business: null,
   };
 
   componentWillMount = () => {
     this.getDBBusinesses();
+    this.getDBReviews();
+    this.getDBUsers();
   };
 
   componentDidMount = () => {
@@ -50,6 +54,8 @@ class App extends Component {
               <LandingPage
                 business={this.getBusiness}
                 businesses={this.state.featuredBusinesses}
+                reviews={this.state.featuredReviews}
+                users={this.state.featuredUsers}
                 search={this.searchResults}
                 getBusiness={this.getBusiness}
               />
@@ -96,6 +102,36 @@ class App extends Component {
         console.log("Error:", err);
       });
   };
+
+  getDBReviews = () => {
+    axios
+    .get("http://localhost:3001/api/review/getAllReviews")
+    .then(reviews => {
+      let featuredReviews = reviews.data.filter(review => {
+        return review.numberOfLikes >= 0;
+      });
+      this.setState({ featuredReviews });
+    })
+    .catch(err => {
+      console.log("Error:", err);
+    });
+  }
+
+  getDBUsers = () => {
+    axios
+    .get("http://localhost:3001/api/user/")
+    .then(users => {
+      let featuredUsers = users.data.filter(user => {
+        console.log("user", user)
+        return user.numberOfLikes >= 0;
+      });
+      console.log("FEATURE",featuredUsers)
+      this.setState({ featuredUsers });
+    })
+    .catch(err => {
+      console.log("Error:", err);
+    });
+  }
 
   getBusiness = (business, landingpage = false) => {
     if (landingpage) {

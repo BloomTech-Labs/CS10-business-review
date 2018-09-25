@@ -57,11 +57,18 @@ class LandingPage extends Component {
           <div className="landing-container__reviews-container">
             <div className="landing-container__title">Popular Reviews</div>
             <div className="landing-container__reviews">
-              {this.props.businesses.map((business, i) => {
-                if (i < 10) {
+              {this.props.reviews.map((review, i) => {
+                if (i < 5) {
                   return (
-                    <div key={business._id} onClick={() => this.openModal(this, business)}>
-                      <BusinessThumbnail business={business} key={business._id} />
+                    // Need to write a component that shows all the reviews by a certain user
+                    // <div key={review._id} onClick={() => this.props.userReviews(user)}>
+                    <div key={review._id} onClick={() => this.openModal(this, review)}>
+                      {console.log("REVIEW", review)}
+                      <div className="landing-container__review">
+                        <div className="landing-container__item">{review.newMongoId.name}</div>
+                        <div className="landing-container__picture" />
+                        <ul className="landing-container__item--hover">@{review.reviewer.username}</ul>
+                      </div>
                     </div>
                   );
                 }
@@ -73,7 +80,7 @@ class LandingPage extends Component {
             <div className="landing-container__title">Popular Businesses</div>
             <div className="landing-container__reviews">
               {this.props.businesses.map((business, i) => {
-                if (i < 10) {
+                if (i < 5) {
                   return (
                     <div key={business._id} onClick={() => this.props.getBusiness(business, true)}>
                       <BusinessThumbnail business={business} key={business._id} />
@@ -87,26 +94,21 @@ class LandingPage extends Component {
           <div className="landing-container__reviews-container">
             <div className="landing-container__title">Popular Reviewers</div>
             <div className="landing-container__reviews">
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
-              <div className="landing-container__review">
-                <div className="landing-container__picture" />
-                <ul className="landing-container__item--hover">@Reviewer</ul>
-              </div>
+              {this.props.users.map((user, i) => {
+                if (i < 5) {
+                  return (
+                    // Need to write a component that shows all the userss by a certain user
+                    // <div key={users._id} onClick={() => this.props.useruserss(user)}>
+                    <div key={user._id}>
+                      <div className="landing-container__review">
+                        <div className="landing-container__picture" />
+                        <ul className="landing-container__item--hover">{user.username}</ul>
+                      </div>
+                    </div>
+                  );
+                }
+                return null;
+              })}
             </div>
           </div>
           <Modal
