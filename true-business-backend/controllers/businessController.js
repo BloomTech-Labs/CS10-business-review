@@ -18,7 +18,7 @@ const createBusiness = (req, res) => {
         : "No Phone Number Listed";
       let images = result.hasOwnProperty("iamges") ? result.images : "No Images Listed";
       let website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
-      let hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
+      let opening_hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
       let description = result.hasOwnProperty("description")
         ? result.address_components.long_name
         : "No Description Listed";
@@ -30,10 +30,12 @@ const createBusiness = (req, res) => {
         images,
         website,
         place_id: result.place_id,
-        hours,
+        opening_hours,
         description,
         location: result.geometry.location,
       });
+      console.log("Business", business);
+      console.log("Result", result);
       business
         .save()
         .then(business => {

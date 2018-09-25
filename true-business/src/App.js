@@ -41,6 +41,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("Business in App", this.state.business)
     return (
       <div className="app-container">
         <Switch>
