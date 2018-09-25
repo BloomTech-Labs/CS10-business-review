@@ -27,6 +27,13 @@ class Business extends Component {
     if (this.props.business !== null) this.getReviews();
   };
 
+  // Updates the reviews with the new review
+  componentDidUpdate = (prevState) => {
+    if(this.state.reviews !== prevState.reviews){
+      this.getReviews();
+    }
+  }
+
   toggleDropDown = event => {
     let toggle = event.target.name;
     let inverse = this.state[toggle];
