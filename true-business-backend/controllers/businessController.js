@@ -39,7 +39,7 @@ const createBusiness = (req, res) => {
       business
         .save()
         .then(business => {
-          res.status(201).json(business._id);
+          res.status(201).json(business);
         })
         .catch(error => {
           res.status(500).json({ error });

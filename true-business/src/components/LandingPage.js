@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import Modal from 'react-modal';
-import BusinessThumbnail from './BusinessThumbnail';
-import '../css/LandingPage.css';
-import '../css/GeneralStyles.css';
+import React, { Component } from "react";
+import Modal from "react-modal";
+import BusinessThumbnail from "./BusinessThumbnail";
+import "../css/LandingPage.css";
+import "../css/GeneralStyles.css";
 
-import NavBar from './NavBar';
+import NavBar from "./NavBar";
 
 let modalStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    height: '75%',
-    width: '50%',
-    zIndex: '5',
-    backgroundColor: 'rgb(62, 56, 146)',
-    overflowY: 'scroll',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    height: "75%",
+    width: "50%",
+    zIndex: "5",
+    backgroundColor: "rgb(62, 56, 146)",
+    overflowY: "scroll",
   },
 };
 
-Modal.setAppElement('div');
+Modal.setAppElement("div");
 
 class LandingPage extends Component {
   constructor() {
@@ -57,24 +57,30 @@ class LandingPage extends Component {
           <div className="landing-container__reviews-container">
             <div className="landing-container__title">Popular Reviews</div>
             <div className="landing-container__reviews">
-              {this.props.businesses.map(business => {
-                return (
-                  <div key={business._id} onClick={() => this.openModal(this, business)}>
-                    <BusinessThumbnail business={business} key={business._id} />
-                  </div>
-                );
+              {this.props.businesses.map((business, i) => {
+                if (i < 10) {
+                  return (
+                    <div key={business._id} onClick={() => this.openModal(this, business)}>
+                      <BusinessThumbnail business={business} key={business._id} />
+                    </div>
+                  );
+                }
+                return null;
               })}
             </div>
           </div>
           <div className="landing-container__reviews-container">
             <div className="landing-container__title">Popular Businesses</div>
             <div className="landing-container__reviews">
-              {this.props.businesses.map(business => {
-                return (
-                  <div key={business._id} onClick={() => this.props.getBusiness(business, true)}>
-                    <BusinessThumbnail business={business} key={business._id} />
-                  </div>
-                );
+              {this.props.businesses.map((business, i) => {
+                if (i < 10) {
+                  return (
+                    <div key={business._id} onClick={() => this.props.getBusiness(business, true)}>
+                      <BusinessThumbnail business={business} key={business._id} />
+                    </div>
+                  );
+                }
+                return null;
               })}
             </div>
           </div>

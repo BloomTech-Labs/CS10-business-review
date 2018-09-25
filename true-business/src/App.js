@@ -18,7 +18,6 @@ class App extends Component {
     searchResults: null,
     featuredBusinesses: [],
     business: null,
-    newBusinessId: null,
   };
 
   componentWillMount = () => {
@@ -76,7 +75,6 @@ class App extends Component {
                 search={this.searchResults}
                 business={this.state.business}
                 createBusiness={this.createBusiness}
-                newBusinessId={this.state.newBusinessId}
               />
             )}
           />
@@ -146,7 +144,7 @@ class App extends Component {
     axios
       .post("http://localhost:3001/api/business/create", { id })
       .then(response => {
-        this.setState({ newBusinessId: response.data });
+        this.setState({ business: response.data });
       })
       .catch(error => console.log("error", error));
   };

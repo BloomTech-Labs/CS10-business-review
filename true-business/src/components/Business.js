@@ -58,7 +58,7 @@ class Business extends Component {
       ? this.setState({ open: true })
       : Promise.resolve()
           .then(() => this.props.createBusiness(this.props.business.place_id))
-          .then(() => this.setState({ open: true }))
+          .then(response => this.setState({ open: true }))
           .catch(error => console.log("Error creating business", error));
   };
 
@@ -79,6 +79,7 @@ class Business extends Component {
   };
 
   render() {
+    console.log("this.props.business", this.props.business);
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -131,7 +132,7 @@ class Business extends Component {
                 time being, I'm going with it. */}
                 {this.props.business ? (
                   <NewReview
-                    newMongoId={this.props.business._id ? this.props.business._id : this.props.newBusinessId}
+                    newMongoId={this.props.business._id}
                     newGoogleId={this.props.business.place_id}
                     open={this.state.open}
                     showModal={this.showModal}
