@@ -5,21 +5,25 @@ const reviewSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
+    default: '5ba9827275255602768e8ef4',
   },
-  businessReviewed: {
+  newMongoId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Business',
     required: true,
   },
-  reviewTitle: {
+  newGoogleId: {
+    type: String,
+  },
+  title: {
     type: String,
     required: true,
   },
-  review: {
+  body: {
     type: String,
     required: true,
   },
-  reviewerRating: {
+  stars: {
     type: Number,
     required: true,
   },
@@ -35,7 +39,7 @@ const reviewSchema = new mongoose.Schema({
     required: true,
     default: Date.now(),
   },
-  reviewerImages: [
+  photos: [
     {
       type: String,
     },

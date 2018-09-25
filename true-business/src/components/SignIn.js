@@ -22,7 +22,7 @@ class SignIn extends Component {
 
   signIn = event => {
     axios
-      .post("http://localhost:3001/login", this.state)
+      .post("http://localhost:3001/api/user/login", this.state)
       .then(response => {
          localStorage.setItem('token', response.data.token)
          localStorage.setItem('username', this.state.username)

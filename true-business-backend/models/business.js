@@ -7,7 +7,7 @@ const businessSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // places_details: type
+  // places_details: types
   // returns an array of strings
   types: [
     {
@@ -16,13 +16,13 @@ const businessSchema = new mongoose.Schema({
   ],
   // places_details: formatted_address
   // returns a formatted string
-  address: {
+  formatted_address: {
     type: String,
     required: true,
   },
   // places_details: formatted_phone_number
   // returns a formatted string
-  phone: {
+  formatted_phone_number: {
     type: String,
     required: true,
   },
@@ -34,14 +34,8 @@ const businessSchema = new mongoose.Schema({
   // places_details: photos
   // returns an array of objects
   // Unlikely, but possible there won't be any, no required
-  images: {
+  photos: {
     type: Array,
-  },
-  // places_details: rating
-  // returns a number from 1.0 to 5.0
-  // Unlikely, but possible there wouldn't be a rating for a new restaurant, no required.
-  googleStars: {
-    type: Number,
   },
   // places_details: place_id
   // returns a string
@@ -51,14 +45,14 @@ const businessSchema = new mongoose.Schema({
   },
   // places_details: opening_hours/weekday_text
   // returns an array of seven strings
-  hours: {
-    type: Array,
+  opening_hours: {
+    type: Object,
   },
   // places_details: address_components/long_name
   // Not 100% about this one, but I believe it is what we are looking for
   // returns full text description supposedly (or name of address component?)
-  description: {
-    type: String,
+  address_components: {
+    type: Object,
   },
   // aggregate (may be the wrong word...) number thus far from the reviews
   // Ex. two reviews, 1 star and 5 star, this number would be 3
@@ -118,6 +112,7 @@ businessSchema.pre('save', function(next) {
 });
 
 // // Post-save hook
+// // This is where we update the net promotor score or whatever
 // businessSchema.pre('save', function(next) {
 // });
 
