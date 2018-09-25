@@ -25,6 +25,7 @@ class SignIn extends Component {
       .post("http://localhost:3001/login", this.state)
       .then(response => {
          localStorage.setItem('token', response.data.token)
+         localStorage.setItem('userId', response.data.userId)
          localStorage.setItem('username', this.state.username)
         console.log("Response", response)
         this.setState({
