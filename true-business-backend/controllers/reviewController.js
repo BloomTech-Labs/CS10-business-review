@@ -4,7 +4,8 @@ const createReview = (req, res) => {
   // Todo:
   // Upload user images to cloudinary
   // Sign In Users so a review can be assigned to the actual reviewer
-  let newReview = new Review({ ...req.body });
+  let { newMongoId, newGoogleId, title, body, stars, photos } = req.body;
+  let newReview = new Review({ newMongoId, newGoogleId, title, body, stars, photos });
   newReview
     .save()
     .then(review => {
@@ -29,17 +30,16 @@ const updateReview = (req, res) => {
 };
 
 const deleteReview = (req, res) => {
-  let id = req.body.id;
-
-  Business.findByIdAndRemove(id)
-    .then(business => {
-      response.status(200).json("Review Deleted", business);
-    })
-    .catch(error => {
-      response.status(500).json({
-        error: "The review could not be removed.",
-      });
-    });
+  // let id = req.body.id;
+  // Business.findByIdAndRemove(id)
+  //   .then(business => {
+  //     response.status(200).json("Review Deleted", business);
+  //   })
+  //   .catch(error => {
+  //     response.status(500).json({
+  //       error: "The review could not be removed.",
+  //     });
+  //   });
 };
 
 // For User Component
@@ -49,10 +49,14 @@ const getReviewsByReviewerId = (req, res) => {
 
 // For Business Component
 const getReviewsByBusinessId = (req, res) => {
-  Review.find({ businessReviewed: req.params.id })
-    .populate('reviewer')
+  let search = req.params.landing === 'true' ? "newMongoId" : "newGoogleId";
+  console.log("req.params.landing", req.params.landing);
+  console.log("Search", search);
+  console.log("req.params.id", req.params.id);
+  Review.find({ [search]: req.params.id })
+    .populate("reviewer")
     .then(reviews => {
-      console.log("reviews", reviews)
+      console.log("reviews", reviews);
       res.status(200).json(reviews);
     })
     .catch(error => {
@@ -79,5 +83,5 @@ module.exports = {
   deleteReview,
   getAllReviews,
   getReviewsByBusinessId,
-  getReviewsByReviewerId
+  getReviewsByReviewerId,
 };

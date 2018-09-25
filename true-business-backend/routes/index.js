@@ -66,7 +66,6 @@ router.get("/api/business/", function(req, res) {
 });
 
 router.post("/api/review/create", (req, res) => {
-  console.log("Gets to routes/index.js");
   ReviewControler.createReview(req, res);
 });
 
@@ -82,7 +81,7 @@ router.get("/api/review/getAllReviews", (req, res) => {
   ReviewControler.getAllReviews(req, res);
 });
 
-router.get("/api/review/getReviewsByBusinessId/:id", (req, res) => {
+router.get("/api/review/getReviewsByBusinessId/:id/:landing", (req, res) => {
   ReviewControler.getReviewsByBusinessId(req, res);
 });
 

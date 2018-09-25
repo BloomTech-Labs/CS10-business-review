@@ -7,10 +7,13 @@ const reviewSchema = new mongoose.Schema({
     required: true,
     default: '5ba9827275255602768e8ef4',
   },
-  businessReviewed: {
+  newMongoId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Business',
     required: true,
+  },
+  newGoogleId: {
+    type: String,
   },
   title: {
     type: String,

@@ -43,8 +43,6 @@ class Business extends Component {
     this.setState({ sortBy: toggle, showsortBy: false });
   };
 
-  // this is now a promise, in hopes that it will wait to open the modal after the business is created, but
-  // so far no bueno.
   displayNewReview = () => {
     this.props.landingBusiness
       ? this.setState({ open: true })
@@ -59,8 +57,9 @@ class Business extends Component {
   };
 
   getReviews = () => {
+    let id = this.props.landingBusiness ? this.props.business._id : this.props.business.place_id;
     axios
-      .get(`http://localhost:3001/api/review/getReviewsByBusinessId/${this.props.business._id}`)
+      .get(`http://localhost:3001/api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}`)
       .then(reviews => {
         this.setState({ reviews: reviews.data, newBusinessID: this.props.newBusinessID });
       })
@@ -70,7 +69,6 @@ class Business extends Component {
   };
 
   render() {
-    console.log("reviews", this.state.reviews);
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -123,7 +121,8 @@ class Business extends Component {
                 time being, I'm going with it. */}
                 {this.props.business ? (
                   <NewReview
-                    newBusinessId={this.props.business._id ? this.props.business._id : this.props.newBusinessId}
+                    newMongoId={this.props.business._id}
+                    newGoogleId={this.props.business.place_id}
                     open={this.state.open}
                     showModal={this.showModal}
                   />
@@ -185,7 +184,7 @@ class Business extends Component {
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
                 <div className="reviews__review">
-                  {this.state.reviews.map(review => {
+                  {this.state.reviews.length ? this.state.reviews.map(review => {
                     return (
                       <div key={review._id} className="review__info">
                         <div className="review__image">image</div>
@@ -201,7 +200,7 @@ class Business extends Component {
                         <div className="review__reviewer">@{review.reviewer.username}</div>{" "}
                       </div>
                     );
-                  })}
+                  }) : <div>No Reviews</div>}
                 </div>
               </div>
             </div>

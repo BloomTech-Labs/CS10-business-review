@@ -71,13 +71,13 @@ export default class NewReview extends Component {
 
   submitReview = () => {
     let review = {
-      businessReviewed: this.props.newBusinessId,
+      newMongoId: this.props.newMongoId,
+      newGoogleId: this.props.newGoogleId,
       title: this.state.title,
       body: this.state.body,
       stars: this.state.rating,
       photos: ['http://grossfood.com'],
     };
-    console.log("business reviewed", review.businessReviewed);
     axios
       .post("http://localhost:3001/api/review/create", review)
       .then(response => {
