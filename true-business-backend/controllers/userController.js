@@ -40,6 +40,7 @@ const login = (request, response) => {
     } else {
       if (bcrypt.compareSync(password, userFound.password)) {
         const token = generateToken({ userFound });
+        console.log("Token", token)
         response.status(200).send({ username: userFound.username, token });
       } else {
         response.status(500).send({
@@ -47,6 +48,12 @@ const login = (request, response) => {
         });
       }
     }
+  })
+  .catch(err => {
+    console.log("Error-Login", err)
+    response.status(500).send({
+      errorMessage: "Failed to Login: " + err,
+    });
   });
 };
 

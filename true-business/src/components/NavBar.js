@@ -52,6 +52,7 @@ class NavBar extends Component {
     this.open = false;
   }
 
+
   openModal(info, event) {
     this.setState({ modalIsOpen: true, modalInfo: info });
   }
@@ -82,7 +83,7 @@ class NavBar extends Component {
       // Eventually, Have it bring up a random business like Yelp.
       this.openModal();
     }
-  };
+  }; 
 
   render() {
     return (
@@ -143,22 +144,22 @@ class NavBar extends Component {
             </button>
           </Popover>
         </div>
-        <div className="navbar-container__right">
-          <div
-            className="navbar-container__sign"
-            onClick={() => {
-              this.props.history.push(`/signup`);
-            }}>
-            Sign Up
-          </div>
-          <div
-            className="navbar-container__sign"
-            onClick={() => {
-              this.props.history.push(`/signin`);
-            }}>
-            Sign In
-          </div>
+        {localStorage.getItem("token") ? (<div className="navbar-container__right"> Hamburger </div>
+        ) : (<div className="navbar-container__right">
+        <div  className="navbar-container__sign"
+          onClick={() => {
+            this.props.history.push(`/signup`);
+          }}>
+          Sign Up
         </div>
+        <div
+          className="navbar-container__sign"
+          onClick={() => {
+            this.props.history.push(`/signin`);
+          }}>
+          Sign In
+        </div>
+      </div>)}
       </div>
     );
   }
