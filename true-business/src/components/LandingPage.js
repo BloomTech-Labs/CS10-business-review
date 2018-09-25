@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
 import BusinessThumbnail from "./BusinessThumbnail";
+import StarRatings from "react-star-ratings";
+
 import "../css/LandingPage.css";
 import "../css/GeneralStyles.css";
 
@@ -37,7 +39,7 @@ class LandingPage extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  openModal(info, event) {
+  openModal(event, info) {
     this.setState({ modalIsOpen: true, modalInfo: info });
   }
 
@@ -120,13 +122,25 @@ class LandingPage extends Component {
               {this.state.modalIsOpen ? (
                 <div className="modal-container">
                   <div className="modal__header">
-                    <div className="header__title">{this.state.modalInfo.title}</div>
-                    <div className="header__reviewer">{this.state.modalInfo.reviewer}</div>
+                    <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
+                    <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
                   </div>
                   <div className="modal__body">
-                    <div className="body__image">{this.state.modalInfo.image}</div>
-                    <div className="body__stars">{this.state.modalInfo.stars}</div>
-                    <div className="body__review">{this.state.modalInfo.review}</div>
+                    <div className="body__image">Yup</div>
+                    <div className="body__stars">
+                      {" "}
+                      <StarRatings
+                        starDimension="20px"
+                        starSpacing="5px"
+                        rating={this.state.modalInfo.stars}
+                        starRatedColor="gold"
+                        starEmptyColor="grey"
+                        numberOfStars={5}
+                        name="rating"
+                      />
+                    </div>
+                    <div>{this.state.modalInfo.title}</div>
+                    <div className="body__review">{this.state.modalInfo.body}</div>
                   </div>
                   <div className="modal__footer">
                     <button className="footer__button" onClick={this.closeModal}>
