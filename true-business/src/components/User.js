@@ -46,11 +46,9 @@ class User extends Component {
   };
 
   logout = () => {
-    console.log("Log");   
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     this.props.history.push("/");
-
   };
 
   render() {
