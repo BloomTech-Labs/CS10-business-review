@@ -4,11 +4,10 @@ const mongoose = require("mongoose");
 require("../services/passport");
 const UserController = require("../controllers/userController");
 const BusinessController = require("../controllers/businessController");
+const ReviewControler = require("../controllers/reviewController")
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness',{}, function(err){
-  if(err)console.log(err);
-});
+mongoose.connect('mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness');
 const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
 
 const router = express.Router();
@@ -18,11 +17,11 @@ router.get("/", (request, response) => {
   response.status(200).json({ api: "Server running OK." });
 });
 
-router.post("/register", (request, response) => {
+router.post("/api/user/register", (request, response) => {
   UserController.register(request, response);
 });
 
-router.post("/login", (request, response) => {
+router.post("/api/user/login", (request, response) => {
   UserController.login(request, response);
 });
 
@@ -65,6 +64,23 @@ router.delete("/api/business/:id", function(req, res) {
 router.get("/api/business/", function(req, res) {
   BusinessController.getAllBusiness(req, res);
 });
+
+router.post("/api/review/create", (req,res) => {
+  console.log("Gets to routes/index.js")
+  ReviewControler.createReview(req,res);
+})
+
+router.post("/api/review/update", (req,res) => {
+  ReviewControler.updateReview(req,res);
+})
+
+router.delete("/api/review/delete", (req,res) => {
+  ReviewControler.deleteReview(req,res);
+})
+
+router.get("/api/review/getAllReviews", (req,res) => {
+  ReviewControler.getAllReviews(req,res);
+})
 
 
 // Guessing we should put this in a StripeController at some point.

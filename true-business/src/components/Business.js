@@ -133,9 +133,10 @@ class Business extends Component {
                 {/* I couldn't base this on this.state.open (i.e. I couldn't figure out the proper
                 life cycle hook to use to make it work), so while this may be poor practice, for the 
                 time being, I'm going with it. */}
+                {console.log("prop", this.props.business._id ? this.props.business._id : this.props.newBusinessId)}
                 {this.props.business ? (
                   <NewReview
-                    newBusinessId={this.props.newBusinessId}
+                    newBusinessId={this.props.business._id ? this.props.business._id : this.props.newBusinessId}
                     open={this.state.open}
                     showModal={this.showModal}
                   />
