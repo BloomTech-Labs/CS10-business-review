@@ -50,7 +50,7 @@ const getReviewsByReviewerId = (req, res) => {
 const getReviewsByBusinessId = (req, res) => {
   let search = req.params.landing === "true" ? "newMongoId" : "newGoogleId";
   Review.find({ [search]: req.params.id })
-    .populate("reviewer")
+    .populate("reviewer newMongoId")
     .then(reviews => {
       res.status(200).json(reviews);
     })

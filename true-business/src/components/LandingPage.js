@@ -64,11 +64,10 @@ class LandingPage extends Component {
                   return (
                     // Need to write a component that shows all the reviews by a certain user
                     // <div key={review._id} onClick={() => this.props.userReviews(user)}>
-                    <div key={review._id} onClick={() => this.openModal(this, review)}>
-                      {console.log("REVIEW", review)}
+                    <div key={review._id}>
                       <div className="landing-container__review">
                         <div className="landing-container__item">{review.newMongoId.name}</div>
-                        <div className="landing-container__picture" />
+                        <div className="landing-container__picture" onClick={() => this.openModal(this, review)} />
                         <ul className="landing-container__item--hover">@{review.reviewer.username}</ul>
                       </div>
                     </div>
@@ -114,6 +113,7 @@ class LandingPage extends Component {
             </div>
           </div>
           <Modal
+            shouldCloseOnOverlayClick={false}
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={modalStyles}

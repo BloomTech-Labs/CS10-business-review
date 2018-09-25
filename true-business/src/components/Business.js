@@ -2,12 +2,29 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import axios from "axios";
+import Modal from "react-modal";
 
 import NewReview from "./NewReview";
 import NavBar from "./NavBar";
 
 import "../css/Business.css";
 import "../css/GeneralStyles.css";
+
+let modalStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    height: "75%",
+    width: "50%",
+    zIndex: "5",
+    backgroundColor: "rgb(62, 56, 146)",
+    overflowY: "scroll",
+  },
+};
 
 class Business extends Component {
   state = {
@@ -20,6 +37,8 @@ class Business extends Component {
     businessID: null,
     newBusinessId: null,
     reviews: [],
+    modalIsOpen: false,
+    modalInfo: null,
   };
 
   componentDidMount = () => {
@@ -78,8 +97,16 @@ class Business extends Component {
       });
   };
 
+  openModal = (event, info) => {
+    this.setState({ modalIsOpen: true, modalInfo: info });
+  };
+
+  closeModal = () => {
+    console.log(this.state);
+    this.setState({ modalIsOpen: false });
+  };
+
   render() {
-    console.log("this.props.business", this.props.business);
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -197,9 +224,14 @@ class Business extends Component {
                 <div className="reviews__review">
                   {this.state.reviews.length ? (
                     this.state.reviews.map(review => {
+                      {
+                        console.log(review);
+                      }
                       return (
                         <div key={review._id} className="review__info">
-                          <div className="review__image">image</div>
+                          <div className="review__image" onClick={() => this.openModal(this, review)}>
+                            image
+                          </div>
                           <StarRatings
                             starDimension="20px"
                             starSpacing="5px"
@@ -219,6 +251,45 @@ class Business extends Component {
                 </div>
               </div>
             </div>
+            <Modal
+              shouldCloseOnOverlayClick={false}
+              isOpen={this.state.modalIsOpen}
+              onRequestClose={this.closeModal}
+              style={modalStyles}
+              contentLabel="Review Modal">
+              <div className="landing-container__modal">
+                {this.state.modalIsOpen ? (
+                  <div className="modal-container">
+                    <div className="modal__header">
+                      <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
+                      <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
+                    </div>
+                    <div className="modal__body">
+                      <div className="body__image">Yup</div>
+                      <div className="body__stars">
+                        {" "}
+                        <StarRatings
+                          starDimension="20px"
+                          starSpacing="5px"
+                          rating={this.state.modalInfo.stars}
+                          starRatedColor="gold"
+                          starEmptyColor="grey"
+                          numberOfStars={5}
+                          name="rating"
+                        />
+                      </div>
+                      <div>{this.state.modalInfo.title}</div>
+                      <div className="body__review">{this.state.modalInfo.body}</div>
+                    </div>
+                    <div className="modal__footer">
+                      <button className="footer__button" onClick={this.closeModal}>
+                        close
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            </Modal>
           </div>
         ) : (
           <div>{this.props.history.push("/")}</div>
