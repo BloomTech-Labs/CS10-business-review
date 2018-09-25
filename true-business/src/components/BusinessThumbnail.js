@@ -19,7 +19,7 @@ const BusinessThumbnail = props => {
           name="rating"
         />
       </div>
-      <div className="thumbnail__text">{props.business.address}</div>
+      <div className="thumbnail__text">{props.business.formatted_address}</div>
       <div className="thumbnail__text">{props.business.types[0].charAt(0).toUpperCase() + props.business.types[0].slice(1)}</div>
     </div>
   );

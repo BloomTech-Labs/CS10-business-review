@@ -12,28 +12,30 @@ const createBusiness = (req, res) => {
       let result = response.json.result;
       let name = result.hasOwnProperty("name") ? result.name : "No Name Listed";
       let types = result.hasOwnProperty("types") ? result.types : "No Types Listed";
-      let address = result.hasOwnProperty("formatted_address") ? result.formatted_address : "No Address Listed";
-      let phone = result.hasOwnProperty("formatted_phone_number")
+      let formatted_address = result.hasOwnProperty("formatted_address")
+        ? result.formatted_address
+        : "No Address Listed";
+      let formatted_phone_number = result.hasOwnProperty("formatted_phone_number")
         ? result.formatted_phone_number
         : "No Phone Number Listed";
-      let images = result.hasOwnProperty("iamges") ? result.images : "No Images Listed";
       let website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
-      let hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
-      let description = result.hasOwnProperty("description")
-        ? result.address_components.long_name
-        : "No Description Listed";
+      let photos = result.hasOwnProperty("images") ? result.photos : "No Images Listed";
+      let place_id = result.hasOwnProperty("place_id") ? result.place_id : "No Images Listed";
+      let opening_hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
+      let description = result.hasOwnProperty("description") ? result.address_components : "No Description Listed";
       const business = new Business({
         name,
         types,
-        address,
-        phone,
-        images,
+        formatted_address,
+        formatted_phone_number,
+        photos,
         website,
-        place_id: result.place_id,
-        hours,
+        place_id,
+        opening_hours,
         description,
         location: result.geometry.location,
       });
+      console.log(business);
       business
         .save()
         .then(business => {
