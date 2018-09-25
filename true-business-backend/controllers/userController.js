@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
+
 function generateToken(user) {
   const options = {
     expiresIn: "1h",

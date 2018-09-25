@@ -3,6 +3,10 @@ import { Popover, PopoverBody, PopoverHeader } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import Modal from 'react-modal';
 
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 import logo from '../imgs/logo.png';
 
 import '../css/NavBar.css';
@@ -37,6 +41,7 @@ class NavBar extends Component {
     super();
 
     this.state = {
+      anchorEl: null,
       modalIsOpen: false,
       modalInfo: null,
       popoverOpen: false,
@@ -52,6 +57,13 @@ class NavBar extends Component {
     this.open = false;
   }
 
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
 
   openModal(info, event) {
     this.setState({ modalIsOpen: true, modalInfo: info });
@@ -85,7 +97,16 @@ class NavBar extends Component {
     }
   }; 
 
+  logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    this.props.history.push("/");
+
+  };
+
   render() {
+
+    const { anchorEl } = this.state;
     return (
       <div className="navbar-container">
         <img
@@ -144,7 +165,29 @@ class NavBar extends Component {
             </button>
           </Popover>
         </div>
-        {localStorage.getItem("token") ? (<div className="navbar-container__right"> Hamburger </div>
+        {localStorage.getItem("token") ? (<div className="navbar-container__right"> <div onClick={() => {this.props.history.push(`/user`);
+          }}> Hi {localStorage.getItem("username")}! 
+            </div>
+            <div>
+            <Button
+              aria-owns={anchorEl ? 'simple-menu' : null}
+              aria-haspopup="true"
+              onClick={this.handleClick}
+            >
+              Open Menu
+            </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={this.handleClose}
+            >
+              <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+              <MenuItem onClick={() => { this.props.history.push(`/user`)}}>My account</MenuItem>
+              <MenuItem onClick={this.logout}>Logout</MenuItem>
+            </Menu>
+          </div>
+          </div>
         ) : (<div className="navbar-container__right">
         <div  className="navbar-container__sign"
           onClick={() => {
