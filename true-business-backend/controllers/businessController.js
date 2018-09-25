@@ -12,30 +12,30 @@ const createBusiness = (req, res) => {
       let result = response.json.result;
       let name = result.hasOwnProperty("name") ? result.name : "No Name Listed";
       let types = result.hasOwnProperty("types") ? result.types : "No Types Listed";
-      let address = result.hasOwnProperty("formatted_address") ? result.formatted_address : "No Address Listed";
-      let phone = result.hasOwnProperty("formatted_phone_number")
+      let formatted_address = result.hasOwnProperty("formatted_address")
+        ? result.formatted_address
+        : "No Address Listed";
+      let formatted_phone_number = result.hasOwnProperty("formatted_phone_number")
         ? result.formatted_phone_number
         : "No Phone Number Listed";
-      let images = result.hasOwnProperty("iamges") ? result.images : "No Images Listed";
       let website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
+      let photos = result.hasOwnProperty("photos") ? result.photos : "No Photos Listed";
       let opening_hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
-      let description = result.hasOwnProperty("description")
-        ? result.address_components.long_name
+      let address_components = result.hasOwnProperty("address_components")
+        ? result.address_components
         : "No Description Listed";
       const business = new Business({
         name,
         types,
-        address,
-        phone,
-        images,
+        formatted_address,
+        formatted_phone_number,
+        photos,
         website,
         place_id: result.place_id,
         opening_hours,
-        description,
+        address_components,
         location: result.geometry.location,
       });
-      console.log("Business", business);
-      console.log("Result", result);
       business
         .save()
         .then(business => {

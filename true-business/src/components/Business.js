@@ -69,7 +69,6 @@ class Business extends Component {
   };
 
   render() {
-    console.log("props in business", this.props.business)
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -81,39 +80,25 @@ class Business extends Component {
               <div className="info__details">
                 <div className="details__hours">
                   <div className="hours__title"> Hours </div>
-                  {/* DB records have hours, google API returns opening_hours */}
-                  {(this.props.business.hasOwnProperty("hours") ? (
-                    this.props.business.hours
+                  {this.props.business.hasOwnProperty("opening_hours") ? (
+                    this.props.business.opening_hours.hasOwnProperty("weekday_text") ? (
+                      this.props.business.opening_hours.weekday_text.map(day => {
+                        return (
+                          <div key={this.props.business.place_id} className="hours__day">
+                            {day}
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <div>Opening Hours Unlisted</div>
+                    )
                   ) : (
-                    this.props.business.opening_hours
-                  )) ? (
-                    // If the hours exist, render them, otherwise return "No Hours Listed"
-                    (this.props.business.hours || this.props.business.opening_hours.weekday_text).map((day, i) => {
-                      return (
-                        <div className="hours__day" key={i}>
-                          {day}
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <div>No Hours Listed</div>
+                    <div>Opening Hours Unlisted</div>
                   )}
                 </div>
                 <div className="details__contact">
                   <div className="contact__phone">
-                    {/* DB records have phone, google API returns formatted phone_number */}
-                    {(this.props.business.hasOwnProperty("phone") ? (
-                      this.props.business.phone
-                    ) : (
-                      this.props.business.formatted_phone_number
-                    )) ? (
-                      // If the hours exist, render them, otherwise return "No Hours Listed"
-                      <div className="phone__number">
-                        {this.props.business.phone || this.props.business.formatted_phone_number}
-                      </div>
-                    ) : (
-                      <div className="phone__number">No Phone Listed</div>
-                    )}
+                    <div className="phone__number">{this.props.business.formatted_phone_number}</div>
                   </div>
                   <div className="contact__website">
                     {this.props.business.website ? (
