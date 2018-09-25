@@ -46,10 +46,11 @@ class User extends Component {
   };
 
   logout = () => {
-    console.log("Log");
+    console.log("Log");   
     localStorage.removeItem("token");
-    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
     this.props.history.push("/");
+
   };
 
   render() {
