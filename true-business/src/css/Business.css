@@ -216,7 +216,7 @@
   min-width: 10rem;
   margin: 2rem;
   flex-wrap: nowrap;
-  color: white;
+  color: black;
   opacity: 0.5;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__image {
