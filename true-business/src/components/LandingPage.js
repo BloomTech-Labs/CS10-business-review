@@ -133,8 +133,8 @@ class LandingPage extends Component {
                         starDimension="20px"
                         starSpacing="5px"
                         rating={this.state.modalInfo.stars}
-                        starRatedColor="blue"
-                        starEmptyColor="blue"
+                        starRatedColor="gold"
+                        starEmptyColor="grey"
                         numberOfStars={5}
                         name="rating"
                       />
