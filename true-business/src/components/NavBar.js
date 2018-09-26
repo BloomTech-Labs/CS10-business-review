@@ -3,7 +3,7 @@ import { Popover, PopoverBody, PopoverHeader } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import Modal from 'react-modal';
 
-import logo from '../imgs/logo.png';
+import logo from '../imgs/TBlogo.png';
 
 import '../css/NavBar.css';
 

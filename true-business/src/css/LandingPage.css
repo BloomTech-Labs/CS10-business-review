@@ -26,7 +26,7 @@
   padding: 0;
   margin: 0;
   margin-bottom: 2rem;
-  background: #4b73a1;
+  background: #ffffff;
 }
 .landing-container .landing-container__reviews-container .landing-container__title {
   font-size: 3rem;
@@ -68,7 +68,7 @@
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture {
   width: 10rem;
   height: 10rem;
-  background-color: black;
+  background-color: rgb(181, 227, 241);
 }
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture:hover {
   cursor: pointer;

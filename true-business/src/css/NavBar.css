@@ -14,7 +14,7 @@
   padding: 0;
   margin: 0;
   max-height: 20vh;
-  background-color: #4b73a1;
+  background-color: #ffffff;
 }
 .navbar-container .navbar-container__logo {
   width: 20%;
@@ -38,9 +38,10 @@
   width: 60%;
 }
 .navbar-container .navbar-container__center .navbar-container__input {
-  border: 0.1rem solid black;
+  border: 0.1rem solid rgb(134, 133, 133);
   margin-top: 2rem;
-  min-width: 80%;
+  min-width: 60%;
+  max-width: 70%;
   font-size: 1.5rem;
   padding: 0.2rem;
 }
@@ -59,7 +60,7 @@
 }
 .navbar-container .navbar-container__center .navbar-container__buttons .navbar-container__button {
   background: #e4e4e4;
-  color: #383838;
+  color: #020202;
   border: outset;
   width: 15%;
   padding: 0.5rem;
@@ -69,6 +70,7 @@
 }
 .navbar-container .navbar-container__center .navbar-container__buttons .navbar-container__button:hover {
   cursor: pointer;
+  color: #33b4b4;
 }
 .navbar-container .navbar-container__right {
   display: flex;
@@ -85,13 +87,17 @@
 }
 .navbar-container .navbar-container__right .navbar-container__sign {
   width: 50%;
-  background-color: #4b73a1;
-  color: #383838;
+  background-color: rgba(190, 236, 240, 0.425);
+  color: #79baf7;
   text-align: center;
   padding: 0.2rem 0;
+  position:relative;
+  display : flex;
 }
 .navbar-container .navbar-container__right .navbar-container__sign:hover {
   cursor: pointer;
+  color: #33b4b4;
+  
 }
 .popover {
   display: flex;
