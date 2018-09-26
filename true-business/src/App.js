@@ -122,10 +122,8 @@ class App extends Component {
     .get("http://localhost:3001/api/user/")
     .then(users => {
       let featuredUsers = users.data.filter(user => {
-        console.log("user", user)
         return user.numberOfLikes >= 0;
       });
-      console.log("FEATURE",featuredUsers)
       this.setState({ featuredUsers });
     })
     .catch(err => {
@@ -180,6 +178,7 @@ class App extends Component {
     axios
       .post("http://localhost:3001/api/business/create", { id })
       .then(response => {
+        console.log("response in app", response)
         this.setState({ business: response.data });
       })
       .catch(error => console.log("error", error));

@@ -101,11 +101,11 @@ let businessModel = mongoose.model('Business', businessSchema);
 
 // Pre-save hook
 businessSchema.pre('save', function(next) {
-  businessModel.find({ _id: this._id }, (err, docs) => {
+  businessModel.find({ place_id: this.place_id }, (err, docs) => {
     if (!docs.length) {
       next();
     } else {
-      console.log('Business exists already: ', this);
+      console.log('Business exists already');
       next(new Error('Business exists!'));
     }
   });

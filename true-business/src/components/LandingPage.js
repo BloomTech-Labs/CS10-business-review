@@ -103,7 +103,7 @@ class LandingPage extends Component {
                     <div key={user._id}>
                       <div className="landing-container__review">
                         <div className="landing-container__picture" />
-                        <ul className="landing-container__item--hover">{user.username}</ul>
+                        <ul className="landing-container__item--hover">@{user.username}</ul>
                       </div>
                     </div>
                   );
