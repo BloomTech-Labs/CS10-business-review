@@ -32,7 +32,9 @@ router.get("/api/user/:id", function(req, res) {
 router.delete("/api/user/:id", function(req, res) {
   UserController.deleteUserById(req, res);
 });
-
+router.put("/api/user/:id", function(req, res) {
+  UserController.updateUser(req, res);
+})
 router.get("/api/user/", function(req, res) {
   UserController.getAllUsers(req, res);
 });
