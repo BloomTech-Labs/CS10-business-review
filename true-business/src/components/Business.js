@@ -83,18 +83,22 @@ class Business extends Component {
 
   showModal = show => {
     this.setState({ open: show });
+    // Cheap way to re-render with the new review showing
+    this.getReviews();
   };
 
   getReviews = () => {
-    let id = this.props.landingBusiness ? this.props.business._id : this.props.business.place_id;
-    axios
-      .get(`http://localhost:3001/api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}`)
-      .then(reviews => {
-        this.setState({ reviews: reviews.data, newBusinessId: this.props.newBusinessId });
-      })
-      .catch(error => {
-        console.log("Error", error);
-      });
+    if (this.props.business) {
+      let id = this.props.landingBusiness ? this.props.business._id : this.props.business.place_id;
+      axios
+        .get(`http://localhost:3001/api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}`)
+        .then(reviews => {
+          this.setState({ reviews: reviews.data, newBusinessId: this.props.newBusinessId });
+        })
+        .catch(error => {
+          console.log("Error", error);
+        });
+    }
   };
 
   openModal = (event, info) => {
