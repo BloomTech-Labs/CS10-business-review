@@ -65,7 +65,7 @@ const login = (request, response) => {
 const getUserById = (request, response) => {
   const { _id } = request.body;
 
-  User.findById(_id)
+  User.findOne(_id)
     .then(function(user) {
       response.status(200).json(user);
     })
@@ -92,7 +92,7 @@ const deleteUserById = (request, response) => {
 
 const updateUser = (request, response) => {
   const { _id } = request.body;
- User.findByIdAndUpdate(_id)
+ User.findOneAndUpdate(_id)
  .then(function(user) {
    response.status(200).json(user);
  })
