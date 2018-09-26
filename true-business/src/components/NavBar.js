@@ -166,7 +166,8 @@ class NavBar extends Component {
             </button>
           </Popover>
         </div>
-        {localStorage.getItem("token") ? (<div className="navbar-container__right"> <div onClick={() => {this.props.history.push(`/user`);
+        {localStorage.getItem("token") && localStorage.getItem("userId")? 
+        (<div className="navbar-container__right"> <div onClick={() => {this.props.history.push(`/user`);
           }}> Hi {localStorage.getItem("username")}! 
             </div>
             <div>
