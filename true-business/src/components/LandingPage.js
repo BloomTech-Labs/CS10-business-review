@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import Modal from 'react-modal';
-import BusinessThumbnail from './BusinessThumbnail';
-import '../css/LandingPage.css';
-import '../css/GeneralStyles.css';
+import React, { Component } from "react";
+import Modal from "react-modal";
+import BusinessThumbnail from "./BusinessThumbnail";
+import "../css/LandingPage.css";
+import "../css/GeneralStyles.css";
 
-import NavBar from './NavBar';
+import NavBar from "./NavBar";
 
 let modalStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    height: '75%',
-    width: '50%',
-    zIndex: '5',
-    backgroundColor: 'rgb(62, 56, 146)',
-    overflowY: 'scroll',
-  },
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    height: "75%",
+    width: "50%",
+    zIndex: "5",
+    backgroundColor: "rgb(62, 56, 146)",
+    overflowY: "scroll"
+  }
 };
 
-Modal.setAppElement('div');
+Modal.setAppElement("div");
 
 class LandingPage extends Component {
   constructor() {
@@ -30,7 +30,7 @@ class LandingPage extends Component {
 
     this.state = {
       modalIsOpen: false,
-      modalInfo: null,
+      modalInfo: null
     };
 
     this.openModal = this.openModal.bind(this);
@@ -59,7 +59,10 @@ class LandingPage extends Component {
             <div className="landing-container__reviews">
               {this.props.businesses.map(business => {
                 return (
-                  <div key={business._id} onClick={() => this.openModal(this, business)}>
+                  <div
+                    key={business._id}
+                    onClick={() => this.openModal(this, business)}
+                  >
                     <BusinessThumbnail business={business} key={business._id} />
                   </div>
                 );
@@ -71,7 +74,10 @@ class LandingPage extends Component {
             <div className="landing-container__reviews">
               {this.props.businesses.map(business => {
                 return (
-                  <div key={business._id} onClick={() => this.props.getBusiness(business, true)}>
+                  <div
+                    key={business._id}
+                    onClick={() => this.props.getBusiness(business, true)}
+                  >
                     <BusinessThumbnail business={business} key={business._id} />
                   </div>
                 );
@@ -107,21 +113,35 @@ class LandingPage extends Component {
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={modalStyles}
-            contentLabel="Review Modal">
+            contentLabel="Review Modal"
+          >
             <div className="landing-container__modal">
               {this.state.modalIsOpen ? (
                 <div className="modal-container">
                   <div className="modal__header">
-                    <div className="header__title">{this.state.modalInfo.title}</div>
-                    <div className="header__reviewer">{this.state.modalInfo.reviewer}</div>
+                    <div className="header__title">
+                      {this.state.modalInfo.title}
+                    </div>
+                    <div className="header__reviewer">
+                      {this.state.modalInfo.reviewer}
+                    </div>
                   </div>
                   <div className="modal__body">
-                    <div className="body__image">{this.state.modalInfo.image}</div>
-                    <div className="body__stars">{this.state.modalInfo.stars}</div>
-                    <div className="body__review">{this.state.modalInfo.review}</div>
+                    <div className="body__image">
+                      {this.state.modalInfo.image}
+                    </div>
+                    <div className="body__stars">
+                      {this.state.modalInfo.stars}
+                    </div>
+                    <div className="body__review">
+                      {this.state.modalInfo.review}
+                    </div>
                   </div>
                   <div className="modal__footer">
-                    <button className="footer__button" onClick={this.closeModal}>
+                    <button
+                      className="footer__button"
+                      onClick={this.closeModal}
+                    >
                       close
                     </button>
                   </div>
@@ -129,6 +149,10 @@ class LandingPage extends Component {
               ) : null}
             </div>
           </Modal>
+        </div>
+        <div>
+          {" "}
+          <this.props.ImageUpload />
         </div>
       </div>
     );

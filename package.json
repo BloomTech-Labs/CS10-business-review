@@ -15,12 +15,15 @@
     "nodemon": "^1.18.4",
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
+    "react-dropzone": "^5.1.0",
     "react-modal": "^3.5.1",
     "react-placeholder": "^3.0.1",
     "react-scripts": "1.1.5",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^2.0.1",
+    "sha1": "^1.1.1",
     "stripe": "^6.11.0",
+    "superagent": "^4.0.0-beta.5",
     "yarn": "^1.9.4"
   },
   "scripts": {

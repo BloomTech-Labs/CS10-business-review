@@ -1,7 +1,7 @@
 const Business = require("../models/business");
 const googleMapsClient = require("@google/maps").createClient({
   key: process.env.REACT_APP_GOOGLEPLACESKEY || process.env.googlePlaces,
-  Promise: Promise,
+  Promise: Promise
 });
 
 const createBusiness = (req, res) => {
@@ -11,14 +11,24 @@ const createBusiness = (req, res) => {
     .then(response => {
       let result = response.json.result;
       let name = result.hasOwnProperty("name") ? result.name : "No Name Listed";
-      let types = result.hasOwnProperty("types") ? result.types : "No Types Listed";
-      let address = result.hasOwnProperty("formatted_address") ? result.formatted_address : "No Address Listed";
+      let types = result.hasOwnProperty("types")
+        ? result.types
+        : "No Types Listed";
+      let address = result.hasOwnProperty("formatted_address")
+        ? result.formatted_address
+        : "No Address Listed";
       let phone = result.hasOwnProperty("formatted_phone_number")
         ? result.formatted_phone_number
         : "No Phone Number Listed";
-      let images = result.hasOwnProperty("iamges") ? result.images : "No Images Listed";
-      let website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
-      let hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
+      let images = result.hasOwnProperty("iamges")
+        ? result.images
+        : "No Images Listed";
+      let website = result.hasOwnProperty("website")
+        ? result.website
+        : "No Website Listed";
+      let hours = result.hasOwnProperty("opening_hours")
+        ? result.opening_hours
+        : "No Hours Listed";
       let description = result.hasOwnProperty("description")
         ? result.address_components.long_name
         : "No Description Listed";
@@ -32,7 +42,7 @@ const createBusiness = (req, res) => {
         place_id: result.place_id,
         hours,
         description,
-        location: result.geometry.location,
+        location: result.geometry.location
       });
       business
         .save()
@@ -58,7 +68,7 @@ createPhotoMarker = photo => {
     map: map,
     position: place.geometry.location,
     title: place.name,
-    icon: photos[0].getUrl({ maxWidth: 35, maxHeight: 35 }),
+    icon: photos[0].getUrl({ maxWidth: 35, maxHeight: 35 })
   });
 };
 
@@ -94,13 +104,14 @@ const getBusinessByName = (request, response) => {
         response.status(200).json(business);
       } else {
         response.status(400).json({
-          error: "Business not found.",
+          error: "Business not found."
         });
       }
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The business information could not be retrieved. (" + error + ")",
+        error:
+          "The business information could not be retrieved. (" + error + ")"
       });
     });
 };
@@ -114,7 +125,7 @@ const getBusinessById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The information could not be retrieved.",
+        error: "The information could not be retrieved."
       });
     });
 };
@@ -128,7 +139,7 @@ const deleteBusinessById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The business could not be removed.",
+        error: "The business could not be removed."
       });
     });
 };
@@ -140,7 +151,7 @@ const getAllBusiness = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The information could not be retrieved.",
+        error: "The information could not be retrieved."
       });
     });
 };
@@ -152,5 +163,5 @@ module.exports = {
   deleteBusinessById,
   getAllBusiness,
   placesSearch,
-  placeSearch,
+  placeSearch
 };

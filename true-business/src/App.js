@@ -9,6 +9,7 @@ import SignIn from "./components/SignIn";
 import SearchResults from "./components/SearchResults";
 import Business from "./components/Business";
 import User from "./components/User";
+import ImageUpload from "./components/ImageUpload";
 import "./css/App.css";
 
 class App extends Component {
@@ -18,7 +19,7 @@ class App extends Component {
     searchResults: null,
     featuredBusinesses: [],
     business: null,
-    newBusinessId: null,
+    newBusinessId: null
   };
 
   componentWillMount = () => {
@@ -53,6 +54,7 @@ class App extends Component {
                 businesses={this.state.featuredBusinesses}
                 search={this.searchResults}
                 getBusiness={this.getBusiness}
+                ImageUpload={ImageUpload}
               />
             )}
           />
@@ -66,8 +68,16 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
-          <Route path="/signin" render={() => <SignIn search={this.searchResults} authUser={this.authUser} />} />
+          <Route
+            path="/signup"
+            render={() => <SignUp search={this.searchResults} />}
+          />
+          <Route
+            path="/signin"
+            render={() => (
+              <SignIn search={this.searchResults} authUser={this.authUser} />
+            )}
+          />
           <Route
             path="/business"
             render={() => (
@@ -80,7 +90,10 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/user" render={() => <User search={this.searchResults} />} />
+          <Route
+            path="/user"
+            render={() => <User search={this.searchResults} />}
+          />
         </Switch>
       </div>
     );
@@ -108,7 +121,7 @@ class App extends Component {
           })[0];
           this.setState({
             business: found,
-            landingBusiness: true,
+            landingBusiness: true
           });
         })
         .then(() => {
@@ -117,10 +130,9 @@ class App extends Component {
         .catch(error => console.log({ error }));
     } else {
       axios
-        .post(
-          "http://localhost:3001/api/business/placeSearch",
-          { id: business.place_id },
-        )
+        .post("http://localhost:3001/api/business/placeSearch", {
+          id: business.place_id
+        })
         .then(response => {
           this.setState({ business: response.data, landingBusiness: false });
         })
@@ -133,14 +145,13 @@ class App extends Component {
 
   searchResults = searchTerm => {
     axios
-      .post(
-        "http://localhost:3001/api/business/placesSearch",
-        {
-          query: searchTerm,
-        },
-      )
+      .post("http://localhost:3001/api/business/placesSearch", {
+        query: searchTerm
+      })
       .then(response => {
-        response.data.length ? this.setState({ searchResults: response.data }) : this.setState({ searchResults: null });
+        response.data.length
+          ? this.setState({ searchResults: response.data })
+          : this.setState({ searchResults: null });
       })
       .then(() => {
         this.props.history.push(`/results`);
@@ -150,10 +161,7 @@ class App extends Component {
 
   createBusiness = id => {
     axios
-      .post(
-        "http://localhost:3001/api/business/create",
-        { id },
-      )
+      .post("http://localhost:3001/api/business/create", { id })
       .then(response => {
         this.setState({ newBusinessId: response.data });
       })

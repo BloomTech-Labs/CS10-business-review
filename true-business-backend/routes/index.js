@@ -1,18 +1,54 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
-require("../services/passport");
+const multer = require("multer");
+const cloudinary = require("cloudinary");
 const UserController = require("../controllers/userController");
 const BusinessController = require("../controllers/businessController");
-mongoose.Promise = global.Promise;
-
-mongoose.connect('mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness',{}, function(err){
-  if(err)console.log(err);
-});
-const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
-
+const ReviewControler = require("../controllers/reviewController");
+var cloudinaryStorage = require("multer-storage-cloudinary");
 const router = express.Router();
 require("../routes/authRoutes")(router);
+require("../services/passport");
+mongoose.Promise = global.Promise;
+
+const bodyParser = require("body-parser");
+
+let app = express();
+
+var storage = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: "../../true-business/src/imgs/upload",
+  allowedFormats: ["jpg", "png"],
+  filename: function(req, file, cb) {
+    cb(undefined, "donkey");
+  }
+});
+
+var parser = multer({ storage: storage });
+
+app.post("/upload", parser.array("images", 10), function(req, res) {
+  console.log(req.files);
+});
+
+router.get("/upload", function(req, res) {
+  console.log(req.files);
+});
+//configure cloudinary
+cloudinary.config({
+  cloud_name: "ddhamypia",
+  api_key: process.env.REACT_APP_CLOUDINARY_API_KEY,
+  api_secret: process.env.REACT_APP_CLOUDINARY_API_SECRET
+});
+console.log(process.env.REACT_APP_CLOUDINARY_API_SECRET);
+
+mongoose.connect(
+  "mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness",
+  {},
+  function(err) {
+    if (err) console.log(err);
+  }
+);
+const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
 
 router.get("/", (request, response) => {
   response.status(200).json({ api: "Server running OK." });
@@ -66,19 +102,22 @@ router.get("/api/business/", function(req, res) {
   BusinessController.getAllBusiness(req, res);
 });
 
-
 // Guessing we should put this in a StripeController at some point.
-router.post('/charge', async (req, res) => {
-  let amount = req.body.selectedRadio === 'oneMonth' ? 999 : 4999;
+router.post("/charge", async (req, res) => {
+  let amount = req.body.selectedRadio === "oneMonth" ? 999 : 4999;
   stripe.charges
-    .create({ amount, currency: 'usd', description: 'An example charge', source: req.body.token.id })
-    .then((status) => {
+    .create({
+      amount,
+      currency: "usd",
+      description: "An example charge",
+      source: req.body.token.id
+    })
+    .then(status => {
       res.json({ status });
     })
     .catch(err => {
       res.status(500).end();
     });
 });
-
 
 module.exports = router;
