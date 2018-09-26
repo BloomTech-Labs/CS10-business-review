@@ -78,6 +78,7 @@ export default class NewReview extends Component {
       stars: this.state.rating,
       photos: ['http://grossfood.com'],
     };
+    console.log("FUCKING SUBMIT", review);
     axios
       .post("http://localhost:3001/api/review/create", review)
       .then(response => {
@@ -144,6 +145,7 @@ export default class NewReview extends Component {
   };
 
   render() {
+    console.log("this.props.newMongoId", this.props.newMongoId)
     return (
       <Modal
         shouldCloseOnOverlayClick={false}

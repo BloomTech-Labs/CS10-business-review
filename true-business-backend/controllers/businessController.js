@@ -36,13 +36,23 @@ const createBusiness = (req, res) => {
         address_components,
         location: result.geometry.location,
       });
+      console.log(business.place_id)
       business
         .save()
         .then(business => {
           res.status(201).json(business);
         })
+        // May be bad pratice, but if it fails to create a business because it
+        // already exists it will then find the business and send that instead
         .catch(error => {
-          res.status(500).json({ error });
+          Business.find({place_id: business.place_id})
+          .then(response => {
+            console.log("response[0]", response[0])
+            res.status(200).json(response[0]);
+          })
+          .catch(error => {
+            res.status(500).json({ error });
+          })
         });
     })
     .catch(error => {

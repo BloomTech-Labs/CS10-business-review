@@ -8,6 +8,7 @@ const createReview = (req, res) => {
   newReview
     .save()
     .then(review => {
+      console.log("this works fine")
       res.status(201).json(review);
     })
     .catch(error => {
@@ -48,10 +49,12 @@ const getReviewsByReviewerId = (req, res) => {
 
 // For Business Component
 const getReviewsByBusinessId = (req, res) => {
+  console.log("Req.params in getGetreviewsbybusinessid", req.params)
   let search = req.params.landing === "true" ? "newMongoId" : "newGoogleId";
   Review.find({ [search]: req.params.id })
     .populate("reviewer newMongoId")
     .then(reviews => {
+      console.log("reviews in getTreviewsbybusinessid", reviews)
       res.status(200).json(reviews);
     })
     .catch(error => {
