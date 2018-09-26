@@ -102,12 +102,10 @@ class Business extends Component {
   };
 
   closeModal = () => {
-    console.log(this.state);
     this.setState({ modalIsOpen: false });
   };
 
   render() {
-    console.log("this.props.business",this.props.business)
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -223,7 +221,6 @@ class Business extends Component {
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
                 <div className="reviews__review">
-                {console.log("FUCKING REVIEWS", this.state.reviews)}
                   {this.state.reviews.length ? (
                     this.state.reviews.map(review => {
                       return (
@@ -250,7 +247,6 @@ class Business extends Component {
                 </div>
               </div>
             </div>
-            {console.log("Modal Info", this.state.modalInfo)}
             <Modal
               shouldCloseOnOverlayClick={false}
               isOpen={this.state.modalIsOpen}

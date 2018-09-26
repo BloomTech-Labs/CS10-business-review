@@ -178,7 +178,6 @@ class App extends Component {
     axios
       .post("http://localhost:3001/api/business/create", { id })
       .then(response => {
-        console.log("response in app", response)
         this.setState({ business: response.data });
       })
       .catch(error => console.log("error", error));

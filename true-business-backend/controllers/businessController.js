@@ -36,7 +36,6 @@ const createBusiness = (req, res) => {
         address_components,
         location: result.geometry.location,
       });
-      console.log(business.place_id)
       business
         .save()
         .then(business => {
@@ -47,7 +46,6 @@ const createBusiness = (req, res) => {
         .catch(error => {
           Business.find({place_id: business.place_id})
           .then(response => {
-            console.log("response[0]", response[0])
             res.status(200).json(response[0]);
           })
           .catch(error => {
