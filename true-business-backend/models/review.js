@@ -18,11 +18,11 @@ const reviewSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    default: 'No Title Given'
+    default: "No Title Given",
   },
   body: {
     type: String,
-    default: 'No Review Given'
+    default: "No Review Given",
   },
   stars: {
     type: Number,
@@ -60,20 +60,29 @@ reviewSchema.post("save", function(next) {
     let update = await Business.findOne({ _id: business.newMongoId }).then(found => {
       found.reviews.push(business._id);
       found.totalReviews += 1;
-      found.stars += business.stars;
-      found.stars /= 2;
-      found.stars = Math.round(found.stars);
+      if (found.stars !== 0) {
+        found.stars += business.stars;
+        found.stars /= 2;
+      }
+      else {
+        found.stars += business.stars;
+      }
       return found;
     });
-    await Business.findOneAndUpdate(business.newMongoId, update)
+    await Business.updateOne(
+      { _id: business.newMongoId },
+      {
+        reviews: update.reviews,
+        totalReviews: update.totalReviews,
+        stars: update.stars,
+      },
+    )
       .then(updated => {
-        console.log("Business Updated Successfully");
+        console.log("Business Updated Successfully", updated);
       })
       .catch(error => console.log({ error }));
   }
-  updateBusiness();
-  console.log("Eh?")
-  next();
+  updateBusiness(next);
 });
 
 module.exports = reviewModel;

@@ -76,7 +76,7 @@ export default class NewReview extends Component {
       title: this.state.title,
       body: this.state.body,
       stars: this.state.rating,
-      photos: ['http://grossfood.com'],
+      photos: ["http://grossfood.com"],
     };
     axios
       .post("http://localhost:3001/api/review/create", review)
@@ -108,7 +108,6 @@ export default class NewReview extends Component {
     if (file && !includes) {
       reader.onloadend = () => {
         let { imagePreviews, photos } = this.state;
-
         // create new Image element
         var image = new Image();
         // set the src of the image to the resulting url of the reader
@@ -144,6 +143,8 @@ export default class NewReview extends Component {
   };
 
   render() {
+
+    console.log(this.state.images);
     return (
       <Modal
         shouldCloseOnOverlayClick={false}

@@ -5,11 +5,9 @@ const createReview = (req, res) => {
   // Upload user images to cloudinary
   // Sign In Users so a review can be assigned to the actual reviewer
   let newReview = new Review({ ...req.body });
-  console.log("NEWREVIEW---------------", newReview)
   newReview
     .save()
     .then(review => {
-      console.log("THISSHITRIGHTHERE")
       res.status(201).json(review);
     })
     .catch(error => {

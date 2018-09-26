@@ -13,8 +13,8 @@ const BusinessThumbnail = props => {
           starDimension="20px"
           starSpacing="5px"
           rating={props.business.stars}
-          starRatedColor="gold"
-          starEmptyColor="grey"
+          starRatedColor="blue"
+          starEmptyColor="black"
           numberOfStars={5}
           name="rating"
         />
