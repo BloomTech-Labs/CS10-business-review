@@ -23,6 +23,14 @@ class App extends Component {
   };
 
   componentWillMount = () => {
+    this.handleLoad();
+  };
+
+  componentDidMount = () => {
+    window.addEventListener("load", this.handleLoad);
+  }
+
+  handleLoad = () => {
     this.getDBBusinesses();
     this.getDBReviews();
     this.getDBUsers();
@@ -105,31 +113,31 @@ class App extends Component {
 
   getDBReviews = () => {
     axios
-    .get("http://localhost:3001/api/review/getAllReviews")
-    .then(reviews => {
-      let featuredReviews = reviews.data.filter(review => {
-        return review.numberOfLikes >= 0;
+      .get("http://localhost:3001/api/review/getAllReviews")
+      .then(reviews => {
+        let featuredReviews = reviews.data.filter(review => {
+          return review.numberOfLikes >= 0;
+        });
+        this.setState({ featuredReviews });
+      })
+      .catch(err => {
+        console.log("Error:", err);
       });
-      this.setState({ featuredReviews });
-    })
-    .catch(err => {
-      console.log("Error:", err);
-    });
-  }
+  };
 
   getDBUsers = () => {
     axios
-    .get("http://localhost:3001/api/user/")
-    .then(users => {
-      let featuredUsers = users.data.filter(user => {
-        return user.numberOfLikes >= 0;
+      .get("http://localhost:3001/api/user/")
+      .then(users => {
+        let featuredUsers = users.data.filter(user => {
+          return user.numberOfLikes >= 0;
+        });
+        this.setState({ featuredUsers });
+      })
+      .catch(err => {
+        console.log("Error:", err);
       });
-      this.setState({ featuredUsers });
-    })
-    .catch(err => {
-      console.log("Error:", err);
-    });
-  }
+  };
 
   getBusiness = (business, landingpage = false) => {
     if (landingpage) {
@@ -178,7 +186,6 @@ class App extends Component {
     axios
       .post("http://localhost:3001/api/business/create", { id })
       .then(response => {
-        console.log("response in app", response)
         this.setState({ business: response.data });
       })
       .catch(error => console.log("error", error));

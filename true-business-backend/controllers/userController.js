@@ -44,8 +44,6 @@ const login = (request, response) => {
       if (bcrypt.compareSync(password, userFound.password)) {
         const token = generateToken({ userFound });
         const { _id } = userFound;
-        console.log("Token", token)
-        console.log("User Id", _id)
         response.status(200).send({ username: userFound.username, token, userId: _id  });
       } else {
         response.status(500).send({
