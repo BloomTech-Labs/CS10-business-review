@@ -255,3 +255,11 @@
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__page:hover {
   cursor: pointer;
 }
+.business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__page--no-hover {
+  width: 5%;
+  cursor: default;
+}
+.active {
+  font-weight: bolder;
+  color: red;
+}
