@@ -12,8 +12,7 @@
   margin: 0;
   padding-top: 25vh;
   padding-left: 5rem;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  color: black;
 }
 .user .user__header {
   display: flex;
@@ -46,9 +45,8 @@
   border: none;
   width: auto;
   font-size: 1.5rem;
-  background-color: darkslategray;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  background-color: #e6e6e6;
+  color: black;
   margin: 0 1rem;
 }
 .user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow {
@@ -109,9 +107,8 @@
   border: none;
   width: 100%;
   font-size: 1.5rem;
-  background-color: #223131;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  background-color: #e6e6e6;
+  color: black;
   padding: 1rem;
 }
 .user .user__body .body__left-bar .left-bar__button:hover {
@@ -160,9 +157,8 @@
   margin: 0 1rem 1rem 1rem;
   border: 0.1rem solid black;
   padding: 1rem;
-  background-color: #223131;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  background-color: #e6e6e6;
+  color: black;
 }
 .user .user__body .body__content .content__user-reviews .user-reviews__item .item__image {
   width: 10rem;
@@ -188,7 +184,7 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  background-color: #223131;
+  background-color: #e6e6e6;
   margin: 0 1rem 1rem 1rem;
   border: 0.1rem solid black;
   padding: 1rem;
@@ -197,8 +193,7 @@
   cursor: pointer;
 }
 .user .user__body .body__content .content__user-reviews .user-reviews__add .add__text {
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  color: black;
   font-size: 2rem;
 }
 .user .user__body .body__content .content__solo-add {
@@ -219,8 +214,7 @@
   cursor: pointer;
 }
 .user .user__body .body__content .content__solo-add .solo-add__text {
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  color: black;
   font-size: 2rem;
 }
 .user .user__body .body__content .content__profile {
@@ -284,9 +278,8 @@
   width: 20%;
   border: none;
   font-size: 1.25rem;
-  background-color: #223131;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  background-color: #e6e6e6;
+  color: black;
   padding: 1rem;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button:hover {
