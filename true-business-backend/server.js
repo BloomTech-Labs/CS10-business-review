@@ -5,9 +5,6 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const bodyparser = require("body-parser");
-const cloudinary = require("cloudinary");
-const multer = require("multer");
-const upload = multer({ dest: "../imgs" });
 
 //Instantiate Server
 const server = express();

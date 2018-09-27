@@ -1,31 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const multer = require("multer");
-const cloudinary = require("cloudinary");
 const UserController = require("../controllers/userController");
 const BusinessController = require("../controllers/businessController");
 const ReviewControler = require("../controllers/reviewController");
-var cloudinaryStorage = require("multer-storage-cloudinary");
 const router = express.Router();
 require("../routes/authRoutes")(router);
 require("../services/passport");
 mongoose.Promise = global.Promise;
 
 const bodyParser = require("body-parser");
-
-const storage = multer.diskStorage({
-  destination: "../../true-business/src/imgs/upload",
-  filename: function(req, file, callback) {
-    //..
-  }
-});
-//configure cloudinary
-cloudinary.config({
-  cloud_name: "ddhamypia",
-  api_key: process.env.REACT_APP_CLOUDINARY_API_KEY,
-  api_secret: process.env.REACT_APP_CLOUDINARY_API_SECRET
-});
-console.log(process.env.REACT_APP_CLOUDINARY_API_SECRET);
 
 mongoose.connect(
   "mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness",
@@ -87,14 +70,6 @@ router.delete("/api/business/:id", function(req, res) {
 router.get("/api/business/", function(req, res) {
   BusinessController.getAllBusiness(req, res);
 });
-
-cloudinary.v2.uploader.upload(
-  "/Users/metten/Desktop/Lambda/CS10-business-review/true-business/src/imgs/upload/donkey.jpg",
-  { public_id: "donkeyface" },
-  function(error, result) {
-    console.log(result, error);
-  }
-);
 
 // Guessing we should put this in a StripeController at some point.
 router.post("/charge", async (req, res) => {
