@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
 import BusinessThumbnail from "./BusinessThumbnail";
-import StarRatings from "react-star-ratings";
-import axios from "axios";
-import Dropzone from "react-dropzone";
-
 import "../css/LandingPage.css";
 import "../css/GeneralStyles.css";
+import Dropzone from "react-dropzone";
+import axios from "axios";
+
 import NavBar from "./NavBar";
 
 let modalStyles = {
@@ -40,7 +39,7 @@ class LandingPage extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  openModal(event, info) {
+  openModal(info, event) {
     this.setState({ modalIsOpen: true, modalInfo: info });
   }
 
@@ -89,59 +88,59 @@ class LandingPage extends Component {
           <div className="landing-container__reviews-container">
             <div className="landing-container__title">Popular Reviews</div>
             <div className="landing-container__reviews">
-              {this.props.reviews.map((review, i) => {
-                if (i < 5) {
-                  return (
-                    // Need to write a component that shows all the reviews by a certain user
-                    // <div key={review._id} onClick={() => this.props.userReviews(user)}>
-                    <div key={review._id}>
-                      <div className="landing-container__review">
-                        <div className="landing-container__item">
-                          {review.newMongoId.name}
-                        </div>
-                        <div
-                          className="landing-container__picture"
-                          onClick={() => this.openModal(this, review)}
-                        />
-                        <ul className="landing-container__item--hover">
-                          @{review.reviewer.username}
-                        </ul>
-                      </div>
-                    </div>
-                  );
-                }
-                return null;
+              {this.props.businesses.map(business => {
+                return (
+                  <div
+                    key={business._id}
+                    onClick={() => this.openModal(this, business)}
+                  >
+                    <BusinessThumbnail business={business} key={business._id} />
+                  </div>
+                );
               })}
             </div>
           </div>
           <div className="landing-container__reviews-container">
             <div className="landing-container__title">Popular Businesses</div>
-            <div className="landing-container__reviews">})}</div>
+            <div className="landing-container__reviews">
+              {this.props.businesses.map(business => {
+                return (
+                  <div
+                    key={business._id}
+                    onClick={() => this.props.getBusiness(business, true)}
+                  >
+                    <BusinessThumbnail business={business} key={business._id} />
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="landing-container__reviews-container">
             <div className="landing-container__title">Popular Reviewers</div>
             <div className="landing-container__reviews">
-              {this.props.users.map((user, i) => {
-                if (i < 5) {
-                  return (
-                    // Need to write a component that shows all the userss by a certain user
-                    // <div key={users._id} onClick={() => this.props.useruserss(user)}>
-                    <div key={user._id}>
-                      <div className="landing-container__review">
-                        <div className="landing-container__picture" />
-                        <ul className="landing-container__item--hover">
-                          @{user.username}
-                        </ul>
-                      </div>
-                    </div>
-                  );
-                }
-                return null;
-              })}
+              <div className="landing-container__review">
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item--hover">@Reviewer</ul>
+              </div>
+              <div className="landing-container__review">
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item--hover">@Reviewer</ul>
+              </div>
+              <div className="landing-container__review">
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item--hover">@Reviewer</ul>
+              </div>
+              <div className="landing-container__review">
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item--hover">@Reviewer</ul>
+              </div>
+              <div className="landing-container__review">
+                <div className="landing-container__picture" />
+                <ul className="landing-container__item--hover">@Reviewer</ul>
+              </div>
             </div>
           </div>
           <Modal
-            shouldCloseOnOverlayClick={false}
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={modalStyles}
@@ -152,29 +151,21 @@ class LandingPage extends Component {
                 <div className="modal-container">
                   <div className="modal__header">
                     <div className="header__title">
-                      {this.state.modalInfo.newMongoId.name}
+                      {this.state.modalInfo.title}
                     </div>
                     <div className="header__reviewer">
-                      @{this.state.modalInfo.reviewer.username}
+                      {this.state.modalInfo.reviewer}
                     </div>
                   </div>
                   <div className="modal__body">
-                    <div className="body__image">Yup</div>
-                    <div className="body__stars">
-                      {" "}
-                      <StarRatings
-                        starDimension="20px"
-                        starSpacing="5px"
-                        rating={this.state.modalInfo.stars}
-                        starRatedColor="gold"
-                        starEmptyColor="grey"
-                        numberOfStars={5}
-                        name="rating"
-                      />
+                    <div className="body__image">
+                      {this.state.modalInfo.image}
                     </div>
-                    <div>{this.state.modalInfo.title}</div>
+                    <div className="body__stars">
+                      {this.state.modalInfo.stars}
+                    </div>
                     <div className="body__review">
-                      {this.state.modalInfo.body}
+                      {this.state.modalInfo.review}
                     </div>
                   </div>
                   <div className="modal__footer">
