@@ -44,8 +44,6 @@ const login = (request, response) => {
       if (bcrypt.compareSync(password, userFound.password)) {
         const token = generateToken({ userFound });
         const { _id } = userFound;
-        console.log("Token", token)
-        console.log("User Id", _id)
         response.status(200).send({ username: userFound.username, token, userId: _id  });
       } else {
         response.status(500).send({
@@ -65,7 +63,7 @@ const login = (request, response) => {
 const getUserById = (request, response) => {
   const { _id } = request.body;
 
-  User.findById(_id)
+  User.findOne(_id)
     .then(function(user) {
       response.status(200).json(user);
     })
@@ -92,7 +90,7 @@ const deleteUserById = (request, response) => {
 
 const updateUser = (request, response) => {
   const { _id } = request.body;
- User.findByIdAndUpdate(_id)
+ User.findOneAndUpdate(_id)
  .then(function(user) {
    response.status(200).json(user);
  })

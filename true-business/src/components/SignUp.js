@@ -30,11 +30,7 @@ class SignUp extends Component {
 
   confirmPassword = () => {
     return this.state.password === this.state.confirmPassword;
-  };
-
-  confirmEmail = () => {
-    return this.state.email === this.state.confirmEmail;
-  };
+  }; 
 
   createUser = event => {
     event.preventDefault();

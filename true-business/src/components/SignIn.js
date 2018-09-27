@@ -27,7 +27,6 @@ class SignIn extends Component {
          localStorage.setItem('token', response.data.token)
          localStorage.setItem('userId', response.data.userId)
          localStorage.setItem('username', this.state.username)
-        console.log("Response", response)
         this.setState({
           error: false,
         });

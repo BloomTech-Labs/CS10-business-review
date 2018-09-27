@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import axios from "axios";
 import Modal from "react-modal";
-
 import NewReview from "./NewReview";
 import NavBar from "./NavBar";
 
@@ -39,6 +38,7 @@ class Business extends Component {
     reviews: [],
     modalIsOpen: false,
     modalInfo: null,
+    currentPage: 0,
   };
 
   componentDidMount = () => {
@@ -83,18 +83,22 @@ class Business extends Component {
 
   showModal = show => {
     this.setState({ open: show });
+    // Cheap way to re-render with the new review showing
+    this.getReviews();
   };
 
   getReviews = () => {
-    let id = this.props.landingBusiness ? this.props.business._id : this.props.business.place_id;
-    axios
-      .get(`http://localhost:3001/api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}`)
-      .then(reviews => {
-        this.setState({ reviews: reviews.data, newBusinessId: this.props.newBusinessId });
-      })
-      .catch(error => {
-        console.log("Error", error);
-      });
+    if (this.props.business) {
+      let id = this.props.landingBusiness ? this.props.business._id : this.props.business.place_id;
+      axios
+        .get(`http://localhost:3001/api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}`)
+        .then(reviews => {
+          this.setState({ reviews: reviews.data, newBusinessId: this.props.newBusinessId });
+        })
+        .catch(error => {
+          console.log("Error", error);
+        });
+    }
   };
 
   openModal = (event, info) => {
@@ -102,12 +106,15 @@ class Business extends Component {
   };
 
   closeModal = () => {
-    console.log(this.state);
     this.setState({ modalIsOpen: false });
   };
 
+  updatePage = currentPage => {
+    this.setState({ currentPage });
+  };
+
   render() {
-    console.log("this.props.business",this.props.business)
+    console.log(this.state.reviews);
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -223,34 +230,45 @@ class Business extends Component {
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
                 <div className="reviews__review">
-                {console.log("FUCKING REVIEWS", this.state.reviews)}
                   {this.state.reviews.length ? (
-                    this.state.reviews.map(review => {
-                      return (
-                        <div key={review._id} className="review__info">
-                          <div className="review__image" onClick={() => this.openModal(this, review)}>
-                            image
+                    this.state.reviews.map((review, i) => {
+                      if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
+                        return (
+                          <div key={review._id} className="review__info">
+                            <div className="review__image" onClick={() => this.openModal(this, review)}>
+                              image
+                            </div>
+                            <StarRatings
+                              starDimension="20px"
+                              starSpacing="5px"
+                              rating={review.stars}
+                              starRatedColor="gold"
+                              starEmptyColor="grey"
+                              numberOfStars={5}
+                              name="rating"
+                            />
+                            <div className="review__reviewer">@{review.reviewer.username}</div>{" "}
                           </div>
-                          <StarRatings
-                            starDimension="20px"
-                            starSpacing="5px"
-                            rating={review.stars}
-                            starRatedColor="gold"
-                            starEmptyColor="grey"
-                            numberOfStars={5}
-                            name="rating"
-                          />
-                          <div className="review__reviewer">@{review.reviewer.username}</div>{" "}
-                        </div>
-                      );
+                        );
+                      } else {
+                        return null;
+                      }
                     })
                   ) : (
                     <div>No Reviews</div>
                   )}
                 </div>
+                <div className="reviews__pagination">
+                  {this.state.reviews.map((review, i) => {
+                    return i % 10 === 0 ? (
+                      <div key={i} className="pagination__page" onClick={this.updatePage.bind(this, i / 10)}>
+                        {i / 10}
+                      </div>
+                    ) : null;
+                  })}
+                </div>
               </div>
             </div>
-            {console.log("Modal Info", this.state.modalInfo)}
             <Modal
               shouldCloseOnOverlayClick={false}
               isOpen={this.state.modalIsOpen}

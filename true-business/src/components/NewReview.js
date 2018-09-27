@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Modal from "react-modal";
 import StarRatings from "react-star-ratings";
 import axios from "axios";
+import Dropzone from "react-dropzone";
 
 import "../css/NewReview.css";
 
@@ -17,8 +18,8 @@ let modalStyles = {
     width: "75%",
     zIndex: "5",
     backgroundColor: "rgb(62, 56, 146)",
-    overflow: "hidden",
-  },
+    overflow: "hidden"
+  }
 };
 
 Modal.setAppElement("div");
@@ -37,6 +38,7 @@ export default class NewReview extends Component {
       title: "",
       body: "",
       rating: 0,
+      fileURL: []
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -64,6 +66,38 @@ export default class NewReview extends Component {
     this.setState({ modalIsOpen: false });
     this.props.showModal(false);
   }
+  handleDrop = files => {
+    const uploaders = files.map(file => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("tags", ``);
+      formData.append("upload_preset", "true-business"); // Replace the preset name with your own
+      formData.append("api_key", process.env.REACT_APP_CLOUDINARY_API_KEY); // Replace API key with your own Cloudinary key
+      formData.append("timestamp", (Date.now() / 1000) | 0);
+
+      // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
+      return axios
+        .post(
+          "https://api.cloudinary.com/v1_1/ddhamypia/image/upload",
+          formData,
+          {
+            headers: { "X-Requested-With": "XMLHttpRequest" }
+          }
+        )
+        .then(response => {
+          const data = response.data;
+          const fileURL = data.secure_url; // You should store this URL for future references in your app
+          console.log(data);
+
+          let photos = this.state.fileURL;
+          photos.push(fileURL);
+          this.setState({ fileURL: photos });
+        });
+    });
+  };
+  // axios.all(uploaders) => {
+  //   // ... perform after upload is successful operation
+  // });
 
   starRating = rating => {
     this.setState({ rating });
@@ -76,9 +110,8 @@ export default class NewReview extends Component {
       title: this.state.title,
       body: this.state.body,
       stars: this.state.rating,
-      photos: ['http://grossfood.com'],
+      photos: this.state.fileURL
     };
-    console.log("FUCKING SUBMIT", review);
     axios
       .post("http://localhost:3001/api/review/create", review)
       .then(response => {
@@ -93,105 +126,26 @@ export default class NewReview extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleImageChange = event => {
-    let reader = new FileReader();
-    let file = event.target.files[0];
-    // keep track of images to allow removal
-    let currentImageID = this.state.currentImageID;
-
-    // check to see if the image has already been uploaded
-    let includes = false;
-    this.state.photos.forEach(image => {
-      if (image.image.id === file.name) return (includes = true);
-    });
-
-    if (includes) window.alert("File already added");
-    if (file && !includes) {
-      reader.onloadend = () => {
-        let { imagePreviews, photos } = this.state;
-
-        // create new Image element
-        var image = new Image();
-        // set the src of the image to the resulting url of the reader
-        image.src = reader.result;
-        // set the id to the file.name
-        // cheap way to make sure an image isn't added twice
-        image.setAttribute("id", file.name);
-
-        // add the image preview to the array
-        imagePreviews.push({ id: currentImageID, preview: reader.result });
-        // add the image and file to the images array for the db on submit
-        // may not need the image, not sure yet
-        photos.push({ id: currentImageID, image, file });
-        this.setState({ currentImageID: ++currentImageID, imagePreviews, photos });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  removeImage = event => {
-    let choice = window.confirm("Are you sure you want to delete this image?");
-    if (choice) {
-      // update the images
-      let images = this.state.photos.filter(image => {
-        return image.id !== Number(event.target.id);
-      });
-      // update the image previews
-      let imagePreviews = this.state.imagePreviews.filter(image => {
-        return image.preview !== event.target.src;
-      });
-      this.setState({ images, imagePreviews });
-    }
-  };
-
   render() {
-    console.log("this.props.newMongoId", this.props.newMongoId)
     return (
       <Modal
         shouldCloseOnOverlayClick={false}
         isOpen={this.state.modalIsOpen}
         onRequestClose={this.closeModal}
         style={modalStyles}
-        contentLabel="New Review Modal">
+        contentLabel="New Review Modal"
+      >
         <div className="new-review">
           {this.state.modalIsOpen ? (
             <div className="new-review__modal">
               <div className="modal__header">New Review</div>
               <div className="modal__body">
-                <div className="body__images">
-                  {this.state.imagePreviews.length
-                    ? this.state.imagePreviews.map((image, i) => {
-                        return (
-                          <div key={i} className="images__previews">
-                            <img
-                              alt="preview"
-                              id={image.id}
-                              src={image.preview}
-                              className="previews__preview"
-                              onClick={this.removeImage}
-                            />
-                            <div className="previews__text"> Click Image to Remove </div>
-                          </div>
-                        );
-                      })
-                    : null}
-                  {this.state.photos.length < 4 ? (
-                    <div className="images__image">
-                      <label htmlFor="file-upload">
-                        <i className="image__add fas fa-plus-square fa-5x" />
-                      </label>
-                      <input
-                        id="file-upload"
-                        type="file"
-                        onChange={this.handleImageChange}
-                        onClick={event => {
-                          event.target.value = null;
-                        }}
-                      />
-                      <div className="image__text">Add an Image</div>
-                    </div>
-                  ) : null}
+                <div>
+                  <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
+                    <p>Drop your files or click here to upload</p>
+                  </Dropzone>
                 </div>
+
                 <div className="body__title">
                   <div className="title__label">Title:</div>
                   <input

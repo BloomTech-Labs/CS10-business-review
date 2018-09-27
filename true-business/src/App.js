@@ -23,6 +23,14 @@ class App extends Component {
   };
 
   componentWillMount = () => {
+    this.handleLoad();
+  };
+
+  componentDidMount = () => {
+    window.addEventListener("load", this.handleLoad);
+  }
+
+  handleLoad = () => {
     this.getDBBusinesses();
     this.getDBReviews();
     this.getDBUsers();
@@ -71,8 +79,16 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
-          <Route path="/signin" render={() => <SignIn search={this.searchResults} authUser={this.authUser} />} />
+          <Route
+            path="/signup"
+            render={() => <SignUp search={this.searchResults} />}
+          />
+          <Route
+            path="/signin"
+            render={() => (
+              <SignIn search={this.searchResults} authUser={this.authUser} />
+            )}
+          />
           <Route
             path="/business"
             render={() => (
@@ -84,7 +100,10 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/user" render={() => <User search={this.searchResults} />} />
+          <Route
+            path="/user"
+            render={() => <User search={this.searchResults} />}
+          />
         </Switch>
       </div>
     );
@@ -105,31 +124,31 @@ class App extends Component {
 
   getDBReviews = () => {
     axios
-    .get("http://localhost:3001/api/review/getAllReviews")
-    .then(reviews => {
-      let featuredReviews = reviews.data.filter(review => {
-        return review.numberOfLikes >= 0;
+      .get("http://localhost:3001/api/review/getAllReviews")
+      .then(reviews => {
+        let featuredReviews = reviews.data.filter(review => {
+          return review.numberOfLikes >= 0;
+        });
+        this.setState({ featuredReviews });
+      })
+      .catch(err => {
+        console.log("Error:", err);
       });
-      this.setState({ featuredReviews });
-    })
-    .catch(err => {
-      console.log("Error:", err);
-    });
-  }
+  };
 
   getDBUsers = () => {
     axios
-    .get("http://localhost:3001/api/user/")
-    .then(users => {
-      let featuredUsers = users.data.filter(user => {
-        return user.numberOfLikes >= 0;
+      .get("http://localhost:3001/api/user/")
+      .then(users => {
+        let featuredUsers = users.data.filter(user => {
+          return user.numberOfLikes >= 0;
+        });
+        this.setState({ featuredUsers });
+      })
+      .catch(err => {
+        console.log("Error:", err);
       });
-      this.setState({ featuredUsers });
-    })
-    .catch(err => {
-      console.log("Error:", err);
-    });
-  }
+  };
 
   getBusiness = (business, landingpage = false) => {
     if (landingpage) {
@@ -140,7 +159,7 @@ class App extends Component {
           })[0];
           this.setState({
             business: found,
-            landingBusiness: true,
+            landingBusiness: true
           });
         })
         .then(() => {
@@ -149,7 +168,9 @@ class App extends Component {
         .catch(error => console.log({ error }));
     } else {
       axios
-        .post("http://localhost:3001/api/business/placeSearch", { id: business.place_id })
+        .post("http://localhost:3001/api/business/placeSearch", {
+          id: business.place_id
+        })
         .then(response => {
           this.setState({ business: response.data, landingBusiness: false });
         })
@@ -163,10 +184,14 @@ class App extends Component {
   searchResults = searchTerm => {
     axios
       .post("http://localhost:3001/api/business/placesSearch", {
-        query: searchTerm,
+
+        query: searchTerm
+
       })
       .then(response => {
-        response.data.length ? this.setState({ searchResults: response.data }) : this.setState({ searchResults: null });
+        response.data.length
+          ? this.setState({ searchResults: response.data })
+          : this.setState({ searchResults: null });
       })
       .then(() => {
         this.props.history.push(`/results`);
@@ -178,7 +203,6 @@ class App extends Component {
     axios
       .post("http://localhost:3001/api/business/create", { id })
       .then(response => {
-        console.log("response in app", response)
         this.setState({ business: response.data });
       })
       .catch(error => console.log("error", error));

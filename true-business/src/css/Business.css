@@ -177,9 +177,9 @@
 }
 .business .business__reviews-container .reviews-container__reviews {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
   height: 100%;
   width: 100%;
   font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
@@ -187,35 +187,19 @@
   line-height: 1;
   padding: 0;
   margin: 0;
+  min-height: 36rem;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
-  font-size: 1.25rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
-  font-size: 1.25rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  min-width: 10rem;
-  margin: 2rem;
-  flex-wrap: nowrap;
+  min-width: 20%;
+  max-width: 20%;
+  padding: 1rem;
   color: black;
   opacity: 0.5;
 }
@@ -244,4 +228,30 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info:hover {
   opacity: 1;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info:after {
+  float: left;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review:after {
+  content: "";
+  flex: auto;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__page {
+  width: 5%;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__page:hover {
+  cursor: pointer;
 }

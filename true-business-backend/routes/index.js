@@ -1,17 +1,25 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
-require("../services/passport");
 const UserController = require("../controllers/userController");
 const BusinessController = require("../controllers/businessController");
 const ReviewControler = require("../controllers/reviewController");
-mongoose.Promise = global.Promise;
-
-mongoose.connect("mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness");
-const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
-
 const router = express.Router();
 require("../routes/authRoutes")(router);
+require("../services/passport");
+mongoose.Promise = global.Promise;
+
+const bodyParser = require("body-parser");
+
+mongoose.connect(
+  "mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness",
+  {},
+  function(err) {
+    if (err) console.log(err);
+  }
+);
+
+mongoose.Promise = global.Promise;
+const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
 
 router.get("/", (request, response) => {
   response.status(200).json({ api: "Server running OK." });
@@ -34,7 +42,7 @@ router.delete("/api/user/:id", function(req, res) {
 });
 router.put("/api/user/:id", function(req, res) {
   UserController.updateUser(req, res);
-})
+});
 router.get("/api/user/", function(req, res) {
   UserController.getAllUsers(req, res);
 });
@@ -91,7 +99,7 @@ router.get("/api/review/getReviewsByBusinessId/:id/:landing", (req, res) => {
 router.post("/charge", async (req, res) => {
   let amount = req.body.selectedRadio === "oneMonth" ? 999 : 4999;
   stripe.charges
-    .create({ amount, currency: "usd", description: "An example charge", source: req.body.token.id })
+
     .then(status => {
       res.json({ status });
     })
