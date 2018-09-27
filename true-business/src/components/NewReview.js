@@ -37,7 +37,8 @@ export default class NewReview extends Component {
       currentImageID: 0,
       title: "",
       body: "",
-      rating: 0
+      rating: 0,
+      fileURL: []
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -87,6 +88,10 @@ export default class NewReview extends Component {
           const data = response.data;
           const fileURL = data.secure_url; // You should store this URL for future references in your app
           console.log(data);
+
+          let photos = this.state.fileURL;
+          photos.push(fileURL);
+          this.setState({ fileURL: photos });
         });
     });
   };
@@ -105,7 +110,7 @@ export default class NewReview extends Component {
       title: this.state.title,
       body: this.state.body,
       stars: this.state.rating,
-      photos: ["http://grossfood.com"]
+      photos: this.state.fileURL
     };
     axios
       .post("http://localhost:3001/api/review/create", review)
