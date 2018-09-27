@@ -13,25 +13,11 @@ mongoose.Promise = global.Promise;
 
 const bodyParser = require("body-parser");
 
-let app = express();
-
-var storage = cloudinaryStorage({
-  cloudinary: cloudinary,
-  folder: "../../true-business/src/imgs/upload",
-  allowedFormats: ["jpg", "png"],
-  filename: function(req, file, cb) {
-    cb(undefined, "donkey");
+const storage = multer.diskStorage({
+  destination: "../../true-business/src/imgs/upload",
+  filename: function(req, file, callback) {
+    //..
   }
-});
-
-var parser = multer({ storage: storage });
-
-app.post("/upload", parser.array("images", 10), function(req, res) {
-  console.log(req.files);
-});
-
-router.get("/upload", function(req, res) {
-  console.log(req.files);
 });
 //configure cloudinary
 cloudinary.config({
@@ -101,6 +87,14 @@ router.delete("/api/business/:id", function(req, res) {
 router.get("/api/business/", function(req, res) {
   BusinessController.getAllBusiness(req, res);
 });
+
+cloudinary.v2.uploader.upload(
+  "/Users/metten/Desktop/Lambda/CS10-business-review/true-business/src/imgs/upload/donkey.jpg",
+  { public_id: "donkeyface" },
+  function(error, result) {
+    console.log(result, error);
+  }
+);
 
 // Guessing we should put this in a StripeController at some point.
 router.post("/charge", async (req, res) => {

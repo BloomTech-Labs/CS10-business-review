@@ -9,7 +9,6 @@ import SignIn from "./components/SignIn";
 import SearchResults from "./components/SearchResults";
 import Business from "./components/Business";
 import User from "./components/User";
-import ImageUpload from "./components/ImageUpload";
 import "./css/App.css";
 
 class App extends Component {
@@ -54,7 +53,6 @@ class App extends Component {
                 businesses={this.state.featuredBusinesses}
                 search={this.searchResults}
                 getBusiness={this.getBusiness}
-                ImageUpload={ImageUpload}
               />
             )}
           />
