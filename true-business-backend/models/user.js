@@ -20,17 +20,19 @@ const userSchema = new mongoose.Schema({
   // For old-school way of registering I presume
   email: {
     type: String,
-    default: "Email" + (Math.floor(Math.random() * 1000000000) + 123456),
+    unique: true,
+    required: true,
   },
   // Displayed on reviews and what not
   username: {
     type: String,
-    default: "User" + (Math.floor(Math.random() * 1000000000) + 123456),
+    unique: true,
+    required: true,
   },
   // Guessing also only necessary for old-school way of registering
   password: {
     type: String,
-    default: "Password" + (Math.floor(Math.random() * 1000000000) + 123456),
+    required: true,
   },
   // For google passport
   googleId: {
