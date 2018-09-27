@@ -1,25 +1,30 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const Business = require("../models/business");
 
 const reviewSchema = new mongoose.Schema({
   reviewer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
+    default: "5ba9827275255602768e8ef4",
   },
-  businessReviewed: {
+  newMongoId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Business',
+    ref: "Business",
     required: true,
   },
-  reviewTitle: {
+  newGoogleId: {
     type: String,
-    required: true,
   },
-  review: {
+  title: {
     type: String,
-    required: true,
+    default: "No Title Given",
   },
-  reviewerRating: {
+  body: {
+    type: String,
+    default: "No Review Given",
+  },
+  stars: {
     type: Number,
     required: true,
   },
@@ -35,7 +40,7 @@ const reviewSchema = new mongoose.Schema({
     required: true,
     default: Date.now(),
   },
-  reviewerImages: [
+  photos: [
     {
       type: String,
     },
@@ -44,7 +49,40 @@ const reviewSchema = new mongoose.Schema({
     type: Number,
     required: true,
     default: 0,
-  }
+  },
 });
 
-module.exports = mongoose.model('Review', reviewSchema);
+let reviewModel = mongoose.model("Review", reviewSchema);
+
+reviewSchema.post("save", function(next) {
+  let business = this;
+  async function updateBusiness() {
+    let update = await Business.findOne({ _id: business.newMongoId }).then(found => {
+      found.reviews.push(business._id);
+      found.totalReviews += 1;
+      if (found.stars !== 0) {
+        found.stars += business.stars;
+        found.stars /= 2;
+      }
+      else {
+        found.stars += business.stars;
+      }
+      return found;
+    });
+    await Business.updateOne(
+      { _id: business.newMongoId },
+      {
+        reviews: update.reviews,
+        totalReviews: update.totalReviews,
+        stars: update.stars,
+      },
+    )
+      .then(updated => {
+        console.log("Business Updated Successfully", updated);
+      })
+      .catch(error => console.log({ error }));
+  }
+  updateBusiness(next);
+});
+
+module.exports = reviewModel;

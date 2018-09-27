@@ -2,6 +2,9 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
+
+
+
 function generateToken(user) {
   const options = {
     expiresIn: "1h",
@@ -40,20 +43,27 @@ const login = (request, response) => {
     } else {
       if (bcrypt.compareSync(password, userFound.password)) {
         const token = generateToken({ userFound });
-        response.status(200).send({ username: userFound.username, token });
+        const { _id } = userFound;
+        response.status(200).send({ username: userFound.username, token, userId: _id  });
       } else {
         response.status(500).send({
           errorMessage: "Login Failed.",
         });
       }
     }
+  })
+  .catch(err => {
+    console.log("Error-Login", err)
+    response.status(500).send({
+      errorMessage: "Failed to Login: " + err,
+    });
   });
 };
 
 const getUserById = (request, response) => {
-  const { id } = request.params;
+  const { _id } = request.body;
 
-  User.findById(id)
+  User.findById(_id)
     .then(function(user) {
       response.status(200).json(user);
     })
@@ -65,9 +75,9 @@ const getUserById = (request, response) => {
 };
 
 const deleteUserById = (request, response) => {
-  const { id } = request.params;
+  const { _id } = request.body;
 
-  User.findByIdAndRemove(id)
+  User.findByIdAndRemove(_id)
     .then(function(user) {
       response.status(200).json(user);
     })
@@ -77,6 +87,19 @@ const deleteUserById = (request, response) => {
       });
     });
 };
+
+const updateUser = (request, response) => {
+  const { _id } = request.body;
+ User.findByIdAndUpdate(_id)
+ .then(function(user) {
+   response.status(200).json(user);
+ })
+ .catch(function(error){
+   response.status(500).json({
+  errorMessage: "The user could not be updated: " + error
+   })
+ })
+}
 
 const getAllUsers = (request, response) => {
   User.find({})
@@ -95,5 +118,6 @@ module.exports = {
   login,
   getUserById,
   deleteUserById,
+  updateUser,
   getAllUsers,
 };
