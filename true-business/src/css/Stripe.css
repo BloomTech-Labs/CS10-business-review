@@ -1,7 +1,7 @@
 .stripe {
   height: 100%;
   font-size: 1.5rem;
-  color: #383838;
+  color: black;
   width: 75%;
   flex-direction: column;
   align-items: center;
@@ -67,7 +67,7 @@
 .stripe .stripe-button:hover {
   cursor: pointer;
 }
-.stripe .stripe__elemnt {
+.stripe .stripe__element {
   width: 70%;
   float: right;
   position: relative;

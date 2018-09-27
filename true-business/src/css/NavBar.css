@@ -1,7 +1,8 @@
 .navbar-container {
   position: fixed;
   border-bottom: 0.1rem solid white;
-  z-index: 1;
+  z-index: 20;
+  opacity: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -14,7 +15,7 @@
   padding: 0;
   margin: 0;
   max-height: 20vh;
-  background-color: #ffffff;
+  background-color: #e6e6e6;
 }
 .navbar-container .navbar-container__logo {
   width: 20%;
@@ -59,8 +60,8 @@
   margin: 0;
 }
 .navbar-container .navbar-container__center .navbar-container__buttons .navbar-container__button {
-  background: #e4e4e4;
-  color: #020202;
+  background: #2687a1;
+  color: black;
   border: outset;
   width: 15%;
   padding: 0.5rem;
@@ -87,8 +88,8 @@
 }
 .navbar-container .navbar-container__right .navbar-container__sign {
   width: 50%;
-  background-color: rgba(190, 236, 240, 0.425);
-  color: #79baf7;
+  background-color: #e6e6e6;
+  color: black;
   text-align: center;
   padding: 0.2rem 0;
   position:relative;
@@ -111,7 +112,7 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  background: #3e3892 !important;
+  background: #29949a !important;
   border: 0.1rem solid black;
   color: white;
   text-align: center;
@@ -126,9 +127,9 @@
   padding: 0.2rem;
 }
 .popover .popover-button {
-  background: #e4e4e4;
-  color: #383838;
-  border: #383838;
+  background: #2687a1;
+  color: black;
+  border: black;
   width: 30%;
   padding: 0.2rem;
   margin: 0 2rem;
@@ -150,7 +151,7 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  color: #383838;
+  color: black;
 }
 .navbar-container__modal .modal-container .modal-container__title {
   font-size: 2rem;
@@ -162,12 +163,12 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  color: #383838;
+  color: black;
   margin-top: 1rem;
 }
 .navbar-container__modal .modal-container .modal-container__footer .footer__button {
-  background: #e4e4e4;
-  color: #383838;
+  background: #2687a1;
+  color: black;
   border: outset;
   width: 15%;
   padding: 0.5rem;

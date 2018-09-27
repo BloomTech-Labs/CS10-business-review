@@ -17,12 +17,15 @@ class App extends Component {
     searchTerm: "",
     searchResults: null,
     featuredBusinesses: [],
+    featuredReviews: [],
+    featuredUsers: [],
     business: null,
-    newBusinessId: null,
   };
 
   componentWillMount = () => {
     this.getDBBusinesses();
+    this.getDBReviews();
+    this.getDBUsers();
   };
 
   componentDidMount = () => {
@@ -51,6 +54,8 @@ class App extends Component {
               <LandingPage
                 business={this.getBusiness}
                 businesses={this.state.featuredBusinesses}
+                reviews={this.state.featuredReviews}
+                users={this.state.featuredUsers}
                 search={this.searchResults}
                 getBusiness={this.getBusiness}
               />
@@ -76,7 +81,6 @@ class App extends Component {
                 search={this.searchResults}
                 business={this.state.business}
                 createBusiness={this.createBusiness}
-                newBusinessId={this.state.newBusinessId}
               />
             )}
           />
@@ -99,6 +103,34 @@ class App extends Component {
       });
   };
 
+  getDBReviews = () => {
+    axios
+    .get("http://localhost:3001/api/review/getAllReviews")
+    .then(reviews => {
+      let featuredReviews = reviews.data.filter(review => {
+        return review.numberOfLikes >= 0;
+      });
+      this.setState({ featuredReviews });
+    })
+    .catch(err => {
+      console.log("Error:", err);
+    });
+  }
+
+  getDBUsers = () => {
+    axios
+    .get("http://localhost:3001/api/user/")
+    .then(users => {
+      let featuredUsers = users.data.filter(user => {
+        return user.numberOfLikes >= 0;
+      });
+      this.setState({ featuredUsers });
+    })
+    .catch(err => {
+      console.log("Error:", err);
+    });
+  }
+
   getBusiness = (business, landingpage = false) => {
     if (landingpage) {
       Promise.resolve()
@@ -117,10 +149,7 @@ class App extends Component {
         .catch(error => console.log({ error }));
     } else {
       axios
-        .post(
-          "http://localhost:3001/api/business/placeSearch",
-          { id: business.place_id },
-        )
+        .post("http://localhost:3001/api/business/placeSearch", { id: business.place_id })
         .then(response => {
           this.setState({ business: response.data, landingBusiness: false });
         })
@@ -133,12 +162,9 @@ class App extends Component {
 
   searchResults = searchTerm => {
     axios
-      .post(
-        "http://localhost:3001/api/business/placesSearch",
-        {
-          query: searchTerm,
-        },
-      )
+      .post("http://localhost:3001/api/business/placesSearch", {
+        query: searchTerm,
+      })
       .then(response => {
         response.data.length ? this.setState({ searchResults: response.data }) : this.setState({ searchResults: null });
       })
@@ -150,12 +176,10 @@ class App extends Component {
 
   createBusiness = id => {
     axios
-      .post(
-        "http://localhost:3001/api/business/create",
-        { id },
-      )
+      .post("http://localhost:3001/api/business/create", { id })
       .then(response => {
-        this.setState({ newBusinessId: response.data });
+        console.log("response in app", response)
+        this.setState({ business: response.data });
       })
       .catch(error => console.log("error", error));
   };

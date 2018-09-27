@@ -1,39 +1,42 @@
-import React, { Component } from 'react';
-import Modal from 'react-modal';
-import StarRatings from 'react-star-ratings';
+import React, { Component } from "react";
+import Modal from "react-modal";
+import StarRatings from "react-star-ratings";
+import axios from "axios";
 
-import '../css/NewReview.css';
+import "../css/NewReview.css";
 
 let modalStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    height: '90%',
-    width: '75%',
-    zIndex: '5',
-    backgroundColor: 'rgb(62, 56, 146)',
-    overflow: 'hidden',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    height: "90%",
+    width: "75%",
+    zIndex: "5",
+    backgroundColor: "rgb(62, 56, 146)",
+    overflow: "hidden",
   },
 };
 
-Modal.setAppElement('div');
+Modal.setAppElement("div");
 
 export default class NewReview extends Component {
   constructor() {
     super();
 
     this.state = {
-      rating: 0,
+      stars: 0,
       modalIsOpen: false,
       modalInfo: null,
-      // the files that will be uploaded to DB or wherever
-      images: [],
+      photos: [],
       imagePreviews: [],
       currentImageID: 0,
+      title: "",
+      body: "",
+      rating: 0,
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -67,8 +70,27 @@ export default class NewReview extends Component {
   };
 
   submitReview = () => {
-    this.closeModal();
-    // I'll focus on this after we do some db stuff
+    let review = {
+      newMongoId: this.props.newMongoId,
+      newGoogleId: this.props.newGoogleId,
+      title: this.state.title,
+      body: this.state.body,
+      stars: this.state.rating,
+      photos: ['http://grossfood.com'],
+    };
+    console.log("FUCKING SUBMIT", review);
+    axios
+      .post("http://localhost:3001/api/review/create", review)
+      .then(response => {
+        this.closeModal();
+      })
+      .catch(error => {
+        console.log("Error:", error);
+      });
+  };
+
+  handleInputChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleImageChange = event => {
@@ -79,14 +101,14 @@ export default class NewReview extends Component {
 
     // check to see if the image has already been uploaded
     let includes = false;
-    this.state.images.forEach(image => {
+    this.state.photos.forEach(image => {
       if (image.image.id === file.name) return (includes = true);
     });
 
-    if (includes) window.alert('File already added');
+    if (includes) window.alert("File already added");
     if (file && !includes) {
       reader.onloadend = () => {
-        let { imagePreviews, images } = this.state;
+        let { imagePreviews, photos } = this.state;
 
         // create new Image element
         var image = new Image();
@@ -94,24 +116,24 @@ export default class NewReview extends Component {
         image.src = reader.result;
         // set the id to the file.name
         // cheap way to make sure an image isn't added twice
-        image.setAttribute('id', file.name);
+        image.setAttribute("id", file.name);
 
         // add the image preview to the array
         imagePreviews.push({ id: currentImageID, preview: reader.result });
         // add the image and file to the images array for the db on submit
         // may not need the image, not sure yet
-        images.push({ id: currentImageID, image, file });
-        this.setState({ currentImageID: ++currentImageID, imagePreviews, images });
+        photos.push({ id: currentImageID, image, file });
+        this.setState({ currentImageID: ++currentImageID, imagePreviews, photos });
       };
       reader.readAsDataURL(file);
     }
   };
 
   removeImage = event => {
-    let choice = window.confirm('Are you sure you want to delete this image?');
+    let choice = window.confirm("Are you sure you want to delete this image?");
     if (choice) {
       // update the images
-      let images = this.state.images.filter(image => {
+      let images = this.state.photos.filter(image => {
         return image.id !== Number(event.target.id);
       });
       // update the image previews
@@ -123,6 +145,7 @@ export default class NewReview extends Component {
   };
 
   render() {
+    console.log("this.props.newMongoId", this.props.newMongoId)
     return (
       <Modal
         shouldCloseOnOverlayClick={false}
@@ -152,7 +175,7 @@ export default class NewReview extends Component {
                         );
                       })
                     : null}
-                  {this.state.images.length < 4 ? (
+                  {this.state.photos.length < 4 ? (
                     <div className="images__image">
                       <label htmlFor="file-upload">
                         <i className="image__add fas fa-plus-square fa-5x" />
@@ -171,11 +194,27 @@ export default class NewReview extends Component {
                 </div>
                 <div className="body__title">
                   <div className="title__label">Title:</div>
-                  <input className="title__info" />
+                  <input
+                    className="title__info"
+                    placeholder="So Gross..."
+                    name="title"
+                    type="text"
+                    value={this.state.title}
+                    onChange={this.handleInputChange}
+                    autoComplete="off"
+                  />
                 </div>
                 <div className="body__review">
                   <div className="review__label">Review:</div>
-                  <textarea className="review__info" />
+                  <textarea
+                    className="review__info"
+                    placeholder="I found a hair in my food..."
+                    name="body"
+                    type="text"
+                    value={this.state.body}
+                    onChange={this.handleInputChange}
+                    autoComplete="off"
+                  />
                 </div>
                 <div className="body__stars">
                   Star Rating:

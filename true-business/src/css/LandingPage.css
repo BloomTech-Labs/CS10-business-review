@@ -68,7 +68,7 @@
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture {
   width: 10rem;
   height: 10rem;
-  background-color: rgb(181, 227, 241);
+  background-color: rgb(0, 0, 0);
 }
 .landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture:hover {
   cursor: pointer;
