@@ -143,8 +143,6 @@ export default class NewReview extends Component {
   };
 
   render() {
-
-    console.log(this.state.images);
     return (
       <Modal
         shouldCloseOnOverlayClick={false}
