@@ -20,8 +20,8 @@ let modalStyles = {
     width: "50%",
     zIndex: "5",
     backgroundColor: "rgb(62, 56, 146)",
-    overflowY: "scroll",
-  },
+    overflowY: "scroll"
+  }
 };
 
 Modal.setAppElement("div");
@@ -32,7 +32,7 @@ class LandingPage extends Component {
 
     this.state = {
       modalIsOpen: false,
-      modalInfo: null,
+      modalInfo: null
     };
 
     this.openModal = this.openModal.bind(this);
@@ -66,9 +66,16 @@ class LandingPage extends Component {
                     // <div key={review._id} onClick={() => this.props.userReviews(user)}>
                     <div key={review._id}>
                       <div className="landing-container__review">
-                        <div className="landing-container__item">{review.newMongoId.name}</div>
-                        <div className="landing-container__picture" onClick={() => this.openModal(this, review)} />
-                        <ul className="landing-container__item--hover">@{review.reviewer.username}</ul>
+                        <div className="landing-container__item">
+                          {review.newMongoId.name}
+                        </div>
+                        <div
+                          className="landing-container__picture"
+                          onClick={() => this.openModal(this, review)}
+                        />
+                        <ul className="landing-container__item--hover">
+                          @{review.reviewer.username}
+                        </ul>
                       </div>
                     </div>
                   );
@@ -83,8 +90,14 @@ class LandingPage extends Component {
               {this.props.businesses.map((business, i) => {
                 if (i < 5) {
                   return (
-                    <div key={business._id} onClick={() => this.props.getBusiness(business, true)}>
-                      <BusinessThumbnail business={business} key={business._id} />
+                    <div
+                      key={business._id}
+                      onClick={() => this.props.getBusiness(business, true)}
+                    >
+                      <BusinessThumbnail
+                        business={business}
+                        key={business._id}
+                      />
                     </div>
                   );
                 }
@@ -103,7 +116,9 @@ class LandingPage extends Component {
                     <div key={user._id}>
                       <div className="landing-container__review">
                         <div className="landing-container__picture" />
-                        <ul className="landing-container__item--hover">@{user.username}</ul>
+                        <ul className="landing-container__item--hover">
+                          @{user.username}
+                        </ul>
                       </div>
                     </div>
                   );
@@ -117,13 +132,18 @@ class LandingPage extends Component {
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={modalStyles}
-            contentLabel="Review Modal">
+            contentLabel="Review Modal"
+          >
             <div className="landing-container__modal">
               {this.state.modalIsOpen ? (
                 <div className="modal-container">
                   <div className="modal__header">
-                    <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
-                    <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
+                    <div className="header__title">
+                      {this.state.modalInfo.newMongoId.name}
+                    </div>
+                    <div className="header__reviewer">
+                      @{this.state.modalInfo.reviewer.username}
+                    </div>
                   </div>
                   <div className="modal__body">
                     <div className="body__image">Yup</div>
@@ -140,10 +160,15 @@ class LandingPage extends Component {
                       />
                     </div>
                     <div>{this.state.modalInfo.title}</div>
-                    <div className="body__review">{this.state.modalInfo.body}</div>
+                    <div className="body__review">
+                      {this.state.modalInfo.body}
+                    </div>
                   </div>
                   <div className="modal__footer">
-                    <button className="footer__button" onClick={this.closeModal}>
+                    <button
+                      className="footer__button"
+                      onClick={this.closeModal}
+                    >
                       close
                     </button>
                   </div>
