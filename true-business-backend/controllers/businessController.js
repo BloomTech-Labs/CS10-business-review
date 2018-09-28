@@ -11,6 +11,19 @@ const createBusiness = (req, res) => {
     .then(response => {
       let result = response.json.result;
       let name = result.hasOwnProperty("name") ? result.name : "No Name Listed";
+      let types = result.hasOwnProperty("types") ? result.types : "No Types Listed";
+      let formatted_address = result.hasOwnProperty("formatted_address")
+        ? result.formatted_address
+        : "No Address Listed";
+      let formatted_phone_number = result.hasOwnProperty("formatted_phone_number")
+        ? result.formatted_phone_number
+        : "No Phone Number Listed";
+      let website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
+      let photos = result.hasOwnProperty("photos") ? result.photos : "No Photos Listed";
+      let opening_hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
+      let address_components = result.hasOwnProperty("address_components")
+        ? result.address_components
+        : "No Description Listed";
       const business = new Business({
         name,
         types,
@@ -20,6 +33,7 @@ const createBusiness = (req, res) => {
         website,
         place_id: result.place_id
       });
+      console.log(business);
       business
         .save()
         .then(business => {

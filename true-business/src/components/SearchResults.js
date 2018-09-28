@@ -42,21 +42,6 @@ class SearchResults extends Component {
                       <div className="result__info">
                         <div className="info__stars-container">
                           <div className="stars-container__text">{result.name}</div>
-                          <div className="stars-container__stars">
-                            {console.log(result)}
-                            <StarRatings
-                              starDimension="20px"
-                              starSpacing="5px"
-                              rating={result.stars}
-                              starRatedColor="gold"
-                              starEmptyColor="grey"
-                              numberOfStars={5}
-                              name="rating"
-                            />
-                            <div className="stars__text">
-                              {result.totalReviews ? result.totalReviews + " Reviews" : "0 Reviews"}
-                            </div>
-                          </div>
                         </div>
                         <div className="info__address">
                           <div className="address__item">
@@ -83,7 +68,9 @@ class SearchResults extends Component {
                         <div className="info__contact">
                           <div className="contact__item">
                             {result.types.map(type => (
-                              <div key={type}>{type}</div>
+                              <div key={type} style={{ fontSize: "1.5rem" }}>
+                                {type}
+                              </div>
                             ))}
                           </div>
                         </div>
