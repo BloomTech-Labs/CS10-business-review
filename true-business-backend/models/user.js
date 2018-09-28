@@ -18,6 +18,11 @@ const userSchema = new mongoose.Schema({
     default: Date.now(),
   },
   // For old-school way of registering I presume
+  name: {
+    type: String,
+    required: true,
+  },
+
   email: {
     type: String,
     unique: true,

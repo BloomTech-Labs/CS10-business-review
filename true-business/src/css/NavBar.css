@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 .navbar {
+=======
+.navbar-container {
+  position: fixed;
+  border-bottom: 0.1rem solid white;
+  z-index: 5;
+  opacity: 1;
+
+>>>>>>> 076a2908701f7ac9d8710f1de179846bcd30347a
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -106,12 +115,21 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
 }
+<<<<<<< HEAD
 .navbar .navbar__right .right__sign:hover {
   cursor: pointer;
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   font-weight: bolder;
   opacity: 1;
+=======
+.navbar-container .navbar-container__right .navbar-container__sign {
+  width: 50%;
+  background-color: #e6e6e6;
+  color: black;
+  text-align: center;
+  padding: .2rem 0;
+>>>>>>> 076a2908701f7ac9d8710f1de179846bcd30347a
 }
 .navbar .navbar__right .right__sign:hover {
   cursor: pointer;

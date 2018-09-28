@@ -92,9 +92,9 @@ export default class NewReview extends Component {
     });
     axios.all(uploaders).then(() => {
       let div = document.createElement("div");
-      let text = document.createTextNode("Image(s) successfully uploaded"); 
+      let text = document.createTextNode("Image successfully uploaded");
       div.appendChild(text);
-      document.getElementById("drop").appendChild(div)
+      document.getElementById("drop").appendChild(div);
     });
   };
 

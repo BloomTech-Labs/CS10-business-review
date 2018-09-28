@@ -24,9 +24,10 @@ class SignIn extends Component {
     axios
       .post("http://localhost:3001/api/user/login", this.state)
       .then(response => {
+        console.log("Fire!", response)
          localStorage.setItem('token', response.data.token)
-         localStorage.setItem('userId', response.data.userId)
-         localStorage.setItem('username', this.state.username)
+         localStorage.setItem('userId', response.data.userId)         
+         localStorage.setItem('name', response.data.name)
         this.setState({
           error: false,
         });
