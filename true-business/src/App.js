@@ -79,8 +79,16 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
-          <Route path="/signin" render={() => <SignIn search={this.searchResults} authUser={this.authUser} />} />
+          <Route
+            path="/signup"
+            render={() => <SignUp search={this.searchResults} />}
+          />
+          <Route
+            path="/signin"
+            render={() => (
+              <SignIn search={this.searchResults} authUser={this.authUser} />
+            )}
+          />
           <Route
             path="/business"
             render={() => (
@@ -92,7 +100,10 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/user" render={() => <User search={this.searchResults} />} />
+          <Route
+            path="/user"
+            render={() => <User search={this.searchResults} />}
+          />
         </Switch>
       </div>
     );
@@ -148,7 +159,7 @@ class App extends Component {
           })[0];
           this.setState({
             business: found,
-            landingBusiness: true,
+            landingBusiness: true
           });
         })
         .then(() => {
@@ -157,7 +168,9 @@ class App extends Component {
         .catch(error => console.log({ error }));
     } else {
       axios
-        .post("http://localhost:3001/api/business/placeSearch", { id: business.place_id })
+        .post("http://localhost:3001/api/business/placeSearch", {
+          id: business.place_id
+        })
         .then(response => {
           this.setState({ business: response.data, landingBusiness: false });
         })
@@ -171,10 +184,14 @@ class App extends Component {
   searchResults = searchTerm => {
     axios
       .post("http://localhost:3001/api/business/placesSearch", {
-        query: searchTerm,
+
+        query: searchTerm
+
       })
       .then(response => {
-        response.data.length ? this.setState({ searchResults: response.data }) : this.setState({ searchResults: null });
+        response.data.length
+          ? this.setState({ searchResults: response.data })
+          : this.setState({ searchResults: null });
       })
       .then(() => {
         this.props.history.push(`/results`);

@@ -33,7 +33,7 @@ class LandingPage extends Component {
 
     this.state = {
       modalIsOpen: false,
-      modalInfo: null,
+      modalInfo: null
     };
 
     this.openModal = this.openModal.bind(this);
@@ -130,13 +130,18 @@ class LandingPage extends Component {
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={modalStyles}
-            contentLabel="Review Modal">
+            contentLabel="Review Modal"
+          >
             <div className="landing-container__modal">
               {this.state.modalIsOpen ? (
                 <div className="modal-container">
                   <div className="modal__header">
-                    <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
-                    <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
+                    <div className="header__title">
+                      {this.state.modalInfo.newMongoId.name}
+                    </div>
+                    <div className="header__reviewer">
+                      @{this.state.modalInfo.reviewer.username}
+                    </div>
                   </div>
                   <div className="modal__body">
                     <img
@@ -156,10 +161,15 @@ class LandingPage extends Component {
                       />
                     </div>
                     <div>{this.state.modalInfo.title}</div>
-                    <div className="body__review">{this.state.modalInfo.body}</div>
+                    <div className="body__review">
+                      {this.state.modalInfo.body}
+                    </div>
                   </div>
                   <div className="modal__footer">
-                    <button className="footer__button" onClick={this.closeModal}>
+                    <button
+                      className="footer__button"
+                      onClick={this.closeModal}
+                    >
                       close
                     </button>
                   </div>
