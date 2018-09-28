@@ -20,7 +20,8 @@ let modalStyles = {
     height: "75%",
     width: "50%",
     zIndex: "5",
-    backgroundColor: "rgb(62, 56, 146)",
+    backgroundColor: "rgb(238,238,238)",
+    color: "rgb(5,56,107)",
     overflowY: "scroll",
   },
 };
@@ -122,7 +123,6 @@ class Business extends Component {
   };
 
   createPagination = () => {
-    console.log("New round of pagination");
     let pages = new Set([0]);
     let lastPage =
       (this.state.reviews.length / 10) % 1 === 0
@@ -131,13 +131,12 @@ class Business extends Component {
     for (let i = 10; i < this.state.reviews.length - 10; i++) {
       if (i % 10 === 0) {
         if (i >= this.state.currentPage * 10 - 20 && i <= this.state.currentPage * 10 + 20) {
-          console.log("Adding page", i / 10);
           pages.add(i / 10);
         }
-        if (this.state.currentPage < 3) {
+        if (this.state.currentPage <= 3 && i <= 40) {
           pages.add(i / 10);
         }
-        if (this.state.currentPage > this.state.reviews.length -3){
+        if (this.state.currentPage >= this.state.reviews.length / 10 - 4 && i >= this.state.reviews.length - 50) {
           pages.add(i / 10);
         }
       }
@@ -146,22 +145,18 @@ class Business extends Component {
       pages.add(lastPage);
     }
     pages = [...pages].sort((x, y) => x - y);
-    console.log("Pages", pages);
     if (this.state.currentPage > 3) pages.splice(1, 0, "...");
     if (this.state.currentPage < lastPage - 3) pages.splice(pages.length - 1, 0, "...");
     return pages.map((page, i) => {
       if (page === "...") {
         return (
-          <div key={i+page} id={page} className="pagination__page--no-hover">
-            {console.log("Why", page)}
-            {console.log("Also Why? ", i)}
+          <div key={i + page} id={page} className="pagination__page--no-hover">
             {page}
           </div>
         );
       }
       return (
         <div key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
-          {console.log("What the fuck", page)}
           {page}
         </div>
       );
@@ -289,9 +284,7 @@ class Business extends Component {
                       if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
                         return (
                           <div key={review._id} className="review__info">
-                            <div className="review__image" onClick={() => this.openModal(this, review)}>
-                              image
-                            </div>
+                            <img alt={review.reviewer.username} className="review__image" src={review.photos} onClick={() => this.openModal(this, review)} />
                             <StarRatings
                               starDimension="20px"
                               starSpacing="5px"

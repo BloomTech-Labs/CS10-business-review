@@ -5,11 +5,14 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
   text-align: center;
   color: black;
 }
@@ -24,11 +27,14 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .new-review .new-review__modal .modal__body .body__images {
   display: flex;
@@ -37,11 +43,14 @@
   align-items: center;
   height: 6em;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .new-review .new-review__modal .modal__body .body__images .images__previews {
   height: inherit;
@@ -79,11 +88,14 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
   height: 20%;
   margin: 1rem;
 }
@@ -103,11 +115,14 @@
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
   margin: 1rem;
 }
 .new-review .new-review__modal .modal__body .body__review .review__label {
@@ -127,17 +142,28 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .new-review .new-review__modal .modal__footer .footer__button {
-  border: outset;
-  width: 30%;
+  border-radius: 1rem;
   padding: 0.5rem;
-  margin: 0 2rem;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  margin: 1rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: #05386b;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
+}
+.new-review .new-review__modal .modal__footer .footer__button:hover {
+  cursor: pointer;
+  box-shadow: 0px 15px 20px grey;
+  filter: brightness(110%);
+  color: white;
 }

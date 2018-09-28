@@ -1,107 +1,131 @@
-.landing-container {
+.landing {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
-  padding: 0;
+  padding: 25vh 0 0 0;
   margin: 0;
-  padding-top: 25vh;
   cursor: default;
+  background: white;
+  color: #05386b;
 }
-.landing-container .landing-container__reviews-container {
+.landing .landing__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 80%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  width: 90%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  margin-bottom: 2rem;
-  background: #e6e6e6;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
-.landing-container .landing-container__reviews-container .landing-container__title {
+.landing .landing__container .container__header {
   font-size: 3rem;
-  color: black;
+  margin: 2rem;
 }
-.landing-container .landing-container__reviews-container .landing-container__reviews {
+.landing .landing__container .container__items {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
   flex-wrap: wrap;
   min-height: 100%;
 }
-.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review {
+.landing .landing__container .container__items .items__item {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
-  width: auto;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: #e6e6e6;
+  color: #05386b;
   color: black;
-  opacity: 0.7;
-  margin: 0 1rem;
+  opacity: 0.8;
+  margin: 1rem;
   padding: 1rem;
-  height: inherit;
+  height: 20rem;
+  width: 20%;
+  max-width: 20%;
+  min-width: 20%;
 }
-.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture {
+.landing .landing__container .container__items .items__item .item__image {
   width: 10rem;
   height: 10rem;
   background-color: #56879e;
+  top: -2rem;
+  position: relative;
 }
-.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__picture:hover {
+.landing .landing__container .container__items .items__item .item__image:hover {
   cursor: pointer;
 }
-.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__item {
-  width: 10rem;
+.landing .landing__container .container__items .items__item .item__title {
+  text-align: center;
+}
+.landing .landing__container .container__items .items__item .item__info {
   padding: 0.2rem 0;
   text-align: center;
   text-overflow: ellipsis;
   padding: 0.3rem;
 }
-.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__item--hover {
-  width: 10rem;
+.landing .landing__container .container__items .items__item .item__info--hover {
   padding: 0.2rem 0;
   text-align: center;
   text-overflow: ellipsis;
   padding: 0.3rem;
 }
-.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review .landing-container__item--hover:hover {
+.landing .landing__container .container__items .items__item .item__info--hover:hover {
   cursor: pointer;
 }
-.landing-container .landing-container__reviews-container .landing-container__reviews .landing-container__review:hover {
+.landing .landing__container .container__items .items__item:hover {
   opacity: 1;
 }
 .landing-container__modal .modal-container .modal__header {
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-star;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
   margin: 1rem;
-  color: black;
+  cursor: default;
+  background: #efeff1;
+  color: #05386b;
 }
 .landing-container__modal .modal-container .modal__header .header__title {
   font-size: 3rem;
+  margin: 0;
 }
 .landing-container__modal .modal-container .modal__header .header__review {
   font-size: 2rem;
@@ -109,8 +133,18 @@
 .landing-container__modal .modal-container .modal__body {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  color: black;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  background: #efeff1;
+  color: #05386b;
 }
 .landing-container__modal .modal-container .modal__body .body__image {
   width: 25rem;
@@ -132,24 +166,40 @@
 }
 .landing-container__modal .modal-container .modal__footer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  color: black;
-  margin-top: 1rem;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .landing-container__modal .modal-container .modal__footer .footer__button {
-  border: outset;
-  width: 15%;
+  border-radius: 1rem;
   padding: 0.5rem;
-  margin: 0 2rem;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  margin: 1rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: #05386b;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
 }
-.landing-container__modal .modal-container .modal__footer .modal__button:hover {
+.landing-container__modal .modal-container .modal__footer .footer__button:hover {
   cursor: pointer;
+  box-shadow: 0px 15px 20px grey;
+  filter: brightness(110%);
+  color: white;
 }
 .ReactModal__Overlay {
   z-index: 1000;
 }
 .ReactModal__Body--open {
+  position: absolute;
   overflow-y: hidden;
 }

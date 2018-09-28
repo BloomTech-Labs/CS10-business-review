@@ -1,0 +1,25 @@
+@import "mixins.less";
+
+.thumbnail {
+  .containers(@width: 25%, @height: 25rem, @padding: 1rem, @margin: 1rem, @justifyContent: space-between, @background: @elementBackground, @fontSize: 1.5rem);
+  opacity: 0.8;
+  max-width: 20%;
+  min-width: 20%;
+  .thumbnail__image {
+    .images();
+  }
+  .thumbnail__description {
+    .containers(@background:@elementBG);
+    .description__title {
+      font-size: 1.5rem;
+    }
+    .description__info {
+      .body(@fontSize: 1.5rem);
+      text-align: center;
+      padding: 0.3rem;
+    }
+  }
+}
+.thumbnail:hover {
+  opacity: 1;
+}

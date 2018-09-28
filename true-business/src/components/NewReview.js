@@ -14,12 +14,13 @@ let modalStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "90%",
-    width: "75%",
+    height: "75%",
+    width: "50%",
     zIndex: "5",
-    backgroundColor: "rgb(62, 56, 146)",
-    overflow: "hidden"
-  }
+    backgroundColor: "rgb(238,238,238)",
+    color: "rgb(5,56,107)",
+    overflowY: "scroll",
+  },
 };
 
 Modal.setAppElement("div");

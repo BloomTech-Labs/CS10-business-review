@@ -5,11 +5,14 @@
   align-items: center;
   height: 100%;
   width: inherit;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 25vh 2rem 2rem 2rem;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
   color: black;
 }
 .business .business__info {
@@ -19,11 +22,14 @@
   align-items: center;
   height: 100%;
   width: 75%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
   background: #e6e6e6;
   padding: 1rem;
   margin: 1rem;
@@ -47,11 +53,14 @@
   align-items: center;
   height: 25vh;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
   flex-grow: 1;
 }
 .business .business__info .info__details .details__hours {
@@ -61,11 +70,14 @@
   align-items: center;
   height: 100%;
   width: 50%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .business .business__info .info__details .details__hours .hours__title {
   font-size: 2rem;
@@ -80,11 +92,14 @@
   align-items: center;
   height: 100%;
   width: 50%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .business .business__info .info__details .details__contact .contact__phone {
   font-size: 1.5rem;
@@ -99,11 +114,14 @@
   align-items: center;
   height: 100%;
   width: 75%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
   padding: 1rem;
   background: #e6e6e6;
 }
@@ -129,11 +147,14 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown {
   display: flex;
@@ -182,11 +203,14 @@
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
   min-height: 36rem;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review {
@@ -243,11 +267,14 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__page {
   width: 5%;

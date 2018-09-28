@@ -1,18 +1,69 @@
-.containers(@display: flex, @flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @fontSize: 2rem, @lineHeight: 1,@padding: 0, @margin:0) {
+.containers(@color: @textColor, @background: white, @display: flex, @flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @fontSize: 2rem, @lineHeight: 1,@padding: 0, @margin:0) {
   display: @display;
   flex-direction: @flexDirection;
   justify-content: @justifyContent;
   align-items: @alignItems;
   height: @height;
   width: @width;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: @fontFamily;
   font-size: @fontSize;
   line-height: @lineHeight;
   padding: @padding;
   margin: @margin;
+  cursor: default;
+  background: @background;
+  color: @textColor;
 }
 
 @background: #2687a1;
 @color: black;
 @elementBackground: rgb(230, 230, 230);
 @popup: #29949a;
+
+@buttonBG: #3487d5;
+@elementBG: #efeff1;
+@modalBG:#eeeeee;
+@textColor: #05386b;
+@fontFamily: Helvetica Neue, Helvetica, Arial, sans-serif;
+
+.buttons(@width: 10rem) {
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 1rem;
+  width: @width;
+  background-color: @buttonBG;
+  color: @textColor;
+  font-family: @fontFamily;
+  font-size: 1.5rem;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 15px 20px grey;
+    filter: brightness(110%);
+    color: white;
+  }
+}
+
+.headers(@fontSize: 3rem, @margin: 2rem) {
+  font-size: @fontSize;
+  margin: @margin;
+}
+
+.body(@fontSize: 2rem) {
+  font-size: @fontSize;
+}
+
+.linerNotes() {
+  font-size: 1.5rem;
+}
+
+.images() {
+  width: 10rem;
+  height: 10rem;
+  background-color: rgb(86, 135, 158);
+  top: -2rem;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+  }
+}
+

@@ -5,11 +5,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  background: white;
+  color: #05386b;
   padding-top: 25vh;
   cursor: default;
 }
@@ -20,11 +22,14 @@
   align-items: center;
   height: 100%;
   width: 50%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
   color: black;
   background: #e6e6e6;
   padding: 1rem;
@@ -39,11 +44,14 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .signup .signup-container .signup-container__form {
   display: flex;
@@ -52,11 +60,14 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .signup .signup-container .signup-container__form .signup-container__stripe {
   display: flex;
@@ -65,11 +76,14 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .signup .signup-container .signup-container__form .signup-container__stripe .stripe_header {
   font-size: 3rem;
@@ -93,11 +107,14 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .signup .signup-container .signup-container__form .signup-container__buttons .signup-container__button {
   border: outset;

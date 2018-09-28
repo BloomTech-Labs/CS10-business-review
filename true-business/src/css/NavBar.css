@@ -1,97 +1,119 @@
-.navbar-container {
-  position: fixed;
-  border-bottom: 0.1rem solid white;
-  z-index: 20;
-  opacity: 1;
+.navbar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: 20vh;
   width: 100vw;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
+  position: fixed;
+  border-bottom: 0.1rem solid #3487d5;
+  z-index: 5;
   max-height: 20vh;
-  background-color: #e6e6e6;
 }
-.navbar-container .navbar-container__logo {
+.navbar .navbar__logo {
   width: 20%;
-  height: 100%;
+  height: 90%;
+  margin: 1rem;
+  padding: 1rem;
 }
-.navbar-container .navbar-container__logo:hover {
+.navbar .navbar__logo:hover {
   cursor: pointer;
 }
-.navbar-container .navbar-container__center {
+.navbar .navbar__center {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  width: 60%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  width: 60%;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
-.navbar-container .navbar-container__center .navbar-container__input {
+.navbar .navbar__center .center__input {
   border: 0.1rem solid black;
   margin-top: 2rem;
   min-width: 80%;
   font-size: 1.5rem;
   padding: 0.2rem;
 }
-.navbar-container .navbar-container__center .navbar-container__buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
-  font-size: 2rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-}
-.navbar-container .navbar-container__center .navbar-container__buttons .navbar-container__button {
-  background: #2687a1;
-  color: black;
-  border: outset;
-  width: 15%;
+.navbar .navbar__center .center__button {
+  border-radius: 1rem;
   padding: 0.5rem;
-  margin: 0 2rem;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  margin: 1rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: #05386b;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
 }
-.navbar-container .navbar-container__center .navbar-container__buttons .navbar-container__button:hover {
+.navbar .navbar__center .center__button:hover {
   cursor: pointer;
+  box-shadow: 0px 15px 20px grey;
+  filter: brightness(110%);
+  color: white;
 }
-.navbar-container .navbar-container__right {
+.navbar .navbar__right {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   height: 100%;
   width: 20%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
-.navbar-container .navbar-container__right .navbar-container__sign {
-  width: 50%;
-  background-color: #e6e6e6;
-  color: black;
+.navbar .navbar__right .right__user {
   text-align: center;
-  padding: 0.2rem 0;
 }
-.navbar-container .navbar-container__right .navbar-container__sign:hover {
+.navbar .navbar__right .right__sign {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  background: white;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 1rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: #05386b;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+}
+.navbar .navbar__right .right__sign:hover {
+  cursor: pointer;
+  box-shadow: 0px 15px 20px grey;
+  filter: brightness(110%);
+  color: white;
+}
+.navbar .navbar__right .right__sign:hover {
   cursor: pointer;
 }
 .popover {
@@ -99,39 +121,45 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 15%;
+  height: 20%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  background: #29949a !important;
+  cursor: default;
+  background: white;
+  background: #efeff1 !important;
+  color: #05386b;
   border: 0.1rem solid black;
-  color: white;
   text-align: center;
   top: -40px !important;
   width: 60% !important;
-  z-index: 2;
+  z-index: 10;
 }
 .popover .popover-header {
-  padding: 0.2rem;
+  font-size: 2rem;
+  margin: 0.2rem;
 }
 .popover .popover-body {
-  padding: 0.2rem;
+  font-size: 1.5rem;
 }
 .popover .popover-button {
-  background: #2687a1;
-  color: black;
-  border: black;
-  width: 30%;
-  padding: 0.2rem;
-  margin: 0 2rem;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 1rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: #05386b;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
 }
 .popover .popover-button:hover {
   cursor: pointer;
+  box-shadow: 0px 15px 20px grey;
+  filter: brightness(110%);
+  color: white;
 }
 .navbar-container__modal .modal-container {
   display: flex;
@@ -140,12 +168,14 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  color: black;
+  cursor: default;
+  background: white;
+  color: #05386b;
 }
 .navbar-container__modal .modal-container .modal-container__title {
   font-size: 2rem;
@@ -161,15 +191,18 @@
   margin-top: 1rem;
 }
 .navbar-container__modal .modal-container .modal-container__footer .footer__button {
-  background: #2687a1;
-  color: black;
-  border: outset;
-  width: 15%;
+  border-radius: 1rem;
   padding: 0.5rem;
-  margin: 0 2rem;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  margin: 1rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: #05386b;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
 }
-.navbar-container__modal .modal-container .modal-container__footer .modal__button:hover {
+.navbar-container__modal .modal-container .modal-container__footer .footer__button:hover {
   cursor: pointer;
+  box-shadow: 0px 15px 20px grey;
+  filter: brightness(110%);
+  color: white;
 }

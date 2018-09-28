@@ -5,11 +5,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  background: white;
+  color: #05386b;
   min-height: 100vh;
   padding-top: 25vh;
   cursor: default;
@@ -22,15 +24,19 @@
 .search-container .search-container__results {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   height: auto;
   width: 90%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
+  min-height: 36rem;
   flex-wrap: wrap;
   color: white;
 }
@@ -41,11 +47,14 @@
   align-items: center;
   height: 100%;
   width: 20%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.25rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
   min-width: 10rem;
   margin: 2rem;
   flex-wrap: wrap;
@@ -54,7 +63,7 @@
   opacity: 0.5;
   float: left;
 }
-.search-container .search-container__results .results__result .result__picture {
+.search-container .search-container__results .results__result .result__image {
   width: 10rem;
   height: 10rem;
   background-color: black;
@@ -71,6 +80,32 @@
 }
 .search-container .search-container__results .results__result:hover {
   opacity: 1;
+}
+.search-container .search-container__results .reviews__pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  background: white;
+  color: #05386b;
+}
+.search-container .search-container__results .reviews__pagination .pagination__page {
+  width: 5%;
+}
+.search-container .search-container__results .reviews__pagination .pagination__page:hover {
+  cursor: pointer;
+}
+.search-container .search-container__results .reviews__pagination .pagination__page--no-hover {
+  width: 5%;
+  cursor: default;
 }
 .search-container .search-container__results:after {
   content: "";
