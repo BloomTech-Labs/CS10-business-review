@@ -1,12 +1,12 @@
 @import 'mixins.less';
 
-.user {
+.subscriber {
   .containers(@width: auto, @justifyContent: flex-start, @alignItems: flex-start);
   padding-top: 25vh;
   padding-left: 5rem;
   color: white;
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
-  .user__header {
+  .subscriber__header {
     .containers(@flexDirection: row, @height: 5rem);
     .header__breadcrumbs {
       .containers(@flexDirection:row, @height:inherit, @alignItems:flex-start, @justifyContent: flex-start);
@@ -39,7 +39,7 @@
       cursor: pointer;
     }
   }
-  .user__body {
+  .subscriber__body {
     .containers(@flexDirection: row, @alignItems:flex-start, @justifyContent:space-between);
     .body__left-bar {
       .containers(@width: 20vw, @height: auto, @justifyContent:flex-start, @alignItems: flex-start);
@@ -60,10 +60,10 @@
     }
     .body__content {
       .containers(@justifyContent: flex-start, @alignItems: flex-start);
-      .content__user-reviews {
+      .content__subscriber-reviews {
         .containers(@justifyContent: flex-start, @alignItems: flex-start, @flexDirection: row);
         flex-wrap: wrap;
-        .user-reviews__item {
+        .subscriber-reviews__item {
           .containers(@width: 20%, @height: 15rem);
           margin: 0 1rem 1rem 1rem;
           border: 0.1rem solid black;
@@ -84,7 +84,7 @@
             text-align: center;
           }
         }
-        .user-reviews__add {
+        .subscriber-reviews__add {
           .containers(@width: 20%, @height: 15rem);
           background-color: rgb(34, 49, 49);
           margin: 0 1rem 1rem 1rem;

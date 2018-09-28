@@ -12,7 +12,7 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      subscribername: "",
       email: "",
       confirmEmail: "",
       password: "",
@@ -36,17 +36,17 @@ class SignUp extends Component {
     return this.state.email === this.state.confirmEmail;
   };
 
-  createUser = event => {
+  createSubscriber = event => {
     event.preventDefault();
-    const user = {
+    const subscriber = {
       email: this.state.email,
-      username: this.state.username,
+      subscribername: this.state.subscribername,
       password: this.state.password,
       accountType: this.state.type,
     };
     this.state.payment
       ? axios
-          .post('http://localhost:3001/register', user)
+          .post('http://localhost:3001/register', subscriber)
           .then(() => {
             this.setState({
               error: false,
@@ -84,10 +84,10 @@ class SignUp extends Component {
               />
               <input
                 className="signup-container__input"
-                placeholder="Username"
-                name="username"
+                placeholder="Subscribername"
+                name="subscribername"
                 type="text"
-                value={this.state.username}
+                value={this.state.subscribername}
                 onChange={this.handleInputChange}
               />
               <input
@@ -114,7 +114,7 @@ class SignUp extends Component {
                 </div>
               </StripeProvider>
               <div className="signup-container__buttons ">
-                <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createUser}>
+                <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createSubscriber}>
                   Confirm
                 </button>
               </div>

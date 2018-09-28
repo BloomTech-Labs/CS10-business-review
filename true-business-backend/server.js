@@ -1,54 +1,62 @@
-require('dotenv').config();
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
-const cookieSession = require('cookie-session');
-const passport = require('passport');
-const bodyparser = require('body-parser');
+require("dotenv").config();
+const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
+const bodyparser = require("body-parser");
+const morgan = require("morgan");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-
-//Instantiate Server
+// set up server
 const server = express();
+const originUrl =
+  process.env.NODE_ENV === "production"
+    ? `https://true-business.netlify.com/`
+    : `http://localhost:3000`;
+const corsOptions = {
+  origin: originUrl,
+  credentials: true,
+  methods: ["GET", "PUT", "POST", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+};
 
-//Bringin Mongoose Database
-const mongoose = require('mongoose');
-
-//Bringing the route
-const routes = require('./routes');
-
-//Database name
-const db = 'mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness';
-
-//Connect Database
-mongoose
-  .connect(db)
-  .then(() => console.log('\n=== connected to mongo ===\n'))
-  .catch(err => console.log('database is not connected'));
-
-//Security
+// set up middlewares
+server.use(cors(corsOptions));
 server.use(helmet());
-
-//Permissions
-server.use(cors());
-
-//Enable to parse Json object
-server.use(express.json());
-server.use(bodyparser.json()); //express.jason
-
-server.use(express.json());
-server.use(
-  cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [process.env.REACT_APP_COOKIEKEY],
-  }),
-);
+server.use(express.urlencoded({ extended: false }));
+server.use(morgan("dev"));
 server.use(passport.initialize());
-server.use(passport.session());
+server.use(express.json());
 
-//Connect the route to the server
-server.use('/', routes);
+const authRoutes = require("./routes/authRoutes");
+const subscriberRoutes = require("./routes/subscriberRoutes");
 
-server.use(require('body-parser').text());
+mongoose
+  .connect(
+    process.env.DB_URI,
+    { useNewUrlParser: true }
+  )
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch(err => {
+    console.log("Error connecting to the database");
+  });
+
+server.get("/", (req, res) => {
+  res.status(200).json("Server running");
+});
+
+// set up routes
+server.use("/auth", authRoutes);
+server.use("/subscriber", subscriberRoutes);
+
+// Catch-all error handler
+server.use((err, req, res) => {
+  res.status(500).send({ err });
+});
 
 //Status server
 const port = process.env.PORT || 3001;

@@ -1,4 +1,4 @@
-.user {
+.subscriber {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -15,7 +15,7 @@
   color: white;
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
 }
-.user .user__header {
+.subscriber .subscriber__header {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -28,7 +28,7 @@
   padding: 0;
   margin: 0;
 }
-.user .user__header .header__breadcrumbs {
+.subscriber .subscriber__header .header__breadcrumbs {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -42,7 +42,7 @@
   margin: 0;
   font-size: 1.5rem;
 }
-.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb {
+.subscriber .subscriber__header .header__breadcrumbs .breadcrumbs__breadcrumb {
   border: none;
   width: auto;
   font-size: 1.5rem;
@@ -51,16 +51,16 @@
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
   margin: 0 1rem;
 }
-.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow {
+.subscriber .subscriber__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow {
   padding: 0 1rem;
 }
-.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow:hover {
+.subscriber .subscriber__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow:hover {
   cursor: default;
 }
-.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb:hover {
+.subscriber .subscriber__header .header__breadcrumbs .breadcrumbs__breadcrumb:hover {
   cursor: pointer;
 }
-.user .user__header .header__signout {
+.subscriber .subscriber__header .header__signout {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -75,10 +75,10 @@
   padding-right: 5rem;
   font-size: 1.5rem;
 }
-.user .user__header .header__signout:hover {
+.subscriber .subscriber__header .header__signout:hover {
   cursor: pointer;
 }
-.user .user__body {
+.subscriber .subscriber__body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -91,7 +91,7 @@
   padding: 0;
   margin: 0;
 }
-.user .user__body .body__left-bar {
+.subscriber .subscriber__body .body__left-bar {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -105,7 +105,7 @@
   margin: 0;
   border: 0.1rem solid black;
 }
-.user .user__body .body__left-bar .left-bar__button {
+.subscriber .subscriber__body .body__left-bar .left-bar__button {
   border: none;
   width: 100%;
   font-size: 1.5rem;
@@ -114,11 +114,11 @@
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
   padding: 1rem;
 }
-.user .user__body .body__left-bar .left-bar__button:hover {
+.subscriber .subscriber__body .body__left-bar .left-bar__button:hover {
   filter: brightness(120%);
   cursor: pointer;
 }
-.user .user__body .body__content {
+.subscriber .subscriber__body .body__content {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -131,7 +131,7 @@
   padding: 0;
   margin: 0;
 }
-.user .user__body .body__content .content__user-reviews {
+.subscriber .subscriber__body .body__content .content__subscriber-reviews {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -145,7 +145,7 @@
   margin: 0;
   flex-wrap: wrap;
 }
-.user .user__body .body__content .content__user-reviews .user-reviews__item {
+.subscriber .subscriber__body .body__content .content__subscriber-reviews .subscriber-reviews__item {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,19 +164,19 @@
   color: white;
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
 }
-.user .user__body .body__content .content__user-reviews .user-reviews__item .item__image {
+.subscriber .subscriber__body .body__content .content__subscriber-reviews .subscriber-reviews__item .item__image {
   width: 10rem;
   height: 10rem;
   background-color: black;
 }
-.user .user__body .body__content .content__user-reviews .user-reviews__item .item__image:hover {
+.subscriber .subscriber__body .body__content .content__subscriber-reviews .subscriber-reviews__item .item__image:hover {
   cursor: pointer;
 }
-.user .user__body .body__content .content__user-reviews .user-reviews__item .item__info {
+.subscriber .subscriber__body .body__content .content__subscriber-reviews .subscriber-reviews__item .item__info {
   font-size: 1.25rem;
   text-align: center;
 }
-.user .user__body .body__content .content__user-reviews .user-reviews__add {
+.subscriber .subscriber__body .body__content .content__subscriber-reviews .subscriber-reviews__add {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -193,15 +193,15 @@
   border: 0.1rem solid black;
   padding: 1rem;
 }
-.user .user__body .body__content .content__user-reviews .user-reviews__add .add__image:hover {
+.subscriber .subscriber__body .body__content .content__subscriber-reviews .subscriber-reviews__add .add__image:hover {
   cursor: pointer;
 }
-.user .user__body .body__content .content__user-reviews .user-reviews__add .add__text {
+.subscriber .subscriber__body .body__content .content__subscriber-reviews .subscriber-reviews__add .add__text {
   color: white;
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
   font-size: 2rem;
 }
-.user .user__body .body__content .content__solo-add {
+.subscriber .subscriber__body .body__content .content__solo-add {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -215,15 +215,15 @@
   margin: 0;
   padding: 1rem 20rem 1rem 0;
 }
-.user .user__body .body__content .content__solo-add .solo-add__image:hover {
+.subscriber .subscriber__body .body__content .content__solo-add .solo-add__image:hover {
   cursor: pointer;
 }
-.user .user__body .body__content .content__solo-add .solo-add__text {
+.subscriber .subscriber__body .body__content .content__solo-add .solo-add__text {
   color: white;
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
   font-size: 2rem;
 }
-.user .user__body .body__content .content__profile {
+.subscriber .subscriber__body .body__content .content__profile {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -236,16 +236,16 @@
   padding: 0;
   margin: 0;
 }
-.user .user__body .body__content .content__profile .profile__image {
+.subscriber .subscriber__body .body__content .content__profile .profile__image {
   margin: 1rem 3rem;
   width: 15rem;
   height: 20rem;
   background-color: black;
 }
-.user .user__body .body__content .content__profile .profile__image:hover {
+.subscriber .subscriber__body .body__content .content__profile .profile__image:hover {
   cursor: pointer;
 }
-.user .user__body .body__content .content__profile .profile__container {
+.subscriber .subscriber__body .body__content .content__profile .profile__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -258,7 +258,7 @@
   padding: 0;
   margin: 0;
 }
-.user .user__body .body__content .content__profile .profile__container .container__info {
+.subscriber .subscriber__body .body__content .content__profile .profile__container .container__info {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -272,15 +272,15 @@
   margin: 0;
   margin: 1rem;
 }
-.user .user__body .body__content .content__profile .profile__container .container__info .info__label {
+.subscriber .subscriber__body .body__content .content__profile .profile__container .container__info .info__label {
   font-size: 1.5rem;
   width: 20%;
 }
-.user .user__body .body__content .content__profile .profile__container .container__info .info__data {
+.subscriber .subscriber__body .body__content .content__profile .profile__container .container__info .info__data {
   width: 50%;
   font-size: 1.5rem;
 }
-.user .user__body .body__content .content__profile .profile__container .container__info .info__button {
+.subscriber .subscriber__body .body__content .content__profile .profile__container .container__info .info__button {
   width: 20%;
   border: none;
   font-size: 1.25rem;
@@ -289,6 +289,6 @@
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
   padding: 1rem;
 }
-.user .user__body .body__content .content__profile .profile__container .container__info .info__button:hover {
+.subscriber .subscriber__body .body__content .content__profile .profile__container .container__info .info__button:hover {
   cursor: pointer;
 }

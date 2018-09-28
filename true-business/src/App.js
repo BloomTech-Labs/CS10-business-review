@@ -8,7 +8,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import SearchResults from "./components/SearchResults";
 import Business from "./components/Business";
-import User from "./components/User";
+import Subscriber from "./components/Subscriber";
 import "./css/App.css";
 
 class App extends Component {
@@ -67,7 +67,7 @@ class App extends Component {
             )}
           />
           <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
-          <Route path="/signin" render={() => <SignIn search={this.searchResults} authUser={this.authUser} />} />
+          <Route path="/signin" render={() => <SignIn search={this.searchResults} authSubscriber={this.authSubscriber} />} />
           <Route
             path="/business"
             render={() => (
@@ -80,7 +80,7 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/user" render={() => <User search={this.searchResults} />} />
+          <Route path="/subscriber" render={() => <Subscriber search={this.searchResults} />} />
         </Switch>
       </div>
     );

@@ -1,68 +1,68 @@
 const mongoose = require("mongoose");
 const moment = require("moment");
 
-const userSchema = new mongoose.Schema({
+const subscriberSchema = new mongoose.Schema({
   // Refers to whether they are "Monthly" or "Yearly"
   accountType: {
     type: String,
-    default: "One Month",
+    default: "One Month"
   },
   // The date the account is activated
   accountActivated: {
     type: Date,
-    default: Date.now(),
+    default: Date.now()
   },
   // presave hook will change this by a month or year
   accountDeactivated: {
     type: Date,
-    default: Date.now(),
+    default: Date.now()
   },
   // For old-school way of registering I presume
   email: {
     type: String,
-    default: "Email" + (Math.floor(Math.random() * 1000000000) + 123456),
+    default: "Email" + (Math.floor(Math.random() * 1000000000) + 123456)
   },
   // Displayed on reviews and what not
-  username: {
+  subscribername: {
     type: String,
-    default: "User" + (Math.floor(Math.random() * 1000000000) + 123456),
+    default: "Subscriber" + (Math.floor(Math.random() * 1000000000) + 123456)
   },
   // Guessing also only necessary for old-school way of registering
   password: {
     type: String,
-    default: "Password" + (Math.floor(Math.random() * 1000000000) + 123456),
+    default: "Password" + (Math.floor(Math.random() * 1000000000) + 123456)
   },
   // For google passport
   googleId: {
     type: String,
-    default: "googleId" + (Math.floor(Math.random() * 1000000000) + 123456),
+    default: "googleId" + (Math.floor(Math.random() * 1000000000) + 123456)
   },
   reviews: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Review",
-    },
+      ref: "Review"
+    }
   ],
   numberOfReviews: {
     type: Number,
-    default: 0,
+    default: 0
   },
   numberOfLikes: {
     type: Number,
-    default: 0,
+    default: 0
   },
-  userImage: {
+  subscriberImage: {
     type: String,
-    default: "userImage" + (Math.floor(Math.random() * 1000000000) + 123456),
-  },
+    default: "subscriberImage" + (Math.floor(Math.random() * 1000000000) + 123456)
+  }
 });
 
-let userModel = mongoose.model("User", userSchema);
+let subscriberModel = mongoose.model("Subscriber", subscriberSchema);
 // Pre-save hook
 // Attempting to find a way to adjust the account Deactivated date.
 // Definitely unfinished.
-userSchema.pre("save", function(next) {
-  userModel.find({ _id: this._id }, (err, docs) => {
+subscriberSchema.pre("save", function(next) {
+  subscriberModel.find({ _id: this._id }, (err, docs) => {
     if (!docs.length) {
       if (this.accountType === "One Month") {
         let current = Date.now();
@@ -73,10 +73,10 @@ userSchema.pre("save", function(next) {
       }
       next();
     } else {
-      console.log("User exists already: ", this);
-      next(new Error("User exists!", this));
+      console.log("Subscriber exists already: ", this);
+      next(new Error("Subscriber exists!", this));
     }
   });
 });
 
-module.exports = userModel;
+module.exports = subscriberModel;

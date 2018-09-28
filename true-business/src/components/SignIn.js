@@ -9,7 +9,7 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      subscribername: "",
       password: "",
       error: "",
       errorMessage: "",
@@ -25,11 +25,11 @@ class SignIn extends Component {
       .post("http://localhost:3001/login", this.state)
       .then(response => {
         // localStorage.setItem('token', response.data.token)
-        // localStorage.setItem('username', this.state.username)
+        // localStorage.setItem('subscribername', this.state.subscribername)
         this.setState({
           error: false,
         });
-        this.props.history.push(`/user`);
+        this.props.history.push(`/subscriber`);
       })
       .catch(err => {
         this.setState({
@@ -53,10 +53,10 @@ class SignIn extends Component {
             <div className="signin-container__form">
               <input
                 className="signin-container__input"
-                placeholder="Username"
-                name="username"
+                placeholder="Subscribername"
+                name="subscribername"
                 type="text"
-                value={this.state.username}
+                value={this.state.subscribername}
                 onChange={this.handleInputChange}
                 autoComplete="off"
               />

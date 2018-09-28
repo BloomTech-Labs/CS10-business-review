@@ -3,12 +3,12 @@ import { withRouter } from "react-router-dom";
 
 import NavBar from "./NavBar.js";
 
-import "../css/User.css";
+import "../css/Subscriber.css";
 
-class User extends Component {
+class Subscriber extends Component {
   state = {
     breadcrumbs: ["Home"],
-    userReviews: [
+    subscriberReviews: [
       {
         business: "Taco Bell",
         businessType: '"Tacos" *cough*',
@@ -48,7 +48,7 @@ class User extends Component {
   logout = () => {
     console.log("Log");
     localStorage.removeItem("token");
-    localStorage.removeItem("userId");
+    localStorage.removeItem("subscriberId");
     this.props.history.push("/");
   };
 
@@ -56,8 +56,8 @@ class User extends Component {
     return (
       <div>
         <NavBar search={this.props.search} />
-        <div className="user">
-          <div className="user__header">
+        <div className="subscriber">
+          <div className="subscriber__header">
             <div className="header__breadcrumbs">
               {this.state.breadcrumbs.map((crumb, i) => {
                 if (i + 1 === this.state.breadcrumbs.length) {
@@ -82,7 +82,7 @@ class User extends Component {
               Sign Out
             </div>
           </div>
-          <div className="user__body">
+          <div className="subscriber__body">
             <div className="body__left-bar">
               <button className="left-bar__button" name="Add a Review" onClick={this.updateCurrent}>
                 Add a Review
@@ -137,11 +137,11 @@ class User extends Component {
         );
       case "My Reviews":
         return (
-          <div className="content__user-reviews">
-            {this.state.userReviews.map((review, i) => {
+          <div className="content__subscriber-reviews">
+            {this.state.subscriberReviews.map((review, i) => {
               return (
                 /* Cheap workaround until we have review ids / hook up to the back end */
-                <div key={i} className="user-reviews__item">
+                <div key={i} className="subscriber-reviews__item">
                   <div className="item__image">image</div>
                   <div className="item__info">{review.business}</div>
                   <div className="item__info">{review.businessType}</div>
@@ -151,7 +151,7 @@ class User extends Component {
                 </div>
               );
             })}
-            <div className="user-reviews__add">
+            <div className="subscriber-reviews__add">
               <div className="add__image">
                 <i className="fas fa-plus-square fa-5x" />
               </div>
@@ -170,9 +170,9 @@ class User extends Component {
             {/* Have this open a modal to change their password */}
             <div className="profile__container">
               <div className="container__info">
-                <div className="info__label">Username:</div>
+                <div className="info__label">Subscribername:</div>
                 <div className="info__data">Amanda Holdenkiss</div>
-                <button className="info__button" onClick={this.changeUsername}>
+                <button className="info__button" onClick={this.changeSubscribername}>
                   Change
                 </button>
               </div>
@@ -186,7 +186,7 @@ class User extends Component {
               <div className="container__info">
                 <div className="info__label">Password:</div>
                 <div className="info__data">****************</div>
-                <button className="info__button" onClick={this.changeUsername}>
+                <button className="info__button" onClick={this.changeSubscribername}>
                   Change
                 </button>
               </div>
@@ -197,4 +197,4 @@ class User extends Component {
   };
 }
 
-export default withRouter(User);
+export default withRouter(Subscriber);
