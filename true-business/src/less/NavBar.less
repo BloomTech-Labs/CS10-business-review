@@ -1,7 +1,8 @@
 @import './mixins.less';
 
 .navbar {
-  .containers(@background: white, @width: 100vw, @flexDirection:row, @justifyContent: space-between, @height: 20vh);
+  .containers(@width: 100vw, @flexDirection:row, @justifyContent: space-between, @height: 20vh);
+  background: white;
   position: fixed;
   border-bottom: 0.1rem solid @buttonBG;
   z-index: 5;
@@ -75,7 +76,7 @@
       display: flex;
       justify-content: center;
       width: 100%;
-      color: @color;
+      color: @textColor;
       margin-top: 1rem;
       .footer__button {
         .buttons()

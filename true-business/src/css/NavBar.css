@@ -11,8 +11,8 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
+  background: white;
   position: fixed;
   border-bottom: 0.1rem solid #3487d5;
   z-index: 5;
@@ -40,7 +40,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .navbar .navbar__center .center__input {
@@ -51,7 +50,7 @@
   padding: 0.2rem;
 }
 .navbar .navbar__center .center__button {
-  border-radius: 1rem;
+  border-radius: 0.3rem;
   padding: 0.5rem;
   margin: 1rem;
   width: 10rem;
@@ -65,6 +64,7 @@
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   color: white;
+  opacity: 1;
 }
 .navbar .navbar__right {
   display: flex;
@@ -79,7 +79,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .navbar .navbar__right .right__user {
@@ -97,8 +96,7 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
-  border-radius: 1rem;
+  border-radius: 0.3rem;
   padding: 0.5rem;
   margin: 1rem;
   width: 10rem;
@@ -112,6 +110,7 @@
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   color: white;
+  opacity: 1;
 }
 .navbar .navbar__right .right__sign:hover {
   cursor: pointer;
@@ -129,7 +128,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   background: #efeff1 !important;
   color: #05386b;
   border: 0.1rem solid black;
@@ -141,12 +139,13 @@
 .popover .popover-header {
   font-size: 2rem;
   margin: 0.2rem;
+  padding: 1rem;
 }
 .popover .popover-body {
   font-size: 1.5rem;
 }
 .popover .popover-button {
-  border-radius: 1rem;
+  border-radius: 0.3rem;
   padding: 0.5rem;
   margin: 1rem;
   width: 10rem;
@@ -160,6 +159,7 @@
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   color: white;
+  opacity: 1;
 }
 .navbar-container__modal .modal-container {
   display: flex;
@@ -174,7 +174,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .navbar-container__modal .modal-container .modal-container__title {
@@ -187,11 +186,11 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  color: black;
+  color: #05386b;
   margin-top: 1rem;
 }
 .navbar-container__modal .modal-container .modal-container__footer .footer__button {
-  border-radius: 1rem;
+  border-radius: 0.3rem;
   padding: 0.5rem;
   margin: 1rem;
   width: 10rem;
@@ -205,4 +204,5 @@
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   color: white;
+  opacity: 1;
 }

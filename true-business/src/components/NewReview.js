@@ -38,7 +38,7 @@ export default class NewReview extends Component {
       title: "",
       body: "",
       rating: 0,
-      fileURL: []
+      fileURL: [],
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -77,13 +77,9 @@ export default class NewReview extends Component {
 
       // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
       return axios
-        .post(
-          "https://api.cloudinary.com/v1_1/ddhamypia/image/upload",
-          formData,
-          {
-            headers: { "X-Requested-With": "XMLHttpRequest" }
-          }
-        )
+        .post("https://api.cloudinary.com/v1_1/ddhamypia/image/upload", formData, {
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+        })
         .then(response => {
           const data = response.data;
           const fileURL = data.secure_url; // You should store this URL for future references in your app
@@ -94,10 +90,13 @@ export default class NewReview extends Component {
           this.setState({ fileURL: photos });
         });
     });
+    axios.all(uploaders).then(() => {
+      let div = document.createElement("div");
+      let text = document.createTextNode("Image(s) successfully uploaded"); 
+      div.appendChild(text);
+      document.getElementById("drop").appendChild(div)
+    });
   };
-  // axios.all(uploaders) => {
-  //   // ... perform after upload is successful operation
-  // });
 
   starRating = rating => {
     this.setState({ rating });
@@ -110,7 +109,7 @@ export default class NewReview extends Component {
       title: this.state.title,
       body: this.state.body,
       stars: this.state.rating,
-      photos: this.state.fileURL
+      photos: this.state.fileURL,
     };
     axios
       .post("http://localhost:3001/api/review/create", review)
@@ -133,14 +132,13 @@ export default class NewReview extends Component {
         isOpen={this.state.modalIsOpen}
         onRequestClose={this.closeModal}
         style={modalStyles}
-        contentLabel="New Review Modal"
-      >
+        contentLabel="New Review Modal">
         <div className="new-review">
           {this.state.modalIsOpen ? (
             <div className="new-review__modal">
               <div className="modal__header">New Review</div>
               <div className="modal__body">
-                <div>
+                <div id="drop">
                   <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
                     <p>Drop your files or click here to upload</p>
                   </Dropzone>

@@ -10,7 +10,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  background: white;
   color: #05386b;
   padding-top: 25vh;
   cursor: default;
@@ -28,9 +27,7 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
-  color: black;
   background: #e6e6e6;
   padding: 1rem;
 }
@@ -50,7 +47,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .signup .signup-container .signup-container__form {
@@ -66,7 +62,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .signup .signup-container .signup-container__form .signup-container__stripe {
@@ -82,7 +77,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .signup .signup-container .signup-container__form .signup-container__stripe .stripe_header {
@@ -113,7 +107,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .signup .signup-container .signup-container__form .signup-container__buttons .signup-container__button {

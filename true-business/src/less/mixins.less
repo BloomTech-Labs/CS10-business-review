@@ -1,4 +1,4 @@
-.containers(@color: @textColor, @background: white, @display: flex, @flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @fontSize: 2rem, @lineHeight: 1,@padding: 0, @margin:0) {
+.containers(@color: @textColor, @display: flex, @flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @fontSize: 2rem, @lineHeight: 1,@padding: 0, @margin:0) {
   display: @display;
   flex-direction: @flexDirection;
   justify-content: @justifyContent;
@@ -11,7 +11,6 @@
   padding: @padding;
   margin: @margin;
   cursor: default;
-  background: @background;
   color: @textColor;
 }
 
@@ -22,12 +21,13 @@
 
 @buttonBG: #3487d5;
 @elementBG: #efeff1;
-@modalBG:#eeeeee;
+@modalBG: #eeeeee;
 @textColor: #05386b;
 @fontFamily: Helvetica Neue, Helvetica, Arial, sans-serif;
+@whiteBG: rgb(255, 255, 255);
 
 .buttons(@width: 10rem) {
-  border-radius: 1rem;
+  border-radius: 0.3rem;
   padding: 0.5rem;
   margin: 1rem;
   width: @width;
@@ -40,12 +40,14 @@
     box-shadow: 0px 15px 20px grey;
     filter: brightness(110%);
     color: white;
+    opacity: 1;
   }
 }
 
-.headers(@fontSize: 3rem, @margin: 2rem) {
+.headers(@fontSize: 3rem, @margin: 2rem, @padding: 1rem) {
   font-size: @fontSize;
   margin: @margin;
+  padding: @padding;
 }
 
 .body(@fontSize: 2rem) {
@@ -67,3 +69,16 @@
   }
 }
 
+.backAndBorder() {
+  background: @whiteBG;
+  border: 0.1rem solid @textColor;
+}
+
+.crazyHover() {
+  &:hover {
+    cursor: pointer;
+    box-shadow:  0px 0px 50px 10px grey;
+    filter: brightness(110%);
+    opacity: 1;
+  }
+}

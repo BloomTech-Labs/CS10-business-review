@@ -11,11 +11,9 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
-  color: #05386b;
   padding-top: 25vh;
   padding-left: 5rem;
-  color: black;
+  color: #05386b;
 }
 .user .user__header {
   display: flex;
@@ -30,7 +28,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .user .user__header .header__breadcrumbs {
@@ -46,7 +43,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
   font-size: 1.5rem;
 }
@@ -55,7 +51,7 @@
   width: auto;
   font-size: 1.5rem;
   background-color: #e6e6e6;
-  color: black;
+  color: #05386b;
   margin: 0 1rem;
 }
 .user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow {
@@ -80,7 +76,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
   padding-right: 5rem;
   font-size: 1.5rem;
@@ -101,7 +96,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .user .user__body .body__left-bar {
@@ -117,7 +111,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
   border: 0.1rem solid black;
 }
@@ -126,7 +119,7 @@
   width: 100%;
   font-size: 1.5rem;
   background-color: #e6e6e6;
-  color: black;
+  color: #05386b;
   padding: 1rem;
 }
 .user .user__body .body__left-bar .left-bar__button:hover {
@@ -146,7 +139,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .user .user__body .body__content .content__user-reviews {
@@ -162,7 +154,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
   flex-wrap: wrap;
 }
@@ -179,13 +170,11 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
-  color: #05386b;
   margin: 0 1rem 1rem 1rem;
   border: 0.1rem solid black;
   padding: 1rem;
   background-color: #e6e6e6;
-  color: black;
+  color: #05386b;
 }
 .user .user__body .body__content .content__user-reviews .user-reviews__item .item__image {
   width: 10rem;
@@ -212,7 +201,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
   background-color: #e6e6e6;
   margin: 0 1rem 1rem 1rem;
@@ -223,7 +211,7 @@
   cursor: pointer;
 }
 .user .user__body .body__content .content__user-reviews .user-reviews__add .add__text {
-  color: black;
+  color: #05386b;
   font-size: 2rem;
 }
 .user .user__body .body__content .content__solo-add {
@@ -239,7 +227,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
   padding: 1rem 20rem 1rem 0;
 }
@@ -247,7 +234,7 @@
   cursor: pointer;
 }
 .user .user__body .body__content .content__solo-add .solo-add__text {
-  color: black;
+  color: #05386b;
   font-size: 2rem;
 }
 .user .user__body .body__content .content__profile {
@@ -263,7 +250,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .user .user__body .body__content .content__profile .profile__image {
@@ -288,7 +274,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info {
@@ -304,7 +289,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
   margin: 1rem;
 }
@@ -321,7 +305,7 @@
   border: none;
   font-size: 1.25rem;
   background-color: #e6e6e6;
-  color: black;
+  color: #05386b;
   padding: 1rem;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button:hover {

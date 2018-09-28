@@ -11,10 +11,8 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
-  color: #05386b;
   text-align: center;
-  color: black;
+  color: #05386b;
 }
 .new-review .new-review__modal .modal__header {
   height: auto;
@@ -33,7 +31,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .new-review .new-review__modal .modal__body .body__images {
@@ -49,7 +46,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .new-review .new-review__modal .modal__body .body__images .images__previews {
@@ -94,7 +90,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
   height: 20%;
   margin: 1rem;
@@ -121,7 +116,6 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
   margin: 1rem;
 }
@@ -148,11 +142,10 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  background: white;
   color: #05386b;
 }
 .new-review .new-review__modal .modal__footer .footer__button {
-  border-radius: 1rem;
+  border-radius: 0.3rem;
   padding: 0.5rem;
   margin: 1rem;
   width: 10rem;
@@ -166,4 +159,5 @@
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   color: white;
+  opacity: 1;
 }
