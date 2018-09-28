@@ -94,10 +94,13 @@ export default class NewReview extends Component {
           this.setState({ fileURL: photos });
         });
     });
+    axios.all(uploaders).then(() => {
+      let div = document.createElement("div");
+      let text = document.createTextNode("Image successfully uploaded");
+      div.appendChild(text);
+      document.getElementById("drop").appendChild(div);
+    });
   };
-  // axios.all(uploaders) => {
-  //   // ... perform after upload is successful operation
-  // });
 
   starRating = rating => {
     this.setState({ rating });
@@ -140,7 +143,7 @@ export default class NewReview extends Component {
             <div className="new-review__modal">
               <div className="modal__header">New Review</div>
               <div className="modal__body">
-                <div>
+                <div id="drop">
                   <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
                     <p>Drop your files or click here to upload</p>
                   </Dropzone>
