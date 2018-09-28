@@ -44,7 +44,10 @@ const login = (request, response) => {
       if (bcrypt.compareSync(password, userFound.password)) {
         const token = generateToken({ userFound });
         const { _id } = userFound;
-        response.status(200).send({ username: userFound.username, token, userId: _id  });
+        console.log("Token", token)
+        console.log("UserId", _id)
+        console.log("UserId", userFound)
+        response.status(200).send({ username: userFound.username, name: userFound.name, token, userId: _id  });
       } else {
         response.status(500).send({
           errorMessage: "Login Failed.",
@@ -89,9 +92,10 @@ const deleteUserById = (request, response) => {
 };
 
 const updateUser = (request, response) => {
-  const { _id } = request.body;
- User.findOneAndUpdate(_id)
+  const { _id, username, email } = request.body;
+ User.findOneAndUpdate(_id, {username, email})
  .then(function(user) {
+   console.log("Date", user)
    response.status(200).json(user);
  })
  .catch(function(error){

@@ -3,6 +3,7 @@
   border-bottom: 0.1rem solid white;
   z-index: 5;
   opacity: 1;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -89,7 +90,7 @@
   background-color: #e6e6e6;
   color: black;
   text-align: center;
-  padding: 0.2rem 0;
+  padding: .2rem 0;
 }
 .navbar-container .navbar-container__right .navbar-container__sign:hover {
   cursor: pointer;

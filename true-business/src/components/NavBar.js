@@ -100,7 +100,7 @@ class NavBar extends Component {
   logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem('userId');
-    localStorage.removeItem("username");
+    localStorage.removeItem("name");
     this.props.history.push("/");
 
   };
@@ -168,7 +168,7 @@ class NavBar extends Component {
         </div>
         {localStorage.getItem("token") && localStorage.getItem("userId")? 
         (<div className="navbar-container__right"> <div onClick={() => {this.props.history.push(`/user`);
-          }}> Hi, {localStorage.getItem("username")}! 
+          }}> Hi, {localStorage.getItem("name").split(' ')[0]}! 
             </div>
             <div>
             <Button

@@ -5,12 +5,13 @@ import axios from 'axios';
 
 import "../css/User.css";
 
+
 class User extends Component {
   state = {
     username: '',
     email:'',
-    editUsername: false,
-    editEmail: false,
+    editUsernameOrEmail: false,
+    Email: false,
     editPassword: false,
     breadcrumbs: ["Home"],
     userReviews: [
@@ -51,48 +52,32 @@ class User extends Component {
   // };
   
   componentDidMount = () =>{
+    setTimeout(()=>{
     const id = localStorage.getItem("userId");
   axios.get(`http://localhost:3001/api/user/${id}`)
   .then(response =>{
     console.log("Smell", response)
-    setTimeout(()=>{
       this.setState({
         username: response.data.username, email: response.data.email
       })
-    }, 1000)
     })
+  }, 300)
   };
 
-  saveUsername = () => {
-    
+  saveUsernameOrEmail = () => {
+
     const user = {
-      username: this.state.username
+      username: this.state.username,
+      email: this.state.email,
     }
 
+    console.log("Before", user)
     const id = localStorage.getItem("userId");
     axios.put(`http://localhost:3001/api/user/${id}`, user)
     .then(response =>{
+      console.log("SaveResponse", response);
       this.setState({
-        editUsername: false
-      })
-      })
-      .catch(err => {
-        console.log("Update Error", err);
-      })
-  }
-
-
-  saveEmail = () => {
-
-    const user = {
-      email: this.state.email
-    }
-
-    const id = localStorage.getItem("userId");
-    axios.put(`http://localhost:3001/api/user/${id}`, user)
-    .then(response =>{
-      this.setState({
-        editEmail: false
+        editUsernameOrEmail: false
       })
       })
       .catch(err => {
@@ -105,7 +90,7 @@ class User extends Component {
   logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem('userId');
-    localStorage.removeItem("username");
+    localStorage.removeItem("name");
     this.props.history.push("/");
   };
 
@@ -114,15 +99,9 @@ handleInputChange = event => {
   this.setState({ [event.target.name]: event.target.value });
 };
 
-changeUsername = () => {
+changeUsernameOrEmail = () => {
   this.setState({
-    editUsername: !this.state.editUsername
-  });
-}
-
-changeEmail = () => {
-  this.setState({
-    editEmail: !this.state.editEmail
+    editUsernameOrEmail: !this.state.editUsernameOrEmail
   });
 }
   render() {
@@ -240,31 +219,31 @@ changeEmail = () => {
         <div className="profile__container">
           <div className="container__info">
             <div className="info__label">Username:</div>
-            <div className="info__data">{this.state.editUsername ? (
-            <input 
+            <div className="info__data">{this.state.editUsernameOrEmail ? (
+            <input
                 placeholder="username"
                 name="username"
                 type="text"
                 value={this.state.username}
                 onChange={this.handleInputChange}
                 /> 
-          ): ( this.state.username)} <button className="info__button" onClick={this.saveUsername}>save</button></div>
-            <button className="info__button" onClick={this.changeUsername}>
+          ): ( this.state.username)} <button className="info__button" onClick={this.saveUsernameOrEmail}>save</button></div>
+            <button className="info__button" onClick={this.changeUsernameOrEmail}>
               Change
             </button>
           </div>
           <div className="container__info">
             <div className="info__label">Email:</div>
-            <div className="info__data">{this.state.editEmail ? (
-            <input 
+            <div className="info__data">{this.state.editUsernameOrEmail ? (
+            <input
                 placeholder="email"
                 name="email"
                 type="text"
                 value={this.state.email}
                 onChange={this.handleInputChange}
                 /> 
-          ): ( this.state.email)} <button  className="info__button" onClick={this.saveEmail}>save</button></div>
-            <button className="info__button" onClick={this.changeEmail}>
+          ): ( this.state.email)} <button  className="info__button" onClick={this.saveUsernameOrEmail}>save</button></div>
+            <button className="info__button" onClick={this.changeUsernameOrEmail}>
               Change
             </button>
           </div>
