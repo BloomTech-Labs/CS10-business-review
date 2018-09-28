@@ -55,7 +55,7 @@
   margin: 1rem;
   width: 10rem;
   background-color: #3487d5;
-  color: #05386b;
+  color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
 }
@@ -63,7 +63,7 @@
   cursor: pointer;
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
-  color: white;
+  font-weight: bolder;
   opacity: 1;
 }
 .navbar .navbar__right {
@@ -96,12 +96,13 @@
   padding: 0;
   margin: 0;
   cursor: default;
+  color: #05386b;
   border-radius: 0.3rem;
   padding: 0.5rem;
   margin: 1rem;
   width: 10rem;
   background-color: #3487d5;
-  color: #05386b;
+  color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
 }
@@ -109,7 +110,7 @@
   cursor: pointer;
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
-  color: white;
+  font-weight: bolder;
   opacity: 1;
 }
 .navbar .navbar__right .right__sign:hover {
@@ -150,7 +151,7 @@
   margin: 1rem;
   width: 10rem;
   background-color: #3487d5;
-  color: #05386b;
+  color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
 }
@@ -158,7 +159,7 @@
   cursor: pointer;
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
-  color: white;
+  font-weight: bolder;
   opacity: 1;
 }
 .navbar-container__modal .modal-container {
@@ -195,7 +196,7 @@
   margin: 1rem;
   width: 10rem;
   background-color: #3487d5;
-  color: #05386b;
+  color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
 }
@@ -203,6 +204,6 @@
   cursor: pointer;
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
-  color: white;
+  font-weight: bolder;
   opacity: 1;
 }
