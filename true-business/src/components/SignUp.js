@@ -12,6 +12,7 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: "",
       username: "",
       email: "",
       confirmEmail: "",
@@ -35,6 +36,7 @@ class SignUp extends Component {
   createUser = event => {
     event.preventDefault();
     const user = {
+      name: this.state.name,
       email: this.state.email,
       username: this.state.username,
       password: this.state.password,
@@ -70,6 +72,14 @@ class SignUp extends Component {
           <div className="signup-container">
             <div className="signup-container__header"> Sign Up </div>
             <form className="signup-container__form">
+            <input
+                className="signup-container__input"
+                placeholder="Full Name"
+                name="name"
+                type="text"
+                value={this.state.name}
+                onChange={this.handleInputChange}
+              />
               <input
                 className="signup-container__input"
                 placeholder="E-mail"
