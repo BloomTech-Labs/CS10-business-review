@@ -160,7 +160,7 @@ class NavBar extends Component {
             target="signInPop"
             toggle={this.toggle}>
             <PopoverHeader>Sign In?</PopoverHeader>
-            <PopoverBody>Users who sign can see unlimited reviews!</PopoverBody>
+            <PopoverBody>Users who sign in can see unlimited reviews!</PopoverBody>
             <button type="submit" className="popover-button" onClick={this.toggle}>
               Close
             </button>

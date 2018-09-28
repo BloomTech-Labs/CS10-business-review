@@ -46,14 +46,10 @@ class Business extends Component {
     if (this.props.business !== null) this.getReviews();
   };
 
-  componentDidUpdate = prevProps => {
-    if (prevProps !== this.props) {
-      this.setState({ newBusinessId: this.props.newBusinessId });
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.reviews.length !== this.state.reviews.length) {
+      this.updatePage();
     }
-  };
-
-  componentWillReceiveProps = nextProps => {
-    this.setState({ newBusinessId: nextProps.newBusinessId });
   };
 
   toggleDropDown = event => {
@@ -109,12 +105,70 @@ class Business extends Component {
     this.setState({ modalIsOpen: false });
   };
 
-  updatePage = currentPage => {
-    this.setState({ currentPage });
+  updatePage = (currentPage, event) => {
+    // How to update active on click
+    if (event) {
+      let children = document.getElementById("pagination").childNodes;
+      children.forEach(child => {
+        child.classList.remove("active");
+      });
+      document.getElementById(event.target.id).classList.add("active");
+      this.setState({ currentPage });
+    }
+    // Set the 0th page to active
+    else {
+      document.getElementById(0).classList.add("active");
+    }
+  };
+
+  createPagination = () => {
+    console.log("New round of pagination");
+    let pages = new Set([0]);
+    let lastPage =
+      (this.state.reviews.length / 10) % 1 === 0
+        ? Math.floor(this.state.reviews.length / 10) - 1
+        : Math.floor(this.state.reviews.length / 10);
+    for (let i = 10; i < this.state.reviews.length - 10; i++) {
+      if (i % 10 === 0) {
+        if (i >= this.state.currentPage * 10 - 20 && i <= this.state.currentPage * 10 + 20) {
+          console.log("Adding page", i / 10);
+          pages.add(i / 10);
+        }
+        if (this.state.currentPage < 3) {
+          pages.add(i / 10);
+        }
+        if (this.state.currentPage > this.state.reviews.length -3){
+          pages.add(i / 10);
+        }
+      }
+    }
+    if (this.state.reviews.length > 10) {
+      pages.add(lastPage);
+    }
+    pages = [...pages].sort((x, y) => x - y);
+    console.log("Pages", pages);
+    if (this.state.currentPage > 3) pages.splice(1, 0, "...");
+    if (this.state.currentPage < lastPage - 3) pages.splice(pages.length - 1, 0, "...");
+    return pages.map((page, i) => {
+      if (page === "...") {
+        return (
+          <div key={i+page} id={page} className="pagination__page--no-hover">
+            {console.log("Why", page)}
+            {console.log("Also Why? ", i)}
+            {page}
+          </div>
+        );
+      }
+      return (
+        <div key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
+          {console.log("What the fuck", page)}
+          {page}
+        </div>
+      );
+    });
   };
 
   render() {
-    console.log(this.state.reviews);
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -258,14 +312,8 @@ class Business extends Component {
                     <div>No Reviews</div>
                   )}
                 </div>
-                <div className="reviews__pagination">
-                  {this.state.reviews.map((review, i) => {
-                    return i % 10 === 0 ? (
-                      <div key={i} className="pagination__page" onClick={this.updatePage.bind(this, i / 10)}>
-                        {i / 10}
-                      </div>
-                    ) : null;
-                  })}
+                <div id="pagination" className="reviews__pagination">
+                  {this.createPagination()}
                 </div>
               </div>
             </div>
