@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-
 import NavBar from "./NavBar.js";
+import axios from 'axios';
 
 import "../css/User.css";
 
 class User extends Component {
   state = {
+    username: '',
+    email:'',
+    editUsername: false,
+    editEmail: false,
+    editPassword: false,
     breadcrumbs: ["Home"],
     userReviews: [
       {
@@ -41,9 +46,61 @@ class User extends Component {
     current: "Home",
   };
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
+  // componentDidMount = () => {
+  //   window.scrollTo(0, 0);
+  // };
+  
+  componentDidMount = () =>{
+    const id = localStorage.getItem("userId");
+  axios.get(`http://localhost:3001/api/user/${id}`)
+  .then(response =>{
+    console.log("Smell", response)
+    setTimeout(()=>{
+      this.setState({
+        username: response.data.username, email: response.data.email
+      })
+    }, 1000)
+    })
   };
+
+  saveUsername = () => {
+    
+    const user = {
+      username: this.state.username
+    }
+
+    const id = localStorage.getItem("userId");
+    axios.put(`http://localhost:3001/api/user/${id}`, user)
+    .then(response =>{
+      this.setState({
+        editUsername: false
+      })
+      })
+      .catch(err => {
+        console.log("Update Error", err);
+      })
+  }
+
+
+  saveEmail = () => {
+
+    const user = {
+      email: this.state.email
+    }
+
+    const id = localStorage.getItem("userId");
+    axios.put(`http://localhost:3001/api/user/${id}`, user)
+    .then(response =>{
+      this.setState({
+        editEmail: false
+      })
+      })
+      .catch(err => {
+        console.log("Update Error", err);
+      })
+  }
+
+
 
   logout = () => {
     localStorage.removeItem("token");
@@ -52,6 +109,22 @@ class User extends Component {
     this.props.history.push("/");
   };
 
+
+handleInputChange = event => {
+  this.setState({ [event.target.name]: event.target.value });
+};
+
+changeUsername = () => {
+  this.setState({
+    editUsername: !this.state.editUsername
+  });
+}
+
+changeEmail = () => {
+  this.setState({
+    editEmail: !this.state.editEmail
+  });
+}
   render() {
     return (
       <div>
@@ -77,7 +150,6 @@ class User extends Component {
                 );
               })}
             </div>
-            {/* Eventually have this actually sign out the person obviously... */}
             <div className="header__signout" onClick={this.logout}>
               Sign Out
             </div>
@@ -162,7 +234,49 @@ class User extends Component {
       case "Billing":
         return <div className="content__billing">No idea what will go here, I guess something for Stripe?</div>;
       case "Settings":
-        return <div className="content__settings">Also no idea for this. Just following the wireframe...</div>;
+        return <div className="content__profile">
+        <div className="profile__image" />
+        {/* Have this open a modal to change their password */}
+        <div className="profile__container">
+          <div className="container__info">
+            <div className="info__label">Username:</div>
+            <div className="info__data">{this.state.editUsername ? (
+            <input 
+                placeholder="username"
+                name="username"
+                type="text"
+                value={this.state.username}
+                onChange={this.handleInputChange}
+                /> 
+          ): ( this.state.username)} <button className="info__button" onClick={this.saveUsername}>save</button></div>
+            <button className="info__button" onClick={this.changeUsername}>
+              Change
+            </button>
+          </div>
+          <div className="container__info">
+            <div className="info__label">Email:</div>
+            <div className="info__data">{this.state.editEmail ? (
+            <input 
+                placeholder="email"
+                name="email"
+                type="text"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+                /> 
+          ): ( this.state.email)} <button  className="info__button" onClick={this.saveEmail}>save</button></div>
+            <button className="info__button" onClick={this.changeEmail}>
+              Change
+            </button>
+          </div>
+          <div className="container__info">
+            <div className="info__label">Password:</div>
+            <div className="info__data">****************</div>
+            <button className="info__button" onClick={this.changePassword}>
+              Change
+            </button>
+          </div>
+        </div>
+      </div>;
       default:
         return (
           <div className="content__profile">
@@ -171,24 +285,24 @@ class User extends Component {
             <div className="profile__container">
               <div className="container__info">
                 <div className="info__label">Username:</div>
-                <div className="info__data">Amanda Holdenkiss</div>
-                <button className="info__button" onClick={this.changeUsername}>
+                <div className="info__data">{this.state.username}</div>
+                {/* <button className="info__button" onClick={this.changeUsername}>
                   Change
-                </button>
+                </button> */}
               </div>
               <div className="container__info">
                 <div className="info__label">Email:</div>
-                <div className="info__data">I.P.@Freely.com</div>
-                <button className="info__button" onClick={this.changeEmail}>
+                <div className="info__data">{this.state.email}</div>
+                {/* <button className="info__button" onClick={this.changeEmail}>
                   Change
-                </button>
+                </button> */}
               </div>
               <div className="container__info">
                 <div className="info__label">Password:</div>
                 <div className="info__data">****************</div>
-                <button className="info__button" onClick={this.changeUsername}>
+                {/* <button className="info__button" onClick={this.changeUsername}>
                   Change
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
