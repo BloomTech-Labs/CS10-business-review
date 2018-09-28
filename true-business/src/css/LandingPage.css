@@ -12,7 +12,6 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  background-image: url('../imgs/white_brick_wall.png');
 }
 .landing .landing__container {
   display: flex;
@@ -89,9 +88,6 @@
 }
 .landing .landing__container .container__items .items__item .item__image:hover {
   cursor: pointer;
-  box-shadow: 0px 0px 50px 10px grey;
-  filter: brightness(110%);
-  opacity: 1;
 }
 .landing .landing__container .container__items .items__item .item__title {
   text-align: center;
@@ -111,9 +107,6 @@
 }
 .landing .landing__container .container__items .items__item .item__info--hover:hover {
   cursor: pointer;
-  box-shadow: 0px 0px 50px 10px grey;
-  filter: brightness(110%);
-  opacity: 1;
 }
 .landing .landing__container .container__items .items__item:hover {
   opacity: 1;

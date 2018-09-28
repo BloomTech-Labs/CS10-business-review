@@ -2,7 +2,6 @@
 
 .landing {
   .containers(@padding: 25vh 0 0 0);
-  background-image: url('../imgs/white_brick_wall.png');
   .landing__container {
     .containers(@width: 90%);
     .container__header {
@@ -25,7 +24,9 @@
         min-width: 22%;
         .item__image {
           .images();
-          .crazyHover();
+        }
+        .item__image:hover {
+          cursor: pointer;
         }
         .item__title {
           text-align: center;
@@ -41,8 +42,10 @@
           text-align: center;
           text-overflow: ellipsis;
           padding: 0.3rem;
-          .crazyHover();
           border-radius: 5rem;
+        }
+        .item__info--hover:hover{
+          cursor: pointer;
         }
       }
       .items__item:hover {

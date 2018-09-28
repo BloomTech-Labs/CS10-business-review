@@ -25,27 +25,69 @@ class SearchResults extends Component {
     return (
       <div>
         <NavBar search={this.props.search} />
-        <div className="search-container">
-          <div className="search-container__title"> Search Results </div>
-          <div className="search-container__results">
+        <div className="search">
+          <div className="search__title"> Search Results </div>
+          <div className="search__results">
             {this.props.searchResults ? (
               this.props.searchResults.map((result, i) => {
                 if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
                   return (
                     <div key={result.place_id} className="results__result">
-                      <div className="result__image" onClick={this.handleBusiness.bind(this,result)}>
-                        image
-                      </div>
-                      <StarRatings
-                        starDimension="20px"
-                        starSpacing="5px"
-                        rating={result.stars}
-                        starRatedColor="gold"
-                        starEmptyColor="grey"
-                        numberOfStars={5}
-                        name="rating"
+                      <img
+                        alt={result.name}
+                        className="result__image"
+                        src={result.photos}
+                        onClick={this.handleBusiness.bind(this, result)}
                       />
-                      <div className="result__item">{result.name}</div>{" "}
+                      <div className="result__info">
+                        <div className="info__stars-container">
+                          <div className="stars-container__text">{result.name}</div>
+                          <div className="stars-container__stars">
+                            {console.log(result)}
+                            <StarRatings
+                              starDimension="20px"
+                              starSpacing="5px"
+                              rating={result.stars}
+                              starRatedColor="gold"
+                              starEmptyColor="grey"
+                              numberOfStars={5}
+                              name="rating"
+                            />
+                            <div className="stars__text">
+                              {result.totalReviews ? result.totalReviews + " Reviews" : "0 Reviews"}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="info__address">
+                          <div className="address__item">
+                            {result.formatted_address
+                              .split(",")
+                              .splice(0, 1)
+                              .toString()}
+                          </div>
+                          <div className="address__item">
+                            {result.formatted_address
+                              .split(",")
+                              .splice(1, 2)
+                              .join(",")
+                              .trim()}
+                          </div>
+                          <div className="address__item">
+                            {result.formatted_address
+                              .split(",")
+                              .splice(3)
+                              .toString()
+                              .trim()}
+                          </div>
+                        </div>
+                        <div className="info__contact">
+                          <div className="contact__item">
+                            {result.types.map(type => (
+                              <div key={type}>{type}</div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   );
                 } else {
@@ -64,7 +106,7 @@ class SearchResults extends Component {
     );
   }
   handleBusiness = (business, event) => {
-    console.log("Mothafuckin business", business)
+    console.log("Mothafuckin business", business);
     this.props.business(business);
   };
 

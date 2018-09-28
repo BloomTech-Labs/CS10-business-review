@@ -58,11 +58,11 @@
   font-size: 1.5rem;
 }
 
-.images() {
-  width: 10rem;
-  height: 10rem;
+.images(@top: -2rem, @width: 10rem, @height: 10rem) {
+  width: @width;
+  height: @height;
   background-color: rgb(86, 135, 158);
-  top: -2rem;
+  top: @top;
   position: relative;
   &:hover {
     cursor: pointer;
