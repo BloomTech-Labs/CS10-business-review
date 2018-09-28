@@ -79,7 +79,7 @@ reviewSchema.post("save", function(next) {
       }
     )
       .then(updated => {
-        console.log("Business Updated Successfully", updated);
+        console.log("Business Updated Successfully");
       })
       .catch(error => console.log({ error }));
   }

@@ -14,12 +14,13 @@ let modalStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "90%",
-    width: "75%",
+    height: "75%",
+    width: "50%",
     zIndex: "5",
-    backgroundColor: "rgb(62, 56, 146)",
-    overflow: "hidden"
-  }
+    backgroundColor: "rgb(238,238,238)",
+    color: "rgb(5,56,107)",
+    overflowY: "scroll",
+  },
 };
 
 Modal.setAppElement("div");
@@ -32,13 +33,12 @@ export default class NewReview extends Component {
       stars: 0,
       modalIsOpen: false,
       modalInfo: null,
-      photos: [],
       imagePreviews: [],
       currentImageID: 0,
       title: "",
       body: "",
       rating: 0,
-      fileURL: []
+      fileURL: [],
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -77,13 +77,9 @@ export default class NewReview extends Component {
 
       // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
       return axios
-        .post(
-          "https://api.cloudinary.com/v1_1/ddhamypia/image/upload",
-          formData,
-          {
-            headers: { "X-Requested-With": "XMLHttpRequest" }
-          }
-        )
+        .post("https://api.cloudinary.com/v1_1/ddhamypia/image/upload", formData, {
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+        })
         .then(response => {
           const data = response.data;
           const fileURL = data.secure_url; // You should store this URL for future references in your app
@@ -113,7 +109,7 @@ export default class NewReview extends Component {
       title: this.state.title,
       body: this.state.body,
       stars: this.state.rating,
-      photos: this.state.fileURL
+      photos: this.state.fileURL,
     };
     axios
       .post("http://localhost:3001/api/review/create", review)
@@ -136,8 +132,7 @@ export default class NewReview extends Component {
         isOpen={this.state.modalIsOpen}
         onRequestClose={this.closeModal}
         style={modalStyles}
-        contentLabel="New Review Modal"
-      >
+        contentLabel="New Review Modal">
         <div className="new-review">
           {this.state.modalIsOpen ? (
             <div className="new-review__modal">

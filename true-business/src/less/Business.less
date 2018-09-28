@@ -2,7 +2,7 @@
 
 .business {
   .containers(@width: inherit, @padding: 25vh 2rem 2rem 2rem);
-  color: @color;
+  color:@textColor;
   .business__info {
     .containers(@width: 75%);
     background: @elementBackground;
@@ -50,11 +50,10 @@
     .reviews-container__title {
       font-size: 2.5rem;
       margin-bottom: 2rem;
-      color: @color;
+      color:@textColor;
     }
     .reviews-container__button {
-      background: @background;
-      color: @color;
+      color:@textColor;
       border: outset;
       width: 20%;
       padding: 0.5rem;
@@ -74,12 +73,11 @@
         .dropdown__drop-container {
           margin-left: 2rem;
           width: 15rem;
-          background-color: @background;
           .drop-container__button {
             width: inherit;
             font-size: 1.5rem;
-            color: @color;
-            background-color: @background;
+            color:@textColor;
+
           }
           .drop-container__button:hover {
             cursor: pointer;
@@ -93,9 +91,8 @@
             .menu__button {
               width: inherit;
               border: none;
-              background-color: @background;
               font-size: 1.5rem;
-              color: @color;
+              color:@textColor;
             }
             .menu__button:hover {
               filter: brightness(80%);
@@ -113,13 +110,12 @@
         height: 100%;
         display: flex;
         justify-content: space-between;
-        
         flex-wrap: wrap;
         .review__info {
           min-width: 20%;
           max-width: 20%;
           padding: 1rem;
-          color: @color;
+          color:@textColor;
           opacity: 0.5;
           .review__image {
             width: 10rem;
