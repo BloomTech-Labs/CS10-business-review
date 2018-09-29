@@ -56,7 +56,6 @@ const login = (request, response) => {
     }
   })
   .catch(err => {
-    console.log("Error-Login", err)
     response.status(500).send({
       errorMessage: "Failed to Login: " + err,
     });

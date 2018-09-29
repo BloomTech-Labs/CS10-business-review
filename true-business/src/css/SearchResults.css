@@ -56,13 +56,13 @@
   background: #ffffff;
   border: 0.1rem solid #05386b;
   min-height: 15rem;
-  max-height: 15rem;
+  max-height: 14.8rem;
   opacity: 0.8;
   float: left;
 }
 .search .search__results .results__result .result__image {
   width: 15rem;
-  height: 15rem;
+  height: 14.8rem;
   background-color: #56879e;
   top: 0;
   position: relative;

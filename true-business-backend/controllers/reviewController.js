@@ -16,32 +16,6 @@ const createReview = (req, res) => {
     });
 };
 
-const updateReview = (req, res) => {
-  //   let updatedReview = req.body;
-  //   Review.findByIdAndUpdate(id)
-  //     .then(review => {
-  //       response.status(200).json(business);
-  //     })
-  //     .catch(error => {
-  //       response.status(500).json({
-  //         error: "The information could not be retrieved.",
-  //       });
-  //     });
-};
-
-const deleteReview = (req, res) => {
-  // let id = req.body.id;
-  // Business.findByIdAndRemove(id)
-  //   .then(business => {
-  //     response.status(200).json("Review Deleted", business);
-  //   })
-  //   .catch(error => {
-  //     response.status(500).json({
-  //       error: "The review could not be removed.",
-  //     });
-  //   });
-};
-
 // For User Component
 const getReviewsByReviewerId = (req, res) => {
   // Reviews.find({reviewer: req.body.id})
@@ -74,8 +48,6 @@ const getAllReviews = (req, res) => {
 
 module.exports = {
   createReview,
-  updateReview,
-  deleteReview,
   getAllReviews,
   getReviewsByBusinessId,
   getReviewsByReviewerId,

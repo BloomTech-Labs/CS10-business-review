@@ -93,7 +93,6 @@ class SearchResults extends Component {
     );
   }
   handleBusiness = (business, event) => {
-    console.log("Mothafuckin business", business);
     this.props.business(business);
   };
 
@@ -139,7 +138,6 @@ class SearchResults extends Component {
     if (this.props.searchResults.length > 10) {
       pages.add(lastPage);
     }
-    console.log(pages);
     pages = [...pages].sort((x, y) => x - y);
     if (this.state.currentPage > 3) pages.splice(1, 0, "...");
     if (this.state.currentPage < lastPage - 3) pages.splice(pages.length - 1, 0, "...");

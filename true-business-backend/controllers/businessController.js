@@ -1,7 +1,7 @@
 const Business = require("../models/business");
 const googleMapsClient = require("@google/maps").createClient({
   key: process.env.REACT_APP_GOOGLEPLACESKEY || process.env.googlePlaces,
-  Promise: Promise
+  Promise: Promise,
 });
 
 const createBusiness = (req, res) => {
@@ -20,6 +20,20 @@ const createBusiness = (req, res) => {
         : "No Phone Number Listed";
       let website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
       let photos = result.hasOwnProperty("photos") ? result.photos : "No Photos Listed";
+      if (photos !== "No Photos Listed") {
+        googleMapsClient
+          .placesPhoto({
+            photoreference: photos[0].photo_reference,
+            maxwidth: 10000,
+          })
+          .asPromise()
+          .then(photo => {
+            photos = [photo];
+          })
+          .catch(err => {
+            photos = ["Error Returning Photo"];
+          });
+      }
       let opening_hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
       let address_components = result.hasOwnProperty("address_components")
         ? result.address_components
@@ -31,9 +45,8 @@ const createBusiness = (req, res) => {
         formatted_phone_number,
         photos,
         website,
-        place_id: result.place_id
+        place_id: result.place_id,
       });
-      console.log(business);
       business
         .save()
         .then(business => {
@@ -56,26 +69,37 @@ const createBusiness = (req, res) => {
     });
 };
 
-createPhotoMarker = photo => {
-  var photos = place.photos;
-  if (!photos) {
-    return;
-  }
-
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location,
-    title: place.name,
-    icon: photos[0].getUrl({ maxWidth: 35, maxHeight: 35 })
-  });
-};
-
 const placesSearch = (req, res) => {
   googleMapsClient
     .places({ query: req.body.query })
     .asPromise()
     .then(response => {
-      res.status(200).json(response.json.results);
+      let promises = response.json.results.map(result => {
+        let photos = result.hasOwnProperty("photos") ? result.photos : "No Photos Listed";
+        if (photos !== "No Photos Listed") {
+          return new Promise(resolve => {
+            return resolve(
+              googleMapsClient
+                .placesPhoto({
+                  photoreference: photos[0].photo_reference,
+                  maxwidth: 10000,
+                })
+                .asPromise()
+                .then(photo => {
+                  let html = ["https://" + photo.req.socket._host + photo.req.path];
+                  result.photos = html;
+                  return result;
+                }),
+            );
+          });
+        }
+        return new Promise(resolve => resolve(result));
+      });
+      Promise.all(promises)
+        .then(places => {
+          res.status(200).json(places);
+        })
+        .catch(error => res.status(500).json("Better not be...", error));
     })
     .catch(error => {
       console.log({ error });
@@ -87,7 +111,24 @@ const placeSearch = (req, res) => {
     .place({ placeid: req.body.id })
     .asPromise()
     .then(response => {
-      res.status(200).json(response.json.result);
+      let photos = response.json.result.hasOwnProperty("photos") ? response.json.result.photos : "No Photos Listed";
+      if (photos !== "No Photos Listed") {
+        googleMapsClient
+          .placesPhoto({
+            photoreference: photos[0].photo_reference,
+            maxwidth: 10000,
+          })
+          .asPromise()
+          .then(photo => {
+            photos = ["https://" + photo.req.socket._host + photo.req.path];
+            response.json.result.photos = photos;
+            res.status(200).json(response.json.result);
+          })
+          .catch(err => {
+            console.log("Error Getting Photo!", err);
+            res.send(venue);
+          });
+      }
     })
     .catch(error => {
       console.log({ error });
@@ -102,14 +143,13 @@ const getBusinessByName = (request, response) => {
         response.status(200).json(business);
       } else {
         response.status(400).json({
-          error: "Business not found."
+          error: "Business not found.",
         });
       }
     })
     .catch(function(error) {
       response.status(500).json({
-        error:
-          "The business information could not be retrieved. (" + error + ")"
+        error: "The business information could not be retrieved. (" + error + ")",
       });
     });
 };
@@ -123,7 +163,7 @@ const getBusinessById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The information could not be retrieved."
+        error: "The information could not be retrieved.",
       });
     });
 };
@@ -137,7 +177,7 @@ const deleteBusinessById = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The business could not be removed."
+        error: "The business could not be removed.",
       });
     });
 };
@@ -149,7 +189,7 @@ const getAllBusiness = (request, response) => {
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The information could not be retrieved."
+        error: "The information could not be retrieved.",
       });
     });
 };
@@ -161,5 +201,5 @@ module.exports = {
   deleteBusinessById,
   getAllBusiness,
   placesSearch,
-  placeSearch
+  placeSearch,
 };

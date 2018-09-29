@@ -170,6 +170,7 @@ class Business extends Component {
         {this.props.business ? (
           <div className="business">
             <div className="business__info">
+              <img alt={this.props.business.name} className="review__image" src={this.props.business.photos} />
               <div className="info__title">{this.props.business.name}</div>
               <div className="info__street">{this.props.business.formatted_address}</div>
               <div className="info__details">
@@ -284,7 +285,12 @@ class Business extends Component {
                       if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
                         return (
                           <div key={review._id} className="review__info">
-                            <img alt={review.reviewer.username} className="review__image" src={review.photos} onClick={() => this.openModal(this, review)} />
+                            <img
+                              alt={review.reviewer.username}
+                              className="review__image"
+                              src={review.photos}
+                              onClick={() => this.openModal(this, review)}
+                            />
                             <StarRatings
                               starDimension="20px"
                               starSpacing="5px"
