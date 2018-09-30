@@ -33,7 +33,7 @@ class LandingPage extends Component {
 
     this.state = {
       modalIsOpen: false,
-      modalInfo: null
+      modalInfo: null,
     };
 
     this.openModal = this.openModal.bind(this);
@@ -69,8 +69,10 @@ class LandingPage extends Component {
                     <div key={review._id} className="items__item">
                       <img
                         alt={review.newMongoId.name}
-                        src={review.photos}
-                        className="item__image"
+                        src={review.photos[0].link}
+                        className={
+                          review.photos[0].width >= review.photos[0].height ? "item__landscape" : "item__portrait"
+                        }
                         onClick={() => this.openModal(this, review)}
                       />
                       <div className="item__title">{review.newMongoId.name}</div>
@@ -114,7 +116,14 @@ class LandingPage extends Component {
                     // Whenever they click on the username in this section or in the bottom section
                     // <div key={review._id} onClick={() => this.props.userReviews(user)}>
                     <div key={user._id} className="items__item">
-                      <img alt={user.username} src={user.photos} className="item__image" />
+                      <img
+                        alt={user.username}
+                        src={user.userImage.link}
+                        className={
+                          user.userImage.width >= user.userImage.height ? "item__landscape" : "item__portrait"
+                        }
+                        // onClick={() => this.openModal(this, user)}
+                      />
                       <div className="item__info--hover">@{user.username}</div>
                       <div className="item__info"># of Reviews: {user.numberOfReviews}</div>
                       <div className="item__info"># of Likes: {user.numberOfLikes}</div>
@@ -130,18 +139,13 @@ class LandingPage extends Component {
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={modalStyles}
-            contentLabel="Review Modal"
-          >
+            contentLabel="Review Modal">
             <div className="landing-container__modal">
               {this.state.modalIsOpen ? (
                 <div className="modal-container">
                   <div className="modal__header">
-                    <div className="header__title">
-                      {this.state.modalInfo.newMongoId.name}
-                    </div>
-                    <div className="header__reviewer">
-                      @{this.state.modalInfo.reviewer.username}
-                    </div>
+                    <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
+                    <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
                   </div>
                   <div className="modal__body">
                     <img
@@ -161,15 +165,10 @@ class LandingPage extends Component {
                       />
                     </div>
                     <div>{this.state.modalInfo.title}</div>
-                    <div className="body__review">
-                      {this.state.modalInfo.body}
-                    </div>
+                    <div className="body__review">{this.state.modalInfo.body}</div>
                   </div>
                   <div className="modal__footer">
-                    <button
-                      className="footer__button"
-                      onClick={this.closeModal}
-                    >
+                    <button className="footer__button" onClick={this.closeModal}>
                       close
                     </button>
                   </div>

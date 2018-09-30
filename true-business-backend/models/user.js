@@ -59,8 +59,12 @@ const userSchema = new mongoose.Schema({
     default: 0,
   },
   userImage: {
-    type: String,
-    default: "userImage" + (Math.floor(Math.random() * 1000000000) + 123456),
+    type: Object,
+    default: {
+      link: "https://lh3.googleusercontent.com/p/AF1QipN_jrDDnnaw0vNmcbYsIv716tMzOQvgp2MlMMsA=s1600-w1000-h500",
+      width: 3024,
+      height: 4032,
+    },
   },
 });
 

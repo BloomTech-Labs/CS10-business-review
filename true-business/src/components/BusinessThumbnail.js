@@ -8,8 +8,8 @@ const BusinessThumbnail = props => {
     <div className="thumbnail">
       <img
         alt={props.business.name}
-        className="thumbnail__image"
-        src={props.business.photos}
+        className={props.business.photos[0].width >= props.business.photos[0].height ? "thumbnail__landscape" : "thumbnail__portrait"}
+        src={props.business.photos[0].link}
         onClick={() => props.getBusiness(props.business, true)}
       />
       <div className="thumbnail__description">

@@ -170,7 +170,12 @@ class Business extends Component {
         {this.props.business ? (
           <div className="business">
             <div className="business__info">
-              <img alt={this.props.business.name} className="review__image" src={this.props.business.photos} />
+              <img
+                alt={this.props.business.name}
+                className={this.props.business.photos[0].width >= this.props.business.photos[0].height ? "info__landscape" : "info__portrait"}
+                src={this.props.business.photos[0].link}
+                onClick={this.openModal}
+              />
               <div className="info__title">{this.props.business.name}</div>
               <div className="info__street">{this.props.business.formatted_address}</div>
               <div className="info__details">
@@ -287,8 +292,8 @@ class Business extends Component {
                           <div key={review._id} className="review__info">
                             <img
                               alt={review.reviewer.username}
-                              className="review__image"
-                              src={review.photos}
+                              className={review.photos[0].width >= review.photos[0].height ? "review__landscape" : "review__portrait"}
+                              src={review.photos[0].link}
                               onClick={() => this.openModal(this, review)}
                             />
                             <StarRatings
@@ -330,7 +335,12 @@ class Business extends Component {
                       <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
                     </div>
                     <div className="modal__body">
-                      <div className="body__image">Yup</div>
+                    <img
+                alt={this.state.modalInfo.name}
+                className={this.state.modalInfo.photos[0].width >= this.state.modalInfo.photos[0].height ? "body__landscape" : "body__portrait"}
+                src={this.state.modalInfo.photos[0].link}
+                onClick={this.openModal}
+              />
                       <div className="body__stars">
                         {" "}
                         <StarRatings

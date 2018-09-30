@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import StarRatings from "react-star-ratings";
 
 import NavBar from "./NavBar";
 
@@ -35,8 +34,14 @@ class SearchResults extends Component {
                     <div key={result.place_id} className="results__result">
                       <img
                         alt={result.name}
-                        className="result__image"
-                        src={result.photos}
+                        className={
+                          result.photos !== "No Photos Listed"
+                            ? result.photos[0].width >= result.photos[0].height
+                              ? "result__landscape"
+                              : "result__portrait"
+                            : null
+                        }
+                        src={result.photos !== "No Photos Listed" ? result.photos[0].link : null}
                         onClick={this.handleBusiness.bind(this, result)}
                       />
                       <div className="result__info">

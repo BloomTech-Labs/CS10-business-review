@@ -33,7 +33,6 @@ export default class NewReview extends Component {
       stars: 0,
       modalIsOpen: false,
       modalInfo: null,
-      imagePreviews: [],
       currentImageID: 0,
       title: "",
       body: "",
@@ -83,10 +82,9 @@ export default class NewReview extends Component {
         .then(response => {
           const data = response.data;
           const fileURL = data.secure_url; // You should store this URL for future references in your app
-          console.log(data);
 
           let photos = this.state.fileURL;
-          photos.push(fileURL);
+          photos.push({ link: fileURL, height: data.height, width: data.width });
           this.setState({ fileURL: photos });
         });
     });

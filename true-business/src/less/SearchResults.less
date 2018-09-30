@@ -16,11 +16,23 @@
       .containers(@justifyContent: space-between, @flexDirection: row, @margin: 2rem, @width: 80%, @fontSize: 1.25rem);
       .backAndBorder();
       min-height: 15rem;
-      max-height: 14.8rem;
+      max-height: 15rem;
       opacity: 0.8;
       float: left;
-      .result__image {
-        .images(@top: 0, @width: 15rem, @height: 14.8rem);
+      .result__landscape {
+        .images(@top: 0, @width: 30%, @height: 14.8rem);
+        max-height: 14.8rem;
+        min-height: 14.8rem;
+        max-width: 30%;
+        min-width: 30%;
+      }
+      .result__portrait {
+        .images(@top: 0, @width: 10%, @height: 14.8rem);
+        max-height: 14.8rem;
+        min-height: 14.8rem;
+        max-width: 10%;
+        min-width: 10%;
+        margin: 0 10%;
       }
       .result__info {
         .containers(@width: 80%, @flexDirection: row);

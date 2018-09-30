@@ -5,9 +5,16 @@
   color:@textColor;
   .business__info {
     .containers(@width: 75%);
-    background: @elementBackground;
+    .backAndBorder();
     padding: 1rem;
     margin: 1rem;
+    .info__landscape {
+      width: 50%;
+      max-height: 20rem;
+    }
+    .info__portrait {
+      max-height: 20rem;
+    }
     .info__title {
       font-size: 3rem;
       text-align: center;
@@ -44,9 +51,8 @@
     }
   }
   .business__reviews-container {
-    .containers(@width: 75%);
-    padding: 1rem;
-    background: @elementBackground;
+    .containers(@width: 75%, @padding: 1rem);
+    .backAndBorder();
     .reviews-container__title {
       font-size: 2.5rem;
       margin-bottom: 2rem;
@@ -112,15 +118,27 @@
         justify-content: space-between;
         flex-wrap: wrap;
         .review__info {
+          .containers();
           min-width: 20%;
           max-width: 20%;
-          padding: 1rem;
+          margin: 3rem 1rem 0 1rem;
+          .backAndBorder();
           color:@textColor;
           opacity: 0.5;
-          .review__image {
-            width: 10rem;
-            height: 10rem;
-            background-color: black;
+          .review__landscape {
+            .images(@height: 60%);
+            max-height: 60%;
+            min-height: 60%;
+            max-width: 90%;
+            min-width: 90%;
+          }
+          .review__portrait {
+            .images(@width: 40%, @height: 60%);
+            max-height: 60%;
+            min-height: 60%;
+            max-width: 40%;
+            min-width: 40%;
+            margin: 0 30%;
           }
           .review__image:hover {
             cursor: pointer;

@@ -22,21 +22,34 @@
   max-width: 22%;
   min-width: 22%;
 }
-.thumbnail .thumbnail__image {
+.thumbnail .thumbnail__landscape {
   width: 10rem;
-  height: 10rem;
+  height: 60%;
   background-color: #56879e;
   top: -2rem;
   position: relative;
+  max-height: 60%;
+  min-height: 60%;
+  max-width: 100%;
+  min-width: 100%;
 }
-.thumbnail .thumbnail__image:hover {
+.thumbnail .thumbnail__landscape:hover {
   cursor: pointer;
 }
-.thumbnail .thumbnail__image:hover {
+.thumbnail .thumbnail__portrait {
+  width: 40%;
+  height: 60%;
+  background-color: #56879e;
+  top: -2rem;
+  position: relative;
+  max-height: 60%;
+  min-height: 60%;
+  max-width: 40%;
+  min-width: 40%;
+  margin: 0 30%;
+}
+.thumbnail .thumbnail__portrait:hover {
   cursor: pointer;
-  box-shadow: 0px 0px 50px 10px grey;
-  filter: brightness(110%);
-  opacity: 1;
 }
 .thumbnail .thumbnail__description {
   display: flex;
