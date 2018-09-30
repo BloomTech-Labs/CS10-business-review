@@ -75,16 +75,16 @@
   cursor: pointer;
 }
 .search .search__results .results__result .result__portrait {
-  width: 10%;
+  width: 15%;
   height: 14.8rem;
   background-color: #56879e;
   top: 0;
   position: relative;
   max-height: 14.8rem;
   min-height: 14.8rem;
-  max-width: 10%;
-  min-width: 10%;
-  margin: 0 10%;
+  max-width: 15%;
+  min-width: 15%;
+  margin: 0 7.5%;
 }
 .search .search__results .results__result .result__portrait:hover {
   cursor: pointer;

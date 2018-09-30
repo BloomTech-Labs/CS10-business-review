@@ -91,6 +91,7 @@ export default class NewReview extends Component {
     axios.all(uploaders).then(() => {
       let div = document.createElement("div");
       let text = document.createTextNode("Image successfully uploaded");
+      div.classList.add("drop__text--uploaded");
       div.appendChild(text);
       document.getElementById("drop").appendChild(div);
     });
@@ -136,9 +137,10 @@ export default class NewReview extends Component {
             <div className="new-review__modal">
               <div className="modal__header">New Review</div>
               <div className="modal__body">
-                <div id="drop">
+                <div id="drop" className="body__drop">
                   <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
-                    <p>Drop your files or click here to upload</p>
+                    <i class="fas fa-cloud-upload-alt fa-4x" />
+                    <div className="drop__text--initial">Drag and Drop or Click to Add Images</div>
                   </Dropzone>
                 </div>
 
@@ -146,7 +148,7 @@ export default class NewReview extends Component {
                   <div className="title__label">Title:</div>
                   <input
                     className="title__info"
-                    placeholder="So Gross..."
+                    placeholder="Great Experience!"
                     name="title"
                     type="text"
                     value={this.state.title}
@@ -158,7 +160,7 @@ export default class NewReview extends Component {
                   <div className="review__label">Review:</div>
                   <textarea
                     className="review__info"
-                    placeholder="I found a hair in my food..."
+                    placeholder="Everything was perfect."
                     name="body"
                     type="text"
                     value={this.state.body}
