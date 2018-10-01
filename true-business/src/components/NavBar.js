@@ -95,7 +95,7 @@ class NavBar extends Component {
       // Eventually, Have it bring up a random business like Yelp.
       this.openModal();
     }
-  }; 
+  };
 
   logout = () => {
     localStorage.removeItem("token");

@@ -252,6 +252,10 @@
   padding: 0;
   margin: 0;
 }
+.user .user__body .body__content .content__profile .profile__container .user-change__input {
+  padding: 0.5rem;
+  font-size: 1.25rem;
+}
 .user .user__body .body__content .content__profile .profile__container .container__info {
   display: flex;
   flex-direction: row;
@@ -273,6 +277,9 @@
 .user .user__body .body__content .content__profile .profile__container .container__info .info__data {
   width: 50%;
   font-size: 1.5rem;
+}
+.user .user__body .body__content .content__profile .profile__container .container__info .noDisplay {
+  display: none;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button {
   width: 20%;

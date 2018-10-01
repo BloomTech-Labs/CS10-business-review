@@ -10,9 +10,11 @@ class User extends Component {
   state = {
     username: '',
     email:'',
-    editUsernameOrEmail: false,
+    openForChange: false,
     Email: false,
     editPassword: false,
+    currenAction: 'Change',
+    change: false,
     breadcrumbs: ["Home"],
     userReviews: [
       {
@@ -77,7 +79,9 @@ class User extends Component {
     .then(response =>{
       console.log("SaveResponse", response);
       this.setState({
-        editUsernameOrEmail: false
+        openForChange: false,
+        currenAction: 'Change',
+        change: false
       })
       })
       .catch(err => {
@@ -99,11 +103,29 @@ handleInputChange = event => {
   this.setState({ [event.target.name]: event.target.value });
 };
 
-changeUsernameOrEmail = () => {
-  this.setState({
-    editUsernameOrEmail: !this.state.editUsernameOrEmail
-  });
+
+changeCurrentAction = () => {
+  if(this.state.change) {
+    this.setState({
+      currenAction: "Change"
+    })
+  }
+  else {
+    this.setState({
+      currenAction: "Cancel"
+    })
+  }
 }
+
+
+ changeUsernameOrEmail = () => {
+   this.changeCurrentAction ();
+  this.setState({
+    openForChange: !this.state.openForChange,
+    change: !this.state.change,
+   });
+
+  }
   render() {
     return (
       <div>
@@ -219,32 +241,36 @@ changeUsernameOrEmail = () => {
         <div className="profile__container">
           <div className="container__info">
             <div className="info__label">Username:</div>
-            <div className="info__data">{this.state.editUsernameOrEmail ? (
+            <div className="info__data">{this.state.openForChange ? (
             <input
+            className="user-change__input"
                 placeholder="username"
                 name="username"
                 type="text"
                 value={this.state.username}
                 onChange={this.handleInputChange}
                 /> 
-          ): ( this.state.username)} <button className="info__button" onClick={this.saveUsernameOrEmail}>save</button></div>
+                 //Show save but when change button is clicked
+          ): ( this.state.username)} {this.state.change?(<button  className="info__button" onClick={this.saveUsernameOrEmail}>Save</button>):(null)}</div>
             <button className="info__button" onClick={this.changeUsernameOrEmail}>
-              Change
+              {this.state.currenAction}
             </button>
           </div>
           <div className="container__info">
             <div className="info__label">Email:</div>
-            <div className="info__data">{this.state.editUsernameOrEmail ? (
+            <div className="info__data">{this.state.openForChange ? (
             <input
+            className="user-change__input"
                 placeholder="email"
                 name="email"
                 type="text"
                 value={this.state.email}
                 onChange={this.handleInputChange}
                 /> 
-          ): ( this.state.email)} <button  className="info__button" onClick={this.saveUsernameOrEmail}>save</button></div>
+                //Show save but when change button is clicked
+            ): ( this.state.email)} {this.state.change?(<button  className="info__button" onClick={this.saveUsernameOrEmail}>Save</button>):(null)}</div>
             <button className="info__button" onClick={this.changeUsernameOrEmail}>
-              Change
+            {this.state.currenAction}
             </button>
           </div>
           <div className="container__info">
