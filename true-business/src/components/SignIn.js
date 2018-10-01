@@ -5,6 +5,12 @@ import { withRouter } from "react-router-dom";
 import "../css/SignIn.css";
 import googleLogo from "../imgs/google-signin.png";
 
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
+  backend = heroku;
+}
+
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -22,12 +28,12 @@ class SignIn extends Component {
 
   signIn = event => {
     axios
-      .post("http://localhost:3001/api/user/login", this.state)
+      .post(`${backend}api/user/login`, this.state)
       .then(response => {
-        console.log("Fire!", response)
-         localStorage.setItem('token', response.data.token)
-         localStorage.setItem('userId', response.data.userId)         
-         localStorage.setItem('name', response.data.name)
+        console.log("Fire!", response);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data.userId);
+        localStorage.setItem("name", response.data.name);
         this.setState({
           error: false,
         });
@@ -74,14 +80,12 @@ class SignIn extends Component {
                 <button type="submit" className="signin-container__button" onClick={this.signIn}>
                   Sign In
                 </button>
-
                 <img
                   alt="Google Logo"
                   src={googleLogo}
                   className="signin-container__google-auth"
                   onClick={() => {
-                    window.location =
-                      "http://localhost:3001/auth/google" || "https://cryptic-brook-22003.herokuapp.com/auth/google";
+                    window.location = `${backend}auth/google`;
                   }}
                 />
               </div>

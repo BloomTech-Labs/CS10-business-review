@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Popover, PopoverBody, PopoverHeader } from "reactstrap";
 import { withRouter } from "react-router-dom";
-import Modal from "react-modal";
+import Modal from "react-modal"; 
 
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -89,18 +89,16 @@ class NavBar extends Component {
 
   handleSearch = event => {
     if (this.state.search !== "") {
-      this.props.search(this.state.search);
-      this.setState({ search: "" });
+      this.props.search(this.state.search, true);
+      this.setState({ search: ""});
     } else {
-      // For the time being, do this.
-      // Eventually, Have it bring up a random business like Yelp.
       this.openModal();
     }
   };
 
   logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem('userId');
+    localStorage.removeItem("userId");
     localStorage.removeItem("name");
     this.props.history.push("/");
   };
@@ -163,9 +161,15 @@ class NavBar extends Component {
             </button>
           </Popover>
         </div>
-        {localStorage.getItem("token") && localStorage.getItem("userId")? 
-        (<div className="navbar-container__right"> <div onClick={() => {this.props.history.push(`/user`);
-          }}> Hi, {localStorage.getItem("name").split(' ')[0]}! 
+        {localStorage.getItem("token") && localStorage.getItem("userId") ? (
+          <div className="navbar-container__right">
+            {" "}
+            <div
+              onClick={() => {
+                this.props.history.push(`/user`);
+              }}>
+              {" "}
+              Hi, {localStorage.getItem("name").split(" ")[0]}!
             </div>
             <div>
               <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
