@@ -72,11 +72,12 @@ export default class NewReview extends Component {
     this.props.showModal(false);
   }
   handleDrop = files => {
+    let key = process.env.REACT_APP_CLOUDINARY_API_KEY;
+    if (typeof(key) !== 'string') {
+      key = process.env.cloudinary_api_key;
+    }
+
     const uploaders = files.map(file => {
-      let key = process.env.REACT_APP_CLOUDINARY_API_KEY;
-      if (typeof(key) !== 'string') {
-        let key = process.env.cloudinary_api_key;
-      }
       const formData = new FormData();
       formData.append("file", file);
       formData.append("tags", ``);
