@@ -36,6 +36,13 @@ const businessSchema = new mongoose.Schema({
   // Unlikely, but possible there won't be any, no required
   photos: {
     type: Array,
+    default: [
+      {
+        link: "https://png.icons8.com/ios/50/000000/company.png",
+        width: 3024,
+        height: 4032,
+      },
+    ],
   },
   // places_details: place_id
   // returns a string

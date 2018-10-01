@@ -6,7 +6,7 @@ const reviewSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
-    default: "5bad30709d410615f14ef517",
+    default: "5bb2a7bc36929201322a9000",
   },
   newMongoId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -40,7 +40,17 @@ const reviewSchema = new mongoose.Schema({
     required: true,
     default: Date.now(),
   },
-  photos: [{}],
+
+  photos: {
+    type: Array,
+    default: [
+      {
+        link: "https://png.icons8.com/ios/50/000000/picture.png",
+        width: 3024,
+        height: 4032,
+      },
+    ],
+  },
   numberOfLikes: {
     type: Number,
     required: true,

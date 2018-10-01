@@ -293,6 +293,7 @@ class Business extends Component {
                   {this.state.reviews.length ? (
                     this.state.reviews.map((review, i) => {
                       if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
+                        console.log("FUCKING REVIEW", review)
                         return (
                           <div key={review._id} className="review__info">
                             <img
