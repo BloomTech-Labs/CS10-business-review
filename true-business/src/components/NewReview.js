@@ -73,11 +73,15 @@ export default class NewReview extends Component {
   }
   handleDrop = files => {
     const uploaders = files.map(file => {
+      let key = process.env.REACT_APP_CLOUDINARY_API_KEY;
+      if (typeof(key) !== 'string') {
+        let key = process.env.cloudinary_api_key;
+      }
       const formData = new FormData();
       formData.append("file", file);
       formData.append("tags", ``);
       formData.append("upload_preset", "true-business"); // Replace the preset name with your own
-      formData.append("api_key", process.env.REACT_APP_CLOUDINARY_API_KEY); // Replace API key with your own Cloudinary key
+      formData.append("api_key", key); // Replace API key with your own Cloudinary key
       formData.append("timestamp", (Date.now() / 1000) | 0);
 
       // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
