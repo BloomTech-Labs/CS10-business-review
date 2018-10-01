@@ -17,10 +17,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  // For old-school way of registering I presume
+  // Display name
   name: {
     type: String,
-    required: true,
+    required: true
   },
 
   email: {
@@ -28,16 +28,15 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
-  // Displayed on reviews and what not
+  // login name
   username: {
     type: String,
     unique: true,
-    required: true,
+    required: false,
   },
   // Guessing also only necessary for old-school way of registering
   password: {
-    type: String,
-    required: true,
+    type: String
   },
   // For google passport
   googleId: {
