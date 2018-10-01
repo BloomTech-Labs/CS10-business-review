@@ -11,7 +11,6 @@ if (typeof(backend) !== 'string') {
   backend = heroku;
 }
 
-
 class User extends Component {
   state = {
     username: "",
@@ -19,6 +18,8 @@ class User extends Component {
     editUsernameOrEmail: false,
     Email: false,
     editPassword: false,
+    currenAction: 'Change',
+    change: false,
     breadcrumbs: ["Home"],
     userReviews: [
       {
@@ -53,9 +54,9 @@ class User extends Component {
     current: "Home",
   };
 
-  // componentDidMount = () => {
-  //   window.scrollTo(0, 0);
-  // };
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
 
   componentDidMount = () => {
     setTimeout(() => {
@@ -101,10 +102,28 @@ class User extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  changeUsernameOrEmail = () => {
+changeCurrentAction = () => {
+  if(this.state.change) {
     this.setState({
-      editUsernameOrEmail: !this.state.editUsernameOrEmail,
-    });
+      currenAction: "Change"
+    })
+  }
+  else {
+    this.setState({
+      currenAction: "Cancel"
+    })
+  }
+}
+
+ changeUsernameOrEmail = () => {
+   this.changeCurrentAction ();
+  this.setState({
+    openForChange: !this.state.openForChange,
+    change: !this.state.change,
+   });
+
+  }
+ 
   };
   render() {
     return (
@@ -215,65 +234,54 @@ class User extends Component {
       case "Billing":
         return <div className="content__billing">No idea what will go here, I guess something for Stripe?</div>;
       case "Settings":
-        return (
-          <div className="content__profile">
-            <div className="profile__image" />
-            {/* Have this open a modal to change their password */}
-            <div className="profile__container">
-              <div className="container__info">
-                <div className="info__label">Username:</div>
-                <div className="info__data">
-                  {this.state.editUsernameOrEmail ? (
-                    <input
-                      placeholder="username"
-                      name="username"
-                      type="text"
-                      value={this.state.username}
-                      onChange={this.handleInputChange}
-                    />
-                  ) : (
-                    this.state.username
-                  )}{" "}
-                  <button className="info__button" onClick={this.saveUsernameOrEmail}>
-                    save
-                  </button>
-                </div>
-                <button className="info__button" onClick={this.changeUsernameOrEmail}>
-                  Change
-                </button>
-              </div>
-              <div className="container__info">
-                <div className="info__label">Email:</div>
-                <div className="info__data">
-                  {this.state.editUsernameOrEmail ? (
-                    <input
-                      placeholder="email"
-                      name="email"
-                      type="text"
-                      value={this.state.email}
-                      onChange={this.handleInputChange}
-                    />
-                  ) : (
-                    this.state.email
-                  )}{" "}
-                  <button className="info__button" onClick={this.saveUsernameOrEmail}>
-                    save
-                  </button>
-                </div>
-                <button className="info__button" onClick={this.changeUsernameOrEmail}>
-                  Change
-                </button>
-              </div>
-              <div className="container__info">
-                <div className="info__label">Password:</div>
-                <div className="info__data">****************</div>
-                <button className="info__button" onClick={this.changePassword}>
-                  Change
-                </button>
-              </div>
-            </div>
+
+        return <div className="content__profile">
+        <div className="profile__image" />
+        {/* Have this open a modal to change their password */}
+        <div className="profile__container">
+          <div className="container__info">
+            <div className="info__label">Username:</div>
+            <div className="info__data">{this.state.openForChange ? (
+            <input
+            className="user-change__input"
+                placeholder="username"
+                name="username"
+                type="text"
+                value={this.state.username}
+                onChange={this.handleInputChange}
+                /> 
+                 //Show save but when change button is clicked
+          ): ( this.state.username)} {this.state.change?(<button  className="info__button" onClick={this.saveUsernameOrEmail}>Save</button>):(null)}</div>
+            <button className="info__button" onClick={this.changeUsernameOrEmail}>
+              {this.state.currenAction}
+            </button>
           </div>
-        );
+          <div className="container__info">
+            <div className="info__label">Email:</div>
+            <div className="info__data">{this.state.openForChange ? (
+            <input
+            className="user-change__input"
+                placeholder="email"
+                name="email"
+                type="text"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+                /> 
+                //Show save but when change button is clicked
+            ): ( this.state.email)} {this.state.change?(<button  className="info__button" onClick={this.saveUsernameOrEmail}>Save</button>):(null)}</div>
+            <button className="info__button" onClick={this.changeUsernameOrEmail}>
+            {this.state.currenAction}
+            </button>
+          </div>
+          <div className="container__info">
+            <div className="info__label">Password:</div>
+            <div className="info__data">****************</div>
+            <button className="info__button" onClick={this.changePassword}>
+              Change
+            </button>
+           </div>
+          </div>
+          </div>
       default:
         return (
           <div className="content__profile">
