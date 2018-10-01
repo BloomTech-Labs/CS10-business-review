@@ -6,7 +6,7 @@
   cursor: default;
   .signup-container {
     .containers(@width: 50%);
-    color: @color;
+    color: @textColor;
     background: @elementBackground;
     padding: 1rem;
     .signup-container__header {
@@ -39,15 +39,7 @@
       .signup-container__buttons {
         .containers(@flexDirection:row);
         .signup-container__button {
-          border: outset;
-          padding: 0.5rem;
-          margin: 2rem;
-          font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
-          font-size: 1.5rem;
-          border-color: black;
-        }
-        .signup-container__button:hover {
-          cursor: pointer;
+          .buttons();
         }
       }
     }

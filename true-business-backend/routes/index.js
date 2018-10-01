@@ -15,7 +15,7 @@ mongoose.connect(
   {},
   function(err) {
     if (err) console.log(err);
-  }
+  },
 );
 
 mongoose.Promise = global.Promise;
@@ -95,11 +95,10 @@ router.get("/api/review/getReviewsByBusinessId/:id/:landing", (req, res) => {
   ReviewControler.getReviewsByBusinessId(req, res);
 });
 
-// Guessing we should put this in a StripeController at some point.
 router.post("/charge", async (req, res) => {
   let amount = req.body.selectedRadio === "oneMonth" ? 999 : 4999;
   stripe.charges
-
+    .create({ amount, currency: "usd", description: "An example charge", source: req.body.token.id })
     .then(status => {
       res.json({ status });
     })

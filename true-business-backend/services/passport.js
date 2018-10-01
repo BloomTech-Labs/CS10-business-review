@@ -13,26 +13,23 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(
-  new GoogleStrategy(
-    {
-      clientID:
-        process.env.googleClientID || process.env.REACT_APP_GOOGLEAUTHCLIENTID,
-      clientSecret:
-        process.env.googleClientSecret ||
-        process.env.REACT_APP_GOOGLEAUTHSECRET,
-      callbackURL: "/auth/google/callback"
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        const existingUser = await User.findOne({ googleId: profile.id });
-        if (existingUser) {
-          return done(null, existingUser);
-        }
-        const user = await new User({ googleId: profile.id }).save();
-        done(null, user);
-      } catch (error) {
-        console.log({ error });
+  new GoogleStrategy({
+    clientID: process.env.googleClientID || process.env.REACT_APP_GOOGLEAUTHCLIENTID,
+    clientSecret: process.env.googleClientSecret || process.env.REACT_APP_GOOGLEAUTHSECRET,
+    callbackURL: "/auth/google/callback"
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      console.log(profile.emails[0].value);
+      const existingUser = await User.findOne({ googleId: profile.id });
+      if (existingUser) {
+        return done(null, existingUser);
       }
+      const email = profile.emails[0].value;
+      const user = await new User({ googleId: profile.id, name: profile.displayName, email: email, username: email }).save();
+      done(null, user);
+    } catch (error) {
+      console.log({ error });
     }
-  )
+  })
 );

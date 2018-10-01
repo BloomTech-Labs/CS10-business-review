@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import NavBar from "./NavBar.js";
-import axios from 'axios';
+import axios from "axios";
 
 import "../css/User.css";
 
-
 class User extends Component {
   state = {
-    username: '',
-    email:'',
-    openForChange: false,
+
+    username: "",
+    email: "",
+    editUsernameOrEmail: false,
+
     Email: false,
     editPassword: false,
     currenAction: 'Change',
@@ -52,29 +53,28 @@ class User extends Component {
   // componentDidMount = () => {
   //   window.scrollTo(0, 0);
   // };
-  
-  componentDidMount = () =>{
-    setTimeout(()=>{
-    const id = localStorage.getItem("userId");
-  axios.get(`http://localhost:3001/api/user/${id}`)
-  .then(response =>{
-    console.log("Smell", response)
-      this.setState({
-        username: response.data.username, email: response.data.email
-      })
-    })
-  }, 300)
+
+  componentDidMount = () => {
+    setTimeout(() => {
+      const id = localStorage.getItem("userId");
+      axios.get(`http://localhost:3001/api/user/${id}`).then(response => {
+        this.setState({
+          username: response.data.username,
+          email: response.data.email,
+        });
+      });
+    }, 300);
   };
 
   saveUsernameOrEmail = () => {
-
     const user = {
       username: this.state.username,
       email: this.state.email,
-    }
+    };
 
-    console.log("Before", user)
+    console.log("Before", user);
     const id = localStorage.getItem("userId");
+
     axios.put(`http://localhost:3001/api/user/${id}`, user)
     .then(response =>{
       console.log("SaveResponse", response);
@@ -83,19 +83,22 @@ class User extends Component {
         currenAction: 'Change',
         change: false
       })
+
       })
       .catch(err => {
         console.log("Update Error", err);
-      })
-  }
-
-
+      });
+  };
 
   logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem('userId');
+    localStorage.removeItem("userId");
     localStorage.removeItem("name");
     this.props.history.push("/");
+  };
+
+  handleInputChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
 
@@ -126,6 +129,7 @@ changeCurrentAction = () => {
    });
 
   }
+
   render() {
     return (
       <div>
@@ -235,6 +239,7 @@ changeCurrentAction = () => {
       case "Billing":
         return <div className="content__billing">No idea what will go here, I guess something for Stripe?</div>;
       case "Settings":
+
         return <div className="content__profile">
         <div className="profile__image" />
         {/* Have this open a modal to change their password */}
@@ -279,9 +284,9 @@ changeCurrentAction = () => {
             <button className="info__button" onClick={this.changePassword}>
               Change
             </button>
+
           </div>
-        </div>
-      </div>;
+        );
       default:
         return (
           <div className="content__profile">

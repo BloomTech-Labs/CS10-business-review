@@ -5,12 +5,13 @@
   align-items: center;
   height: 100%;
   width: inherit;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 25vh 2rem 2rem 2rem;
   margin: 0;
-  color: black;
+  cursor: default;
+  color: #05386b;
 }
 .business .business__info {
   display: flex;
@@ -19,14 +20,24 @@
   align-items: center;
   height: 100%;
   width: 75%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  background: #e6e6e6;
+  cursor: default;
+  color: #05386b;
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
   padding: 1rem;
   margin: 1rem;
+}
+.business .business__info .info__landscape {
+  width: 50%;
+  max-height: 20rem;
+}
+.business .business__info .info__portrait {
+  max-height: 20rem;
 }
 .business .business__info .info__title {
   font-size: 3rem;
@@ -47,11 +58,13 @@
   align-items: center;
   height: 25vh;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
   flex-grow: 1;
 }
 .business .business__info .info__details .details__hours {
@@ -61,11 +74,13 @@
   align-items: center;
   height: 100%;
   width: 50%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .business .business__info .info__details .details__hours .hours__title {
   font-size: 2rem;
@@ -80,11 +95,13 @@
   align-items: center;
   height: 100%;
   width: 50%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .business .business__info .info__details .details__contact .contact__phone {
   font-size: 1.5rem;
@@ -99,22 +116,23 @@
   align-items: center;
   height: 100%;
   width: 75%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
-  padding: 0;
-  margin: 0;
   padding: 1rem;
-  background: #e6e6e6;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
 }
 .business .business__reviews-container .reviews-container__title {
   font-size: 2.5rem;
   margin-bottom: 2rem;
-  color: black;
+  color: #05386b;
 }
 .business .business__reviews-container .reviews-container__button {
-  background: #2687a1;
-  color: black;
+  color: #05386b;
   border: outset;
   width: 20%;
   padding: 0.5rem;
@@ -129,11 +147,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown {
   display: flex;
@@ -146,13 +166,11 @@
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container {
   margin-left: 2rem;
   width: 15rem;
-  background-color: #2687a1;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__button {
   width: inherit;
   font-size: 1.5rem;
-  color: black;
-  background-color: #2687a1;
+  color: #05386b;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__button:hover {
   cursor: pointer;
@@ -167,9 +185,8 @@
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__menu .menu__button {
   width: inherit;
   border: none;
-  background-color: #2687a1;
   font-size: 1.5rem;
-  color: black;
+  color: #05386b;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__menu .menu__button:hover {
   filter: brightness(80%);
@@ -182,11 +199,13 @@
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
   min-height: 36rem;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review {
@@ -197,16 +216,54 @@
   flex-wrap: wrap;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
   min-width: 20%;
   max-width: 20%;
-  padding: 1rem;
-  color: black;
+  margin: 3rem 1rem 0 1rem;
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
+  color: #05386b;
   opacity: 0.5;
 }
-.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__image {
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape {
   width: 10rem;
-  height: 10rem;
-  background-color: black;
+  height: 60%;
+  background-color: #56879e;
+  top: -2rem;
+  position: relative;
+  max-height: 60%;
+  min-height: 60%;
+  max-width: 90%;
+  min-width: 90%;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape:hover {
+  cursor: pointer;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait {
+  width: 40%;
+  height: 60%;
+  background-color: #56879e;
+  top: -2rem;
+  position: relative;
+  max-height: 60%;
+  min-height: 60%;
+  max-width: 40%;
+  min-width: 40%;
+  margin: 0 30%;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait:hover {
+  cursor: pointer;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__image:hover {
   cursor: pointer;
@@ -243,11 +300,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__page {
   width: 5%;

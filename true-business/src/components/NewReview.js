@@ -14,12 +14,13 @@ let modalStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "90%",
-    width: "75%",
+    height: "75%",
+    width: "50%",
     zIndex: "5",
-    backgroundColor: "rgb(62, 56, 146)",
-    overflow: "hidden"
-  }
+    backgroundColor: "rgb(238,238,238)",
+    color: "rgb(5,56,107)",
+    overflowY: "scroll",
+  },
 };
 
 Modal.setAppElement("div");
@@ -32,13 +33,11 @@ export default class NewReview extends Component {
       stars: 0,
       modalIsOpen: false,
       modalInfo: null,
-      photos: [],
-      imagePreviews: [],
       currentImageID: 0,
       title: "",
       body: "",
       rating: 0,
-      fileURL: []
+      fileURL: [],
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -77,27 +76,26 @@ export default class NewReview extends Component {
 
       // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
       return axios
-        .post(
-          "https://api.cloudinary.com/v1_1/ddhamypia/image/upload",
-          formData,
-          {
-            headers: { "X-Requested-With": "XMLHttpRequest" }
-          }
-        )
+        .post("https://api.cloudinary.com/v1_1/ddhamypia/image/upload", formData, {
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+        })
         .then(response => {
           const data = response.data;
           const fileURL = data.secure_url; // You should store this URL for future references in your app
-          console.log(data);
 
           let photos = this.state.fileURL;
-          photos.push(fileURL);
+          photos.push({ link: fileURL, height: data.height, width: data.width });
           this.setState({ fileURL: photos });
         });
     });
+    axios.all(uploaders).then(() => {
+      let div = document.createElement("div");
+      let text = document.createTextNode("Image successfully uploaded");
+      div.classList.add("drop__text--uploaded");
+      div.appendChild(text);
+      document.getElementById("drop").appendChild(div);
+    });
   };
-  // axios.all(uploaders) => {
-  //   // ... perform after upload is successful operation
-  // });
 
   starRating = rating => {
     this.setState({ rating });
@@ -110,7 +108,7 @@ export default class NewReview extends Component {
       title: this.state.title,
       body: this.state.body,
       stars: this.state.rating,
-      photos: this.state.fileURL
+      photos: this.state.fileURL,
     };
     axios
       .post("http://localhost:3001/api/review/create", review)
@@ -133,16 +131,16 @@ export default class NewReview extends Component {
         isOpen={this.state.modalIsOpen}
         onRequestClose={this.closeModal}
         style={modalStyles}
-        contentLabel="New Review Modal"
-      >
+        contentLabel="New Review Modal">
         <div className="new-review">
           {this.state.modalIsOpen ? (
             <div className="new-review__modal">
               <div className="modal__header">New Review</div>
               <div className="modal__body">
-                <div>
+                <div id="drop" className="body__drop">
                   <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
-                    <p>Drop your files or click here to upload</p>
+                    <i className="fas fa-cloud-upload-alt fa-4x" />
+                    <div className="drop__text--initial">Drag and Drop or Click to Add Images</div>
                   </Dropzone>
                 </div>
 
@@ -150,7 +148,7 @@ export default class NewReview extends Component {
                   <div className="title__label">Title:</div>
                   <input
                     className="title__info"
-                    placeholder="So Gross..."
+                    placeholder="Great Experience!"
                     name="title"
                     type="text"
                     value={this.state.title}
@@ -162,7 +160,7 @@ export default class NewReview extends Component {
                   <div className="review__label">Review:</div>
                   <textarea
                     className="review__info"
-                    placeholder="I found a hair in my food..."
+                    placeholder="Everything was perfect."
                     name="body"
                     type="text"
                     value={this.state.body}

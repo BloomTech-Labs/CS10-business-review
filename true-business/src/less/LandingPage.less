@@ -1,55 +1,66 @@
-@import 'mixins.less';
+@import "mixins.less";
 
-.landing-container {
-  .containers();
-  padding-top: 25vh;
-  cursor: default;
-  .landing-container__reviews-container {
-    .containers(@width: 80%);
-    margin-bottom: 2rem;
-    background: @elementBackground;
-    .landing-container__title {
-      font-size: 3rem;
-      color: @color;
+.landing {
+  .containers(@padding: 25vh 0 0 0);
+  .landing__container {
+    .containers(@width: 90%);
+    .container__header {
+      .backAndBorder();
+      .headers();
     }
-    .landing-container__reviews {
+    .container__items {
       .containers(@flexDirection: row, @justifyContent: space-between, @alignItems: flex-start);
       flex-wrap: wrap;
       min-height: 100%;
-      .landing-container__review {
-        .containers(@width: auto, @fontSize: 1.5rem);
-        color: @color;
-        opacity: 0.7;
-        margin: 0 1rem;
+      .items__item {
+        .containers(@justifyContent: space-between, @fontSize: 1.5rem);
+        .backAndBorder();
+        opacity: 0.8;
+        margin: 1rem;
         padding: 1rem;
-        height: inherit;
-        .landing-container__picture {
-          width: 10rem;
-          height: 10rem;
-          background-color: rgb(86, 135, 158);
+        height: 20rem;
+        width: 22%;
+        max-width: 22%;
+        min-width: 22%;
+        .item__landscape {
+          .images(@height: 60%);
+          max-height: 60%;
+          min-height: 60%;
+          max-width: 100%;
+          min-width: 100%;
         }
-        .landing-container__picture:hover {
+        .item__portrait {
+          .images(@width: 40%, @height: 60%);
+          max-height: 60%;
+          min-height: 60%;
+          max-width: 40%;
+          min-width: 40%;
+          margin: 0 30%;
+        }
+        .item__image:hover {
           cursor: pointer;
         }
-        .landing-container__item {
-          width: 10rem;
+        .item__title {
+          text-align: center;
+        }
+        .item__info {
           padding: 0.2rem 0;
           text-align: center;
           text-overflow: ellipsis;
           padding: 0.3rem;
         }
-        .landing-container__item--hover {
-          width: 10rem;
+        .item__info--hover {
           padding: 0.2rem 0;
           text-align: center;
           text-overflow: ellipsis;
           padding: 0.3rem;
+          border-radius: 5rem;
         }
-        .landing-container__item--hover:hover {
+        .item__info--hover:hover {
           cursor: pointer;
         }
       }
-      .landing-container__review:hover {
+      .items__item:hover {
         opacity: 1;
       }
     }
@@ -58,29 +69,35 @@
 .landing-container__modal {
   .modal-container {
     .modal__header {
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      margin: 1rem;
-      color: @color;
-
+      .containers(@alignItems: flex-star, @margin: 1rem);
       .header__title {
-        font-size: 3rem;
+        .headers(@margin: 0);
       }
       .header__review {
-        font-size: 2rem;
+        .body();
       }
     }
     .modal__body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: @color;
-
-      .body__image {
-        width: 25rem;
-        height: 25rem;
-        background: black;
+      .containers();
+      .body__drop {
+        .containers();
+      }
+      .body__landscape {
+        .images(@top: 0, @height: 60%);
+        max-height: 60%;
+        min-height: 60%;
+        max-width: 100%;
+        min-width: 100%;
+        cursor: default;
+      }
+      .body__portrait {
+        .images(@top: 0, @width: 40%, @height: 60%);
+        max-height: 60%;
+        min-height: 60%;
+        max-width: 40%;
+        min-width: 40%;
+        margin: 0 30%;
+        cursor: default;
       }
       .body__stars {
         text-align: center;
@@ -97,20 +114,9 @@
       }
     }
     .modal__footer {
-      display: flex;
-      justify-content: center;
-      color: @color;
-      margin-top: 1rem;
+      .containers();
       .footer__button {
-        border: outset;
-        width: 15%;
-        padding: 0.5rem;
-        margin: 0 2rem;
-        font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
-        font-size: 1.5rem;
-      }
-      .modal__button:hover {
-        cursor: pointer;
+        .buttons();
       }
     }
   }
@@ -121,5 +127,14 @@
 }
 
 .ReactModal__Body--open {
+  position: absolute;
   overflow-y: hidden;
+}
+
+.drop__text--initial {
+  font-size: 1rem;
+}
+
+.drop__text--uploaded {
+  font-size: .8rem;
 }
