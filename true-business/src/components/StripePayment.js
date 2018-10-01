@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { CardElement, injectStripe } from 'react-stripe-elements';
+import React, { Component } from "react";
+import axios from "axios";
+import { CardElement, injectStripe } from "react-stripe-elements";
 
-import '../css/Stripe.css';
+import "../css/Stripe.css";
 
 class StripePayment extends Component {
   constructor(props) {
@@ -11,12 +11,12 @@ class StripePayment extends Component {
     this.state = {
       complete: false,
       loading: false,
-      selectedRadio: 'oneMonth',
-      name: '',
-      street: '',
-      city: '',
-      state: '',
-      zip: '',
+      selectedRadio: "oneMonth",
+      name: "",
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
       error: false,
     };
   }
@@ -26,26 +26,26 @@ class StripePayment extends Component {
 
     let args = {
       name: this.state.name,
-      address_country: 'United States',
+      address_country: "United States",
       address_state: this.state.state,
       address_line1: this.state.street,
       address_city: this.state.city,
     };
     if (this.state.name && this.state.state && this.state.street && this.state.city) {
-      let { token } = await this.props.stripe.createToken({...args});
+      let { token } = await this.props.stripe.createToken({ ...args });
       this.setState({ loading: true });
       axios
-        .post('http://localhost:3001/charge', { args, token, selectedRadio: this.state.selectedRadio })
+        .post("http://localhost:3001/charge", { args, token, selectedRadio: this.state.selectedRadio })
         .then(() => {
           this.setState({ complete: true });
           this.props.checkPayment(true);
         })
         .catch(error => {
-          this.setState({ loading: false, error: 'Failed, Check Information, Click to Try Again' });
+          this.setState({ loading: false, error: "Failed, Check Information, Click to Try Again" });
           console.log({ error });
         });
     } else {
-      window.alert('Missing information in payment section.');
+      window.alert("Missing information in payment section.");
     }
   }
 
@@ -66,7 +66,7 @@ class StripePayment extends Component {
       <div className="stripe">
         <div className="stripe__info">
           <div className="info__label">
-            Name on the credit card:
+            Name on CC:
             <input
               className="info__input"
               placeholder="John M. Smith..."
@@ -118,7 +118,7 @@ class StripePayment extends Component {
                 className="radio__button"
                 type="radio"
                 id="oneMonth"
-                checked={this.state.selectedRadio === 'oneMonth'}
+                checked={this.state.selectedRadio === "oneMonth"}
                 onChange={this.handleRadioChange}
               />
               -- 1 Month: $9.99
@@ -130,7 +130,7 @@ class StripePayment extends Component {
                 className="radio__button"
                 type="radio"
                 id="oneYear"
-                checked={this.state.selectedRadio === 'oneYear'}
+                checked={this.state.selectedRadio === "oneYear"}
                 onChange={this.handleRadioChange}
               />
               -- 1 Year: $49.99 (Save $69.89)
@@ -141,13 +141,23 @@ class StripePayment extends Component {
           className="stripe__element"
           style={{
             base: {
-              fontSize: '25px',
+              fontSize: "20px",
+              color: "#05386b",
+              letterSpacing: "0.025em",
+              fontFamily: "Source Code Pro, monospace",
+              "::placeholder": {
+                color: "#05386b",
+              },
+              iconColor: "#05386b",
+            },
+            invalid: {
+              color: "#red",
             },
           }}
         />
         {!this.state.complete ? (
           this.state.loading ? (
-            <div>Verifying...</div>
+            <div className="stripe__button">Verifying...</div>
           ) : (
             <button className="stripe__button" onClick={this.submit.bind()}>
               Submit Payment

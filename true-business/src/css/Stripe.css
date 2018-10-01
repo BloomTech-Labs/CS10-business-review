@@ -1,11 +1,17 @@
 .stripe {
-  height: 100%;
-  font-size: 1.5rem;
-  color: black;
-  width: 75%;
+  display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .stripe .stripe__info {
   display: flex;
@@ -14,11 +20,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .stripe .stripe__info .info__label {
   display: flex;
@@ -27,11 +35,13 @@
   align-items: initial;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
   margin: 1rem;
   font-size: 1.5rem;
 }
@@ -46,26 +56,38 @@
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  margin-left: 20%;
+  cursor: default;
+  color: #05386b;
+  margin-left: 50%;
+}
+.stripe .stripe__radio .radio__label {
+  font-size: 1.5rem;
 }
 .stripe .stripe__radio .radio__button:hover {
   cursor: pointer;
 }
 .stripe .stripe__button {
-  border: outset;
-  width: 30%;
-  padding: 0.2rem;
-  margin: 0 2rem;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  margin: 1rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: white;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
+  width: 30%;
 }
-.stripe .stripe-button:hover {
+.stripe .stripe__button:hover {
   cursor: pointer;
+  box-shadow: 0px 15px 20px grey;
+  filter: brightness(110%);
+  font-weight: bolder;
+  opacity: 1;
 }
 .stripe .stripe__element {
   width: 70%;
