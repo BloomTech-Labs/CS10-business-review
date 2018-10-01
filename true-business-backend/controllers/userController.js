@@ -20,16 +20,23 @@ function generateToken(user) {
 const bcryptRounds = 10;
 
 const register = (request, response) => {
+  console.log("Yup")
   const { username, password, email } = request.body;
+  console.log("maybe")
   const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
+  console.log("eh?")
   const token = generateToken({ username });
+  console.log("lol")
   const user = new User({ username, password: encryptedPassword, token, email });
+  console.log("totally")
   user
     .save()
     .then(savedUser => {
+      console.log("YEAAAH")
       response.status(200).send(savedUser);
     })
     .catch(err => {
+      console.log("BLAHHHH")
       response.status(500).send({
         errorMessage: "Error occurred while saving: " + err,
       });
