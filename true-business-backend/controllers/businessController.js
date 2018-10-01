@@ -55,8 +55,10 @@ const createBusiness = (req, res) => {
             types,
             formatted_address,
             formatted_phone_number,
-            photos: images,
             website,
+            photos: images,
+            opening_hours,
+            address_components,
             place_id: result.place_id,
           });
           business

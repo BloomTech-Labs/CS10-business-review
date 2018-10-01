@@ -4,6 +4,14 @@ import { CardElement, injectStripe } from "react-stripe-elements";
 
 import "../css/Stripe.css";
 
+
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof(backend) !== 'string') {
+  backend = heroku;
+}
+
+
 class StripePayment extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +43,7 @@ class StripePayment extends Component {
       let { token } = await this.props.stripe.createToken({ ...args });
       this.setState({ loading: true });
       axios
-        .post("http://localhost:3001/charge", { args, token, selectedRadio: this.state.selectedRadio })
+        .post(`${backend}charge`, { args, token, selectedRadio: this.state.selectedRadio })
         .then(() => {
           this.setState({ complete: true });
           this.props.checkPayment(true);

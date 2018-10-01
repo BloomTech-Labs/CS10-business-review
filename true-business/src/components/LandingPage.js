@@ -151,7 +151,7 @@ class LandingPage extends Component {
                     <img
                       alt={this.state.modalInfo.newMongoId.name}
                       className="body__image"
-                      src={this.state.modalInfo.photos}
+                      src={this.state.modalInfo.photos[0].link}
                     />
                     <div className="body__stars">
                       <StarRatings

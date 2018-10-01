@@ -5,6 +5,12 @@ import axios from "axios";
 
 import "../css/User.css";
 
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof(backend) !== 'string') {
+  backend = heroku;
+}
+
 class User extends Component {
   state = {
 
@@ -50,14 +56,14 @@ class User extends Component {
     current: "Home",
   };
 
-  // componentDidMount = () => {
-  //   window.scrollTo(0, 0);
-  // };
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
 
   componentDidMount = () => {
     setTimeout(() => {
       const id = localStorage.getItem("userId");
-      axios.get(`http://localhost:3001/api/user/${id}`).then(response => {
+      axios.get(`${backend}api/user/${id}`).then(response => {
         this.setState({
           username: response.data.username,
           email: response.data.email,
@@ -74,16 +80,15 @@ class User extends Component {
 
     console.log("Before", user);
     const id = localStorage.getItem("userId");
-
-    axios.put(`http://localhost:3001/api/user/${id}`, user)
-    .then(response =>{
-      console.log("SaveResponse", response);
-      this.setState({
-        openForChange: false,
-        currenAction: 'Change',
-        change: false
-      })
-
+    axios
+      .put(`${backend}api/user/${id}`, user)
+      .then(response => {
+        console.log("SaveResponse", response);
+        this.setState({
+          openForChange: false,
+          currenAction: 'Change',
+          change: false
+        });
       })
       .catch(err => {
         console.log("Update Error", err);
@@ -101,34 +106,28 @@ class User extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-
-handleInputChange = event => {
-  this.setState({ [event.target.name]: event.target.value });
-};
-
-
-changeCurrentAction = () => {
-  if(this.state.change) {
-    this.setState({
-      currenAction: "Change"
-    })
+  changeCurrentAction = () => {
+    if(this.state.change) {
+      this.setState({
+        currenAction: "Change"
+      })
+    }
+    else {
+      this.setState({
+        currenAction: "Cancel"
+      })
+    }
   }
-  else {
-    this.setState({
-      currenAction: "Cancel"
-    })
-  }
-}
 
+  changeUsernameOrEmail = () => {
+    this.changeCurrentAction ();
+   this.setState({
+     openForChange: !this.state.openForChange,
+     change: !this.state.change,
+    });
+ 
+   }
 
- changeUsernameOrEmail = () => {
-   this.changeCurrentAction ();
-  this.setState({
-    openForChange: !this.state.openForChange,
-    change: !this.state.change,
-   });
-
-  }
 
   render() {
     return (

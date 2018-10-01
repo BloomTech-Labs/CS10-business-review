@@ -9,6 +9,12 @@ import NavBar from "./NavBar";
 import "../css/Business.css";
 import "../css/GeneralStyles.css";
 
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof(backend) !== 'string') {
+  backend = heroku;
+}
+
 let modalStyles = {
   content: {
     top: "50%",
@@ -88,7 +94,7 @@ class Business extends Component {
     if (this.props.business) {
       let id = this.props.landingBusiness ? this.props.business._id : this.props.business.place_id;
       axios
-        .get(`http://localhost:3001/api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}`)
+        .get(`${backend}api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}`)
         .then(reviews => {
           this.setState({ reviews: reviews.data, newBusinessId: this.props.newBusinessId });
         })
@@ -174,7 +180,6 @@ class Business extends Component {
                 alt={this.props.business.name}
                 className={this.props.business.photos[0].width >= this.props.business.photos[0].height ? "info__landscape" : "info__portrait"}
                 src={this.props.business.photos[0].link}
-                onClick={this.openModal}
               />
               <div className="info__title">{this.props.business.name}</div>
               <div className="info__street">{this.props.business.formatted_address}</div>

@@ -6,6 +6,12 @@ import Dropzone from "react-dropzone";
 
 import "../css/NewReview.css";
 
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof(backend) !== 'string') {
+  backend = heroku;
+}
+
 let modalStyles = {
   content: {
     top: "50%",
@@ -111,7 +117,7 @@ export default class NewReview extends Component {
       photos: this.state.fileURL,
     };
     axios
-      .post("http://localhost:3001/api/review/create", review)
+      .post(`${backend}api/review/create`, review)
       .then(response => {
         this.closeModal();
       })
