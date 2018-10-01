@@ -14,10 +14,10 @@ module.exports = router => {
   router.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-      failureRedirect: frontend + "/signin"
+      failureRedirect: frontend + "signin"
     }),
     function(req, res) {
-      res.redirect(frontend);
+      res.redirect(frontend + "user");
     }
   );
 };

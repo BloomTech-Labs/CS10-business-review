@@ -238,7 +238,6 @@ class User extends Component {
       case "Billing":
         return <div className="content__billing">No idea what will go here, I guess something for Stripe?</div>;
       case "Settings":
-
         return <div className="content__profile">
         <div className="profile__image" />
         {/* Have this open a modal to change their password */}
