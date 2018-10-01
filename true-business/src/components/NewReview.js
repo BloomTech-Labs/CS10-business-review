@@ -139,7 +139,7 @@ export default class NewReview extends Component {
               <div className="modal__body">
                 <div id="drop" className="body__drop">
                   <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
-                    <i class="fas fa-cloud-upload-alt fa-4x" />
+                    <i className="fas fa-cloud-upload-alt fa-4x" />
                     <div className="drop__text--initial">Drag and Drop or Click to Add Images</div>
                   </Dropzone>
                 </div>

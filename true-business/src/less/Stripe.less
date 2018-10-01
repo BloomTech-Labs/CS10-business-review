@@ -1,13 +1,7 @@
 @import './mixins.less';
 
 .stripe {
-  height: 100%;
-  font-size: 1.5rem;
-  color: @textColor;
-  width: 75%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  .containers(@fontSize: 1.5rem);
   .stripe__info {
     .containers();
     .info__label {
@@ -22,23 +16,17 @@
   }
   .stripe__radio {
     .containers(@alignItems: flex-start);
-    margin-left: 20%;
+    margin-left: 50%;
     .radio__label {
+      font-size: 1.5rem;
     }
     .radio__button:hover {
       cursor: pointer;
     }
   }
   .stripe__button {
-    border: outset;
+    .buttons();
     width: 30%;
-    padding: 0.2rem;
-    margin: 0 2rem;
-    font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
-    font-size: 1.5rem;
-  }
-  .stripe-button:hover {
-    cursor: pointer;
   }
   .stripe__element {
     width: 70%;

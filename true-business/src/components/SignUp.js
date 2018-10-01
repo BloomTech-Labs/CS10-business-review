@@ -31,7 +31,7 @@ class SignUp extends Component {
 
   confirmPassword = () => {
     return this.state.password === this.state.confirmPassword;
-  }; 
+  };
 
   createUser = event => {
     event.preventDefault();
@@ -42,22 +42,20 @@ class SignUp extends Component {
       password: this.state.password,
       accountType: this.state.type,
     };
-    this.state.payment
-      ? axios
-          .post('http://localhost:3001/api/user/register', user)
-          .then(() => {
-            this.setState({
-              error: false,
-            });
-            this.props.history.push(`/signin`);
-          })
-          .catch(err => {
-            this.setState({
-              error: true,
-              errorMessage: err,
-            });
-          })
-      : window.alert("You must submit payment first");
+    axios
+      .post("http://localhost:3001/api/user/register", user)
+      .then(() => {
+        this.setState({
+          error: false,
+        });
+        this.props.history.push(`/signin`);
+      })
+      .catch(err => {
+        this.setState({
+          error: true,
+          errorMessage: err,
+        });
+      });
   };
 
   handleInputChange = event => {
@@ -72,7 +70,7 @@ class SignUp extends Component {
           <div className="signup-container">
             <div className="signup-container__header"> Sign Up </div>
             <form className="signup-container__form">
-            <input
+              <input
                 className="signup-container__input"
                 placeholder="Full Name"
                 name="name"
@@ -120,9 +118,15 @@ class SignUp extends Component {
                 </div>
               </StripeProvider>
               <div className="signup-container__buttons ">
-                <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createUser}>
-                  Confirm
-                </button>
+                {this.state.payment ? (
+                  <button
+                    id="signup-submit"
+                    type="submit"
+                    className="signup-container__button"
+                    onClick={this.createUser}>
+                    Confirm Registration
+                  </button>
+                ) : null}
               </div>
             </form>
           </div>
