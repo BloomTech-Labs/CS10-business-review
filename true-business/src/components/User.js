@@ -284,9 +284,9 @@ changeCurrentAction = () => {
             <button className="info__button" onClick={this.changePassword}>
               Change
             </button>
-
+           </div>
           </div>
-        );
+          </div>
       default:
         return (
           <div className="content__profile">
