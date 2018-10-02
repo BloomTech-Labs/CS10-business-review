@@ -10,8 +10,8 @@ import "../css/Business.css";
 import "../css/GeneralStyles.css";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
-if (typeof(backend) !== 'string') {
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
   backend = heroku;
 }
 
@@ -153,20 +153,27 @@ class Business extends Component {
     pages = [...pages].sort((x, y) => x - y);
     if (this.state.currentPage > 3) pages.splice(1, 0, "...");
     if (this.state.currentPage < lastPage - 3) pages.splice(pages.length - 1, 0, "...");
-    return pages.map((page, i) => {
-      if (page === "...") {
-        return (
-          <div key={i + page} id={page} className="pagination__page--no-hover">
-            {page}
-          </div>
-        );
-      }
-      return (
-        <div key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
-          {page}
+    return (
+      <div className="reviews__pagination">
+        Page {this.state.currentPage} / {lastPage}
+        <div id="pagination" className="pagination__pages">
+          {pages.map((page, i) => {
+            if (page === "...") {
+              return (
+                <button key={i + page} id={page} className="pagination__page--no-hover">
+                  {page}
+                </button>
+              );
+            }
+            return (
+              <button key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
+                {page}
+              </button>
+            );
+          })}
         </div>
-      );
-    });
+      </div>
+    );
   };
 
   render() {
@@ -178,7 +185,7 @@ class Business extends Component {
             <div className="business__info">
               <img
                 alt={this.props.business.name}
-                className={this.props.business.photos[0].width >= this.props.business.photos[0].height ? "info__landscape" : "info__portrait"}
+                className="info__landscape"
                 src={this.props.business.photos[0].link}
               />
               <div className="info__title">{this.props.business.name}</div>
@@ -297,7 +304,7 @@ class Business extends Component {
                           <div key={review._id} className="review__info">
                             <img
                               alt={review.reviewer.username}
-                              className={review.photos[0].width >= review.photos[0].height ? "review__landscape" : "review__portrait"}
+                              className="review__landscape"
                               src={review.photos[0].link}
                               onClick={() => this.openModal(this, review)}
                             />
@@ -321,9 +328,7 @@ class Business extends Component {
                     <div>No Reviews</div>
                   )}
                 </div>
-                <div id="pagination" className="reviews__pagination">
-                  {this.createPagination()}
-                </div>
+                <div>{this.createPagination()}</div>
               </div>
             </div>
             <Modal
@@ -340,12 +345,12 @@ class Business extends Component {
                       <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
                     </div>
                     <div className="modal__body">
-                    <img
-                alt={this.state.modalInfo.name}
-                className={this.state.modalInfo.photos[0].width >= this.state.modalInfo.photos[0].height ? "body__landscape" : "body__portrait"}
-                src={this.state.modalInfo.photos[0].link}
-                onClick={this.openModal}
-              />
+                      <img
+                        alt={this.state.modalInfo.name}
+                        className="body__landscape"
+                        src={this.state.modalInfo.photos[0].link}
+                        onClick={this.openModal}
+                      />
                       <div className="body__stars">
                         {" "}
                         <StarRatings

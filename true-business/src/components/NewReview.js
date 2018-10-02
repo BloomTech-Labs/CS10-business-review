@@ -7,8 +7,8 @@ import Dropzone from "react-dropzone";
 import "../css/NewReview.css";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
-if (typeof(backend) !== 'string') {
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
   backend = heroku;
 }
 
@@ -20,12 +20,11 @@ let modalStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "75%",
-    width: "50%",
+    height: "85vh",
+    width: "50vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
-    overflowY: "scroll",
   },
 };
 
@@ -44,6 +43,7 @@ export default class NewReview extends Component {
       body: "",
       rating: 0,
       fileURL: [],
+      starsError: false,
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -73,7 +73,7 @@ export default class NewReview extends Component {
   }
   handleDrop = files => {
     let key = process.env.REACT_APP_CLOUDINARY_API_KEY;
-    if (typeof(key) !== 'string') {
+    if (typeof key !== "string") {
       key = process.env.cloudinary_api_key;
     }
 
@@ -101,10 +101,15 @@ export default class NewReview extends Component {
     });
     axios.all(uploaders).then(() => {
       let div = document.createElement("div");
-      let text = document.createTextNode("Image successfully uploaded");
-      div.classList.add("drop__text--uploaded");
-      div.appendChild(text);
+      div.classList.add("drop__image--post");
+      let img = document.createElement("i");
+      img.classList.add("fas");
+      img.classList.add("fa-check");
+      img.classList.add("fa-4x");
+      div.appendChild(img);
       document.getElementById("drop").appendChild(div);
+      let dropZone = document.getElementById("dropZone");
+      document.getElementById("drop").removeChild(dropZone);
     });
   };
 
@@ -113,6 +118,10 @@ export default class NewReview extends Component {
   };
 
   submitReview = () => {
+    if (this.state.rating === 0) {
+      this.setState({starsError: true})
+      return;
+    };
     let review = {
       newMongoId: this.props.newMongoId,
       newGoogleId: this.props.newGoogleId,
@@ -121,6 +130,7 @@ export default class NewReview extends Component {
       stars: this.state.rating,
       photos: this.state.fileURL,
     };
+    this.setState({ title: "", body: "", photos: [], rating: 0, starsError: false });
     axios
       .post(`${backend}api/review/create`, review)
       .then(response => {
@@ -149,7 +159,12 @@ export default class NewReview extends Component {
               <div className="modal__header">New Review</div>
               <div className="modal__body">
                 <div id="drop" className="body__drop">
-                  <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
+                  <Dropzone
+                    id="dropZone"
+                    className="drop__container"
+                    onDrop={this.handleDrop}
+                    multiple
+                    accept="image/*">
                     <i className="fas fa-cloud-upload-alt fa-4x" />
                     <div className="drop__text--initial">Drag and Drop or Click to Add Images</div>
                   </Dropzone>
@@ -193,12 +208,15 @@ export default class NewReview extends Component {
                 </div>
               </div>
               <div className="modal__footer">
-                <button className="footer__button" onClick={this.submitReview}>
+                <div className="footer__buttons">
+                <button className="buttons__button" onClick={this.submitReview}>
                   Submit
                 </button>
-                <button className="footer__button" onClick={this.closeModal}>
+                <button className="buttons__button" onClick={this.closeModal}>
                   Close
                 </button>
+                {this.state.starsError ? <div className="footer__text"> Must Provide a Star Rating </div> : <div className="footer_text" />}
+                </div>
               </div>
             </div>
           ) : null}
