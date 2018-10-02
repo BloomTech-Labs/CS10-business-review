@@ -246,11 +246,12 @@
   opacity: 0.8;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape {
-  width: 10rem;
-  height: 60%;
-  background-color: #56879e;
+  object-fit: cover;
+  object-position: 50% 0%;
+  background-color: #05386b;
   top: -2rem;
   position: relative;
+  border: 0.1rem solid #05386b;
   max-height: 60%;
   min-height: 60%;
   max-width: 90%;
@@ -260,11 +261,12 @@
   cursor: pointer;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait {
-  width: 40%;
-  height: 60%;
-  background-color: #56879e;
+  object-fit: cover;
+  object-position: 50% 0%;
+  background-color: #05386b;
   top: -2rem;
   position: relative;
+  border: 0.1rem solid #05386b;
   max-height: 60%;
   min-height: 60%;
   max-width: 40%;

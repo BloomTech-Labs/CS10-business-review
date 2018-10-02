@@ -61,11 +61,12 @@
   float: left;
 }
 .search .search__results .results__result .result__landscape {
-  width: 30%;
-  height: 14.8rem;
-  background-color: #56879e;
-  top: 0;
+  object-fit: cover;
+  object-position: 50% 0%;
+  background-color: #05386b;
+  top: -2rem;
   position: relative;
+  border: 0.1rem solid #05386b;
   max-height: 14.8rem;
   min-height: 14.8rem;
   max-width: 30%;
@@ -75,11 +76,12 @@
   cursor: pointer;
 }
 .search .search__results .results__result .result__portrait {
-  width: 15%;
-  height: 14.8rem;
-  background-color: #56879e;
-  top: 0;
+  object-fit: cover;
+  object-position: 50% 0%;
+  background-color: #05386b;
+  top: -2rem;
   position: relative;
+  border: 0.1rem solid #05386b;
   max-height: 14.8rem;
   min-height: 14.8rem;
   max-width: 15%;

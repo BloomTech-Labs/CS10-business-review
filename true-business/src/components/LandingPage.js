@@ -16,12 +16,11 @@ let modalStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "75%",
+    height: "80%",
     width: "50%",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
-    overflowY: "scroll",
   },
 };
 
@@ -62,19 +61,15 @@ class LandingPage extends Component {
             <div className="container__items">
               {this.props.reviews.map((review, i) => {
                 if (i < 4) {
-                  console.log("review", review);
                   return (
                     // Need to write a component that shows all the reviews by a certain user
                     // Whenever they click on the username in this section or in the bottom section
                     // <div key={review._id} onClick={() => this.props.userReviews(user)}>
-
                     <div key={review._id} className="items__item">
                       <img
                         alt={review.newMongoId.name}
                         src={review.photos[0].link}
-                        className={
-                          review.photos[0].width >= review.photos[0].height ? "item__landscape" : "item__portrait"
-                        }
+                        className="item__landscape"
                         onClick={() => this.openModal(this, review)}
                       />
                       <div className="item__title">{review.newMongoId.name}</div>
@@ -121,7 +116,7 @@ class LandingPage extends Component {
                       <img
                         alt={user.username}
                         src={user.userImages[0].link}
-                        className={"item__landscape"}
+                        className="item__landscape"
                         // onClick={() => this.openModal(this, user)}
                       />
                       <div className="item__info--hover">@{user.username}</div>
@@ -144,15 +139,17 @@ class LandingPage extends Component {
               {this.state.modalIsOpen ? (
                 <div className="modal-container">
                   <div className="modal__header">
-                    <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
-                    <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
-                  </div>
-                  <div className="modal__body">
+                    <div className="header__user">
+                      <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
+                      <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
+                    </div>
                     <img
                       alt={this.state.modalInfo.newMongoId.name}
-                      className="body__image"
+                      className="header__landscape"
                       src={this.state.modalInfo.photos[0].link}
                     />
+                  </div>
+                  <div className="modal__body">
                     <div className="body__stars">
                       <StarRatings
                         starDimension="20px"

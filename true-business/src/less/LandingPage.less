@@ -18,24 +18,20 @@
         opacity: 0.8;
         margin: 1rem;
         padding: 1rem;
-        height: 20rem;
+        height: 25rem;
+        min-height: 25rem;
+        max-height: 25rem;
         width: 22%;
         max-width: 22%;
         min-width: 22%;
         .item__landscape {
-          .images(@height: 60%);
-          max-height: 60%;
-          min-height: 60%;
-          max-width: 100%;
-          min-width: 100%;
-        }
-        .item__portrait {
-          .images(@width: 40%, @height: 60%);
-          max-height: 60%;
-          min-height: 60%;
-          max-width: 40%;
-          min-width: 40%;
-          margin: 0 30%;
+          .images();
+          width: 75%;
+          max-width: 75%;
+          min-width: 75%;
+          height: 50%;
+          max-height: 50%;
+          min-height: 50%;
         }
         .item__image:hover {
           cursor: pointer;
@@ -69,40 +65,40 @@
 .landing-container__modal {
   .modal-container {
     .modal__header {
-      .containers(@alignItems: flex-star, @margin: 1rem);
-      .header__title {
-        .headers(@margin: 0);
+      .containers(@height: 45%, @flexDirection: row, @margin: 0 0 1rem 0);
+      min-height: 45%;
+      max-height: 45%;
+      width: initial;
+      .header__user {
+        text-align: center;
+        width: 50%;
+        min-height: 50%;
+        max-height: 50%;
+        .header__title {
+          .headers(@margin: 0);
+        }
+        .header__reviewer {
+          .body();
+        }
       }
-      .header__review {
-        .body();
+      .header__landscape {
+        .images(@top: 0);
+        cursor: default;
+        width: 50%;
+        min-height: 50%;
+        max-height: 50%;
       }
     }
     .modal__body {
-      .containers();
+      .containers(@height: 45%);
+      min-height: 45%;
+      max-height: 45%;
       .body__drop {
         .containers();
-      }
-      .body__landscape {
-        .images(@top: 0, @height: 60%);
-        max-height: 60%;
-        min-height: 60%;
-        max-width: 100%;
-        min-width: 100%;
-        cursor: default;
-      }
-      .body__portrait {
-        .images(@top: 0, @width: 40%, @height: 60%);
-        max-height: 60%;
-        min-height: 60%;
-        max-width: 40%;
-        min-width: 40%;
-        margin: 0 30%;
-        cursor: default;
       }
       .body__stars {
         text-align: center;
         width: 50%;
-        margin: 1rem 0;
       }
       .body__review {
         font-size: 1.25rem;
@@ -114,7 +110,9 @@
       }
     }
     .modal__footer {
-      .containers();
+      .containers(@height: 10%);
+      min-height: 10%;
+      max-height: 10%;
       .footer__button {
         .buttons();
       }
@@ -136,5 +134,5 @@
 }
 
 .drop__text--uploaded {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }

@@ -4,7 +4,7 @@ const createReview = (req, res) => {
   // Todo:
   // Upload user images to cloudinary
   // Sign In Users so a review can be assigned to the actual reviewer
-  if (!req.body.photoslength) {
+  if (!req.body.photos.length) {
     delete req.body.photos;
   }
   let newReview = new Review({ ...req.body });

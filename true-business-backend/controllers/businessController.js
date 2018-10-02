@@ -19,7 +19,7 @@ const createBusiness = (req, res) => {
         ? result.formatted_phone_number
         : "No Phone Number Listed";
       let website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
-      let photos = result.hasOwnProperty("photos") ? result.photos : "No Photos Listed";
+      let photos = result.hasOwnProperty("photos") ? result.photos : null;
       let opening_hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
       let address_components = result.hasOwnProperty("address_components")
         ? result.address_components

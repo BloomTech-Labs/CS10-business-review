@@ -71,38 +71,28 @@
   opacity: 0.8;
   margin: 1rem;
   padding: 1rem;
-  height: 20rem;
+  height: 25rem;
+  min-height: 25rem;
+  max-height: 25rem;
   width: 22%;
   max-width: 22%;
   min-width: 22%;
 }
 .landing .landing__container .container__items .items__item .item__landscape {
-  width: 10rem;
-  height: 60%;
-  background-color: #56879e;
+  object-fit: cover;
+  object-position: 50% 0%;
+  background-color: #05386b;
   top: -2rem;
   position: relative;
-  max-height: 60%;
-  min-height: 60%;
-  max-width: 100%;
-  min-width: 100%;
+  border: 0.1rem solid #05386b;
+  width: 75%;
+  max-width: 75%;
+  min-width: 75%;
+  height: 50%;
+  max-height: 50%;
+  min-height: 50%;
 }
 .landing .landing__container .container__items .items__item .item__landscape:hover {
-  cursor: pointer;
-}
-.landing .landing__container .container__items .items__item .item__portrait {
-  width: 40%;
-  height: 60%;
-  background-color: #56879e;
-  top: -2rem;
-  position: relative;
-  max-height: 60%;
-  min-height: 60%;
-  max-width: 40%;
-  min-width: 40%;
-  margin: 0 30%;
-}
-.landing .landing__container .container__items .items__item .item__portrait:hover {
   cursor: pointer;
 }
 .landing .landing__container .container__items .items__item .item__image:hover {
@@ -132,33 +122,57 @@
 }
 .landing-container__modal .modal-container .modal__header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: flex-star;
-  height: 100%;
+  align-items: center;
+  height: 45%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
-  margin: 1rem;
+  margin: 0 0 1rem 0;
   cursor: default;
   color: #05386b;
+  min-height: 45%;
+  max-height: 45%;
+  width: initial;
 }
-.landing-container__modal .modal-container .modal__header .header__title {
+.landing-container__modal .modal-container .modal__header .header__user {
+  text-align: center;
+  width: 50%;
+  min-height: 50%;
+  max-height: 50%;
+}
+.landing-container__modal .modal-container .modal__header .header__user .header__title {
   font-size: 3rem;
   margin: 0;
   padding: 1rem;
 }
-.landing-container__modal .modal-container .modal__header .header__review {
+.landing-container__modal .modal-container .modal__header .header__user .header__reviewer {
   font-size: 2rem;
+}
+.landing-container__modal .modal-container .modal__header .header__landscape {
+  object-fit: cover;
+  object-position: 50% 0%;
+  background-color: #05386b;
+  top: 0;
+  position: relative;
+  border: 0.1rem solid #05386b;
+  cursor: default;
+  width: 50%;
+  min-height: 50%;
+  max-height: 50%;
+}
+.landing-container__modal .modal-container .modal__header .header__landscape:hover {
+  cursor: pointer;
 }
 .landing-container__modal .modal-container .modal__body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 45%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
@@ -167,6 +181,8 @@
   margin: 0;
   cursor: default;
   color: #05386b;
+  min-height: 45%;
+  max-height: 45%;
 }
 .landing-container__modal .modal-container .modal__body .body__drop {
   display: flex;
@@ -183,41 +199,9 @@
   cursor: default;
   color: #05386b;
 }
-.landing-container__modal .modal-container .modal__body .body__landscape {
-  width: 10rem;
-  height: 60%;
-  background-color: #56879e;
-  top: 0;
-  position: relative;
-  max-height: 60%;
-  min-height: 60%;
-  max-width: 100%;
-  min-width: 100%;
-  cursor: default;
-}
-.landing-container__modal .modal-container .modal__body .body__landscape:hover {
-  cursor: pointer;
-}
-.landing-container__modal .modal-container .modal__body .body__portrait {
-  width: 40%;
-  height: 60%;
-  background-color: #56879e;
-  top: 0;
-  position: relative;
-  max-height: 60%;
-  min-height: 60%;
-  max-width: 40%;
-  min-width: 40%;
-  margin: 0 30%;
-  cursor: default;
-}
-.landing-container__modal .modal-container .modal__body .body__portrait:hover {
-  cursor: pointer;
-}
 .landing-container__modal .modal-container .modal__body .body__stars {
   text-align: center;
   width: 50%;
-  margin: 1rem 0;
 }
 .landing-container__modal .modal-container .modal__body .body__review {
   font-size: 1.25rem;
@@ -232,7 +216,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 10%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
@@ -241,6 +225,8 @@
   margin: 0;
   cursor: default;
   color: #05386b;
+  min-height: 10%;
+  max-height: 10%;
 }
 .landing-container__modal .modal-container .modal__footer .footer__button {
   border-radius: 0.3rem;
