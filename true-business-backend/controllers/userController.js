@@ -16,10 +16,10 @@ function generateToken(user) {
 const bcryptRounds = 10;
 
 const register = (request, response) => {
-  const { username, password, email } = request.body;
+  const { username, password, email, name } = request.body;
   const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
   const token = generateToken({ username });
-  const user = new User({ username, password: encryptedPassword, token, email });
+  const user = new User({ username, password: encryptedPassword, name, token, email });
   user
     .save()
     .then(savedUser => {
