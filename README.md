@@ -64,7 +64,7 @@ Start installing the necessary modules with
 yarn
 ```
 
-On the `root`, `true-business-backend` and `ftrue-business` folder.
+On the `root`, `true-business-backend` and `true-business` folder.
 
 Start the servers with
 
@@ -72,7 +72,7 @@ Start the servers with
 yarn start
 ```
 
-By running the command on the `true-business-backend` and `ftrue-business` folder simultaneously.
+By running the command on the `true-business-backend` and `true-business` folder simultaneously.
 
 Next, create a `.env` file in the backend folder to store all sensitive infomation. In this file you will store API client IDs, keys and Secrets as well as URIs and additional data of confidential nature.
 
