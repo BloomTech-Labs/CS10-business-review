@@ -167,6 +167,9 @@
 .navbar .navbar__right--logged .right__sign:hover {
   cursor: pointer;
 }
+.navbar .navbar__right--logged .right--logged__hamburger {
+  margin-top: 1rem !important;
+}
 .popover {
   display: flex;
   flex-direction: column;

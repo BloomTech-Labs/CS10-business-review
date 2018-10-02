@@ -5,7 +5,7 @@
   min-height: 100vh;
   padding-top: 25vh;
   .search__title {
-    .headers();
+    .headers(@margin: 2rem 2rem 0 2rem);
     .backAndBorder();
   }
   .search__results {
@@ -16,43 +16,19 @@
       .containers(@justifyContent: space-between, @flexDirection: row, @margin: 2rem, @width: 80%, @fontSize: 1.25rem);
       .backAndBorder();
       min-height: 15rem;
-      max-height: 15rem;
       opacity: 0.8;
       float: left;
       .result__landscape {
-        .images();
-        max-height: 14.8rem;
-        min-height: 14.8rem;
-        max-width: 30%;
+        .images(@top: 0);
+        max-height: 15rem;
         min-width: 30%;
       }
-      .result__portrait {
-        .images();
-        max-height: 14.8rem;
-        min-height: 14.8rem;
-        max-width: 15%;
-        min-width: 15%;
-        margin: 0 7.5%;
-      }
       .result__info {
-        .containers(@width: 80%, @flexDirection: row);
-        .info__stars-container {
-          .containers(@width: 50%);
-          .stars-container__text {
-            padding-left: 1rem;
-          }
-          .stars-container__text--hover {
-            padding-left: 1rem;
-          }
-          .stars-container__text--hover:hover {
-            cursor: pointer;
-          }
-          .stars-containers__stars {
-            .containers(@flexDirection: row, @fontSize: 1rem);
-            .stars__text {
-              padding-left: 1rem;
-            }
-          }
+        .containers(@width: 80%, @justifyContent: space-between);
+        height: 15rem;
+        .hover();
+        .info__name {
+          font-size: 2rem;
         }
         .info__address {
           width: 25%;
@@ -65,11 +41,16 @@
             padding: 0.3rem;
           }
         }
+        .info__type {
+          font-size: 1.5rem;
+          text-align: center;
+        }
       }
     }
     .results__result:hover {
       opacity: 1;
     }
+    // This is obviously overkill... need to fix at some point
     .results__none {
       float: left;
       justify-self: flex-start;
@@ -79,18 +60,46 @@
       align-self: flex-start;
       align-items: flex-start;
     }
-    .reviews__pagination {
+  }
+  .results__pagination {
+    .containers(@flexDirection: row, @justifyContent: space-between);
+    .backAndBorder();
+    width: 50vw;
+    margin: 2rem 0;
+    min-width: 50%;
+    padding: .5rem;
+    .pagination__pages {
       .containers(@flexDirection: row);
+      max-width: 70%;
       .pagination__page {
+        .buttons();
         width: 5%;
+        margin: 0 .5rem;
       }
       .pagination__page:hover {
         cursor: pointer;
+      }
+      .pagination__page:active {
+        animation: shake 0.1s both
       }
       .pagination__page--no-hover {
         width: 5%;
         cursor: default;
       }
     }
+  }
+}
+
+.active {
+  font-weight: 1000;
+  animation: shake 0.5s both;
+}
+
+@keyframes shake {
+  10%, 50%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  30%, 70% {
+    transform: translate3d(1px, 0, 0);
   }
 }

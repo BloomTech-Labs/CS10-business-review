@@ -169,9 +169,9 @@ class NavBar extends Component {
               }}>
               Hi, {localStorage.getItem("name").split(" ")[0]}!
             </div>
-            <div>
+            <div className="right--logged__hamburger">
               <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
-                <i class="fas fa-bars fa-3x" />
+                <i className="fas fa-bars fa-3x" />
               </Button>
               <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
                 <MenuItem
