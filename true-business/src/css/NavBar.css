@@ -12,9 +12,10 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  background: white;
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
+  border-width: 0 0 0.1rem 0;
   position: fixed;
-  border-bottom: 0.1rem solid #3487d5;
   z-index: 5;
   max-height: 20vh;
 }

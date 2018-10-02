@@ -6,8 +6,8 @@
   cursor: default;
   .signup-container {
     .containers(@width: 50%);
+    .backAndBorder();
     color: @textColor;
-    background: @elementBackground;
     padding: 1rem;
     .signup-container__header {
       font-size: 3rem;
@@ -25,6 +25,7 @@
       }
       .signup-container__input {
         border: 0.1rem solid black;
+        background: @elementBG;
         margin: 1rem;
         width: 75%;
         font-size: 1.5rem;

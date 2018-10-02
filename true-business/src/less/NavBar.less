@@ -2,9 +2,9 @@
 
 .navbar {
   .containers(@width: 100vw, @flexDirection:row, @justifyContent: space-between, @height: 20vh);
-  background: white;
+  .backAndBorder();
+  border-width: 0 0 .1rem 0;
   position: fixed;
-  border-bottom: 0.1rem solid @buttonBG;
   z-index: 5;
   max-height: 20vh;
   .navbar__logo {

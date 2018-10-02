@@ -27,8 +27,9 @@
   padding: 0;
   margin: 0;
   cursor: default;
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
   color: #05386b;
-  background: #e6e6e6;
   padding: 1rem;
 }
 .signup .signup-container .signup-container__header {
@@ -84,6 +85,7 @@
 }
 .signup .signup-container .signup-container__form .signup-container__input {
   border: 0.1rem solid black;
+  background: #efeff1;
   margin: 1rem;
   width: 75%;
   font-size: 1.5rem;
