@@ -3,9 +3,6 @@ import axios from "axios";
 import { withRouter } from "react-router-dom";
 import NavBar from "./NavBar";
 
-import { Elements, StripeProvider } from "react-stripe-elements";
-import StripePayment from "./StripePayment";
-
 import "../css/SignUp.css";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
@@ -46,7 +43,6 @@ class SignUp extends Component {
       email: this.state.email,
       username: this.state.username,
       password: this.state.password,
-      accountType: this.state.type,
     };
     axios
       .post(`${backend}api/user/register`, user)
@@ -116,15 +112,7 @@ class SignUp extends Component {
                 value={this.state.confirmPassword}
                 onChange={this.handleInputChange}
               />
-              <StripeProvider apiKey="pk_test_a80QBoWXww54ttxUn5cMQO1o">
-                <div className="signup-container__stripe">
-                  <Elements>
-                    <StripePayment checkPayment={this.checkPayment} />
-                  </Elements>
-                </div>
-              </StripeProvider>
               <div className="signup-container__buttons ">
-                {this.state.payment ? (
                   <button
                     id="signup-submit"
                     type="submit"
@@ -132,7 +120,6 @@ class SignUp extends Component {
                     onClick={this.createUser}>
                     Confirm Registration
                   </button>
-                ) : null}
               </div>
             </form>
           </div>

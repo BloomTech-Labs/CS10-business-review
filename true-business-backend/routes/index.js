@@ -87,6 +87,10 @@ router.delete("/api/review/delete", (req, res) => {
   ReviewControler.deleteReview(req, res);
 });
 
+router.get("/api/review/getReviewsByReviewerId/:id", (req,res) => {
+  ReviewControler.getReviewsByReviewerId(req,res);
+})
+
 router.get("/api/review/getAllReviews", (req, res) => {
   ReviewControler.getAllReviews(req, res);
 });

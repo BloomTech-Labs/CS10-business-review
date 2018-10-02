@@ -100,6 +100,9 @@ class NavBar extends Component {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("name");
+    localStorage.removeItem("accountType");
+    localStorage.removeItem("accountDeactivated");
+    localStorage.removeItem("userImage");
     this.props.history.push("/");
   };
 

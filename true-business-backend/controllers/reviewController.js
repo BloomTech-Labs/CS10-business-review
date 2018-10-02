@@ -2,8 +2,9 @@ const Review = require("../models/review");
 
 const createReview = (req, res) => {
   // Todo:
-  // Upload user images to cloudinary
   // Sign In Users so a review can be assigned to the actual reviewer
+
+  // Allows for default photos
   if (!req.body.photos.length) {
     delete req.body.photos;
   }
@@ -20,7 +21,12 @@ const createReview = (req, res) => {
 
 // For User Component
 const getReviewsByReviewerId = (req, res) => {
-  // Reviews.find({reviewer: req.body.id})
+  Review.find({ reviewer: req.params.id })
+    .populate("newMongoId")
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(error => res.status(500).json(error));
 };
 
 // For Business Component

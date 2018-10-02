@@ -32,8 +32,11 @@ class SignIn extends Component {
       .then(response => {
         console.log("Fire!", response);
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data.userId);
-        localStorage.setItem("name", response.data.name);
+        localStorage.setItem("userId", response.data._doc._id);
+        localStorage.setItem("name", response.data._doc.name);
+        localStorage.setItem("accountType", response.data._doc.accountType);
+        localStorage.setItem("accountDeactivated", response.data._doc.accountDeactivated);
+        localStorage.setItem("userImage", response.data._doc.userImages[0].link);
         this.setState({
           error: false,
         });

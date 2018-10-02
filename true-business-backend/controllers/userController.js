@@ -45,11 +45,7 @@ const login = (request, response) => {
       } else {
         if (bcrypt.compareSync(password, userFound.password)) {
           const token = generateToken({ userFound });
-          const { _id } = userFound;
-          console.log("Token", token);
-          console.log("UserId", _id);
-          console.log("UserId", userFound);
-          response.status(200).send({ username: userFound.username, name: userFound.name, token, userId: _id });
+          response.status(200).send({ ...userFound, token });
         } else {
           response.status(500).send({
             errorMessage: "Login Failed.",

@@ -28,7 +28,6 @@ let modalStyles = {
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
-    overflowY: "scroll",
   },
 };
 
@@ -61,8 +60,12 @@ class Business extends Component {
 
   toggleDropDown = event => {
     let toggle = event.target.name;
+    let other = "showfilterBy";
+    if (toggle === "showfilterBy") {
+      other = "showsortBy";
+    }
     let inverse = this.state[toggle];
-    this.setState({ [toggle]: !inverse });
+    this.setState({ [toggle]: !inverse, [other]: false });
   };
 
   toggleFilterChoice = event => {
