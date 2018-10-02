@@ -16,8 +16,8 @@ let modalStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "80%",
-    width: "50%",
+    height: "80vh",
+    width: "50vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
@@ -142,15 +142,6 @@ class LandingPage extends Component {
                     <div className="header__user">
                       <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
                       <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
-                    </div>
-                    <img
-                      alt={this.state.modalInfo.newMongoId.name}
-                      className="header__landscape"
-                      src={this.state.modalInfo.photos[0].link}
-                    />
-                  </div>
-                  <div className="modal__body">
-                    <div className="body__stars">
                       <StarRatings
                         starDimension="20px"
                         starSpacing="5px"
@@ -161,6 +152,13 @@ class LandingPage extends Component {
                         name="rating"
                       />
                     </div>
+                    <img
+                      alt={this.state.modalInfo.newMongoId.name}
+                      className="header__landscape"
+                      src={this.state.modalInfo.photos[0].link}
+                    />
+                  </div>
+                  <div className="modal__body">
                     <div>{this.state.modalInfo.title}</div>
                     <div className="body__review">{this.state.modalInfo.body}</div>
                   </div>

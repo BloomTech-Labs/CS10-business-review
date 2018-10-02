@@ -37,7 +37,6 @@ class SignIn extends Component {
         this.setState({
           error: false,
         });
-        console.log(this.props.history)
         this.props.history.push(`/user`);
       })
       .catch(err => {

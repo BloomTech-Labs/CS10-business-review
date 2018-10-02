@@ -44,7 +44,7 @@ const BusinessThumbnail = props => {
             .trim()}
         </div>
         <div className="description__info">
-          {props.business.types[0].charAt(0).toUpperCase() + props.business.types[0].slice(1)}
+          {(props.business.types[0].charAt(0).toUpperCase() + props.business.types[0].slice(1)).replace(/_/g, " ")}
         </div>
       </div>
     </div>

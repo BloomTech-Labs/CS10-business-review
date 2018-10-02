@@ -48,8 +48,6 @@ class SignUp extends Component {
       password: this.state.password,
       accountType: this.state.type,
     };
-    console.log("BACKEND", backend);
-    console.log("USER", user)
     axios
       .post(`${backend}api/user/register`, user)
       .then(() => {

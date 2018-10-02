@@ -62,20 +62,16 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
   line-height: 1;
-  padding: 0;
-  margin: 0;
+  padding: 1rem;
+  margin: 1rem;
   cursor: default;
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
   opacity: 0.8;
-  margin: 1rem;
-  padding: 1rem;
   height: 25rem;
-  min-height: 25rem;
   max-height: 25rem;
   width: 22%;
-  max-width: 22%;
   min-width: 22%;
 }
 .landing .landing__container .container__items .items__item .item__landscape {
@@ -86,10 +82,8 @@
   position: relative;
   border: 0.1rem solid #05386b;
   width: 75%;
-  max-width: 75%;
   min-width: 75%;
   height: 50%;
-  max-height: 50%;
   min-height: 50%;
 }
 .landing .landing__container .container__items .items__item .item__landscape:hover {
@@ -99,20 +93,26 @@
   cursor: pointer;
 }
 .landing .landing__container .container__items .items__item .item__title {
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: center;
 }
 .landing .landing__container .container__items .items__item .item__info {
-  padding: 0.2rem 0;
-  text-align: center;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0.3rem;
+  text-align: center;
 }
 .landing .landing__container .container__items .items__item .item__info--hover {
   padding: 0.2rem 0;
-  text-align: center;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0.3rem;
-  border-radius: 5rem;
+  text-align: center;
 }
 .landing .landing__container .container__items .items__item .item__info--hover:hover {
   cursor: pointer;
@@ -125,24 +125,36 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 45%;
+  height: 30%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.3rem 0;
   cursor: default;
   color: #05386b;
-  min-height: 45%;
-  max-height: 45%;
+  min-height: 50%;
+  max-height: 50%;
   width: initial;
 }
 .landing-container__modal .modal-container .modal__header .header__user {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
   text-align: center;
-  width: 50%;
-  min-height: 50%;
-  max-height: 50%;
+  width: 70%;
+  min-height: 30vh;
 }
 .landing-container__modal .modal-container .modal__header .header__user .header__title {
   font-size: 3rem;
@@ -159,10 +171,11 @@
   top: 0;
   position: relative;
   border: 0.1rem solid #05386b;
-  cursor: default;
-  width: 50%;
-  min-height: 50%;
-  max-height: 50%;
+  width: 40%;
+  min-width: 40%;
+  height: 40vh;
+  min-height: 40vh;
+  margin: 1rem 1rem 0 1rem;
 }
 .landing-container__modal .modal-container .modal__header .header__landscape:hover {
   cursor: pointer;
@@ -216,7 +229,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 10%;
+  height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
@@ -225,8 +238,6 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  min-height: 10%;
-  max-height: 10%;
 }
 .landing-container__modal .modal-container .modal__footer .footer__button {
   border-radius: 0.3rem;
@@ -237,6 +248,7 @@
   color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
+  margin: 0.5rem 0;
 }
 .landing-container__modal .modal-container .modal__footer .footer__button:hover {
   cursor: pointer;
@@ -251,6 +263,10 @@
 .ReactModal__Body--open {
   position: absolute;
   overflow-y: hidden;
+}
+.ReactModal__Content--after-open {
+  padding: 0 !important;
+  overflow: hidden;
 }
 .drop__text--initial {
   font-size: 1rem;
