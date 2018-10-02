@@ -135,7 +135,7 @@ class LandingPage extends Component {
             onRequestClose={this.closeModal}
             style={modalStyles}
             contentLabel="Review Modal">
-            <div className="landing-container__modal">
+            <div className="modal">
               {this.state.modalIsOpen ? (
                 <div className="modal-container">
                   <div className="modal__header">

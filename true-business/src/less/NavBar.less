@@ -1,4 +1,4 @@
-@import './mixins.less';
+@import "./mixins.less";
 
 .navbar {
   .containers(@width: 100vw, @flexDirection:row, @justifyContent: space-between, @height: 20vh);
@@ -26,11 +26,11 @@
       padding: 0.2rem;
     }
     .center__button {
-        .buttons()
+      .buttons();
     }
   }
   .navbar__right {
-    .containers(@flexDirection: column, @justifyContent: space-around, @width: 20%, @fontSize: 2rem);
+    .containers(@justifyContent: space-around, @width: 20%, @fontSize: 2rem);
     .right__user {
       text-align: center;
     }
@@ -41,6 +41,10 @@
     .right__sign:hover {
       cursor: pointer;
     }
+  }
+  .navbar__right--logged {
+    .navbar__right();
+    justify-content: center;
   }
 }
 .popover {
@@ -53,34 +57,27 @@
   width: 60% !important;
   z-index: 10;
   .popover-header {
-    .headers(@fontSize: 2rem, @margin: .2rem);
+    .headers(@fontSize: 2rem, @margin: 0.2rem);
   }
   .popover-body {
-    .body(@fontSize: 1.5rem)
+    .body(@fontSize: 1.5rem);
   }
   .popover-button {
-    .buttons()
+    .buttons();
   }
 }
 
-.navbar-container__modal {
-  .modal-container {
-    .containers();
-    .modal-container__title {
-      font-size: 2rem;
-    }
-    .modal-container__body {
-      font-size: 1.5rem;
-    }
-    .modal-container__footer {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      color: @textColor;
-      margin-top: 1rem;
-      .footer__button {
-        .buttons()
-      }
+.modal {
+  .containers();
+  .modal__title{
+    .headers();
+  }
+  .modal__body{
+    .body();
+  }
+  .modal__footer{
+    .footer__button{
+      .buttons();
     }
   }
 }

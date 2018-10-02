@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Popover, PopoverBody, PopoverHeader } from "reactstrap";
 import { withRouter } from "react-router-dom";
-import Modal from "react-modal"; 
+import Modal from "react-modal";
 
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -13,14 +13,14 @@ import "../css/NavBar.css";
 
 let modalStyles = {
   content: {
-    top: "50%",
+    top: "30%",
     left: "50%",
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "75%",
-    width: "50%",
+    height: "40vh",
+    width: "50vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
@@ -90,7 +90,7 @@ class NavBar extends Component {
   handleSearch = event => {
     if (this.state.search !== "") {
       this.props.search(this.state.search, true);
-      this.setState({ search: ""});
+      this.setState({ search: "" });
     } else {
       this.openModal();
     }
@@ -134,12 +134,12 @@ class NavBar extends Component {
             onRequestClose={this.closeModal}
             style={modalStyles}
             contentLabel="No Input Modal">
-            <div className="navbar__modal">
+            <div className="modal">
               {this.state.modalIsOpen ? (
-                <div className="modal__container">
-                  <div className="container__title">No Search Term!</div>
-                  <div className="container__body">You can't very well search for nothing...</div>
-                  <div className="container__footer">
+                <div className="modal">
+                  <div className="modal__title">No Search Term!</div>
+                  <div className="modal__body">You can't very well search for nothing...</div>
+                  <div className="modal__footer">
                     <button className="footer__button" onClick={this.closeModal}>
                       Close
                     </button>
@@ -162,21 +162,18 @@ class NavBar extends Component {
           </Popover>
         </div>
         {localStorage.getItem("token") && localStorage.getItem("userId") ? (
-          <div className="navbar-container__right">
-            {" "}
+          <div className="navbar__right--logged">
             <div
               onClick={() => {
                 this.props.history.push(`/user`);
               }}>
-              {" "}
               Hi, {localStorage.getItem("name").split(" ")[0]}!
             </div>
             <div>
               <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
-                Open Menu
+                <i class="fas fa-bars fa-3x" />
               </Button>
               <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
-                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                 <MenuItem
                   onClick={() => {
                     this.props.history.push(`/user`);

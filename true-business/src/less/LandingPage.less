@@ -51,12 +51,13 @@
     }
   }
 }
-.landing-container__modal {
+
+.modal {
   .modal-container {
     .modal__header {
-      .containers(@height:30%, @flexDirection: row, @margin: 0 0 .3rem 0);
-      min-height:50%;
-      max-height:50%;
+      .containers(@height:30%, @flexDirection: row, @margin: 0 0 0.3rem 0);
+      min-height: 50%;
+      max-height: 50%;
       width: initial;
       .header__user {
         .containers(@justifyContent: space-around);
@@ -103,7 +104,7 @@
       .containers();
       .footer__button {
         .buttons();
-        margin: .5rem 0;
+        margin: 0.5rem 0;
       }
     }
   }

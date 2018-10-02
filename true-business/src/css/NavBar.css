@@ -116,6 +116,57 @@
 .navbar .navbar__right .right__sign:hover {
   cursor: pointer;
 }
+.navbar .navbar__right--logged {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 20%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  justify-content: center;
+}
+.navbar .navbar__right--logged .right__user {
+  text-align: center;
+}
+.navbar .navbar__right--logged .right__sign {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  margin: 1rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: white;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+}
+.navbar .navbar__right--logged .right__sign:hover {
+  cursor: pointer;
+  box-shadow: 0px 15px 20px grey;
+  filter: brightness(110%);
+  font-weight: bolder;
+  opacity: 1;
+}
+.navbar .navbar__right--logged .right__sign:hover {
+  cursor: pointer;
+}
 .popover {
   display: flex;
   flex-direction: column;
@@ -162,7 +213,7 @@
   font-weight: bolder;
   opacity: 1;
 }
-.navbar-container__modal .modal-container {
+.modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -177,20 +228,15 @@
   cursor: default;
   color: #05386b;
 }
-.navbar-container__modal .modal-container .modal-container__title {
+.modal .modal__title {
+  font-size: 3rem;
+  margin: 2rem;
+  padding: 1rem;
+}
+.modal .modal__body {
   font-size: 2rem;
 }
-.navbar-container__modal .modal-container .modal-container__body {
-  font-size: 1.5rem;
-}
-.navbar-container__modal .modal-container .modal-container__footer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  color: #05386b;
-  margin-top: 1rem;
-}
-.navbar-container__modal .modal-container .modal-container__footer .footer__button {
+.modal .modal__footer .footer__button {
   border-radius: 0.3rem;
   padding: 0.5rem;
   margin: 1rem;
@@ -200,7 +246,7 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
 }
-.navbar-container__modal .modal-container .modal-container__footer .footer__button:hover {
+.modal .modal__footer .footer__button:hover {
   cursor: pointer;
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
