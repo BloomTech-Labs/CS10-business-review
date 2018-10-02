@@ -35,9 +35,10 @@ const register = (request, response) => {
 
 const login = (request, response) => {
   const { username, password } = request.body;
-
+  console.log("FUCKING LOGIN", username, password)
   User.findOne({ username: username })
     .then(userFound => {
+      console.log("USERFOUND", userFound);
       if (!userFound) {
         response.status(500).send({
           errorMessage: "Login Failed.",
@@ -54,6 +55,7 @@ const login = (request, response) => {
       }
     })
     .catch(err => {
+      console.log("FUCKBALLS", err)
       response.status(500).send({
         errorMessage: "Failed to Login: " + err,
       });
@@ -62,9 +64,11 @@ const login = (request, response) => {
 
 const getUserById = (request, response) => {
   const { _id } = request.body;
+  console.log("GET USER SHIT", request.body);
 
   User.findOne(_id)
     .then(function(user) {
+      console.log("WHAT THE FUCK", user);
       response.status(200).json(user);
     })
     .catch(function(error) {
@@ -88,17 +92,32 @@ const deleteUserById = (request, response) => {
     });
 };
 
-const updateUser = (request, response) => {
-  const { _id, username, email } = request.body;
-  User.findOneAndUpdate(_id, { username, email })
-    .then(function(user) {
-      console.log("Date", user);
-      response.status(200).json(user);
+const updateUser = (req, res) => {
+  let updateType = null;
+  if (req.body.hasOwnProperty("email")) updateType = "email";
+  if (req.body.hasOwnProperty("username")) updateType = "username";
+  if (req.body.hasOwnProperty("password")) updateType = "password";
+  User.findOne({ _id: req.params.id })
+    .then(found => {
+      if (updateType === "password") {
+        const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
+        const token = generateToken({ username });
+        found[updateType] = req.body;
+      } else {
+        found[updateType] = req.body;
+      }
+      User.findOneAndUpdate({ _id: req.params.id }, found)
+        .then(function(user) {
+          response.status(200).json(user);
+        })
+        .catch(function(error) {
+          response.status(500).json({
+            errorMessage: "The user could not be updated: " + error,
+          });
+        });
     })
-    .catch(function(error) {
-      response.status(500).json({
-        errorMessage: "The user could not be updated: " + error,
-      });
+    .catch(error => {
+      console.log("FUCK", error);
     });
 };
 

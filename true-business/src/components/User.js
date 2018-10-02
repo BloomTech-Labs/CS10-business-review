@@ -39,7 +39,9 @@ class User extends Component {
     editUsernameOrEmail: false,
     Email: false,
     editPassword: false,
-    currenAction: "Change",
+    currentActionUsername: "Change",
+    currentActionEmail: "Change",
+    currentActionPassword: "Change",
     change: false,
     breadcrumbs: ["Home"],
     current: "Home",
@@ -55,13 +57,22 @@ class User extends Component {
     modalIsOpen: false,
     modalInfo: null,
     currentPage: 0,
+    openForChangePassword: false,
+    changePassword: false,
+    openForChangeEmail: false,
+    changeEmail: false,
+    openForChangeUsername: false,
+    changeUsername: false,
+    password: "",
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
     setTimeout(() => {
       const id = localStorage.getItem("userId");
+      console.log("USERID IN DIDMOUNT GET BULLSHIT", id)
       axios.get(`${backend}api/user/${id}`).then(response => {
+        console.log("RESPONSE MOFO", response);
         this.setState({
           username: response.data.username,
           email: response.data.email,
@@ -80,16 +91,49 @@ class User extends Component {
       .catch(error => console.log({ error }));
   };
 
-  saveUsernameOrEmail = () => {
-    const user = {
-      username: this.state.username,
-      email: this.state.email,
-    };
-
-    console.log("Before", user);
+  saveUsername = () => {
+    let username = this.state.username;
     const id = localStorage.getItem("userId");
+    console.log("THIS BULLSHIT AT LEAST GETTING HERE?", username);
     axios
-      .put(`${backend}api/user/${id}`, user)
+      .put(`${backend}api/user/${id}`, { username })
+      .then(response => {
+        console.log("SaveResponse", response);
+        this.setState({
+          openForChange: false,
+          currenAction: "Change",
+          change: false,
+        });
+      })
+      .catch(err => {
+        console.log("Update Error", err);
+      });
+  };
+
+  saveEmail = () => {
+    let email = this.state.email;
+    const id = localStorage.getItem("userId");
+    console.log("THIS BULLSHIT AT LEAST GETTING HERE?", email);
+    axios
+      .put(`${backend}api/user/${id}`, { email })
+      .then(response => {
+        console.log("SaveResponse", response);
+        this.setState({
+          openForChange: false,
+          currenAction: "Change",
+          change: false,
+        });
+      })
+      .catch(err => {
+        console.log("Update Error", err);
+      });
+  };
+  savePassword = () => {
+    let password = this.state.password;
+    const id = localStorage.getItem("userId");
+    console.log("THIS BULLSHIT AT LEAST GETTING HERE?", password);
+    axios
+      .put(`${backend}api/user/${id}`, { password })
       .then(response => {
         console.log("SaveResponse", response);
         this.setState({
@@ -117,23 +161,61 @@ class User extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  changeCurrentAction = () => {
-    if (this.state.change) {
+  changeCurrentActionUsername = () => {
+    if (this.state.changeUsername) {
       this.setState({
-        currenAction: "Change",
+        currenActionUsername: "Change",
       });
     } else {
       this.setState({
-        currenAction: "Cancel",
+        currenActionUsername: "Cancel",
+      });
+    }
+  };
+  changeCurrentActionPassword = () => {
+    if (this.state.changePassword) {
+      this.setState({
+        currenActionPassword: "Change",
+      });
+    } else {
+      this.setState({
+        currenActionPassword: "Cancel",
+      });
+    }
+  };
+  changeCurrentActionEmail = () => {
+    if (this.state.changeEmail) {
+      this.setState({
+        currenActionEmail: "Change",
+      });
+    } else {
+      this.setState({
+        currenActionEmail: "Cancel",
       });
     }
   };
 
-  changeUsernameOrEmail = () => {
-    this.changeCurrentAction();
+  changeUsername = () => {
+    this.changeCurrentActionUsername();
     this.setState({
-      openForChange: !this.state.openForChange,
-      change: !this.state.change,
+      openForChangeUsername: !this.state.openForChangeUsername,
+      changeUsername: !this.state.changeUsername,
+    });
+  };
+
+  changeEmail = () => {
+    this.changeCurrentActionEmail();
+    this.setState({
+      openForChangeEmail: !this.state.openForChangeEmail,
+      changeEmail: !this.state.changeEmail,
+    });
+  };
+
+  changePassword = () => {
+    this.changeCurrentActionPassword();
+    this.setState({
+      openForChangePassword: !this.state.openForChangePassword,
+      changePassword: !this.state.changePassword,
     });
   };
 
@@ -437,22 +519,21 @@ class User extends Component {
       case "Settings":
         return (
           <div className="content__profile">
-            <img
-              alt={localStorage.getItem("name")}
-              className="profile__image"
-              src={localStorage.getItem("userImage")}
-            />
-            {/* Have this open a modal to change their password */}
             <div className="profile__container">
+              <img
+                alt={localStorage.getItem("name")}
+                className="profile__image"
+                src={localStorage.getItem("userImage")}
+              />
               <div className="container__info">
                 <div className="info__label">Username:</div>
                 <div className="info__data">
-                  {this.state.openForChange ? (
+                  {this.state.openForChangeUsername ? (
                     <input
-                      className="user-change__input"
+                      className="data__input"
                       placeholder="username"
                       name="username"
-                      type="text"
+                      type="username"
                       value={this.state.username}
                       onChange={this.handleInputChange}
                     />
@@ -460,25 +541,25 @@ class User extends Component {
                     //Show save but when change button is clicked
                     this.state.username
                   )}
-                  {this.state.change ? (
-                    <button className="info__button" onClick={this.saveUsernameOrEmail}>
-                      Save
-                    </button>
-                  ) : null}
                 </div>
-                <button className="info__button" onClick={this.changeUsernameOrEmail}>
-                  {this.state.currenAction}
+                {this.state.changeUsername ? (
+                  <button className="info__button--save" onClick={this.saveUsername}>
+                    Save
+                  </button>
+                ) : null}
+                <button className="info__button" onClick={this.changeUsername}>
+                  {this.state.currentActionUsername}
                 </button>
               </div>
               <div className="container__info">
                 <div className="info__label">Email:</div>
                 <div className="info__data">
-                  {this.state.openForChange ? (
+                  {this.state.openForChangeEmail ? (
                     <input
                       className="data__input"
                       placeholder="email"
                       name="email"
-                      type="text"
+                      type="email"
                       value={this.state.email}
                       onChange={this.handleInputChange}
                     />
@@ -486,21 +567,40 @@ class User extends Component {
                     //Show save but when change button is clicked
                     this.state.email
                   )}
-                  {this.state.change ? (
-                    <button className="info__button" onClick={this.saveUsernameOrEmail}>
-                      Save
-                    </button>
-                  ) : null}
                 </div>
-                <button className="info__button" onClick={this.changeUsernameOrEmail}>
-                  {this.state.currenAction}
+                {this.state.changeEmail ? (
+                  <button className="info__button--save" onClick={this.saveEmail}>
+                    Save
+                  </button>
+                ) : null}
+                <button className="info__button" onClick={this.changeEmail}>
+                  {this.state.currentActionEmail}
                 </button>
               </div>
               <div className="container__info">
                 <div className="info__label">Password:</div>
-                <div className="info__data">****************</div>
+                <div className="info__data">
+                  {this.state.openForChangePassword ? (
+                    <input
+                      className="data__input"
+                      placeholder="password"
+                      name="password"
+                      type="password"
+                      value="************************"
+                      onChange={this.handleInputChange}
+                    />
+                  ) : (
+                    //Show save but when change button is clicked
+                    "************************"
+                  )}
+                </div>
+                {this.state.changePassword ? (
+                  <button className="info__button--save" onClick={this.savePassword}>
+                    Save
+                  </button>
+                ) : null}
                 <button className="info__button" onClick={this.changePassword}>
-                  Change
+                  {this.state.currentActionPassword}
                 </button>
               </div>
             </div>
@@ -509,12 +609,12 @@ class User extends Component {
       default:
         return (
           <div className="content__profile">
-            <img
-              alt={localStorage.getItem("name")}
-              className="profile__image"
-              src={localStorage.getItem("userImage")}
-            />
             <div className="profile__container">
+              <img
+                alt={localStorage.getItem("name")}
+                className="profile__image"
+                src={localStorage.getItem("userImage")}
+              />
               <div className="container__info">
                 <div className="info__label">Username:</div>
                 <div className="info__data">{this.state.username}</div>

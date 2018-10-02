@@ -218,9 +218,9 @@
             padding: 0.5rem;
             font-size: 1.25rem;
           }
-          .containers(@width: 70%);
+          .containers(@width: 70%, @padding: 5rem 0);
           .container__info {
-            .containers(@flexDirection: row);
+            .containers(@flexDirection: row, @justifyContent: space-between);
             .backAndBorder(@background: @elementBG);
             margin: 1rem;
             height: 2rem;
@@ -228,20 +228,41 @@
             .info__label {
               font-size: 1.5rem;
               width: 20%;
+              min-width: 20%;
             }
             .info__data {
-              width: 50%;
+              width: 60%;
+              min-width: 60%;
               font-size: 1.5rem;
+              .containers();
+              .data__input {
+                width: 90%;
+                min-width: 90%;
+                font-size: 1.5rem;
+                max-height: 1.9rem;
+                background: @buttonBG;
+              }
+              .data__button {
+                .buttons();
+                margin: 0;
+              }
             }
-
             .noDisplay {
               display: none;
             }
             .info__button {
               .buttons();
+              margin: 0;
+              &:hover {
+                cursor: pointer;
+              }
             }
-            .info__button:hover {
-              cursor: pointer;
+            .info__button--save {
+              .buttons();
+              margin: 0 1rem 0 0;
+              &:hover {
+                cursor: pointer;
+              }
             }
           }
         }

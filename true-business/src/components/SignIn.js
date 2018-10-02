@@ -26,9 +26,10 @@ class SignIn extends Component {
     window.scrollTo(0, 0);
   };
 
-  signIn = event => {
+  signIn = () => {
+    console.log("FUCKSTICK")
     axios
-      .post(`${backend}api/user/login`, this.state)
+      .post(`${backend}api/user/login`, {username:this.state.username, password:this.state.password})
       .then(response => {
         console.log("Fire!", response);
         localStorage.setItem("token", response.data.token);

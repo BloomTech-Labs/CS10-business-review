@@ -29,8 +29,9 @@ router.post("/api/user/register", (request, response) => {
   UserController.register(request, response);
 });
 
-router.post("/api/user/login", (request, response) => {
-  UserController.login(request, response);
+router.post("/api/user/login", (req, res) => {
+  console.log("THIS BULLSHIT HITTING THE FUCKING API?", req.body, req.params)
+  UserController.login(req, res);
 });
 
 router.get("/api/user/:id", function(req, res) {
@@ -40,7 +41,7 @@ router.get("/api/user/:id", function(req, res) {
 router.delete("/api/user/:id", function(req, res) {
   UserController.deleteUserById(req, res);
 });
-router.put("/api/user/:_id", function(req, res) {
+router.put("/api/user/:id", function(req, res) {
   UserController.updateUser(req, res);
 });
 router.get("/api/user/", function(req, res) {
