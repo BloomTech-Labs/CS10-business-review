@@ -139,21 +139,16 @@ const getAllUsers = (request, response) => {
 
 
 const reset_password = function(request, response) {
-  const { _id, password, newPassword, verifyPassword } = request.body;
-  console.log("fire", request.params)
+  const { _id, password, newPassword, verifyPassword } = request.body;  
   User.findById({ _id: request.params._id })  
-  .then(function(user) {
-    console.log("Backend*****************", user)
+  .then(function(user) {    
     if (user) {
       if (bcrypt.compareSync(password, user.password)) {
        if (newPassword === verifyPassword) {
-         user.password = bcrypt.hashSync(newPassword, bcryptRounds);    
-         console.log("User here", user)   
-         User.findByIdAndUpdate( { _id: request.params._id }, user).then(user => {
-           console.log("Working")
+         user.password = bcrypt.hashSync(newPassword, bcryptRounds);              
+         User.findByIdAndUpdate( { _id: request.params._id }, user).then(user => {         
            response.status(200).json(user)
-         }).catch(err => {
-           console.log("Failing")
+         }).catch(err => {           
           response.status(500).json(`message: Error reseting password: ${err}`)
          })        
       }
