@@ -198,6 +198,22 @@ const getBusinessById = (request, response) => {
     });
 };
 
+const getRandomBusiness = (request, response) => {
+  Business.count().exec(function (err, count) {
+    const random = Math.floor(Math.random() * count);
+    console.log(random);
+    Business.findOne().skip(random)
+    .then(function(business) {
+      response.status(200).json(business);
+    })
+    .catch(function(error) {
+      response.status(500).json({
+        error: "The business could not be retrieved.",
+      });
+    });
+  });
+};
+
 const deleteBusinessById = (request, response) => {
   const { id } = request.params;
 
@@ -232,4 +248,5 @@ module.exports = {
   getAllBusiness,
   placesSearch,
   placeSearch,
+  getRandomBusiness
 };
