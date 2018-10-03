@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const moment = require("moment");
 
 const userSchema = new mongoose.Schema({
-  // Refers to whether they are "Monthly" or "Yearly"
+  // Refers to whether they are "Trial, ""Monthly", or "Yearly"
   accountType: {
     type: String,
-    default: "One Month",
+    default: "Trial",
   },
   // The date the account is activated
   accountActivated: {
@@ -17,12 +17,14 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  token: {
+    type: String,
+  },
   // Display name
   name: {
     type: String,
-    required: true
+    required: true,
   },
-
   email: {
     type: String,
     unique: true,
@@ -32,11 +34,10 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     unique: true,
-    required: false,
   },
   // Guessing also only necessary for old-school way of registering
   password: {
-    type: String
+    type: String,
   },
   // For google passport
   googleId: {
@@ -57,29 +58,31 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  userImage: {
-    type: Object,
-    default: {
-      link: "https://lh3.googleusercontent.com/p/AF1QipN_jrDDnnaw0vNmcbYsIv716tMzOQvgp2MlMMsA=s1600-w1000-h500",
-      width: 3024,
-      height: 4032,
-    },
+  userImages: {
+    type: Array,
+    default: [
+      {
+        link: "https://png.icons8.com/ios/50/000000/user-filled.png",
+        width: 3024,
+        height: 4032,
+      },
+    ],
   },
 });
 
-let userModel = mongoose.model("User", userSchema);
-// Pre-save hook
-// Attempting to find a way to adjust the account Deactivated date.
-// Definitely unfinished.
-userSchema.pre("save", function(next) {
+// Pre-validate hook
+userSchema.pre("validate", function(next) {
   userModel.find({ _id: this._id }, (err, docs) => {
-    if (!docs.length) {
+    if (!docs.length && this.isNew) {
       if (this.accountType === "One Month") {
         let current = Date.now();
         this.accountDeactivated = moment(current).add(1, "M");
+      } else if (this.accountType === "Trial") {
+        let current = Date.now();
+        this.accountDeactivated = moment(current).add(1, "w");
       } else {
         let current = Date.now();
-        this.accountDeactivated = moment(current).add(12, "M");
+        this.accountDeactivated = moment(current).add(1, "y");
       }
       next();
     } else {
@@ -88,5 +91,7 @@ userSchema.pre("save", function(next) {
     }
   });
 });
+
+let userModel = mongoose.model("User", userSchema);
 
 module.exports = userModel;

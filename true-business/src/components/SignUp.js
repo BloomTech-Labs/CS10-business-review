@@ -8,6 +8,12 @@ import StripePayment from "./StripePayment";
 
 import "../css/SignUp.css";
 
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof(backend) !== 'string') {
+  backend = heroku;
+}
+
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -42,8 +48,10 @@ class SignUp extends Component {
       password: this.state.password,
       accountType: this.state.type,
     };
+    console.log("BACKEND", backend);
+    console.log("USER", user)
     axios
-      .post("http://localhost:3001/api/user/register", user)
+      .post(`${backend}api/user/register`, user)
       .then(() => {
         this.setState({
           error: false,

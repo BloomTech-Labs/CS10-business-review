@@ -62,10 +62,12 @@ class LandingPage extends Component {
             <div className="container__items">
               {this.props.reviews.map((review, i) => {
                 if (i < 4) {
+                  console.log("review", review);
                   return (
                     // Need to write a component that shows all the reviews by a certain user
                     // Whenever they click on the username in this section or in the bottom section
                     // <div key={review._id} onClick={() => this.props.userReviews(user)}>
+
                     <div key={review._id} className="items__item">
                       <img
                         alt={review.newMongoId.name}
@@ -118,10 +120,8 @@ class LandingPage extends Component {
                     <div key={user._id} className="items__item">
                       <img
                         alt={user.username}
-                        src={user.userImage.link}
-                        className={
-                          user.userImage.width >= user.userImage.height ? "item__landscape" : "item__portrait"
-                        }
+                        src={user.userImages[0].link}
+                        className={"item__landscape"}
                         // onClick={() => this.openModal(this, user)}
                       />
                       <div className="item__info--hover">@{user.username}</div>
@@ -151,7 +151,7 @@ class LandingPage extends Component {
                     <img
                       alt={this.state.modalInfo.newMongoId.name}
                       className="body__image"
-                      src={this.state.modalInfo.photos}
+                      src={this.state.modalInfo.photos[0].link}
                     />
                     <div className="body__stars">
                       <StarRatings

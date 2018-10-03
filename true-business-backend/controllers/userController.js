@@ -7,16 +7,20 @@ function generateToken(user) {
     expiresIn: "1h",
   };
   const payload = { name: user.username };
-  return jwt.sign(payload, process.env.REACT_APP_SECRET, options);
+  secret = process.env.REACT_APP_SECRET;
+  if (typeof secret !== "string") {
+    secret = process.env.secret;
+  }
+  return jwt.sign(payload, secret, options);
 }
 
 const bcryptRounds = 10;
 
 const register = (request, response) => {
-  const { username, password, email, name } = request.body;
+  const { name, username, password, email, accountType } = request.body;
   const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
   const token = generateToken({ username });
-  const user = new User({ username, password: encryptedPassword, name, token, email });
+  const user = new User({ accountType, name, username, password: encryptedPassword, token, email });
   user
     .save()
     .then(savedUser => {
@@ -32,31 +36,32 @@ const register = (request, response) => {
 const login = (request, response) => {
   const { username, password } = request.body;
 
-  User.findOne({ username: username }).then(userFound => {
-    if (!userFound) {
-      response.status(500).send({
-        errorMessage: "Login Failed.",
-      });
-    } else {
-      if (bcrypt.compareSync(password, userFound.password)) {
-        const token = generateToken({ userFound });
-        const { _id } = userFound;
-        console.log("Token", token)
-        console.log("UserId", _id)
-        console.log("UserId", userFound)
-        response.status(200).send({ username: userFound.username, name: userFound.name, token, userId: _id  });
-      } else {
+  User.findOne({ username: username })
+    .then(userFound => {
+      if (!userFound) {
         response.status(500).send({
           errorMessage: "Login Failed.",
         });
+      } else {
+        if (bcrypt.compareSync(password, userFound.password)) {
+          const token = generateToken({ userFound });
+          const { _id } = userFound;
+          console.log("Token", token);
+          console.log("UserId", _id);
+          console.log("UserId", userFound);
+          response.status(200).send({ username: userFound.username, name: userFound.name, token, userId: _id });
+        } else {
+          response.status(500).send({
+            errorMessage: "Login Failed.",
+          });
+        }
       }
-    }
-  })
-  .catch(err => {
-    response.status(500).send({
-      errorMessage: "Failed to Login: " + err,
+    })
+    .catch(err => {
+      response.status(500).send({
+        errorMessage: "Failed to Login: " + err,
+      });
     });
-  });
 };
 
 const getUserById = (request, response) => {
@@ -105,17 +110,17 @@ const deleteUserById = (request, response) => {
 
 const updateUser = (request, response) => {
   const { _id, username, email } = request.body;
- User.findOneAndUpdate(_id, {username, email})
- .then(function(user) {
-   console.log("Date", user)
-   response.status(200).json(user);
- })
- .catch(function(error){
-   response.status(500).json({
-  errorMessage: "The user could not be updated: " + error
-   })
- })
-}
+  User.findOneAndUpdate(_id, { username, email })
+    .then(function(user) {
+      console.log("Date", user);
+      response.status(200).json(user);
+    })
+    .catch(function(error) {
+      response.status(500).json({
+        errorMessage: "The user could not be updated: " + error,
+      });
+    });
+};
 
 const getAllUsers = (request, response) => {
   User.find({})

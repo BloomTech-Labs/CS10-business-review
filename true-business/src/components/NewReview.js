@@ -6,6 +6,12 @@ import Dropzone from "react-dropzone";
 
 import "../css/NewReview.css";
 
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof(backend) !== 'string') {
+  backend = heroku;
+}
+
 let modalStyles = {
   content: {
     top: "50%",
@@ -66,12 +72,17 @@ export default class NewReview extends Component {
     this.props.showModal(false);
   }
   handleDrop = files => {
+    let key = process.env.REACT_APP_CLOUDINARY_API_KEY;
+    if (typeof(key) !== 'string') {
+      key = process.env.cloudinary_api_key;
+    }
+
     const uploaders = files.map(file => {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("tags", ``);
       formData.append("upload_preset", "true-business"); // Replace the preset name with your own
-      formData.append("api_key", process.env.REACT_APP_CLOUDINARY_API_KEY); // Replace API key with your own Cloudinary key
+      formData.append("api_key", key); // Replace API key with your own Cloudinary key
       formData.append("timestamp", (Date.now() / 1000) | 0);
 
       // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
@@ -111,7 +122,7 @@ export default class NewReview extends Component {
       photos: this.state.fileURL,
     };
     axios
-      .post("http://localhost:3001/api/review/create", review)
+      .post(`${backend}api/review/create`, review)
       .then(response => {
         this.closeModal();
       })
