@@ -47,6 +47,7 @@ class NavBar extends Component {
       modalInfo: null,
       popoverOpen: false,
       popoverFired: false,
+      signedIn: false,
       search: "",
     };
 
@@ -74,6 +75,17 @@ class NavBar extends Component {
     this.setState({ modalIsOpen: false });
   }
 
+  noPopUpInSearch = () => {
+    if(localStorage.getItem("token")) {
+      this.setState({ signedIn: true})
+    }
+    else {
+      this.setState( {
+        signedIn: false
+      })
+    }
+  }
+
   toggle = event => {
     // Only fires the popover the first time they click on the search bar
     if (!this.state.popoverFired) {
@@ -81,6 +93,7 @@ class NavBar extends Component {
     } else {
       this.setState({ popoverOpen: false });
     }
+    this.noPopUpInSearch();
   };
 
   handleInputChange = event => {
@@ -103,6 +116,7 @@ class NavBar extends Component {
     this.props.history.push("/");
   };
 
+ 
   render() {
     const { anchorEl } = this.state;
     return (
@@ -147,7 +161,7 @@ class NavBar extends Component {
                 </div>
               ) : null}
             </div>
-          </Modal>
+          </Modal> {this.state.signedIn? ( null ) : ( 
           <Popover
             styles={{ popoverStyles }}
             placement="top"
@@ -160,6 +174,7 @@ class NavBar extends Component {
               Close
             </button>
           </Popover>
+          )}
         </div>
         {localStorage.getItem("token") && localStorage.getItem("userId") ? (
           <div className="navbar-container__right">
