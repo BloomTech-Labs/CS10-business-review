@@ -79,7 +79,7 @@ class NavBar extends Component {
     event.preventDefault();
     if (this.state.searchWord !== "") {
       this.props.search(this.state.searchWord + " " + this.state.searchCity, true);
-      this.setState({ search: "" });
+      this.setState({ searchWord: "", searchCity: "" });
     } else {
       this.openModal();
     }
@@ -154,31 +154,31 @@ class NavBar extends Component {
           </Modal>
         </div>
         {localStorage.getItem("token") && localStorage.getItem("userId") ? (
-            <div className="navbar__right--logged">
-              <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
-                <i
-                  onClick={() => {
-                    this.props.history.push(`/user`);
-                  }}
-                  className="fas fa-bars fa-2x fa-fw"
-                />
-                <div className="right--logged__text">Hi, {localStorage.getItem("name").split(' ')[0]}</div>
-              </Button>
-              <Menu
-                id="simple-menu"
-                style={{ top: "3rem", left: "1rem" }}
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={this.handleClose}>
-                <MenuItem
-                  onClick={() => {
-                    this.props.history.push(`/user`);
-                  }}>
-                  My Account
-                </MenuItem>
-                <MenuItem onClick={this.logout}>Logout</MenuItem>
-              </Menu>
-            </div>
+          <div className="navbar__right--logged">
+            <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
+              <i
+                onClick={() => {
+                  this.props.history.push(`/user`);
+                }}
+                className="fas fa-bars fa-2x fa-fw"
+              />
+              <div className="right--logged__text">Hi, {localStorage.getItem("name").split(" ")[0]}</div>
+            </Button>
+            <Menu
+              id="simple-menu"
+              style={{ top: "3rem", left: "1rem" }}
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={this.handleClose}>
+              <MenuItem
+                onClick={() => {
+                  this.props.history.push(`/user`);
+                }}>
+                My Account
+              </MenuItem>
+              <MenuItem onClick={this.logout}>Logout</MenuItem>
+            </Menu>
+          </div>
         ) : (
           <div className="navbar__right">
             <button

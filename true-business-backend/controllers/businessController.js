@@ -121,6 +121,7 @@ const placesSearch = (req, res) => {
                             found.photos = imgObject;
                             return found;
                           } else {
+                            result.stars = 0;
                             result.photos = imgObject;
                             return result;
                           }

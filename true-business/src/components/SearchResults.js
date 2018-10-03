@@ -19,6 +19,11 @@ class SearchResults extends Component {
     lastPage: 0,
   };
 
+  handleError = id => {
+    let broken = document.getElementById(id);
+    broken.style.opacity = "0";
+  };
+
   render() {
     return (
       <div>
@@ -30,34 +35,120 @@ class SearchResults extends Component {
             {this.props.searchResults ? (
               this.props.searchResults.map((result, i) => {
                 if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
+                  {
+                    console.log("RESULT", result);
+                  }
                   return (
+                    // <div
+                    //   key={result.place_id}
+                    //   className="results__result"
+                    //   onClick={this.handleBusiness.bind(this, result)}>
+                    //   <div className="result__image">
+                    //     <img
+                    //       alt={result.name}
+                    //       className={result.photos !== "No Photos Listed" ? "image__landscape" : null}
+                    //       src={result.photos !== "No Photos Listed" ? result.photos[0].link : null}
+                    //     />
+                    //   </div>
+                    //   <div className="result__logoNameWeb">
+                    //     <div className="logoNameWeb__logo">
+                    //       <img
+                    //         id={result.place_id}
+                    //         onError={this.handleError.bind(this, result.place_id)}
+                    //         src={"//logo.clearbit.com/" + result.website}
+                    //       />
+                    //     </div>
+                    //     <div className="logoNameWeb__name">{result.name}</div>
+                    //     <StarRatings
+                    //       starDimension="20px"
+                    //       starSpacing="5px"
+                    //       rating={result.stars}
+                    //       starRatedColor="gold"
+                    //       starEmptyColor="grey"
+                    //       numberOfStars={5}
+                    //       name="rating"
+                    //     />
+                    //     <div className="logoNameWeb__web">
+                    //       {result.webiste !== "No Website Listed" ? (
+                    //         <a href={result.website} target="_blank">
+                    //           <i class="fas fa-globe fa-2x" />
+                    //         </a>
+                    //       ) : null}
+                    //     </div>
+                    //   </div>
+                    //   <div className="result__info">
+                    //     <div className="info__address">
+                    //       <a href={"https://www.google.com/maps/place/" + result.formatted_address} target="_blank">
+                    //         <i style={{ color: "#05386b" }} className="fas fa-map-marked-alt fa-2x" />
+                    //       </a>
+                    //       <div className="info__city">
+                    //         {result.formatted_address
+                    //           .split(",")
+                    //           .splice(1, 2)
+                    //           .join(",")
+                    //           .trim()}
+                    //       </div>
+                    //     </div>
+                    //     <div className="info__hours">
+                    //       <div className="hours__open"> {result.opening_hours.open_now ? "Open" : "Closed"}</div>{" "}
+                    //       {this.props.business.hasOwnProperty("opening_hours") ? (
+                    //         this.props.business.opening_hours.hasOwnProperty("weekday_text") ? (
+                    //           this.props.business.opening_hours.weekday_text.map(day => {
+                    //             return (
+                    //               <div key={day} className="hours__day">
+                    //                 {day}
+                    //               </div>
+                    //             );
+                    //           })
+                    //         ) : (
+                    //           <div>Opening Hours Unlisted</div>
+                    //         )
+                    //       ) : (
+                    //         <div>Opening Hours Unlisted</div>
+                    //       )}
+                    //     </div>
+                    //   </div>
+                    // </div>
                     <div
                       key={result.place_id}
                       className="results__result"
                       onClick={this.handleBusiness.bind(this, result)}>
-                      <img
-                        alt={result.name}
-                        className={result.photos !== "No Photos Listed" ? "result__landscape" : null}
-                        src={result.photos !== "No Photos Listed" ? result.photos[0].link : null}
-                      />
+                    <img
+                      alt={result.name}
+                      className={result.photos !== "No Photos Listed" ? "result__landscape" : null}
+                      src={result.photos !== "No Photos Listed" ? result.photos[0].link : null}
+                    />
                       <div className="result__info">
+                    <img
+                      id={result.place_id}
+                      onError={this.handleError.bind(this, result.place_id)}
+                      src={"//logo.clearbit.com/" + result.website}
+                    />
+
                         <div className="info__name">{result.name}</div>
                         <div className="info__address">
                           <a href={"https://www.google.com/maps/place/" + result.formatted_address} target="_blank">
                             <i style={{ color: "#05386b" }} className="fas fa-map-marked-alt fa-2x" />
                           </a>
+                          <div>
+                    
+                            {result.formatted_address
+                              .split(",")
+                              .splice(1, 2)
+                              .join(",")
+                              .trim()}
+                          </div>
                         </div>
                         <div className="info__type">
-                          True Reviews Rating
-                          <StarRatings
-                            starDimension="20px"
-                            starSpacing="5px"
-                            rating={result.stars}
-                            starRatedColor="gold"
-                            starEmptyColor="grey"
-                            numberOfStars={5}
-                            name="rating"
-                          />
+                    <StarRatings
+                      starDimension="20px"
+                      starSpacing="5px"
+                      rating={result.stars}
+                      starRatedColor="gold"
+                      starEmptyColor="grey"
+                      numberOfStars={5}
+                      name="rating"
+                    />
                         </div>
                         <div className="info__type">
                           {(result.types[0].charAt(0).toUpperCase() + result.types[0].slice(1)).replace(/_/g, " ")}
