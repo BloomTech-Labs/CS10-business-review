@@ -302,7 +302,6 @@ class Business extends Component {
                 <div className="reviews__review">
                   {this.state.reviews.length ? (
                     this.state.reviews.map((review, i) => {
-                      console.log("REVIEW", review)
                       if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
                         return (
                           <div key={review._id} className="review__info">

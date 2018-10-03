@@ -7,7 +7,7 @@ const reviewSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
-    default: "5bb2a7bc36929201322a9000",
+    default: "5bb4f55389a02a00795f87eb",
   },
   newMongoId: {
     type: mongoose.Schema.Types.ObjectId,

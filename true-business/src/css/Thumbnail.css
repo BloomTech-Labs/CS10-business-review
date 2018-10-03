@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 20rem;
+  height: 25rem;
   width: 20%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
@@ -18,7 +18,7 @@
   opacity: 0.8;
   margin: 1rem;
   padding: 1rem;
-  max-height: 20rem;
+  min-height: 25rem;
   min-width: 20%;
   text-align: center;
 }
@@ -30,10 +30,10 @@
   top: -2rem;
   position: relative;
   border: 0.1rem solid #05386b;
-  width: 75%;
-  min-width: 75%;
-  height: 43%;
-  min-height: 43%;
+  width: 100%;
+  min-width: 100%;
+  min-height: 15rem;
+  max-height: 15rem;
 }
 .thumbnail .thumbnail__landscape:hover {
   cursor: pointer;
@@ -67,6 +67,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+  padding-top: 1rem;
   width: 100%;
 }
 .thumbnail:hover {

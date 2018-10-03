@@ -1,18 +1,46 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import StarRatings from "react-star-ratings";
+import axios from "axios";
 
 import NavBar from "./NavBar";
 
 import "../css/SearchResults.css";
 
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
+  backend = heroku;
+}
+
 class SearchResults extends Component {
   state = {
     currentPage: 0,
     lastPage: 0,
+    trueRatings: [],
   };
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
+  componentWillReceiveProps() {
+    if (this.props.searchResults) {
+      if (this.props.searchResults.length) {
+        // this.getRating(this.props.searchResults);
+      }
+    }
+  }
+
+  getRating = businesses => {
+    businesses.forEach(business => {
+      axios
+        .get(`${backend}api/business/google/${business.place_id}`)
+        .then(response => {
+          let trueRatings = this.state.trueRatings;
+          trueRatings.push(response.data.stars);
+          this.setState({ trueRatings });
+        })
+        .catch(error => {
+          console.log({ error });
+        });
+    });
   };
 
   render() {
@@ -39,26 +67,21 @@ class SearchResults extends Component {
                       <div className="result__info">
                         <div className="info__name">{result.name}</div>
                         <div className="info__address">
-                          <div className="address__item">
-                            {result.formatted_address
-                              .split(",")
-                              .splice(0, 1)
-                              .toString()}
-                          </div>
-                          <div className="address__item">
-                            {result.formatted_address
-                              .split(",")
-                              .splice(1, 2)
-                              .join(",")
-                              .trim()}
-                          </div>
-                          <div className="address__item">
-                            {result.formatted_address
-                              .split(",")
-                              .splice(3)
-                              .toString()
-                              .trim()}
-                          </div>
+                          <a href={"https://www.google.com/maps/place/" + result.formatted_address} target="_blank">
+                            <i style={{ color: "#05386b" }} className="fas fa-map-marked-alt fa-2x" />
+                          </a>
+                        </div>
+                        <div className="info__type">
+                          True Reviews Rating
+                          <StarRatings
+                            starDimension="20px"
+                            starSpacing="5px"
+                            rating={this.state.trueRatings[i]}
+                            starRatedColor="gold"
+                            starEmptyColor="grey"
+                            numberOfStars={5}
+                            name="rating"
+                          />
                         </div>
                         <div className="info__type">
                           {(result.types[0].charAt(0).toUpperCase() + result.types[0].slice(1)).replace(/_/g, " ")}

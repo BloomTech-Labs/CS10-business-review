@@ -27,7 +27,6 @@ class SignIn extends Component {
   };
 
   signIn = () => {
-    console.log("FUCKSTICK")
     axios
       .post(`${backend}api/user/login`, {username:this.state.username, password:this.state.password})
       .then(response => {

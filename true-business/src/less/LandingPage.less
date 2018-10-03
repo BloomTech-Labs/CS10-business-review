@@ -13,24 +13,20 @@
       flex-wrap: wrap;
       min-height: 100%;
       .items__item {
-        .containers(
-          @width: 20%,
-          @height: 15rem,
-          @margin: 1rem,
-          @padding: 1rem,
-          @justifyContent: space-between,
-          @fontSize: 1.2rem
-        );
+        .containers(@height: 25rem, @width: 20%, @justifyContent: space-between, @fontSize: 1.5rem);
         .backAndBorder();
         opacity: 0.8;
-        max-height: 15rem;
+        margin: 1rem;
+        padding: 1rem;
+        min-height: 25rem;
         min-width: 20%;
+        text-align: center;
         .item__landscape {
           .images();
-          width: 75%;
-          min-width: 75%;
-          height: 60%;
-          min-height: 60%;
+          width: 100%;
+          min-width: 100%;
+          min-height: 15rem;
+          max-height: 15rem;
         }
         .item__image:hover {
           cursor: pointer;

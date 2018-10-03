@@ -30,7 +30,6 @@ router.post("/api/user/register", (request, response) => {
 });
 
 router.post("/api/user/login", (req, res) => {
-  console.log("THIS BULLSHIT HITTING THE FUCKING API?", req.body, req.params)
   UserController.login(req, res);
 });
 
@@ -49,6 +48,7 @@ router.get("/api/user/", function(req, res) {
 });
 
 router.post("/api/business/create", (request, response) => {
+  console.log("GETTING HERE?")
   BusinessController.createBusiness(request, response);
 });
 
@@ -66,6 +66,18 @@ router.get("/api/business/ByName/:name", function(request, response) {
 
 router.get("/api/business/:id", function(req, res) {
   BusinessController.getBusinessById(req, res);
+});
+
+router.get("/api/business/google/:id", function(req, res) {
+  BusinessController.getBusinessByGoogleId(req, res);
+});
+
+router.get("/api/user/random", function(req, res) {
+  UserController.getRandomUser(req, res);
+});
+
+router.get("/api/business/random", function(req, res) {
+  BusinessController.getRandomBusiness(req, res);
 });
 
 router.delete("/api/business/:id", function(req, res) {

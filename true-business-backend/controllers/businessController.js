@@ -63,6 +63,7 @@ const createBusiness = (req, res) => {
             place_id: result.place_id,
             rating,
           });
+          console.log("New Business", business)
           business
             .save()
             .then(business => {
@@ -130,6 +131,22 @@ const placesSearch = (req, res) => {
     .catch(error => {
       console.log({ error });
     });
+};
+
+const getRandomBusiness = (request, response) => {
+  Business.count().exec(function(err, count) {
+    const random = Math.floor(Math.random() * count);
+    Business.findOne()
+      .skip(random)
+      .then(function(business) {
+        response.status(200).json(business);
+      })
+      .catch(function(error) {
+        response.status(500).json({
+          error: "The business could not be retrieved.",
+        });
+      });
+  });
 };
 
 const placeSearch = (req, res) => {
@@ -200,6 +217,11 @@ const getBusinessById = (request, response) => {
     });
 };
 
+const getBusinessByGoogleId = (request, response) => {
+  const { id } = request.params;
+  console.log("ID IN GETGOOGLE", id);
+};
+
 const deleteBusinessById = (request, response) => {
   const { id } = request.params;
 
@@ -230,8 +252,10 @@ module.exports = {
   createBusiness,
   getBusinessByName,
   getBusinessById,
+  getBusinessByGoogleId,
   deleteBusinessById,
   getAllBusiness,
   placesSearch,
   placeSearch,
+  getRandomBusiness,
 };

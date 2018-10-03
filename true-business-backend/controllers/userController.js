@@ -33,12 +33,25 @@ const register = (request, response) => {
     });
 };
 
+const getRandomUser = (request, response) => {
+  User.count().exec(function (err, count) {
+    const random = Math.floor(Math.random() * count);
+    User.findOne().skip(random)
+    .then(function(user) {
+      response.status(200).json(user);
+    })
+    .catch(function(error) {
+      response.status(500).json({
+        error: "The user could not be retrieved.",
+      });
+    });
+  });
+};
+
 const login = (request, response) => {
   const { username, password } = request.body;
-  console.log("FUCKING LOGIN", username, password)
   User.findOne({ username: username })
     .then(userFound => {
-      console.log("USERFOUND", userFound);
       if (!userFound) {
         response.status(500).send({
           errorMessage: "Login Failed.",
@@ -55,7 +68,6 @@ const login = (request, response) => {
       }
     })
     .catch(err => {
-      console.log("FUCKBALLS", err)
       response.status(500).send({
         errorMessage: "Failed to Login: " + err,
       });
@@ -64,11 +76,9 @@ const login = (request, response) => {
 
 const getUserById = (request, response) => {
   const { _id } = request.body;
-  console.log("GET USER SHIT", request.body);
 
   User.findOne(_id)
     .then(function(user) {
-      console.log("WHAT THE FUCK", user);
       response.status(200).json(user);
     })
     .catch(function(error) {
@@ -117,7 +127,7 @@ const updateUser = (req, res) => {
         });
     })
     .catch(error => {
-      console.log("FUCK", error);
+      console.log("Error", error);
     });
 };
 
@@ -140,4 +150,5 @@ module.exports = {
   deleteUserById,
   updateUser,
   getAllUsers,
+  getRandomUser
 };
