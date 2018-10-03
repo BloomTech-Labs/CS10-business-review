@@ -12,15 +12,14 @@ let modalStyles = {
   content: {
     top: "50%",
     left: "50%",
-    right: "auto",
-    bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "80vh",
-    width: "50vw",
+    height: "90vh",
+    width: "55vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
+    overflow: "hidden",
   },
 };
 
@@ -120,8 +119,8 @@ class LandingPage extends Component {
                         // onClick={() => this.openModal(this, user)}
                       />
                       <div className="item__info--hover">@{user.username}</div>
-                      <div className="item__info">Reviews: {user.numberOfReviews}</div>
-                      <div className="item__info">Likes: {user.numberOfLikes}</div>
+                      <div className="item__info">{user.numberOfReviews} Reviews</div>
+                      <div className="item__info">{user.numberOfLikes} Likes</div>
                     </div>
                   );
                 }
@@ -139,9 +138,34 @@ class LandingPage extends Component {
               {this.state.modalIsOpen ? (
                 <div className="modal-container">
                   <div className="modal__header">
+                    <div className="header__image">
+                      <button className="image__button" onClick={this.closeModal}>
+                        Close
+                        <i className="far fa-window-close" />
+                      </button>
+                      {/* Update reviews / user with likes */}
+                      <button className="image__button">
+                        Like
+                        <i className="fas fa-thumbs-up" />
+                      </button>
+                      <img
+                        alt={this.state.modalInfo.newMongoId.name}
+                        className="image__landscape"
+                        src={this.state.modalInfo.photos[0].link}
+                      />
+                    </div>
                     <div className="header__user">
-                      <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
-                      <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
+                      <div className="header__title"> {this.state.modalInfo.newMongoId.name}</div>
+                      {/* Onclick to go to the user component whenever we get to that... */}
+                      <div className="header__reviewer">
+                        <div className="reviewer__info--onclick">@{this.state.modalInfo.reviewer.username}</div>
+                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
+                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="modal__body">
+                    <div className="body__stars">
                       <StarRatings
                         starDimension="20px"
                         starSpacing="5px"
@@ -151,21 +175,12 @@ class LandingPage extends Component {
                         numberOfStars={5}
                         name="rating"
                       />
+                      <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
                     </div>
-                    <img
-                      alt={this.state.modalInfo.newMongoId.name}
-                      className="header__landscape"
-                      src={this.state.modalInfo.photos[0].link}
-                    />
-                  </div>
-                  <div className="modal__body">
-                    <div>{this.state.modalInfo.title}</div>
-                    <div className="body__review">{this.state.modalInfo.body}</div>
-                  </div>
-                  <div className="modal__footer">
-                    <button className="footer__button" onClick={this.closeModal}>
-                      close
-                    </button>
+                    <div className="body__title">
+                      {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
+                    </div>
+                    <div className="body__review">{this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}</div>
                   </div>
                 </div>
               ) : null}

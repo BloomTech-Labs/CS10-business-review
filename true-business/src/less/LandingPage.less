@@ -13,7 +13,14 @@
       flex-wrap: wrap;
       min-height: 100%;
       .items__item {
-        .containers(@width: 20%, @height: 15rem, @margin: 1rem, @padding: 1rem, @justifyContent: space-between, @fontSize: 1.2rem);
+        .containers(
+          @width: 20%,
+          @height: 15rem,
+          @margin: 1rem,
+          @padding: 1rem,
+          @justifyContent: space-between,
+          @fontSize: 1.2rem
+        );
         .backAndBorder();
         opacity: 0.8;
         max-height: 15rem;
@@ -31,15 +38,15 @@
         .item__title {
           .titles();
           .hidden();
-          margin: .2rem;
+          margin: 0.2rem;
         }
         .item__info {
           .hidden();
-          margin: .2rem;
+          margin: 0.2rem;
         }
         .item__info--hover {
           .hidden();
-          margin: .2rem;
+          margin: 0.2rem;
           &:hover {
             cursor: pointer;
           }
@@ -54,49 +61,81 @@
 
 .modal {
   .modal-container {
+    width: 80%;
+    height: 80vh;
+    max-height: 80vh;
     .modal__header {
-      .containers(@height:30%, @flexDirection: row, @margin: 0 0 0.3rem 0);
-      min-height: 50%;
+      .containers(@height:50%, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
       max-height: 50%;
-      width: initial;
+      .header__image {
+        .containers(@justifyContent: space-between; @flexDirection: row);
+        height: 85%;
+        max-height: 85%;
+        .image__landscape {
+          .images(@top: 0);
+          width: 50%;
+          min-width: 50%;
+          height: 85%;
+          max-height: 85%;
+          margin: 1rem 1rem 0 1rem;
+        }
+        .image__button {
+          .containers(@flexDirection: row, @justifyContent: space-around);
+          height: initial;
+          .buttons();
+          .headers();
+          width: 20%;
+        }
+      }
       .header__user {
-        .containers(@justifyContent: space-around);
+        .containers(@flexDirection: row, @justifyContent: space-around);
         text-align: center;
-        width: 70%;
-        min-height: 30vh;
+        width: 100%;
+        height: 15%;
+        min-height: 15%;
+        max-height: 15%;
         .header__title {
           .headers(@margin: 0);
         }
         .header__reviewer {
-          .body();
+          .containers(@flexDirection: row, @justifyContent: space-around);
+          width: 50%;
+          .reviewer__info--onclick {
+            .headers();
+          }
+          .reviewer__info {
+            .body();
+          }
         }
-      }
-      .header__landscape {
-        .images(@top: 0);
-        width: 40%;
-        min-width: 40%;
-        height: 40vh;
-        min-height: 40vh;
-        margin: 1rem 1rem 0 1rem;
       }
     }
     .modal__body {
       .containers(@height: 45%);
       min-height: 45%;
       max-height: 45%;
+      .body__stars {
+        .containers(@flexDirection: row, @width: 50%, @justifyContent: space-around);
+        height: 10%;
+      }
       .body__drop {
         .containers();
+      }
+      .body__title {
+        height: 10%;
       }
       .body__stars {
         text-align: center;
         width: 50%;
+        height: 20%;
       }
       .body__review {
-        font-size: 1.25rem;
+        .backAndBorder();
+        .body();
+        height: 50%;
         padding: 0.5rem;
-        border: 0.1rem solid black;
         width: 75%;
-        height: 25vh;
+        height: auto;
+        max-height: 25vh;
         overflow: auto;
       }
     }
@@ -122,6 +161,7 @@
 .ReactModal__Content--after-open {
   padding: 0 !important;
   overflow: hidden;
+  max-height: 80vh;
 }
 
 .drop__text--initial {
