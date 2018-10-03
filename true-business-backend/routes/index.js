@@ -15,7 +15,7 @@ mongoose.connect(
   {},
   function(err) {
     if (err) console.log(err);
-  },
+  }
 );
 
 mongoose.Promise = global.Promise;
@@ -33,13 +33,13 @@ router.post("/api/user/login", (request, response) => {
   UserController.login(request, response);
 });
 
-
 router.put("/api/user/:_id", (request, response) => { 
+
   UserController.reset_password(request, response);
+});
 
 router.get("/api/user/random", function(req, res) {
   UserController.getRandomUser(req, res);
-
 });
 
 router.get("/api/user/:id", function(req, res) {
@@ -111,7 +111,12 @@ router.get("/api/review/getReviewsByBusinessId/:id/:landing", (req, res) => {
 router.post("/charge", async (req, res) => {
   let amount = req.body.selectedRadio === "oneMonth" ? 999 : 4999;
   stripe.charges
-    .create({ amount, currency: "usd", description: "An example charge", source: req.body.token.id })
+    .create({
+      amount,
+      currency: "usd",
+      description: "An example charge",
+      source: req.body.token.id
+    })
     .then(status => {
       res.json({ status });
     })
