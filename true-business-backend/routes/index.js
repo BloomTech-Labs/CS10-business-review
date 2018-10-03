@@ -6,24 +6,66 @@ const ReviewControler = require("../controllers/reviewController");
 const router = express.Router();
 require("../routes/authRoutes")(router);
 require("../services/passport");
+const paginate = require("express-paginate");
+const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
+
 mongoose.Promise = global.Promise;
 
 const bodyParser = require("body-parser");
 
 mongoose.connect(
-  "mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness",
+  "mongodb:process.env.REACT_APP_DB_URI",
   {},
   function(err) {
     if (err) console.log(err);
   }
 );
 
-mongoose.Promise = global.Promise;
-const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
-
 router.get("/", (request, response) => {
   response.status(200).json({ api: "Server running OK." });
 });
+
+// // START PAGINATE CODE
+// // keep this before all routes that will use pagination
+router.use(paginate.middleware(10, 50));
+
+router.get("/api/business/", async (req, res, next) => {
+  // This example assumes you've previously defined `business`
+  // as `const Users = db.model('Users')` if you are using `mongoose`
+  // and that you are using Node v7.6.0+ which has async/await support
+  try {
+    const [results, itemCount] = await Promise.all([
+      Business.find({})
+        .limit(req.query.limit)
+        .skip(req.skip)
+        .lean()
+        .exec(),
+      Business.count({})
+    ]);
+
+    const pageCount = Math.ceil(itemCount / req.query.limit);
+
+    if (req.accepts("json")) {
+      // inspired by Stripe's API response for list objects
+      res.json({
+        object: "list",
+        has_more: paginate.hasNextPages(req)(pageCount),
+        data: results
+      });
+    } else {
+      res.render("business", {
+        users: results,
+        pageCount,
+        itemCount,
+        pages: paginate.getArrayPages(req)(3, pageCount, req.query.page)
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+// END PAGINATE CODE
 
 router.post("/api/user/register", (request, response) => {
   UserController.register(request, response);

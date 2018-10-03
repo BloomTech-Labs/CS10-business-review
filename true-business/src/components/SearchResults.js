@@ -7,7 +7,7 @@ import "../css/SearchResults.css";
 
 class SearchResults extends Component {
   state = {
-    currentPage: 0,
+    currentPage: 0
   };
 
   componentDidMount = () => {
@@ -29,7 +29,10 @@ class SearchResults extends Component {
           <div className="search__results">
             {this.props.searchResults ? (
               this.props.searchResults.map((result, i) => {
-                if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
+                if (
+                  i < this.state.currentPage * 10 + 10 &&
+                  i >= this.state.currentPage * 10
+                ) {
                   return (
                     <div key={result.place_id} className="results__result">
                       <img
@@ -41,12 +44,18 @@ class SearchResults extends Component {
                               : "result__portrait"
                             : null
                         }
-                        src={result.photos !== "No Photos Listed" ? result.photos[0].link : null}
+                        src={
+                          result.photos !== "No Photos Listed"
+                            ? result.photos[0].link
+                            : null
+                        }
                         onClick={this.handleBusiness.bind(this, result)}
                       />
                       <div className="result__info">
                         <div className="info__stars-container">
-                          <div className="stars-container__text">{result.name}</div>
+                          <div className="stars-container__text">
+                            {result.name}
+                          </div>
                         </div>
                         <div className="info__address">
                           <div className="address__item">
@@ -92,6 +101,7 @@ class SearchResults extends Component {
           </div>
           <div id="pagination" className="results__pagination">
             {this.props.searchResults ? this.createPagination() : null}
+            <a href="paginate.href({ sort: 'name' }))" Sort by name />
           </div>
         </div>
       </div>
@@ -126,7 +136,10 @@ class SearchResults extends Component {
 
     for (let i = 10; i < this.props.searchResults.length - 10; i++) {
       if (i % 10 === 0) {
-        if (i >= this.state.currentPage * 10 - 20 && i <= this.state.currentPage * 10 + 20) {
+        if (
+          i >= this.state.currentPage * 10 - 20 &&
+          i <= this.state.currentPage * 10 + 20
+        ) {
           pages.add(i / 10);
         }
         if (this.state.currentPage <= 3 && i <= 40) {
@@ -145,7 +158,8 @@ class SearchResults extends Component {
     }
     pages = [...pages].sort((x, y) => x - y);
     if (this.state.currentPage > 3) pages.splice(1, 0, "...");
-    if (this.state.currentPage < lastPage - 3) pages.splice(pages.length - 1, 0, "...");
+    if (this.state.currentPage < lastPage - 3)
+      pages.splice(pages.length - 1, 0, "...");
     return pages.map((page, i) => {
       if (page === "...") {
         return (
@@ -155,7 +169,12 @@ class SearchResults extends Component {
         );
       }
       return (
-        <div key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
+        <div
+          key={page}
+          id={page}
+          className="pagination__page"
+          onClick={this.updatePage.bind(this, page)}
+        >
           {page}
         </div>
       );
