@@ -63,7 +63,7 @@ const createBusiness = (req, res) => {
             place_id: result.place_id,
             rating,
           });
-          console.log("New Business", business)
+          console.log("New Business", business);
           business
             .save()
             .then(business => {
@@ -106,15 +106,33 @@ const placesSearch = (req, res) => {
                 })
                 .asPromise()
                 .then(photo => {
-                  let imgObject = [
-                    {
-                      link: "https://" + photo.req.socket._host + photo.req.path,
-                      width: photos[0].width,
-                      height: photos[0].height,
-                    },
-                  ];
-                  result.photos = imgObject;
-                  return result;
+                  return new Promise(resolve => {
+                    return resolve(
+                      Business.findOne({ place_id: result.place_id })
+                        .then(found => {
+                          let imgObject = [
+                            {
+                              link: "https://" + photo.req.socket._host + photo.req.path,
+                              width: photos[0].width,
+                              height: photos[0].height,
+                            },
+                          ];
+                          if (found) {
+                            found.photos = imgObject;
+                            return found;
+                          } else {
+                            result.photos = imgObject;
+                            return result;
+                          }
+                        })
+                        .catch(error => {
+                          console.log({ error });
+                        }),
+                    );
+                  });
+                })
+                .catch(error => {
+                  console.log({ error });
                 }),
             );
           });
@@ -217,11 +235,6 @@ const getBusinessById = (request, response) => {
     });
 };
 
-const getBusinessByGoogleId = (request, response) => {
-  const { id } = request.params;
-  console.log("ID IN GETGOOGLE", id);
-};
-
 const deleteBusinessById = (request, response) => {
   const { id } = request.params;
 
@@ -252,7 +265,6 @@ module.exports = {
   createBusiness,
   getBusinessByName,
   getBusinessById,
-  getBusinessByGoogleId,
   deleteBusinessById,
   getAllBusiness,
   placesSearch,

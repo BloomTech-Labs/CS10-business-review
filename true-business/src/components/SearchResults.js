@@ -17,30 +17,6 @@ class SearchResults extends Component {
   state = {
     currentPage: 0,
     lastPage: 0,
-    trueRatings: [],
-  };
-
-  componentWillReceiveProps() {
-    if (this.props.searchResults) {
-      if (this.props.searchResults.length) {
-        // this.getRating(this.props.searchResults);
-      }
-    }
-  }
-
-  getRating = businesses => {
-    businesses.forEach(business => {
-      axios
-        .get(`${backend}api/business/google/${business.place_id}`)
-        .then(response => {
-          let trueRatings = this.state.trueRatings;
-          trueRatings.push(response.data.stars);
-          this.setState({ trueRatings });
-        })
-        .catch(error => {
-          console.log({ error });
-        });
-    });
   };
 
   render() {
@@ -76,7 +52,7 @@ class SearchResults extends Component {
                           <StarRatings
                             starDimension="20px"
                             starSpacing="5px"
-                            rating={this.state.trueRatings[i]}
+                            rating={result.stars}
                             starRatedColor="gold"
                             starEmptyColor="grey"
                             numberOfStars={5}
@@ -102,6 +78,7 @@ class SearchResults extends Component {
       </div>
     );
   }
+
   handleBusiness = (business, event) => {
     this.props.business(business);
   };
