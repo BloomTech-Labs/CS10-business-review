@@ -33,8 +33,8 @@ router.post("/api/user/login", (request, response) => {
   UserController.login(request, response);
 });
 
-router.put("/api/user/:_id", (request, response) => {
-  console.log("Firing here");
+router.put("/api/user/:_id", (request, response) => { 
+
   UserController.reset_password(request, response);
 });
 
