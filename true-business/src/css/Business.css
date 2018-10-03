@@ -132,16 +132,16 @@
   color: #05386b;
 }
 .business .business__reviews-container .reviews-container__button {
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   width: 10rem;
   background-color: #3487d5;
-  color: white;
+  color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
 }
 .business .business__reviews-container .reviews-container__button:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px grey;
+  box-shadow: 0px 15px 20px #6b6b6b;
   filter: brightness(110%);
   font-weight: bolder;
 }
@@ -318,10 +318,10 @@
   max-width: 70%;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__pages .pagination__page {
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   width: 10rem;
   background-color: #3487d5;
-  color: white;
+  color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   width: 5%;
@@ -329,7 +329,7 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__pages .pagination__page:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px grey;
+  box-shadow: 0px 15px 20px #6b6b6b;
   filter: brightness(110%);
   font-weight: bolder;
 }

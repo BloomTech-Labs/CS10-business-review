@@ -87,16 +87,16 @@
   cursor: pointer;
 }
 .signin .signin-container .signin-container__form .signin-container__buttons .signin-container__button {
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   width: 10rem;
   background-color: #3487d5;
-  color: white;
+  color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
 }
 .signin .signin-container .signin-container__form .signin-container__buttons .signin-container__button:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px grey;
+  box-shadow: 0px 15px 20px #6b6b6b;
   filter: brightness(110%);
   font-weight: bolder;
 }

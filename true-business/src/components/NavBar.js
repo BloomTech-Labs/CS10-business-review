@@ -9,17 +9,16 @@ import "../css/NavBar.css";
 
 let modalStyles = {
   content: {
-    top: "30%",
+    top: "15%",
     left: "50%",
-    right: "auto",
-    bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "40vh",
-    width: "50vw",
+    height: "20vh",
+    width: "55vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
+    overflow: "hidden",
   },
 };
 

@@ -1,3 +1,13 @@
+
+@buttonBG: #3487d5;
+@elementBG: #efeff1;
+@modalBG: #eeeeee;
+@textColor: #05386b;
+@fontFamily: Helvetica Neue, Helvetica, Arial, sans-serif;
+@whiteBG: rgb(255, 255, 255);
+@boxShadow: rgb(107, 107, 107);
+
+
 .containers(@color: @textColor, @display: flex, @flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @fontSize: 1.2rem, @lineHeight: 1,@padding: 0, @margin:0) {
   display: @display;
   flex-direction: @flexDirection;
@@ -14,45 +24,33 @@
   color: @textColor;
 }
 
-@background: #2687a1;
-@color: black;
-@elementBackground: rgb(230, 230, 230);
-@popup: #29949a;
-
-@buttonBG: #3487d5;
-@elementBG: #efeff1;
-@modalBG: #eeeeee;
-@textColor: #05386b;
-@fontFamily: Helvetica Neue, Helvetica, Arial, sans-serif;
-@whiteBG: rgb(255, 255, 255);
-
 .buttons(@width: 10rem) {
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   width: @width;
   background-color: @buttonBG;
-  color: white;
+  color: @whiteBG;
   font-family: @fontFamily;
   font-size: 1rem;
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 15px 20px grey;
+    box-shadow: 0px 15px 20px @boxShadow;
     filter: brightness(110%);
     font-weight: bolder;
   }
 }
 
-.headers(@fontSize: 3rem, @margin: 2rem, @padding: 1rem) {
+.headers(@fontSize: 1.5rem, @margin: 1rem, @padding: .5rem) {
   font-size: @fontSize;
   margin: @margin;
   padding: @padding;
 }
 
-.body(@fontSize: 2rem) {
+.body(@fontSize: 1.2rem) {
   font-size: @fontSize;
 }
 
 .linerNotes() {
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .images(@top: -2rem) {
@@ -81,7 +79,7 @@
 .crazyHover() {
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 50px 10px grey;
+    box-shadow: 0px 0px 50px 10px @boxShadow;
     filter: brightness(110%);
     opacity: 1;
   }
