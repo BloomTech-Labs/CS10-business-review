@@ -78,6 +78,22 @@ const getUserById = (request, response) => {
     });
 };
 
+const getRandomUser = (request, response) => {
+  User.count().exec(function (err, count) {
+    const random = Math.floor(Math.random() * count);
+    console.log(random);
+    User.findOne().skip(random)
+    .then(function(user) {
+      response.status(200).json(user);
+    })
+    .catch(function(error) {
+      response.status(500).json({
+        error: "The user could not be retrieved.",
+      });
+    });
+  });
+};
+
 const deleteUserById = (request, response) => {
   const { _id } = request.body;
 
@@ -125,4 +141,5 @@ module.exports = {
   deleteUserById,
   updateUser,
   getAllUsers,
+  getRandomUser
 };
