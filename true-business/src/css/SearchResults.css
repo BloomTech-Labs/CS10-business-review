@@ -21,6 +21,7 @@
   padding: 0.5rem;
   background: #ffffff;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
 }
 .search .search__results {
   display: flex;
@@ -55,11 +56,13 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
   min-height: 15rem;
   opacity: 0.8;
   float: left;
 }
 .search .search__results .results__result .result__landscape {
+  border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 0%;
   background-color: #05386b;
@@ -136,6 +139,7 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
   width: 50vw;
   margin: 2rem 0;
   min-width: 50%;

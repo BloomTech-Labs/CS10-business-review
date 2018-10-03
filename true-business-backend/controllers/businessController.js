@@ -18,6 +18,7 @@ const createBusiness = (req, res) => {
       let formatted_phone_number = result.hasOwnProperty("formatted_phone_number")
         ? result.formatted_phone_number
         : "No Phone Number Listed";
+      let rating = result.hasOwnProperty("rating") ? result.rating : "No Rating Listed";
       let website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
       let photos = result.hasOwnProperty("photos") ? result.photos : null;
       let opening_hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
@@ -60,6 +61,7 @@ const createBusiness = (req, res) => {
             opening_hours,
             address_components,
             place_id: result.place_id,
+            rating,
           });
           business
             .save()
@@ -116,7 +118,7 @@ const placesSearch = (req, res) => {
             );
           });
         }
-        result.photos = "No Photos Listed"
+        result.photos = "No Photos Listed";
         return new Promise(resolve => resolve(result));
       });
       Promise.all(promises)

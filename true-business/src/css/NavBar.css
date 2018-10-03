@@ -14,6 +14,7 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
   border-width: 0 0 0.1rem 0;
   position: fixed;
   z-index: 5;
@@ -190,7 +191,7 @@
   padding: 0.5rem;
 }
 .modal .modal__body {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 .modal .modal__footer .footer__button {
   border-radius: 0.5rem;

@@ -29,6 +29,7 @@
   cursor: default;
   background: #ffffff;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
   color: #05386b;
   padding: 1rem;
 }

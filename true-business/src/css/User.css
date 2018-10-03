@@ -164,6 +164,7 @@
   max-height: 85vh;
   background: #ffffff;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns {
   display: flex;
@@ -196,6 +197,7 @@
   color: #05386b;
   background: #efeff1;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
   width: 40vw;
   min-width: 50%;
   padding: 0.5rem;
@@ -334,6 +336,7 @@
   cursor: default;
   background: #ffffff;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
   height: 15rem;
   min-width: 17%;
   max-width: 17%;
@@ -343,6 +346,7 @@
   opacity: 0.8;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape {
+  border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 0%;
   background-color: #05386b;
@@ -405,6 +409,7 @@
   max-height: 85vh;
   background: #ffffff;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
 }
 .user .user__body .body__content .content__billing .billing__section {
   display: flex;
@@ -444,8 +449,10 @@
   max-height: 85vh;
   background: #ffffff;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
 }
 .user .user__body .body__content .content__profile .profile__image {
+  border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 0%;
   background-color: #05386b;
@@ -495,6 +502,7 @@
   color: #05386b;
   background: #efeff1;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
   margin: 1rem;
   height: 2rem;
   max-height: 2rem;

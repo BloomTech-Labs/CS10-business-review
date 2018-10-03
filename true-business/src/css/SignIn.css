@@ -30,6 +30,7 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
+  border-radius: 1rem;
   cursor: default;
 }
 .signin .signin-container .signin-container__header {

@@ -24,24 +24,9 @@ const BusinessThumbnail = props => {
           name="rating"
         />
         <div className="description__info">
-          {props.business.formatted_address
-            .split(",")
-            .splice(0, 1)
-            .toString()}
-        </div>
-        <div className="description__info">
-          {props.business.formatted_address
-            .split(",")
-            .splice(1, 2)
-            .join(",")
-            .trim()}
-        </div>
-        <div className="description__info">
-          {props.business.formatted_address
-            .split(",")
-            .splice(3)
-            .toString()
-            .trim()}
+          <a href={"https://www.google.com/maps/place/" + props.business.formatted_address} target="_blank">
+            <i style={{color:'#05386b'}}className="fas fa-map-marked-alt fa-2x" />
+          </a>
         </div>
         <div className="description__info">
           {(props.business.types[0].charAt(0).toUpperCase() + props.business.types[0].slice(1)).replace(/_/g, " ")}
@@ -52,3 +37,25 @@ const BusinessThumbnail = props => {
 };
 
 export default BusinessThumbnail;
+
+// In case we want this for later (probably not)
+/* <div className="description__info">
+  {props.business.formatted_address
+    .split(",")
+    .splice(0, 1)
+    .toString()}
+</div>
+<div className="description__info">
+  {props.business.formatted_address
+    .split(",")
+    .splice(1, 2)
+    .join(",")
+    .trim()}
+</div> */
+/* <div className="description__info">
+  {props.business.formatted_address
+    .split(",")
+    .splice(3)
+    .toString()
+    .trim()}
+</div> */

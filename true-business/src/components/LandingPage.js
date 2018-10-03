@@ -120,8 +120,8 @@ class LandingPage extends Component {
                         // onClick={() => this.openModal(this, user)}
                       />
                       <div className="item__info--hover">@{user.username}</div>
-                      <div className="item__info"># of Reviews: {user.numberOfReviews}</div>
-                      <div className="item__info"># of Likes: {user.numberOfLikes}</div>
+                      <div className="item__info">Reviews: {user.numberOfReviews}</div>
+                      <div className="item__info">Likes: {user.numberOfLikes}</div>
                     </div>
                   );
                 }
