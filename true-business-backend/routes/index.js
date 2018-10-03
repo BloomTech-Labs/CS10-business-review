@@ -33,6 +33,10 @@ router.post("/api/user/login", (request, response) => {
   UserController.login(request, response);
 });
 
+router.get("/api/user/random", function(req, res) {
+  UserController.getRandomUser(req, res);
+});
+
 router.get("/api/user/:id", function(req, res) {
   UserController.getUserById(req, res);
 });
@@ -61,6 +65,10 @@ router.post("/api/business/placeSearch", (request, response) => {
 
 router.get("/api/business/ByName/:name", function(request, response) {
   BusinessController.getBusinessByName(request, response);
+});
+
+router.get("/api/business/random", function(req, res) {
+  BusinessController.getRandomBusiness(req, res);
 });
 
 router.get("/api/business/:id", function(req, res) {

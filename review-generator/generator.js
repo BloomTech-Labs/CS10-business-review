@@ -1,5 +1,5 @@
 const program = require('commander');
-const { genReviews, genUsers, genBusinesses } = require('./logic');
+const { genReviews, genUsers } = require('./logic');
 
 program
   .version('1.0.0')
@@ -19,14 +19,6 @@ program
   .description('Generate Users')
   .action((count) => {
     genUsers(count);
-  });
-
-program
-  .command('genBusinesses <numberGenerate>')
-  .alias('b')
-  .description('Generate Businesses')
-  .action((count) => {
-    genBusinesses(count);
   });
 
 program.parse(process.argv);
