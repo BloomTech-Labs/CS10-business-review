@@ -304,8 +304,15 @@
   width: 50%;
   font-size: 1.5rem;
 }
-.user .user__body .body__content .content__profile .profile__container .container__info .noDisplay {
-  display: none;
+.user .user__body .body__content .content__profile .profile__container .container__info .info__data .password-reset {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+.user .user__body .body__content .content__profile .profile__container .container__info .info__data .password-reset .password-change__input {
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  margin: 5px;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button {
   width: 20%;
