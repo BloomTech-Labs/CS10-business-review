@@ -6,7 +6,7 @@
   height: 100%;
   width: auto;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -23,7 +23,7 @@
   height: 5rem;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -38,7 +38,7 @@
   height: inherit;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -71,7 +71,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -93,7 +93,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -109,7 +109,7 @@
   height: auto;
   width: 20vw;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -137,7 +137,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -152,7 +152,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 1rem 1rem 0 1rem;
   margin: 0 1rem;
@@ -173,7 +173,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -188,7 +188,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -209,7 +209,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -219,13 +219,11 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .reviews__pagination .pagination__pages .pagination__page {
   border-radius: 0.3rem;
-  padding: 0.5rem;
-  margin: 1rem;
   width: 10rem;
   background-color: #3487d5;
   color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
   width: 5%;
   margin: 0 0.5rem;
 }
@@ -234,7 +232,6 @@
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   font-weight: bolder;
-  opacity: 1;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .reviews__pagination .pagination__pages .pagination__page:hover {
   cursor: pointer;
@@ -286,20 +283,17 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__button {
   border-radius: 0.3rem;
-  padding: 0.5rem;
-  margin: 1rem;
   width: 10rem;
   background-color: #3487d5;
   color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__button:hover {
   cursor: pointer;
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   font-weight: bolder;
-  opacity: 1;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews {
   display: flex;
@@ -309,7 +303,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -333,7 +327,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -374,7 +368,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -399,7 +393,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 1rem 1rem 0 1rem;
   margin: 0 1rem;
@@ -420,7 +414,7 @@
   height: 100%;
   width: 40%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -438,7 +432,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 1rem 1rem 0 1rem;
   margin: 0 1rem;
@@ -474,7 +468,7 @@
   height: 100%;
   width: 70%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 5rem 0;
   margin: 0;
@@ -493,7 +487,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -521,7 +515,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -537,13 +531,11 @@
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__data .data__button {
   border-radius: 0.3rem;
-  padding: 0.5rem;
-  margin: 1rem;
   width: 10rem;
   background-color: #3487d5;
   color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 0;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__data .data__button:hover {
@@ -551,20 +543,17 @@
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   font-weight: bolder;
-  opacity: 1;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .noDisplay {
   display: none;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button {
   border-radius: 0.3rem;
-  padding: 0.5rem;
-  margin: 1rem;
   width: 10rem;
   background-color: #3487d5;
   color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 0;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button:hover {
@@ -572,20 +561,17 @@
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   font-weight: bolder;
-  opacity: 1;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button:hover {
   cursor: pointer;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button--save {
   border-radius: 0.3rem;
-  padding: 0.5rem;
-  margin: 1rem;
   width: 10rem;
   background-color: #3487d5;
   color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 0 1rem 0 0;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button--save:hover {
@@ -593,7 +579,6 @@
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   font-weight: bolder;
-  opacity: 1;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button--save:hover {
   cursor: pointer;

@@ -1,4 +1,4 @@
-.containers(@color: @textColor, @display: flex, @flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @fontSize: 2rem, @lineHeight: 1,@padding: 0, @margin:0) {
+.containers(@color: @textColor, @display: flex, @flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @fontSize: 1.2rem, @lineHeight: 1,@padding: 0, @margin:0) {
   display: @display;
   flex-direction: @flexDirection;
   justify-content: @justifyContent;
@@ -28,19 +28,16 @@
 
 .buttons(@width: 10rem) {
   border-radius: 0.3rem;
-  padding: 0.5rem;
-  margin: 1rem;
   width: @width;
   background-color: @buttonBG;
   color: white;
   font-family: @fontFamily;
-  font-size: 1.5rem;
+  font-size: 1rem;
   &:hover {
     cursor: pointer;
     box-shadow: 0px 15px 20px grey;
     filter: brightness(110%);
     font-weight: bolder;
-    opacity: 1;
   }
 }
 

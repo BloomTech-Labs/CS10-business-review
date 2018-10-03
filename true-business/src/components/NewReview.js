@@ -93,7 +93,6 @@ export default class NewReview extends Component {
         .then(response => {
           const data = response.data;
           const fileURL = data.secure_url; // You should store this URL for future references in your app
-
           let photos = this.state.fileURL;
           photos.push({ link: fileURL, height: data.height, width: data.width });
           this.setState({ fileURL: photos });
@@ -130,7 +129,7 @@ export default class NewReview extends Component {
       stars: this.state.rating,
       photos: this.state.fileURL,
     };
-    this.setState({ title: "", body: "", photos: [], rating: 0, starsError: false });
+    this.setState({ title: "", body: "", fileURL: [], rating: 0, starsError: false });
     axios
       .post(`${backend}api/review/create`, review)
       .then(response => {

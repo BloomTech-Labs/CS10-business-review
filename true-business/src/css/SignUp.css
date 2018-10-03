@@ -6,7 +6,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -22,7 +22,7 @@
   height: 100%;
   width: 50%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -43,7 +43,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -58,7 +58,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -73,7 +73,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -104,7 +104,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -113,18 +113,15 @@
 }
 .signup .signup-container .signup-container__form .signup-container__buttons .signup-container__button {
   border-radius: 0.3rem;
-  padding: 0.5rem;
-  margin: 1rem;
   width: 10rem;
   background-color: #3487d5;
   color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 .signup .signup-container .signup-container__form .signup-container__buttons .signup-container__button:hover {
   cursor: pointer;
   box-shadow: 0px 15px 20px grey;
   filter: brightness(110%);
   font-weight: bolder;
-  opacity: 1;
 }
