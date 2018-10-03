@@ -56,9 +56,10 @@
     }
   }
   .navbar__right {
-    .containers(@flexDirection: row, @fontSize: 2rem);
+    .containers(@justifyContent: space-around, @flexDirection: row, @fontSize: 2rem);
     min-width: 15vw;
     max-width: 15vw;
+    padding-right: 2vw;
     .right__sign {
       .containers();
       .buttons();
@@ -75,7 +76,7 @@
     .containers(@justifyContent: flex-start, @flexDirection: row, @fontSize: 2rem);
     min-width: 15vw;
     max-width: 15vw;
-    margin-right: 1rem;
+    padding-right: 2vw;
     .right--logged__text {
       .hidden();
       text-align: left;
