@@ -16,8 +16,13 @@ class User extends Component {
 
     username: "",
     email: "",
+    password: "",
+    newPassword:"",
+    verifyPassword:"",
     editUsernameOrEmail: false,
-
+    changePassword: false,
+    opendPasswordForm: false,
+    passwordAction: "Change",
     Email: false,
     editPassword: false,
     currenAction: 'Change',
@@ -63,7 +68,9 @@ class User extends Component {
   componentDidMount = () => {
     setTimeout(() => {
       const id = localStorage.getItem("userId");
-      axios.get(`${backend}api/user/${id}`).then(response => {
+      const token = localStorage.getItem('token');
+      const headers = { "headers": { "authorization": token } };
+      axios.get(`${backend}api/user/${id}`, headers).then(response => {
         this.setState({
           username: response.data.username,
           email: response.data.email,
@@ -94,6 +101,30 @@ class User extends Component {
         console.log("Update Error", err);
       });
   };
+
+  changePassword = () => {
+    const user = {
+      password: this.state.password,
+      newPassword: this.state.newPassword,
+      verifyPassword: this.state.verifyPassword,
+    };    
+    const id = localStorage.getItem("userId");
+    console.log("Happening on frontend")
+    axios
+      .put(`${backend}api/user/${id}`, user)
+      .then(response => {
+        console.log("SaveResponse", response);
+        this.setState({
+          opendPasswordForm: false,
+          passwordAction: "Change",
+          changePassword: false,         
+        });
+      })
+      .catch(err => {
+        console.log("Password Reset Error", err);
+      });
+  };
+
 
   logout = () => {
     localStorage.removeItem("token");
@@ -128,6 +159,26 @@ class User extends Component {
  
    }
 
+   passwordChangeCurrentAction = () => {
+    if(this.state.changePassword) {
+      this.setState({
+        passwordAction: "Change"
+      })
+    }
+    else {
+      this.setState({
+        passwordAction: "Cancel"
+      })
+    }
+  }
+  
+   changePasswordfunc = () => {
+     this.passwordChangeCurrentAction();
+     this.setState({
+      opendPasswordForm: !this.state.opendPasswordForm,
+      changePassword: !this.state.changePassword,
+     })
+   }
 
   render() {
     return (
@@ -238,6 +289,7 @@ class User extends Component {
       case "Billing":
         return <div className="content__billing">No idea what will go here, I guess something for Stripe?</div>;
       case "Settings":
+
         return <div className="content__profile">
         <div className="profile__image" />
         {/* Have this open a modal to change their password */}
@@ -276,11 +328,37 @@ class User extends Component {
             {this.state.currenAction}
             </button>
           </div>
+          
           <div className="container__info">
             <div className="info__label">Password:</div>
-            <div className="info__data">****************</div>
-            <button className="info__button" onClick={this.changePassword}>
-              Change
+            <div className="info__data"> {this.state.opendPasswordForm? (<div className="password-reset">
+            <input
+            className="password-change__input"
+                placeholder="Password"
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+                /> 
+                <input
+            className="password-change__input"
+                placeholder="New password"
+                name="newPassword"
+                type="password"
+                value={this.state.newPassword}
+                onChange={this.handleInputChange}
+                /> 
+                <input
+            className="password-change__input"
+                placeholder="Repeat new password"
+                name="verifyPassword"
+                type="password"
+                value={this.state.verifyPassword}
+                onChange={this.handleInputChange}
+            /> </div>) : ( <div>****************</div>
+            )} {this.state.changePassword?(<button  className="info__button" onClick={this.changePassword}>Save</button>):(null)}</div>
+            <button className="info__button" onClick={this.changePasswordfunc}>
+              {this.state.passwordAction}
             </button>
            </div>
           </div>

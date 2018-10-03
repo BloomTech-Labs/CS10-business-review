@@ -33,8 +33,14 @@ router.post("/api/user/login", (request, response) => {
   UserController.login(request, response);
 });
 
+
+router.put("/api/user/:_id", (request, response) => {
+  console.log("Firing here")
+  UserController.reset_password(request, response);
+
 router.get("/api/user/random", function(req, res) {
   UserController.getRandomUser(req, res);
+
 });
 
 router.get("/api/user/:id", function(req, res) {
