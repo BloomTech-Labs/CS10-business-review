@@ -155,8 +155,7 @@ class NavBar extends Component {
           </Modal>
         </div>
         {localStorage.getItem("token") && localStorage.getItem("userId") ? (
-          <div className="navbar__right--logged">
-            <div className="right--logged__hamburger">
+            <div className="navbar__right--logged">
               <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
                 <i
                   onClick={() => {
@@ -164,7 +163,7 @@ class NavBar extends Component {
                   }}
                   className="fas fa-bars fa-2x fa-fw"
                 />
-                <div className="right--logged__text">Hi, SHAMIQUA HOLDSCLAW</div>
+                <div className="right--logged__text">Hi, {localStorage.getItem("name").split(' ')[0]}</div>
               </Button>
               <Menu
                 id="simple-menu"
@@ -181,7 +180,6 @@ class NavBar extends Component {
                 <MenuItem onClick={this.logout}>Logout</MenuItem>
               </Menu>
             </div>
-          </div>
         ) : (
           <div className="navbar__right">
             <button

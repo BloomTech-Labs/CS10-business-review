@@ -72,16 +72,14 @@
     }
   }
   .navbar__right--logged {
-    .containers(@flexDirection: row, @fontSize: 2rem);
+    .containers(@justifyContent: flex-start, @flexDirection: row, @fontSize: 2rem);
     min-width: 15vw;
     max-width: 15vw;
     margin-right: 1rem;
-    .right--logged__hamburger {
-      .right--logged__text {
-        .hidden();
-        text-align: left;
-        font-size: 1.2rem;
-      }
+    .right--logged__text {
+      .hidden();
+      text-align: left;
+      font-size: 1.2rem;
     }
   }
 }
