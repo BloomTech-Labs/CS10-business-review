@@ -21,6 +21,7 @@
     .center__search {
       .containers(@flexDirection: row);
       min-width: 100%;
+      padding-left: 5vw;
       .search__input {
         border: 0.1rem solid black;
         border-right: 0.1rem solid grey;
@@ -57,7 +58,8 @@
   }
   .navbar__right {
     .containers(@justifyContent: space-around, @flexDirection: row, @fontSize: 2rem);
-    min-width: 10vw;
+    min-width: 15vw;
+    max-width: 15vw;
     padding-right: 2vw;
     .right__sign {
       .containers();
@@ -74,7 +76,8 @@
   }
   .navbar__right--logged {
     .containers(@justifyContent: flex-start, @flexDirection: row, @fontSize: 2rem);
-    min-width: 10vw;
+    min-width: 15vw;
+    max-width: 15vw;
     padding-right: 2vw;
     .right--logged__text {
       .hidden();

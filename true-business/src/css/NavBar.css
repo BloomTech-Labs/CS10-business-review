@@ -59,6 +59,7 @@
   cursor: default;
   color: #05386b;
   min-width: 100%;
+  padding-left: 5vw;
 }
 .navbar .navbar__center .center__search .search__input {
   border: 0.1rem solid black;
@@ -106,7 +107,8 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  min-width: 10vw;
+  min-width: 15vw;
+  max-width: 15vw;
   padding-right: 2vw;
 }
 .navbar .navbar__right .right__sign {
@@ -157,7 +159,8 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  min-width: 10vw;
+  min-width: 15vw;
+  max-width: 15vw;
   padding-right: 2vw;
 }
 .navbar .navbar__right--logged .right--logged__text {
