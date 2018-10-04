@@ -1,18 +1,84 @@
-.containers(@display: flex, @flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @fontSize: 2rem, @lineHeight: 1,@padding: 0, @margin:0) {
+.containers(@color: @textColor, @display: flex, @flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @fontSize: 2rem, @lineHeight: 1,@padding: 0, @margin:0) {
   display: @display;
   flex-direction: @flexDirection;
   justify-content: @justifyContent;
   align-items: @alignItems;
   height: @height;
   width: @width;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: @fontFamily;
   font-size: @fontSize;
   line-height: @lineHeight;
   padding: @padding;
   margin: @margin;
+  cursor: default;
+  color: @textColor;
 }
 
-@background: z;
-@color: rgb(56, 56, 56);
-@elementBackground: rgb(75, 115, 161);
-@popup:rgb(62, 56, 146);
+@background: #2687a1;
+@color: black;
+@elementBackground: rgb(230, 230, 230);
+@popup: #29949a;
+
+@buttonBG: #3487d5;
+@elementBG: #efeff1;
+@modalBG: #eeeeee;
+@textColor: #05386b;
+@fontFamily: Helvetica Neue, Helvetica, Arial, sans-serif;
+@whiteBG: rgb(255, 255, 255);
+
+.buttons(@width: 10rem) {
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  margin: 1rem;
+  width: @width;
+  background-color: @buttonBG;
+  color: white;
+  font-family: @fontFamily;
+  font-size: 1.5rem;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 15px 20px grey;
+    filter: brightness(110%);
+    font-weight: bolder;
+    opacity: 1;
+  }
+}
+
+.headers(@fontSize: 3rem, @margin: 2rem, @padding: 1rem) {
+  font-size: @fontSize;
+  margin: @margin;
+  padding: @padding;
+}
+
+.body(@fontSize: 2rem) {
+  font-size: @fontSize;
+}
+
+.linerNotes() {
+  font-size: 1.5rem;
+}
+
+.images(@top: -2rem, @width: 10rem, @height: 10rem) {
+  width: @width;
+  height: @height;
+  background-color: rgb(86, 135, 158);
+  top: @top;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.backAndBorder() {
+  background: @whiteBG;
+  border: 0.1rem solid @textColor;
+}
+
+.crazyHover() {
+  &:hover {
+    cursor: pointer;
+    box-shadow:  0px 0px 50px 10px grey;
+    filter: brightness(110%);
+    opacity: 1;
+  }
+}

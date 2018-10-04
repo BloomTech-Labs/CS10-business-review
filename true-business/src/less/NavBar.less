@@ -1,94 +1,71 @@
 @import './mixins.less';
 
-.navbar-container {
-  position: fixed;
-  border-bottom: 0.1rem solid white;
-  z-index: 1;
+.navbar {
   .containers(@width: 100vw, @flexDirection:row, @justifyContent: space-between, @height: 20vh);
+  background: white;
+  position: fixed;
+  border-bottom: 0.1rem solid @buttonBG;
+  z-index: 5;
   max-height: 20vh;
-  background-color: @elementBackground;
-  .navbar-container__logo {
+  .navbar__logo {
     width: 20%;
-    height: 100%;
+    height: 90%;
+    margin: 1rem;
+    padding: 1rem;
   }
-  .navbar-container__logo:hover {
+  .navbar__logo:hover {
     cursor: pointer;
   }
-  .navbar-container__center {
-    .containers();
-    width: 60%;
-    .navbar-container__input {
+  .navbar__center {
+    .containers(@width: 60%);
+    .center__input {
       border: 0.1rem solid black;
       margin-top: 2rem;
       min-width: 80%;
       font-size: 1.5rem;
       padding: 0.2rem;
     }
-    .navbar-container__buttons {
-      .containers(@flexDirection: row);
-      .navbar-container__button {
-        background: @background;
-        color: @color;
-        border: outset;
-        width: 15%;
-        padding: 0.5rem;
-        margin: 0 2rem;
-        font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
-        font-size: 1.5rem;
-      }
-      .navbar-container__button:hover {
-        cursor: pointer;
-      }
+    .center__button {
+        .buttons()
     }
   }
-  .navbar-container__right {
+  .navbar__right {
     .containers(@flexDirection: column, @justifyContent: space-around, @width: 20%, @fontSize: 2rem);
-    .navbar-container__sign {
-      width: 50%;
-      background-color: @elementBackground;
-      color: @color;
+    .right__user {
       text-align: center;
-      padding: .2rem 0;
     }
-    .navbar-container__sign:hover {
+    .right__sign {
+      .containers();
+      .buttons();
+    }
+    .right__sign:hover {
       cursor: pointer;
     }
   }
 }
 .popover {
-  .containers(@height: 15%, @fontSize: 1.5rem);
-  background: @popup !important;
+  .containers(@height: 25%, @fontSize: 1.5rem);
+  background: @elementBG !important;
+  color: @textColor;
   border: 0.1rem solid black;
-  color: white;
   text-align: center;
   top: -40px !important;
   width: 60% !important;
-  z-index: 2;
+  z-index: 10;
   .popover-header {
-    padding: 0.2rem;
+    .headers(@fontSize: 2rem, @margin: .2rem);
   }
   .popover-body {
-    padding: 0.2rem;
+    .body(@fontSize: 1.5rem)
   }
   .popover-button {
-    background: @background;
-    color: @color;
-    border: @color;
-    width: 30%;
-    padding: 0.2rem;
-    margin: 0 2rem;
-    font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
-    font-size: 1.5rem;
-  }
-  .popover-button:hover {
-    cursor: pointer;
+    .buttons()
   }
 }
 
 .navbar-container__modal {
   .modal-container {
     .containers();
-    color: @color;
     .modal-container__title {
       font-size: 2rem;
     }
@@ -99,20 +76,10 @@
       display: flex;
       justify-content: center;
       width: 100%;
-      color: @color;
+      color: @textColor;
       margin-top: 1rem;
       .footer__button {
-        background: @background;
-        color: @color;
-        border: outset;
-        width: 15%;
-        padding: 0.5rem;
-        margin: 0 2rem;
-        font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
-        font-size: 1.5rem;
-      }
-      .modal__button:hover {
-        cursor: pointer;
+        .buttons()
       }
     }
   }

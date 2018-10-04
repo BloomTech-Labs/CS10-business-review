@@ -5,15 +5,15 @@
   align-items: flex-start;
   height: 100%;
   width: auto;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
   padding-top: 25vh;
   padding-left: 5rem;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  color: #05386b;
 }
 .subscriber .subscriber__header {
   display: flex;
@@ -22,11 +22,13 @@
   align-items: center;
   height: 5rem;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .subscriber .subscriber__header .header__breadcrumbs {
   display: flex;
@@ -35,20 +37,21 @@
   align-items: flex-start;
   height: inherit;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
   font-size: 1.5rem;
 }
 .subscriber .subscriber__header .header__breadcrumbs .breadcrumbs__breadcrumb {
   border: none;
   width: auto;
   font-size: 1.5rem;
-  background-color: darkslategray;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  background-color: #e6e6e6;
+  color: #05386b;
   margin: 0 1rem;
 }
 .subscriber .subscriber__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow {
@@ -67,11 +70,13 @@
   align-items: flex-end;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
   padding-right: 5rem;
   font-size: 1.5rem;
 }
@@ -85,11 +90,13 @@
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .subscriber .subscriber__body .body__left-bar {
   display: flex;
@@ -98,20 +105,21 @@
   align-items: flex-start;
   height: auto;
   width: 20vw;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
   border: 0.1rem solid black;
 }
 .subscriber .subscriber__body .body__left-bar .left-bar__button {
   border: none;
   width: 100%;
   font-size: 1.5rem;
-  background-color: #223131;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  background-color: #e6e6e6;
+  color: #05386b;
   padding: 1rem;
 }
 .subscriber .subscriber__body .body__left-bar .left-bar__button:hover {
@@ -125,11 +133,13 @@
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .subscriber .subscriber__body .body__content .content__subscriber-reviews {
   display: flex;
@@ -138,11 +148,13 @@
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
   flex-wrap: wrap;
 }
 .subscriber .subscriber__body .body__content .content__subscriber-reviews .subscriber-reviews__item {
@@ -152,17 +164,17 @@
   align-items: center;
   height: 15rem;
   width: 20%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
   margin: 0 1rem 1rem 1rem;
   border: 0.1rem solid black;
   padding: 1rem;
-  background-color: #223131;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  background-color: #e6e6e6;
+  color: #05386b;
 }
 .subscriber .subscriber__body .body__content .content__subscriber-reviews .subscriber-reviews__item .item__image {
   width: 10rem;
@@ -183,12 +195,14 @@
   align-items: center;
   height: 15rem;
   width: 20%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  background-color: #223131;
+  cursor: default;
+  color: #05386b;
+  background-color: #e6e6e6;
   margin: 0 1rem 1rem 1rem;
   border: 0.1rem solid black;
   padding: 1rem;
@@ -196,9 +210,14 @@
 .subscriber .subscriber__body .body__content .content__subscriber-reviews .subscriber-reviews__add .add__image:hover {
   cursor: pointer;
 }
+<<<<<<< HEAD
 .subscriber .subscriber__body .body__content .content__subscriber-reviews .subscriber-reviews__add .add__text {
   color: white;
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+=======
+.user .user__body .body__content .content__user-reviews .user-reviews__add .add__text {
+  color: #05386b;
+>>>>>>> 4e47a008bbdec49647fa59b56a1de2e10a67d796
   font-size: 2rem;
 }
 .subscriber .subscriber__body .body__content .content__solo-add {
@@ -208,19 +227,26 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
   padding: 1rem 20rem 1rem 0;
 }
 .subscriber .subscriber__body .body__content .content__solo-add .solo-add__image:hover {
   cursor: pointer;
 }
+<<<<<<< HEAD
 .subscriber .subscriber__body .body__content .content__solo-add .solo-add__text {
   color: white;
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+=======
+.user .user__body .body__content .content__solo-add .solo-add__text {
+  color: #05386b;
+>>>>>>> 4e47a008bbdec49647fa59b56a1de2e10a67d796
   font-size: 2rem;
 }
 .subscriber .subscriber__body .body__content .content__profile {
@@ -230,11 +256,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .subscriber .subscriber__body .body__content .content__profile .profile__image {
   margin: 1rem 3rem;
@@ -252,11 +280,17 @@
   align-items: center;
   height: 100%;
   width: 70%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
+}
+.user .user__body .body__content .content__profile .profile__container .user-change__input {
+  padding: 0.5rem;
+  font-size: 1.25rem;
 }
 .subscriber .subscriber__body .body__content .content__profile .profile__container .container__info {
   display: flex;
@@ -265,11 +299,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
   margin: 1rem;
 }
 .subscriber .subscriber__body .body__content .content__profile .profile__container .container__info .info__label {
@@ -280,13 +316,26 @@
   width: 50%;
   font-size: 1.5rem;
 }
+<<<<<<< HEAD
 .subscriber .subscriber__body .body__content .content__profile .profile__container .container__info .info__button {
+=======
+.user .user__body .body__content .content__profile .profile__container .container__info .info__data .password-reset {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+.user .user__body .body__content .content__profile .profile__container .container__info .info__data .password-reset .password-change__input {
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  margin: 5px;
+}
+.user .user__body .body__content .content__profile .profile__container .container__info .info__button {
+>>>>>>> 4e47a008bbdec49647fa59b56a1de2e10a67d796
   width: 20%;
   border: none;
   font-size: 1.25rem;
-  background-color: #223131;
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -2px black;
+  background-color: #e6e6e6;
+  color: #05386b;
   padding: 1rem;
 }
 .subscriber .subscriber__body .body__content .content__profile .profile__container .container__info .info__button:hover {

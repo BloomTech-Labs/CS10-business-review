@@ -36,6 +36,7 @@ const localStrategy = new LocalStrategy({ subscribernameField: "email" }, functi
   });
 });
 
+<<<<<<< HEAD
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: secret
@@ -154,6 +155,28 @@ const facebookStrategy = new FacebookStrategy(
         done(err, false, err.message);
       });
   }
+=======
+passport.use(
+  new GoogleStrategy({
+    clientID: process.env.googleClientID || process.env.REACT_APP_GOOGLEAUTHCLIENTID,
+    clientSecret: process.env.googleClientSecret || process.env.REACT_APP_GOOGLEAUTHSECRET,
+    callbackURL: "/auth/google/callback"
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      console.log(profile.emails[0].value);
+      const existingUser = await User.findOne({ googleId: profile.id });
+      if (existingUser) {
+        return done(null, existingUser);
+      }
+      const email = profile.emails[0].value;
+      const user = await new User({ googleId: profile.id, name: profile.displayName, email: email, username: email }).save();
+      done(null, user);
+    } catch (error) {
+      console.log({ error });
+    }
+  })
+>>>>>>> 4e47a008bbdec49647fa59b56a1de2e10a67d796
 );
 const githubStrategy = new GitHubStrategy(
   {

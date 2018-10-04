@@ -11,18 +11,35 @@ import Business from "./components/Business";
 import Subscriber from "./components/Subscriber";
 import "./css/App.css";
 
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof(backend) !== 'string') {
+  backend = heroku;
+}
+
 class App extends Component {
   state = {
     searchFired: false,
     searchTerm: "",
     searchResults: null,
     featuredBusinesses: [],
+    featuredReviews: [],
+    featuredUsers: [],
     business: null,
-    newBusinessId: null,
   };
 
   componentWillMount = () => {
+    this.handleLoad();
+  };
+
+  componentDidMount = () => {
+    window.addEventListener("load", this.handleLoad);
+  };
+
+  handleLoad = () => {
     this.getDBBusinesses();
+    this.getDBReviews();
+    this.getDBUsers();
   };
 
   componentDidMount = () => {
@@ -51,6 +68,8 @@ class App extends Component {
               <LandingPage
                 business={this.getBusiness}
                 businesses={this.state.featuredBusinesses}
+                reviews={this.state.featuredReviews}
+                users={this.state.featuredUsers}
                 search={this.searchResults}
                 getBusiness={this.getBusiness}
               />
@@ -76,7 +95,6 @@ class App extends Component {
                 search={this.searchResults}
                 business={this.state.business}
                 createBusiness={this.createBusiness}
-                newBusinessId={this.state.newBusinessId}
               />
             )}
           />
@@ -87,12 +105,40 @@ class App extends Component {
   }
   getDBBusinesses = () => {
     axios
-      .get("http://localhost:3001/api/business")
+      .get(`${backend}api/business`)
       .then(businesses => {
         let featuredBusinesses = businesses.data.filter(business => {
           return business.stars >= 0;
         });
         this.setState({ featuredBusinesses });
+      })
+      .catch(err => {
+        console.log("Error:", err);
+      });
+  };
+
+  getDBReviews = () => {
+    axios
+      .get(`${backend}api/review/getAllReviews`)
+      .then(reviews => {
+        let featuredReviews = reviews.data.filter(review => {
+          return review.numberOfLikes >= 0;
+        });
+        this.setState({ featuredReviews });
+      })
+      .catch(err => {
+        console.log("Error:", err);
+      });
+  };
+
+  getDBUsers = () => {
+    axios
+      .get(`${backend}api/user`)
+      .then(users => {
+        let featuredUsers = users.data.filter(user => {
+          return user.numberOfLikes >= 0;
+        });
+        this.setState({ featuredUsers });
       })
       .catch(err => {
         console.log("Error:", err);
@@ -117,10 +163,9 @@ class App extends Component {
         .catch(error => console.log({ error }));
     } else {
       axios
-        .post(
-          "http://localhost:3001/api/business/placeSearch",
-          { id: business.place_id },
-        )
+        .post(`${backend}api/business/placeSearch`, {
+          id: business.place_id,
+        })
         .then(response => {
           this.setState({ business: response.data, landingBusiness: false });
         })
@@ -133,12 +178,9 @@ class App extends Component {
 
   searchResults = searchTerm => {
     axios
-      .post(
-        "http://localhost:3001/api/business/placesSearch",
-        {
-          query: searchTerm,
-        },
-      )
+      .post(`${backend}api/business/placesSearch`, {
+        query: searchTerm,
+      })
       .then(response => {
         response.data.length ? this.setState({ searchResults: response.data }) : this.setState({ searchResults: null });
       })
@@ -150,12 +192,9 @@ class App extends Component {
 
   createBusiness = id => {
     axios
-      .post(
-        "http://localhost:3001/api/business/create",
-        { id },
-      )
+      .post(`${backend}api/business/create`, { id })
       .then(response => {
-        this.setState({ newBusinessId: response.data });
+        this.setState({ business: response.data });
       })
       .catch(error => console.log("error", error));
   };

@@ -5,12 +5,14 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  color: #05386b;
   padding-top: 25vh;
+  min-height: 100%;
   cursor: default;
 }
 .signin .signin-container {
@@ -20,19 +22,19 @@
   align-items: center;
   height: 100%;
   width: 50%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  color: #383838;
-  background: #4b73a1;
+  color: #05386b;
+  background: #e6e6e6;
   padding: 1rem;
   cursor: default;
 }
 .signin .signin-container .signin-container__header {
   font-size: 3rem;
-  color: #383838;
+  color: #05386b;
   height: auto;
 }
 .signin .signin-container .signin-container__form {
@@ -42,11 +44,13 @@
   align-items: center;
   height: auto;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .signin .signin-container .signin-container__form .signin-container__input {
   border: 0.1rem solid black;
@@ -67,11 +71,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
+  cursor: default;
+  color: #05386b;
 }
 .signin .signin-container .signin-container__form .signin-container__buttons .signin-container__google-auth {
   max-width: 75%;

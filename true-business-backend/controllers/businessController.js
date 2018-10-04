@@ -12,54 +12,77 @@ const createBusiness = (req, res) => {
       let result = response.json.result;
       let name = result.hasOwnProperty("name") ? result.name : "No Name Listed";
       let types = result.hasOwnProperty("types") ? result.types : "No Types Listed";
-      let address = result.hasOwnProperty("formatted_address") ? result.formatted_address : "No Address Listed";
-      let phone = result.hasOwnProperty("formatted_phone_number")
+      let formatted_address = result.hasOwnProperty("formatted_address")
+        ? result.formatted_address
+        : "No Address Listed";
+      let formatted_phone_number = result.hasOwnProperty("formatted_phone_number")
         ? result.formatted_phone_number
         : "No Phone Number Listed";
-      let images = result.hasOwnProperty("iamges") ? result.images : "No Images Listed";
       let website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
-      let hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
-      let description = result.hasOwnProperty("description")
-        ? result.address_components.long_name
+      let photos = result.hasOwnProperty("photos") ? result.photos : "No Photos Listed";
+      let opening_hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
+      let address_components = result.hasOwnProperty("address_components")
+        ? result.address_components
         : "No Description Listed";
-      const business = new Business({
-        name,
-        types,
-        address,
-        phone,
-        images,
-        website,
-        place_id: result.place_id,
-        hours,
-        description,
-        location: result.geometry.location,
-      });
-      business
-        .save()
-        .then(business => {
-          res.status(201).json(business._id);
-        })
-        .catch(error => {
-          res.status(500).json({ error });
+      let promises = [];
+      if (photos !== "No Photos Listed") {
+        promises = result.photos.map((photo, i) => {
+          return new Promise(resolve => {
+            return resolve(
+              googleMapsClient
+                .placesPhoto({
+                  photoreference: photo.photo_reference,
+                  maxwidth: 1000,
+                  maxheight: 500,
+                })
+                .asPromise()
+                .then(photo => {
+                  let imgObject = {
+                    link: "https://" + photo.req.socket._host + photo.req.path,
+                    width: photos[i].width,
+                    height: photos[i].height,
+                  };
+                  return imgObject;
+                }),
+            );
+          });
         });
+      }
+      Promise.all(promises)
+        .then(images => {
+          const business = new Business({
+            name,
+            types,
+            formatted_address,
+            formatted_phone_number,
+            website,
+            photos: images,
+            opening_hours,
+            address_components,
+            place_id: result.place_id,
+          });
+          business
+            .save()
+            .then(business => {
+              res.status(201).json(business);
+            })
+            // May be bad pratice, but if it fails to create a business because it
+            // already exists it will then find the business and send that instead
+            .catch(error => {
+              Business.find({ place_id: business.place_id })
+                .then(response => {
+                  res.status(200).json(response[0]);
+                })
+                .catch(error => {
+                  res.status(500).json({ error });
+                });
+            });
+        })
+        .catch(error => res.status(500).json("Error Getting Photos", error));
     })
     .catch(error => {
       console.log({ error });
     });
-};
-
-createPhotoMarker = photo => {
-  var photos = place.photos;
-  if (!photos) {
-    return;
-  }
-
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location,
-    title: place.name,
-    icon: photos[0].getUrl({ maxWidth: 35, maxHeight: 35 }),
-  });
 };
 
 const placesSearch = (req, res) => {
@@ -67,7 +90,40 @@ const placesSearch = (req, res) => {
     .places({ query: req.body.query })
     .asPromise()
     .then(response => {
-      res.status(200).json(response.json.results);
+      let promises = response.json.results.map(result => {
+        let photos = result.hasOwnProperty("photos") ? result.photos : "No Photos Listed";
+        if (photos !== "No Photos Listed") {
+          return new Promise(resolve => {
+            return resolve(
+              googleMapsClient
+                .placesPhoto({
+                  photoreference: photos[0].photo_reference,
+                  maxwidth: 1000,
+                  maxheight: 500,
+                })
+                .asPromise()
+                .then(photo => {
+                  let imgObject = [
+                    {
+                      link: "https://" + photo.req.socket._host + photo.req.path,
+                      width: photos[0].width,
+                      height: photos[0].height,
+                    },
+                  ];
+                  result.photos = imgObject;
+                  return result;
+                }),
+            );
+          });
+        }
+        result.photos = "No Photos Listed"
+        return new Promise(resolve => resolve(result));
+      });
+      Promise.all(promises)
+        .then(places => {
+          res.status(200).json(places);
+        })
+        .catch(error => res.status(500).json("Error Getting Photos", error));
     })
     .catch(error => {
       console.log({ error });
@@ -79,7 +135,30 @@ const placeSearch = (req, res) => {
     .place({ placeid: req.body.id })
     .asPromise()
     .then(response => {
-      res.status(200).json(response.json.result);
+      let photos = response.json.result.hasOwnProperty("photos") ? response.json.result.photos : "No Photos Listed";
+      if (photos !== "No Photos Listed") {
+        googleMapsClient
+          .placesPhoto({
+            photoreference: photos[0].photo_reference,
+            maxheight: 500,
+            maxwidth: 1000,
+          })
+          .asPromise()
+          .then(photo => {
+            let imgObject = [
+              {
+                link: "https://" + photo.req.socket._host + photo.req.path,
+                width: photos[0].width,
+                height: photos[0].height,
+              },
+            ];
+            response.json.result.photos = imgObject;
+            res.status(200).json(response.json.result);
+          })
+          .catch(err => {
+            console.log("Error Getting Photo!", err);
+          });
+      }
     })
     .catch(error => {
       console.log({ error });
@@ -119,6 +198,22 @@ const getBusinessById = (request, response) => {
     });
 };
 
+const getRandomBusiness = (request, response) => {
+  Business.count().exec(function (err, count) {
+    const random = Math.floor(Math.random() * count);
+    console.log(random);
+    Business.findOne().skip(random)
+    .then(function(business) {
+      response.status(200).json(business);
+    })
+    .catch(function(error) {
+      response.status(500).json({
+        error: "The business could not be retrieved.",
+      });
+    });
+  });
+};
+
 const deleteBusinessById = (request, response) => {
   const { id } = request.params;
 
@@ -153,4 +248,5 @@ module.exports = {
   getAllBusiness,
   placesSearch,
   placeSearch,
+  getRandomBusiness
 };

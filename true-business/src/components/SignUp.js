@@ -8,11 +8,22 @@ import StripePayment from "./StripePayment";
 
 import "../css/SignUp.css";
 
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof(backend) !== 'string') {
+  backend = heroku;
+}
+
 class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
       subscribername: "",
+=======
+      name: "",
+      username: "",
+>>>>>>> 4e47a008bbdec49647fa59b56a1de2e10a67d796
       email: "",
       confirmEmail: "",
       password: "",
@@ -32,6 +43,7 @@ class SignUp extends Component {
     return this.state.password === this.state.confirmPassword;
   };
 
+<<<<<<< HEAD
   confirmEmail = () => {
     return this.state.email === this.state.confirmEmail;
   };
@@ -39,11 +51,18 @@ class SignUp extends Component {
   createSubscriber = event => {
     event.preventDefault();
     const subscriber = {
+=======
+  createUser = event => {
+    event.preventDefault();
+    const user = {
+      name: this.state.name,
+>>>>>>> 4e47a008bbdec49647fa59b56a1de2e10a67d796
       email: this.state.email,
       subscribername: this.state.subscribername,
       password: this.state.password,
       accountType: this.state.type,
     };
+<<<<<<< HEAD
     this.state.payment
       ? axios
           .post('http://localhost:3001/register', subscriber)
@@ -60,6 +79,24 @@ class SignUp extends Component {
             });
           })
       : window.alert("You must submit payment first");
+=======
+    console.log("BACKEND", backend);
+    console.log("USER", user)
+    axios
+      .post(`${backend}api/user/register`, user)
+      .then(() => {
+        this.setState({
+          error: false,
+        });
+        this.props.history.push(`/signin`);
+      })
+      .catch(err => {
+        this.setState({
+          error: true,
+          errorMessage: err,
+        });
+      });
+>>>>>>> 4e47a008bbdec49647fa59b56a1de2e10a67d796
   };
 
   handleInputChange = event => {
@@ -74,6 +111,14 @@ class SignUp extends Component {
           <div className="signup-container">
             <div className="signup-container__header"> Sign Up </div>
             <form className="signup-container__form">
+              <input
+                className="signup-container__input"
+                placeholder="Full Name"
+                name="name"
+                type="text"
+                value={this.state.name}
+                onChange={this.handleInputChange}
+              />
               <input
                 className="signup-container__input"
                 placeholder="E-mail"
@@ -114,9 +159,21 @@ class SignUp extends Component {
                 </div>
               </StripeProvider>
               <div className="signup-container__buttons ">
+<<<<<<< HEAD
                 <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createSubscriber}>
                   Confirm
                 </button>
+=======
+                {this.state.payment ? (
+                  <button
+                    id="signup-submit"
+                    type="submit"
+                    className="signup-container__button"
+                    onClick={this.createUser}>
+                    Confirm Registration
+                  </button>
+                ) : null}
+>>>>>>> 4e47a008bbdec49647fa59b56a1de2e10a67d796
               </div>
             </form>
           </div>

@@ -1,12 +1,36 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import StarRatings from "react-star-ratings";
-
+import axios from "axios";
+import Modal from "react-modal";
 import NewReview from "./NewReview";
 import NavBar from "./NavBar";
 
 import "../css/Business.css";
 import "../css/GeneralStyles.css";
+
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof(backend) !== 'string') {
+  backend = heroku;
+}
+
+let modalStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    height: "75%",
+    width: "50%",
+    zIndex: "5",
+    backgroundColor: "rgb(238,238,238)",
+    color: "rgb(5,56,107)",
+    overflowY: "scroll",
+  },
+};
 
 class Business extends Component {
   state = {
@@ -17,24 +41,22 @@ class Business extends Component {
     sortBy: "Date Descending",
     showsortBy: false,
     businessID: null,
-    newBusinessID: null,
+    newBusinessId: null,
+    reviews: [],
+    modalIsOpen: false,
+    modalInfo: null,
+    currentPage: 0,
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    if (this.props.business !== null) this.getReviews();
   };
 
-  // Not entirely sure if both of these are necessary.
-  // Or either for that matter... I just didn't want to break it
-  // and haven't tested it with one / the other / neither yet.
-  componentDidUpdate = prevProps => {
-    if (prevProps !== this.props) {
-      this.setState({ newBusinessID: this.props.newBusinessID });
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.reviews.length !== this.state.reviews.length) {
+      this.updatePage();
     }
-  };
-
-  componentWillReceiveProps = nextProps => {
-    this.setState({ newBusinessID: nextProps.newBusinessID });
   };
 
   toggleDropDown = event => {
@@ -53,19 +75,98 @@ class Business extends Component {
     this.setState({ sortBy: toggle, showsortBy: false });
   };
 
-  // this is now a promise, in hopes that it will wait to open the modal after the business is created, but
-  // so far no bueno.
   displayNewReview = () => {
     this.props.landingBusiness
       ? this.setState({ open: true })
       : Promise.resolve()
           .then(() => this.props.createBusiness(this.props.business.place_id))
-          .then(() => this.setState({ open: true }))
+          .then(response => this.setState({ open: true }))
           .catch(error => console.log("Error creating business", error));
   };
 
   showModal = show => {
     this.setState({ open: show });
+    // Cheap way to re-render with the new review showing
+    this.getReviews();
+  };
+
+  getReviews = () => {
+    if (this.props.business) {
+      let id = this.props.landingBusiness ? this.props.business._id : this.props.business.place_id;
+      axios
+        .get(`${backend}api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}`)
+        .then(reviews => {
+          this.setState({ reviews: reviews.data, newBusinessId: this.props.newBusinessId });
+        })
+        .catch(error => {
+          console.log("Error", error);
+        });
+    }
+  };
+
+  openModal = (event, info) => {
+    this.setState({ modalIsOpen: true, modalInfo: info });
+  };
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  };
+
+  updatePage = (currentPage, event) => {
+    // How to update active on click
+    if (event) {
+      let children = document.getElementById("pagination").childNodes;
+      children.forEach(child => {
+        child.classList.remove("active");
+      });
+      document.getElementById(event.target.id).classList.add("active");
+      this.setState({ currentPage });
+    }
+    // Set the 0th page to active
+    else {
+      document.getElementById(0).classList.add("active");
+    }
+  };
+
+  createPagination = () => {
+    let pages = new Set([0]);
+    let lastPage =
+      (this.state.reviews.length / 10) % 1 === 0
+        ? Math.floor(this.state.reviews.length / 10) - 1
+        : Math.floor(this.state.reviews.length / 10);
+    for (let i = 10; i < this.state.reviews.length - 10; i++) {
+      if (i % 10 === 0) {
+        if (i >= this.state.currentPage * 10 - 20 && i <= this.state.currentPage * 10 + 20) {
+          pages.add(i / 10);
+        }
+        if (this.state.currentPage <= 3 && i <= 40) {
+          pages.add(i / 10);
+        }
+        if (this.state.currentPage >= this.state.reviews.length / 10 - 4 && i >= this.state.reviews.length - 50) {
+          pages.add(i / 10);
+        }
+      }
+    }
+    if (this.state.reviews.length > 10) {
+      pages.add(lastPage);
+    }
+    pages = [...pages].sort((x, y) => x - y);
+    if (this.state.currentPage > 3) pages.splice(1, 0, "...");
+    if (this.state.currentPage < lastPage - 3) pages.splice(pages.length - 1, 0, "...");
+    return pages.map((page, i) => {
+      if (page === "...") {
+        return (
+          <div key={i + page} id={page} className="pagination__page--no-hover">
+            {page}
+          </div>
+        );
+      }
+      return (
+        <div key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
+          {page}
+        </div>
+      );
+    });
   };
 
   render() {
@@ -75,44 +176,35 @@ class Business extends Component {
         {this.props.business ? (
           <div className="business">
             <div className="business__info">
+              <img
+                alt={this.props.business.name}
+                className={this.props.business.photos[0].width >= this.props.business.photos[0].height ? "info__landscape" : "info__portrait"}
+                src={this.props.business.photos[0].link}
+              />
               <div className="info__title">{this.props.business.name}</div>
               <div className="info__street">{this.props.business.formatted_address}</div>
               <div className="info__details">
                 <div className="details__hours">
                   <div className="hours__title"> Hours </div>
-                  {/* DB records have hours, google API returns opening_hours */}
-                  {(this.props.business.hasOwnProperty("hours") ? (
-                    this.props.business.hours
+                  {this.props.business.hasOwnProperty("opening_hours") ? (
+                    this.props.business.opening_hours.hasOwnProperty("weekday_text") ? (
+                      this.props.business.opening_hours.weekday_text.map(day => {
+                        return (
+                          <div key={day} className="hours__day">
+                            {day}
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <div>Opening Hours Unlisted</div>
+                    )
                   ) : (
-                    this.props.business.opening_hours
-                  )) ? (
-                    // If the hours exist, render them, otherwise return "No Hours Listed"
-                    (this.props.business.hours || this.props.business.opening_hours.weekday_text).map((day, i) => {
-                      return (
-                        <div className="hours__day" key={i}>
-                          {day}
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <div>No Hours Listed</div>
+                    <div>Opening Hours Unlisted</div>
                   )}
                 </div>
                 <div className="details__contact">
                   <div className="contact__phone">
-                    {/* DB records have phone, google API returns formatted phone_number */}
-                    {(this.props.business.hasOwnProperty("phone") ? (
-                      this.props.business.phone
-                    ) : (
-                      this.props.business.formatted_phone_number
-                    )) ? (
-                      // If the hours exist, render them, otherwise return "No Hours Listed"
-                      <div className="phone__number">
-                        {this.props.business.phone || this.props.business.formatted_phone_number}
-                      </div>
-                    ) : (
-                      <div className="phone__number">No Phone Listed</div>
-                    )}
+                    <div className="phone__number">{this.props.business.formatted_phone_number}</div>
                   </div>
                   <div className="contact__website">
                     {this.props.business.website ? (
@@ -135,7 +227,8 @@ class Business extends Component {
                 time being, I'm going with it. */}
                 {this.props.business ? (
                   <NewReview
-                    newBusinessId={this.props.newBusinessId}
+                    newMongoId={this.props.business._id}
+                    newGoogleId={this.props.business.place_id}
                     open={this.state.open}
                     showModal={this.showModal}
                   />
@@ -197,60 +290,87 @@ class Business extends Component {
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
                 <div className="reviews__review">
-                  <div className="review__image">image</div>
-                  <StarRatings
-                    starDimension="20px"
-                    starSpacing="5px"
-                    rating={this.props.business.stars}
-                    starRatedColor="gold"
-                    starEmptyColor="grey"
-                    numberOfStars={5}
-                    name="rating"
-                  />
-                  <div className="review__reviewer">@person</div>
+                  {this.state.reviews.length ? (
+                    this.state.reviews.map((review, i) => {
+                      if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
+                        console.log("FUCKING REVIEW", review)
+                        return (
+                          <div key={review._id} className="review__info">
+                            <img
+                              alt={review.reviewer.username}
+                              className={review.photos[0].width >= review.photos[0].height ? "review__landscape" : "review__portrait"}
+                              src={review.photos[0].link}
+                              onClick={() => this.openModal(this, review)}
+                            />
+                            <StarRatings
+                              starDimension="20px"
+                              starSpacing="5px"
+                              rating={review.stars}
+                              starRatedColor="gold"
+                              starEmptyColor="grey"
+                              numberOfStars={5}
+                              name="rating"
+                            />
+                            <div className="review__reviewer">@{review.reviewer.username}</div>{" "}
+                          </div>
+                        );
+                      } else {
+                        return null;
+                      }
+                    })
+                  ) : (
+                    <div>No Reviews</div>
+                  )}
                 </div>
-                <div className="reviews__review">
-                  <div className="review__image">image</div>
-                  <StarRatings
-                    starDimension="20px"
-                    starSpacing="5px"
-                    // Change these to review ratings
-                    rating={this.props.business.stars}
-                    starRatedColor="gold"
-                    starEmptyColor="grey"
-                    numberOfStars={5}
-                    name="rating"
-                  />
-                  <div className="review__reviewer">@person</div>
-                </div>
-                <div className="reviews__review">
-                  <div className="review__image">image</div>
-                  <StarRatings
-                    starDimension="20px"
-                    starSpacing="5px"
-                    rating={this.props.business.stars}
-                    starRatedColor="gold"
-                    starEmptyColor="grey"
-                    numberOfStars={5}
-                    name="rating"
-                  />
-                  <div className="review__reviewer">@person</div>
-                </div>
-                <div className="reviews__review">
-                  <div className="review__image">image</div>
-                  <StarRatings
-                    starDimension="20px"
-                    starSpacing="5px"
-                    rating={this.props.business.stars}
-                    starRatedColor="gold"
-                    starEmptyColor="grey"
-                    numberOfStars={5}
-                    name="rating"
-                  />
-                  <div className="review__reviewer">@person</div>
+                <div id="pagination" className="reviews__pagination">
+                  {this.createPagination()}
                 </div>
               </div>
             </div>
+            <Modal
+              shouldCloseOnOverlayClick={false}
+              isOpen={this.state.modalIsOpen}
+              onRequestClose={this.closeModal}
+              style={modalStyles}
+              contentLabel="Review Modal">
+              <div className="landing-container__modal">
+                {this.state.modalIsOpen ? (
+                  <div className="modal-container">
+                    <div className="modal__header">
+                      <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
+                      <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
+                    </div>
+                    <div className="modal__body">
+                    <img
+                alt={this.state.modalInfo.name}
+                className={this.state.modalInfo.photos[0].width >= this.state.modalInfo.photos[0].height ? "body__landscape" : "body__portrait"}
+                src={this.state.modalInfo.photos[0].link}
+                onClick={this.openModal}
+              />
+                      <div className="body__stars">
+                        {" "}
+                        <StarRatings
+                          starDimension="20px"
+                          starSpacing="5px"
+                          rating={this.state.modalInfo.stars}
+                          starRatedColor="gold"
+                          starEmptyColor="grey"
+                          numberOfStars={5}
+                          name="rating"
+                        />
+                      </div>
+                      <div>{this.state.modalInfo.title}</div>
+                      <div className="body__review">{this.state.modalInfo.body}</div>
+                    </div>
+                    <div className="modal__footer">
+                      <button className="footer__button" onClick={this.closeModal}>
+                        close
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            </Modal>
           </div>
         ) : (
           <div>{this.props.history.push("/")}</div>

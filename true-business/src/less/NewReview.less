@@ -4,13 +4,16 @@
   .new-review__modal {
     .containers();
     text-align: center;
-    color: @color;
+    color: @textColor;
     .modal__header {
       height: auto;
       font-size: 3rem;
     }
     .modal__body {
       .containers();
+      .body__drop {
+        .containers();
+      }
       .body__images {
         .containers(@height: 6em, @flexDirection: row);
         .images__previews {
@@ -79,12 +82,7 @@
     .modal__footer {
       .containers(@flexDirection: row);
       .footer__button {
-        border: outset;
-        width: 30%;
-        padding: 0.5rem;
-        margin: 0 2rem;
-        font-family: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
-        font-size: 1.5rem;
+        .buttons()
       }
     }
   }

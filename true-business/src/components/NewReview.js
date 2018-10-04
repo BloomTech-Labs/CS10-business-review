@@ -1,39 +1,49 @@
-import React, { Component } from 'react';
-import Modal from 'react-modal';
-import StarRatings from 'react-star-ratings';
+import React, { Component } from "react";
+import Modal from "react-modal";
+import StarRatings from "react-star-ratings";
+import axios from "axios";
+import Dropzone from "react-dropzone";
 
-import '../css/NewReview.css';
+import "../css/NewReview.css";
+
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof(backend) !== 'string') {
+  backend = heroku;
+}
 
 let modalStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    height: '90%',
-    width: '75%',
-    zIndex: '5',
-    backgroundColor: 'rgb(62, 56, 146)',
-    overflow: 'hidden',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    height: "75%",
+    width: "50%",
+    zIndex: "5",
+    backgroundColor: "rgb(238,238,238)",
+    color: "rgb(5,56,107)",
+    overflowY: "scroll",
   },
 };
 
-Modal.setAppElement('div');
+Modal.setAppElement("div");
 
 export default class NewReview extends Component {
   constructor() {
     super();
 
     this.state = {
-      rating: 0,
+      stars: 0,
       modalIsOpen: false,
       modalInfo: null,
-      // the files that will be uploaded to DB or wherever
-      images: [],
-      imagePreviews: [],
       currentImageID: 0,
+      title: "",
+      body: "",
+      rating: 0,
+      fileURL: [],
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -61,65 +71,68 @@ export default class NewReview extends Component {
     this.setState({ modalIsOpen: false });
     this.props.showModal(false);
   }
+  handleDrop = files => {
+    let key = process.env.REACT_APP_CLOUDINARY_API_KEY;
+    if (typeof(key) !== 'string') {
+      key = process.env.cloudinary_api_key;
+    }
+
+    const uploaders = files.map(file => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("tags", ``);
+      formData.append("upload_preset", "true-business"); // Replace the preset name with your own
+      formData.append("api_key", key); // Replace API key with your own Cloudinary key
+      formData.append("timestamp", (Date.now() / 1000) | 0);
+
+      // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
+      return axios
+        .post("https://api.cloudinary.com/v1_1/ddhamypia/image/upload", formData, {
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+        })
+        .then(response => {
+          const data = response.data;
+          const fileURL = data.secure_url; // You should store this URL for future references in your app
+
+          let photos = this.state.fileURL;
+          photos.push({ link: fileURL, height: data.height, width: data.width });
+          this.setState({ fileURL: photos });
+        });
+    });
+    axios.all(uploaders).then(() => {
+      let div = document.createElement("div");
+      let text = document.createTextNode("Image successfully uploaded");
+      div.classList.add("drop__text--uploaded");
+      div.appendChild(text);
+      document.getElementById("drop").appendChild(div);
+    });
+  };
 
   starRating = rating => {
     this.setState({ rating });
   };
 
   submitReview = () => {
-    this.closeModal();
-    // I'll focus on this after we do some db stuff
+    let review = {
+      newMongoId: this.props.newMongoId,
+      newGoogleId: this.props.newGoogleId,
+      title: this.state.title,
+      body: this.state.body,
+      stars: this.state.rating,
+      photos: this.state.fileURL,
+    };
+    axios
+      .post(`${backend}api/review/create`, review)
+      .then(response => {
+        this.closeModal();
+      })
+      .catch(error => {
+        console.log("Error:", error);
+      });
   };
 
-  handleImageChange = event => {
-    let reader = new FileReader();
-    let file = event.target.files[0];
-    // keep track of images to allow removal
-    let currentImageID = this.state.currentImageID;
-
-    // check to see if the image has already been uploaded
-    let includes = false;
-    this.state.images.forEach(image => {
-      if (image.image.id === file.name) return (includes = true);
-    });
-
-    if (includes) window.alert('File already added');
-    if (file && !includes) {
-      reader.onloadend = () => {
-        let { imagePreviews, images } = this.state;
-
-        // create new Image element
-        var image = new Image();
-        // set the src of the image to the resulting url of the reader
-        image.src = reader.result;
-        // set the id to the file.name
-        // cheap way to make sure an image isn't added twice
-        image.setAttribute('id', file.name);
-
-        // add the image preview to the array
-        imagePreviews.push({ id: currentImageID, preview: reader.result });
-        // add the image and file to the images array for the db on submit
-        // may not need the image, not sure yet
-        images.push({ id: currentImageID, image, file });
-        this.setState({ currentImageID: ++currentImageID, imagePreviews, images });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  removeImage = event => {
-    let choice = window.confirm('Are you sure you want to delete this image?');
-    if (choice) {
-      // update the images
-      let images = this.state.images.filter(image => {
-        return image.id !== Number(event.target.id);
-      });
-      // update the image previews
-      let imagePreviews = this.state.imagePreviews.filter(image => {
-        return image.preview !== event.target.src;
-      });
-      this.setState({ images, imagePreviews });
-    }
+  handleInputChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
@@ -135,47 +148,36 @@ export default class NewReview extends Component {
             <div className="new-review__modal">
               <div className="modal__header">New Review</div>
               <div className="modal__body">
-                <div className="body__images">
-                  {this.state.imagePreviews.length
-                    ? this.state.imagePreviews.map((image, i) => {
-                        return (
-                          <div key={i} className="images__previews">
-                            <img
-                              alt="preview"
-                              id={image.id}
-                              src={image.preview}
-                              className="previews__preview"
-                              onClick={this.removeImage}
-                            />
-                            <div className="previews__text"> Click Image to Remove </div>
-                          </div>
-                        );
-                      })
-                    : null}
-                  {this.state.images.length < 4 ? (
-                    <div className="images__image">
-                      <label htmlFor="file-upload">
-                        <i className="image__add fas fa-plus-square fa-5x" />
-                      </label>
-                      <input
-                        id="file-upload"
-                        type="file"
-                        onChange={this.handleImageChange}
-                        onClick={event => {
-                          event.target.value = null;
-                        }}
-                      />
-                      <div className="image__text">Add an Image</div>
-                    </div>
-                  ) : null}
+                <div id="drop" className="body__drop">
+                  <Dropzone onDrop={this.handleDrop} multiple accept="image/*">
+                    <i className="fas fa-cloud-upload-alt fa-4x" />
+                    <div className="drop__text--initial">Drag and Drop or Click to Add Images</div>
+                  </Dropzone>
                 </div>
+
                 <div className="body__title">
                   <div className="title__label">Title:</div>
-                  <input className="title__info" />
+                  <input
+                    className="title__info"
+                    placeholder="Great Experience!"
+                    name="title"
+                    type="text"
+                    value={this.state.title}
+                    onChange={this.handleInputChange}
+                    autoComplete="off"
+                  />
                 </div>
                 <div className="body__review">
                   <div className="review__label">Review:</div>
-                  <textarea className="review__info" />
+                  <textarea
+                    className="review__info"
+                    placeholder="Everything was perfect."
+                    name="body"
+                    type="text"
+                    value={this.state.body}
+                    onChange={this.handleInputChange}
+                    autoComplete="off"
+                  />
                 </div>
                 <div className="body__stars">
                   Star Rating:
