@@ -16,8 +16,8 @@ passport.use(
   new GoogleStrategy(
     {
       callbackURL: "/auth/google/redirect",
-      clientID: process.env.REACT_APP_GOOGLEAUTHCLIENTID,
-      clientSecret: process.env.REACT_APP_GOOGLEAUTHSECRET,
+      clientID: process.env.REACT_APP_GOOGLEAUTHCLIENTID || process.env.googleClientID,
+      clientSecret: process.env.REACT_APP_GOOGLEAUTHSECRET || process.env.googleClientSecret
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({

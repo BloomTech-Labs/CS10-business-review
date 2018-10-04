@@ -450,6 +450,7 @@ class User extends Component {
                 <div className="info__data">
                   {this.state.openForChange ? (
                     <input
+                      style={{ width: "10rem" }}
                       className="user-change__input"
                       placeholder="username"
                       name="username"
@@ -460,7 +461,7 @@ class User extends Component {
                   ) : (
                     //Show save but when change button is clicked
                     this.state.username
-                  )}{" "}
+                  )}
                   {this.state.change ? (
                     <button className="info__button" onClick={this.saveUsernameOrEmail}>
                       Save
@@ -476,6 +477,7 @@ class User extends Component {
                 <div className="info__data">
                   {this.state.openForChange ? (
                     <input
+                      style={{ width: "10rem" }}
                       className="user-change__input"
                       placeholder="email"
                       name="email"
@@ -486,7 +488,7 @@ class User extends Component {
                   ) : (
                     //Show save but when change button is clicked
                     this.state.email
-                  )}{" "}
+                  )}
                   {this.state.change ? (
                     <button className="info__button" onClick={this.saveUsernameOrEmail}>
                       Save
@@ -501,7 +503,6 @@ class User extends Component {
               <div className="container__info">
                 <div className="info__label">Password:</div>
                 <div className="info__data">
-                  {" "}
                   {this.state.opendPasswordForm ? (
                     <div className="password-reset">
                       <input
@@ -527,11 +528,11 @@ class User extends Component {
                         type="password"
                         value={this.state.verifyPassword}
                         onChange={this.handleInputChange}
-                      />{" "}
+                      />
                     </div>
                   ) : (
                     <div>****************</div>
-                  )}{" "}
+                  )}
                   {this.state.changePassword ? (
                     <button className="info__button" onClick={this.changePassword}>
                       Save
