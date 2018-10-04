@@ -335,7 +335,7 @@ class User extends Component {
                     ) : null}
                   </div>
                 </div>
-                <div>{this.createPagination()}</div>
+                <div>{this.state.reviews.length ? this.createPagination() : null}</div>
               </div>
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
