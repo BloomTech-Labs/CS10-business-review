@@ -40,10 +40,9 @@ const userSchema = new mongoose.Schema({
     type: String
   },
   // For google passport
-  google: {
-    id: profile.id,
-    email: profile.emails[0].value,
-    username: profile.displayName
+  googleId: {
+    type: String,
+    default: "googleId" + (Math.floor(Math.random() * 1000000000) + 123456)
   },
   reviews: [
     {

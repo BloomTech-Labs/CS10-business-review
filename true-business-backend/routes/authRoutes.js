@@ -12,7 +12,7 @@ module.exports = router => {
   );
 
   router.get(
-    "/auth/google/callback",
+    "/auth/google/redirect",
     passport.authenticate("google", {
       failureRedirect: frontend + "signin"
     }),

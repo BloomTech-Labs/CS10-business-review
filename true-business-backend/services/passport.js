@@ -31,8 +31,7 @@ const googleStrategy = new GoogleStrategy(
             google: {
               id: profile.id,
               email: profile.emails[0].value,
-              username: profile.displayName,
-              thumbnail: profile._json.image.url
+              username: profile.displayName
             }
           });
           newUser.local.email = profile.emails[0].value;
