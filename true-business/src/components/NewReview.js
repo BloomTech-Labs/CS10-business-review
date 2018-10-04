@@ -118,9 +118,9 @@ export default class NewReview extends Component {
 
   submitReview = () => {
     if (this.state.rating === 0) {
-      this.setState({starsError: true})
+      this.setState({ starsError: true });
       return;
-    };
+    }
     let review = {
       newMongoId: this.props.newMongoId,
       newGoogleId: this.props.newGoogleId,
@@ -141,7 +141,12 @@ export default class NewReview extends Component {
   };
 
   handleInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    if (event.target.name === "title" && event.target.value.length >= 50) {
+      // Append a Div instead later on
+      window.alert("Titles Can Only Be 50 Characters or Less");
+    } else {
+      this.setState({ [event.target.name]: event.target.value });
+    }
   };
 
   render() {
@@ -208,13 +213,17 @@ export default class NewReview extends Component {
               </div>
               <div className="modal__footer">
                 <div className="footer__buttons">
-                <button className="buttons__button" onClick={this.submitReview}>
-                  Submit
-                </button>
-                <button className="buttons__button" onClick={this.closeModal}>
-                  Close
-                </button>
-                {this.state.starsError ? <div className="footer__text"> Must Provide a Star Rating </div> : <div className="footer_text" />}
+                  <button className="buttons__button" onClick={this.submitReview}>
+                    Submit
+                  </button>
+                  <button className="buttons__button" onClick={this.closeModal}>
+                    Close
+                  </button>
+                  {this.state.starsError ? (
+                    <div className="footer__text"> Must Provide a Star Rating </div>
+                  ) : (
+                    <div className="footer_text" />
+                  )}
                 </div>
               </div>
             </div>

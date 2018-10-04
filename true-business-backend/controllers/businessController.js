@@ -63,7 +63,6 @@ const createBusiness = (req, res) => {
             place_id: result.place_id,
             rating,
           });
-          console.log("New Business", business);
           business
             .save()
             .then(business => {
@@ -152,22 +151,6 @@ const placesSearch = (req, res) => {
     });
 };
 
-const getRandomBusiness = (request, response) => {
-  Business.count().exec(function(err, count) {
-    const random = Math.floor(Math.random() * count);
-    Business.findOne()
-      .skip(random)
-      .then(function(business) {
-        response.status(200).json(business);
-      })
-      .catch(function(error) {
-        response.status(500).json({
-          error: "The business could not be retrieved.",
-        });
-      });
-  });
-};
-
 const placeSearch = (req, res) => {
   googleMapsClient
     .place({ placeid: req.body.id })
@@ -234,6 +217,21 @@ const getBusinessById = (request, response) => {
         error: "The information could not be retrieved.",
       });
     });
+};
+
+const getRandomBusiness = (request, response) => {
+  Business.count().exec(function (err, count) {
+    const random = Math.floor(Math.random() * count);
+    Business.findOne().skip(random)
+    .then(function(business) {
+      response.status(200).json(business);
+    })
+    .catch(function(error) {
+      response.status(500).json({
+        error: "The business could not be retrieved.",
+      });
+    });
+  });
 };
 
 const deleteBusinessById = (request, response) => {

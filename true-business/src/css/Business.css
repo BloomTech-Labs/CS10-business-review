@@ -346,6 +346,8 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__pages .pagination__page--no-hover {
   width: 5%;
+  font-weight: bold;
+  background: #efeff1;
   cursor: default;
 }
 .active {

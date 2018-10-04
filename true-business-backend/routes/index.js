@@ -15,7 +15,7 @@ mongoose.connect(
   {},
   function(err) {
     if (err) console.log(err);
-  },
+  }
 );
 
 mongoose.Promise = global.Promise;
@@ -33,6 +33,15 @@ router.post("/api/user/login", (req, res) => {
   UserController.login(req, res);
 });
 
+router.put("/api/user/:_id", (request, response) => { 
+
+  UserController.reset_password(request, response);
+});
+
+router.get("/api/user/random", function(req, res) {
+  UserController.getRandomUser(req, res);
+});
+
 router.get("/api/user/:id", function(req, res) {
   UserController.getUserById(req, res);
 });
@@ -48,7 +57,6 @@ router.get("/api/user/", function(req, res) {
 });
 
 router.post("/api/business/create", (request, response) => {
-  console.log("GETTING HERE?")
   BusinessController.createBusiness(request, response);
 });
 
@@ -62,6 +70,10 @@ router.post("/api/business/placeSearch", (request, response) => {
 
 router.get("/api/business/ByName/:name", function(request, response) {
   BusinessController.getBusinessByName(request, response);
+});
+
+router.get("/api/business/random", function(req, res) {
+  BusinessController.getRandomBusiness(req, res);
 });
 
 router.get("/api/business/:id", function(req, res) {
@@ -100,18 +112,23 @@ router.get("/api/review/getReviewsByReviewerId/:id", (req,res) => {
   ReviewControler.getReviewsByReviewerId(req,res);
 })
 
-router.get("/api/review/getAllReviews", (req, res) => {
+router.get("/api/review/getAllReviews/", (req, res) => {
   ReviewControler.getAllReviews(req, res);
 });
 
-router.get("/api/review/getReviewsByBusinessId/:id/:landing", (req, res) => {
+router.get("/api/review/getReviewsByBusinessId/:id/:landing/:currentPage", (req, res) => {
   ReviewControler.getReviewsByBusinessId(req, res);
 });
 
 router.post("/charge", async (req, res) => {
   let amount = req.body.selectedRadio === "oneMonth" ? 999 : 4999;
   stripe.charges
-    .create({ amount, currency: "usd", description: "An example charge", source: req.body.token.id })
+    .create({
+      amount,
+      currency: "usd",
+      description: "An example charge",
+      source: req.body.token.id
+    })
     .then(status => {
       res.json({ status });
     })

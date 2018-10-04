@@ -36,7 +36,13 @@ class User extends Component {
   state = {
     username: "",
     email: "",
+    password: "",
+    newPassword:"",
+    verifyPassword:"",
     editUsernameOrEmail: false,
+    changePassword: false,
+    opendPasswordForm: false,
+    passwordAction: "Change",
     Email: false,
     editPassword: false,
     currentActionUsername: "Change",
@@ -58,21 +64,19 @@ class User extends Component {
     modalInfo: null,
     currentPage: 0,
     openForChangePassword: false,
-    changePassword: false,
     openForChangeEmail: false,
     changeEmail: false,
     openForChangeUsername: false,
     changeUsername: false,
-    password: "",
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
     setTimeout(() => {
       const id = localStorage.getItem("userId");
-      console.log("USERID IN DIDMOUNT GET BULLSHIT", id)
-      axios.get(`${backend}api/user/${id}`).then(response => {
-        console.log("RESPONSE MOFO", response);
+      const token = localStorage.getItem('token');
+      const headers = { "headers": { "authorization": token } };
+      axios.get(`${backend}api/user/${id}`, headers).then(response => {
         this.setState({
           username: response.data.username,
           email: response.data.email,
@@ -91,61 +95,27 @@ class User extends Component {
       .catch(error => console.log({ error }));
   };
 
-  saveUsername = () => {
-    let username = this.state.username;
+  changePassword = () => {
+    const user = {
+      password: this.state.password,
+      newPassword: this.state.newPassword,
+      verifyPassword: this.state.verifyPassword,
+    };    
     const id = localStorage.getItem("userId");
-    console.log("THIS BULLSHIT AT LEAST GETTING HERE?", username);
     axios
-      .put(`${backend}api/user/${id}`, { username })
+      .put(`${backend}api/user/${id}`, user)
       .then(response => {
-        console.log("SaveResponse", response);
         this.setState({
-          openForChange: false,
-          currenAction: "Change",
-          change: false,
+          opendPasswordForm: false,
+          passwordAction: "Change",
+          changePassword: false,         
         });
       })
       .catch(err => {
-        console.log("Update Error", err);
+        console.log("Password Reset Error", err);
       });
   };
 
-  saveEmail = () => {
-    let email = this.state.email;
-    const id = localStorage.getItem("userId");
-    console.log("THIS BULLSHIT AT LEAST GETTING HERE?", email);
-    axios
-      .put(`${backend}api/user/${id}`, { email })
-      .then(response => {
-        console.log("SaveResponse", response);
-        this.setState({
-          openForChange: false,
-          currenAction: "Change",
-          change: false,
-        });
-      })
-      .catch(err => {
-        console.log("Update Error", err);
-      });
-  };
-  savePassword = () => {
-    let password = this.state.password;
-    const id = localStorage.getItem("userId");
-    console.log("THIS BULLSHIT AT LEAST GETTING HERE?", password);
-    axios
-      .put(`${backend}api/user/${id}`, { password })
-      .then(response => {
-        console.log("SaveResponse", response);
-        this.setState({
-          openForChange: false,
-          currenAction: "Change",
-          change: false,
-        });
-      })
-      .catch(err => {
-        console.log("Update Error", err);
-      });
-  };
 
   logout = () => {
     localStorage.removeItem("token");
@@ -211,80 +181,28 @@ class User extends Component {
     });
   };
 
-  changePassword = () => {
-    this.changeCurrentActionPassword();
-    this.setState({
-      openForChangePassword: !this.state.openForChangePassword,
-      changePassword: !this.state.changePassword,
-    });
-  };
-
-  updatePage = (currentPage, event) => {
-    // How to update active on click
-    if (event) {
-      let children = document.getElementById("pagination").childNodes;
-      children.forEach(child => {
-        child.classList.remove("active");
-      });
-      document.getElementById(event.target.id).classList.add("active");
-      this.setState({ currentPage });
+   passwordChangeCurrentAction = () => {
+    if(this.state.changePassword) {
+      this.setState({
+        passwordAction: "Change"
+      })
     }
-    // Set the 0th page to active
     else {
-      document.getElementById(0).classList.add("active");
+      this.setState({
+        passwordAction: "Cancel"
+      })
     }
-  };
-
-  createPagination = () => {
-    let pages = new Set([0]);
-    let lastPage =
-      (this.state.reviews.length / 10) % 1 === 0
-        ? Math.floor(this.state.reviews.length / 10) - 1
-        : Math.floor(this.state.reviews.length / 10);
-    for (let i = 10; i < this.state.reviews.length - 10; i++) {
-      if (i % 10 === 0) {
-        if (i >= this.state.currentPage * 10 - 20 && i <= this.state.currentPage * 10 + 20) {
-          pages.add(i / 10);
-        }
-        if (this.state.currentPage <= 3 && i <= 40) {
-          pages.add(i / 10);
-        }
-        if (this.state.currentPage >= this.state.reviews.length / 10 - 4 && i >= this.state.reviews.length - 50) {
-          pages.add(i / 10);
-        }
-      }
-    }
-    if (this.state.reviews.length > 10) {
-      pages.add(lastPage);
-    }
-    pages = [...pages].sort((x, y) => x - y);
-    if (this.state.currentPage > 3) pages.splice(1, 0, "...");
-    if (this.state.currentPage < lastPage - 3) pages.splice(pages.length - 1, 0, "...");
-    return (
-      <div className="reviews__pagination">
-        Page {this.state.currentPage + 1} / {lastPage + 1}
-        <div id="pagination" className="pagination__pages">
-          {pages.map((page, i) => {
-            if (page === "...") {
-              return (
-                <button key={i + page} id={page} className="pagination__page--no-hover">
-                  {page + 1}
-                </button>
-              );
-            }
-            return (
-              <button key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
-                {page + 1}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
+  }
+  
+   changePasswordfunc = () => {
+     this.passwordChangeCurrentAction();
+     this.setState({
+      opendPasswordForm: !this.state.opendPasswordForm,
+      changePassword: !this.state.changePassword,
+     })
+   }
 
   render() {
-    // console.log(localStorage);
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -517,93 +435,79 @@ class User extends Component {
           </div>
         );
       case "Settings":
-        return (
-          <div className="content__profile">
-            <div className="profile__container">
-              <img
-                alt={localStorage.getItem("name")}
-                className="profile__image"
-                src={localStorage.getItem("userImage")}
-              />
-              <div className="container__info">
-                <div className="info__label">Username:</div>
-                <div className="info__data">
-                  {this.state.openForChangeUsername ? (
-                    <input
-                      className="data__input"
-                      placeholder="username"
-                      name="username"
-                      type="username"
-                      value={this.state.username}
-                      onChange={this.handleInputChange}
-                    />
-                  ) : (
-                    //Show save but when change button is clicked
-                    this.state.username
-                  )}
-                </div>
-                {this.state.changeUsername ? (
-                  <button className="info__button--save" onClick={this.saveUsername}>
-                    Save
-                  </button>
-                ) : null}
-                <button className="info__button" onClick={this.changeUsername}>
-                  {this.state.currentActionUsername}
-                </button>
-              </div>
-              <div className="container__info">
-                <div className="info__label">Email:</div>
-                <div className="info__data">
-                  {this.state.openForChangeEmail ? (
-                    <input
-                      className="data__input"
-                      placeholder="email"
-                      name="email"
-                      type="email"
-                      value={this.state.email}
-                      onChange={this.handleInputChange}
-                    />
-                  ) : (
-                    //Show save but when change button is clicked
-                    this.state.email
-                  )}
-                </div>
-                {this.state.changeEmail ? (
-                  <button className="info__button--save" onClick={this.saveEmail}>
-                    Save
-                  </button>
-                ) : null}
-                <button className="info__button" onClick={this.changeEmail}>
-                  {this.state.currentActionEmail}
-                </button>
-              </div>
-              <div className="container__info">
-                <div className="info__label">Password:</div>
-                <div className="info__data">
-                  {this.state.openForChangePassword ? (
-                    <input
-                      className="data__input"
-                      placeholder="password"
-                      name="password"
-                      type="password"
-                      value="************************"
-                      onChange={this.handleInputChange}
-                    />
-                  ) : (
-                    //Show save but when change button is clicked
-                    "************************"
-                  )}
-                </div>
-                {this.state.changePassword ? (
-                  <button className="info__button--save" onClick={this.savePassword}>
-                    Save
-                  </button>
-                ) : null}
-                <button className="info__button" onClick={this.changePassword}>
-                  {this.state.currentActionPassword}
-                </button>
-              </div>
-            </div>
+
+        return (<div className="content__profile">
+        <div className="profile__image" />
+        {/* Have this open a modal to change their password */}
+        <div className="profile__container">
+          <div className="container__info">
+            <div className="info__label">Username:</div>
+            <div className="info__data">{this.state.openForChange ? (
+            <input
+            className="user-change__input"
+                placeholder="username"
+                name="username"
+                type="text"
+                value={this.state.username}
+                onChange={this.handleInputChange}
+                /> 
+                 //Show save but when change button is clicked
+          ): ( this.state.username)} {this.state.change?(<button  className="info__button" onClick={this.saveUsernameOrEmail}>Save</button>):(null)}</div>
+            <button className="info__button" onClick={this.changeUsernameOrEmail}>
+              {this.state.currenAction}
+            </button>
+          </div>
+          <div className="container__info">
+            <div className="info__label">Email:</div>
+            <div className="info__data">{this.state.openForChange ? (
+            <input
+            className="user-change__input"
+                placeholder="email"
+                name="email"
+                type="text"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+                /> 
+                //Show save but when change button is clicked
+            ): ( this.state.email)} {this.state.change?(<button  className="info__button" onClick={this.saveUsernameOrEmail}>Save</button>):(null)}</div>
+            <button className="info__button" onClick={this.changeUsernameOrEmail}>
+            {this.state.currenAction}
+            </button>
+          </div>
+          
+          <div className="container__info">
+            <div className="info__label">Password:</div>
+            <div className="info__data"> {this.state.opendPasswordForm? (<div className="password-reset">
+            <input
+            className="password-change__input"
+                placeholder="Password"
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+                /> 
+                <input
+            className="password-change__input"
+                placeholder="New password"
+                name="newPassword"
+                type="password"
+                value={this.state.newPassword}
+                onChange={this.handleInputChange}
+                /> 
+                <input
+            className="password-change__input"
+                placeholder="Repeat new password"
+                name="verifyPassword"
+                type="password"
+                value={this.state.verifyPassword}
+                onChange={this.handleInputChange}
+            /> </div>) : ( <div>****************</div>
+            )} {this.state.changePassword?(<button  className="info__button" onClick={this.changePassword}>Save</button>):(null)}</div>
+            <button className="info__button" onClick={this.changePasswordfunc}>
+              {this.state.passwordAction}
+            </button>
+           </div>
+          </div>
           </div>
         );
       default:

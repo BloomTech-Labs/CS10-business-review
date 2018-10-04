@@ -21,7 +21,7 @@
   max-height: 15vh;
 }
 .navbar .navbar__logo {
-  width: 15vw;
+  width: 10vw;
   height: 85%;
   margin: 0.5rem;
 }
@@ -106,8 +106,7 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  min-width: 15vw;
-  max-width: 15vw;
+  min-width: 10vw;
   padding-right: 2vw;
 }
 .navbar .navbar__right .right__sign {
@@ -158,8 +157,7 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  min-width: 15vw;
-  max-width: 15vw;
+  min-width: 10vw;
   padding-right: 2vw;
 }
 .navbar .navbar__right--logged .right--logged__text {

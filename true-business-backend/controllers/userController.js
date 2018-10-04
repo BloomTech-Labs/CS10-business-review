@@ -33,21 +33,6 @@ const register = (request, response) => {
     });
 };
 
-const getRandomUser = (request, response) => {
-  User.count().exec(function (err, count) {
-    const random = Math.floor(Math.random() * count);
-    User.findOne().skip(random)
-    .then(function(user) {
-      response.status(200).json(user);
-    })
-    .catch(function(error) {
-      response.status(500).json({
-        error: "The user could not be retrieved.",
-      });
-    });
-  });
-};
-
 const login = (request, response) => {
   const { username, password } = request.body;
   User.findOne({ username: username })
@@ -67,11 +52,11 @@ const login = (request, response) => {
         }
       }
     })
-    .catch(err => {
-      response.status(500).send({
-        errorMessage: "Failed to Login: " + err,
-      });
+  .catch(err => {
+    response.status(500).send({
+      errorMessage: "Failed to Login: " + err,
     });
+  });
 };
 
 const getUserById = (request, response) => {
@@ -88,6 +73,21 @@ const getUserById = (request, response) => {
     });
 };
 
+const getRandomUser = (request, response) => {
+  User.count().exec(function (err, count) {
+    const random = Math.floor(Math.random() * count);
+    User.findOne().skip(random)
+    .then(function(user) {
+      response.status(200).json(user);
+    })
+    .catch(function(error) {
+      response.status(500).json({
+        error: "The user could not be retrieved.",
+      });
+    });
+  });
+};
+
 const deleteUserById = (request, response) => {
   const { _id } = request.body;
 
@@ -100,36 +100,20 @@ const deleteUserById = (request, response) => {
         error: "The user could not be removed.",
       });
     });
-};
+  }
 
-const updateUser = (req, res) => {
-  let updateType = null;
-  if (req.body.hasOwnProperty("email")) updateType = "email";
-  if (req.body.hasOwnProperty("username")) updateType = "username";
-  if (req.body.hasOwnProperty("password")) updateType = "password";
-  User.findOne({ _id: req.params.id })
-    .then(found => {
-      if (updateType === "password") {
-        const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
-        const token = generateToken({ username });
-        found[updateType] = req.body;
-      } else {
-        found[updateType] = req.body;
-      }
-      User.findOneAndUpdate({ _id: req.params.id }, found)
-        .then(function(user) {
-          response.status(200).json(user);
-        })
-        .catch(function(error) {
-          response.status(500).json({
-            errorMessage: "The user could not be updated: " + error,
-          });
-        });
-    })
-    .catch(error => {
-      console.log("Error", error);
-    });
-};
+const updateUser = (request, response) => {
+  const { _id, username, email } = request.body;
+ User.findOneAndUpdate(_id, {username, email})
+ .then(function(user) {
+   response.status(200).json(user);
+ })
+ .catch(function(error){
+   response.status(500).json({
+  errorMessage: "The user could not be updated: " + error
+   })
+ })
+}
 
 const getAllUsers = (request, response) => {
   User.find({})
@@ -143,6 +127,29 @@ const getAllUsers = (request, response) => {
     });
 };
 
+
+const reset_password = function(request, response) {
+  const { _id, password, newPassword, verifyPassword } = request.body;  
+  User.findById({ _id: request.params._id })  
+  .then(function(user) {    
+    if (user) {
+      if (bcrypt.compareSync(password, user.password)) {
+       if (newPassword === verifyPassword) {
+         user.password = bcrypt.hashSync(newPassword, bcryptRounds);              
+         User.findByIdAndUpdate( { _id: request.params._id }, user).then(user => {         
+           response.status(200).json(user)
+         }).catch(err => {           
+          response.status(500).json(`message: Error reseting password: ${err}`)
+         })        
+      }
+    } 
+  }
+  })
+  .catch(function(error){
+    res.status(500).json(`message: Error reseting password: ${error}`)
+    })
+}
+
 module.exports = {
   register,
   login,
@@ -150,5 +157,6 @@ module.exports = {
   deleteUserById,
   updateUser,
   getAllUsers,
+  reset_password,
   getRandomUser
 };
