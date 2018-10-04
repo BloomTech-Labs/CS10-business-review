@@ -87,8 +87,9 @@ class User extends Component {
 
     console.log("Before", user);
     const id = localStorage.getItem("userId");
+    
     axios
-      .put(`${backend}api/user/${id}`, user)
+      .put(`${backend}api/user/update/${id}`, user)
       .then(response => {
         console.log("SaveResponse", response);
         this.setState({
@@ -99,7 +100,7 @@ class User extends Component {
       })
       .catch(err => {
         console.log("Update Error", err);
-      });
+      });    
   };
 
   changePassword = () => {
@@ -109,9 +110,9 @@ class User extends Component {
       verifyPassword: this.state.verifyPassword,
     };    
     const id = localStorage.getItem("userId");
-    console.log("Happening on frontend")
+    console.log("Happening on frontend")    
     axios
-      .put(`${backend}api/user/${id}`, user)
+      .put(`${backend}api/user/resetpassword/${id}`, user)
       .then(response => {
         console.log("SaveResponse", response);
         this.setState({
