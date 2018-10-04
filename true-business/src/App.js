@@ -9,6 +9,7 @@ import SignIn from "./components/SignIn";
 import SearchResults from "./components/SearchResults";
 import Business from "./components/Business";
 import User from "./components/User";
+import Redirect from "./components/Redirect";
 import "./css/App.css";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
@@ -56,7 +57,7 @@ class App extends Component {
       this.resetSearch();
     }
   };
-
+  
   render() {
     return (
       <div className="app-container">
@@ -98,7 +99,9 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/user" render={() => <User search={this.searchResults} />} />
+          {localStorage.getItem('token') &&  localStorage.getItem('userId') ? (
+          <Route path="/user" render={() => <User search={this.searchResults} />} /> ):(
+          <Route path="/user" render={() => <Redirect search={this.searchResults} />} />)}
         </Switch>
       </div>
     );

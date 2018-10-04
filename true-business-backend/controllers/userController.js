@@ -52,15 +52,15 @@ const login = (request, response) => {
         }
       }
     })
-  .catch(err => {
-    response.status(500).send({
-      errorMessage: "Failed to Login: " + err,
+    .catch(err => {
+      response.status(500).send({
+        errorMessage: "Failed to Login: " + err,
+      });
     });
-  });
 };
 
 const getUserById = (request, response) => {
-  User.findById({_id:request.params.id})
+  User.findById({ _id: request.params.id })
     .then(function(user) {
       response.status(200).json(user);
     })
@@ -72,24 +72,24 @@ const getUserById = (request, response) => {
 };
 
 const getRandomUser = (request, response) => {
-  User.count().exec(function (err, count) {
+  User.count().exec(function(err, count) {
     const random = Math.floor(Math.random() * count);
-    User.findOne().skip(random)
-    .then(function(user) {
-      response.status(200).json(user);
-    })
-    .catch(function(error) {
-      response.status(500).json({
-        error: "The user could not be retrieved.",
+    User.findOne()
+      .skip(random)
+      .then(function(user) {
+        response.status(200).json(user);
+      })
+      .catch(function(error) {
+        response.status(500).json({
+          error: "The user could not be retrieved.",
+        });
       });
-    });
   });
 };
 
 const deleteUserById = (request, response) => {
   const { _id } = request.body;
-
-  User.findByIdAndRemove(_id)
+  User.findByIdAndRemove({ _id: request.params._id })
     .then(function(user) {
       response.status(200).json(user);
     })
@@ -98,20 +98,27 @@ const deleteUserById = (request, response) => {
         error: "The user could not be removed.",
       });
     });
-  }
+};
 
 const updateUser = (request, response) => {
   const { _id, username, email } = request.body;
- User.findOneAndUpdate(_id, {username, email})
- .then(function(user) {
-   response.status(200).json(user);
- })
- .catch(function(error){
-   response.status(500).json({
-  errorMessage: "The user could not be updated: " + error
-   })
- })
-}
+  User.findById({ _id: request.params.id })
+    .then(function(user) {
+      if (user) {
+        (user.username = username), (user.email = email);
+        User.findByIdAndUpdate({ _id: request.params.id }, user)
+          .then(user => {
+            response.status(200).json(user);
+          })
+          .catch(err => {
+            response.status(500).json(`message: Error username or email: ${err}`);
+          });
+      }
+    })
+    .catch(function(error) {
+      response.status(500).json(`message: Error username or email: ${error}`);
+    });
+};
 
 const getAllUsers = (request, response) => {
   User.find({})
@@ -138,28 +145,30 @@ const getAllUsers = (request, response) => {
     });
 };
 
-
 const reset_password = function(request, response) {
-  const { _id, password, newPassword, verifyPassword } = request.body;  
-  User.findById({ _id: request.params._id })  
-  .then(function(user) {    
-    if (user) {
-      if (bcrypt.compareSync(password, user.password)) {
-       if (newPassword === verifyPassword) {
-         user.password = bcrypt.hashSync(newPassword, bcryptRounds);              
-         User.findByIdAndUpdate( { _id: request.params._id }, user).then(user => {         
-           response.status(200).json(user)
-         }).catch(err => {           
-          response.status(500).json(`message: Error reseting password: ${err}`)
-         })        
+  console.log("Fire password");
+  const { _id, password, newPassword, verifyPassword } = request.body;
+  User.findById({ _id: request.params._id })
+    .then(function(user) {
+      if (user) {
+        if (bcrypt.compareSync(password, user.password)) {
+          if (newPassword === verifyPassword) {
+            user.password = bcrypt.hashSync(newPassword, bcryptRounds);
+            User.findByIdAndUpdate({ _id: request.params._id }, user)
+              .then(user => {
+                response.status(200).json(user);
+              })
+              .catch(err => {
+                response.status(500).json(`message: Error reseting password: ${err}`);
+              });
+          }
+        }
       }
-    } 
-  }
-  })
-  .catch(function(error){
-    res.status(500).json(`message: Error reseting password: ${error}`)
     })
-}
+    .catch(function(error) {
+      response.status(500).json(`message: Error reseting password: ${error}`);
+    });
+};
 
 module.exports = {
   register,
@@ -169,5 +178,5 @@ module.exports = {
   updateUser,
   getAllUsers,
   reset_password,
-  getRandomUser
+  getRandomUser,
 };

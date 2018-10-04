@@ -55,15 +55,6 @@ class SearchResults extends Component {
                             : "https://png.icons8.com/ios/50/000000/company.png"
                         }
                       />
-                      <div className="result__logo">
-                        <img
-                          id={result.place_id}
-                          onError={this.handleError.bind(this, result.place_id)}
-                          src={"//logo.clearbit.com/" + result.website}
-                          alt={result.name}
-                          className="logo__image"
-                        />
-                      </div>
                       <div className="result__info">
                         <div className="info__name">
                           <div className="name__title">{result.name}</div>

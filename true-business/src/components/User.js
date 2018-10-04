@@ -34,38 +34,51 @@ let modalStyles = {
 
 class User extends Component {
   state = {
-        username: "",
+    username: "",
     email: "",
     password: "",
-    newPassword:"",
-    verifyPassword:"",
+    newPassword: "",
+    verifyPassword: "",
     editUsernameOrEmail: false,
     changePassword: false,
     opendPasswordForm: false,
     passwordAction: "Change",
     Email: false,
     editPassword: false,
-    currenAction: 'Change',
+    currenAction: "Change",
     change: false,
     breadcrumbs: ["Home"],
+    userReviews: [
+      {
+        business: "Taco Bell",
+        businessType: '"Tacos" *cough*',
+        businessstreet: "123 West",
+        businessCity: "Knoxville, TN 37919",
+        updated: "1/1/1",
+      },
+      {
+        business: "Taco Bell",
+        businessType: '"Tacos" *cough*',
+        businessstreet: "123 West",
+        businessCity: "Knoxville, TN 37919",
+        updated: "1/1/1",
+      },
+      {
+        business: "Taco Bell",
+        businessType: '"Tacos" *cough*',
+        businessstreet: "123 West",
+        businessCity: "Knoxville, TN 37919",
+        updated: "1/1/1",
+      },
+      {
+        business: "Taco Bell",
+        businessType: '"Tacos" *cough*',
+        businessstreet: "123 West",
+        businessCity: "Knoxville, TN 37919",
+        updated: "1/1/1",
+      },
+    ],
     current: "Home",
-    dropdownOpenFilter: false,
-    dropdownOpenSort: false,
-    filterBy: "No Filter",
-    showfilterBy: false,
-    sortBy: "Date Descending",
-    showsortBy: false,
-    businessID: null,
-    newBusinessId: null,
-    reviews: [],
-    modalIsOpen: false,
-    modalInfo: null,
-    currentPage: 0,
-    openForChangePassword: false,
-    openForChangeEmail: false,
-    changeEmail: false,
-    openForChangeUsername: false,
-    changeUsername: false,
   };
 
   componentDidMount = () => {
@@ -84,6 +97,53 @@ class User extends Component {
     }, 300);
   };
 
+  saveUsernameOrEmail = () => {
+    const user = {
+      username: this.state.username,
+      email: this.state.email,
+    };
+
+    console.log("Before", user);
+    const id = localStorage.getItem("userId");
+
+    axios
+      .put(`${backend}api/user/update/${id}`, user)
+      .then(response => {
+        console.log("SaveResponse", response);
+        this.setState({
+          openForChange: false,
+          currenAction: "Change",
+          change: false,
+        });
+      })
+      .catch(err => {
+        console.log("Update Error", err);
+      });
+  };
+
+  changePassword = () => {
+    const user = {
+      password: this.state.password,
+      newPassword: this.state.newPassword,
+      verifyPassword: this.state.verifyPassword,
+    };
+    const id = localStorage.getItem("userId");
+    console.log("Happening on frontend");
+    axios
+      .put(`${backend}api/user/resetpassword/${id}`, user)
+      .then(response => {
+        console.log("SaveResponse", response);
+        this.setState({
+          opendPasswordForm: false,
+          passwordAction: "Change",
+          changePassword: false,
+        });
+      })
+      .catch(err => {
+        console.log("Password Reset Error", err);
+      });
+  };
+
   getReviews = currentPage => {
     axios
       .get(`${backend}api/review/getReviewsByReviewerId/${localStorage.getItem("userId")}/${currentPage}`)
@@ -95,27 +155,6 @@ class User extends Component {
       })
       .catch(error => {
         console.log("Error", error);
-      });
-  };
-
-  changePassword = currenPage => {
-    const user = {
-      password: this.state.password,
-      newPassword: this.state.newPassword,
-      verifyPassword: this.state.verifyPassword,
-    };
-    const id = localStorage.getItem("userId");
-    axios
-      .put(`${backend}api/user/${id}/`, user)
-      .then(response => {
-        this.setState({
-          opendPasswordForm: false,
-          passwordAction: "Change",
-          changePassword: false,
-        });
-      })
-      .catch(err => {
-        console.log("Password Reset Error", err);
       });
   };
 
@@ -133,53 +172,23 @@ class User extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  changeCurrentActionUsername = () => {
-    if (this.state.changeUsername) {
+  changeCurrentAction = () => {
+    if (this.state.change) {
       this.setState({
-        currenActionUsername: "Change",
+        currenAction: "Change",
       });
     } else {
       this.setState({
-        currenActionUsername: "Cancel",
-      });
-    }
-  };
-  changeCurrentActionPassword = () => {
-    if (this.state.changePassword) {
-      this.setState({
-        currenActionPassword: "Change",
-      });
-    } else {
-      this.setState({
-        currenActionPassword: "Cancel",
-      });
-    }
-  };
-  changeCurrentActionEmail = () => {
-    if (this.state.changeEmail) {
-      this.setState({
-        currenActionEmail: "Change",
-      });
-    } else {
-      this.setState({
-        currenActionEmail: "Cancel",
+        currenAction: "Cancel",
       });
     }
   };
 
-  changeUsername = () => {
-    this.changeCurrentActionUsername();
+  changeUsernameOrEmail = () => {
+    this.changeCurrentAction();
     this.setState({
-      openForChangeUsername: !this.state.openForChangeUsername,
-      changeUsername: !this.state.changeUsername,
-    });
-  };
-
-  changeEmail = () => {
-    this.changeCurrentActionEmail();
-    this.setState({
-      openForChangeEmail: !this.state.openForChangeEmail,
-      changeEmail: !this.state.changeEmail,
+      openForChange: !this.state.openForChange,
+      change: !this.state.change,
     });
   };
 
@@ -203,6 +212,53 @@ class User extends Component {
     });
   };
 
+  render() {
+    return (
+      <div>
+        <NavBar search={this.props.search} />
+        <div className="user">
+          <div className="user__header">
+            <div className="header__breadcrumbs">
+              {this.state.breadcrumbs.map((crumb, i) => {
+                if (i + 1 === this.state.breadcrumbs.length) {
+                  return (
+                    <button key={i} name={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
+                      {crumb}
+                    </button>
+                  );
+                }
+                return (
+                  <div>
+                    <button key={i} name={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
+                      {crumb}
+                    </button>
+                    <i className="fas fa-arrow-right" />
+                  </div>
+                );
+              })}
+            </div>
+            <div className="header__signout" onClick={this.logout}>
+              Sign Out
+            </div>
+          </div>
+          <div className="user__body">
+            <div className="body__left-bar">
+              <button className="left-bar__button" name="My Reviews" onClick={this.updateCurrent}>
+                My Reviews
+              </button>
+              <button className="left-bar__button" name="Billing" onClick={this.updateCurrent}>
+                Billing
+              </button>
+              <button className="left-bar__button" name="Settings" onClick={this.updateCurrent}>
+                Settings
+              </button>
+            </div>
+            <div className="body__content">{this.loadContent()}</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   updateCurrent = event => {
     let breadcrumbs = this.state.breadcrumbs;
     // Home => Home
@@ -221,57 +277,8 @@ class User extends Component {
       breadcrumbs.pop();
       breadcrumbs.push(event.target.name);
     }
-    this.setState({ current: event.target.name, breadcrumbs, showfilterBy: false, showsortBy: false });
+    this.setState({ current: event.target.name, breadcrumbs });
   };
-
-  render() {
-    return (
-      <div>
-        <NavBar search={this.props.search} />
-        <div className="user">
-          <div className="user__header">
-            <div className="header__breadcrumbs">
-              {this.state.breadcrumbs.map((crumb, i) => {
-                if (i + 1 === this.state.breadcrumbs.length) {
-                  return (
-                    <button key={i} name={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
-                      {crumb}
-                    </button>
-                  );
-                }
-                return (
-                  <div key={i}>
-                    <button name={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
-                      {crumb}
-                    </button>
-                    <i className="fas fa-arrow-right" />
-                  </div>
-                );
-              })}
-            </div>
-            <button className="header__signout" onClick={this.logout}>
-              Sign Out
-            </button>
-          </div>
-          <div className="user__body">
-            <div className="body__left-bar">
-              <button className="left-bar__button" name="My Reviews" onClick={this.updateCurrent}>
-                My Reviews
-              </button>
-              <button className="left-bar__button" name="Billing" onClick={this.updateCurrent}>
-                Billing
-              </button>
-              <button className="left-bar__button" name="Settings" onClick={this.updateCurrent}>
-                Settings
-              </button>
-            </div>
-            <div className="body__content">{this.loadContent()}</div>
-            <div className="body__footer"> </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   loadContent = () => {
     switch (this.state.current) {
@@ -435,11 +442,7 @@ class User extends Component {
       case "Settings":
         return (
           <div className="content__profile">
-            <img
-              alt={localStorage.getItem("name")}
-              className="profile__image"
-              src={localStorage.getItem("userImage")}
-            />
+            <div className="profile__image" />
             {/* Have this open a modal to change their password */}
             <div className="profile__container">
               <div className="container__info">
@@ -457,7 +460,7 @@ class User extends Component {
                   ) : (
                     //Show save but when change button is clicked
                     this.state.username
-                  )}
+                  )}{" "}
                   {this.state.change ? (
                     <button className="info__button" onClick={this.saveUsernameOrEmail}>
                       Save
@@ -483,7 +486,7 @@ class User extends Component {
                   ) : (
                     //Show save but when change button is clicked
                     this.state.email
-                  )}
+                  )}{" "}
                   {this.state.change ? (
                     <button className="info__button" onClick={this.saveUsernameOrEmail}>
                       Save
@@ -498,6 +501,7 @@ class User extends Component {
               <div className="container__info">
                 <div className="info__label">Password:</div>
                 <div className="info__data">
+                  {" "}
                   {this.state.opendPasswordForm ? (
                     <div className="password-reset">
                       <input
@@ -523,11 +527,11 @@ class User extends Component {
                         type="password"
                         value={this.state.verifyPassword}
                         onChange={this.handleInputChange}
-                      />
+                      />{" "}
                     </div>
                   ) : (
                     <div>****************</div>
-                  )}
+                  )}{" "}
                   {this.state.changePassword ? (
                     <button className="info__button" onClick={this.changePassword}>
                       Save

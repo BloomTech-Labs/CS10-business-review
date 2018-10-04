@@ -249,9 +249,10 @@ class Business extends Component {
                   />
                 ) : null}
               </div>
-              <button id="NewReview" className="reviews-container__button" onClick={this.displayNewReview}>
-                New Review
-              </button>
+              {
+               localStorage.getItem('token') &&  localStorage.getItem('userId') ? (
+              <button id="NewReview" className="reviews-container__button" onClick={this.displayNewReview}> New Review </button>
+               ) : (null)}
               <div className="reviews-container__dropdowns">
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__title"> Filter By: </div>

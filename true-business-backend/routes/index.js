@@ -10,16 +10,34 @@ mongoose.Promise = global.Promise;
 
 const bodyParser = require("body-parser");
 
+const jwt = require("jsonwebtoken");
+
 mongoose.connect(
   "mongodb://metten:Lambdalabs1@ds251632.mlab.com:51632/truebusiness",
   {},
   function(err) {
     if (err) console.log(err);
-  }
+  },
 );
 
 mongoose.Promise = global.Promise;
 const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
+
+const restricted = (request, response, next) => {
+  const token = request.headers.authorization;
+
+  if (token) {
+    jwt.verify(token, process.env.REACT_APP_SECRET, (err, decodedToken) => {
+      if (err) {
+        return response.status(401).json({ message: "Haha! Unauthorized!" });
+      }
+      console.log("Restricted");
+      next();
+    });
+  } else {
+    response.status(401).json({ message: "You need some token, my Friend!" });
+  }
+};
 
 router.get("/", (request, response) => {
   response.status(200).json({ api: "Server running OK." });
@@ -33,8 +51,11 @@ router.post("/api/user/login", (req, res) => {
   UserController.login(req, res);
 });
 
-router.put("/api/user/:_id", (request, response) => { 
+router.put("/api/user/update/:id", function(request, response) {
+  UserController.updateUser(request, response);
+});
 
+router.put("/api/user/resetpassword/:_id", (request, response) => {
   UserController.reset_password(request, response);
 });
 
@@ -49,9 +70,7 @@ router.get("/api/user/:id", function(req, res) {
 router.delete("/api/user/:id", function(req, res) {
   UserController.deleteUserById(req, res);
 });
-router.put("/api/user/:id", function(req, res) {
-  UserController.updateUser(req, res);
-});
+
 router.get("/api/user/", function(req, res) {
   UserController.getAllUsers(req, res);
 });
@@ -108,9 +127,9 @@ router.delete("/api/review/delete", (req, res) => {
   ReviewControler.deleteReview(req, res);
 });
 
-router.get("/api/review/getReviewsByReviewerId/:id/:currentPage", (req,res) => {
-  ReviewControler.getReviewsByReviewerId(req,res);
-})
+router.get("/api/review/getReviewsByReviewerId/:id/:currentPage", (req, res) => {
+  ReviewControler.getReviewsByReviewerId(req, res);
+});
 
 router.get("/api/review/getAllReviews/", (req, res) => {
   ReviewControler.getAllReviews(req, res);
@@ -127,7 +146,7 @@ router.post("/charge", async (req, res) => {
       amount,
       currency: "usd",
       description: "An example charge",
-      source: req.body.token.id
+      source: req.body.token.id,
     })
     .then(status => {
       res.json({ status });
