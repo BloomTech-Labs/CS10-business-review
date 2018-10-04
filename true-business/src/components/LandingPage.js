@@ -51,6 +51,7 @@ class LandingPage extends Component {
   };
 
   render() {
+    console.log(this.props.reviews, this.props.businesses, this.props.users);
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -180,7 +181,9 @@ class LandingPage extends Component {
                     <div className="body__title">
                       {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
                     </div>
-                    <div className="body__review">{this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}</div>
+                    <div className="body__review">
+                      {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                    </div>
                   </div>
                 </div>
               ) : null}

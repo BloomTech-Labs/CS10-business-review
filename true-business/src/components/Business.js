@@ -145,7 +145,7 @@ class Business extends Component {
     // current:9	1 ... 8 9 10
     // current:10	1 ... 9 10
     for (let i = 1; i < lastPage; i++) {
-      if (i <= this.state.currentPage + 1 && i >= this.state.currentPage - 1){
+      if (i <= this.state.currentPage + 1 && i >= this.state.currentPage - 1) {
         pages.add(i);
       }
     }
@@ -306,9 +306,7 @@ class Business extends Component {
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
                 <div className="reviews__review">
                   {this.state.reviews.length ? (
-                    
                     this.state.reviews.map(review => {
-                      console.log("REVIEW", review)
                       return (
                         <div key={review._id} className="review__info">
                           <img
