@@ -46,7 +46,6 @@ class StripePayment extends Component {
         .post(`${backend}charge`, { args, token, selectedRadio: this.state.selectedRadio })
         .then(() => {
           this.setState({ complete: true });
-          this.props.checkPayment(true);
         })
         .catch(error => {
           this.setState({ loading: false, error: "Failed, Check Information, Click to Try Again" });
@@ -173,7 +172,7 @@ class StripePayment extends Component {
           )
         ) : null}
         {this.state.complete && !this.state.error ? (
-          <div>Payment Complete!</div>
+          <div className="stripe__button">Payment Complete!</div>
         ) : (
           <div onClick={this.reset}>{this.state.error}</div>
         )}

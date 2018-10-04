@@ -38,7 +38,7 @@ server.use(express.json());
 server.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [process.env.REACT_APP_COOKIEKEY]
+    keys: [process.env.REACT_APP_COOKIEKEY || process.env.cookieKey]
   })
 );
 server.use(passport.initialize());

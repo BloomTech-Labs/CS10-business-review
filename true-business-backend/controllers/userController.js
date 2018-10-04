@@ -1,10 +1,6 @@
-
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-
-
-
 
 function generateToken(user) {
   const options = {
@@ -21,10 +17,10 @@ function generateToken(user) {
 const bcryptRounds = 10;
 
 const register = (request, response) => {
-  const { username, password, email } = request.body;
+  const { name, username, password, email, accountType } = request.body;
   const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
   const token = generateToken({ username });
-  const user = new User({ username, password: encryptedPassword, token, email });
+  const user = new User({ accountType, name, username, password: encryptedPassword, token, email });
   user
     .save()
     .then(savedUser => {
@@ -39,36 +35,32 @@ const register = (request, response) => {
 
 const login = (request, response) => {
   const { username, password } = request.body;
-
-  User.findOne({ username: username }).then(userFound => {
-    if (!userFound) {
-      response.status(500).send({
-        errorMessage: "Login Failed.",
-      });
-    } else {
-      if (bcrypt.compareSync(password, userFound.password)) {
-        const token = generateToken({ userFound });
-        const { _id } = userFound;
-        console.log("Token", token)
-        console.log("UserId", _id)
-        console.log("UserId", userFound)
-        response.status(200).send({ username: userFound.username, name: userFound.name, token, userId: _id  });
-      } else {
+  User.findOne({ username: username })
+    .then(userFound => {
+      if (!userFound) {
         response.status(500).send({
           errorMessage: "Login Failed.",
         });
+      } else {
+        if (bcrypt.compareSync(password, userFound.password)) {
+          const token = generateToken({ userFound });
+          response.status(200).send({ ...userFound, token });
+        } else {
+          response.status(500).send({
+            errorMessage: "Login Failed.",
+          });
+        }
       }
-    }
-  })
-  .catch(err => {
-    response.status(500).send({
-      errorMessage: "Failed to Login: " + err,
+    })
+    .catch(err => {
+      response.status(500).send({
+        errorMessage: "Failed to Login: " + err,
+      });
     });
-  });
 };
 
 const getUserById = (request, response) => {
-  User.findById({_id:request.params.id})
+  User.findById({ _id: request.params.id })
     .then(function(user) {
       response.status(200).json(user);
     })
@@ -80,18 +72,18 @@ const getUserById = (request, response) => {
 };
 
 const getRandomUser = (request, response) => {
-  User.count().exec(function (err, count) {
+  User.count().exec(function(err, count) {
     const random = Math.floor(Math.random() * count);
-    console.log(random);
-    User.findOne().skip(random)
-    .then(function(user) {
-      response.status(200).json(user);
-    })
-    .catch(function(error) {
-      response.status(500).json({
-        error: "The user could not be retrieved.",
+    User.findOne()
+      .skip(random)
+      .then(function(user) {
+        response.status(200).json(user);
+      })
+      .catch(function(error) {
+        response.status(500).json({
+          error: "The user could not be retrieved.",
+        });
       });
-    });
   });
 };
 
@@ -108,58 +100,75 @@ const deleteUserById = (request, response) => {
     });
 };
 
-const updateUser = (request, response) => { 
-  const { _id, username, email } = request.body;  
-  User.findById({ _id: request.params.id })  
-  .then(function(user) {  
-    if (user) {   
-         user.username = username, user.email = email;       
-          User.findByIdAndUpdate( { _id: request.params.id }, user).then(user => { 
-           response.status(200).json(user)
-         }).catch(err => {           
-          response.status(500).json(`message: Error username or email: ${err}`)
-         })
-         }
-  })
-  .catch(function(error){
-    response.status(500).json(`message: Error username or email: ${error}`)
+const updateUser = (request, response) => {
+  const { _id, username, email } = request.body;
+  User.findById({ _id: request.params.id })
+    .then(function(user) {
+      if (user) {
+        (user.username = username), (user.email = email);
+        User.findByIdAndUpdate({ _id: request.params.id }, user)
+          .then(user => {
+            response.status(200).json(user);
+          })
+          .catch(err => {
+            response.status(500).json(`message: Error username or email: ${err}`);
+          });
+      }
     })
-}
+    .catch(function(error) {
+      response.status(500).json(`message: Error username or email: ${error}`);
+    });
+};
 
 const getAllUsers = (request, response) => {
   User.find({})
-    .then(function(userList) {
-      response.status(200).json(userList);
+    .then(function(users) {
+      let featured = [];
+      let reviews = 100;
+      // While we don't have 4 featured users
+      // When we get likes going, do the same thing we did in businessController
+      while (featured.length < 4 && reviews >= 0) {
+        // While we have an empty DB this may be slow...
+        users.forEach(user => {
+          if (user.numberOfReviews > reviews && !featured.includes(user)) {
+            featured.push(user);
+          }
+        });
+        reviews -= 10;
+      }
+      response.status(200).json(featured);
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The users could not be found.",
+        error: "The information could not be retrieved.",
       });
     });
 };
 
 const reset_password = function(request, response) {
-  console.log("Fire password")
-  const { _id, password, newPassword, verifyPassword } = request.body;  
-  User.findById({ _id: request.params._id })  
-  .then(function(user) {    
-    if (user) {
-      if (bcrypt.compareSync(password, user.password)) {
-       if (newPassword === verifyPassword) {
-         user.password = bcrypt.hashSync(newPassword, bcryptRounds);              
-         User.findByIdAndUpdate( { _id: request.params._id }, user).then(user => {         
-           response.status(200).json(user)
-         }).catch(err => {           
-          response.status(500).json(`message: Error reseting password: ${err}`)
-         })        
+  console.log("Fire password");
+  const { _id, password, newPassword, verifyPassword } = request.body;
+  User.findById({ _id: request.params._id })
+    .then(function(user) {
+      if (user) {
+        if (bcrypt.compareSync(password, user.password)) {
+          if (newPassword === verifyPassword) {
+            user.password = bcrypt.hashSync(newPassword, bcryptRounds);
+            User.findByIdAndUpdate({ _id: request.params._id }, user)
+              .then(user => {
+                response.status(200).json(user);
+              })
+              .catch(err => {
+                response.status(500).json(`message: Error reseting password: ${err}`);
+              });
+          }
+        }
       }
-    } 
-  }
-  })
-  .catch(function(error){
-    response.status(500).json(`message: Error reseting password: ${error}`)
     })
-}
+    .catch(function(error) {
+      response.status(500).json(`message: Error reseting password: ${error}`);
+    });
+};
 
 module.exports = {
   register,
@@ -167,8 +176,7 @@ module.exports = {
   getUserById,
   deleteUserById,
   updateUser,
-  getAllUsers,  
+  getAllUsers,
   reset_password,
-  getRandomUser
-
+  getRandomUser,
 };

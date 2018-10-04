@@ -102,6 +102,10 @@ const businessSchema = new mongoose.Schema({
     required: true,
     default: false,
   },
+  rating: {
+    type: Number,
+    default: 0,
+  }
 });
 
 let businessModel = mongoose.model('Business', businessSchema);

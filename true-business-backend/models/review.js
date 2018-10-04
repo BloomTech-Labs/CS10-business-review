@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 const Business = require("../models/business");
+const User = require("../models/user");
 
 const reviewSchema = new mongoose.Schema({
   reviewer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
-    default: "5bb2a7bc36929201322a9000",
+    default: "5bb4f5a37e80b2009ed1972a",
   },
   newMongoId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -45,7 +46,7 @@ const reviewSchema = new mongoose.Schema({
     type: Array,
     default: [
       {
-        link: "https://png.icons8.com/ios/50/000000/picture.png",
+        link: "https://png.icons8.com/ios/50/000000/no-camera.png",
         width: 3024,
         height: 4032,
       },
@@ -60,8 +61,9 @@ const reviewSchema = new mongoose.Schema({
 
 let reviewModel = mongoose.model("Review", reviewSchema);
 
-reviewSchema.post("save", function(next) {
+reviewSchema.post("save", function() {
   let business = this;
+  let user = this;
   async function updateBusiness() {
     let update = await Business.findOne({ _id: business.newMongoId }).then(found => {
       found.reviews.push(business._id);
@@ -87,7 +89,26 @@ reviewSchema.post("save", function(next) {
       })
       .catch(error => console.log({ error }));
   }
-  updateBusiness(next);
+  async function updateUser() {
+    let update = await User.findOne({ _id: user.reviewer }).then(found => {
+      found.reviews.push(user._id);
+      found.numberOfReviews += 1;
+      return found;
+    });
+    await User.updateOne(
+      { _id: user.reviewer },
+      {
+        reviews: update.reviews,
+        numberOfReviews: update.numberOfReviews,
+      },
+    )
+      .then(updated => {
+        console.log("Business Updated Successfully");
+      })
+      .catch(error => console.log({ error }));
+  }
+  updateBusiness();
+  updateUser();
 });
 
 module.exports = reviewModel;

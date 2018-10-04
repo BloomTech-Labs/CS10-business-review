@@ -2,15 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import NavBar from "./NavBar";
-
-import { Elements, StripeProvider } from "react-stripe-elements";
-import StripePayment from "./StripePayment";
+import signUp from "../imgs/signup.png";
 
 import "../css/SignUp.css";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
-if (typeof(backend) !== 'string') {
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
   backend = heroku;
 }
 
@@ -46,10 +44,7 @@ class SignUp extends Component {
       email: this.state.email,
       username: this.state.username,
       password: this.state.password,
-      accountType: this.state.type,
     };
-    console.log("BACKEND", backend);
-    console.log("USER", user)
     axios
       .post(`${backend}api/user/register`, user)
       .then(() => {
@@ -118,23 +113,19 @@ class SignUp extends Component {
                 value={this.state.confirmPassword}
                 onChange={this.handleInputChange}
               />
-              <StripeProvider apiKey="pk_test_a80QBoWXww54ttxUn5cMQO1o">
-                <div className="signup-container__stripe">
-                  <Elements>
-                    <StripePayment checkPayment={this.checkPayment} />
-                  </Elements>
-                </div>
-              </StripeProvider>
               <div className="signup-container__buttons ">
-                {this.state.payment ? (
-                  <button
-                    id="signup-submit"
-                    type="submit"
-                    className="signup-container__button"
-                    onClick={this.createUser}>
-                    Confirm Registration
-                  </button>
-                ) : null}
+                <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createUser}>
+                  Confirm Registration
+                </button>
+                <hr />
+                <img
+                  alt="Google Logo"
+                  src={signUp}
+                  className="signup-container__google-auth"
+                  onClick={() => {
+                    window.location = `${backend}auth/google`;
+                  }}
+                />
               </div>
             </form>
           </div>
