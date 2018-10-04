@@ -96,7 +96,6 @@ class Business extends Component {
       axios
         .get(`${backend}api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}/${currentPage}`)
         .then(response => {
-          console.log("RESPONSE BITCH", response);
           this.setState({
             reviews: response.data.reviews,
             total: response.data.total,

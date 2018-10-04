@@ -20,25 +20,33 @@ const createReview = (req, res) => {
 // For User Component
 const getReviewsByReviewerId = (req, res) => {
   Review.find({ reviewer: req.params.id })
+    .skip(10 * req.params.currentPage)
+    .limit(10)
     .populate("newMongoId")
-    .then(response => {
-      res.status(200).json(response);
+    .then(reviews => {
+      Review.find({ reviewer: req.params.id })
+        .count()
+        .then(total => {
+          res.status(200).json({ reviews, total });
+        });
     })
-    .catch(error => res.status(500).json(error));
+    .catch(error => {
+      res.status(200).json({ "ERROR": error });
+    });
 };
 
 // For Business Component
 const getReviewsByBusinessId = (req, res) => {
   let search = req.params.landing === "true" ? "newMongoId" : "newGoogleId";
-  console.log("SHIT", req.params.currentPage);
   Review.find({ [search]: req.params.id })
     .skip(10 * req.params.currentPage)
     .limit(10)
     .then(reviews => {
-      Review.count().then(total => {
-        console.log("FUCKING REVIEWS", reviews[0].title)
-        res.status(200).json({ reviews, total });
-      });
+      Review.find({ [search]: req.params.id })
+        .count()
+        .then(total => {
+          res.status(200).json({ reviews, total });
+        });
     })
     .catch(error => {
       res.status(200).json({ "ERROR BIATCH": error });

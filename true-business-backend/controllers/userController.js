@@ -60,9 +60,7 @@ const login = (request, response) => {
 };
 
 const getUserById = (request, response) => {
-  const { _id } = request.body;
-
-  User.findOne(_id)
+  User.findById({_id:request.params.id})
     .then(function(user) {
       response.status(200).json(user);
     })

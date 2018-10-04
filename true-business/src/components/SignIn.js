@@ -60,7 +60,7 @@ class SignIn extends Component {
         <NavBar search={this.props.search} />
         <div className="signin">
           <div className="signin-container">
-            <div className="signin-container__header"> Login </div>
+            <div className="signin-container__header"> Sign In </div>
             <div className="signin-container__form">
               <input
                 className="signin-container__input"
@@ -83,6 +83,7 @@ class SignIn extends Component {
                 <button type="submit" className="signin-container__button" onClick={this.signIn}>
                   Sign In
                 </button>
+                <hr/>
                 <img
                   alt="Google Logo"
                   src={googleLogo}

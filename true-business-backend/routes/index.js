@@ -108,7 +108,8 @@ router.delete("/api/review/delete", (req, res) => {
   ReviewControler.deleteReview(req, res);
 });
 
-router.get("/api/review/getReviewsByReviewerId/:id", (req,res) => {
+router.get("/api/review/getReviewsByReviewerId/:id/:currentPage", (req,res) => {
+  console.log("WHAT THE FUCK");
   ReviewControler.getReviewsByReviewerId(req,res);
 })
 

@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import NavBar from "./NavBar";
+import signUp from "../imgs/signup.png";
 
 import "../css/SignUp.css";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
-if (typeof(backend) !== 'string') {
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
   backend = heroku;
 }
 
@@ -113,13 +114,18 @@ class SignUp extends Component {
                 onChange={this.handleInputChange}
               />
               <div className="signup-container__buttons ">
-                  <button
-                    id="signup-submit"
-                    type="submit"
-                    className="signup-container__button"
-                    onClick={this.createUser}>
-                    Confirm Registration
-                  </button>
+                <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createUser}>
+                  Confirm Registration
+                </button>
+                <hr />
+                <img
+                  alt="Google Logo"
+                  src={signUp}
+                  className="signup-container__google-auth"
+                  onClick={() => {
+                    window.location = `${backend}auth/google`;
+                  }}
+                />
               </div>
             </form>
           </div>

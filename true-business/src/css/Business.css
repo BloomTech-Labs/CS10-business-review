@@ -8,7 +8,7 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
   line-height: 1;
-  padding: 25vh 2rem 2rem 2rem;
+  padding: 15vh 2rem 2rem 2rem;
   margin: 0;
   cursor: default;
   color: #05386b;
@@ -140,6 +140,7 @@
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
+  height: 2.5rem;
 }
 .business .business__reviews-container .reviews-container__button:hover {
   cursor: pointer;
@@ -329,6 +330,7 @@
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
+  height: 2.5rem;
   width: 5%;
   margin: 0 0.5rem;
 }

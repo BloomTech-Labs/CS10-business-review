@@ -1,7 +1,7 @@
 .user {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: flex-start;
   height: 100%;
   width: auto;
@@ -11,9 +11,8 @@
   padding: 0;
   margin: 0;
   cursor: default;
-  padding-top: 25vh;
-  padding-left: 5rem;
   color: #05386b;
+  padding: 15vh 5rem 5rem 5rem;
 }
 .user .user__header {
   display: flex;
@@ -34,7 +33,7 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   height: inherit;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -47,12 +46,21 @@
   font-size: 1.5rem;
 }
 .user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb {
-  border: none;
+  border-radius: 0.5rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: #ffffff;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  height: 2.5rem;
   width: auto;
-  font-size: 1.5rem;
-  background-color: #efeff1;
-  color: #05386b;
-  margin: 0 1rem;
+  padding: 0 1rem;
+}
+.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb:hover {
+  cursor: pointer;
+  box-shadow: 0px 15px 20px #6b6b6b;
+  filter: brightness(110%);
+  font-weight: bolder;
 }
 .user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow {
   padding: 0 1rem;
@@ -60,27 +68,22 @@
 .user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow:hover {
   cursor: default;
 }
-.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb:hover {
-  cursor: pointer;
-}
 .user .user__header .header__signout {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-end;
-  height: 100%;
-  width: 100%;
+  border-radius: 0.5rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  cursor: default;
-  color: #05386b;
-  width: auto;
-  padding-right: 5rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  height: 2.5rem;
+  margin-right: 5rem;
   white-space: nowrap;
+}
+.user .user__header .header__signout:hover {
+  cursor: pointer;
+  box-shadow: 0px 15px 20px #6b6b6b;
+  filter: brightness(110%);
+  font-weight: bolder;
 }
 .user .user__header .header__signout:hover {
   cursor: pointer;
@@ -100,13 +103,14 @@
   cursor: default;
   color: #05386b;
   min-height: 100vh;
+  width: 80vw;
 }
 .user .user__body .body__left-bar {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  height: auto;
+  justify-content: space-around;
+  align-items: center;
+  height: 20vh;
   width: 20vw;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
@@ -115,18 +119,20 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  border: 0.1rem solid black;
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
+  border-radius: 1rem;
 }
 .user .user__body .body__left-bar .left-bar__button {
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
+  border-radius: 1rem;
   border: none;
-  width: 100%;
-  font-size: 1.5rem;
-  background-color: #efeff1;
-  color: #05386b;
+  width: 95%;
   padding: 1rem;
 }
 .user .user__body .body__left-bar .left-bar__button:hover {
-  filter: brightness(120%);
+  font-weight: bolder;
   cursor: pointer;
 }
 .user .user__body .body__content {
@@ -158,8 +164,8 @@
   margin: 0 1rem;
   cursor: default;
   color: #05386b;
-  min-width: 75vw;
-  max-width: 75vw;
+  min-width: 60vw;
+  max-width: 60vw;
   min-height: 85vh;
   max-height: 85vh;
   background: #ffffff;
@@ -217,7 +223,8 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  max-width: 70%;
+  max-width: 75%;
+  min-width: 75%;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .reviews__pagination .pagination__pages .pagination__page {
   border-radius: 0.5rem;
@@ -226,6 +233,7 @@
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
+  height: 2.5rem;
   width: 5%;
   margin: 0 0.5rem;
 }
@@ -290,6 +298,7 @@
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
+  height: 2.5rem;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__button:hover {
   cursor: pointer;
@@ -443,15 +452,34 @@
   margin: 0 1rem;
   cursor: default;
   color: #05386b;
-  min-width: 75vw;
-  max-width: 75vw;
-  min-height: 85vh;
-  max-height: 85vh;
+  min-width: 60vw;
+  max-width: 60vw;
+  min-height: 60vh;
+  max-height: 60vh;
   background: #ffffff;
   border: 0.1rem solid #05386b;
   border-radius: 1rem;
 }
-.user .user__body .body__content .content__profile .profile__image {
+.user .user__body .body__content .content__profile .profile__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 1rem;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+}
+.user .user__body .body__content .content__profile .profile__container .user-change__input {
+  padding: 0.5rem;
+  font-size: 1.25rem;
+}
+.user .user__body .body__content .content__profile .profile__container .profile__image {
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 0%;
@@ -464,27 +492,8 @@
   height: 40%;
   min-height: 40%;
 }
-.user .user__body .body__content .content__profile .profile__image:hover {
+.user .user__body .body__content .content__profile .profile__container .profile__image:hover {
   cursor: pointer;
-}
-.user .user__body .body__content .content__profile .profile__container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 70%;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
-  padding: 5rem 0;
-  margin: 0;
-  cursor: default;
-  color: #05386b;
-}
-.user .user__body .body__content .content__profile .profile__container .user-change__input {
-  padding: 0.5rem;
-  font-size: 1.25rem;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info {
   display: flex;
@@ -544,6 +553,7 @@
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
+  height: 2.5rem;
   margin: 0;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__data .data__button:hover {
@@ -562,6 +572,7 @@
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
+  height: 2.5rem;
   margin: 0;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button:hover {
@@ -580,6 +591,7 @@
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
+  height: 2.5rem;
   margin: 0 1rem 0 0;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button--save:hover {

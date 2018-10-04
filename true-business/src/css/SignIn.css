@@ -11,7 +11,7 @@
   padding: 0;
   margin: 0;
   color: #05386b;
-  padding-top: 25vh;
+  padding-top: 20vh;
   min-height: 100%;
   cursor: default;
 }
@@ -25,18 +25,20 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
   line-height: 1;
-  padding: 1rem;
+  padding: 0;
   margin: 0;
-  color: #05386b;
+  cursor: default;
   background: #ffffff;
   border: 0.1rem solid #05386b;
   border-radius: 1rem;
-  cursor: default;
+  color: #05386b;
+  padding: 1rem;
+  min-height: 50vh;
 }
 .signin .signin-container .signin-container__header {
-  font-size: 3rem;
-  color: #05386b;
-  height: auto;
+  font-size: 1.5rem;
+  margin: 1rem;
+  padding: 0.5rem;
 }
 .signin .signin-container .signin-container__form {
   display: flex;
@@ -54,21 +56,17 @@
   color: #05386b;
 }
 .signin .signin-container .signin-container__form .signin-container__input {
-  border: 0.1rem solid black;
-  margin-top: 2rem;
-  width: 50%;
-  font-size: 1.5rem;
-}
-.signin .signin-container .signin-container__form .signin-container__error {
-  content: none;
-}
-.signin .signin-container .signin-container__form .signin-container__error--hidden {
-  display: none;
+  border: 0.1rem solid #05386b;
+  background: #efeff1;
+  margin-bottom: 1rem;
+  width: 75%;
+  font-size: 1.25rem;
+  padding: 0.5rem;
 }
 .signin .signin-container .signin-container__form .signin-container__buttons {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -81,8 +79,11 @@
   color: #05386b;
 }
 .signin .signin-container .signin-container__form .signin-container__buttons .signin-container__google-auth {
-  max-width: 75%;
-  height: 50%;
+  min-width: 50%;
+  max-width: 50%;
+  min-height: 10vh;
+  max-height: 10vh;
+  border-radius: 1rem;
 }
 .signin .signin-container .signin-container__form .signin-container__buttons .signin-container__google-auth:hover {
   cursor: pointer;
@@ -94,6 +95,7 @@
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
+  height: 2.5rem;
 }
 .signin .signin-container .signin-container__form .signin-container__buttons .signin-container__button:hover {
   cursor: pointer;
@@ -103,4 +105,10 @@
 }
 .signin .signin-container .signin-container__form .signin-container__buttons .signin-container__button:hover {
   cursor: pointer;
+}
+hr {
+  border: 0.2rem solid #05386b;
+  margin: 2rem 0;
+  width: 100%;
+  height: 1rem;
 }

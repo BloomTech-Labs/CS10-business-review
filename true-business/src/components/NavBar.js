@@ -145,7 +145,6 @@ class NavBar extends Component {
               onClick={this.toggle}
               onChange={this.handleInputChange.bind(this)}
               name="searchCity"
-              id="signInPop"
               className="search__input"
             />
             <button type="submit" id="Search" className="search__button" onClick={this.handleSearch}>

@@ -1,22 +1,17 @@
 @import "mixins.less";
 
 .user {
-  .containers(@width: auto, @justifyContent: flex-start, @alignItems: flex-start);
-  padding-top: 25vh;
-  padding-left: 5rem;
-  color: @textColor;
+  .containers(@width: auto, @justifyContent: space-around, @alignItems: flex-start);
+  padding: 15vh 5rem 5rem 5rem;
   .user__header {
     .containers(@flexDirection: row, @height: 5rem);
     .header__breadcrumbs {
-      .containers(@flexDirection:row, @height:inherit, @alignItems:flex-start, @justifyContent: flex-start);
+      .containers(@flexDirection:row, @height:inherit, @justifyContent: flex-start);
       font-size: 1.5rem;
       .breadcrumbs__breadcrumb {
-        border: none;
+        .buttons();
         width: auto;
-        font-size: 1.5rem;
-        background-color: @elementBG;
-        color: @textColor;
-        margin: 0 1rem;
+        padding: 0 1rem;
         .breadcrumb__arrow {
           padding: 0 1rem;
         }
@@ -24,15 +19,10 @@
           cursor: default;
         }
       }
-      .breadcrumbs__breadcrumb:hover {
-        cursor: pointer;
-      }
     }
     .header__signout {
-      .containers(@alignItems: flex-end, @justifyContent: flex-start);
-      width: auto;
-      padding-right: 5rem;
-      font-size: 1.5rem;
+      .buttons();
+      margin-right: 5rem;
       white-space: nowrap;
     }
     .header__signout:hover {
@@ -42,28 +32,27 @@
   .user__body {
     .containers(@flexDirection: row, @alignItems:flex-start, @justifyContent:space-between);
     min-height: 100vh;
+    width: 80vw;
     .body__left-bar {
-      .containers(@width: 20vw, @height: auto, @justifyContent:flex-start, @alignItems: flex-start);
-      border: 0.1rem solid black;
+      .containers(@width: 20vw, @height: 20vh, @justifyContent: space-around);
+      .backAndBorder();
       .left-bar__button {
+        .backAndBorder();
         border: none;
-        width: 100%;
-        font-size: 1.5rem;
-        background-color: @elementBG;
-        color: @textColor;
+        width: 95%;
         padding: 1rem;
-      }
-      .left-bar__button:hover {
-        filter: brightness(120%);
-        cursor: pointer;
+        &:hover {
+          font-weight: bolder;
+          cursor: pointer;
+        }
       }
     }
     .body__content {
       .containers(@justifyContent: flex-start, @alignItems: flex-start);
       .content__reviews-container {
         .containers(@padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
-        min-width: 75vw;
-        max-width: 75vw;
+        min-width: 60vw;
+        max-width: 60vw;
         min-height: 85vh;
         max-height: 85vh;
         .backAndBorder();
@@ -78,7 +67,8 @@
             margin: 1rem;
             .pagination__pages {
               .containers(@flexDirection: row);
-              max-width: 70%;
+              max-width: 75%;
+              min-width: 75%;
               .pagination__page {
                 .buttons();
                 width: 5%;
@@ -201,24 +191,24 @@
       }
       .content__profile {
         .containers(@justifyContent: space-between, @padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
-        min-width: 75vw;
-        max-width: 75vw;
-        min-height: 85vh;
-        max-height: 85vh;
+        min-width: 60vw;
+        max-width: 60vw;
+        min-height: 60vh;
+        max-height: 60vh;
         .backAndBorder();
-        .profile__image {
-          .images(@top: 0);
-          width: 40%;
-          min-width: 40%;
-          height: 40%;
-          min-height: 40%;
-        }
         .profile__container {
+          .containers(@padding: 1rem);
           .user-change__input {
             padding: 0.5rem;
             font-size: 1.25rem;
           }
-          .containers(@width: 70%, @padding: 5rem 0);
+          .profile__image {
+            .images(@top: 0);
+            width: 40%;
+            min-width: 40%;
+            height: 40%;
+            min-height: 40%;
+          }
           .container__info {
             .containers(@flexDirection: row, @justifyContent: space-between);
             .backAndBorder(@background: @elementBG);

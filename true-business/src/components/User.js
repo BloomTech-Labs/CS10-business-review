@@ -37,8 +37,8 @@ class User extends Component {
     username: "",
     email: "",
     password: "",
-    newPassword:"",
-    verifyPassword:"",
+    newPassword: "",
+    verifyPassword: "",
     editUsernameOrEmail: false,
     changePassword: false,
     opendPasswordForm: false,
@@ -72,50 +72,60 @@ class User extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    console.log("localStore", localStorage);
     setTimeout(() => {
+      this.getReviews(0);
       const id = localStorage.getItem("userId");
-      const token = localStorage.getItem('token');
-      const headers = { "headers": { "authorization": token } };
+      const token = localStorage.getItem("token");
+      const headers = { headers: { authorization: token } };
       axios.get(`${backend}api/user/${id}`, headers).then(response => {
+        console.log("AXIOS RESPONSE", response)
         this.setState({
           username: response.data.username,
           email: response.data.email,
         });
       });
+      console.log("localStore in timeout", localStorage);
     }, 300);
-    this.getReviews();
+    console.log("localStore after timeout", localStorage);
   };
 
-  getReviews = () => {
+  getReviews = currentPage => {
+    console.log("YUP");
     axios
-      .get(`${backend}api/review/getReviewsByReviewerId/${localStorage.getItem("userId")}`)
+      .get(`${backend}api/review/getReviewsByReviewerId/${localStorage.getItem("userId")}/${currentPage}`)
       .then(response => {
-        this.setState({ reviews: response.data });
+        console.log("RESPONSE MOFO", response);
+        this.setState({
+          reviews: response.data.reviews,
+          total: response.data.total,
+        });
       })
-      .catch(error => console.log({ error }));
+      .catch(error => {
+        console.log("Error", error);
+      });
   };
 
-  changePassword = () => {
+  changePassword = currenPage => {
     const user = {
       password: this.state.password,
       newPassword: this.state.newPassword,
       verifyPassword: this.state.verifyPassword,
-    };    
+    };
     const id = localStorage.getItem("userId");
     axios
-      .put(`${backend}api/user/${id}`, user)
+      .put(`${backend}api/user/${id}/`, user)
       .then(response => {
         this.setState({
           opendPasswordForm: false,
           passwordAction: "Change",
-          changePassword: false,         
+          changePassword: false,
         });
       })
       .catch(err => {
         console.log("Password Reset Error", err);
       });
   };
-
 
   logout = () => {
     localStorage.removeItem("token");
@@ -181,26 +191,46 @@ class User extends Component {
     });
   };
 
-   passwordChangeCurrentAction = () => {
-    if(this.state.changePassword) {
+  passwordChangeCurrentAction = () => {
+    if (this.state.changePassword) {
       this.setState({
-        passwordAction: "Change"
-      })
-    }
-    else {
+        passwordAction: "Change",
+      });
+    } else {
       this.setState({
-        passwordAction: "Cancel"
-      })
+        passwordAction: "Cancel",
+      });
     }
-  }
-  
-   changePasswordfunc = () => {
-     this.passwordChangeCurrentAction();
-     this.setState({
+  };
+
+  changePasswordfunc = () => {
+    this.passwordChangeCurrentAction();
+    this.setState({
       opendPasswordForm: !this.state.opendPasswordForm,
       changePassword: !this.state.changePassword,
-     })
-   }
+    });
+  };
+
+  updateCurrent = event => {
+    let breadcrumbs = this.state.breadcrumbs;
+    // Home => Home
+    if (event.target.name === "Home") {
+      // Home->Whatever => Home
+      if (breadcrumbs.length === 2) {
+        breadcrumbs.pop();
+      }
+    }
+    // Home => Home->Whatever
+    else if (breadcrumbs.length === 1) {
+      breadcrumbs.push(event.target.name);
+    }
+    // Home->Whatever => Home=> Whatever
+    else if (breadcrumbs.length === 2) {
+      breadcrumbs.pop();
+      breadcrumbs.push(event.target.name);
+    }
+    this.setState({ current: event.target.name, breadcrumbs, showfilterBy: false, showsortBy: false });
+  };
 
   render() {
     return (
@@ -227,9 +257,9 @@ class User extends Component {
                 );
               })}
             </div>
-            <div className="header__signout" onClick={this.logout}>
+            <button className="header__signout" onClick={this.logout}>
               Sign Out
-            </div>
+            </button>
           </div>
           <div className="user__body">
             <div className="body__left-bar">
@@ -250,26 +280,6 @@ class User extends Component {
       </div>
     );
   }
-  updateCurrent = event => {
-    let breadcrumbs = this.state.breadcrumbs;
-    // Home => Home
-    if (event.target.name === "Home") {
-      // Home->Whatever => Home
-      if (breadcrumbs.length === 2) {
-        breadcrumbs.pop();
-      }
-    }
-    // Home => Home->Whatever
-    else if (breadcrumbs.length === 1) {
-      breadcrumbs.push(event.target.name);
-    }
-    // Home->Whatever => Home=> Whatever
-    else if (breadcrumbs.length === 2) {
-      breadcrumbs.pop();
-      breadcrumbs.push(event.target.name);
-    }
-    this.setState({ current: event.target.name, breadcrumbs, showfilterBy: false, showsortBy: false });
-  };
 
   loadContent = () => {
     switch (this.state.current) {
@@ -333,33 +343,29 @@ class User extends Component {
                 <div className="reviews__review">
                   {this.state.reviews.length ? (
                     this.state.reviews.map((review, i) => {
-                      if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
-                        return (
-                          <div key={review._id} className="review__info">
-                            <img
-                              alt={review.reviewer.username}
-                              className="review__landscape"
-                              src={review.photos[0].link}
-                              onClick={() => this.openModal(this, review)}
+                      return (
+                        <div key={review._id} className="review__info">
+                          <img
+                            alt={review.reviewer.username}
+                            className="review__landscape"
+                            src={review.photos[0].link}
+                            onClick={() => this.openModal(this, review)}
+                          />
+                          <div className="info__detailed">
+                            <StarRatings
+                              className="detailed__stars"
+                              starDimension="20px"
+                              starSpacing="5px"
+                              rating={review.stars}
+                              starRatedColor="gold"
+                              starEmptyColor="grey"
+                              numberOfStars={5}
+                              name="rating"
                             />
-                            <div className="info__detailed">
-                              <StarRatings
-                                className="detailed__stars"
-                                starDimension="20px"
-                                starSpacing="5px"
-                                rating={review.stars}
-                                starRatedColor="gold"
-                                starEmptyColor="grey"
-                                numberOfStars={5}
-                                name="rating"
-                              />
-                              <div className="detailed__business">{review.newMongoId.name}</div>
-                            </div>
+                            <div className="detailed__business">{review.newMongoId.name}</div>
                           </div>
-                        );
-                      } else {
-                        return null;
-                      }
+                        </div>
+                      );
                     })
                   ) : (
                     <div>No Reviews</div>
@@ -435,79 +441,112 @@ class User extends Component {
           </div>
         );
       case "Settings":
+        return (
+          <div className="content__profile">
+            <img
+              alt={localStorage.getItem("name")}
+              className="profile__image"
+              src={localStorage.getItem("userImage")}
+            />
+            {/* Have this open a modal to change their password */}
+            <div className="profile__container">
+              <div className="container__info">
+                <div className="info__label">Username:</div>
+                <div className="info__data">
+                  {this.state.openForChange ? (
+                    <input
+                      className="user-change__input"
+                      placeholder="username"
+                      name="username"
+                      type="text"
+                      value={this.state.username}
+                      onChange={this.handleInputChange}
+                    />
+                  ) : (
+                    //Show save but when change button is clicked
+                    this.state.username
+                  )}
+                  {this.state.change ? (
+                    <button className="info__button" onClick={this.saveUsernameOrEmail}>
+                      Save
+                    </button>
+                  ) : null}
+                </div>
+                <button className="info__button" onClick={this.changeUsernameOrEmail}>
+                  {this.state.currenAction}
+                </button>
+              </div>
+              <div className="container__info">
+                <div className="info__label">Email:</div>
+                <div className="info__data">
+                  {this.state.openForChange ? (
+                    <input
+                      className="user-change__input"
+                      placeholder="email"
+                      name="email"
+                      type="text"
+                      value={this.state.email}
+                      onChange={this.handleInputChange}
+                    />
+                  ) : (
+                    //Show save but when change button is clicked
+                    this.state.email
+                  )}
+                  {this.state.change ? (
+                    <button className="info__button" onClick={this.saveUsernameOrEmail}>
+                      Save
+                    </button>
+                  ) : null}
+                </div>
+                <button className="info__button" onClick={this.changeUsernameOrEmail}>
+                  {this.state.currenAction}
+                </button>
+              </div>
 
-        return (<div className="content__profile">
-        <div className="profile__image" />
-        {/* Have this open a modal to change their password */}
-        <div className="profile__container">
-          <div className="container__info">
-            <div className="info__label">Username:</div>
-            <div className="info__data">{this.state.openForChange ? (
-            <input
-            className="user-change__input"
-                placeholder="username"
-                name="username"
-                type="text"
-                value={this.state.username}
-                onChange={this.handleInputChange}
-                /> 
-                 //Show save but when change button is clicked
-          ): ( this.state.username)} {this.state.change?(<button  className="info__button" onClick={this.saveUsernameOrEmail}>Save</button>):(null)}</div>
-            <button className="info__button" onClick={this.changeUsernameOrEmail}>
-              {this.state.currenAction}
-            </button>
-          </div>
-          <div className="container__info">
-            <div className="info__label">Email:</div>
-            <div className="info__data">{this.state.openForChange ? (
-            <input
-            className="user-change__input"
-                placeholder="email"
-                name="email"
-                type="text"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-                /> 
-                //Show save but when change button is clicked
-            ): ( this.state.email)} {this.state.change?(<button  className="info__button" onClick={this.saveUsernameOrEmail}>Save</button>):(null)}</div>
-            <button className="info__button" onClick={this.changeUsernameOrEmail}>
-            {this.state.currenAction}
-            </button>
-          </div>
-          
-          <div className="container__info">
-            <div className="info__label">Password:</div>
-            <div className="info__data"> {this.state.opendPasswordForm? (<div className="password-reset">
-            <input
-            className="password-change__input"
-                placeholder="Password"
-                name="password"
-                type="password"
-                value={this.state.password}
-                onChange={this.handleInputChange}
-                /> 
-                <input
-            className="password-change__input"
-                placeholder="New password"
-                name="newPassword"
-                type="password"
-                value={this.state.newPassword}
-                onChange={this.handleInputChange}
-                /> 
-                <input
-            className="password-change__input"
-                placeholder="Repeat new password"
-                name="verifyPassword"
-                type="password"
-                value={this.state.verifyPassword}
-                onChange={this.handleInputChange}
-            /> </div>) : ( <div>****************</div>
-            )} {this.state.changePassword?(<button  className="info__button" onClick={this.changePassword}>Save</button>):(null)}</div>
-            <button className="info__button" onClick={this.changePasswordfunc}>
-              {this.state.passwordAction}
-            </button>
-           </div>
-          </div>
+              <div className="container__info">
+                <div className="info__label">Password:</div>
+                <div className="info__data">
+                  {this.state.opendPasswordForm ? (
+                    <div className="password-reset">
+                      <input
+                        className="password-change__input"
+                        placeholder="Password"
+                        name="password"
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.handleInputChange}
+                      />
+                      <input
+                        className="password-change__input"
+                        placeholder="New password"
+                        name="newPassword"
+                        type="password"
+                        value={this.state.newPassword}
+                        onChange={this.handleInputChange}
+                      />
+                      <input
+                        className="password-change__input"
+                        placeholder="Repeat new password"
+                        name="verifyPassword"
+                        type="password"
+                        value={this.state.verifyPassword}
+                        onChange={this.handleInputChange}
+                      />
+                    </div>
+                  ) : (
+                    <div>****************</div>
+                  )}
+                  {this.state.changePassword ? (
+                    <button className="info__button" onClick={this.changePassword}>
+                      Save
+                    </button>
+                  ) : null}
+                </div>
+                <button className="info__button" onClick={this.changePasswordfunc}>
+                  {this.state.passwordAction}
+                </button>
+              </div>
+            </div>
           </div>
         );
       default:
@@ -535,6 +574,81 @@ class User extends Component {
           </div>
         );
     }
+  };
+
+  updatePage = currentPage => {
+    this.setState({ currentPage });
+    this.getReviews(currentPage);
+  };
+
+  createPagination = () => {
+    let lastPage =
+      // Ex. 100 / 10 % 1 = 0
+      // Ex. 101 / 10 % 1 != 0
+      (this.state.total / 10) % 1 === 0
+        ? // 100 / 10 - 1 = 9, so pages 0-9 will show results 0-99 (10 pages, 10 each page)
+          Math.floor(this.state.total / 10) - 1
+        : // 101 / 10 = 10, so pages 0-10 will show results 0-100 (11 pages, 1 on the last page)
+          Math.floor(this.state.total / 10);
+
+    // Set is the lazy / quick way if there is only one page
+    let pages = new Set([0, lastPage]);
+    if (lastPage < 7) {
+      for (let i = 1; i < lastPage; i++) {
+        pages.add(i);
+      }
+      pages = [...pages].sort((a, b) => a - b);
+    } else {
+      // Load the appropriate pages
+      // current:1 	1 2 ... 10
+      // current:2	1 2 3 ... 10
+      // current:3	1 2 3 4 ... 10
+      // current:4	1 ... 3 4 5 ... 10
+      // current:5	1 ... 4 5 6 ... 10
+      // current:6	1 ... 5 6 7 ... 10
+      // current:7	1 ... 6 7 8 ... 10
+      // current:8	1 ... 7 8 9 10
+      // current:9	1 ... 8 9 10
+      // current:10	1 ... 9 10
+      for (let i = 1; i < lastPage; i++) {
+        if (i <= this.state.currentPage + 1 && i >= this.state.currentPage - 1) {
+          pages.add(i);
+        }
+      }
+
+      pages = [...pages].sort((a, b) => a - b);
+      // Add an elipsis if more than 3 away from the first page
+      if (this.state.currentPage > 2) {
+        pages.splice(1, 0, "...");
+      }
+
+      // Add an elipsis if more than 3 away from the last page
+      if (this.state.currentPage < lastPage - 2) {
+        pages.splice(pages.length - 1, 0, "...");
+      }
+    }
+
+    return pages.length > 1 ? (
+      <div className="reviews__pagination">
+        Page {this.state.currentPage + 1} / {lastPage + 1}
+        <div id="pagination" className="pagination__pages">
+          {pages.map((page, i) => {
+            if (page === "...") {
+              return (
+                <button key={i + page} id={page} className="pagination__page--no-hover">
+                  {page}
+                </button>
+              );
+            }
+            return (
+              <button key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
+                {page + 1}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    ) : null;
   };
 
   toggleDropDown = event => {
