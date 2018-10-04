@@ -1,232 +1,184 @@
 import React, { Component } from "react";
-import { Popover, PopoverBody, PopoverHeader } from "reactstrap";
 import { withRouter } from "react-router-dom";
-import Modal from "react-modal"; 
 
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import NavBar from "./NavBar";
 
-import logo from "../imgs/logo.png";
+import "../css/SearchResults.css";
 
-import "../css/NavBar.css";
-
-let modalStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    height: "75%",
-    width: "50%",
-    zIndex: "5",
-    backgroundColor: "rgb(238,238,238)",
-    color: "rgb(5,56,107)",
-    overflowY: "scroll",
-  },
-};
-
-let popoverStyles = {
-  content: {
-    backgroundColor: "rgb(62, 56, 146)",
-    overflow: "hidden",
-  },
-};
-
-Modal.setAppElement("div");
-
-class NavBar extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      anchorEl: null,
-      modalIsOpen: false,
-      modalInfo: null,
-      popoverOpen: false,
-      popoverFired: false,
-      signedIn: false,
-      search: "",
-    };
-
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.toggle = this.toggle.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.open = false;
-  }
-
-  handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
+class SearchResults extends Component {
+  state = {
+    currentPage: 0
   };
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
   };
 
-  openModal(info, event) {
-    this.setState({ modalIsOpen: true, modalInfo: info });
-  }
-
-  closeModal() {
-    this.setState({ modalIsOpen: false });
-  }
-
-  noPopUpInSearch = () => {
-    if(localStorage.getItem("token")) {
-      this.setState({ signedIn: true})
-    }
-    else {
-      this.setState( {
-        signedIn: false
-      })
-    }
-  }
-
-  toggle = event => {
-    // Only fires the popover the first time they click on the search bar
-    if (!this.state.popoverFired) {
-      this.setState({ popoverOpen: true, popoverFired: true });
-    } else {
-      this.setState({ popoverOpen: false });
-    }
-    this.noPopUpInSearch();
-  };
-
-  handleInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  handleSearch = event => {
-    if (this.state.search !== "") {
-      this.props.search(this.state.search, true);
-      this.setState({ search: ""});
-    } else {
-      this.openModal();
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevProps.searchReviews !== this.props.searchReviews) {
+      this.updatePage();
     }
   };
 
-  logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("name");
-    this.props.history.push("/");
-  };
-
- 
   render() {
-    const { anchorEl } = this.state;
     return (
-      <div className="navbar">
-        <img
-          alt="logo"
-          src={logo}
-          className="navbar__logo"
-          onClick={() => {
-            this.props.history.push(`/`);
-          }}
-        />
-        <div className="navbar__center">
-          <input
-            value={this.state.search}
-            autoComplete="off"
-            placeholder="Tacos in Seattle..."
-            onClick={this.toggle}
-            onChange={this.handleInputChange.bind(this)}
-            name="search"
-            id="signInPop"
-            className="center__input"
-          />
-          <button type="submit" id="Search" className="center__button" onClick={this.handleSearch}>
-            Search
-          </button>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
-            style={modalStyles}
-            contentLabel="No Input Modal">
-            <div className="navbar__modal">
-              {this.state.modalIsOpen ? (
-                <div className="modal__container">
-                  <div className="container__title">No Search Term!</div>
-                  <div className="container__body">You can't very well search for nothing...</div>
-                  <div className="container__footer">
-                    <button className="footer__button" onClick={this.closeModal}>
-                      Close
-                    </button>
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          </Modal> {this.state.signedIn? ( null ) : ( 
-          <Popover
-            styles={{ popoverStyles }}
-            placement="top"
-            isOpen={this.state.popoverOpen}
-            target="signInPop"
-            toggle={this.toggle}>
-            <PopoverHeader>Sign In?</PopoverHeader>
-<<<<<<< HEAD
-            <PopoverBody>Subscribers who sign can see unlimited reviews!</PopoverBody>
-=======
-            <PopoverBody>Users who sign in can see unlimited reviews!</PopoverBody>
->>>>>>> 4e47a008bbdec49647fa59b56a1de2e10a67d796
-            <button type="submit" className="popover-button" onClick={this.toggle}>
-              Close
-            </button>
-          </Popover>
-          )}
+      <div>
+        <NavBar search={this.props.search} />
+        <div className="search">
+          <div className="search__title"> Search Results </div>
+          <div className="search__results">
+            {this.props.searchResults ? (
+              this.props.searchResults.map((result, i) => {
+                if (
+                  i < this.state.currentPage * 10 + 10 &&
+                  i >= this.state.currentPage * 10
+                ) {
+                  return (
+                    <div key={result.place_id} className="results__result">
+                      <img
+                        alt={result.name}
+                        className={
+                          result.photos !== "No Photos Listed"
+                            ? result.photos[0].width >= result.photos[0].height
+                              ? "result__landscape"
+                              : "result__portrait"
+                            : null
+                        }
+                        src={
+                          result.photos !== "No Photos Listed"
+                            ? result.photos[0].link
+                            : null
+                        }
+                        onClick={this.handleBusiness.bind(this, result)}
+                      />
+                      <div className="result__info">
+                        <div className="info__stars-container">
+                          <div className="stars-container__text">
+                            {result.name}
+                          </div>
+                        </div>
+                        <div className="info__address">
+                          <div className="address__item">
+                            {result.formatted_address
+                              .split(",")
+                              .splice(0, 1)
+                              .toString()}
+                          </div>
+                          <div className="address__item">
+                            {result.formatted_address
+                              .split(",")
+                              .splice(1, 2)
+                              .join(",")
+                              .trim()}
+                          </div>
+                          <div className="address__item">
+                            {result.formatted_address
+                              .split(",")
+                              .splice(3)
+                              .toString()
+                              .trim()}
+                          </div>
+                        </div>
+                        <div className="info__contact">
+                          <div className="contact__item">
+                            {result.types.map(type => (
+                              <div key={type} style={{ fontSize: "1.5rem" }}>
+                                {type}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                } else {
+                  return null;
+                }
+              })
+            ) : (
+              <div>No Results</div>
+            )}
+          </div>
+          <div id="pagination" className="results__pagination">
+            {this.props.searchResults ? this.createPagination() : null}
+          </div>
         </div>
-        {localStorage.getItem("token") && localStorage.getItem("userId") ? (
-          <div className="navbar-container__right">
-            {" "}
-            <div
-              onClick={() => {
-                this.props.history.push(`/user`);
-              }}>
-              {" "}
-              Hi, {localStorage.getItem("name").split(" ")[0]}!
-            </div>
-            <div>
-              <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
-                Open Menu
-              </Button>
-              <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
-                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    this.props.history.push(`/user`);
-                  }}>
-                  My account
-                </MenuItem>
-                <MenuItem onClick={this.logout}>Logout</MenuItem>
-              </Menu>
-            </div>
-          </div>
-        ) : (
-          <div className="navbar__right">
-            <button
-              className="right__sign"
-              onClick={() => {
-                this.props.history.push(`/signup`);
-              }}>
-              Sign Up
-            </button>
-            <button
-              className="right__sign"
-              onClick={() => {
-                this.props.history.push(`/signin`);
-              }}>
-              Sign In
-            </button>
-          </div>
-        )}
       </div>
     );
   }
+  handleBusiness = (business, event) => {
+    this.props.business(business);
+  };
+
+  updatePage = (currentPage, event) => {
+    // How to update active on click
+    if (event) {
+      let children = document.getElementById("pagination").childNodes;
+      children.forEach(child => {
+        child.classList.remove("active");
+      });
+      document.getElementById(event.target.id).classList.add("active");
+      this.setState({ currentPage });
+    }
+    // Set the 0th page to active
+    else {
+      document.getElementById(0).classList.add("active");
+    }
+  };
+
+  createPagination = () => {
+    let pages = new Set([0]);
+    let lastPage =
+      (this.props.searchResults.length / 10) % 1 === 0
+        ? Math.floor(this.props.searchResults.length / 10) - 1
+        : Math.floor(this.props.searchResults.length / 10);
+
+    for (let i = 10; i < this.props.searchResults.length - 10; i++) {
+      if (i % 10 === 0) {
+        if (
+          i >= this.state.currentPage * 10 - 20 &&
+          i <= this.state.currentPage * 10 + 20
+        ) {
+          pages.add(i / 10);
+        }
+        if (this.state.currentPage <= 3 && i <= 40) {
+          pages.add(i / 10);
+        }
+        if (
+          this.state.currentPage >= this.props.searchResults.length / 10 - 4 &&
+          i >= this.props.searchResults.length - 50
+        ) {
+          pages.add(i / 10);
+        }
+      }
+    }
+    if (this.props.searchResults.length > 10) {
+      pages.add(lastPage);
+    }
+    pages = [...pages].sort((x, y) => x - y);
+    if (this.state.currentPage > 3) pages.splice(1, 0, "...");
+    if (this.state.currentPage < lastPage - 3)
+      pages.splice(pages.length - 1, 0, "...");
+    return pages.map((page, i) => {
+      if (page === "...") {
+        return (
+          <div key={i + page} id={page} className="pagination__page--no-hover">
+            {page}
+          </div>
+        );
+      }
+      return (
+        <div
+          key={page}
+          id={page}
+          className="pagination__page"
+          onClick={this.updatePage.bind(this, page)}
+        >
+          {page}
+        </div>
+      );
+    });
+  };
 }
 
-export default withRouter(NavBar);
+export default withRouter(SearchResults);
