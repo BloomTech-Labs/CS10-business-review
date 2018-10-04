@@ -117,7 +117,7 @@ class SignUp extends Component {
                 <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createUser}>
                   Confirm Registration
                 </button>
-                <hr />
+                {/* <hr />
                 <img
                   alt="Google Logo"
                   src={signUp}
@@ -125,7 +125,7 @@ class SignUp extends Component {
                   onClick={() => {
                     window.location = `${backend}auth/google`;
                   }}
-                />
+                /> */}
               </div>
             </form>
           </div>
