@@ -137,6 +137,7 @@ export default class NewReview extends Component {
 
   render() {
     return (
+      <div>{localStorage.getItem('token') &&  localStorage.getItem('userId') ?(
       <Modal
         shouldCloseOnOverlayClick={false}
         isOpen={this.state.modalIsOpen}
@@ -203,7 +204,7 @@ export default class NewReview extends Component {
             </div>
           ) : null}
         </div>
-      </Modal>
+      </Modal>): (null)}</div>
     );
   }
 }

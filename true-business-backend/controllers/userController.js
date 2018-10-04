@@ -18,26 +18,6 @@ function generateToken(user) {
   return jwt.sign(payload, secret, options);
 }
 
-
-const  restricted = (request, response, next) => {
-  const token = request.headers.authorization;
-
-  if (token) {
-      jwt.verify(token, process.env.REACT_APP_SECRET, (err, decodedToken) => {
-
-          if (err) {
-              return res
-                  .status(401)
-                  .json({ message: 'Haha! Unauthorized!' });
-          }
-          console.log("Restricted");
-          next();
-      });
-  } else {
-      res.status(401).json({ message: 'You need some token, my Friend!' });
-  }
-}
-
 const bcryptRounds = 10;
 
 const register = (request, response) => {
@@ -88,9 +68,7 @@ const login = (request, response) => {
 };
 
 const getUserById = (request, response) => {
-  const { _id } = request.body;
-
-  User.findOne(_id)
+  User.findById({_id:request.params.id})
     .then(function(user) {
       response.status(200).json(user);
     })
@@ -119,8 +97,7 @@ const getRandomUser = (request, response) => {
 
 const deleteUserById = (request, response) => {
   const { _id } = request.body;
-
-  User.findByIdAndRemove(_id)
+  User.findByIdAndRemove({ _id: request.params._id })
     .then(function(user) {
       response.status(200).json(user);
     })
@@ -131,18 +108,22 @@ const deleteUserById = (request, response) => {
     });
 };
 
-const updateUser = (request, response) => {
-  const { _id, username, email } = request.body;
- User.findOneAndUpdate(_id, {username, email})
- .then(function(user) {
-   console.log("Date", user)
-   response.status(200).json(user);
- })
- .catch(function(error){
-   response.status(500).json({
-  errorMessage: "The user could not be updated: " + error
-   })
- })
+const updateUser = (request, response) => { 
+  const { _id, username, email } = request.body;  
+  User.findById({ _id: request.params.id })  
+  .then(function(user) {  
+    if (user) {   
+         user.username = username, user.email = email;       
+          User.findByIdAndUpdate( { _id: request.params.id }, user).then(user => { 
+           response.status(200).json(user)
+         }).catch(err => {           
+          response.status(500).json(`message: Error username or email: ${err}`)
+         })
+         }
+  })
+  .catch(function(error){
+    response.status(500).json(`message: Error username or email: ${error}`)
+    })
 }
 
 const getAllUsers = (request, response) => {
@@ -157,8 +138,8 @@ const getAllUsers = (request, response) => {
     });
 };
 
-
 const reset_password = function(request, response) {
+  console.log("Fire password")
   const { _id, password, newPassword, verifyPassword } = request.body;  
   User.findById({ _id: request.params._id })  
   .then(function(user) {    
@@ -176,7 +157,7 @@ const reset_password = function(request, response) {
   }
   })
   .catch(function(error){
-    res.status(500).json(`message: Error reseting password: ${error}`)
+    response.status(500).json(`message: Error reseting password: ${error}`)
     })
 }
 
@@ -186,8 +167,7 @@ module.exports = {
   getUserById,
   deleteUserById,
   updateUser,
-  getAllUsers,
-  restricted,
+  getAllUsers,  
   reset_password,
   getRandomUser
 
