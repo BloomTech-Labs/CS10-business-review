@@ -10,6 +10,30 @@ function generateToken(user) {
   secret = process.env.REACT_APP_SECRET;
   if (typeof secret !== "string") {
     secret = process.env.secret;
+<<<<<<< HEAD
+=======
+  }
+  return jwt.sign(payload, secret, options);
+}
+
+
+const  restricted = (request, response, next) => {
+  const token = request.headers.authorization;
+
+  if (token) {
+      jwt.verify(token, process.env.REACT_APP_SECRET, (err, decodedToken) => {
+
+          if (err) {
+              return res
+                  .status(401)
+                  .json({ message: 'Haha! Unauthorized!' });
+          }
+          console.log("Restricted");
+          next();
+      });
+  } else {
+      res.status(401).json({ message: 'You need some token, my Friend!' });
+>>>>>>> 4e47a008bbdec49647fa59b56a1de2e10a67d796
   }
   return jwt.sign(payload, secret, options);
 }
