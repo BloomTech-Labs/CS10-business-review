@@ -34,20 +34,18 @@ let modalStyles = {
 
 class User extends Component {
   state = {
-    username: "",
+        username: "",
     email: "",
     password: "",
-    newPassword: "",
-    verifyPassword: "",
+    newPassword:"",
+    verifyPassword:"",
     editUsernameOrEmail: false,
     changePassword: false,
     opendPasswordForm: false,
     passwordAction: "Change",
     Email: false,
     editPassword: false,
-    currentActionUsername: "Change",
-    currentActionEmail: "Change",
-    currentActionPassword: "Change",
+    currenAction: 'Change',
     change: false,
     breadcrumbs: ["Home"],
     current: "Home",
@@ -72,30 +70,24 @@ class User extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    console.log("localStore", localStorage);
     setTimeout(() => {
       this.getReviews(0);
       const id = localStorage.getItem("userId");
       const token = localStorage.getItem("token");
       const headers = { headers: { authorization: token } };
       axios.get(`${backend}api/user/${id}`, headers).then(response => {
-        console.log("AXIOS RESPONSE", response)
         this.setState({
           username: response.data.username,
           email: response.data.email,
         });
       });
-      console.log("localStore in timeout", localStorage);
     }, 300);
-    console.log("localStore after timeout", localStorage);
   };
 
   getReviews = currentPage => {
-    console.log("YUP");
     axios
       .get(`${backend}api/review/getReviewsByReviewerId/${localStorage.getItem("userId")}/${currentPage}`)
       .then(response => {
-        console.log("RESPONSE MOFO", response);
         this.setState({
           reviews: response.data.reviews,
           total: response.data.total,

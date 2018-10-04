@@ -306,7 +306,9 @@ class Business extends Component {
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
                 <div className="reviews__review">
                   {this.state.reviews.length ? (
+                    
                     this.state.reviews.map(review => {
+                      console.log("REVIEW", review)
                       return (
                         <div key={review._id} className="review__info">
                           <img

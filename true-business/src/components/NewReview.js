@@ -128,7 +128,9 @@ export default class NewReview extends Component {
       body: this.state.body,
       stars: this.state.rating,
       photos: this.state.fileURL,
+      reviewer: localStorage.getItem("userId"),
     };
+    console.log("user", localStorage.getItem("userId"))
     this.setState({ title: "", body: "", fileURL: [], rating: 0, starsError: false });
     axios
       .post(`${backend}api/review/create`, review)

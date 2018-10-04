@@ -115,12 +115,25 @@ const updateUser = (request, response) => {
 
 const getAllUsers = (request, response) => {
   User.find({})
-    .then(function(userList) {
-      response.status(200).json(userList);
+    .then(function(users) {
+      let featured = [];
+      let reviews = 100;
+      // While we don't have 4 featured users
+      // When we get likes going, do the same thing we did in businessController
+      while (featured.length < 4 && reviews >= 0) {
+        // While we have an empty DB this may be slow...
+        users.forEach(user => {
+          if (user.numberOfReviews > reviews && !featured.includes(user)) {
+            featured.push(user);
+          }
+        });
+        reviews -= 10;
+      }
+      response.status(200).json(featured);
     })
     .catch(function(error) {
       response.status(500).json({
-        error: "The users could not be found.",
+        error: "The information could not be retrieved.",
       });
     });
 };

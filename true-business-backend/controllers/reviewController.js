@@ -22,7 +22,7 @@ const getReviewsByReviewerId = (req, res) => {
   Review.find({ reviewer: req.params.id })
     .skip(10 * req.params.currentPage)
     .limit(10)
-    .populate("newMongoId")
+    .populate("reviewer")
     .then(reviews => {
       Review.find({ reviewer: req.params.id })
         .count()
@@ -31,7 +31,7 @@ const getReviewsByReviewerId = (req, res) => {
         });
     })
     .catch(error => {
-      res.status(200).json({ "ERROR": error });
+      res.status(200).json({ ERROR: error });
     });
 };
 
@@ -41,6 +41,7 @@ const getReviewsByBusinessId = (req, res) => {
   Review.find({ [search]: req.params.id })
     .skip(10 * req.params.currentPage)
     .limit(10)
+    .populate("reviewer")
     .then(reviews => {
       Review.find({ [search]: req.params.id })
         .count()
@@ -53,25 +54,33 @@ const getReviewsByBusinessId = (req, res) => {
     });
 };
 
-// For Landing Page, Popular Review, do a sort
+// For Landing Page
 const getAllReviews = (req, res) => {
   Review.find({})
-    .populate("reviewer newMongoId")
+    // Don't include this when we get likes
+    .limit(4)
+    .populate('newMongoId reviewer')
     .then(reviews => {
+      // let featured = [];
+      // let likes = 100;
+      // While we don't have 4 featured reviews
+      // When we get likes going, do the same things users
+      // while (featured.length < 4 && reviews >= 0) {
+      //   // While we have an empty DB this may be slow...
+      //   users.forEach(user => {
+      //     if (user.numberOfReviews > reviews && !featured.includes(user)) {
+      //       featured.push(user);
+      //     }
+      //   });
+      //   reviews -= 10;
+      // }
       res.status(200).json(reviews);
     })
-    .catch(error => {
-      res.status(500).json({ error });
+    .catch(function(error) {
+      response.status(500).json({
+        error: "The information could not be retrieved.",
+      });
     });
-  // Review.find({})
-  //   .skip(10 * req.params.currentPage )
-  //   .limit(10)
-  //   .then(response => {
-  //     res.status(200).json(response);
-  //   })
-  //   .catch(error => {
-  //     res.status(200).json;
-  //   });
 };
 
 module.exports = {
