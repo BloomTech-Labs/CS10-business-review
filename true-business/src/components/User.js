@@ -31,7 +31,7 @@ let modalStyles = {
     color: "rgb(5,56,107)",
   },
 };
-
+ 
 class User extends Component {
   state = {
     username: "",

@@ -17,7 +17,7 @@ class SignIn extends Component {
     this.state = {
       username: "",
       password: "",
-      error: "",
+      error: false,
       errorMessage: "",
     };
   }
@@ -27,6 +27,12 @@ class SignIn extends Component {
   };
 
   signIn = () => {
+    if( !this.state.username || !this.state.password ) {
+      this.setState({
+        error: true,
+        errorMessage: "Please provide a username and password!"})
+    }
+    else {
     axios
       .post(`${backend}api/user/login`, {username:this.state.username, password:this.state.password})
       .then(response => {
@@ -43,11 +49,14 @@ class SignIn extends Component {
         this.props.history.push(`/user`);
       })
       .catch(err => {
+        if(err) {
         this.setState({
           error: true,
-          errorMessage: err.response.data.error,
+          errorMessage: "Incorrect username or password",
         });
+        }
       });
+    }
   };
 
   handleInputChange = event => {
@@ -62,6 +71,7 @@ class SignIn extends Component {
           <div className="signin-container">
             <div className="signin-container__header"> Sign In </div>
             <div className="signin-container__form">
+            <div className="danger"> {this.state.errorMessage} </div>
               <input
                 className="signin-container__input"
                 placeholder="Username"
