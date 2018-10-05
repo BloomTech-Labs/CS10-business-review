@@ -10,8 +10,8 @@ import "../css/Business.css";
 import "../css/GeneralStyles.css";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
-if (typeof(backend) !== 'string') {
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
   backend = heroku;
 }
 
@@ -28,7 +28,6 @@ let modalStyles = {
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
-    overflowY: "scroll",
   },
 };
 
@@ -46,23 +45,24 @@ class Business extends Component {
     modalIsOpen: false,
     modalInfo: null,
     currentPage: 0,
+    total: 0,
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    if (this.props.business !== null) this.getReviews();
-  };
-
-  componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.reviews.length !== this.state.reviews.length) {
-      this.updatePage();
+    if (this.props.business !== null) {
+      this.getReviews(0);
     }
   };
 
   toggleDropDown = event => {
     let toggle = event.target.name;
+    let other = "showfilterBy";
+    if (toggle === "showfilterBy") {
+      other = "showsortBy";
+    }
     let inverse = this.state[toggle];
-    this.setState({ [toggle]: !inverse });
+    this.setState({ [toggle]: !inverse, [other]: false });
   };
 
   toggleFilterChoice = event => {
@@ -87,16 +87,20 @@ class Business extends Component {
   showModal = show => {
     this.setState({ open: show });
     // Cheap way to re-render with the new review showing
-    this.getReviews();
+    this.getReviews(this.state.currentPage);
   };
 
-  getReviews = () => {
+  getReviews = currentPage => {
     if (this.props.business) {
       let id = this.props.landingBusiness ? this.props.business._id : this.props.business.place_id;
       axios
-        .get(`${backend}api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}`)
-        .then(reviews => {
-          this.setState({ reviews: reviews.data, newBusinessId: this.props.newBusinessId });
+        .get(`${backend}api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}/${currentPage}`)
+        .then(response => {
+          this.setState({
+            reviews: response.data.reviews,
+            total: response.data.total,
+            newBusinessId: this.props.newBusinessId,
+          });
         })
         .catch(error => {
           console.log("Error", error);
@@ -112,61 +116,72 @@ class Business extends Component {
     this.setState({ modalIsOpen: false });
   };
 
-  updatePage = (currentPage, event) => {
-    // How to update active on click
-    if (event) {
-      let children = document.getElementById("pagination").childNodes;
-      children.forEach(child => {
-        child.classList.remove("active");
-      });
-      document.getElementById(event.target.id).classList.add("active");
-      this.setState({ currentPage });
-    }
-    // Set the 0th page to active
-    else {
-      document.getElementById(0).classList.add("active");
-    }
+  updatePage = currentPage => {
+    this.setState({ currentPage });
+    this.getReviews(currentPage);
   };
 
   createPagination = () => {
-    let pages = new Set([0]);
     let lastPage =
-      (this.state.reviews.length / 10) % 1 === 0
-        ? Math.floor(this.state.reviews.length / 10) - 1
-        : Math.floor(this.state.reviews.length / 10);
-    for (let i = 10; i < this.state.reviews.length - 10; i++) {
-      if (i % 10 === 0) {
-        if (i >= this.state.currentPage * 10 - 20 && i <= this.state.currentPage * 10 + 20) {
-          pages.add(i / 10);
-        }
-        if (this.state.currentPage <= 3 && i <= 40) {
-          pages.add(i / 10);
-        }
-        if (this.state.currentPage >= this.state.reviews.length / 10 - 4 && i >= this.state.reviews.length - 50) {
-          pages.add(i / 10);
-        }
+      // Ex. 100 / 10 % 1 = 0
+      // Ex. 101 / 10 % 1 != 0
+      (this.state.total / 10) % 1 === 0
+        ? // 100 / 10 - 1 = 9, so pages 0-9 will show results 0-99 (10 pages, 10 each page)
+          Math.floor(this.state.total / 10) - 1
+        : // 101 / 10 = 10, so pages 0-10 will show results 0-100 (11 pages, 1 on the last page)
+          Math.floor(this.state.total / 10);
+
+    // Set is the lazy / quick way if there is only one page
+    let pages = new Set([0, lastPage]);
+    // Load the appropriate pages
+    // current:1 	1 2 ... 10
+    // current:2	1 2 3 ... 10
+    // current:3	1 2 3 4 ... 10
+    // current:4	1 ... 3 4 5 ... 10
+    // current:5	1 ... 4 5 6 ... 10
+    // current:6	1 ... 5 6 7 ... 10
+    // current:7	1 ... 6 7 8 ... 10
+    // current:8	1 ... 7 8 9 10
+    // current:9	1 ... 8 9 10
+    // current:10	1 ... 9 10
+    for (let i = 1; i < lastPage; i++) {
+      if (i <= this.state.currentPage + 1 && i >= this.state.currentPage - 1) {
+        pages.add(i);
       }
     }
-    if (this.state.reviews.length > 10) {
-      pages.add(lastPage);
+
+    pages = [...pages].sort((a, b) => a - b);
+    // Add an elipsis if more than 3 away from the first page
+    if (this.state.currentPage > 2) {
+      pages.splice(1, 0, "...");
     }
-    pages = [...pages].sort((x, y) => x - y);
-    if (this.state.currentPage > 3) pages.splice(1, 0, "...");
-    if (this.state.currentPage < lastPage - 3) pages.splice(pages.length - 1, 0, "...");
-    return pages.map((page, i) => {
-      if (page === "...") {
-        return (
-          <div key={i + page} id={page} className="pagination__page--no-hover">
-            {page}
-          </div>
-        );
-      }
-      return (
-        <div key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
-          {page}
+
+    // Add an elipsis if more than 3 away from the last page
+    if (this.state.currentPage < lastPage - 2) {
+      pages.splice(pages.length - 1, 0, "...");
+    }
+
+    return pages.length > 1 ? (
+      <div className="reviews__pagination">
+        Page {this.state.currentPage + 1} / {lastPage + 1}
+        <div id="pagination" className="pagination__pages">
+          {pages.map((page, i) => {
+            if (page === "...") {
+              return (
+                <button key={i + page} id={page} className="pagination__page--no-hover">
+                  {page}
+                </button>
+              );
+            }
+            return (
+              <button key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
+                {page + 1}
+              </button>
+            );
+          })}
         </div>
-      );
-    });
+      </div>
+    ) : null;
   };
 
   render() {
@@ -178,7 +193,7 @@ class Business extends Component {
             <div className="business__info">
               <img
                 alt={this.props.business.name}
-                className={this.props.business.photos[0].width >= this.props.business.photos[0].height ? "info__landscape" : "info__portrait"}
+                className="info__landscape"
                 src={this.props.business.photos[0].link}
               />
               <div className="info__title">{this.props.business.name}</div>
@@ -234,9 +249,10 @@ class Business extends Component {
                   />
                 ) : null}
               </div>
-              <button id="NewReview" className="reviews-container__button" onClick={this.displayNewReview}>
-                New Review
-              </button>
+              {
+               localStorage.getItem('token') &&  localStorage.getItem('userId') ? (
+              <button id="NewReview" className="reviews-container__button" onClick={this.displayNewReview}> New Review </button>
+               ) : (null)}
               <div className="reviews-container__dropdowns">
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__title"> Filter By: </div>
@@ -291,40 +307,33 @@ class Business extends Component {
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
                 <div className="reviews__review">
                   {this.state.reviews.length ? (
-                    this.state.reviews.map((review, i) => {
-                      if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
-                        console.log("FUCKING REVIEW", review)
-                        return (
-                          <div key={review._id} className="review__info">
-                            <img
-                              alt={review.reviewer.username}
-                              className={review.photos[0].width >= review.photos[0].height ? "review__landscape" : "review__portrait"}
-                              src={review.photos[0].link}
-                              onClick={() => this.openModal(this, review)}
-                            />
-                            <StarRatings
-                              starDimension="20px"
-                              starSpacing="5px"
-                              rating={review.stars}
-                              starRatedColor="gold"
-                              starEmptyColor="grey"
-                              numberOfStars={5}
-                              name="rating"
-                            />
-                            <div className="review__reviewer">@{review.reviewer.username}</div>{" "}
-                          </div>
-                        );
-                      } else {
-                        return null;
-                      }
+                    this.state.reviews.map(review => {
+                      return (
+                        <div key={review._id} className="review__info">
+                          <img
+                            alt={review.reviewer.username}
+                            className="review__landscape"
+                            src={review.photos[0].link}
+                            onClick={() => this.openModal(this, review)}
+                          />
+                          <StarRatings
+                            starDimension="20px"
+                            starSpacing="5px"
+                            rating={review.stars}
+                            starRatedColor="gold"
+                            starEmptyColor="grey"
+                            numberOfStars={5}
+                            name="rating"
+                          />
+                          <div className="review__reviewer">@{review.reviewer.username}</div>{" "}
+                        </div>
+                      );
                     })
                   ) : (
                     <div>No Reviews</div>
                   )}
                 </div>
-                <div id="pagination" className="reviews__pagination">
-                  {this.createPagination()}
-                </div>
+                <div>{this.createPagination()}</div>
               </div>
             </div>
             <Modal
@@ -341,12 +350,12 @@ class Business extends Component {
                       <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
                     </div>
                     <div className="modal__body">
-                    <img
-                alt={this.state.modalInfo.name}
-                className={this.state.modalInfo.photos[0].width >= this.state.modalInfo.photos[0].height ? "body__landscape" : "body__portrait"}
-                src={this.state.modalInfo.photos[0].link}
-                onClick={this.openModal}
-              />
+                      <img
+                        alt={this.state.modalInfo.name}
+                        className="body__landscape"
+                        src={this.state.modalInfo.photos[0].link}
+                        onClick={this.openModal}
+                      />
                       <div className="body__stars">
                         {" "}
                         <StarRatings

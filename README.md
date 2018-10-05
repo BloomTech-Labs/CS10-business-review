@@ -30,10 +30,11 @@ A clean presentation with a white-based palette has been chosen in order to prov
 
 The general frontend structure consists on:
 
-- The Landing page, with sign up and log in modal with OAuth option.
-- A display page that features a filtered search option, popular businesses, popular reviews, and popular reviewers.
-- An "Add review" option for users to add their own experiences and photos via Cloudinary by way of React-Dropzone.
-- The "User Settings" page, accessed by clicking on the username on the top right corner of the application. Here the premium subscription can be aquired by [Stripe](https://stripe.com) payment, as well as the option to change the password.
+- The Navigation bar; Google Places API search functionality and a sign-up and log-in component with OAuth option.
+- The Landing page;  features popular businesses, popular reviews, and popular reviewers.
+- The "Add review" modal; allow's registered users to add their own experiences and photos via Cloudinary by way of React-Dropzone.
+- The "User Settings" component; accessed by clicking on the user button on the navigation bar.  Here the premium subscription can be aquired by [Stripe](https://stripe.com) payment, as well as the option to change the password, username, or e-mail, or the option to view all of the user's reviews.
+- A business component that displays all reviews for the business, as well as information acquired from the Google Place Details API.
 
 ### **Backend**
 

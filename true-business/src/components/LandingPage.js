@@ -12,16 +12,14 @@ let modalStyles = {
   content: {
     top: "50%",
     left: "50%",
-    right: "auto",
-    bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "75%",
-    width: "50%",
+    height: "90vh",
+    width: "55vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
-    overflowY: "scroll",
+    overflow: "hidden",
   },
 };
 
@@ -53,6 +51,7 @@ class LandingPage extends Component {
   };
 
   render() {
+    console.log(this.props.reviews, this.props.businesses, this.props.users);
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -62,19 +61,15 @@ class LandingPage extends Component {
             <div className="container__items">
               {this.props.reviews.map((review, i) => {
                 if (i < 4) {
-                  console.log("review", review);
                   return (
                     // Need to write a component that shows all the reviews by a certain user
                     // Whenever they click on the username in this section or in the bottom section
                     // <div key={review._id} onClick={() => this.props.userReviews(user)}>
-
                     <div key={review._id} className="items__item">
                       <img
                         alt={review.newMongoId.name}
                         src={review.photos[0].link}
-                        className={
-                          review.photos[0].width >= review.photos[0].height ? "item__landscape" : "item__portrait"
-                        }
+                        className="item__landscape"
                         onClick={() => this.openModal(this, review)}
                       />
                       <div className="item__title">{review.newMongoId.name}</div>
@@ -121,12 +116,12 @@ class LandingPage extends Component {
                       <img
                         alt={user.username}
                         src={user.userImages[0].link}
-                        className={"item__landscape"}
+                        className="item__landscape"
                         // onClick={() => this.openModal(this, user)}
                       />
                       <div className="item__info--hover">@{user.username}</div>
-                      <div className="item__info"># of Reviews: {user.numberOfReviews}</div>
-                      <div className="item__info"># of Likes: {user.numberOfLikes}</div>
+                      <div className="item__info">{user.numberOfReviews} Reviews</div>
+                      <div className="item__info">{user.numberOfLikes} Likes</div>
                     </div>
                   );
                 }
@@ -140,19 +135,37 @@ class LandingPage extends Component {
             onRequestClose={this.closeModal}
             style={modalStyles}
             contentLabel="Review Modal">
-            <div className="landing-container__modal">
+            <div className="modal">
               {this.state.modalIsOpen ? (
                 <div className="modal-container">
                   <div className="modal__header">
-                    <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
-                    <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
+                    <div className="header__image">
+                      <button className="image__button" onClick={this.closeModal}>
+                        Close
+                        <i className="far fa-window-close" />
+                      </button>
+                      {/* Update reviews / user with likes */}
+                      <button className="image__button">
+                        Like
+                        <i className="fas fa-thumbs-up" />
+                      </button>
+                      <img
+                        alt={this.state.modalInfo.newMongoId.name}
+                        className="image__landscape"
+                        src={this.state.modalInfo.photos[0].link}
+                      />
+                    </div>
+                    <div className="header__user">
+                      <div className="header__title"> {this.state.modalInfo.newMongoId.name}</div>
+                      {/* Onclick to go to the user component whenever we get to that... */}
+                      <div className="header__reviewer">
+                        <div className="reviewer__info--onclick">@{this.state.modalInfo.reviewer.username}</div>
+                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
+                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
+                      </div>
+                    </div>
                   </div>
                   <div className="modal__body">
-                    <img
-                      alt={this.state.modalInfo.newMongoId.name}
-                      className="body__image"
-                      src={this.state.modalInfo.photos[0].link}
-                    />
                     <div className="body__stars">
                       <StarRatings
                         starDimension="20px"
@@ -163,14 +176,14 @@ class LandingPage extends Component {
                         numberOfStars={5}
                         name="rating"
                       />
+                      <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
                     </div>
-                    <div>{this.state.modalInfo.title}</div>
-                    <div className="body__review">{this.state.modalInfo.body}</div>
-                  </div>
-                  <div className="modal__footer">
-                    <button className="footer__button" onClick={this.closeModal}>
-                      close
-                    </button>
+                    <div className="body__title">
+                      {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
+                    </div>
+                    <div className="body__review">
+                      {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                    </div>
                   </div>
                 </div>
               ) : null}

@@ -1,22 +1,17 @@
-@import 'mixins.less';
+@import "mixins.less";
 
 .user {
-  .containers(@width: auto, @justifyContent: flex-start, @alignItems: flex-start);
-  padding-top: 25vh;
-  padding-left: 5rem;
-  color: @textColor;
+  .containers(@width: auto, @justifyContent: space-around, @alignItems: flex-start);
+  padding: 15vh 5rem 5rem 5rem;
   .user__header {
     .containers(@flexDirection: row, @height: 5rem);
     .header__breadcrumbs {
-      .containers(@flexDirection:row, @height:inherit, @alignItems:flex-start, @justifyContent: flex-start);
+      .containers(@flexDirection:row, @height:inherit, @justifyContent: flex-start);
       font-size: 1.5rem;
       .breadcrumbs__breadcrumb {
-        border: none;
+        .buttons();
         width: auto;
-        font-size: 1.5rem;
-        background-color: @elementBackground;
-        color: @textColor;
-        margin: 0 1rem;
+        padding: 0 1rem;
         .breadcrumb__arrow {
           padding: 0 1rem;
         }
@@ -24,14 +19,11 @@
           cursor: default;
         }
       }
-      .breadcrumbs__breadcrumb:hover {
-        cursor: pointer;
-      }
     }
     .header__signout {
-      .containers(@alignItems: flex-end, @justifyContent: flex-start);
-      padding-right: 5rem;
-      font-size: 1.5rem;
+      .buttons();
+      margin-right: 5rem;
+      white-space: nowrap;
     }
     .header__signout:hover {
       cursor: pointer;
@@ -39,127 +31,235 @@
   }
   .user__body {
     .containers(@flexDirection: row, @alignItems:flex-start, @justifyContent:space-between);
+    min-height: 100vh;
+    width: 80vw;
     .body__left-bar {
-      .containers(@width: 20vw, @height: auto, @justifyContent:flex-start, @alignItems: flex-start);
-      border: 0.1rem solid black;
+      .containers(@width: 20vw, @height: 20vh, @justifyContent: space-around);
+      .backAndBorder();
       .left-bar__button {
+        .backAndBorder();
         border: none;
-        width: 100%;
-        font-size: 1.5rem;
-        background-color: @elementBackground;
-        color: @textColor;
+        width: 95%;
         padding: 1rem;
-      }
-      .left-bar__button:hover {
-        filter: brightness(120%);
-        cursor: pointer;
+        &:hover {
+          font-weight: bolder;
+          cursor: pointer;
+        }
       }
     }
     .body__content {
       .containers(@justifyContent: flex-start, @alignItems: flex-start);
-      .content__user-reviews {
-        .containers(@justifyContent: flex-start, @alignItems: flex-start, @flexDirection: row);
-        flex-wrap: wrap;
-        .user-reviews__item {
-          .containers(@width: 20%, @height: 15rem);
-          margin: 0 1rem 1rem 1rem;
-          border: 0.1rem solid black;
-          padding: 1rem;
-          background-color: @elementBackground;
-          color: @textColor;
-          .item__image {
-            width: 10rem;
-            height: 10rem;
-            background-color: black;
-          }
-          .item__image:hover {
-            cursor: pointer;
-          }
-          .item__info {
-            font-size: 1.25rem;
-            text-align: center;
-          }
-        }
-        .user-reviews__add {
-          .containers(@width: 20%, @height: 15rem);
-          background-color: @elementBackground;
-          margin: 0 1rem 1rem 1rem;
-          border: 0.1rem solid black;
-          padding: 1rem;
-          .add__image:hover {
-            cursor: pointer;
-          }
-          .add__text {
-            color: @textColor;
-            font-size: 2rem;
-          }
-        }
-      }
-      .content__solo-add {
-        .containers();
-        padding: 1rem 20rem 1rem 0;
-        .solo-add__image:hover {
-          cursor: pointer;
-        }
-        .solo-add__text {
-          color: @textColor;
-          font-size: 2rem;
-        }
-      }
-      .content__profile {
-        .containers(@flexDirection: row, @justifyContent: space-between);
-        .profile__image {
-          margin: 1rem 3rem;
-          width: 15rem;
-          height: 20rem;
-          background-color: black;
-        }
-        .profile__image:hover {
-          cursor: pointer;
-        }
-        .profile__container {
-          .user-change__input {
+      .content__reviews-container {
+        .containers(@padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        min-width: 60vw;
+        max-width: 60vw;
+        min-height: 85vh;
+        max-height: 85vh;
+        .backAndBorder();
+        .reviews-container__dropdowns {
+          .containers(@flexDirection: row, @justifyContent: space-between);
+          .reviews__pagination {
+            .containers(@flexDirection: row, @justifyContent: space-between);
+            .backAndBorder(@background: @elementBG);
+            width: 40vw;
+            min-width: 50%;
             padding: 0.5rem;
-            font-size: 1.25rem
-          }        
-          .containers(@width: 70%);
-          .container__info {
-            .containers(@flexDirection: row);
             margin: 1rem;
-            .info__label {
-              font-size: 1.5rem;
-              width: 20%;
+            .pagination__pages {
+              .containers(@flexDirection: row);
+              max-width: 75%;
+              min-width: 75%;
+              .pagination__page {
+                .buttons();
+                width: 5%;
+                margin: 0 0.5rem;
+              }
+              .pagination__page:hover {
+                cursor: pointer;
+              }
+              .pagination__page:active {
+                animation: shake 0.1s both;
+              }
+              .pagination__page--no-hover {
+                width: 5%;
+                cursor: default;
+              }
             }
-            .info__data {
-              width:50%;
-              font-size: 1.5rem;
-              .password-reset {
+          }
+          .dropdowns__dropdown {
+            display: flex;
+            flex-direction: row;
+            z-index: 2;
+            .dropdown__title {
+              font-size: 2rem;
+            }
+            .dropdown__drop-container {
+              margin-left: 2rem;
+              width: 15rem;
+              text-align: center;
+              .drop-container__button {
+                width: inherit;
+                font-size: 1.5rem;
+                color: @textColor;
+              }
+              .drop-container__button:hover {
+                cursor: pointer;
+              }
+              .drop-container__menu {
+                position: absolute;
+                z-index: 2;
                 display: flex;
                 flex-direction: column;
-                width: 60%; 
-                
-                .password-change__input {
-                  padding: 0.5rem;
-                  font-size: 1.25rem;
-                  margin: 5px;
+                width: inherit;
+                .menu__button {
+                  width: inherit;
+                  border: none;
+                  font-size: 1.5rem;
+                  color: @textColor;
+                }
+                .menu__button:hover {
+                  filter: brightness(80%);
+                  cursor: pointer;
                 }
               }
             }
-
-            .info__button {
-              width: 20%;
-              border: none;
-              font-size: 1.25rem;
-              background-color: @elementBackground;
-              color: @textColor;
+          }
+        }
+        .reviews-container__button {
+          .buttons();
+        }
+        .reviews-container__reviews {
+          .containers(@justifyContent: space-between);
+          min-height: 75vh;
+          flex: 1;
+          .reviews__review {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2rem;
+            .review__info {
+              .containers();
+              .backAndBorder();
+              height: 15rem;
+              min-width: 17%;
+              max-width: 17%;
+              margin: 1rem;
               padding: 1rem;
+              color: @textColor;
+              opacity: 0.8;
+              .review__landscape {
+                .images();
+                width: 75%;
+                min-width: 75%;
+                height: 50%;
+                min-height: 50%;
+              }
+              .review__image:hover {
+                cursor: pointer;
+              }
+              .info__detailed {
+                .containers();
+                .detailed__stars {
+                  text-align: center;
+                }
+                .detailed__business {
+                  .body(@fontSize: 1.5rem);
+                  text-align: center;
+                }
+              }
             }
-            .info__button:hover{
-              cursor: pointer;
+            .review__info:hover {
+              opacity: 1;
             }
           }
         }
       }
+      .content__billing {
+        .containers(@padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        min-width: 75vw;
+        max-width: 75vw;
+        min-height: 85vh;
+        max-height: 85vh;
+        .backAndBorder();
+        .billing__section {
+          .containers(@width: 40%, @justifyContent: space-between, @flexDirection: row);
+          .billing__info {
+            .body(@fontSize: 1.5rem);
+          }
+        }
+      }
+      .content__profile {
+        .containers(@justifyContent: space-between, @padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        min-width: 60vw;
+        max-width: 60vw;
+        min-height: 60vh;
+        max-height: 60vh;
+        .backAndBorder();
+        .profile__container {
+          .containers(@padding: 1rem);
+          .user-change__input {
+            padding: 0.5rem;
+            font-size: 1.25rem;
+          }
+          .profile__image {
+            .images(@top: 0);
+            width: 40%;
+            min-width: 40%;
+            height: 40%;
+            min-height: 40%;
+          }
+          .container__info {
+            .containers(@flexDirection: row, @justifyContent: space-between);
+            .backAndBorder(@background: @elementBG);
+            margin: 1rem;
+            height: 2rem;
+            max-height: 2rem;
+            .info__label {
+              font-size: 1.5rem;
+              width: 20%;
+              min-width: 20%;
+            }
+            .info__data {
+              width: 60%;
+              min-width: 60%;
+              font-size: 1.5rem;
+              .containers();
+              .data__input {
+                width: 90%;
+                min-width: 90%;
+                font-size: 1.5rem;
+                max-height: 1.9rem;
+                background: @buttonBG;
+              }
+              .data__button {
+                .buttons();
+                margin: 0;
+              }
+            }
+            .noDisplay {
+              display: none;
+            }
+            .info__button {
+              .buttons();
+              margin: 0;
+              &:hover {
+                cursor: pointer;
+              }
+            }
+            .info__button--save {
+              .buttons();
+              margin: 0 1rem 0 0;
+              &:hover {
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+    .body__footer {
+      min-height: 10vh;
     }
   }
 }

@@ -12,38 +12,23 @@
     .modal__body {
       .containers();
       .body__drop {
-        .containers();
-      }
-      .body__images {
-        .containers(@height: 6em, @flexDirection: row);
-        .images__previews {
-          height:inherit;
-          .previews__preview {
-            width: auto;
-            height: 5em;
-            margin: 0 1rem;
-          }
-          .previews__preview:hover{
-            cursor: pointer;
-          }
-          .previews__text {
-            font-size: 1.25rem;
-          }
+        .drop__container{
+          .containers();
+          max-width: 200px;
+          min-height: 200px;
+          border: .1rem dashed @textColor;
         }
-        .images__image {
-          background: black;
-          width: 5em;
-          height: 5em;
-          margin: 0 1rem 2rem 1rem;
-          .image__add:hover {
-            cursor: pointer;
-          }
-          .image__text {
-            font-size: 1.25rem;
-          }
+        .drop__container:hover {
+          cursor: pointer;
         }
-        input[type='file'] {
-          display: none;
+        .containers(@flexDirection:row);
+        .drop__text--initial {
+          font-size: 1rem;
+        }
+        .drop__image--post {
+          .containers(); 
+          min-width: 200px;
+          min-height: 200px;
         }
       }
       .body__title {
@@ -80,10 +65,18 @@
       }
     }
     .modal__footer {
-      .containers(@flexDirection: row);
-      .footer__button {
-        .buttons()
+      .containers(@flexDirection: column);
+      .footer__buttons {
+        .buttons__button {
+          .buttons()
+        }
       }
+      .footer__text {
+        color: red;
+        height: 1rem;
+        font-size: 1rem;
+      }
+      
     }
   }
 }

@@ -6,7 +6,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -26,7 +26,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -35,62 +35,59 @@
 }
 .new-review .new-review__modal .modal__body .body__drop {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+}
+.new-review .new-review__modal .modal__body .body__drop .drop__container {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
   cursor: default;
   color: #05386b;
+  max-width: 200px;
+  min-height: 200px;
+  border: 0.1rem dashed #05386b;
 }
-.new-review .new-review__modal .modal__body .body__images {
+.new-review .new-review__modal .modal__body .body__drop .drop__container:hover {
+  cursor: pointer;
+}
+.new-review .new-review__modal .modal__body .body__drop .drop__text--initial {
+  font-size: 1rem;
+}
+.new-review .new-review__modal .modal__body .body__drop .drop__image--post {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 6em;
+  height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
   cursor: default;
   color: #05386b;
-}
-.new-review .new-review__modal .modal__body .body__images .images__previews {
-  height: inherit;
-}
-.new-review .new-review__modal .modal__body .body__images .images__previews .previews__preview {
-  width: auto;
-  height: 5em;
-  margin: 0 1rem;
-}
-.new-review .new-review__modal .modal__body .body__images .images__previews .previews__preview:hover {
-  cursor: pointer;
-}
-.new-review .new-review__modal .modal__body .body__images .images__previews .previews__text {
-  font-size: 1.25rem;
-}
-.new-review .new-review__modal .modal__body .body__images .images__image {
-  background: black;
-  width: 5em;
-  height: 5em;
-  margin: 0 1rem 2rem 1rem;
-}
-.new-review .new-review__modal .modal__body .body__images .images__image .image__add:hover {
-  cursor: pointer;
-}
-.new-review .new-review__modal .modal__body .body__images .images__image .image__text {
-  font-size: 1.25rem;
-}
-.new-review .new-review__modal .modal__body .body__images input[type='file'] {
-  display: none;
+  min-width: 200px;
+  min-height: 200px;
 }
 .new-review .new-review__modal .modal__body .body__title {
   display: flex;
@@ -100,7 +97,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -126,7 +123,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -146,33 +143,36 @@
 }
 .new-review .new-review__modal .modal__footer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
   cursor: default;
   color: #05386b;
 }
-.new-review .new-review__modal .modal__footer .footer__button {
-  border-radius: 0.3rem;
-  padding: 0.5rem;
-  margin: 1rem;
+.new-review .new-review__modal .modal__footer .footer__buttons .buttons__button {
+  border-radius: 0.5rem;
   width: 10rem;
   background-color: #3487d5;
-  color: white;
+  color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  height: 2.5rem;
 }
-.new-review .new-review__modal .modal__footer .footer__button:hover {
+.new-review .new-review__modal .modal__footer .footer__buttons .buttons__button:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px grey;
+  box-shadow: 0px 15px 20px #6b6b6b;
   filter: brightness(110%);
   font-weight: bolder;
-  opacity: 1;
+}
+.new-review .new-review__modal .modal__footer .footer__text {
+  color: red;
+  height: 1rem;
+  font-size: 1rem;
 }

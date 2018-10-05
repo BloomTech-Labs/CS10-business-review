@@ -1,36 +1,31 @@
 import React, { Component } from "react";
-import { Popover, PopoverBody, PopoverHeader } from "reactstrap";
 import { withRouter } from "react-router-dom";
-import Modal from "react-modal"; 
-
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import Modal from "react-modal";
+import { Popover, PopoverHeader, PopoverBody } from "reactstrap";
+import { Button, Menu, MenuItem } from "@material-ui/core";
 
 import logo from "../imgs/logo.png";
 
 import "../css/NavBar.css";
 
-let modalStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    height: "75%",
-    width: "50%",
-    zIndex: "5",
-    backgroundColor: "rgb(238,238,238)",
-    color: "rgb(5,56,107)",
-    overflowY: "scroll",
-  },
-};
-
 let popoverStyles = {
   content: {
     backgroundColor: "rgb(62, 56, 146)",
+    overflow: "hidden",
+  },
+};
+
+let modalStyles = {
+  content: {
+    top: "15%",
+    left: "50%",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    height: "20vh",
+    width: "55vw",
+    zIndex: "5",
+    backgroundColor: "rgb(238,238,238)",
+    color: "rgb(5,56,107)",
     overflow: "hidden",
   },
 };
@@ -47,8 +42,8 @@ class NavBar extends Component {
       modalInfo: null,
       popoverOpen: false,
       popoverFired: false,
-      signedIn: false,
-      search: "",
+      searchWord: "",
+      searchCity: "",
     };
 
     this.openModal = this.openModal.bind(this);
@@ -76,15 +71,14 @@ class NavBar extends Component {
   }
 
   noPopUpInSearch = () => {
-    if(localStorage.getItem("token")) {
-      this.setState({ signedIn: true})
+    if (localStorage.getItem("token")) {
+      this.setState({ signedIn: true });
+    } else {
+      this.setState({
+        signedIn: false,
+      });
     }
-    else {
-      this.setState( {
-        signedIn: false
-      })
-    }
-  }
+  };
 
   toggle = event => {
     // Only fires the popover the first time they click on the search bar
@@ -101,9 +95,10 @@ class NavBar extends Component {
   };
 
   handleSearch = event => {
-    if (this.state.search !== "") {
-      this.props.search(this.state.search, true);
-      this.setState({ search: ""});
+    event.preventDefault();
+    if (this.state.searchWord !== "") {
+      this.props.search(this.state.searchWord + " " + this.state.searchCity, true);
+      this.setState({ searchWord: "", searchCity: "" });
     } else {
       this.openModal();
     }
@@ -113,10 +108,12 @@ class NavBar extends Component {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("name");
+    localStorage.removeItem("accountType");
+    localStorage.removeItem("accountDeactivated");
+    localStorage.removeItem("userImage");
     this.props.history.push("/");
   };
 
- 
   render() {
     const { anchorEl } = this.state;
     return (
@@ -130,30 +127,41 @@ class NavBar extends Component {
           }}
         />
         <div className="navbar__center">
-          <input
-            value={this.state.search}
-            autoComplete="off"
-            placeholder="Tacos in Seattle..."
-            onClick={this.toggle}
-            onChange={this.handleInputChange.bind(this)}
-            name="search"
-            id="signInPop"
-            className="center__input"
-          />
-          <button type="submit" id="Search" className="center__button" onClick={this.handleSearch}>
-            Search
-          </button>
+          <form className="center__search">
+            <input
+              value={this.state.searchWord}
+              autoComplete="off"
+              placeholder="Tacos..."
+              onClick={this.toggle}
+              onChange={this.handleInputChange.bind(this)}
+              name="searchWord"
+              id="signInPop"
+              className="search__input"
+            />
+            <input
+              value={this.state.searchCity}
+              autoComplete="off"
+              placeholder="Seattle Washington..."
+              onClick={this.toggle}
+              onChange={this.handleInputChange.bind(this)}
+              name="searchCity"
+              className="search__input"
+            />
+            <button type="submit" id="Search" className="search__button" onClick={this.handleSearch}>
+              <i className="fa fa-search" />
+            </button>
+          </form>
           <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={modalStyles}
             contentLabel="No Input Modal">
-            <div className="navbar__modal">
+            <div className="modal">
               {this.state.modalIsOpen ? (
-                <div className="modal__container">
-                  <div className="container__title">No Search Term!</div>
-                  <div className="container__body">You can't very well search for nothing...</div>
-                  <div className="container__footer">
+                <div className="modal">
+                  <div className="modal__title">No Search Term!</div>
+                  <div className="modal__body">You can't very well search for nothing...</div>
+                  <div className="modal__footer">
                     <button className="footer__button" onClick={this.closeModal}>
                       Close
                     </button>
@@ -161,46 +169,47 @@ class NavBar extends Component {
                 </div>
               ) : null}
             </div>
-          </Modal> {this.state.signedIn? ( null ) : ( 
-          <Popover
-            styles={{ popoverStyles }}
-            placement="top"
-            isOpen={this.state.popoverOpen}
-            target="signInPop"
-            toggle={this.toggle}>
-            <PopoverHeader>Sign In?</PopoverHeader>
-            <PopoverBody>Users who sign in can see unlimited reviews!</PopoverBody>
-            <button type="submit" className="popover-button" onClick={this.toggle}>
-              Close
-            </button>
-          </Popover>
+          </Modal>{" "}
+          {this.state.signedIn ? null : (
+            <Popover
+              styles={{ popoverStyles }}
+              placement="top"
+              isOpen={this.state.popoverOpen}
+              target="signInPop"
+              toggle={this.toggle}>
+              <PopoverHeader>Sign In?</PopoverHeader>
+              <PopoverBody>Users who sign in can see unlimited reviews!</PopoverBody>
+              <button type="submit" className="popover-button" onClick={this.toggle}>
+                Close
+              </button>
+            </Popover>
           )}
         </div>
         {localStorage.getItem("token") && localStorage.getItem("userId") ? (
-          <div className="navbar-container__right">
-            {" "}
-            <div
-              onClick={() => {
-                this.props.history.push(`/user`);
-              }}>
-              {" "}
-              Hi, {localStorage.getItem("name").split(" ")[0]}!
-            </div>
-            <div>
-              <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
-                Open Menu
-              </Button>
-              <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
-                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    this.props.history.push(`/user`);
-                  }}>
-                  My account
-                </MenuItem>
-                <MenuItem onClick={this.logout}>Logout</MenuItem>
-              </Menu>
-            </div>
+          <div className="navbar__right--logged">
+            <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
+              <i
+                onClick={() => {
+                  this.props.history.push(`/user`);
+                }}
+                className="fas fa-bars fa-2x fa-fw"
+              />
+              <div className="right--logged__text">{localStorage.getItem("name").split(" ")[0]}</div>
+            </Button>
+            <Menu
+              id="simple-menu"
+              style={{ top: "3rem", left: "1rem" }}
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={this.handleClose}>
+              <MenuItem
+                onClick={() => {
+                  this.props.history.push(`/user`);
+                }}>
+                My Account
+              </MenuItem>
+              <MenuItem onClick={this.logout}>Logout</MenuItem>
+            </Menu>
           </div>
         ) : (
           <div className="navbar__right">
@@ -210,6 +219,7 @@ class NavBar extends Component {
                 this.props.history.push(`/signup`);
               }}>
               Sign Up
+              <i className="fa fa-user-plus" />
             </button>
             <button
               className="right__sign"
@@ -217,6 +227,7 @@ class NavBar extends Component {
                 this.props.history.push(`/signin`);
               }}>
               Sign In
+              <i className="fas fa-sign-in-alt" />
             </button>
           </div>
         )}

@@ -20,11 +20,11 @@ passport.use(
       clientSecret:
         process.env.googleClientSecret ||
         process.env.REACT_APP_GOOGLEAUTHSECRET,
-      callbackURL: "/auth/google/callback"
+      callbackURL: "http://localhost:3001/auth/google/callback"
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log(profile.emails[0].value);
+        console.log("fire", profile.emails[0].value);
         const existingUser = await User.findOne({ googleId: profile.id });
         if (existingUser) {
           return done(null, existingUser);

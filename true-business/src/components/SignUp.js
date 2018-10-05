@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import NavBar from "./NavBar";
-
-import { Elements, StripeProvider } from "react-stripe-elements";
-import StripePayment from "./StripePayment";
+import signUp from "../imgs/signup.png";
 
 import "../css/SignUp.css";
 
@@ -118,13 +116,6 @@ class SignUp extends Component {
                 value={this.state.confirmPassword}
                 onChange={this.handleInputChange}
               />
-              <StripeProvider apiKey="pk_test_a80QBoWXww54ttxUn5cMQO1o">
-                <div className="signup-container__stripe">
-                  <Elements>
-                    <StripePayment checkPayment={this.checkPayment} />
-                  </Elements>
-                </div>
-              </StripeProvider>
               <div className="signup-container__buttons ">
                 {this.state.payment ? (
                   <button
@@ -150,8 +141,8 @@ class SignUp extends Component {
 
 export default withRouter(SignUp);
 
-{
-  /* <Link to="/">
-  <button className="signup-container__button">Home</button>
-</Link>; */
-}
+// {
+//   <Link to="/">
+//     <button className="signup-container__button">Home</button>
+//   </Link>;
+// }

@@ -13,6 +13,8 @@ mongoose.Promise = global.Promise;
 
 const bodyParser = require("body-parser");
 
+const jwt = require("jsonwebtoken");
+
 mongoose.connect(
   "mongodb:process.env.REACT_APP_DB_URI",
   {},
@@ -71,8 +73,8 @@ router.post("/api/user/register", (request, response) => {
   UserController.register(request, response);
 });
 
-router.post("/api/user/login", (request, response) => {
-  UserController.login(request, response);
+router.post("/api/user/login", (req, res) => {
+  UserController.login(req, res);
 });
 
 router.put("/api/user/:_id", (request, response) => {
@@ -90,9 +92,7 @@ router.get("/api/user/:id", function(req, res) {
 router.delete("/api/user/:id", function(req, res) {
   UserController.deleteUserById(req, res);
 });
-router.put("/api/user/:_id", function(req, res) {
-  UserController.updateUser(req, res);
-});
+
 router.get("/api/user/", function(req, res) {
   UserController.getAllUsers(req, res);
 });
@@ -121,6 +121,14 @@ router.get("/api/business/:id", function(req, res) {
   BusinessController.getBusinessById(req, res);
 });
 
+router.get("/api/user/random", function(req, res) {
+  UserController.getRandomUser(req, res);
+});
+
+router.get("/api/business/random", function(req, res) {
+  BusinessController.getRandomBusiness(req, res);
+});
+
 router.delete("/api/business/:id", function(req, res) {
   BusinessController.deleteBusinessById(req, res);
 });
@@ -141,13 +149,23 @@ router.delete("/api/review/delete", (req, res) => {
   ReviewControler.deleteReview(req, res);
 });
 
-router.get("/api/review/getAllReviews", (req, res) => {
+router.get(
+  "/api/review/getReviewsByReviewerId/:id/:currentPage",
+  (req, res) => {
+    ReviewControler.getReviewsByReviewerId(req, res);
+  }
+);
+
+router.get("/api/review/getAllReviews/", (req, res) => {
   ReviewControler.getAllReviews(req, res);
 });
 
-router.get("/api/review/getReviewsByBusinessId/:id/:landing", (req, res) => {
-  ReviewControler.getReviewsByBusinessId(req, res);
-});
+router.get(
+  "/api/review/getReviewsByBusinessId/:id/:landing/:currentPage",
+  (req, res) => {
+    ReviewControler.getReviewsByBusinessId(req, res);
+  }
+);
 
 router.post("/charge", async (req, res) => {
   let amount = req.body.selectedRadio === "oneMonth" ? 999 : 4999;

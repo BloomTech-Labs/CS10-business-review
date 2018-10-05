@@ -18,8 +18,9 @@ const createBusiness = (req, res) => {
       let formatted_phone_number = result.hasOwnProperty("formatted_phone_number")
         ? result.formatted_phone_number
         : "No Phone Number Listed";
+      let rating = result.hasOwnProperty("rating") ? result.rating : "No Rating Listed";
       let website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
-      let photos = result.hasOwnProperty("photos") ? result.photos : "No Photos Listed";
+      let photos = result.hasOwnProperty("photos") ? result.photos : null;
       let opening_hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
       let address_components = result.hasOwnProperty("address_components")
         ? result.address_components
@@ -60,6 +61,7 @@ const createBusiness = (req, res) => {
             opening_hours,
             address_components,
             place_id: result.place_id,
+            rating,
           });
           business
             .save()
@@ -103,20 +105,39 @@ const placesSearch = (req, res) => {
                 })
                 .asPromise()
                 .then(photo => {
-                  let imgObject = [
-                    {
-                      link: "https://" + photo.req.socket._host + photo.req.path,
-                      width: photos[0].width,
-                      height: photos[0].height,
-                    },
-                  ];
-                  result.photos = imgObject;
-                  return result;
+                  return new Promise(resolve => {
+                    return resolve(
+                      Business.findOne({ place_id: result.place_id })
+                        .then(found => {
+                          let imgObject = [
+                            {
+                              link: "https://" + photo.req.socket._host + photo.req.path,
+                              width: photos[0].width,
+                              height: photos[0].height,
+                            },
+                          ];
+                          if (found) {
+                            found.photos = imgObject;
+                            return found;
+                          } else {
+                            result.stars = 0;
+                            result.photos = imgObject;
+                            return result;
+                          }
+                        })
+                        .catch(error => {
+                          console.log({ error });
+                        }),
+                    );
+                  });
+                })
+                .catch(error => {
+                  console.log({ error });
                 }),
             );
           });
         }
-        result.photos = "No Photos Listed"
+        result.photos = "No Photos Listed";
         return new Promise(resolve => resolve(result));
       });
       Promise.all(promises)
@@ -199,18 +220,18 @@ const getBusinessById = (request, response) => {
 };
 
 const getRandomBusiness = (request, response) => {
-  Business.count().exec(function (err, count) {
+  Business.count().exec(function(err, count) {
     const random = Math.floor(Math.random() * count);
-    console.log(random);
-    Business.findOne().skip(random)
-    .then(function(business) {
-      response.status(200).json(business);
-    })
-    .catch(function(error) {
-      response.status(500).json({
-        error: "The business could not be retrieved.",
+    Business.findOne()
+      .skip(random)
+      .then(function(business) {
+        response.status(200).json(business);
+      })
+      .catch(function(error) {
+        response.status(500).json({
+          error: "The business could not be retrieved.",
+        });
       });
-    });
   });
 };
 
@@ -228,10 +249,47 @@ const deleteBusinessById = (request, response) => {
     });
 };
 
+// const getAllBusiness = (request, response) => {
+//   Business.find({})
+//     .then(function(businessList) {
+//       response.status(200).json(businessList);
+//     })
+//     .catch(function(error) {
+//       response.status(500).json({
+//         error: "The information could not be retrieved.",
+//       });
+//     });
+// };
+
 const getAllBusiness = (request, response) => {
   Business.find({})
     .then(function(businessList) {
-      response.status(200).json(businessList);
+      let featured = [];
+      let stars = 4;
+      let reviews = 100;
+      let flag = false;
+      // While we don't have 4 featured business
+      while (featured.length < 4 && stars >= 0 && reviews >= 0) {
+        // Get Ideally 4 stars & 100 Reviews
+        // Then 4 stars & 80 Reviews
+        // ...
+        // Worst Case 0 stars & 0 Reviews
+        // While we have an empty DB this may be slow...
+        businessList.forEach(business => {
+          if (business.stars > stars && business.totalReviews > reviews && !featured.includes(business)) {
+            featured.push(business);
+          }
+        });
+        if (flag === false && reviews === 0) {
+          stars -= 1;
+          reviews = 100;
+          flag = true;
+        } else {
+          reviews -= 20;
+          flag = false;
+        }
+      }
+      response.status(200).json(featured);
     })
     .catch(function(error) {
       response.status(500).json({
@@ -248,5 +306,5 @@ module.exports = {
   getAllBusiness,
   placesSearch,
   placeSearch,
-  getRandomBusiness
+  getRandomBusiness,
 };

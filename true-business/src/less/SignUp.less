@@ -2,44 +2,47 @@
 
 .signup {
   .containers();
-  padding-top: 25vh;
+  padding-top: 20vh;
   cursor: default;
   .signup-container {
     .containers(@width: 50%);
+    .backAndBorder();
     color: @textColor;
-    background: @elementBackground;
     padding: 1rem;
+    min-height: 50vh;
     .signup-container__header {
-      font-size: 3rem;
+      .headers();
     }
     .signup-container__stripe {
       .containers();
     }
     .signup-container__form {
       .containers();
-      .signup-container__stripe {
-        .containers();
-        .stripe_header {
-          font-size: 3rem;
-        }
-      }
       .signup-container__input {
-        border: 0.1rem solid black;
-        margin: 1rem;
+        border: 0.1rem solid @textColor;
+        background: @elementBG;
+        margin-bottom: 1rem;
         width: 75%;
-        font-size: 1.5rem;
-      }
-      .signup-container__error {
-        // temporary placeholder since we can't have error messages yet without backend to get the warnings off my back
-        content: none;
-      }
-      .signup-container__error--hidden {
-        display: none;
+        font-size: 1.25rem;
+        padding: .5rem;
       }
       .signup-container__buttons {
-        .containers(@flexDirection:row);
+        .containers(@justifyContent: space-around);
+        .signup-container__google-auth {
+          min-width: 50%;
+          max-width: 50%;
+          min-height: 10vh;
+          max-height: 10vh;
+          border-radius: 1rem;
+        }
+        .signup-container__google-auth:hover {
+          cursor: pointer;
+        }
         .signup-container__button {
           .buttons();
+        }
+        .signup-container__button:hover {
+          cursor: pointer;
         }
       }
     }
