@@ -1,49 +1,45 @@
 const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
+var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const User = require("../models/user");
 
-const googleStrategy = new GoogleStrategy(
-  {
-    callbackURL: "/auth/google/redirect",
-    clientID: process.env.REACT_APP_GOOGLEAUTHCLIENTID,
-    clientSecret: process.env.REACT_APP_GOOGLEAUTHSECRET
-  },
-  (accessToken, refreshToken, profile, done) => {
-    User.findOne({
-      $or: [
-        { "google.id": profile.id },
-        { "local.email": profile.emails[0].value }
-      ]
-    })
-      .then(existingUser => {
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user);
+  });
+});
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID:
+        process.env.googleClientID || process.env.REACT_APP_GOOGLEAUTHCLIENTID,
+      clientSecret:
+        process.env.googleClientSecret ||
+        process.env.REACT_APP_GOOGLEAUTHSECRET,
+      callbackURL: "/auth/google/callback"
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        console.log(profile.emails[0].value);
+        const existingUser = await User.findOne({ googleId: profile.id });
         if (existingUser) {
-          if (existingUser.google.id == undefined) {
-            existingUser.google.id = profile.id;
-            existingUser.google.username = profile.displayName;
-            existingUser.google.email = profile.emails[0].value;
-            existingUser.google.thumbnail = profile._json.image.url;
-            existingUser.save();
-          }
-          done(null, existingUser);
-        } else {
-          let newUser = new User({
-            method: "google",
-            google: {
-              id: profile.id,
-              email: profile.emails[0].value,
-              username: profile.displayName
-            }
-          });
-          newUser.local.email = profile.emails[0].value;
-          newUser.local.username = profile.displayName;
-          newUser.verified = true;
-          newUser.save().then(newUser => {
-            done(null, newUser);
-          });
+          return done(null, existingUser);
         }
-      })
-      .catch(err => {
-        done(err, false, err.message);
-      });
-  }
+        const email = profile.emails[0].value;
+        const user = await new User({
+          googleId: profile.id,
+          name: profile.displayName,
+          email: email,
+          username: email
+        }).save();
+        done(null, user);
+      } catch (error) {
+        console.log({ error });
+      }
+    }
+  )
 );

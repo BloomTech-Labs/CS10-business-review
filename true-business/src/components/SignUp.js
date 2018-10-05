@@ -9,8 +9,8 @@ import StripePayment from "./StripePayment";
 import "../css/SignUp.css";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
-if (typeof(backend) !== 'string') {
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
   backend = heroku;
 }
 
@@ -27,7 +27,7 @@ class SignUp extends Component {
       error: "",
       errorMessage: "",
       payment: false,
-      type: null,
+      type: null
     };
   }
 
@@ -46,22 +46,22 @@ class SignUp extends Component {
       email: this.state.email,
       username: this.state.username,
       password: this.state.password,
-      accountType: this.state.type,
+      accountType: this.state.type
     };
     console.log("BACKEND", backend);
-    console.log("USER", user)
+    console.log("USER", user);
     axios
       .post(`${backend}api/user/register`, user)
       .then(() => {
         this.setState({
-          error: false,
+          error: false
         });
         this.props.history.push(`/signin`);
       })
       .catch(err => {
         this.setState({
           error: true,
-          errorMessage: err,
+          errorMessage: err
         });
       });
   };
@@ -131,7 +131,8 @@ class SignUp extends Component {
                     id="signup-submit"
                     type="submit"
                     className="signup-container__button"
-                    onClick={this.createUser}>
+                    onClick={this.createUser}
+                  >
                     Confirm Registration
                   </button>
                 ) : null}
@@ -149,6 +150,8 @@ class SignUp extends Component {
 
 export default withRouter(SignUp);
 
-/* <Link to="/">
-    <button className="signup-container__button">Home</button>
-</Link> */
+{
+  /* <Link to="/">
+  <button className="signup-container__button">Home</button>
+</Link>; */
+}
