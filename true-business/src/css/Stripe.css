@@ -51,8 +51,8 @@
 }
 .stripe .stripe__radio {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: flex-start;
   height: 100%;
   width: 100%;
@@ -63,9 +63,9 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  margin-left: 50%;
 }
 .stripe .stripe__radio .radio__label {
+  padding: 1rem;
   font-size: 1.5rem;
 }
 .stripe .stripe__radio .radio__button:hover {
@@ -88,10 +88,17 @@
   font-weight: bolder;
 }
 .stripe .stripe__element {
-  width: 70%;
+  width: 100%;
   float: right;
   position: relative;
   top: 50%;
   font-size: 2rem;
   margin: 2rem;
+}
+.StripeElement {
+  padding: 1rem;
+  border: 0.1rem solid #05386b;
+}
+.StripeElement--invalid {
+  border: 1px solid red;
 }

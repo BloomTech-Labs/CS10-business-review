@@ -140,7 +140,7 @@ class StripePayment extends Component {
                 checked={this.state.selectedRadio === "oneYear"}
                 onChange={this.handleRadioChange}
               />
-              -- 1 Year: $49.99 (Save $69.89)
+              -- 1 Year: $49.99
             </label>
           </div>
         </div>

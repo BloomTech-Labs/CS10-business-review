@@ -20,8 +20,8 @@ const createReview = (req, res) => {
 // For User Component
 const getReviewsByReviewerId = (req, res) => {
   Review.find({ reviewer: req.params.id })
-    .skip(10 * req.params.currentPage)
-    .limit(10)
+    .skip(8 * req.params.currentPage)
+    .limit(8)
     .populate("reviewer")
     .then(reviews => {
       Review.find({ reviewer: req.params.id })

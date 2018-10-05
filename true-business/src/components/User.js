@@ -18,129 +18,99 @@ if (typeof backend !== "string") {
 
 let modalStyles = {
   content: {
-    top: "50%",
+    top: "15%",
     left: "50%",
-    right: "auto",
-    bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "75%",
-    width: "50%",
+    height: "20vh",
+    width: "55vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
+    overflow: "hidden",
   },
 };
 
 class User extends Component {
   state = {
-    username: "",
-    email: "",
-    password: "",
-    newPassword: "",
-    verifyPassword: "",
-    editUsernameOrEmail: false,
-    changePassword: false,
-    opendPasswordForm: false,
-    passwordAction: "Change",
-    Email: false,
-    editPassword: false,
-    currenAction: "Change",
-    change: false,
-    breadcrumbs: ["Home"],
-    userReviews: [
-      {
-        business: "Taco Bell",
-        businessType: '"Tacos" *cough*',
-        businessstreet: "123 West",
-        businessCity: "Knoxville, TN 37919",
-        updated: "1/1/1",
-      },
-      {
-        business: "Taco Bell",
-        businessType: '"Tacos" *cough*',
-        businessstreet: "123 West",
-        businessCity: "Knoxville, TN 37919",
-        updated: "1/1/1",
-      },
-      {
-        business: "Taco Bell",
-        businessType: '"Tacos" *cough*',
-        businessstreet: "123 West",
-        businessCity: "Knoxville, TN 37919",
-        updated: "1/1/1",
-      },
-      {
-        business: "Taco Bell",
-        businessType: '"Tacos" *cough*',
-        businessstreet: "123 West",
-        businessCity: "Knoxville, TN 37919",
-        updated: "1/1/1",
-      },
-    ],
     current: "Home",
+    currentPage: 0,
+    username: "",
+    usernameShow: false,
+    usernameButton: "Change",
+    usernameUpdate: "",
+    email: "",
+    emailShow: false,
+    emailButton: "Change",
+    emailUpdate: "",
+    password: "",
+    passwordShow: false,
+    passwordButton: "Change",
+    passwordUpdate: "",
+    passwordUpdateVerify: "",
+    passwordErrorMatch: false,
+    passwordErrorLength: false,
+    passwordErrorUpdate: false,
+    filter: ["No Filter", "4 Stars or Higher", "3 Stars or Higher", "2 Stars or Higher"],
+    sort: ["Date Descending", "Date Ascending", "Rating Descending", "Rating Ascending"],
+    filterBy: "No Filter",
+    sortBy: "Date Descending",
+    showFilterBy: false,
+    showSortBy: false,
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    setTimeout(() => {
-      this.getReviews(0);
-      const id = localStorage.getItem("userId");
-      const token = localStorage.getItem("token");
-      const headers = { headers: { authorization: token } };
-      axios.get(`${backend}api/user/${id}`, headers).then(response => {
-        this.setState({
-          username: response.data.username,
-          email: response.data.email,
-        });
+    this.getReviews(0);
+    const id = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+    const headers = { headers: { authorization: token } };
+    axios.get(`${backend}api/user/${id}`, headers).then(response => {
+      this.setState({
+        username: response.data.username,
+        email: response.data.email,
       });
-    }, 300);
+    });
   };
 
-  saveUsernameOrEmail = () => {
-    const user = {
-      username: this.state.username,
-      email: this.state.email,
-    };
-
-    console.log("Before", user);
-    const id = localStorage.getItem("userId");
-
+  updateUser = event => {
+    event.preventDefault();
+    let field = event.target.name;
+    let update =
+      field === "password"
+        ? {
+            password: this.state.password,
+            passwordUpdate: this.state.passwordUpdate,
+          }
+        : this.state[field + "Update"];
+    let userId = localStorage.getItem("userId");
     axios
-      .put(`${backend}api/user/update/${id}`, user)
+      .put(`${backend}api/user/update/${userId}`, { field: field, update })
       .then(response => {
-        console.log("SaveResponse", response);
-        this.setState({
-          openForChange: false,
-          currenAction: "Change",
-          change: false,
-        });
+        field === "password"
+          ? this.setState({
+              password: "",
+              passwordUpdate: "",
+              passwordUpdateVerify: "",
+              passwordShow: false,
+              passwordButton: "Change",
+            })
+          : this.setState({
+              [field]: response.data[field],
+              [field + "Show"]: false,
+              [field + "Button"]: "Change",
+            });
       })
       .catch(err => {
-        console.log("Update Error", err);
-      });
-  };
-
-  changePassword = () => {
-    const user = {
-      password: this.state.password,
-      newPassword: this.state.newPassword,
-      verifyPassword: this.state.verifyPassword,
-    };
-    const id = localStorage.getItem("userId");
-    console.log("Happening on frontend");
-    axios
-      .put(`${backend}api/user/resetpassword/${id}`, user)
-      .then(response => {
-        console.log("SaveResponse", response);
+        console.log("FUCK");
         this.setState({
-          opendPasswordForm: false,
-          passwordAction: "Change",
-          changePassword: false,
+          passwordErrorUpdate: true,
+          password: "",
+          passwordUpdate: "",
+          passwordUpdateVerify: "",
+          passwordShow: false,
+          passwordButton: "Change",
         });
-      })
-      .catch(err => {
-        console.log("Password Reset Error", err);
       });
   };
 
@@ -172,112 +142,138 @@ class User extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  changeCurrentAction = () => {
-    if (this.state.change) {
-      this.setState({
-        currenAction: "Change",
-      });
-    } else {
-      this.setState({
-        currenAction: "Cancel",
-      });
+  buttonChange = event => {
+    switch (event.target.name) {
+      case "emailButton":
+        let email = this.state.emailButton === "Change" ? "Cancel" : "Change";
+        this.setState({ emailButton: email, emailShow: !this.state.emailShow });
+        break;
+      case "usernameButton":
+        let username = this.state.usernameButton === "Change" ? "Cancel" : "Change";
+        this.setState({ usernameButton: username, usernameShow: !this.state.usernameShow });
+        break;
+      //password
+      default:
+        let password = this.state.passwordButton === "Change" ? "Cancel" : "Change";
+        this.setState({ passwordButton: password, passwordShow: !this.state.passwordShow });
     }
   };
 
-  changeUsernameOrEmail = () => {
-    this.changeCurrentAction();
-    this.setState({
-      openForChange: !this.state.openForChange,
-      change: !this.state.change,
-    });
-  };
-
-  passwordChangeCurrentAction = () => {
-    if (this.state.changePassword) {
-      this.setState({
-        passwordAction: "Change",
-      });
-    } else {
-      this.setState({
-        passwordAction: "Cancel",
-      });
-    }
-  };
-
-  changePasswordfunc = () => {
-    this.passwordChangeCurrentAction();
-    this.setState({
-      opendPasswordForm: !this.state.opendPasswordForm,
-      changePassword: !this.state.changePassword,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <NavBar search={this.props.search} />
-        <div className="user">
-          <div className="user__header">
-            <div className="header__breadcrumbs">
-              {this.state.breadcrumbs.map((crumb, i) => {
-                if (i + 1 === this.state.breadcrumbs.length) {
-                  return (
-                    <button key={i} name={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
-                      {crumb}
-                    </button>
-                  );
-                }
-                return (
-                  <div>
-                    <button key={i} name={crumb} onClick={this.updateCurrent} className="breadcrumbs__breadcrumb">
-                      {crumb}
-                    </button>
-                    <i className="fas fa-arrow-right" />
-                  </div>
-                );
-              })}
-            </div>
-            <div className="header__signout" onClick={this.logout}>
-              Sign Out
-            </div>
-          </div>
-          <div className="user__body">
-            <div className="body__left-bar">
-              <button className="left-bar__button" name="My Reviews" onClick={this.updateCurrent}>
-                My Reviews
-              </button>
-              <button className="left-bar__button" name="Billing" onClick={this.updateCurrent}>
-                Billing
-              </button>
-              <button className="left-bar__button" name="Settings" onClick={this.updateCurrent}>
-                Settings
-              </button>
-            </div>
-            <div className="body__content">{this.loadContent()}</div>
-          </div>
-        </div>
-      </div>
-    );
-  }
   updateCurrent = event => {
-    let breadcrumbs = this.state.breadcrumbs;
-    // Home => Home
-    if (event.target.name === "Home") {
-      // Home->Whatever => Home
-      if (breadcrumbs.length === 2) {
-        breadcrumbs.pop();
+    this.setState({ current: event.target.name });
+  };
+
+  toggleDropDown = event => {
+    let toggle = event.target.name;
+    let other = "showFilterBy";
+    if (toggle === "showFilterBy") {
+      other = "showSortBy";
+    }
+    let inverse = this.state[toggle];
+    this.setState({ [toggle]: !inverse, [other]: false });
+  };
+
+  toggleFilterChoice = event => {
+    let toggle = event.target.name;
+    this.setState({ filterBy: toggle, showFilterBy: false });
+  };
+
+  toggleSortChoice = event => {
+    let toggle = event.target.name;
+    this.setState({ sortBy: toggle, showSortBy: false });
+  };
+
+  checkPassword = event => {
+    event.preventDefault();
+    if (
+      this.state.passwordUpdate === this.state.passwordUpdateVerify &&
+      (this.state.password !== "" || this.state.passwordUpdate !== "")
+    ) {
+      this.updateUser(event);
+      this.setState({ passwordErrorMatch: false, passwordErrorLength: false });
+    } else if (
+      this.state.password === "" ||
+      this.state.passwordUpdate === "" ||
+      this.state.passwordUpdateVerify === ""
+    ) {
+      this.setState({ passwordErrorLength: true });
+    } else {
+      this.setState({ passwordErrorMatch: true });
+    }
+  };
+
+  updatePage = currentPage => {
+    this.setState({ currentPage });
+    this.getReviews(currentPage);
+  };
+
+  createPagination = () => {
+    let lastPage =
+      // Ex. 100 / 10 % 1 = 0
+      // Ex. 101 / 10 % 1 != 0
+      (this.state.total / 10) % 1 === 0
+        ? // 100 / 10 - 1 = 9, so pages 0-9 will show results 0-99 (10 pages, 10 each page)
+          Math.floor(this.state.total / 8) - 1
+        : // 101 / 10 = 10, so pages 0-10 will show results 0-100 (11 pages, 1 on the last page)
+          Math.floor(this.state.total / 8);
+
+    // Set is the lazy / quick way if there is only one page
+    let pages = new Set([0, lastPage]);
+    if (lastPage < 7) {
+      for (let i = 1; i < lastPage; i++) {
+        pages.add(i);
+      }
+      pages = [...pages].sort((a, b) => a - b);
+    } else {
+      // Load the appropriate pages
+      // current:1 	1 2 ... 10
+      // current:2	1 2 3 ... 10
+      // current:3	1 2 3 4 ... 10
+      // current:4	1 ... 3 4 5 ... 10
+      // current:5	1 ... 4 5 6 ... 10
+      // current:6	1 ... 5 6 7 ... 10
+      // current:7	1 ... 6 7 8 ... 10
+      // current:8	1 ... 7 8 9 10
+      // current:9	1 ... 8 9 10
+      // current:10	1 ... 9 10
+      for (let i = 1; i < lastPage; i++) {
+        if (i <= this.state.currentPage + 1 && i >= this.state.currentPage - 1) {
+          pages.add(i);
+        }
+      }
+
+      pages = [...pages].sort((a, b) => a - b);
+      // Add an elipsis if more than 3 away from the first page
+      if (this.state.currentPage > 2) {
+        pages.splice(1, 0, "...");
+      }
+
+      // Add an elipsis if more than 3 away from the last page
+      if (this.state.currentPage < lastPage - 2) {
+        pages.splice(pages.length - 1, 0, "...");
       }
     }
-    // Home => Home->Whatever
-    else if (breadcrumbs.length === 1) {
-      breadcrumbs.push(event.target.name);
-    }
-    // Home->Whatever => Home=> Whatever
-    else if (breadcrumbs.length === 2) {
-      breadcrumbs.pop();
-      breadcrumbs.push(event.target.name);
-    }
-    this.setState({ current: event.target.name, breadcrumbs });
+    return pages.length > 1 ? (
+      <div className="reviews__pagination">
+        Page {this.state.currentPage + 1} / {lastPage + 1}
+        <div id="pagination" className="pagination__pages">
+          {pages.map((page, i) => {
+            if (page === "...") {
+              return (
+                <button key={i + page} id={page} className="pagination__page--no-hover">
+                  {page}
+                </button>
+              );
+            }
+            return (
+              <button key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
+                {page + 1}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    ) : null;
   };
 
   loadContent = () => {
@@ -290,23 +286,18 @@ class User extends Component {
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__drop-container">
                     Filter
-                    <button className="drop-container__button" name="showfilterBy" onClick={this.toggleDropDown}>
+                    <button className="drop-container__button" name="showFilterBy" onClick={this.toggleDropDown}>
                       {this.state.filterBy}
                     </button>
-                    {this.state.showfilterBy ? (
+                    {this.state.showFilterBy ? (
                       <div className="drop-container__menu">
-                        <button onClick={this.toggleFilterChoice} name="No Filter" className="menu__button">
-                          No Filter
-                        </button>
-                        <button onClick={this.toggleFilterChoice} name="4 Stars or Higher" className="menu__button">
-                          4 Stars or Higher
-                        </button>
-                        <button onClick={this.toggleFilterChoice} name="3 Stars or Higher" className="menu__button">
-                          3 Stars or Higher
-                        </button>
-                        <button onClick={this.toggleFilterChoice} name="2 Stars or Higher" className="menu__button">
-                          2 Stars or Higher
-                        </button>
+                        {this.state.filter.map(type => {
+                          return (
+                            <button key={type} onClick={this.toggleFilterChoice} name={type} className="menu__button">
+                              {type}
+                            </button>
+                          );
+                        })}
                       </div>
                     ) : null}
                   </div>
@@ -314,31 +305,28 @@ class User extends Component {
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__drop-container">
                     Sort
-                    <button className="drop-container__button" name="showsortBy" onClick={this.toggleDropDown}>
+                    <button className="drop-container__button" name="showSortBy" onClick={this.toggleDropDown}>
                       {this.state.sortBy}
                     </button>
-                    {this.state.showsortBy ? (
+                    {this.state.showSortBy ? (
                       <div className="drop-container__menu">
-                        <button onClick={this.toggleSortChoice} name="Date Descending" className="menu__button">
-                          Date Descending
-                        </button>
-                        <button onClick={this.toggleSortChoice} name="Date Ascending" className="menu__button">
-                          Date Ascending
-                        </button>
-                        <button onClick={this.toggleSortChoice} name="Rating Descending" className="menu__button">
-                          Rating Descending
-                        </button>
-                        <button onClick={this.toggleSortChoice} name="Rating Descending" className="menu__button">
-                          Rating Descending
-                        </button>
+                        {this.state.sort.map(type => {
+                          return (
+                            <button key={type} onClick={this.toggleSortChoice} name={type} className="menu__button">
+                              {type}
+                            </button>
+                          );
+                        })}
                       </div>
                     ) : null}
                   </div>
                 </div>
-                <div>{this.state.reviews.length ? this.createPagination() : null}</div>
+                {console.log("FUCKING TOTAL", this.state.total)}
+                {this.state.total > 8 ? this.createPagination() : null}
               </div>
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
+
                 <div className="reviews__review">
                   {this.state.reviews.length ? (
                     this.state.reviews.map((review, i) => {
@@ -417,94 +405,69 @@ class User extends Component {
             </Modal>
           </div>
         );
-      case "Billing":
-        return (
-          <div className="content__billing">
-            <div className="billing__section">
-              <div className="billing__info">Account Type:</div>
-              <div className="billing__info">{localStorage.getItem("accountType")}</div>
-            </div>
-            <div className="billing__section">
-              <div className="billing__info">Account Deactivates:</div>
-              <div className="billing__info">
-                {localStorage.getItem("accountDeactivated").replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}
-              </div>
-            </div>
-            <StripeProvider apiKey="pk_test_a80QBoWXww54ttxUn5cMQO1o">
-              <div className="signup-container__stripe">
-                <Elements>
-                  <StripePayment checkPayment={this.checkPayment} />
-                </Elements>
-              </div>
-            </StripeProvider>
-          </div>
-        );
       case "Settings":
         return (
           <div className="content__profile">
-            <div className="profile__image" />
-            {/* Have this open a modal to change their password */}
             <div className="profile__container">
+              <img
+                alt={localStorage.getItem("name")}
+                className="profile__image"
+                src={localStorage.getItem("userImage")}
+              />
               <div className="container__info">
                 <div className="info__label">Username:</div>
                 <div className="info__data">
-                  {this.state.openForChange ? (
-                    <input
-                      style={{ width: "10rem" }}
-                      className="user-change__input"
-                      placeholder="username"
-                      name="username"
-                      type="text"
-                      value={this.state.username}
-                      onChange={this.handleInputChange}
-                    />
+                  {this.state.usernameShow ? (
+                    <form className="data__change">
+                      <input
+                        className="change__input"
+                        placeholder={this.state.username}
+                        name="usernameUpdate"
+                        type="text"
+                        value={this.state.usernameUpdate}
+                        onChange={this.handleInputChange}
+                      />
+                      <button type="submit" name="username" className="change__button" onClick={this.updateUser}>
+                        Save
+                      </button>
+                    </form>
                   ) : (
-                    //Show save but when change button is clicked
                     this.state.username
                   )}
-                  {this.state.change ? (
-                    <button className="info__button" onClick={this.saveUsernameOrEmail}>
-                      Save
-                    </button>
-                  ) : null}
                 </div>
-                <button className="info__button" onClick={this.changeUsernameOrEmail}>
-                  {this.state.currenAction}
+                <button name="usernameButton" className="info__button" onClick={this.buttonChange}>
+                  {this.state.usernameButton}
                 </button>
               </div>
               <div className="container__info">
                 <div className="info__label">Email:</div>
                 <div className="info__data">
-                  {this.state.openForChange ? (
-                    <input
-                      style={{ width: "10rem" }}
-                      className="user-change__input"
-                      placeholder="email"
-                      name="email"
-                      type="text"
-                      value={this.state.email}
-                      onChange={this.handleInputChange}
-                    />
+                  {this.state.emailShow ? (
+                    <form className="data__change">
+                      <input
+                        className="change__input"
+                        placeholder={this.state.email}
+                        name="emailUpdate"
+                        value={this.state.emailUpdate}
+                        onChange={this.handleInputChange}
+                      />
+                      <button type="submit" name="email" className="change__button" onClick={this.updateUser}>
+                        Save
+                      </button>
+                    </form>
                   ) : (
-                    //Show save but when change button is clicked
                     this.state.email
                   )}
-                  {this.state.change ? (
-                    <button className="info__button" onClick={this.saveUsernameOrEmail}>
-                      Save
-                    </button>
-                  ) : null}
                 </div>
-                <button className="info__button" onClick={this.changeUsernameOrEmail}>
-                  {this.state.currenAction}
+                <button name="emailButton" className="info__button" onClick={this.buttonChange}>
+                  {this.state.emailButton}
                 </button>
               </div>
-
               <div className="container__info">
                 <div className="info__label">Password:</div>
-                <div className="info__data">
-                  {this.state.opendPasswordForm ? (
-                    <div className="password-reset">
+                <div id="password" className="info__data">
+                  {this.state.passwordShow ? (
+                    <form className="data__change">
                       <input
                         className="password-change__input"
                         placeholder="Password"
@@ -516,34 +479,63 @@ class User extends Component {
                       <input
                         className="password-change__input"
                         placeholder="New password"
-                        name="newPassword"
+                        name="passwordUpdate"
                         type="password"
-                        value={this.state.newPassword}
+                        value={this.state.passwordUpdate}
                         onChange={this.handleInputChange}
                       />
                       <input
                         className="password-change__input"
                         placeholder="Repeat new password"
-                        name="verifyPassword"
+                        name="passwordUpdateVerify"
                         type="password"
-                        value={this.state.verifyPassword}
+                        value={this.state.passwordUpdateVerify}
                         onChange={this.handleInputChange}
                       />
-                    </div>
+                      <button type="submit" name="password" className="change__button" onClick={this.checkPassword}>
+                        Save
+                      </button>
+                    </form>
                   ) : (
-                    <div>****************</div>
+                    "****************"
                   )}
-                  {this.state.changePassword ? (
-                    <button className="info__button" onClick={this.changePassword}>
-                      Save
-                    </button>
-                  ) : null}
                 </div>
-                <button className="info__button" onClick={this.changePasswordfunc}>
-                  {this.state.passwordAction}
+                <button name="passwordButton" className="info__button" onClick={this.buttonChange}>
+                  {this.state.passwordButton}
                 </button>
               </div>
             </div>
+            {this.state.passwordErrorMatch ? <div className="profile__error"> Passwords Do Not Match </div> : null}
+            {this.state.passwordErrorLength ? (
+              <div className="profile__error"> Password Must Be At Least 1 Character </div>
+            ) : null}
+            {this.state.passwordErrorUpdate ? (
+              <div className="profile__error"> Original Password Incorrect </div>
+            ) : null}
+          </div>
+        );
+      case "Billing":
+        return (
+          <div className="content__billing">
+            <div className="billing__section">
+              <div className="section__single">
+                <div className="single__info">Current Account Type:</div>
+                <div className="single__info">{localStorage.getItem("accountType")}</div>
+              </div>
+              <div className="section__single">
+                <div className="single__info">Account Deactivates:</div>
+                <div className="single__info">
+                  {localStorage.getItem("accountDeactivated").replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}
+                </div>
+              </div>
+            </div>
+            <StripeProvider apiKey="pk_test_a80QBoWXww54ttxUn5cMQO1o">
+              <div className="signup-container__stripe">
+                <Elements>
+                  <StripePayment checkPayment={this.checkPayment} />
+                </Elements>
+              </div>
+            </StripeProvider>
           </div>
         );
       default:
@@ -573,100 +565,36 @@ class User extends Component {
     }
   };
 
-  updatePage = currentPage => {
-    this.setState({ currentPage });
-    this.getReviews(currentPage);
-  };
-
-  createPagination = () => {
-    let lastPage =
-      // Ex. 100 / 10 % 1 = 0
-      // Ex. 101 / 10 % 1 != 0
-      (this.state.total / 10) % 1 === 0
-        ? // 100 / 10 - 1 = 9, so pages 0-9 will show results 0-99 (10 pages, 10 each page)
-          Math.floor(this.state.total / 10) - 1
-        : // 101 / 10 = 10, so pages 0-10 will show results 0-100 (11 pages, 1 on the last page)
-          Math.floor(this.state.total / 10);
-
-    // Set is the lazy / quick way if there is only one page
-    let pages = new Set([0, lastPage]);
-    if (lastPage < 7) {
-      for (let i = 1; i < lastPage; i++) {
-        pages.add(i);
-      }
-      pages = [...pages].sort((a, b) => a - b);
-    } else {
-      // Load the appropriate pages
-      // current:1 	1 2 ... 10
-      // current:2	1 2 3 ... 10
-      // current:3	1 2 3 4 ... 10
-      // current:4	1 ... 3 4 5 ... 10
-      // current:5	1 ... 4 5 6 ... 10
-      // current:6	1 ... 5 6 7 ... 10
-      // current:7	1 ... 6 7 8 ... 10
-      // current:8	1 ... 7 8 9 10
-      // current:9	1 ... 8 9 10
-      // current:10	1 ... 9 10
-      for (let i = 1; i < lastPage; i++) {
-        if (i <= this.state.currentPage + 1 && i >= this.state.currentPage - 1) {
-          pages.add(i);
-        }
-      }
-
-      pages = [...pages].sort((a, b) => a - b);
-      // Add an elipsis if more than 3 away from the first page
-      if (this.state.currentPage > 2) {
-        pages.splice(1, 0, "...");
-      }
-
-      // Add an elipsis if more than 3 away from the last page
-      if (this.state.currentPage < lastPage - 2) {
-        pages.splice(pages.length - 1, 0, "...");
-      }
-    }
-
-    return pages.length > 1 ? (
-      <div className="reviews__pagination">
-        Page {this.state.currentPage + 1} / {lastPage + 1}
-        <div id="pagination" className="pagination__pages">
-          {pages.map((page, i) => {
-            if (page === "...") {
-              return (
-                <button key={i + page} id={page} className="pagination__page--no-hover">
-                  {page}
-                </button>
-              );
-            }
-            return (
-              <button key={page} id={page} className="pagination__page" onClick={this.updatePage.bind(this, page)}>
-                {page + 1}
+  render() {
+    console.log("this.state.usernameupdate", this.state.usernameUpdate);
+    return (
+      <div>
+        <NavBar search={this.props.search} />
+        <div className="user">
+          <div className="user__body">
+            <div className="body__left-bar">
+              <button className="left-bar__button" name="Home" onClick={this.updateCurrent}>
+                Profile
               </button>
-            );
-          })}
+              <button className="left-bar__button" name="My Reviews" onClick={this.updateCurrent}>
+                My Reviews
+              </button>
+              <button className="left-bar__button" name="Billing" onClick={this.updateCurrent}>
+                Billing
+              </button>
+              <button className="left-bar__button" name="Settings" onClick={this.updateCurrent}>
+                Settings
+              </button>
+              <button className="left-bar__button" onClick={this.logout}>
+                Sign Out
+              </button>
+            </div>
+            <div className="body__content">{this.loadContent()}</div>
+          </div>
         </div>
       </div>
-    ) : null;
-  };
-
-  toggleDropDown = event => {
-    let toggle = event.target.name;
-    let other = "showfilterBy";
-    if (toggle === "showfilterBy") {
-      other = "showsortBy";
-    }
-    let inverse = this.state[toggle];
-    this.setState({ [toggle]: !inverse, [other]: false });
-  };
-
-  toggleFilterChoice = event => {
-    let toggle = event.target.name;
-    this.setState({ filterBy: toggle, showfilterBy: false });
-  };
-
-  toggleSortChoice = event => {
-    let toggle = event.target.name;
-    this.setState({ sortBy: toggle, showsortBy: false });
-  };
+    );
+  }
 }
 
 export default withRouter(User);
