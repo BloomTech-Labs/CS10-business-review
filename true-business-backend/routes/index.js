@@ -25,7 +25,6 @@ const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
 
 const restricted = (request, response, next) => {
   const token = request.headers.authorization;
-
   if (token) {
     jwt.verify(token, process.env.REACT_APP_SECRET, (err, decodedToken) => {
       if (err) {
@@ -53,10 +52,6 @@ router.post("/api/user/login", (req, res) => {
 
 router.put("/api/user/update/:id", function(request, response) {
   UserController.updateUser(request, response);
-});
-
-router.put("/api/user/resetpassword/:_id", (request, response) => {
-  UserController.reset_password(request, response);
 });
 
 router.get("/api/user/random", function(req, res) {

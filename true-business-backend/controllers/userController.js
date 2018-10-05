@@ -152,31 +152,6 @@ const getAllUsers = (request, response) => {
     });
 };
 
-const reset_password = function(request, response) {
-  console.log("Fire password");
-  const { _id, password, newPassword, verifyPassword } = request.body;
-  User.findById({ _id: request.params._id })
-    .then(function(user) {
-      if (user) {
-        if (bcrypt.compareSync(password, user.password)) {
-          if (newPassword === verifyPassword) {
-            user.password = bcrypt.hashSync(newPassword, bcryptRounds);
-            User.findByIdAndUpdate({ _id: request.params._id }, user)
-              .then(user => {
-                response.status(200).json(user);
-              })
-              .catch(err => {
-                response.status(500).json(`message: Error reseting password: ${err}`);
-              });
-          }
-        }
-      }
-    })
-    .catch(function(error) {
-      response.status(500).json(`message: Error reseting password: ${error}`);
-    });
-};
-
 module.exports = {
   register,
   login,
@@ -184,6 +159,5 @@ module.exports = {
   deleteUserById,
   updateUser,
   getAllUsers,
-  reset_password,
   getRandomUser,
 };

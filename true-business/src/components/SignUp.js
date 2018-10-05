@@ -28,11 +28,7 @@ class SignUp extends Component {
       type: null,
     };
   }
-
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
+  
   confirmPassword = () => {
     return this.state.password === this.state.confirmPassword;
   };

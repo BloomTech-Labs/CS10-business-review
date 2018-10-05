@@ -19,15 +19,14 @@ let modalStyles = {
   content: {
     top: "50%",
     left: "50%",
-    right: "auto",
-    bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "75%",
-    width: "50%",
+    height: "90vh",
+    width: "60vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
+    overflow: "hidden",
   },
 };
 
@@ -49,7 +48,6 @@ class Business extends Component {
   };
 
   componentDidMount = () => {
-    window.scrollTo(0, 0);
     if (this.props.business !== null) {
       this.getReviews(0);
     }
@@ -197,15 +195,33 @@ class Business extends Component {
                 src={this.props.business.photos[0].link}
               />
               <div className="info__title">{this.props.business.name}</div>
-              <div className="info__street">{this.props.business.formatted_address}</div>
+              <div className="info__address">
+                <div className="address__city">{this.props.business.formatted_address}</div>
+                <div className="address__icon">
+                  <a
+                    href={
+                      "https://www.google.com/maps/search/" +
+                      this.props.business.formatted_address.replace(/[, ]+/g, "+")
+                    }
+                    target="_blank">
+                    <i style={{ color: "#05386b" }} className="fas fa-map-marked-alt fa-2x" />
+                  </a>
+                </div>
+              </div>
               <div className="info__details">
                 <div className="details__hours">
                   <div className="hours__title"> Hours </div>
                   {this.props.business.hasOwnProperty("opening_hours") ? (
                     this.props.business.opening_hours.hasOwnProperty("weekday_text") ? (
-                      this.props.business.opening_hours.weekday_text.map(day => {
+                      this.props.business.opening_hours.weekday_text.map((day, i) => {
+                        let dayIndex = 0;
+                        let dayNum = new Date().getDay();
+                        i + 1 > this.props.business.opening_hours.weekday_text.length
+                          ? (dayIndex = i)
+                          : (dayIndex = i + 1);
+                        let flag = dayIndex === dayNum ? true : false;
                         return (
-                          <div key={day} className="hours__day">
+                          <div style={flag ? { fontWeight: "bolder" } : null} key={day} className="hours__day">
                             {day}
                           </div>
                         );
@@ -219,14 +235,18 @@ class Business extends Component {
                 </div>
                 <div className="details__contact">
                   <div className="contact__phone">
-                    <div className="phone__number">{this.props.business.formatted_phone_number}</div>
+                    <i className="fas fa-phone" />
+                    <div className="phone__number">{this.props.business.formatted_phone_number ? this.props.business.formatted_phone_number : "No Phone Listed"}</div>
                   </div>
                   <div className="contact__website">
                     {this.props.business.website ? (
-                      <a href={this.props.business.website}>
-                        {this.props.business.name}
-                        's Website
-                      </a>
+                      <div>
+                        <i className="fab fa-chrome" />
+                        <a className="website__text" href={this.props.business.website}>
+                          {this.props.business.name}
+                          's Website
+                        </a>
+                      </div>
                     ) : (
                       "No Website Listed"
                     )}
@@ -249,10 +269,11 @@ class Business extends Component {
                   />
                 ) : null}
               </div>
-              {
-               localStorage.getItem('token') &&  localStorage.getItem('userId') ? (
-              <button id="NewReview" className="reviews-container__button" onClick={this.displayNewReview}> New Review </button>
-               ) : (null)}
+              {localStorage.getItem("token") && localStorage.getItem("userId") ? (
+                <button id="NewReview" className="reviews-container__button" onClick={this.displayNewReview}>
+                  New Review
+                </button>
+              ) : null}
               <div className="reviews-container__dropdowns">
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__title"> Filter By: </div>
@@ -312,7 +333,11 @@ class Business extends Component {
                         <div key={review._id} className="review__info">
                           <img
                             alt={review.reviewer.username}
-                            className="review__landscape"
+                            className={
+                              review.photos[0].width > review.photos[0].height
+                                ? "review__landscape"
+                                : "review__portrait"
+                            }
                             src={review.photos[0].link}
                             onClick={() => this.openModal(this, review)}
                           />
@@ -325,7 +350,7 @@ class Business extends Component {
                             numberOfStars={5}
                             name="rating"
                           />
-                          <div className="review__reviewer">@{review.reviewer.username}</div>{" "}
+                          <div className="review__reviewer">@{review.reviewer.username}</div>
                         </div>
                       );
                     })
@@ -342,22 +367,43 @@ class Business extends Component {
               onRequestClose={this.closeModal}
               style={modalStyles}
               contentLabel="Review Modal">
-              <div className="landing-container__modal">
+              <div className="modal">
                 {this.state.modalIsOpen ? (
                   <div className="modal-container">
                     <div className="modal__header">
-                      <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
-                      <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
+                      <div className="header__image">
+                        <button className="image__button" onClick={this.closeModal}>
+                          Close
+                          <i className="far fa-window-close" />
+                        </button>
+                        {/* Update reviews / user with likes */}
+                        <button className="image__button">
+                          Like
+                          <i className="fas fa-thumbs-up" />
+                        </button>
+                        <img
+                          alt={this.state.modalInfo.newMongoId.name}
+                          className={
+                            this.state.modalInfo.photos[0].width > this.state.modalInfo.photos[0].height
+                              ? "image__landscape"
+                              : "image__portrait"
+                          }
+                          src={this.state.modalInfo.photos[0].link}
+                        />
+                      </div>
+                      <div className="header__user">
+                        
+                        {/* Onclick to go to the user component whenever we get to that... */}
+                        <div className="header__reviewer">
+                          <div className="reviewer__info--onclick">@{this.state.modalInfo.reviewer.username}</div>
+                          <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
+                          <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
+                        </div>
+                      </div>
                     </div>
                     <div className="modal__body">
-                      <img
-                        alt={this.state.modalInfo.name}
-                        className="body__landscape"
-                        src={this.state.modalInfo.photos[0].link}
-                        onClick={this.openModal}
-                      />
                       <div className="body__stars">
-                        {" "}
+                      <div className="stars__title"> {this.state.modalInfo.newMongoId.name}</div>
                         <StarRatings
                           starDimension="20px"
                           starSpacing="5px"
@@ -367,14 +413,14 @@ class Business extends Component {
                           numberOfStars={5}
                           name="rating"
                         />
+                        <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
                       </div>
-                      <div>{this.state.modalInfo.title}</div>
-                      <div className="body__review">{this.state.modalInfo.body}</div>
-                    </div>
-                    <div className="modal__footer">
-                      <button className="footer__button" onClick={this.closeModal}>
-                        close
-                      </button>
+                      <div className="body__title">
+                        {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
+                      </div>
+                      <div className="body__review">
+                        {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                      </div>
                     </div>
                   </div>
                 ) : null}

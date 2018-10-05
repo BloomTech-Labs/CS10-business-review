@@ -22,7 +22,7 @@ const getReviewsByReviewerId = (req, res) => {
   Review.find({ reviewer: req.params.id })
     .skip(8 * req.params.currentPage)
     .limit(8)
-    .populate("reviewer")
+    .populate("reviewer newMongoId")
     .then(reviews => {
       Review.find({ reviewer: req.params.id })
         .count()
@@ -31,7 +31,7 @@ const getReviewsByReviewerId = (req, res) => {
         });
     })
     .catch(error => {
-      res.status(200).json({ ERROR: error });
+      res.status(200).json({ error });
     });
 };
 
@@ -41,7 +41,7 @@ const getReviewsByBusinessId = (req, res) => {
   Review.find({ [search]: req.params.id })
     .skip(10 * req.params.currentPage)
     .limit(10)
-    .populate("reviewer")
+    .populate("reviewer newMongoId")
     .then(reviews => {
       Review.find({ [search]: req.params.id })
         .count()

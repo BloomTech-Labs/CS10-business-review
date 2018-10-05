@@ -15,7 +15,7 @@ let modalStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     height: "90vh",
-    width: "55vw",
+    width: "60vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
@@ -46,12 +46,7 @@ class LandingPage extends Component {
     this.setState({ modalIsOpen: false });
   }
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
   render() {
-    console.log(this.props.reviews, this.props.businesses, this.props.users);
     return (
       <div>
         <NavBar search={this.props.search} />

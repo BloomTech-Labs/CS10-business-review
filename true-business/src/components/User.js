@@ -18,12 +18,12 @@ if (typeof backend !== "string") {
 
 let modalStyles = {
   content: {
-    top: "15%",
+    top: "50%",
     left: "50%",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "20vh",
-    width: "55vw",
+    height: "90vh",
+    width: "60vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
@@ -51,6 +51,7 @@ class User extends Component {
     passwordErrorMatch: false,
     passwordErrorLength: false,
     passwordErrorUpdate: false,
+    error: false,
     filter: ["No Filter", "4 Stars or Higher", "3 Stars or Higher", "2 Stars or Higher"],
     sort: ["Date Descending", "Date Ascending", "Rating Descending", "Rating Ascending"],
     filterBy: "No Filter",
@@ -60,7 +61,6 @@ class User extends Component {
   };
 
   componentDidMount = () => {
-    window.scrollTo(0, 0);
     this.getReviews(0);
     const id = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
@@ -102,8 +102,8 @@ class User extends Component {
             });
       })
       .catch(err => {
-        console.log("FUCK");
         this.setState({
+          error: true,
           passwordErrorUpdate: true,
           password: "",
           passwordUpdate: "",
@@ -190,21 +190,33 @@ class User extends Component {
       (this.state.password !== "" || this.state.passwordUpdate !== "")
     ) {
       this.updateUser(event);
-      this.setState({ passwordErrorMatch: false, passwordErrorLength: false });
+      this.setState({ passwordErrorMatch: false, passwordErrorLength: false, error: false });
     } else if (
       this.state.password === "" ||
       this.state.passwordUpdate === "" ||
       this.state.passwordUpdateVerify === ""
     ) {
-      this.setState({ passwordErrorLength: true });
+      this.setState({ passwordErrorLength: true, error: true });
     } else {
-      this.setState({ passwordErrorMatch: true });
+      this.setState({ passwordErrorMatch: true, error: true });
     }
   };
 
-  updatePage = currentPage => {
-    this.setState({ currentPage });
-    this.getReviews(currentPage);
+  updateCurrent = event => {
+    this.setState({
+      current: event.target.name,
+      passwordErrorLength: false,
+      passwordErrorMatch: false,
+      passwordErrorUpdate: false,
+      error: false,
+      emailShow: false,
+      emailUpdate: "",
+      usernameShow: false,
+      usernameUpdate: "",
+      passwordShow: false,
+      passwordUpdate: "",
+      passwordUpdateVerify: "",
+    });
   };
 
   createPagination = () => {
@@ -276,6 +288,14 @@ class User extends Component {
     ) : null;
   };
 
+  openModal = (event, info) => {
+    this.setState({ modalIsOpen: true, modalInfo: info });
+  };
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  };
+
   loadContent = () => {
     switch (this.state.current) {
       case "My Reviews":
@@ -321,7 +341,6 @@ class User extends Component {
                     ) : null}
                   </div>
                 </div>
-                {console.log("FUCKING TOTAL", this.state.total)}
                 {this.state.total > 8 ? this.createPagination() : null}
               </div>
               <div className="reviews-container__reviews">
@@ -330,6 +349,7 @@ class User extends Component {
                 <div className="reviews__review">
                   {this.state.reviews.length ? (
                     this.state.reviews.map((review, i) => {
+                      console.log("REVIEW", review)
                       return (
                         <div key={review._id} className="review__info">
                           <img
@@ -366,20 +386,37 @@ class User extends Component {
               onRequestClose={this.closeModal}
               style={modalStyles}
               contentLabel="Review Modal">
-              <div className="landing-container__modal">
+              <div className="modal">
                 {this.state.modalIsOpen ? (
                   <div className="modal-container">
                     <div className="modal__header">
-                      <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
-                      <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
+                      <div className="header__image">
+                        <button className="image__button" onClick={this.closeModal}>
+                          Close
+                          <i className="far fa-window-close" />
+                        </button>
+                        {/* Update reviews / user with likes */}
+                        <button className="image__button">
+                          Like
+                          <i className="fas fa-thumbs-up" />
+                        </button>
+                        <img
+                          alt={this.state.modalInfo.newMongoId.name}
+                          className="image__landscape"
+                          src={this.state.modalInfo.photos[0].link}
+                        />
+                      </div>
+                      <div className="header__user">
+                        <div className="header__title"> {this.state.modalInfo.newMongoId.name}</div>
+                        {/* Onclick to go to the user component whenever we get to that... */}
+                        <div className="header__reviewer">
+                          <div className="reviewer__info--onclick">@{this.state.modalInfo.reviewer.username}</div>
+                          <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
+                          <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
+                        </div>
+                      </div>
                     </div>
                     <div className="modal__body">
-                      <img
-                        alt={this.state.modalInfo.name}
-                        className="body__landscape"
-                        src={this.state.modalInfo.photos[0].link}
-                        onClick={this.openModal}
-                      />
                       <div className="body__stars">
                         <StarRatings
                           starDimension="20px"
@@ -390,14 +427,14 @@ class User extends Component {
                           numberOfStars={5}
                           name="rating"
                         />
+                        <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
                       </div>
-                      <div>{this.state.modalInfo.title}</div>
-                      <div className="body__review">{this.state.modalInfo.body}</div>
-                    </div>
-                    <div className="modal__footer">
-                      <button className="footer__button" onClick={this.closeModal}>
-                        close
-                      </button>
+                      <div className="body__title">
+                        {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
+                      </div>
+                      <div className="body__review">
+                        {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                      </div>
                     </div>
                   </div>
                 ) : null}
@@ -414,7 +451,7 @@ class User extends Component {
                 className="profile__image"
                 src={localStorage.getItem("userImage")}
               />
-              <div className="container__info">
+              <div className="container__info--top">
                 <div className="info__label">Username:</div>
                 <div className="info__data">
                   {this.state.usernameShow ? (
@@ -505,13 +542,22 @@ class User extends Component {
                 </button>
               </div>
             </div>
-            {this.state.passwordErrorMatch ? <div className="profile__error"> Passwords Do Not Match </div> : null}
+            {this.state.passwordErrorMatch ? (
+              <div className="profile__error"> Passwords Do Not Match </div>
+            ) : (
+              null
+            )}
             {this.state.passwordErrorLength ? (
               <div className="profile__error"> Password Must Be At Least 1 Character </div>
-            ) : null}
+            ) : (
+              null
+            )}
             {this.state.passwordErrorUpdate ? (
               <div className="profile__error"> Original Password Incorrect </div>
-            ) : null}
+            ) : (
+              null
+            )}
+            {this.state.error ? null : <div className="profile__error" />}
           </div>
         );
       case "Billing":
@@ -547,7 +593,7 @@ class User extends Component {
                 className="profile__image"
                 src={localStorage.getItem("userImage")}
               />
-              <div className="container__info">
+              <div className="container__info--top">
                 <div className="info__label">Username:</div>
                 <div className="info__data">{this.state.username}</div>
               </div>
@@ -560,13 +606,13 @@ class User extends Component {
                 <div className="info__data">****************</div>
               </div>
             </div>
+            <div className="profile__error" />
           </div>
         );
     }
   };
 
   render() {
-    console.log("this.state.usernameupdate", this.state.usernameUpdate);
     return (
       <div>
         <NavBar search={this.props.search} />
