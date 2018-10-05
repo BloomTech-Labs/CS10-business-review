@@ -17,6 +17,7 @@ function generateToken(user) {
 const bcryptRounds = 10;
 
 const register = (request, response) => {
+  console.log("Registering...")
   const { name, username, password, email, accountType } = request.body;
   const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
   const token = generateToken({ username });
@@ -34,6 +35,7 @@ const register = (request, response) => {
 };
 
 const login = (request, response) => {
+  console.log("Signing in...");
   const { username, password } = request.body;
   User.findOne({ username: username })
     .then(userFound => {
@@ -55,6 +57,33 @@ const login = (request, response) => {
     .catch(err => {
       response.status(500).send({
         errorMessage: "Failed to Login: " + err,
+      });
+    });
+};
+
+const getLoggedInUser = (request, response) => {
+  //5bb68069adadaad4b39e0528
+  // Having some issues with the session because of the 
+  // backend and frontend having different ports and the 
+  // cookie is tied to the 3000 port.
+  const userId = /*"5bb68069adadaad4b39e0528"*/request.session.passport.user;
+  console.log("Looking for Logged in user:" + userId);
+
+  if(!userId) {
+    console.log("No session found");
+    response.status(500).json({
+      error: "No sessio found.",
+    });
+  }
+
+  User.findById({ _id: userId })
+    .then(function(user) {
+      console.log(user);
+      response.status(200).json(user);
+    })
+    .catch(function(error) {
+      response.status(500).json({
+        error: "The user could not be retrieved.",
       });
     });
 };
@@ -101,6 +130,7 @@ const deleteUserById = (request, response) => {
 };
 
 const updateUser = (request, response) => {
+  console.log("Updating user..");
   const { _id, username, email } = request.body;
   User.findById({ _id: request.params.id })
     .then(function(user) {
@@ -179,4 +209,5 @@ module.exports = {
   getAllUsers,
   reset_password,
   getRandomUser,
+  getLoggedInUser
 };

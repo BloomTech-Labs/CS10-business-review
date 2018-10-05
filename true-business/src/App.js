@@ -38,6 +38,7 @@ class App extends Component {
   };
 
   handleLoad = () => {
+    this.getLoggedInUser();
     this.getDBBusinesses();
     this.getDBReviews();
     this.getDBUsers();
@@ -58,6 +59,19 @@ class App extends Component {
     }
   };
   
+  getLoggedInUser = () => {
+    axios
+    .get(`${backend}api/user/current`/*, { withCredentials: true }*/)
+    .then(response => {
+      localStorage.setItem("userId", response.data._id);
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("name", response.data.name);
+    })
+    .catch(err => {
+      console.log("Error:", err);
+    });
+  };
+
   render() {
     return (
       <div className="app-container">

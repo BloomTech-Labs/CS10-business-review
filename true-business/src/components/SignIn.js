@@ -83,15 +83,15 @@ class SignIn extends Component {
                 <button type="submit" className="signin-container__button" onClick={this.signIn}>
                   Sign In
                 </button>
-                {/* <hr/> */}
-                {/* <img
+                { <hr/> }
+                { <img
                   alt="Google Logo"
                   src={googleLogo}
                   className="signin-container__google-auth"
                   onClick={() => {
                     window.location = `${backend}auth/google`;
                   }}
-                /> */}
+                /> }
               </div>
             </div>
           </div>

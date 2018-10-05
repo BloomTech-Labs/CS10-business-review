@@ -21,10 +21,11 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({
-        $or: [{ "google.id": profile.id }, { "local.email": profile.emails[0].value }],
+        $or: [{ "id": profile.id }, { "email": profile.emails[0].value }],
       })
         .then(existingUser => {
           if (existingUser) {
+            console.log("Found Existing user...");
             existingUser.google_id = profile.id;
             existingUser.username = profile.displayName;
             existingUser.email = profile.emails[0].value;
@@ -38,10 +39,12 @@ passport.use(
             existingUser.save();
             done(null, existingUser);
           } else {
+            console.log("New User...");
             let newUser = new User({
               google_id: profile.id,
               email: profile.emails[0].value,
-              username: profile.displayName,
+              username: profile.emails[0].value,
+              name: profile.displayName,
               userImages: [
                 {
                   link: profile._json.image.url,

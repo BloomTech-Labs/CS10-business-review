@@ -55,6 +55,10 @@ router.put("/api/user/update/:id", function(request, response) {
   UserController.updateUser(request, response);
 });
 
+router.get("/api/user/current", function(request, response) {
+  UserController.getLoggedInUser(request, response);
+});
+
 router.put("/api/user/resetpassword/:_id", (request, response) => {
   UserController.reset_password(request, response);
 });
