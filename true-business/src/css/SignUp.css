@@ -69,13 +69,16 @@
   cursor: default;
   color: #05386b;
 }
+.signup .signup-container .signup-container__form .danger {
+  color: red;
+}
 .signup .signup-container .signup-container__form .signup-container__input {
   border: 0.1rem solid #05386b;
   background: #efeff1;
   margin-bottom: 1rem;
   width: 75%;
   font-size: 1.25rem;
-  padding: 0.5rem;
+  padding: .5rem;
 }
 .signup .signup-container .signup-container__form .signup-container__buttons {
   display: flex;

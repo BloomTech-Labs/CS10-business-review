@@ -17,12 +17,11 @@ class SignUp extends Component {
     super(props);
     this.state = {
       name: "",
+      email: "",      
       username: "",
-      email: "",
-      confirmEmail: "",
       password: "",
       confirmPassword: "",
-      error: "",
+      error: false,
       errorMessage: "",
       payment: false,
       type: null,
@@ -40,8 +39,38 @@ class SignUp extends Component {
       email: this.state.email,
       username: this.state.username,
       password: this.state.password,
+      confirmPassword: this.state.confirmPassword,
     };
-    axios
+    if(!this.state.name && !this.state.email  && !this.state.username && !this.state.password && !this.state.confirmPassword) {
+      this.setState({errorMessage: "Please completely fill out the form to Sign Up!"})
+    }
+    else if(!this.state.name) {
+      this.setState({
+        error: true,
+        errorMessage: "Please provide your full name!"})
+    }
+    else if(!this.state.email) {
+      this.setState({
+        error: true,
+        errorMessage: "Please provide an email!"})
+    }
+   else if(!this.state.username) {
+      this.setState({
+        error: true,
+        errorMessage: "Please provide a username!"})
+    }
+  else if(!this.state.password) {
+      this.setState({
+        error: true,
+        errorMessage: "Please provide a password!"})
+    }
+  else if(!this.confirmPassword()) {
+      this.setState({
+        error: true,
+        errorMessage: "Passwords don't match!"})
+    } 
+   else { 
+     axios
       .post(`${backend}api/user/register`, user)
       .then(() => {
         this.setState({
@@ -50,11 +79,14 @@ class SignUp extends Component {
         this.props.history.push(`/signin`);
       })
       .catch(err => {
+        if(err) {     
         this.setState({
           error: true,
-          errorMessage: err,
+          errorMessage: "This username already exists!",          
         });
+         }
       });
+    }
   };
 
   handleInputChange = event => {
@@ -69,6 +101,7 @@ class SignUp extends Component {
           <div className="signup-container">
             <div className="signup-container__header"> Sign Up </div>
             <form className="signup-container__form">
+           <div className="danger"> {this.state.errorMessage} </div>
               <input
                 className="signup-container__input"
                 placeholder="Full Name"
