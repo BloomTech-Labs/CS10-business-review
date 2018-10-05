@@ -34,8 +34,20 @@
   margin: 1rem;
 }
 .business .business__info .info__landscape {
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background-color: #05386b;
+  top: 0;
+  position: relative;
+  border: 0.1rem solid #05386b;
   width: 50%;
-  max-height: 20rem;
+  min-width: 50%;
+  min-height: 40vh;
+  max-height: 40vh;
+}
+.business .business__info .info__landscape:hover {
+  cursor: pointer;
 }
 .business .business__info .info__portrait {
   max-height: 20rem;
@@ -44,9 +56,25 @@
   font-size: 3rem;
   text-align: center;
 }
-.business .business__info .info__street {
-  padding: 1rem 0 0 0;
-  font-size: 2rem;
+.business .business__info .info__address {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+}
+.business .business__info .info__address .address__city {
+  font-size: 1rem;
+  padding: 1rem;
+  text-align: center;
 }
 .business .business__info .info__city {
   padding: 0 0 1rem 0;
@@ -71,10 +99,10 @@
 .business .business__info .info__details .details__hours {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
-  width: 50%;
+  width: 33%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
   line-height: 1;
@@ -91,11 +119,11 @@
 }
 .business .business__info .info__details .details__contact {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 50%;
+  width: 66%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
   line-height: 1;
@@ -105,10 +133,47 @@
   color: #05386b;
 }
 .business .business__info .info__details .details__contact .contact__phone {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  height: 50%;
+  width: 50%;
   font-size: 1.5rem;
 }
+.business .business__info .info__details .details__contact .contact__phone .phone__number {
+  font-size: 1rem;
+  padding: 1rem;
+}
 .business .business__info .info__details .details__contact .contact__website {
-  font-size: 1.25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  width: 50%;
+  font-size: 1.5rem;
+}
+.business .business__info .info__details .details__contact .contact__website .website__text {
+  font-size: 1rem;
+  padding: 1rem;
 }
 .business .business__reviews-container {
   display: flex;
@@ -222,11 +287,12 @@
   height: 100%;
   display: flex;
   flex-wrap: wrap;
+  margin: 1rem;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -239,30 +305,50 @@
   background: #ffffff;
   border: 0.1rem solid #05386b;
   border-radius: 1rem;
-  height: 15rem;
+  min-height: 25vh;
+  max-height: 25vh;
   min-width: 17%;
   max-width: 17%;
   margin: 1rem;
   color: #05386b;
   opacity: 0.8;
+  padding: 1rem;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape {
   border-radius: 1rem;
   object-fit: cover;
-  object-position: 50% 0%;
+  object-position: 50% 50%;
   background-color: #05386b;
   top: -2rem;
   position: relative;
   border: 0.1rem solid #05386b;
-  width: 75%;
-  min-width: 75%;
-  height: 50%;
-  min-height: 50%;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: 15vh;
+  min-height: 15vh;
+  max-height: 15vh;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape:hover {
   cursor: pointer;
 }
-.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape:hover {
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait {
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background-color: #05386b;
+  top: -2rem;
+  position: relative;
+  border: 0.1rem solid #05386b;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: 15vh;
+  min-height: 15vh;
+  max-height: 15vh;
+  object-position: 50% 0%;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait:hover {
   cursor: pointer;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__image:hover {
@@ -275,10 +361,10 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__reviewer {
   width: 10rem;
-  padding: 0.2rem 0;
   text-align: center;
   text-overflow: ellipsis;
-  padding: 0.3rem;
+  overflow: hidden;
+  padding: 0.5rem;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__reviewer:hover {
   cursor: pointer;
@@ -351,6 +437,267 @@
   font-weight: bold;
   background: #efeff1;
   cursor: default;
+}
+.modal .modal-container {
+  width: 80%;
+  height: 80vh;
+  max-height: 80vh;
+}
+.modal .modal-container .modal__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 50%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0 0 0.3rem 0;
+  cursor: default;
+  color: #05386b;
+  max-height: 50%;
+}
+.modal .modal-container .modal__header .header__image {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  height: 85%;
+  max-height: 85%;
+}
+.modal .modal-container .modal__header .header__image .image__landscape {
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background-color: #05386b;
+  top: 0;
+  position: relative;
+  border: 0.1rem solid #05386b;
+  width: 50%;
+  min-width: 50%;
+  height: 100%;
+  max-height: 100%;
+  margin: 1rem 1rem 0 1rem;
+}
+.modal .modal-container .modal__header .header__image .image__landscape:hover {
+  cursor: pointer;
+}
+.modal .modal-container .modal__header .header__image .image__portrait {
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background-color: #05386b;
+  top: 0;
+  position: relative;
+  border: 0.1rem solid #05386b;
+  width: 50%;
+  min-width: 50%;
+  height: 100%;
+  max-height: 100%;
+  margin: 1rem 1rem 0 1rem;
+  object-position: 50% 0%;
+}
+.modal .modal-container .modal__header .header__image .image__portrait:hover {
+  cursor: pointer;
+}
+.modal .modal-container .modal__header .header__image .image__button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  height: initial;
+  border-radius: 0.5rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: #ffffff;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  margin: 1rem;
+  padding: 0.5rem;
+  width: 20%;
+}
+.modal .modal-container .modal__header .header__image .image__button:hover {
+  cursor: pointer;
+  box-shadow: 0px 15px 20px #6b6b6b;
+  filter: brightness(110%);
+  font-weight: bolder;
+}
+.modal .modal-container .modal__header .header__user {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  text-align: center;
+  width: 100%;
+  height: 15%;
+  min-height: 15%;
+  max-height: 15%;
+  padding: 2rem;
+}
+.modal .modal-container .modal__header .header__user .header__title {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0.5rem;
+}
+.modal .modal-container .modal__header .header__user .header__reviewer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  width: 50%;
+}
+.modal .modal-container .modal__header .header__user .header__reviewer .reviewer__info--onclick {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 33%;
+  font-size: 1.5rem;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+.modal .modal-container .modal__header .header__user .header__reviewer .reviewer__info {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 33%;
+  font-size: 1rem;
+}
+.modal .modal-container .modal__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 45%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  min-height: 45%;
+  max-height: 45%;
+}
+.modal .modal-container .modal__body .body__stars {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  height: 10%;
+}
+.modal .modal-container .modal__body .body__drop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+}
+.modal .modal-container .modal__body .body__title {
+  font-size: 1.5rem;
+  height: 10%;
+}
+.modal .modal-container .modal__body .body__stars {
+  text-align: center;
+  width: 50%;
+  height: 20%;
+}
+.modal .modal-container .modal__body .body__review {
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
+  border-radius: 1rem;
+  font-size: 1rem;
+  height: 50%;
+  padding: 0.5rem;
+  width: 75%;
+  height: auto;
+  max-height: 25vh;
+  overflow-y: auto;
+  overflow-wrap: break-word;
+}
+.modal .modal-container .modal__footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+}
+.modal .modal-container .modal__footer .footer__button {
+  border-radius: 0.5rem;
+  width: 10rem;
+  background-color: #3487d5;
+  color: #ffffff;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  height: 2.5rem;
+  margin: 0.5rem 0;
+}
+.modal .modal-container .modal__footer .footer__button:hover {
+  cursor: pointer;
+  box-shadow: 0px 15px 20px #6b6b6b;
+  filter: brightness(110%);
+  font-weight: bolder;
 }
 .active {
   font-weight: bolder;

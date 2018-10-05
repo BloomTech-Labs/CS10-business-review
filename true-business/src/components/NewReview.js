@@ -49,11 +49,7 @@ export default class NewReview extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.openModal = this.openModal.bind(this);
   }
-
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
+  
   componentDidUpdate = () => {
     if (this.state.modalIsOpen !== this.props.open) {
       this.openModal();
@@ -130,7 +126,6 @@ export default class NewReview extends Component {
       photos: this.state.fileURL,
       reviewer: localStorage.getItem("userId"),
     };
-    console.log("user", localStorage.getItem("userId"))
     this.setState({ title: "", body: "", fileURL: [], rating: 0, starsError: false });
     axios
       .post(`${backend}api/review/create`, review)

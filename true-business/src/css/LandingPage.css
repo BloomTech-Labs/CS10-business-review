@@ -34,7 +34,7 @@
   border-radius: 1rem;
   font-size: 1.5rem;
   margin: 1rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 .landing .landing__container .container__items {
   display: flex;
@@ -80,7 +80,7 @@
 .landing .landing__container .container__items .items__item .item__landscape {
   border-radius: 1rem;
   object-fit: cover;
-  object-position: 50% 0%;
+  object-position: 50% 50%;
   background-color: #05386b;
   top: -2rem;
   position: relative;
@@ -168,18 +168,36 @@
 .modal .modal-container .modal__header .header__image .image__landscape {
   border-radius: 1rem;
   object-fit: cover;
-  object-position: 50% 0%;
+  object-position: 50% 50%;
   background-color: #05386b;
   top: 0;
   position: relative;
   border: 0.1rem solid #05386b;
   width: 50%;
   min-width: 50%;
-  height: 85%;
-  max-height: 85%;
+  height: 100%;
+  max-height: 100%;
   margin: 1rem 1rem 0 1rem;
 }
 .modal .modal-container .modal__header .header__image .image__landscape:hover {
+  cursor: pointer;
+}
+.modal .modal-container .modal__header .header__image .image__portrait {
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background-color: #05386b;
+  top: 0;
+  position: relative;
+  border: 0.1rem solid #05386b;
+  width: 50%;
+  min-width: 50%;
+  height: 100%;
+  max-height: 100%;
+  margin: 1rem 1rem 0 1rem;
+  object-position: 50% 0%;
+}
+.modal .modal-container .modal__header .header__image .image__portrait:hover {
   cursor: pointer;
 }
 .modal .modal-container .modal__header .header__image .image__button {
@@ -232,6 +250,7 @@
   height: 15%;
   min-height: 15%;
   max-height: 15%;
+  padding: 2rem;
 }
 .modal .modal-container .modal__header .header__user .header__title {
   font-size: 1.5rem;
@@ -255,17 +274,23 @@
   width: 50%;
 }
 .modal .modal-container .modal__header .header__user .header__reviewer .reviewer__info--onclick {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 33%;
   font-size: 1.5rem;
   margin: 1rem;
   padding: 0.5rem;
 }
 .modal .modal-container .modal__header .header__user .header__reviewer .reviewer__info {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 33%;
   font-size: 1rem;
 }
 .modal .modal-container .modal__body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 45%;
   width: 100%;
@@ -311,6 +336,7 @@
   color: #05386b;
 }
 .modal .modal-container .modal__body .body__title {
+  font-size: 1.5rem;
   height: 10%;
 }
 .modal .modal-container .modal__body .body__stars {
@@ -328,7 +354,8 @@
   width: 75%;
   height: auto;
   max-height: 25vh;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-wrap: break-word;
 }
 .modal .modal-container .modal__footer {
   display: flex;

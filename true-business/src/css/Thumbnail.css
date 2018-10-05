@@ -25,7 +25,7 @@
 .thumbnail .thumbnail__landscape {
   border-radius: 1rem;
   object-fit: cover;
-  object-position: 50% 0%;
+  object-position: 50% 50%;
   background-color: #05386b;
   top: -2rem;
   position: relative;

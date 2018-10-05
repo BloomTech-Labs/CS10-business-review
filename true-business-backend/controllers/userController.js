@@ -117,22 +117,29 @@ const deleteUserById = (request, response) => {
 };
 
 const updateUser = (request, response) => {
-  const { _id, username, email } = request.body;
   User.findById({ _id: request.params.id })
     .then(function(user) {
       if (user) {
-        (user.username = username), (user.email = email);
-        User.findByIdAndUpdate({ _id: request.params.id }, user)
+        if (request.body.field === "password") {
+          if (bcrypt.compareSync(request.body.update.password, user.password)) {
+            user.password = bcrypt.hashSync(request.body.update.passwordUpdate, bcryptRounds);
+          } else {
+            return response.status(500).json({ "Error Updating Password": error });
+          }
+        } else {
+          user[request.body.field] = request.body.update;
+        }
+        User.findByIdAndUpdate({ _id: request.params.id }, user, { new: true })
           .then(user => {
             response.status(200).json(user);
           })
           .catch(err => {
-            response.status(500).json(`message: Error username or email: ${err}`);
+            response.status(500).json({ "Error Updating Username or Email": error });
           });
       }
     })
     .catch(function(error) {
-      response.status(500).json(`message: Error username or email: ${error}`);
+      response.status(500).json({ "Error Updating User": error });
     });
 };
 
@@ -161,31 +168,6 @@ const getAllUsers = (request, response) => {
     });
 };
 
-const reset_password = function(request, response) {
-  console.log("Fire password");
-  const { _id, password, newPassword, verifyPassword } = request.body;
-  User.findById({ _id: request.params._id })
-    .then(function(user) {
-      if (user) {
-        if (bcrypt.compareSync(password, user.password)) {
-          if (newPassword === verifyPassword) {
-            user.password = bcrypt.hashSync(newPassword, bcryptRounds);
-            User.findByIdAndUpdate({ _id: request.params._id }, user)
-              .then(user => {
-                response.status(200).json(user);
-              })
-              .catch(err => {
-                response.status(500).json(`message: Error reseting password: ${err}`);
-              });
-          }
-        }
-      }
-    })
-    .catch(function(error) {
-      response.status(500).json(`message: Error reseting password: ${error}`);
-    });
-};
-
 module.exports = {
   register,
   login,
@@ -193,6 +175,5 @@ module.exports = {
   deleteUserById,
   updateUser,
   getAllUsers,
-  reset_password,
   getRandomUser,
 };

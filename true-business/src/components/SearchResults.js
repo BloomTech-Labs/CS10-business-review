@@ -71,17 +71,15 @@ class SearchResults extends Component {
                           </div>
                         </div>
                         <div className="info__address">
+                          <div className="address__city">{result.formatted_address}</div>
                           <div className="address__icon">
-                            <a href={"https://www.google.com/maps/search/" + result.formatted_address.replace(/[, ]+/g, '+')} target="_blank">
+                            <a
+                              href={
+                                "https://www.google.com/maps/search/" + result.formatted_address.replace(/[, ]+/g, "+")
+                              }
+                              target="_blank">
                               <i style={{ color: "#05386b" }} className="fas fa-map-marked-alt fa-2x" />
                             </a>
-                          </div>
-                          <div className="address__city">
-                            {result.formatted_address
-                              .split(",")
-                              .splice(1, 2)
-                              .join(",")
-                              .trim()}
                           </div>
                         </div>
                         <div className="info__type">

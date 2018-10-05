@@ -44,10 +44,6 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    if ("scrollRestoration" in window.history) {
-      window.history.scrollRestoration = "manual";
-    }
-    window.scrollTo(0, 0);
     this.resetSearch();
     this.getDBBusinesses();
   };

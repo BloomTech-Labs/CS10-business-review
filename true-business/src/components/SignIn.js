@@ -3,7 +3,7 @@ import axios from "axios";
 import NavBar from "./NavBar";
 import { withRouter } from "react-router-dom";
 import "../css/SignIn.css";
-import googleLogo from "../imgs/google-signin.png";
+// import googleLogo from "../imgs/google-signin.png";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
 let heroku = "https://cryptic-brook-22003.herokuapp.com/";
@@ -22,10 +22,6 @@ class SignIn extends Component {
     };
   }
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
   signIn = () => {
     if( !this.state.username || !this.state.password ) {
       this.setState({
@@ -36,7 +32,6 @@ class SignIn extends Component {
     axios
       .post(`${backend}api/user/login`, {username:this.state.username, password:this.state.password})
       .then(response => {
-        console.log("Fire!", response);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data._doc._id);
         localStorage.setItem("name", response.data._doc.name);
