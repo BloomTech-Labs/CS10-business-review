@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
   token: {
     type: String
   },
-  // Display name
+  // For old-school way of registering I presume
   name: {
     type: String,
     required: true
@@ -30,14 +30,15 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
-  // login name
+  // Displayed on reviews and what not
   username: {
     type: String,
     unique: true
   },
   // Guessing also only necessary for old-school way of registering
   password: {
-    type: String
+    type: String,
+    required: true
   },
   // For google passport
   googleId: {
