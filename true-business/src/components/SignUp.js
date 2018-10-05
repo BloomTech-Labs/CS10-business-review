@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import NavBar from "./NavBar";
-import signUp from "../imgs/signup.png";
+// import signUp from "../imgs/signup.png";
 
 import "../css/SignUp.css";
 

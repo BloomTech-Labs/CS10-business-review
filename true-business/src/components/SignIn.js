@@ -3,7 +3,7 @@ import axios from "axios";
 import NavBar from "./NavBar";
 import { withRouter } from "react-router-dom";
 import "../css/SignIn.css";
-import googleLogo from "../imgs/google-signin.png";
+// import googleLogo from "../imgs/google-signin.png";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
 let heroku = "https://cryptic-brook-22003.herokuapp.com/";

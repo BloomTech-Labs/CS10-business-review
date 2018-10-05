@@ -79,7 +79,21 @@ class SearchResults extends Component {
                           <div className="address__city">
                             {result.formatted_address
                               .split(",")
+                              .splice(0, 1)
+                              .join(",")
+                              .trim()}
+                          </div>
+                          <div className="address__city">
+                            {result.formatted_address
+                              .split(",")
                               .splice(1, 2)
+                              .join(",")
+                              .trim()}
+                          </div>
+                          <div className="address__city">
+                            {result.formatted_address
+                              .split(",")
+                              .splice(2, 3)
                               .join(",")
                               .trim()}
                           </div>

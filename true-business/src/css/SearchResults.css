@@ -56,8 +56,8 @@
   background: #ffffff;
   border: 0.1rem solid #05386b;
   border-radius: 1rem;
-  min-width: 50vw;
-  max-width: 50vw;
+  min-width: 60vw;
+  max-width: 60vw;
   min-height: 30vh;
   max-height: 30vh;
   opacity: 0.8;
@@ -78,41 +78,6 @@
 .search .search__results .results__result .result__image:hover {
   cursor: pointer;
 }
-.search .search__results .results__result .result__logo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  cursor: default;
-  color: #05386b;
-  min-height: 100%;
-  min-width: 30%;
-  max-width: 30%;
-}
-.search .search__results .results__result .result__logo .logo__image {
-  border-radius: 1rem;
-  object-fit: cover;
-  object-position: 50% 0%;
-  background-color: #05386b;
-  top: 0;
-  position: relative;
-  border: 0.1rem solid #05386b;
-  border: 0;
-  min-height: 50%;
-  max-height: 50%;
-  min-width: 50%;
-  max-width: 50%;
-}
-.search .search__results .results__result .result__logo .logo__image:hover {
-  cursor: pointer;
-}
 .search .search__results .results__result .result__info {
   display: flex;
   flex-direction: column;
@@ -129,8 +94,8 @@
   color: #05386b;
   min-height: inherit;
   max-height: inherit;
-  min-width: 30%;
-  max-width: 30%;
+  min-width: 60%;
+  max-width: 60%;
 }
 .search .search__results .results__result .result__info .info__name {
   display: flex;
@@ -149,11 +114,15 @@
 }
 .search .search__results .results__result .result__info .info__name .name__title {
   font-size: 1.2rem;
-  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
   padding: 0.5rem;
+  border-bottom: 0.1rem solid #05386b;
 }
 .search .search__results .results__result .result__info .info__name .name__rating {
   font-size: 1rem;
+  padding: 1rem;
 }
 .search .search__results .results__result .result__info .info__address {
   display: flex;
@@ -180,6 +149,7 @@
 .search .search__results .results__result .result__info .info__type {
   text-align: center;
   width: 100%;
+  font-size: 1rem;
 }
 .search .results__pagination {
   display: flex;

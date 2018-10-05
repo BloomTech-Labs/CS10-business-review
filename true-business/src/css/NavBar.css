@@ -59,7 +59,7 @@
   cursor: default;
   color: #05386b;
   min-width: 100%;
-  padding-left: 5vw;
+  padding-left: 10vw;
 }
 .navbar .navbar__center .center__search .search__input {
   border: 0.1rem solid black;
@@ -107,8 +107,8 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  min-width: 15vw;
-  max-width: 15vw;
+  min-width: 20vw;
+  max-width: 20vw;
   padding-right: 2vw;
 }
 .navbar .navbar__right .right__sign {
@@ -131,11 +131,11 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   height: 2.5rem;
-  padding: 1.5rem 0;
-  width: 30%;
-  max-width: 30%;
-  height: 30%;
-  max-height: 30%;
+  padding: 1rem 0;
+  width: 35%;
+  max-width: 35%;
+  height: 35%;
+  max-height: 35%;
 }
 .navbar .navbar__right .right__sign:hover {
   cursor: pointer;
