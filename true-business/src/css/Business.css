@@ -28,7 +28,7 @@
   cursor: default;
   color: #05386b;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   padding: 1rem;
   margin: 1rem;
@@ -40,7 +40,6 @@
   background-color: #05386b;
   top: 0;
   position: relative;
-  border: 0.1rem solid #05386b;
   width: 50%;
   min-width: 50%;
   min-height: 40vh;
@@ -48,6 +47,10 @@
 }
 .business .business__info .info__landscape:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  box-shadow: #6b6b6b;
+  opacity: 1;
 }
 .business .business__info .info__portrait {
   max-height: 20rem;
@@ -183,12 +186,12 @@
   cursor: default;
   color: #05386b;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
 }
 .business .business__reviews-container .reviews-container__title {
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   font-size: 1.2rem;
   margin-bottom: 1rem;
@@ -302,7 +305,7 @@
   font-size: 1.5rem;
   padding: 0.5rem;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   margin: 1rem;
 }
@@ -323,7 +326,7 @@
   font-size: 1.5rem;
   padding: 0.5rem;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   width: 50vw;
   margin: 2rem;
@@ -352,7 +355,7 @@
   margin: 0;
   cursor: default;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   min-height: 25vh;
   max-height: 25vh;
@@ -370,7 +373,6 @@
   background-color: #05386b;
   top: -2rem;
   position: relative;
-  border: 0.1rem solid #05386b;
   width: 100%;
   min-width: 100%;
   max-width: 100%;
@@ -380,6 +382,10 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  box-shadow: #6b6b6b;
+  opacity: 1;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait {
   border-radius: 1rem;
@@ -388,7 +394,6 @@
   background-color: #05386b;
   top: -2rem;
   position: relative;
-  border: 0.1rem solid #05386b;
   width: 100%;
   min-width: 100%;
   max-width: 100%;
@@ -399,6 +404,10 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  box-shadow: #6b6b6b;
+  opacity: 1;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__image:hover {
   cursor: pointer;
@@ -436,7 +445,7 @@
   cursor: default;
   color: #05386b;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   width: 50vw;
   min-width: 50%;
@@ -533,7 +542,6 @@
   background-color: #05386b;
   top: 0;
   position: relative;
-  border: 0.1rem solid #05386b;
   width: 50%;
   min-width: 50%;
   height: 100%;
@@ -542,6 +550,10 @@
 }
 .modal .modal-container .modal__header .header__image .image__landscape:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  box-shadow: #6b6b6b;
+  opacity: 1;
 }
 .modal .modal-container .modal__header .header__image .image__portrait {
   border-radius: 1rem;
@@ -550,7 +562,6 @@
   background-color: #05386b;
   top: 0;
   position: relative;
-  border: 0.1rem solid #05386b;
   width: 50%;
   min-width: 50%;
   height: 100%;
@@ -560,6 +571,10 @@
 }
 .modal .modal-container .modal__header .header__image .image__portrait:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  box-shadow: #6b6b6b;
+  opacity: 1;
 }
 .modal .modal-container .modal__header .header__image .image__button {
   display: flex;
@@ -704,7 +719,7 @@
 }
 .modal .modal-container .modal__body .body__review {
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   font-size: 1rem;
   height: 50%;

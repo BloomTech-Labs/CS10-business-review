@@ -192,7 +192,11 @@ class Business extends Component {
               <img
                 alt={this.props.business.name}
                 className="info__landscape"
-                src={this.props.business.photos[0].link}
+                src={
+                  this.props.business.photos === "No Photos Listed"
+                    ? "https://png.icons8.com/ios/50/000000/company.png"
+                    : this.props.business.photos[0].link
+                }
               />
               <div className="info__title">{this.props.business.name}</div>
               <div className="info__address">
@@ -209,8 +213,8 @@ class Business extends Component {
                 </div>
               </div>
               <div className="info__details">
+                <div className="details__title"> Hours </div>
                 <div className="details__hours">
-                  <div className="hours__title"> Hours </div>
                   {this.props.business.hasOwnProperty("opening_hours") ? (
                     this.props.business.opening_hours.hasOwnProperty("weekday_text") ? (
                       this.props.business.opening_hours.weekday_text.map((day, i) => {
@@ -364,7 +368,7 @@ class Business extends Component {
                     </div>
                   )}
                 </div>
-                <div>{this.createPagination()}</div>
+                <div>{this.props.business.totalReviews > 10 ? this.createPagination() : null}</div>
               </div>
             </div>
             <Modal

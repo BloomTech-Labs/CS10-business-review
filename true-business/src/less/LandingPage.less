@@ -13,10 +13,13 @@
       .containers(@flexDirection: row, @justifyContent: space-between, @alignItems: flex-start);
       flex-wrap: wrap;
       min-height: 100%;
+      background-image: url("../imgs/bar.gif");
+      background-size: 100% 25rem;
       .items__item {
         .containers(@margin: 1rem, @padding: 1rem, @height: 25rem, @width: 20%, @justifyContent: space-between);
         .backAndBorder();
         .shadowHover();
+        cursor: default;
         min-height: 25rem;
         min-width: 20%;
         text-align: center;
@@ -40,15 +43,15 @@
           .item__title {
             .title();
             .hidden();
-            padding: .5rem 0;
+            padding: 0.5rem 0;
           }
           .item__info {
             .hidden();
-            padding: .5rem 0;
+            padding: 0.5rem 0;
           }
           .item__info--hover {
             .hidden();
-            padding: .5rem 0;
+            padding: 0.5rem 0;
             &:hover {
               cursor: pointer;
             }
@@ -57,110 +60,111 @@
       }
       .items__item:hover {
         opacity: 1;
+        cursor: default;
       }
     }
   }
 }
 
 .modal {
-  .modal-containers {
-    min-width: 80%;
-    max-width: 80%;
-    min-height: 80vh;
-    max-height: 80vh;
-    .modal__header {
-      .containers(@height:40vh, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
-      max-height: 40vh;
-      .header__image {
-        .containers(@justifyContent: space-between; @flexDirection: row);
-        .image__landscape {
-          .image(@top: 0);
-          min-width: 80vw;
-          min-height: 30vh;
-          max-height: 30vh;
-          margin: 1rem 1rem 0 1rem;
-        }
-        .image__portrait {
-          .image(@top: 0);
-          min-width: 50%;
-          min-height: 100%;
-          max-height: 100%;
-          margin: 1rem 1rem 0 1rem;
-          object-position: 50% 0%;
-        }
-        .image__button {
-          .containers(@flexDirection: row, @justifyContent: space-around);
-          height: initial;
-          .button();
-          .header();
-          width: 20%;
-        }
+  .modal__header {
+    .containers(@height:40vh, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
+    max-height: 40vh;
+    .header__image {
+      .containers(@alignItems: flex-start, @justifyContent: space-between, @flexDirection: row);
+      .image__landscape {
+        .image(@top: 0);
+        .noHover();
+        min-width: 30vw;
+        min-height: 30vh;
+        max-height: 30vh;
+        margin: 1rem 1rem 0 1rem;
       }
-      .header__user {
+      .image__portrait {
+        .image(@top: 0);
+        .noHover();
+        min-width: 30vw;
+        min-height: 30vh;
+        max-height: 30vh;
+        margin: 1rem 1rem 0 1rem;
+        object-position: 50% 0%;
+      }
+      .image__button {
         .containers(@flexDirection: row, @justifyContent: space-around);
-        text-align: center;
-        min-height: 10%;
-        max-height: 10%;
-        padding: 2rem;
-        .header__title {
+        .button();
+        .header();
+        width: 5rem;
+        margin: 1rem;
+      }
+    }
+    .header__user {
+      .containers(@flexDirection: row, @justifyContent: space-around);
+      text-align: center;
+      min-height: 10%;
+      max-height: 10%;
+      padding: 2rem;
+      .header__title {
+        .header();
+      }
+      .header__reviewer {
+        .containers(@flexDirection: row, @justifyContent: space-around);
+        width: 50%;
+        .reviewer__info--onclick {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 33%;
           .header();
         }
-        .header__reviewer {
-          .containers(@flexDirection: row, @justifyContent: space-around);
-          width: 50%;
-          .reviewer__info--onclick {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            width: 33%;
-            .header();
-          }
-          .reviewer__info {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            width: 33%;
-            .body();
-          }
+        .reviewer__info {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 33%;
+          .body();
         }
       }
     }
-    .modal__body {
-      .containers(@justifyContent: flex-start, @height: 40vh);
-      min-height: 40vh;
-      max-height: 40vh;
-      .body__stars {
-        .containers(@flexDirection: row, @width: 50%, @justifyContent: space-around);
-        height: 10%;
-      }
-      .body__drop {
-        .containers();
-      }
-      .body__title {
-        .title();
-        height: 10%;
-      }
-      .body__stars {
-        text-align: center;
-        width: 50%;
-        height: 20%;
-      }
-      .body__review {
-        .backAndBorder();
-        .body();
-        height: 50%;
-        padding: 0.5rem;
-        width: 75%;
-        height: auto;
-        max-height: 25vh;
-        overflow-y: auto;
-        overflow-wrap: break-word;
-      }
+  }
+  .modal__body {
+    .containers(@justifyContent: flex-start, @height: 40vh);
+    min-height: 40vh;
+    max-height: 40vh;
+    .body__business {
+      .header();
     }
-    .modal__footer {
+    .body__stars {
+      .containers(@flexDirection: row, @width: 50%, @justifyContent: space-around);
+      height: 10%;
+    }
+    .body__drop {
       .containers();
-      .footer__button {
-        .button();
-        margin: 0.5rem 0;
-      }
+    }
+    .body__title {
+      .title();
+      text-decoration: underline;
+      height: 10%;
+    }
+    .body__stars {
+      text-align: center;
+      width: 50%;
+      height: 20%;
+    }
+    .body__review {
+      .backAndBorder();
+      .body();
+      height: 50%;
+      padding: 0.5rem;
+      width: 75%;
+      height: auto;
+      max-height: 25vh;
+      overflow-y: auto;
+      overflow-wrap: break-word;
+    }
+  }
+  .modal__footer {
+    .containers();
+    .footer__button {
+      .button();
+      margin: 0.5rem 0;
     }
   }
 }

@@ -17,6 +17,10 @@
 @fontFamily: Helvetica Neue, Helvetica, Arial, sans-serif;
 @boxShadow: rgb(107, 107, 107);
 
+@iconGrey: #7E7D7D;
+@iconTeal: #18C3DA;
+@iconGreen: #05ECC9;
+
 .containers(@flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @padding: 0, @margin:0) {
   display: flex;
   flex-direction: @flexDirection;
@@ -95,14 +99,17 @@
   background-color: @textColor;
   top: @top;
   position: relative;
-  border: 0.1rem solid @textColor;
   &:hover {
     cursor: pointer;
+    filter: brightness(110%);
+    box-shadow: 0px 0px 50px 10px @boxShadow;
+    box-shadow: @boxShadow;
+    opacity: 1;
   }
 }
 
 // White Background, Blue Border
-.backAndBorder(@background: @whiteBG, @border: 0.1rem solid @textColor, @borderRadius: .5rem) {
+.backAndBorder(@background: @whiteBG, @border: 0.1rem solid @whiteBG, @borderRadius: .5rem) {
   background: @background;
   border: @border;
   border-radius: @borderRadius;
@@ -112,11 +119,10 @@
   opacity: @opacity;
 }
 
-.regularHover(@boxShadow: 0 0 50px 10px @boxShadow) {
+.regularHover() {
   &:hover {
     cursor: pointer;
     filter: brightness(110%);
-    box-shadow: @boxShadow;
     opacity: 1;
   }
 }
@@ -126,6 +132,15 @@
     cursor: pointer;
     filter: brightness(110%);
     box-shadow: 0px 0px 50px 10px @boxShadow;
+    opacity: 1;
+  }
+}
+
+.noHover() {
+  &:hover {
+    cursor: default;
+    filter: brightness(100%);
+    box-shadow: 0 0 0 0;
     opacity: 1;
   }
 }

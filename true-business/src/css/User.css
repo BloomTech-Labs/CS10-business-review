@@ -81,12 +81,12 @@
   cursor: default;
   color: #05386b;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
 }
 .user .user__body .body__left-bar .left-bar__button {
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   border: none;
   width: 95%;
@@ -130,7 +130,7 @@
   min-height: 90vh;
   max-height: 90vh;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns {
@@ -163,7 +163,7 @@
   cursor: default;
   color: #05386b;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   width: 40%;
   min-width: 40%;
@@ -311,7 +311,7 @@
   margin: 0;
   cursor: default;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   min-height: 25vh;
   max-height: 25vh;
@@ -329,7 +329,6 @@
   background-color: #05386b;
   top: -2rem;
   position: relative;
-  border: 0.1rem solid #05386b;
   width: 100%;
   min-width: 100%;
   max-width: 100%;
@@ -339,6 +338,10 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  box-shadow: #6b6b6b;
+  opacity: 1;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait {
   border-radius: 1rem;
@@ -347,7 +350,6 @@
   background-color: #05386b;
   top: -2rem;
   position: relative;
-  border: 0.1rem solid #05386b;
   width: 100%;
   min-width: 100%;
   max-width: 100%;
@@ -358,6 +360,10 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  box-shadow: #6b6b6b;
+  opacity: 1;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__image:hover {
   cursor: pointer;
@@ -408,7 +414,7 @@
   cursor: default;
   color: #05386b;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   min-width: 60vw;
   max-width: 60vw;
@@ -463,7 +469,7 @@
   cursor: default;
   color: #05386b;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   min-width: 60vw;
   max-width: 60vw;
@@ -502,7 +508,6 @@
   background-color: #05386b;
   top: 0;
   position: relative;
-  border: 0.1rem solid #05386b;
   width: 40%;
   min-width: 40%;
   height: 40%;
@@ -510,6 +515,10 @@
 }
 .user .user__body .body__content .content__profile .profile__container .profile__image:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  box-shadow: #6b6b6b;
+  opacity: 1;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info {
   display: flex;
@@ -526,7 +535,7 @@
   cursor: default;
   color: #05386b;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   padding: 1rem;
   margin: 1rem;
@@ -633,7 +642,7 @@
   cursor: default;
   color: #05386b;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   padding: 1rem;
   margin: 1rem;
@@ -774,7 +783,6 @@
   background-color: #05386b;
   top: 0;
   position: relative;
-  border: 0.1rem solid #05386b;
   width: 50%;
   min-width: 50%;
   height: 100%;
@@ -783,6 +791,10 @@
 }
 .modal .modal-container .modal__header .header__image .image__landscape:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  box-shadow: #6b6b6b;
+  opacity: 1;
 }
 .modal .modal-container .modal__header .header__image .image__portrait {
   border-radius: 1rem;
@@ -791,7 +803,6 @@
   background-color: #05386b;
   top: 0;
   position: relative;
-  border: 0.1rem solid #05386b;
   width: 50%;
   min-width: 50%;
   height: 100%;
@@ -801,6 +812,10 @@
 }
 .modal .modal-container .modal__header .header__image .image__portrait:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  box-shadow: #6b6b6b;
+  opacity: 1;
 }
 .modal .modal-container .modal__header .header__image .image__button {
   display: flex;
@@ -945,7 +960,7 @@
 }
 .modal .modal-container .modal__body .body__review {
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   font-size: 1rem;
   height: 50%;

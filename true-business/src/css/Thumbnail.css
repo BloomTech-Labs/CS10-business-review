@@ -13,7 +13,7 @@
   cursor: default;
   color: #05386b;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
   margin: 1rem;
   padding: 1rem;
@@ -34,7 +34,6 @@
   background-color: #05386b;
   top: -2rem;
   position: relative;
-  border: 0.1rem solid #05386b;
   width: 100%;
   min-width: 100%;
   min-height: 15rem;
@@ -42,6 +41,10 @@
 }
 .thumbnail .thumbnail__landscape:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  box-shadow: #6b6b6b;
+  opacity: 1;
 }
 .thumbnail .thumbnail__description {
   display: flex;

@@ -32,6 +32,7 @@ class LandingPage extends Component {
     this.state = {
       modalIsOpen: false,
       modalInfo: null,
+      liked: false,
     };
 
     this.openModal = this.openModal.bind(this);
@@ -43,8 +44,12 @@ class LandingPage extends Component {
   }
 
   closeModal() {
-    this.setState({ modalIsOpen: false });
+    this.setState({ modalIsOpen: false, liked: false });
   }
+
+  updateLike = () => {
+    this.setState({ liked: true });
+  };
 
   render() {
     return (
@@ -53,7 +58,7 @@ class LandingPage extends Component {
         <div className="landing">
           <div className="landing__container">
             <div className="container__header">Popular Reviews</div>
-            <div className="container__items">
+            <div id="containerOne" className="container__items">
               {this.props.reviews.map((review, i) => {
                 if (i < 4) {
                   return (
@@ -91,7 +96,7 @@ class LandingPage extends Component {
           </div>
           <div className="landing__container">
             <div className="container__header">Popular Businesses</div>
-            <div className="container__items">
+            <div id="containerTwo" className="container__items">
               {this.props.businesses.map((business, i) => {
                 if (i < 4) {
                   return (
@@ -104,7 +109,7 @@ class LandingPage extends Component {
           </div>
           <div className="landing__container">
             <div className="container__header">Popular Reviewers</div>
-            <div className="container__items">
+            <div id="containerThree" className="container__items">
               {this.props.users.map((user, i) => {
                 if (i < 4) {
                   return (
@@ -121,9 +126,9 @@ class LandingPage extends Component {
                         // onClick={() => this.openModal(this, user)}
                       />
                       <div className="item__description">
-                      <div className="item__info--hover">@{user.username}</div>
-                      <div className="item__info">{user.numberOfReviews} Reviews</div>
-                      <div className="item__info">{user.numberOfLikes} Likes</div>
+                        <div className="item__info--hover">@{user.username}</div>
+                        <div className="item__info">{user.numberOfReviews} Reviews</div>
+                        <div className="item__info">{user.numberOfLikes} Likes</div>
                       </div>
                     </div>
                   );
@@ -138,59 +143,54 @@ class LandingPage extends Component {
             onRequestClose={this.closeModal}
             style={modalStyles}
             contentLabel="Review Modal">
-            <div className="modal">
-              {this.state.modalIsOpen ? (
-                <div className="modal-container">
-                  <div className="modal__header">
-                    <div className="header__image">
-                      <button className="image__button" onClick={this.closeModal}>
-                        Close
-                        <i className="far fa-window-close" />
-                      </button>
-                      {/* Update reviews / user with likes */}
-                      <button className="image__button">
-                        Like
-                        <i className="fas fa-thumbs-up" />
-                      </button>
-                      <img
-                        alt={this.state.modalInfo.newMongoId.name}
-                        className="image__landscape"
-                        src={this.state.modalInfo.photos[0].link}
-                      />
-                    </div>
-                    <div className="header__user">
-                      <div className="header__title"> {this.state.modalInfo.newMongoId.name}</div>
-                      {/* Onclick to go to the user component whenever we get to that... */}
-                      <div className="header__reviewer">
-                        <div className="reviewer__info--onclick">@{this.state.modalInfo.reviewer.username}</div>
-                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
-                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
-                      </div>
-                    </div>
+            {this.state.modalIsOpen ? (
+              <div className="modal">
+                <div className="modal__header">
+                  <div className="header__image">
+                    {/* Update reviews / user with likes */}
+                    <button className="image__button" onClick={this.updateLike}>
+                      {this.state.liked ? <i className="fas fa-check" /> : <i className="fas fa-thumbs-up" />}
+                    </button>
+                    <img
+                      alt={this.state.modalInfo.newMongoId.name}
+                      className="image__landscape"
+                      src={this.state.modalInfo.photos[0].link}
+                    />
+                    <button className="image__button" onClick={this.closeModal}>
+                      <i className="far fa-window-close" />
+                    </button>
                   </div>
-                  <div className="modal__body">
-                    <div className="body__stars">
-                      <StarRatings
-                        starDimension="20px"
-                        starSpacing="5px"
-                        rating={this.state.modalInfo.stars}
-                        starRatedColor="gold"
-                        starEmptyColor="grey"
-                        numberOfStars={5}
-                        name="rating"
-                      />
-                      <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
-                    </div>
-                    <div className="body__title">
-                      {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
-                    </div>
-                    <div className="body__review">
-                      {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                  <div className="header__user">
+                    <div className="header__reviewer">
+                      <div className="reviewer__info--onclick">@{this.state.modalInfo.reviewer.username}</div>
+                      <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
+                      <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
                     </div>
                   </div>
                 </div>
-              ) : null}
-            </div>
+                <div className="modal__body">
+                  <div className="body__business"> {this.state.modalInfo.newMongoId.name}</div>
+                  <div className="body__stars">
+                    <StarRatings
+                      starDimension="20px"
+                      starSpacing="5px"
+                      rating={this.state.modalInfo.stars}
+                      starRatedColor="gold"
+                      starEmptyColor="grey"
+                      numberOfStars={5}
+                      name="rating"
+                    />
+                    <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
+                  </div>
+                  <div className="body__title">
+                    {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
+                  </div>
+                  <div className="body__review">
+                    {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                  </div>
+                </div>
+              </div>
+            ) : null}
           </Modal>
         </div>
       </div>

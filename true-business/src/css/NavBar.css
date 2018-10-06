@@ -11,7 +11,7 @@
   margin: 0;
   color: #05386b;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
+  border: 0.1rem solid #ffffff;
   border-radius: 0;
   min-width: 100vw;
   max-height: 100vw;
@@ -19,6 +19,7 @@
   max-height: 15vh;
   position: fixed;
   z-index: 5;
+  border: 0.1rem solid #05386b;
   border-width: 0 0 0.1rem 0;
 }
 .navbar .navbar__logo {
