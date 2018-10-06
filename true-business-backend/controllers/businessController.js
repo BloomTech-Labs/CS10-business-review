@@ -142,6 +142,9 @@ const placesSearch = (req, res) => {
       });
       Promise.all(promises)
         .then(places => {
+          places = places.filter(place => {
+            return !place.hasOwnProperty("permanently_closed");
+          });
           res.status(200).json(places);
         })
         .catch(error => res.status(500).json("Error Getting Photos", error));
@@ -156,11 +159,27 @@ const placeSearch = (req, res) => {
     .place({ placeid: req.body.id })
     .asPromise()
     .then(response => {
-      let photos = response.json.result.hasOwnProperty("photos") ? response.json.result.photos : "No Photos Listed";
-      if (photos !== "No Photos Listed") {
+      let result = response.json.result;
+      result.name = result.hasOwnProperty("name") ? result.name : "No Name Listed";
+      result.types = result.hasOwnProperty("types") ? result.types : "No Types Listed";
+      result.formatted_address = result.hasOwnProperty("formatted_address")
+        ? result.formatted_address
+        : "No Address Listed";
+      result.formatted_phone_number = result.hasOwnProperty("formatted_phone_number")
+        ? result.formatted_phone_number
+        : "No Phone Number Listed";
+      result.rating = result.hasOwnProperty("rating") ? result.rating : "No Rating Listed";
+      result.website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
+      result.photos = result.hasOwnProperty("photos") ? result.photos : "No Photos Listed";
+      result.opening_hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
+      console.log("FUCKING OPENING HOURS", result.opening_hours);
+      result.address_components = result.hasOwnProperty("address_components")
+        ? result.address_components
+        : "No Description Listed";
+      if (result.photos !== "No Photos Listed") {
         googleMapsClient
           .placesPhoto({
-            photoreference: photos[0].photo_reference,
+            photoreference: result.photos[0].photo_reference,
             maxheight: 500,
             maxwidth: 1000,
           })
@@ -169,16 +188,18 @@ const placeSearch = (req, res) => {
             let imgObject = [
               {
                 link: "https://" + photo.req.socket._host + photo.req.path,
-                width: photos[0].width,
-                height: photos[0].height,
+                width: result.photos[0].width,
+                height: result.photos[0].height,
               },
             ];
-            response.json.result.photos = imgObject;
-            res.status(200).json(response.json.result);
+            result.photos = imgObject;
+            res.status(200).json(result);
           })
           .catch(err => {
             console.log("Error Getting Photo!", err);
           });
+      } else {
+        res.status(200).json(result);
       }
     })
     .catch(error => {

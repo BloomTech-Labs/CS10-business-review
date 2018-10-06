@@ -1,50 +1,57 @@
 @import "mixins.less";
 
 .landing {
-  .containers(@padding: 15vh 0 5vh 0);
+  .containers(@width: inherit, @padding: 15vh 0 5vh 0);
   .landing__container {
     .containers(@width: 90%);
     .container__header {
       .backAndBorder();
-      .headers(@margin: 1rem, @padding: .5rem 1rem);
+      .header();
+      margin: 1rem;
     }
     .container__items {
       .containers(@flexDirection: row, @justifyContent: space-between, @alignItems: flex-start);
       flex-wrap: wrap;
       min-height: 100%;
       .items__item {
-        .containers(@height: 25rem, @width: 20%, @justifyContent: space-between, @fontSize: 1.5rem);
+        .containers(@margin: 1rem, @padding: 1rem, @height: 25rem, @width: 20%, @justifyContent: space-between);
         .backAndBorder();
-        opacity: 0.8;
-        margin: 1rem;
-        padding: 1rem;
+        .shadowHover();
         min-height: 25rem;
         min-width: 20%;
         text-align: center;
         .item__landscape {
-          .images();
+          .image();
           width: 100%;
           min-width: 100%;
           min-height: 15rem;
           max-height: 15rem;
         }
-        .item__image:hover {
-          cursor: pointer;
+        .item__portrait {
+          .image();
+          width: 100%;
+          min-width: 100%;
+          min-height: 15rem;
+          max-height: 15rem;
+          object-position: 50% 0%;
         }
-        .item__title {
-          .titles();
-          .hidden();
-          margin: 0.2rem;
-        }
-        .item__info {
-          .hidden();
-          margin: 0.2rem;
-        }
-        .item__info--hover {
-          .hidden();
-          margin: 0.2rem;
-          &:hover {
-            cursor: pointer;
+        .item__description {
+          .containers();
+          .item__title {
+            .title();
+            .hidden();
+            padding: .5rem 0;
+          }
+          .item__info {
+            .hidden();
+            padding: .5rem 0;
+          }
+          .item__info--hover {
+            .hidden();
+            padding: .5rem 0;
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
       }
@@ -56,30 +63,27 @@
 }
 
 .modal {
-  .modal-container {
-    width: 80%;
-    height: 80vh;
+  .modal-containers {
+    min-width: 80%;
+    max-width: 80%;
+    min-height: 80vh;
     max-height: 80vh;
     .modal__header {
-      .containers(@height:50%, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
-      max-height: 50%;
+      .containers(@height:40vh, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
+      max-height: 40vh;
       .header__image {
         .containers(@justifyContent: space-between; @flexDirection: row);
-        height: 85%;
-        max-height: 85%;
         .image__landscape {
-          .images(@top: 0);
-          width: 50%;
-          min-width: 50%;
-          height: 100%;
-          max-height: 100%;
+          .image(@top: 0);
+          min-width: 80vw;
+          min-height: 30vh;
+          max-height: 30vh;
           margin: 1rem 1rem 0 1rem;
         }
         .image__portrait {
-          .images(@top: 0);
-          width: 50%;
+          .image(@top: 0);
           min-width: 50%;
-          height: 100%;
+          min-height: 100%;
           max-height: 100%;
           margin: 1rem 1rem 0 1rem;
           object-position: 50% 0%;
@@ -87,21 +91,19 @@
         .image__button {
           .containers(@flexDirection: row, @justifyContent: space-around);
           height: initial;
-          .buttons();
-          .headers();
+          .button();
+          .header();
           width: 20%;
         }
       }
       .header__user {
         .containers(@flexDirection: row, @justifyContent: space-around);
         text-align: center;
-        width: 100%;
-        height: 15%;
-        min-height: 15%;
-        max-height: 15%;
+        min-height: 10%;
+        max-height: 10%;
         padding: 2rem;
         .header__title {
-          .headers(@margin: 0);
+          .header();
         }
         .header__reviewer {
           .containers(@flexDirection: row, @justifyContent: space-around);
@@ -110,7 +112,7 @@
             text-overflow: ellipsis;
             overflow: hidden;
             width: 33%;
-            .headers();
+            .header();
           }
           .reviewer__info {
             text-overflow: ellipsis;
@@ -122,9 +124,9 @@
       }
     }
     .modal__body {
-      .containers(@justifyContent: flex-start, @height: 45%);
-      min-height: 45%;
-      max-height: 45%;
+      .containers(@justifyContent: flex-start, @height: 40vh);
+      min-height: 40vh;
+      max-height: 40vh;
       .body__stars {
         .containers(@flexDirection: row, @width: 50%, @justifyContent: space-around);
         height: 10%;
@@ -133,7 +135,7 @@
         .containers();
       }
       .body__title {
-        font-size: 1.5rem;
+        .title();
         height: 10%;
       }
       .body__stars {
@@ -156,13 +158,12 @@
     .modal__footer {
       .containers();
       .footer__button {
-        .buttons();
+        .button();
         margin: 0.5rem 0;
       }
     }
   }
 }
-
 
 .ReactModal__Overlay {
   z-index: 1000;
@@ -177,12 +178,4 @@
   padding: 0 !important;
   overflow: hidden;
   max-height: 80vh;
-}
-
-.drop__text--initial {
-  font-size: 1rem;
-}
-
-.drop__text--uploaded {
-  font-size: 0.8rem;
 }

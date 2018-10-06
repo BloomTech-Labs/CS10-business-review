@@ -1,14 +1,39 @@
-
 @buttonBG: #3487d5;
-@elementBG: #efeff1;
+// remove this
+@elementBG: #ffffff;
+// rename this to alternativeBG
 @modalBG: #eeeeee;
+// rename this to mainBG
+@whiteBG: rgb(255, 255, 255);
+// Rename this Site Color or Something
 @textColor: #05386b;
 @fontFamily: Helvetica Neue, Helvetica, Arial, sans-serif;
-@whiteBG: rgb(255, 255, 255);
 @boxShadow: rgb(107, 107, 107);
 
+@buttonBG: #3487d5;
+@mainBG: #ffffff;
+@altBG: #eeeeee;
+@siteColor: #05386b;
+@fontFamily: Helvetica Neue, Helvetica, Arial, sans-serif;
+@boxShadow: rgb(107, 107, 107);
 
-.containers(@color: @textColor, @display: flex, @flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @fontSize: 1.2rem, @lineHeight: 1,@padding: 0, @margin:0) {
+.containers(@flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @padding: 0, @margin:0) {
+  display: flex;
+  flex-direction: @flexDirection;
+  justify-content: @justifyContent;
+  align-items: @alignItems;
+  height: @height;
+  width: @width;
+  font-family: @fontFamily;
+  font-size: 1rem;
+  padding: @padding;
+  margin: @margin;
+  color: @siteColor;
+}
+
+//I feel like this should be re-done... ^^^^
+// Have a main containers here, and then one that is called like "Default" for lesser stuff
+.container(@color: @textColor, @display: flex, @flexDirection: column, @justifyContent: center, @alignItems: center, @height: 100%, @width: 100%, @fontSize: 1.2rem, @lineHeight: 1,@padding: 0, @margin:0) {
   display: @display;
   flex-direction: @flexDirection;
   justify-content: @justifyContent;
@@ -24,8 +49,9 @@
   color: @textColor;
 }
 
-.buttons(@width: 10rem) {
-  border-radius: 0.5rem;
+// Have everything be a default and be able to be changed EXCEPT font-family, font-size, background-color, color
+.button(@width: 5rem, @borderRadius: .5rem) {
+  border-radius: @borderRadius;
   width: @width;
   background-color: @buttonBG;
   color: @whiteBG;
@@ -40,25 +66,29 @@
   }
 }
 
-.headers(@fontSize: 1.5rem, @margin: 1rem, @padding: .5rem) {
+.input(@padding: .5rem, @borderRadius: .5rem){
+  padding: @padding;
+  border-radius: @borderRadius;
+}
+
+// HEADERS === "Popular Reviewers", etc.
+.header(@fontSize: 1.5rem, @padding: .5rem) {
   font-size: @fontSize;
-  margin: @margin;
   padding: @padding;
 }
 
-.titles(@fontSize: 1.2rem) {
+// TITLES === Restaurant Names, etc.
+.title(@fontSize: 1.2rem) {
   font-size: @fontSize;
 }
 
+// Literally Everything Else
 .body(@fontSize: 1rem) {
   font-size: @fontSize;
 }
 
-.linerNotes() {
-  font-size: 1rem;
-}
-
-.images(@top: -2rem) {
+// Make more defaults and shit
+.image(@top: -2rem) {
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
@@ -71,31 +101,40 @@
   }
 }
 
-.hover() {
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.backAndBorder(@background: @whiteBG) {
+// White Background, Blue Border
+.backAndBorder(@background: @whiteBG, @border: 0.1rem solid @textColor, @borderRadius: .5rem) {
   background: @background;
-  border: 0.1rem solid @textColor;
-  border-radius: 1rem;
+  border: @border;
+  border-radius: @borderRadius;
 }
 
-.crazyHover() {
+.transparent(@opacity: 0.8) {
+  opacity: @opacity;
+}
+
+.regularHover(@boxShadow: 0 0 50px 10px @boxShadow) {
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 50px 10px @boxShadow;
     filter: brightness(110%);
+    box-shadow: @boxShadow;
     opacity: 1;
   }
 }
 
+.shadowHover() {
+  &:hover {
+    cursor: pointer;
+    filter: brightness(110%);
+    box-shadow: 0px 0px 50px 10px @boxShadow;
+    opacity: 1;
+  }
+}
+
+// Cut Text Off with an elipsis
 .hidden() {
-  white-space: nowrap; 
-  width: 100%; 
+  white-space: nowrap;
+  width: 100%;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   text-align: center;
 }

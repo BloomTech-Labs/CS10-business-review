@@ -3,7 +3,7 @@ import axios from "axios";
 import NavBar from "./NavBar";
 import { withRouter } from "react-router-dom";
 import "../css/SignIn.css";
-// import googleLogo from "../imgs/google-signin.png";
+import googleLogo from "../imgs/google-signin.png";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
 let heroku = "https://cryptic-brook-22003.herokuapp.com/";
@@ -49,6 +49,21 @@ class SignIn extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  getLoggedInUser = () => {
+    console.log("BALLS")
+    axios
+    .get(`${backend}api/user/current`)
+    .then(response => {
+      window.location = `${backend}auth/google`
+      localStorage.setItem("userId", response.data._id);
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("name", response.data.name);
+    })
+    .catch(err => {
+      console.log("Error:", err);
+    });
+  };
+
   render() {
     return (
       <div>
@@ -78,15 +93,13 @@ class SignIn extends Component {
                 <button type="submit" className="signin-container__button" onClick={this.signIn}>
                   Sign In
                 </button>
-                {/* <hr/> */}
-                {/* <img
+                <hr/>
+                <img
                   alt="Google Logo"
                   src={googleLogo}
                   className="signin-container__google-auth"
-                  onClick={() => {
-                    window.location = `${backend}auth/google`;
-                  }}
-                /> */}
+                  onClick={this.getLoggedInUser}
+                />
               </div>
             </div>
           </div>

@@ -1,31 +1,31 @@
 @import "./mixins.less";
 
 .stripe {
-  .containers(@fontSize: 1.5rem);
+  .container();
   .stripe__info {
-    .containers();
+    .container();
     .info__label {
-      .containers(@justifyContent: space-between, @flexDirection: row, @alignItems: initial);
+      .container(@justifyContent: space-between, @flexDirection: row, @alignItems: initial);
+      .title();
       margin: 1rem;
-      font-size: 1.5rem;
       .info__input {
         border: 0.1rem solid black;
-        font-size: 1.5rem;
+        padding: .5rem;
       }
     }
   }
   .stripe__radio {
-    .containers(@flexDirection: row, @alignItems: flex-start, @justifyContent: space-around);
+    .container(@flexDirection: row, @alignItems: flex-start, @justifyContent: space-around);
     .radio__label {
+      .title();
       padding: 1rem;
-      font-size: 1.5rem;
     }
     .radio__button:hover {
       cursor: pointer;
     }
   }
   .stripe__button {
-    .buttons();
+    .button();
     width: 30%;
   }
   .stripe__element {
@@ -33,13 +33,12 @@
     float: right;
     position: relative;
     top: 50%;
-    font-size: 2rem;
     margin: 2rem;
   }
 }
 
 .StripeElement {
-  padding: 1rem;
+  padding: .5rem;
   border: .1rem solid @textColor;
 }
 

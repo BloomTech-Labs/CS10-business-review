@@ -236,7 +236,11 @@ class Business extends Component {
                 <div className="details__contact">
                   <div className="contact__phone">
                     <i className="fas fa-phone" />
-                    <div className="phone__number">{this.props.business.formatted_phone_number ? this.props.business.formatted_phone_number : "No Phone Listed"}</div>
+                    <div className="phone__number">
+                      {this.props.business.formatted_phone_number
+                        ? this.props.business.formatted_phone_number
+                        : "No Phone Listed"}
+                    </div>
                   </div>
                   <div className="contact__website">
                     {this.props.business.website ? (
@@ -355,7 +359,9 @@ class Business extends Component {
                       );
                     })
                   ) : (
-                    <div>No Reviews</div>
+                    <div className="reviews--no-results">
+                      <div className="no-results__text">No Reviews</div>
+                    </div>
                   )}
                 </div>
                 <div>{this.createPagination()}</div>
@@ -392,7 +398,6 @@ class Business extends Component {
                         />
                       </div>
                       <div className="header__user">
-                        
                         {/* Onclick to go to the user component whenever we get to that... */}
                         <div className="header__reviewer">
                           <div className="reviewer__info--onclick">@{this.state.modalInfo.reviewer.username}</div>
@@ -403,7 +408,7 @@ class Business extends Component {
                     </div>
                     <div className="modal__body">
                       <div className="body__stars">
-                      <div className="stars__title"> {this.state.modalInfo.newMongoId.name}</div>
+                        <div className="stars__title"> {this.state.modalInfo.newMongoId.name}</div>
                         <StarRatings
                           starDimension="20px"
                           starSpacing="5px"

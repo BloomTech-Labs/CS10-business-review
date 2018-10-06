@@ -59,6 +59,34 @@ const login = (request, response) => {
     });
 };
 
+const getLoggedInUser = (request, response) => {
+  console.log("WHAT THE FUCK");
+  console.log("REQUEST", request);
+  //5bb68069adadaad4b39e0528
+  // Having some issues with the session because of the 
+  // backend and frontend having different ports and the 
+  // cookie is tied to the 3000 port.
+  // const userId = /*"5bb68069adadaad4b39e0528"*/request.session.passport.user;
+  // console.log("Looking for Logged in user:" + userId);
+  //  if(!userId) {
+  //   console.log("No session found");
+  //   response.status(500).json({
+  //     error: "No sessio found.",
+  //   });
+  // }
+  //  User.findById({ _id: userId })
+  //   .then(function(user) {
+  //     console.log(user);
+  //     response.status(200).json(user);
+  //   })
+  //   .catch(function(error) {
+  //     response.status(500).json({
+  //       error: "The user could not be retrieved.",
+  //     });
+  //   });
+};
+
+
 const getUserById = (request, response) => {
   User.findById({ _id: request.params.id })
     .then(function(user) {
@@ -160,4 +188,5 @@ module.exports = {
   updateUser,
   getAllUsers,
   getRandomUser,
+  getLoggedInUser
 };

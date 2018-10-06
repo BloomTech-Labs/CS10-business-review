@@ -29,48 +29,9 @@
   cursor: default;
   color: #05386b;
 }
-.user .user__header .header__breadcrumbs {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  height: inherit;
-  width: 100%;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  cursor: default;
-  color: #05386b;
-  font-size: 1.5rem;
-}
-.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb {
-  border-radius: 0.5rem;
-  width: 10rem;
-  background-color: #3487d5;
-  color: #ffffff;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-  height: 2.5rem;
-  width: auto;
-  padding: 0 1rem;
-}
-.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb:hover {
-  cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
-  font-weight: bolder;
-}
-.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow {
-  padding: 0 1rem;
-}
-.user .user__header .header__breadcrumbs .breadcrumbs__breadcrumb .breadcrumb__arrow:hover {
-  cursor: default;
-}
 .user .user__header .header__signout {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -121,12 +82,12 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 .user .user__body .body__left-bar .left-bar__button {
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   border: none;
   width: 95%;
   padding: 1rem;
@@ -170,7 +131,7 @@
   max-height: 90vh;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns {
   display: flex;
@@ -201,9 +162,9 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  background: #efeff1;
+  background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   width: 40%;
   min-width: 40%;
   max-width: 40%;
@@ -228,7 +189,7 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .reviews__pagination .pagination__pages .pagination__page {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -250,22 +211,26 @@
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .dropdowns__dropdown {
   display: flex;
   flex-direction: row;
-  width: 25%;
-  min-width: 25%;
-  max-width: 25%;
+  width: 15vw;
+  min-width: 15vw;
+  max-width: 15vw;
   z-index: 2;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__title {
-  font-size: 2rem;
+  width: 15vw;
+  min-width: 15vw;
+  max-width: 15vw;
+  font-size: 1.2rem;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container {
   padding: 1rem;
   text-align: center;
-  width: 100%;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__button {
-  width: inherit;
-  font-size: 1.5rem;
+  width: 15vw;
+  min-width: 15vw;
+  max-width: 15vw;
+  font-size: 1.2rem;
   color: #05386b;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__button:hover {
@@ -276,12 +241,16 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  width: inherit;
+  width: 15vw;
+  min-width: 15vw;
+  max-width: 15vw;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__menu .menu__button {
-  width: inherit;
+  font-size: 1.2rem;
+  width: 15vw;
+  min-width: 15vw;
+  max-width: 15vw;
   border: none;
-  font-size: 1.5rem;
   color: #05386b;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__menu .menu__button:hover {
@@ -290,7 +259,7 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -343,7 +312,7 @@
   cursor: default;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   min-height: 25vh;
   max-height: 25vh;
   min-width: 21%;
@@ -414,7 +383,6 @@
   text-align: center;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .info__detailed .detailed__business {
-  font-size: 1.5rem;
   white-space: nowrap;
   width: 100%;
   overflow: hidden;
@@ -441,7 +409,7 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   min-width: 60vw;
   max-width: 60vw;
   min-height: 70vh;
@@ -479,7 +447,6 @@
 }
 .user .user__body .body__content .content__billing .billing__section .section__single .single__info {
   text-align: center;
-  font-size: 1.5rem;
 }
 .user .user__body .body__content .content__profile {
   display: flex;
@@ -497,7 +464,7 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   min-width: 60vw;
   max-width: 60vw;
   min-height: 75vh;
@@ -505,8 +472,6 @@
 }
 .user .user__body .body__content .content__profile .profile__error {
   min-height: 1rem;
-  height: 1rem;
-  font-size: 1rem;
   color: red;
   text-align: center;
   width: 100%;
@@ -529,7 +494,6 @@
 }
 .user .user__body .body__content .content__profile .profile__container .user-change__input {
   padding: 0.5rem;
-  font-size: 1.25rem;
 }
 .user .user__body .body__content .content__profile .profile__container .profile__image {
   border-radius: 1rem;
@@ -561,9 +525,8 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  background: #efeff1;
+  background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
   border-radius: 0.5rem;
   padding: 1rem;
   margin: 1rem;
@@ -571,14 +534,12 @@
   max-height: 2rem;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__label {
-  font-size: 1.5rem;
   width: 20%;
   min-width: 20%;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__data {
   width: 60%;
   min-width: 60%;
-  font-size: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -596,13 +557,12 @@
 .user .user__body .body__content .content__profile .profile__container .container__info .info__data .data__input {
   width: 90%;
   min-width: 90%;
-  font-size: 1.5rem;
   max-height: 1.9rem;
   background: #3487d5;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__data .data__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -621,7 +581,7 @@
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -641,7 +601,7 @@
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__button--save {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -672,9 +632,8 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  background: #efeff1;
+  background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
   border-radius: 0.5rem;
   padding: 1rem;
   margin: 1rem;
@@ -683,14 +642,12 @@
   margin-top: 3rem;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info--top .info__label {
-  font-size: 1.5rem;
   width: 20%;
   min-width: 20%;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info--top .info__data {
   width: 60%;
   min-width: 60%;
-  font-size: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -708,13 +665,12 @@
 .user .user__body .body__content .content__profile .profile__container .container__info--top .info__data .data__input {
   width: 90%;
   min-width: 90%;
-  font-size: 1.5rem;
   max-height: 1.9rem;
   background: #3487d5;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info--top .info__data .data__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -733,7 +689,7 @@
 }
 .user .user__body .body__content .content__profile .profile__container .container__info--top .info__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -753,7 +709,7 @@
 }
 .user .user__body .body__content .content__profile .profile__container .container__info--top .info__button--save {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -861,14 +817,13 @@
   color: #05386b;
   height: initial;
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   height: 2.5rem;
   font-size: 1.5rem;
-  margin: 1rem;
   padding: 0.5rem;
   width: 20%;
 }
@@ -900,7 +855,6 @@
 }
 .modal .modal-container .modal__header .header__user .header__title {
   font-size: 1.5rem;
-  margin: 0;
   padding: 0.5rem;
 }
 .modal .modal-container .modal__header .header__user .header__reviewer {
@@ -924,7 +878,6 @@
   overflow: hidden;
   width: 33%;
   font-size: 1.5rem;
-  margin: 1rem;
   padding: 0.5rem;
 }
 .modal .modal-container .modal__header .header__user .header__reviewer .reviewer__info {
@@ -982,7 +935,7 @@
   color: #05386b;
 }
 .modal .modal-container .modal__body .body__title {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   height: 10%;
 }
 .modal .modal-container .modal__body .body__stars {
@@ -993,7 +946,7 @@
 .modal .modal-container .modal__body .body__review {
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   font-size: 1rem;
   height: 50%;
   padding: 0.5rem;
@@ -1020,7 +973,7 @@
 }
 .modal .modal-container .modal__footer .footer__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;

@@ -36,7 +36,7 @@ class SearchResults extends Component {
         <NavBar search={this.props.search} />
         <div className={this.props.searchResults ? "search" : "search--no-results"}>
           <div className="search__title"> Search Results </div>
-          {this.props.searchResults ? this.createPagination() : null}
+          {this.props.searchResults > 10 ? this.createPagination() : null}
           {this.props.searchResults ? (
             <div className="search__results">
               {this.props.searchResults.map((result, i) => {
@@ -99,7 +99,7 @@ class SearchResults extends Component {
               <div className="no-results__text">No Results Found</div>
             </div>
           )}
-          {this.props.searchResults ? this.createPagination() : null}
+          {this.props.searchResults > 10 ? this.createPagination() : null}
         </div>
       </div>
     );

@@ -30,14 +30,13 @@
   cursor: default;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   color: #05386b;
   padding: 1rem;
   min-height: 40vh;
 }
 .signin .signin-container .signin-container__header {
   font-size: 1.5rem;
-  margin: 1rem;
   padding: 0.5rem;
 }
 .signin .signin-container .signin-container__form {
@@ -57,10 +56,9 @@
 }
 .signin .signin-container .signin-container__form .signin-container__input {
   border: 0.1rem solid #05386b;
-  background: #efeff1;
+  background: #ffffff;
   margin-bottom: 1rem;
   width: 75%;
-  font-size: 1.25rem;
   padding: 0.5rem;
 }
 .signin .signin-container .signin-container__form .signin-container__buttons {
@@ -90,7 +88,7 @@
 }
 .signin .signin-container .signin-container__form .signin-container__buttons .signin-container__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;

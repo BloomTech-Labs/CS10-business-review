@@ -64,20 +64,24 @@ class LandingPage extends Component {
                       <img
                         alt={review.newMongoId.name}
                         src={review.photos[0].link}
-                        className="item__landscape"
+                        className={
+                          review.photos[0].width > review.photos[0].height ? "item__landscape" : "item__portrait"
+                        }
                         onClick={() => this.openModal(this, review)}
                       />
-                      <div className="item__title">{review.newMongoId.name}</div>
-                      <StarRatings
-                        starDimension="20px"
-                        starSpacing="5px"
-                        rating={review.stars}
-                        starRatedColor="gold"
-                        starEmptyColor="grey"
-                        numberOfStars={5}
-                        name="rating"
-                      />
-                      <div className="item__info--hover">@{review.reviewer.username}</div>
+                      <div className="item__description">
+                        <div className="item__title">{review.newMongoId.name}</div>
+                        <StarRatings
+                          starDimension="20px"
+                          starSpacing="5px"
+                          rating={review.stars}
+                          starRatedColor="gold"
+                          starEmptyColor="grey"
+                          numberOfStars={5}
+                          name="rating"
+                        />
+                        <div className="item__info--hover">@{review.reviewer.username}</div>
+                      </div>
                     </div>
                   );
                 }
@@ -111,12 +115,16 @@ class LandingPage extends Component {
                       <img
                         alt={user.username}
                         src={user.userImages[0].link}
-                        className="item__landscape"
+                        className={
+                          user.userImages[0].width > user.userImages[0].height ? "item__landscape" : "item__portrait"
+                        }
                         // onClick={() => this.openModal(this, user)}
                       />
+                      <div className="item__description">
                       <div className="item__info--hover">@{user.username}</div>
                       <div className="item__info">{user.numberOfReviews} Reviews</div>
                       <div className="item__info">{user.numberOfLikes} Likes</div>
+                      </div>
                     </div>
                   );
                 }

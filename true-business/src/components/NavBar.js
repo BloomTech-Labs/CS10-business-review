@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Modal from "react-modal";
-import { Popover, PopoverHeader, PopoverBody } from "reactstrap";
+import { Popover, PopoverBody } from "reactstrap";
 import { Button, Menu, MenuItem } from "@material-ui/core";
 
 import logo from "../imgs/logo.png";
@@ -22,7 +22,7 @@ let modalStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     height: "20vh",
-    width: "55vw",
+    width: "30vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
@@ -169,7 +169,7 @@ class NavBar extends Component {
                 </div>
               ) : null}
             </div>
-          </Modal>{" "}
+          </Modal>
           {this.state.signedIn ? null : (
             <Popover
               styles={{ popoverStyles }}
@@ -177,9 +177,11 @@ class NavBar extends Component {
               isOpen={this.state.popoverOpen}
               target="signInPop"
               toggle={this.toggle}>
-              <PopoverHeader>Sign In?</PopoverHeader>
-              <PopoverBody>Users who sign in can see unlimited reviews!</PopoverBody>
-              <button type="submit" className="popover-button" onClick={this.toggle}>
+              <PopoverBody>
+                <i className="far fa-smile-wink fa-2x" />
+                <div className="popover__text">Users don't see this!</div>
+              </PopoverBody>
+              <button type="submit" className="popover__button" onClick={this.toggle}>
                 Close
               </button>
             </Popover>

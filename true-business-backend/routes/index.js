@@ -24,7 +24,7 @@ mongoose.Promise = global.Promise;
 const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
 
 const restricted = (request, response, next) => {
-  const token = request.headers.authorization;
+  const token = request.header.authorization;
   if (token) {
     jwt.verify(token, process.env.REACT_APP_SECRET, (err, decodedToken) => {
       if (err) {
@@ -56,6 +56,10 @@ router.put("/api/user/update/:id", function(request, response) {
 
 router.get("/api/user/random", function(req, res) {
   UserController.getRandomUser(req, res);
+});
+
+router.get("/api/user/current", function(request, response) {
+  UserController.getLoggedInUser(request, response);
 });
 
 router.get("/api/user/:id", function(req, res) {

@@ -1,31 +1,30 @@
 @import 'mixins.less';
 
 .signin {
-  .containers();
+  .container();
   padding-top: 20vh;
   min-height: 100%;
   cursor: default;
   .signin-container {
-    .containers(@width: 50%);
+    .container(@width: 50%);
     .backAndBorder();
     color: @textColor;
     padding: 1rem;
     min-height: 40vh;
     .signin-container__header {
-      .headers();
+      .header();
     }
     .signin-container__form {
-      .containers(@height: auto);
+      .container(@height: auto);
       .signin-container__input {
         border: 0.1rem solid @textColor;
         background: @elementBG;
         margin-bottom: 1rem;
         width: 75%;
-        font-size: 1.25rem;
         padding: .5rem;
       }
       .signin-container__buttons {
-        .containers(@justifyContent: space-around);
+        .container(@justifyContent: space-around);
         .signin-container__google-auth {
           min-width: 50%;
           max-width: 50%;
@@ -37,7 +36,7 @@
           cursor: pointer;
         }
         .signin-container__button {
-          .buttons();
+          .button();
         }
         .signin-container__button:hover {
           cursor: pointer;

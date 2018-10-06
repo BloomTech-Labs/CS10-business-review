@@ -6,7 +6,7 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -36,18 +36,17 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
   cursor: default;
   color: #05386b;
+  font-size: 1.2rem;
   margin: 1rem;
-  font-size: 1.5rem;
 }
 .stripe .stripe__info .info__label .info__input {
   border: 0.1rem solid black;
-  font-size: 1.5rem;
+  padding: 0.5rem;
 }
 .stripe .stripe__radio {
   display: flex;
@@ -65,15 +64,15 @@
   color: #05386b;
 }
 .stripe .stripe__radio .radio__label {
+  font-size: 1.2rem;
   padding: 1rem;
-  font-size: 1.5rem;
 }
 .stripe .stripe__radio .radio__button:hover {
   cursor: pointer;
 }
 .stripe .stripe__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -92,11 +91,10 @@
   float: right;
   position: relative;
   top: 50%;
-  font-size: 2rem;
   margin: 2rem;
 }
 .StripeElement {
-  padding: 1rem;
+  padding: 0.5rem;
   border: 0.1rem solid #05386b;
 }
 .StripeElement--invalid {

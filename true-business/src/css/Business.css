@@ -8,7 +8,7 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
   line-height: 1;
-  padding: 15vh 2rem 2rem 2rem;
+  padding: 15vh 0 5vh 0;
   margin: 0;
   cursor: default;
   color: #05386b;
@@ -29,7 +29,7 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   padding: 1rem;
   margin: 1rem;
 }
@@ -53,8 +53,9 @@
   max-height: 20rem;
 }
 .business .business__info .info__title {
-  font-size: 3rem;
+  font-size: 1.2rem;
   text-align: center;
+  padding: 1rem;
 }
 .business .business__info .info__address {
   display: flex;
@@ -78,7 +79,6 @@
 }
 .business .business__info .info__city {
   padding: 0 0 1rem 0;
-  font-size: 1.5rem;
 }
 .business .business__info .info__details {
   display: flex;
@@ -112,10 +112,7 @@
   color: #05386b;
 }
 .business .business__info .info__details .details__hours .hours__title {
-  font-size: 2rem;
-}
-.business .business__info .info__details .details__hours .hours__day {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 .business .business__info .info__details .details__contact {
   display: flex;
@@ -148,10 +145,8 @@
   color: #05386b;
   height: 50%;
   width: 50%;
-  font-size: 1.5rem;
 }
 .business .business__info .info__details .details__contact .contact__phone .phone__number {
-  font-size: 1rem;
   padding: 1rem;
 }
 .business .business__info .info__details .details__contact .contact__website {
@@ -169,16 +164,14 @@
   cursor: default;
   color: #05386b;
   width: 50%;
-  font-size: 1.5rem;
 }
 .business .business__info .info__details .details__contact .contact__website .website__text {
-  font-size: 1rem;
   padding: 1rem;
 }
 .business .business__reviews-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
   width: 75%;
@@ -191,21 +184,28 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 .business .business__reviews-container .reviews-container__title {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
   color: #05386b;
+  padding: 0.5rem;
 }
 .business .business__reviews-container .reviews-container__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   height: 2.5rem;
+  font-size: 1.5rem;
+  width: auto;
+  padding: 0.5rem;
 }
 .business .business__reviews-container .reviews-container__button:hover {
   cursor: pointer;
@@ -234,15 +234,15 @@
   z-index: 2;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__title {
-  font-size: 2rem;
+  font-size: 1.2rem;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container {
   margin-left: 2rem;
   width: 15rem;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__button {
+  font-size: 1.2rem;
   width: inherit;
-  font-size: 1.5rem;
   color: #05386b;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__button:hover {
@@ -256,9 +256,9 @@
   width: inherit;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__menu .menu__button {
+  font-size: 1.2rem;
   width: inherit;
   border: none;
-  font-size: 1.5rem;
   color: #05386b;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__drop-container .drop-container__menu .menu__button:hover {
@@ -279,15 +279,64 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  min-height: 75vh;
+  min-height: 72vh;
   flex: 1;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews--no-results {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 15vh 0 5vh 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  min-height: 100vh;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews--no-results .search__title {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
+  border-radius: 0.5rem;
+  margin: 1rem;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews--no-results .search__no-results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: #05386b;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
+  border-radius: 0.5rem;
+  width: 50vw;
+  margin: 2rem;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews--no-results .search__no-results .no-results__text {
+  margin-top: 2rem;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review {
   width: 100%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin: 1rem;
+  margin: 2rem 1rem 0 1rem;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info {
   display: flex;
@@ -304,7 +353,7 @@
   cursor: default;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   min-height: 25vh;
   max-height: 25vh;
   min-width: 17%;
@@ -386,12 +435,13 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  background: #efeff1;
+  background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   width: 50vw;
   min-width: 50%;
   padding: 0.5rem;
+  margin: 0 0 1rem 0;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__pages {
   display: flex;
@@ -411,7 +461,7 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__pages .pagination__page {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -526,14 +576,13 @@
   color: #05386b;
   height: initial;
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   height: 2.5rem;
   font-size: 1.5rem;
-  margin: 1rem;
   padding: 0.5rem;
   width: 20%;
 }
@@ -565,7 +614,6 @@
 }
 .modal .modal-container .modal__header .header__user .header__title {
   font-size: 1.5rem;
-  margin: 0;
   padding: 0.5rem;
 }
 .modal .modal-container .modal__header .header__user .header__reviewer {
@@ -589,7 +637,6 @@
   overflow: hidden;
   width: 33%;
   font-size: 1.5rem;
-  margin: 1rem;
   padding: 0.5rem;
 }
 .modal .modal-container .modal__header .header__user .header__reviewer .reviewer__info {
@@ -647,7 +694,7 @@
   color: #05386b;
 }
 .modal .modal-container .modal__body .body__title {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   height: 10%;
 }
 .modal .modal-container .modal__body .body__stars {
@@ -658,7 +705,7 @@
 .modal .modal-container .modal__body .body__review {
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   font-size: 1rem;
   height: 50%;
   padding: 0.5rem;
@@ -685,7 +732,7 @@
 }
 .modal .modal-container .modal__footer .footer__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;

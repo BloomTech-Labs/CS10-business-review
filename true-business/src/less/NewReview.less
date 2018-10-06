@@ -2,18 +2,18 @@
 
 .new-review {
   .new-review__modal {
-    .containers();
+    .container();
     text-align: center;
     color: @textColor;
     .modal__header {
+      .header();
       height: auto;
-      font-size: 3rem;
     }
     .modal__body {
-      .containers();
+      .container();
       .body__drop {
         .drop__container{
-          .containers();
+          .container();
           max-width: 200px;
           min-height: 200px;
           border: .1rem dashed @textColor;
@@ -21,18 +21,16 @@
         .drop__container:hover {
           cursor: pointer;
         }
-        .containers(@flexDirection:row);
-        .drop__text--initial {
-          font-size: 1rem;
-        }
+        .container(@flexDirection:row);
         .drop__image--post {
-          .containers(); 
+          .container(); 
           min-width: 200px;
           min-height: 200px;
         }
       }
       .body__title {
-        .containers(@flexDirection:row, @justifyContent: flex-start);
+        .container(@flexDirection:row, @justifyContent: flex-start);
+        .title();
         height: 20%;
         margin: 1rem;
         .title__label {
@@ -41,12 +39,12 @@
           padding-right: 2rem;
         }
         .title__info {
-          font-size: 1.5rem;
+          padding: .5rem;
           width: 60%;
         }
       }
       .body__review {
-        .containers(@flexDirection:row, @justifyContent: flex-start, @alignItems: flex-start);
+        .container(@flexDirection:row, @justifyContent: flex-start, @alignItems: flex-start);
         margin: 1rem;
         .review__label {
           text-align: right;
@@ -54,9 +52,11 @@
           width: 20%;
         }
         .review__info {
-          font-size: 1.5rem;
           width: 60%;
-          height: 10rem;
+          height: 20vh;
+          min-height: 20vh;
+          max-height: 20vh;
+          padding: .5rem;
         }
       }
       .body__stars {
@@ -65,18 +65,20 @@
       }
     }
     .modal__footer {
-      .containers(@flexDirection: column);
+      .container(@flexDirection: column);
       .footer__buttons {
         .buttons__button {
-          .buttons()
+          .button();
+          margin: 1rem 0;
+        }
+        .buttons__button:last-of-type {
+          margin-left: 1rem;
         }
       }
       .footer__text {
         color: red;
         height: 1rem;
-        font-size: 1rem;
       }
-      
     }
   }
 }

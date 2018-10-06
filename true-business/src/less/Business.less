@@ -1,15 +1,15 @@
 @import "./mixins.less";
 
 .business {
-  .containers(@width: inherit, @padding: 15vh 2rem 2rem 2rem);
+  .container(@width: inherit, @padding: 15vh 0 5vh 0);
   color: @textColor;
   .business__info {
-    .containers(@width: 75%);
+    .container(@width: 75%);
     .backAndBorder();
     padding: 1rem;
     margin: 1rem;
     .info__landscape {
-      .images(@top: 0);
+      .image(@top: 0);
       width: 50%;
       min-width: 50%;
       min-height: 40vh;
@@ -19,11 +19,12 @@
       max-height: 20rem;
     }
     .info__title {
-      font-size: 3rem;
+      .title();
       text-align: center;
+      padding: 1rem;
     }
     .info__address {
-      .containers(@flexDirection: row);
+      .container(@flexDirection: row);
       .address__city {
         .body();
         padding: 1rem;
@@ -32,38 +33,30 @@
     }
     .info__city {
       padding: 0 0 1rem 0;
-      font-size: 1.5rem;
     }
     .info__details {
-      .containers(@flexDirection: row, @height: 25vh, @justifyContent: space-between);
+      .container(@flexDirection: row, @height: 25vh, @justifyContent: space-between);
       flex-grow: 1;
       .details__hours {
-        .containers(@flexDirection: column, @width:33%, @justifyContent: space-between);
+        .container(@flexDirection: column, @width:33%, @justifyContent: space-between);
         .hours__title {
-          font-size: 2rem;
-        }
-        .hours__day {
-          font-size: 1rem;
+          .title();
         }
       }
       .details__contact {
-        .containers(@width: 66%, @flexDirection: row);
+        .container(@width: 66%, @flexDirection: row);
         .contact__phone {
-          .containers(@flexDirection: row);
+          .container(@flexDirection: row);
           height: 50%;
           width: 50%;
-          font-size: 1.5rem;
           .phone__number {
-            font-size: 1rem;
             padding: 1rem;
           }
         }
         .contact__website {
-          .containers(@flexDirection: row);
+          .container(@flexDirection: row);
           width: 50%;
-          font-size: 1.5rem;
           .website__text {
-            font-size: 1rem;
             padding: 1rem;
           }
         }
@@ -71,31 +64,36 @@
     }
   }
   .business__reviews-container {
-    .containers(@width: 75%, @padding: 1rem 1rem 0 1rem);
+    .container(@width: 75%, @padding: 1rem 1rem 0 1rem, @justifyContent: space-between);
     .backAndBorder();
     .reviews-container__title {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
+      .backAndBorder();
+      .title();
+      margin-bottom: 1rem;
       color: @textColor;
+      padding: 0.5rem;
     }
     .reviews-container__button {
-      .buttons();
+      .button();
+      .header();
+      width: auto;
+      padding: 0.5rem;
     }
     .reviews-container__dropdowns {
-      .containers(@flexDirection: row, @justifyContent: space-between);
+      .container(@flexDirection: row, @justifyContent: space-between);
       .dropdowns__dropdown {
         display: flex;
         flex-direction: row;
         z-index: 2;
         .dropdown__title {
-          font-size: 2rem;
+          .title();
         }
         .dropdown__drop-container {
           margin-left: 2rem;
           width: 15rem;
           .drop-container__button {
+            .title();
             width: inherit;
-            font-size: 1.5rem;
             color: @textColor;
           }
           .drop-container__button:hover {
@@ -108,9 +106,9 @@
             flex-direction: column;
             width: inherit;
             .menu__button {
+              .title();
               width: inherit;
               border: none;
-              font-size: 1.5rem;
               color: @textColor;
             }
             .menu__button:hover {
@@ -122,17 +120,36 @@
       }
     }
     .reviews-container__reviews {
-      .containers(@justifyContent: space-between);
-      min-height: 75vh;
+      .container(@justifyContent: space-between);
+      min-height: 72vh;
       flex: 1;
+      .reviews--no-results {
+        .container(@padding: 15vh 0 5vh 0, @justifyContent: flex-start);
+        min-height: 100vh;
+        .search__title {
+          .header();
+          .backAndBorder();
+          margin: 1rem;
+        }
+        .search__no-results {
+          .container();
+          .header();
+          .backAndBorder();
+          width: 50vw;
+          margin: 2rem;
+          .no-results__text {
+            margin-top: 2rem;
+          }
+        }
+      }
       .reviews__review {
         width: 100%;
         height: 100%;
         display: flex;
         flex-wrap: wrap;
-        margin: 1rem;
+        margin: 2rem 1rem 0 1rem;
         .review__info {
-          .containers(@justifyContent: space-between);
+          .container(@justifyContent: space-between);
           .backAndBorder();
           min-height: 25vh;
           max-height: 25vh;
@@ -143,7 +160,7 @@
           opacity: 0.8;
           padding: 1rem;
           .review__landscape {
-            .images();
+            .image();
             width: 100%;
             min-width: 100%;
             max-width: 100%;
@@ -152,7 +169,7 @@
             max-height: 15vh;
           }
           .review__portrait {
-            .images();
+            .image();
             width: 100%;
             min-width: 100%;
             max-width: 100%;
@@ -185,16 +202,17 @@
         }
       }
       .reviews__pagination {
-        .containers(@flexDirection: row, @justifyContent: space-between);
+        .container(@flexDirection: row, @justifyContent: space-between);
         .backAndBorder(@background: @elementBG);
         width: 50vw;
         min-width: 50%;
         padding: 0.5rem;
+        margin: 0 0 1rem 0;
         .pagination__pages {
-          .containers(@flexDirection: row);
+          .container(@flexDirection: row);
           max-width: 70%;
           .pagination__page {
-            .buttons();
+            .button();
             width: 5%;
             margin: 0 0.5rem;
           }
@@ -222,14 +240,14 @@
     height: 80vh;
     max-height: 80vh;
     .modal__header {
-      .containers(@height:50%, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
+      .container(@height:50%, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
       max-height: 50%;
       .header__image {
-        .containers(@justifyContent: space-between; @flexDirection: row);
+        .container(@justifyContent: space-between; @flexDirection: row);
         height: 85%;
         max-height: 85%;
         .image__landscape {
-          .images(@top: 0);
+          .image(@top: 0);
           width: 50%;
           min-width: 50%;
           height: 100%;
@@ -237,7 +255,7 @@
           margin: 1rem 1rem 0 1rem;
         }
         .image__portrait {
-          .images(@top: 0);
+          .image(@top: 0);
           width: 50%;
           min-width: 50%;
           height: 100%;
@@ -246,15 +264,15 @@
           object-position: 50% 0%;
         }
         .image__button {
-          .containers(@flexDirection: row, @justifyContent: space-around);
+          .container(@flexDirection: row, @justifyContent: space-around);
           height: initial;
-          .buttons();
-          .headers();
+          .button();
+          .header();
           width: 20%;
         }
       }
       .header__user {
-        .containers(@flexDirection: row, @justifyContent: space-around);
+        .container(@flexDirection: row, @justifyContent: space-around);
         text-align: center;
         width: 100%;
         height: 15%;
@@ -262,16 +280,16 @@
         max-height: 15%;
         padding: 2rem;
         .header__title {
-          .headers(@margin: 0);
+          .header();
         }
         .header__reviewer {
-          .containers(@flexDirection: row, @justifyContent: space-around);
+          .container(@flexDirection: row, @justifyContent: space-around);
           width: 50%;
           .reviewer__info--onclick {
             text-overflow: ellipsis;
             overflow: hidden;
             width: 33%;
-            .headers();
+            .header();
           }
           .reviewer__info {
             text-overflow: ellipsis;
@@ -283,18 +301,18 @@
       }
     }
     .modal__body {
-      .containers(@justifyContent: flex-start, @height: 45%);
+      .container(@justifyContent: flex-start, @height: 45%);
       min-height: 45%;
       max-height: 45%;
       .body__stars {
-        .containers(@flexDirection: row, @width: 50%, @justifyContent: space-around);
+        .container(@flexDirection: row, @width: 50%, @justifyContent: space-around);
         height: 10%;
       }
       .body__drop {
-        .containers();
+        .container();
       }
       .body__title {
-        font-size: 1.5rem;
+        .title();
         height: 10%;
       }
       .body__stars {
@@ -315,15 +333,14 @@
       }
     }
     .modal__footer {
-      .containers();
+      .container();
       .footer__button {
-        .buttons();
+        .button();
         margin: 0.5rem 0;
       }
     }
   }
 }
-
 
 .active {
   font-weight: bolder;

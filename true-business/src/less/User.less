@@ -1,27 +1,12 @@
 @import "mixins.less";
 
 .user {
-  .containers(@width: auto, @justifyContent: space-around, @alignItems: flex-start);
+  .container(@width: auto, @justifyContent: space-around, @alignItems: flex-start);
   padding: 20vh 5rem 5rem 5rem;
   .user__header {
-    .containers(@flexDirection: row, @height: 5rem);
-    .header__breadcrumbs {
-      .containers(@flexDirection:row, @height:inherit, @justifyContent: flex-start);
-      font-size: 1.5rem;
-      .breadcrumbs__breadcrumb {
-        .buttons();
-        width: auto;
-        padding: 0 1rem;
-        .breadcrumb__arrow {
-          padding: 0 1rem;
-        }
-        .breadcrumb__arrow:hover {
-          cursor: default;
-        }
-      }
-    }
+    .container(@flexDirection: row, @height: 5rem);
     .header__signout {
-      .buttons();
+      .button();
       margin-right: 5rem;
       white-space: nowrap;
     }
@@ -30,11 +15,11 @@
     }
   }
   .user__body {
-    .containers(@flexDirection: row, @alignItems:flex-start, @justifyContent:space-between);
+    .container(@flexDirection: row, @alignItems:flex-start, @justifyContent:space-between);
     min-height: 100vh;
     width: 80vw;
     .body__left-bar {
-      .containers(@width: 20vw, @height: 25vh, @justifyContent: space-around);
+      .container(@width: 20vw, @height: 25vh, @justifyContent: space-around);
       .backAndBorder();
       .left-bar__button {
         .backAndBorder();
@@ -48,29 +33,29 @@
       }
     }
     .body__content {
-      .containers(@justifyContent: flex-start, @alignItems: flex-start);
+      .container(@justifyContent: flex-start, @alignItems: flex-start);
       .content__reviews-container {
-        .containers(@padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        .container(@padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
         min-width: 60vw;
         max-width: 60vw;
         min-height: 90vh;
         max-height: 90vh;
         .backAndBorder();
         .reviews-container__dropdowns {
-          .containers(@width: inherit, @flexDirection: row, @justifyContent: space-around);
+          .container(@width: inherit, @flexDirection: row, @justifyContent: space-around);
           .reviews__pagination {
-            .containers(@flexDirection: row, @justifyContent: space-between);
+            .container(@flexDirection: row, @justifyContent: space-between);
             .backAndBorder(@background: @elementBG);
             width: 40%;
             min-width: 40%;
             max-width: 40%;
             padding: 0.5rem;
             .pagination__pages {
-              .containers(@flexDirection: row);
+              .container(@flexDirection: row);
               max-width: 75%;
               min-width: 75%;
               .pagination__page {
-                .buttons();
+                .button();
                 width: 10%;
                 margin: 0 0.2rem;
               }
@@ -83,20 +68,24 @@
           .dropdowns__dropdown {
             display: flex;
             flex-direction: row;
-            width: 25%;
-            min-width: 25%;
-            max-width: 25%;
+            width: 15vw;
+            min-width: 15vw;
+            max-width: 15vw;
             z-index: 2;
             .dropdown__title {
-              font-size: 2rem;
+              width: 15vw;
+              min-width: 15vw;
+              max-width: 15vw;
+              .title();
             }
             .dropdown__drop-container {
               padding: 1rem;
               text-align: center;
-              width: 100%;
               .drop-container__button {
-                width: inherit;
-                font-size: 1.5rem;
+                width: 15vw;
+                min-width: 15vw;
+                max-width: 15vw;
+                .title();
                 color: @textColor;
               }
               .drop-container__button:hover {
@@ -107,11 +96,15 @@
                 z-index: 2;
                 display: flex;
                 flex-direction: column;
-                width: inherit;
+                width: 15vw;
+                min-width: 15vw;
+                max-width: 15vw;
                 .menu__button {
-                  width: inherit;
+                  .title();
+                  width: 15vw;
+                  min-width: 15vw;
+                  max-width: 15vw;
                   border: none;
-                  font-size: 1.5rem;
                   color: @textColor;
                 }
                 .menu__button:hover {
@@ -123,10 +116,10 @@
           }
         }
         .reviews-container__button {
-          .buttons();
+          .button();
         }
         .reviews-container__reviews {
-          .containers(@justifyContent: space-between);
+          .container(@justifyContent: space-between);
           min-height: 80vh;
           max-height: 80vh;
           flex: 1;
@@ -137,7 +130,7 @@
             width: 100%;
             height: 100%;
             .review__info {
-              .containers();
+              .container();
               .backAndBorder();
               min-height: 25vh;
               max-height: 25vh;
@@ -148,7 +141,7 @@
               color: @textColor;
               opacity: 0.8;
               .review__landscape {
-                .images();
+                .image();
                 width: 100%;
                 min-width: 100%;
                 max-width: 100%;
@@ -157,7 +150,7 @@
                 max-height: 15vh;
               }
               .review__portrait {
-                .images();
+                .image();
                 width: 100%;
                 min-width: 100%;
                 max-width: 100%;
@@ -170,14 +163,13 @@
                 cursor: pointer;
               }
               .info__detailed {
-                .containers(@justifyContent: space-around);
+                .container(@justifyContent: space-around);
                 min-height: 50%;
                 max-height: 50%;
                 .detailed__stars {
                   text-align: center;
                 }
                 .detailed__business {
-                  .body(@fontSize: 1.5rem);
                   .hidden();
                   max-width: 100%;
                   text-align: center;
@@ -191,25 +183,24 @@
         }
       }
       .content__billing {
-        .containers(@padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        .container(@padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
         .backAndBorder();
         min-width: 60vw;
         max-width: 60vw;
         min-height: 70vh;
         max-height: 70vh;
         .billing__section {
-          .containers(@width: 75%, @justifyContent: space-around, @flexDirection: row);
+          .container(@width: 75%, @justifyContent: space-around, @flexDirection: row);
           .section__single {
-            .containers();
+            .container();
             .single__info {
               text-align: center;
-              .body(@fontSize: 1.5rem);
             }
           }
         }
       }
       .content__profile {
-        .containers(@justifyContent: space-between, @padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        .container(@justifyContent: space-between, @padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
         .backAndBorder();
         min-width: 60vw;
         max-width: 60vw;
@@ -217,54 +208,48 @@
         max-height: 75vh;
         .profile__error {
           min-height: 1rem;
-          height: 1rem;
-          font-size: 1rem;
           color: red;
           text-align: center;
           width: 100%;
           margin-bottom: 1rem;
         }
         .profile__container {
-          .containers(@padding: 1rem);
+          .container(@padding: 1rem);
           .user-change__input {
             padding: 0.5rem;
-            font-size: 1.25rem;
           }
           .profile__image {
-            .images(@top: 0);
+            .image(@top: 0);
             width: 40%;
             min-width: 40%;
             height: 40%;
             min-height: 40%;
           }
-          
+
           .container__info {
-            .containers(@flexDirection: row, @justifyContent: space-between);
+            .container(@flexDirection: row, @justifyContent: space-between);
             .backAndBorder(@background: @elementBG);
-            border-radius: .5rem;
+            border-radius: 0.5rem;
             padding: 1rem;
             margin: 1rem;
             height: 2rem;
             max-height: 2rem;
             .info__label {
-              font-size: 1.5rem;
               width: 20%;
               min-width: 20%;
             }
             .info__data {
               width: 60%;
               min-width: 60%;
-              font-size: 1.5rem;
-              .containers();
+              .container();
               .data__input {
                 width: 90%;
                 min-width: 90%;
-                font-size: 1.5rem;
                 max-height: 1.9rem;
                 background: @buttonBG;
               }
               .data__button {
-                .buttons();
+                .button();
                 margin: 0;
               }
             }
@@ -272,7 +257,7 @@
               display: none;
             }
             .info__button {
-              .buttons();
+              .button();
               position: relative;
               left: 1.5rem;
               &:hover {
@@ -280,13 +265,12 @@
               }
             }
             .info__button--save {
-              .buttons();
+              .button();
               margin: 0 1rem 0 0;
               &:hover {
                 cursor: pointer;
               }
             }
-            
           }
           .container__info--top {
             .container__info();
@@ -307,14 +291,14 @@
     height: 80vh;
     max-height: 80vh;
     .modal__header {
-      .containers(@height:50%, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
+      .container(@height:50%, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
       max-height: 50%;
       .header__image {
-        .containers(@justifyContent: space-between; @flexDirection: row);
+        .container(@justifyContent: space-between; @flexDirection: row);
         height: 85%;
         max-height: 85%;
         .image__landscape {
-          .images(@top: 0);
+          .image(@top: 0);
           width: 50%;
           min-width: 50%;
           height: 100%;
@@ -322,7 +306,7 @@
           margin: 1rem 1rem 0 1rem;
         }
         .image__portrait {
-          .images(@top: 0);
+          .image(@top: 0);
           width: 50%;
           min-width: 50%;
           height: 100%;
@@ -331,15 +315,15 @@
           object-position: 50% 0%;
         }
         .image__button {
-          .containers(@flexDirection: row, @justifyContent: space-around);
+          .container(@flexDirection: row, @justifyContent: space-around);
           height: initial;
-          .buttons();
-          .headers();
+          .button();
+          .header();
           width: 20%;
         }
       }
       .header__user {
-        .containers(@flexDirection: row, @justifyContent: space-around);
+        .container(@flexDirection: row, @justifyContent: space-around);
         text-align: center;
         width: 100%;
         height: 15%;
@@ -347,16 +331,16 @@
         max-height: 15%;
         padding: 2rem;
         .header__title {
-          .headers(@margin: 0);
+          .header();
         }
         .header__reviewer {
-          .containers(@flexDirection: row, @justifyContent: space-around);
+          .container(@flexDirection: row, @justifyContent: space-around);
           width: 50%;
           .reviewer__info--onclick {
             text-overflow: ellipsis;
             overflow: hidden;
             width: 33%;
-            .headers();
+            .header();
           }
           .reviewer__info {
             text-overflow: ellipsis;
@@ -368,18 +352,18 @@
       }
     }
     .modal__body {
-      .containers(@justifyContent: flex-start, @height: 45%);
+      .container(@justifyContent: flex-start, @height: 45%);
       min-height: 45%;
       max-height: 45%;
       .body__stars {
-        .containers(@flexDirection: row, @width: 50%, @justifyContent: space-around);
+        .container(@flexDirection: row, @width: 50%, @justifyContent: space-around);
         height: 10%;
       }
       .body__drop {
-        .containers();
+        .container();
       }
       .body__title {
-        font-size: 1.5rem;
+        .title();
         height: 10%;
       }
       .body__stars {
@@ -400,9 +384,9 @@
       }
     }
     .modal__footer {
-      .containers();
+      .container();
       .footer__button {
-        .buttons();
+        .button();
         margin: 0.5rem 0;
       }
     }

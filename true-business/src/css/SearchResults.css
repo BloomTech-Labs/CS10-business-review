@@ -16,11 +16,11 @@
 }
 .search .search__title {
   font-size: 1.5rem;
-  margin: 2rem 2rem 0 2rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
 }
 .search .search__results {
   display: flex;
@@ -42,7 +42,7 @@
 .search .search__results .results__result {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -55,12 +55,17 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   min-width: 60vw;
   max-width: 60vw;
   min-height: 30vh;
   max-height: 30vh;
-  opacity: 0.8;
+}
+.search .search__results .results__result:hover {
+  cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  opacity: 1;
 }
 .search .search__results .results__result .result__image {
   border-radius: 1rem;
@@ -115,7 +120,6 @@
   font-size: 1.2rem;
   width: 100%;
   text-align: center;
-  font-size: 2rem;
   padding: 1rem;
 }
 .search .search__results .results__result .result__info .info__name .name__rating {
@@ -145,7 +149,6 @@
 .search .search__results .results__result .result__info .info__type {
   text-align: center;
   width: 100%;
-  font-size: 1rem;
   padding: 1rem;
 }
 .search .results__pagination {
@@ -164,7 +167,7 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   width: 20vw;
   max-width: 20vw;
   margin: 1rem 0;
@@ -188,7 +191,7 @@
 }
 .search .results__pagination .pagination__pages .pagination__page {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -231,11 +234,11 @@
 }
 .search--no-results .search__title {
   font-size: 1.5rem;
-  margin: 2rem 2rem 0 2rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   background: #ffffff;
   border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
 }
 .search--no-results .search__no-results {
   display: flex;
@@ -252,27 +255,13 @@
   cursor: default;
   color: #05386b;
   font-size: 1.5rem;
-  margin: 5rem;
   padding: 0.5rem;
+  background: #ffffff;
+  border: 0.1rem solid #05386b;
+  border-radius: 0.5rem;
+  width: 50vw;
+  margin: 2rem;
 }
 .search--no-results .search__no-results .no-results__text {
   margin-top: 2rem;
-}
-.no-logo {
-  font-size: 0.7rem;
-}
-.active {
-  font-weight: 1000;
-  animation: shake 0.5s both;
-}
-@keyframes shake {
-  10%,
-  50%,
-  90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-  30%,
-  70% {
-    transform: translate3d(1px, 0, 0);
-  }
 }
