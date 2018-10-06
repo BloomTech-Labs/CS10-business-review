@@ -1,4 +1,4 @@
-@import 'mixins.less';
+@import "mixins.less";
 
 .signin {
   .container();
@@ -20,35 +20,29 @@
         border: 0.1rem solid @textColor;
         background: @elementBG;
         margin-bottom: 1rem;
-        width: 75%;
-        padding: .5rem;
+        width: 50%;
+        padding: 0.5rem;
       }
-      .signin-container__buttons {
-        .container(@justifyContent: space-around);
-        .signin-container__google-auth {
-          min-width: 50%;
-          max-width: 50%;
-          min-height: 10vh;
-          max-height: 10vh;
-          border-radius: 1rem;
-        }
-        .signin-container__google-auth:hover {
-          cursor: pointer;
-        }
-        .signin-container__button {
-          .button();
-        }
-        .signin-container__button:hover {
-          cursor: pointer;
-        }
+      .signin-container__button {
+        .button();
+        .regularHover();
       }
     }
   }
 }
 
+.signin-container__google-auth {
+  min-width: 30%;
+  max-width: 30%;
+  min-height: 5vh;
+  max-height: 5vh;
+  border-radius: 1rem;
+  .regularHover();
+}
+
 hr {
-  border: .2rem solid @textColor;
+  border: 0.2rem solid @textColor;
   margin: 2rem 0;
-  width: 100%;
+  width: 50%;
   height: 1rem;
 }

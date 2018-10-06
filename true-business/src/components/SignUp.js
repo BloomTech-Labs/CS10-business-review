@@ -103,7 +103,7 @@ class SignUp extends Component {
               />
               <input
                 className="signup-container__input"
-                placeholder="confirmPassword"
+                placeholder="Confirm Password"
                 name="confirmPassword"
                 type="password"
                 value={this.state.confirmPassword}

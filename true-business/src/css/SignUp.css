@@ -32,7 +32,6 @@
   border-radius: 0.5rem;
   color: #05386b;
   padding: 1rem;
-  min-height: 60vh;
 }
 .signup .signup-container .signup-container__header {
   font-size: 1.5rem;
@@ -72,7 +71,7 @@
   border: 0.1rem solid #05386b;
   background: #ffffff;
   margin-bottom: 1rem;
-  width: 75%;
+  width: 50%;
   padding: 0.5rem;
 }
 .signup .signup-container .signup-container__form .signup-container__buttons {
