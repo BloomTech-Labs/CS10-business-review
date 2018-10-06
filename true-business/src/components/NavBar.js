@@ -190,12 +190,7 @@ class NavBar extends Component {
         {localStorage.getItem("token") && localStorage.getItem("userId") ? (
           <div className="navbar__right--logged">
             <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
-              <i
-                onClick={() => {
-                  this.props.history.push(`/user`);
-                }}
-                className="fas fa-bars fa-2x fa-fw"
-              />
+              <i className="fas fa-bars fa-2x fa-fw" />
               <div className="right--logged__text">{localStorage.getItem("name").split(" ")[0]}</div>
             </Button>
             <Menu

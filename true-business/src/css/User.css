@@ -338,10 +338,6 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
-  box-shadow: #6b6b6b;
-  opacity: 1;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait {
   border-radius: 1rem;
@@ -360,10 +356,6 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
-  box-shadow: #6b6b6b;
-  opacity: 1;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__image:hover {
   cursor: pointer;
@@ -515,10 +507,6 @@
 }
 .user .user__body .body__content .content__profile .profile__container .profile__image:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
-  box-shadow: #6b6b6b;
-  opacity: 1;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info {
   display: flex;
@@ -791,10 +779,6 @@
 }
 .modal .modal-container .modal__header .header__image .image__landscape:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
-  box-shadow: #6b6b6b;
-  opacity: 1;
 }
 .modal .modal-container .modal__header .header__image .image__portrait {
   border-radius: 1rem;
@@ -812,10 +796,6 @@
 }
 .modal .modal-container .modal__header .header__image .image__portrait:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
-  box-shadow: #6b6b6b;
-  opacity: 1;
 }
 .modal .modal-container .modal__header .header__image .image__button {
   display: flex;

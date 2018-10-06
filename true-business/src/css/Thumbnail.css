@@ -15,6 +15,7 @@
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
+  box-shadow: 0px 0px 40px 0px #6b6b6b;
   margin: 1rem;
   padding: 1rem;
   min-height: 25rem;
@@ -41,10 +42,6 @@
 }
 .thumbnail .thumbnail__landscape:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
-  box-shadow: #6b6b6b;
-  opacity: 1;
 }
 .thumbnail .thumbnail__description {
   display: flex;

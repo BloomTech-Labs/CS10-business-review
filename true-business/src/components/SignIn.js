@@ -22,9 +22,10 @@ class SignIn extends Component {
     };
   }
 
-  signIn = () => {
+  signIn = event => {
+    event.preventDefault();
     axios
-      .post(`${backend}api/user/login`, {username:this.state.username, password:this.state.password})
+      .post(`${backend}api/user/login`, { username: this.state.username, password: this.state.password })
       .then(response => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data._doc._id);
@@ -49,21 +50,6 @@ class SignIn extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  getLoggedInUser = () => {
-    console.log("BALLS")
-    axios
-    .get(`${backend}api/user/current`)
-    .then(response => {
-      window.location = `${backend}auth/google`
-      localStorage.setItem("userId", response.data._id);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("name", response.data.name);
-    })
-    .catch(err => {
-      console.log("Error:", err);
-    });
-  };
-
   render() {
     return (
       <div>
@@ -71,7 +57,7 @@ class SignIn extends Component {
         <div className="signin">
           <div className="signin-container">
             <div className="signin-container__header"> Sign In </div>
-            <div className="signin-container__form">
+            <form className="signin-container__form">
               <input
                 className="signin-container__input"
                 placeholder="Username"
@@ -89,19 +75,17 @@ class SignIn extends Component {
                 value={this.state.password}
                 onChange={this.handleInputChange}
               />
-              <div className="signin-container__buttons ">
-                <button type="submit" className="signin-container__button" onClick={this.signIn}>
-                  Sign In
-                </button>
-                <hr/>
-                <img
-                  alt="Google Logo"
-                  src={googleLogo}
-                  className="signin-container__google-auth"
-                  onClick={this.getLoggedInUser}
-                />
-              </div>
-            </div>
+              <button type="submit" className="signin-container__button" onClick={this.signIn}>
+                Sign In
+              </button>
+            </form>
+            <hr />
+            <img
+              alt="Google Logo"
+              src={googleLogo}
+              className="signin-container__google-auth"
+              onClick={this.getLoggedInUser}
+            />
           </div>
         </div>
       </div>

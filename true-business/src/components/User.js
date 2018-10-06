@@ -345,11 +345,9 @@ class User extends Component {
               </div>
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
-
                 <div className="reviews__review">
                   {this.state.reviews.length ? (
                     this.state.reviews.map((review, i) => {
-                      console.log("REVIEW", review)
                       return (
                         <div key={review._id} className="review__info">
                           <img

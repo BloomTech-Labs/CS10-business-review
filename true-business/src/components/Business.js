@@ -45,6 +45,7 @@ class Business extends Component {
     modalInfo: null,
     currentPage: 0,
     total: 0,
+    top: 0,
   };
 
   componentDidMount = () => {
@@ -52,6 +53,10 @@ class Business extends Component {
       this.getReviews(0);
     }
   };
+
+  componentDidUpdate = () => {
+    window.scrollTo(0 ,this.state.top);
+  }
 
   toggleDropDown = event => {
     let toggle = event.target.name;
@@ -107,6 +112,7 @@ class Business extends Component {
   };
 
   openModal = (event, info) => {
+    this.setState({ top: document.documentElement.scrollTop });
     this.setState({ modalIsOpen: true, modalInfo: info });
   };
 
@@ -374,7 +380,6 @@ class Business extends Component {
             <Modal
               shouldCloseOnOverlayClick={false}
               isOpen={this.state.modalIsOpen}
-              onRequestClose={this.closeModal}
               style={modalStyles}
               contentLabel="Review Modal">
               <div className="modal">

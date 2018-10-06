@@ -60,7 +60,6 @@ const login = (request, response) => {
 };
 
 const getLoggedInUser = (request, response) => {
-  console.log("WHAT THE FUCK");
   console.log("REQUEST", request);
   //5bb68069adadaad4b39e0528
   // Having some issues with the session because of the 

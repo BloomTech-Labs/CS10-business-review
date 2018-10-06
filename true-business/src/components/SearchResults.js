@@ -82,9 +82,6 @@ class SearchResults extends Component {
                             </a>
                           </div>
                         </div>
-                        <div className="info__type">
-                          {(result.types[0].charAt(0).toUpperCase() + result.types[0].slice(1)).replace(/_/g, " ")}
-                        </div>
                       </div>
                     </div>
                   );

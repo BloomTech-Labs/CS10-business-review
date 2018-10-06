@@ -148,7 +148,6 @@ class App extends Component {
   };
 
   getBusiness = (business, landingpage = false) => {
-    console.log("FUCKING BUSINESS", business)
     if (landingpage) {
       Promise.resolve()
         .then(() => {

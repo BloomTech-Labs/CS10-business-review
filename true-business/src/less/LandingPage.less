@@ -19,12 +19,13 @@
         .containers(@margin: 1rem, @padding: 1rem, @height: 25rem, @width: 20%, @justifyContent: space-between);
         .backAndBorder();
         .shadowHover();
-        cursor: default;
+        .shadow();
         min-height: 25rem;
         min-width: 20%;
         text-align: center;
         .item__landscape {
           .image();
+          .regularHover();
           width: 100%;
           min-width: 100%;
           min-height: 15rem;
@@ -32,6 +33,7 @@
         }
         .item__portrait {
           .image();
+          .regularHover();
           width: 100%;
           min-width: 100%;
           min-height: 15rem;
@@ -41,26 +43,24 @@
         .item__description {
           .containers();
           .item__title {
-            .title();
+            .header();
             .hidden();
-            padding: 0.5rem 0;
+            padding: 0.5rem;
+            width: auto;
           }
           .item__info {
             .hidden();
+            
             padding: 0.5rem 0;
           }
           .item__info--hover {
             .hidden();
-            padding: 0.5rem 0;
-            &:hover {
-              cursor: pointer;
-            }
+            .shadowHover();
+            width: auto;
+            padding: 0.5rem;
+            border-radius: .5rem;
           }
         }
-      }
-      .items__item:hover {
-        opacity: 1;
-        cursor: default;
       }
     }
   }
@@ -74,7 +74,7 @@
       .containers(@alignItems: flex-start, @justifyContent: space-between, @flexDirection: row);
       .image__landscape {
         .image(@top: 0);
-        .noHover();
+        .regularHover();
         min-width: 30vw;
         min-height: 30vh;
         max-height: 30vh;
@@ -82,7 +82,7 @@
       }
       .image__portrait {
         .image(@top: 0);
-        .noHover();
+        .regularHover();
         min-width: 30vw;
         min-height: 30vh;
         max-height: 30vh;
@@ -149,7 +149,6 @@
       height: 20%;
     }
     .body__review {
-      .backAndBorder();
       .body();
       height: 50%;
       padding: 0.5rem;

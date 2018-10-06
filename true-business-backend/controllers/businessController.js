@@ -172,7 +172,6 @@ const placeSearch = (req, res) => {
       result.website = result.hasOwnProperty("website") ? result.website : "No Website Listed";
       result.photos = result.hasOwnProperty("photos") ? result.photos : "No Photos Listed";
       result.opening_hours = result.hasOwnProperty("opening_hours") ? result.opening_hours : "No Hours Listed";
-      console.log("FUCKING OPENING HOURS", result.opening_hours);
       result.address_components = result.hasOwnProperty("address_components")
         ? result.address_components
         : "No Description Listed";

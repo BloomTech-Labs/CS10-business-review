@@ -47,10 +47,6 @@
 }
 .business .business__info .info__landscape:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
-  box-shadow: #6b6b6b;
-  opacity: 1;
 }
 .business .business__info .info__portrait {
   max-height: 20rem;
@@ -382,10 +378,6 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
-  box-shadow: #6b6b6b;
-  opacity: 1;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait {
   border-radius: 1rem;
@@ -404,10 +396,6 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
-  box-shadow: #6b6b6b;
-  opacity: 1;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__image:hover {
   cursor: pointer;
@@ -550,10 +538,6 @@
 }
 .modal .modal-container .modal__header .header__image .image__landscape:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
-  box-shadow: #6b6b6b;
-  opacity: 1;
 }
 .modal .modal-container .modal__header .header__image .image__portrait {
   border-radius: 1rem;
@@ -571,10 +555,6 @@
 }
 .modal .modal-container .modal__header .header__image .image__portrait:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
-  box-shadow: #6b6b6b;
-  opacity: 1;
 }
 .modal .modal-container .modal__header .header__image .image__button {
   display: flex;
