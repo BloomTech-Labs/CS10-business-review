@@ -6,11 +6,9 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 15vh 0 5vh 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-height: 100vh;
 }
@@ -30,14 +28,15 @@
   height: auto;
   width: 90%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-height: inherit;
   flex-wrap: wrap;
+  background-image: url("../imgs/bar.gif");
+  background-size: 100% 34vh;
+  background-repeat: repeat;
 }
 .search .search__results .results__result {
   display: flex;
@@ -47,17 +46,16 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
-  margin: 1rem;
-  cursor: default;
+  margin: 1rem 1rem 1rem 3rem;
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
-  min-width: 60vw;
-  max-width: 60vw;
+  box-shadow: 0px 0px 40px 0px #6b6b6b;
+  min-width: 40vw;
+  max-width: 40vw;
   min-height: 30vh;
   max-height: 30vh;
 }
@@ -86,64 +84,74 @@
 .search .search__results .results__result .result__info {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
-  padding: 1rem;
-  margin: 0;
-  cursor: default;
-  color: #05386b;
-  min-height: inherit;
-  max-height: inherit;
-}
-.search .search__results .results__result .result__info .info__name {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
+  padding: 1rem;
+  margin: 0;
+  color: #05386b;
+  text-align: left;
+  min-height: inherit;
+  max-height: inherit;
+}
+.search .search__results .results__result .result__info:hover {
+  cursor: pointer;
+  opacity: 1;
+  box-shadow: 0 0 0 0;
+}
+.search .search__results .results__result .result__info .info__name {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .search .search__results .results__result .result__info .info__name .name__title {
   font-size: 1.2rem;
   width: 100%;
-  text-align: center;
   padding: 1rem;
 }
 .search .search__results .results__result .result__info .info__name .name__rating {
+  width: 100%;
   font-size: 1rem;
   padding: 1rem;
 }
 .search .search__results .results__result .result__info .info__address {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
-}
-.search .search__results .results__result .result__info .info__address .address__city {
-  font-size: 1rem;
+  text-decoration: none;
   padding: 1rem;
-  text-align: center;
+}
+.search .search__results .results__result .result__info .info__address .address__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
 }
 .search .search__results .results__result .result__info .info__type {
   text-align: center;
@@ -158,17 +166,16 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
-  width: 20vw;
-  max-width: 20vw;
+  box-shadow: 0px 0px 40px 0px #6b6b6b;
+  width: 10vw;
+  max-width: 10vw;
   margin: 1rem 0;
   padding: 0.5rem 1rem;
 }
@@ -180,11 +187,9 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   max-width: 70%;
 }
@@ -196,7 +201,7 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   height: 2.5rem;
-  width: 10%;
+  width: 20%;
   margin: 0 0.2rem;
 }
 .search .results__pagination .pagination__pages .pagination__page:hover {
@@ -207,9 +212,12 @@
 }
 .search .results__pagination .pagination__pages .pagination__page:hover {
   cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  opacity: 1;
 }
-.search .results__pagination .pagination__pages .pagination__page:active {
-  animation: shake 0.1s both;
+.search .results__pagination .pagination__pages .pagination__page:hover {
+  cursor: pointer;
 }
 .search .results__pagination .pagination__pages .pagination__page--no-hover {
   width: 5%;
@@ -223,11 +231,9 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 15vh 0 5vh 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-height: 100vh;
 }
@@ -247,11 +253,9 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   font-size: 1.5rem;
   padding: 0.5rem;

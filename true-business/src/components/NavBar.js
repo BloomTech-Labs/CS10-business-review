@@ -96,7 +96,7 @@ class NavBar extends Component {
 
   handleSearch = event => {
     event.preventDefault();
-    if (this.state.searchWord !== "") {
+    if (this.state.searchWord !== "" && !this.state.popoverOpen) {
       this.props.search(this.state.searchWord + " " + this.state.searchCity, true);
       this.setState({ searchWord: "", searchCity: "" });
     } else {

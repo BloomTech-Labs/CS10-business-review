@@ -47,7 +47,8 @@
   flex-wrap: wrap;
   min-height: 100%;
   background-image: url("../imgs/bar.gif");
-  background-size: 100% 25rem;
+  background-size: 100% 12.5rem;
+  background-repeat: repeat;
 }
 .landing .landing__container .container__items .items__item {
   display: flex;

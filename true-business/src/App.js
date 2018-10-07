@@ -77,6 +77,7 @@ class App extends Component {
             path="/results"
             render={() => (
               <SearchResults
+                currentPage="0"
                 business={this.getBusiness}
                 search={this.searchResults}
                 searchResults={this.state.searchResults}
