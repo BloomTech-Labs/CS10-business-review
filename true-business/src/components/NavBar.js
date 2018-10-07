@@ -80,6 +80,14 @@ class NavBar extends Component {
     }
   };
 
+  componentDidMount = () => {
+    if (this.state.signedIn && this.state.popoverOpen) this.setState({ popoverOpen: false });
+  };
+
+  componentDidUpdate = () => {
+    if (this.state.signedIn && this.state.popoverOpen) this.setState({ popoverOpen: false });
+  };
+
   toggle = event => {
     // Only fires the popover the first time they click on the search bar
     if (!this.state.popoverFired) {
@@ -96,6 +104,8 @@ class NavBar extends Component {
 
   handleSearch = event => {
     event.preventDefault();
+    console.log("Searchword", this.state.searchWord);
+    console.log("this.state.popoveropen", this.state.popoverOpen);
     if (this.state.searchWord !== "" && !this.state.popoverOpen) {
       this.props.search(this.state.searchWord + " " + this.state.searchCity, true);
       this.setState({ searchWord: "", searchCity: "" });
@@ -115,7 +125,6 @@ class NavBar extends Component {
   };
 
   render() {
-    const { anchorEl } = this.state;
     return (
       <div className="navbar">
         <img
@@ -189,15 +198,18 @@ class NavBar extends Component {
         </div>
         {localStorage.getItem("token") && localStorage.getItem("userId") ? (
           <div className="navbar__right--logged">
-            <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
+            <Button
+              aria-owns={this.state.anchorEl ? "simple-menu" : null}
+              aria-haspopup="true"
+              onClick={this.handleClick}>
               <i className="fas fa-bars fa-2x fa-fw" />
               <div className="right--logged__text">{localStorage.getItem("name").split(" ")[0]}</div>
             </Button>
             <Menu
               id="simple-menu"
               style={{ top: "3rem", left: "1rem" }}
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
+              anchorEl={this.state.anchorEl}
+              open={Boolean(this.state.anchorEl)}
               onClose={this.handleClose}>
               <MenuItem
                 onClick={() => {

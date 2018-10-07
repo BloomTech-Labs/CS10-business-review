@@ -37,6 +37,7 @@ const getReviewsByReviewerId = (req, res) => {
 
 // For Business Component
 const getReviewsByBusinessId = (req, res) => {
+  let { filter, sort } = req.params;
   let search = req.params.landing === "true" ? "newMongoId" : "newGoogleId";
   Review.find({ [search]: req.params.id })
     .skip(10 * req.params.currentPage)
@@ -46,6 +47,60 @@ const getReviewsByBusinessId = (req, res) => {
       Review.find({ [search]: req.params.id })
         .count()
         .then(total => {
+          console.log("Filter", filter);
+          // console.log("params------------------", req.params);
+          switch (filter) {
+            case "5 Stars or Higher":
+              console.log("4 stars or higher");
+              reviews = reviews.filter(review => {
+                return review.stars === 5;
+              });
+              break;
+            case "4 Stars or Higher":
+              console.log("4 stars or higher");
+              reviews = reviews.filter(review => {
+                return review.stars >= 4;
+              });
+              break;
+            case "3 Stars or Higher":
+              console.log("3 stars or higher");
+              reviews = reviews.filter(review => {
+                console.log("review.stars", review.stars);
+                return review.stars >= 3;
+              });
+              break;
+            case "2 Stars or Higher":
+              console.log("2 stars or higher");
+              reviews = reviews.filter(review => {
+                return review.stars >= 2;
+              });
+              break;
+            // No Filter
+            default:
+              null;
+          }
+          switch (sort) {
+            case "Date Ascending":
+              reviews = reviews.sort((a, b) => {
+                return a.createdOn.getTime() < b.createdOn.getTime();
+              });
+              break;
+            case "Rating Descending":
+              reviews = reviews.sort((a, b) => {
+                return a.stars > b.stars;
+              });
+              break;
+            case "Rating Ascending":
+              reviews = reviews.sort((a, b) => {
+                return a.stars < b.stars;
+              });
+              break;
+            // Date Descending
+            default:
+            reviews = reviews.sort((a, b) => {
+              return a.createdOn.getTime() > b.createdOn.getTime();
+            });
+          }
           res.status(200).json({ reviews, total });
         });
     })
@@ -59,7 +114,7 @@ const getAllReviews = (req, res) => {
   Review.find({})
     // Don't include this when we get likes
     .limit(4)
-    .populate('newMongoId reviewer')
+    .populate("newMongoId reviewer")
     .then(reviews => {
       // let featured = [];
       // let likes = 100;

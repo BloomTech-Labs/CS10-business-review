@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
-import NavBar from "./NavBar";
+import logo from "../imgs/logo.png";
 // import signUp from "../imgs/signup.png";
 
 import "../css/SignUp.css";
@@ -28,7 +28,7 @@ class SignUp extends Component {
       type: null,
     };
   }
-  
+
   confirmPassword = () => {
     return this.state.password === this.state.confirmPassword;
   };
@@ -64,8 +64,15 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <NavBar search={this.props.search} />
         <div className="signup">
+          <img
+            alt="logo"
+            src={logo}
+            className="signup__logo"
+            onClick={() => {
+              this.props.history.push(`/`);
+            }}
+          />
           <div className="signup-container">
             <div className="signup-container__header"> Sign Up </div>
             <form className="signup-container__form">
@@ -124,6 +131,12 @@ class SignUp extends Component {
                 /> */}
               </div>
             </form>
+            <div className="signup__returning">
+              <div className="returning__text">Already a Member of True Business Reviews?</div>
+              <button className="returning__button" onClick={() => this.props.history.push(`/signin`)}>
+                Sign In
+              </button>
+            </div>
           </div>
         </div>
       </div>

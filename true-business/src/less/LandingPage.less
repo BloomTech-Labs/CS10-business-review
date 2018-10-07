@@ -10,7 +10,7 @@
       margin: 1rem;
     }
     .container__items {
-      .containers(@flexDirection: row, @justifyContent: space-between, @alignItems: flex-start);
+      .containers(@flexDirection: row, @justifyContent: space-around, @alignItems: flex-start);
       flex-wrap: wrap;
       min-height: 100%;
       background-image: url("../imgs/bar.gif");
@@ -140,7 +140,7 @@
       .containers();
     }
     .body__title {
-      .title();
+      .header();
       text-decoration: underline;
       height: 10%;
     }
@@ -153,7 +153,7 @@
       .body();
       height: 50%;
       padding: 0.5rem;
-      width: 75%;
+      width: 90%;
       height: auto;
       max-height: 25vh;
       overflow-y: auto;

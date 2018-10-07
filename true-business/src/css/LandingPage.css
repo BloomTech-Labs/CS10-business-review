@@ -35,7 +35,7 @@
 .landing .landing__container .container__items {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: flex-start;
   height: 100%;
   width: 100%;
@@ -354,7 +354,8 @@
   color: #05386b;
 }
 .modal .modal__body .body__title {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  padding: 0.5rem;
   text-decoration: underline;
   height: 10%;
 }
@@ -367,7 +368,7 @@
   font-size: 1rem;
   height: 50%;
   padding: 0.5rem;
-  width: 75%;
+  width: 90%;
   height: auto;
   max-height: 25vh;
   overflow-y: auto;

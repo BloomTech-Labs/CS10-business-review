@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import NavBar from "./NavBar";
+import logo from "../imgs/logo.png";
 import { withRouter } from "react-router-dom";
 import "../css/SignIn.css";
 import googleLogo from "../imgs/google-signin.png";
@@ -53,8 +53,15 @@ class SignIn extends Component {
   render() {
     return (
       <div>
-        <NavBar search={this.props.search} />
         <div className="signin">
+          <img
+            alt="logo"
+            src={logo}
+            className="signin__logo"
+            onClick={() => {
+              this.props.history.push(`/`);
+            }}
+          />
           <div className="signin-container">
             <div className="signin-container__header"> Sign In </div>
             <form className="signin-container__form">
@@ -76,7 +83,7 @@ class SignIn extends Component {
                 onChange={this.handleInputChange}
               />
               <button type="submit" className="signin-container__button" onClick={this.signIn}>
-                Sign In
+                Continue
               </button>
             </form>
             <hr />
@@ -86,6 +93,12 @@ class SignIn extends Component {
               className="signin-container__google-auth"
               onClick={this.getLoggedInUser}
             />
+            <div className="signin__new">
+              <div className="new__text">New To True Business Reviews?</div>
+              <button className="new__button" onClick={() => this.props.history.push(`/signup`)}>
+                Sign Up
+              </button>
+            </div>
           </div>
         </div>
       </div>

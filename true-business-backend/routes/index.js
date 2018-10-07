@@ -126,7 +126,7 @@ router.delete("/api/review/delete", (req, res) => {
   ReviewControler.deleteReview(req, res);
 });
 
-router.get("/api/review/getReviewsByReviewerId/:id/:currentPage", (req, res) => {
+router.get("/api/review/getReviewsByReviewerId/:id/:currentPage/", (req, res) => {
   ReviewControler.getReviewsByReviewerId(req, res);
 });
 
@@ -134,7 +134,7 @@ router.get("/api/review/getAllReviews/", (req, res) => {
   ReviewControler.getAllReviews(req, res);
 });
 
-router.get("/api/review/getReviewsByBusinessId/:id/:landing/:currentPage", (req, res) => {
+router.get("/api/review/getReviewsByBusinessId/:id/:landing/:currentPage/:filter/:sort", (req, res) => {
   ReviewControler.getReviewsByBusinessId(req, res);
 });
 

@@ -1,13 +1,21 @@
 @import "mixins.less";
 
 .signin {
-  .container();
-  padding-top: 20vh;
-  min-height: 100%;
-  cursor: default;
+  .containers(@padding: 5vh 0 5vh 0);
+  .signin__logo {
+    min-width: 15vw;
+    max-width: 15vw;
+    min-height: 15vh;
+    max-height: 15vh;
+    margin: 2rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
   .signin-container {
     .container(@width: 50%);
     .backAndBorder();
+    .shadow();
     color: @textColor;
     padding: 1rem;
     min-height: 40vh;
@@ -25,10 +33,21 @@
       }
       .signin-container__button {
         .button();
-        .regularHover();
+      }
+    }
+    .signin__new {
+      .containers(@flexDirection: row);
+      margin-top: 2rem;
+      .new__text {
+        .body();
+      }
+      .new__button {
+        .button();
+        margin-left: 1rem;
       }
     }
   }
+
 }
 
 .signin-container__google-auth {
@@ -37,12 +56,12 @@
   min-height: 5vh;
   max-height: 5vh;
   border-radius: 1rem;
-  .regularHover();
+  .button();
 }
 
 hr {
-  border: 0.2rem solid @textColor;
-  margin: 2rem 0;
+  border: 0.1rem solid @textColor;
+  margin: 1rem 0;
+  padding: .1rem;
   width: 50%;
-  height: 1rem;
 }

@@ -285,7 +285,7 @@ const getAllBusiness = (request, response) => {
   Business.find({})
     .then(function(businessList) {
       let featured = [];
-      let stars = 4;
+      let stars = 5;
       let reviews = 100;
       let flag = false;
       // While we don't have 4 featured business
@@ -296,7 +296,7 @@ const getAllBusiness = (request, response) => {
         // Worst Case 0 stars & 0 Reviews
         // While we have an empty DB this may be slow...
         businessList.forEach(business => {
-          if (business.stars > stars && business.totalReviews > reviews && !featured.includes(business)) {
+          if (business.stars >= stars && business.totalReviews >= reviews && !featured.includes(business)) {
             featured.push(business);
           }
         });

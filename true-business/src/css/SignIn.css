@@ -6,14 +6,20 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
-  padding: 0;
+  font-size: 1rem;
+  padding: 5vh 0 5vh 0;
   margin: 0;
   color: #05386b;
-  padding-top: 20vh;
-  min-height: 100%;
-  cursor: default;
+}
+.signin .signin__logo {
+  min-width: 15vw;
+  max-width: 15vw;
+  min-height: 15vh;
+  max-height: 15vh;
+  margin: 2rem;
+}
+.signin .signin__logo:hover {
+  cursor: pointer;
 }
 .signin .signin-container {
   display: flex;
@@ -31,6 +37,7 @@
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
+  box-shadow: 0px 0px 40px 0px #6b6b6b;
   color: #05386b;
   padding: 1rem;
   min-height: 40vh;
@@ -76,10 +83,38 @@
   filter: brightness(110%);
   font-weight: bolder;
 }
-.signin .signin-container .signin-container__form .signin-container__button:hover {
+.signin .signin-container .signin__new {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+  margin-top: 2rem;
+}
+.signin .signin-container .signin__new .new__text {
+  font-size: 1rem;
+}
+.signin .signin-container .signin__new .new__button {
+  border-radius: 0.5rem;
+  width: 5rem;
+  background-color: #3487d5;
+  color: #ffffff;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  height: 2.5rem;
+  margin-left: 1rem;
+}
+.signin .signin-container .signin__new .new__button:hover {
   cursor: pointer;
-  opacity: 1;
-  box-shadow: 0 0 0 0;
+  box-shadow: 0px 15px 20px #6b6b6b;
+  filter: brightness(110%);
+  font-weight: bolder;
 }
 .signin-container__google-auth {
   min-width: 30%;
@@ -87,15 +122,23 @@
   min-height: 5vh;
   max-height: 5vh;
   border-radius: 1rem;
+  border-radius: 0.5rem;
+  width: 5rem;
+  background-color: #3487d5;
+  color: #ffffff;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  height: 2.5rem;
 }
 .signin-container__google-auth:hover {
   cursor: pointer;
-  opacity: 1;
-  box-shadow: 0 0 0 0;
+  box-shadow: 0px 15px 20px #6b6b6b;
+  filter: brightness(110%);
+  font-weight: bolder;
 }
 hr {
-  border: 0.2rem solid #05386b;
-  margin: 2rem 0;
+  border: 0.1rem solid #05386b;
+  margin: 1rem 0;
+  padding: 0.1rem;
   width: 50%;
-  height: 1rem;
 }

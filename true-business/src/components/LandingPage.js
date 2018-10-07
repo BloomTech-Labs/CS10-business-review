@@ -17,7 +17,7 @@ let modalStyles = {
     height: "90vh",
     width: "60vw",
     zIndex: "5",
-    backgroundColor: "rgb(238,238,238)",
+    backgroundColor: "rgb(255,255,255)",
     color: "rgb(5,56,107)",
     overflow: "hidden",
   },
@@ -46,6 +46,10 @@ class LandingPage extends Component {
   closeModal() {
     this.setState({ modalIsOpen: false, liked: false });
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
 
   updateLike = () => {
     this.setState({ liked: true });
@@ -85,7 +89,7 @@ class LandingPage extends Component {
                           name="rating"
                         />
                         <div className="item__info--hover">
-                          <i style={{ paddingRight: ".5rem" }} class="fas fa-user" /> {review.reviewer.username}
+                          <i style={{ paddingRight: ".5rem" }} className="fas fa-user" /> {review.reviewer.username}
                         </div>
                       </div>
                     </div>
@@ -128,7 +132,8 @@ class LandingPage extends Component {
                       />
                       <div className="item__description">
                         <div className="item__info--hover">
-                          <i style={{ paddingRight: ".5rem" }} class="fas fa-user" />{user.username}
+                          <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
+                          {user.username}
                         </div>
                         <div className="item__info">{user.numberOfReviews} Reviews</div>
                         <div className="item__info">{user.numberOfLikes} Likes</div>
@@ -165,15 +170,19 @@ class LandingPage extends Component {
                   </div>
                   <div className="header__user">
                     <div className="header__reviewer">
-                      <div className="reviewer__info--onclick"> <i style={{ paddingRight: ".5rem" }} class="fas fa-user" />{this.state.modalInfo.reviewer.username}</div>
+                      <div className="reviewer__info--onclick">
+                        {" "}
+                        <i style={{ paddingRight: ".5rem" }} class="fas fa-user" />
+                        {this.state.modalInfo.reviewer.username}
+                      </div>
                       <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
                       <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
                     </div>
                   </div>
                 </div>
                 <div className="modal__body">
-                  <div className="body__business"> {this.state.modalInfo.newMongoId.name}</div>
                   <div className="body__stars">
+                    <div className="body__business"> {this.state.modalInfo.newMongoId.name}</div>
                     <StarRatings
                       starDimension="20px"
                       starSpacing="5px"

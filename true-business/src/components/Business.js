@@ -5,6 +5,7 @@ import axios from "axios";
 import Modal from "react-modal";
 import NewReview from "./NewReview";
 import NavBar from "./NavBar";
+import { Button, Menu, MenuItem } from "@material-ui/core";
 
 import "../css/Business.css";
 import "../css/GeneralStyles.css";
@@ -32,12 +33,12 @@ let modalStyles = {
 
 class Business extends Component {
   state = {
+    anchorElFilter: null,
+    anchorElSort: null,
     dropdownOpenFilter: false,
     dropdownOpenSort: false,
     filterBy: "No Filter",
-    showfilterBy: false,
     sortBy: "Date Descending",
-    showsortBy: false,
     businessID: null,
     newBusinessId: null,
     reviews: [],
@@ -45,37 +46,22 @@ class Business extends Component {
     modalInfo: null,
     currentPage: 0,
     total: 0,
-    top: 0,
   };
 
   componentDidMount = () => {
     if (this.props.business !== null) {
-      this.getReviews(0);
+      this.getReviews(0, this.state.sortBy, this.state.filterBy);
     }
   };
 
-  componentDidUpdate = () => {
-    window.scrollTo(0 ,this.state.top);
-  }
-
-  toggleDropDown = event => {
-    let toggle = event.target.name;
-    let other = "showfilterBy";
-    if (toggle === "showfilterBy") {
-      other = "showsortBy";
-    }
-    let inverse = this.state[toggle];
-    this.setState({ [toggle]: !inverse, [other]: false });
+  handleClick = (type, event) => {
+    event.preventDefault();
+    this.setState({ [type]: event.currentTarget });
   };
 
-  toggleFilterChoice = event => {
-    let toggle = event.target.name;
-    this.setState({ filterBy: toggle, showfilterBy: false });
-  };
-
-  toggleSortChoice = event => {
-    let toggle = event.target.name;
-    this.setState({ sortBy: toggle, showsortBy: false });
+  handleClose = type => {
+    console.log("handleClose Firing");
+    this.setState({ [type]: null });
   };
 
   displayNewReview = () => {
@@ -90,15 +76,20 @@ class Business extends Component {
   showModal = show => {
     this.setState({ open: show });
     // Cheap way to re-render with the new review showing
-    this.getReviews(this.state.currentPage);
+    this.getReviews(this.state.currentPage, this.state.sortBy, this.state.filterBy);
   };
 
-  getReviews = currentPage => {
+  getReviews = (currentPage, sort, filter) => {
     if (this.props.business) {
       let id = this.props.landingBusiness ? this.props.business._id : this.props.business.place_id;
       axios
-        .get(`${backend}api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}/${currentPage}`)
+        .get(
+          `${backend}api/review/getReviewsByBusinessId/${id}/${
+            this.props.landingBusiness
+          }/${currentPage}/${filter}/${sort}`,
+        )
         .then(response => {
+          console.log("Axios Response", response);
           this.setState({
             reviews: response.data.reviews,
             total: response.data.total,
@@ -112,7 +103,6 @@ class Business extends Component {
   };
 
   openModal = (event, info) => {
-    this.setState({ top: document.documentElement.scrollTop });
     this.setState({ modalIsOpen: true, modalInfo: info });
   };
 
@@ -122,7 +112,7 @@ class Business extends Component {
 
   updatePage = currentPage => {
     this.setState({ currentPage });
-    this.getReviews(currentPage);
+    this.getReviews(currentPage, this.state.sortBy, this.state.filterBy);
   };
 
   createPagination = () => {
@@ -188,7 +178,22 @@ class Business extends Component {
     ) : null;
   };
 
+  sort = sortBy => {
+    console.log("Sort Firing", sortBy);
+    this.handleClose("anchorElSort");
+    this.setState({ sortBy });
+    this.getReviews(0, sortBy, this.state.filterBy);
+  };
+
+  filter = filterBy => {
+    console.log("Filter Firing", filterBy);
+    this.handleClose("anchorElFilter");
+    this.setState({ filterBy });
+    this.getReviews(0, this.state.sortBy, filterBy);
+  };
+
   render() {
+    console.log("This.state", this.state);
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -291,50 +296,45 @@ class Business extends Component {
               <div className="reviews-container__dropdowns">
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__title"> Filter By: </div>
-                  <div className="dropdown__drop-container">
-                    <button className="drop-container__button" name="showfilterBy" onClick={this.toggleDropDown}>
-                      {this.state.filterBy}
-                    </button>
-                    {this.state.showfilterBy ? (
-                      <div className="drop-container__menu">
-                        <button onClick={this.toggleFilterChoice} name="No Filter" className="menu__button">
-                          No Filter
-                        </button>
-                        <button onClick={this.toggleFilterChoice} name="4 Stars or Higher" className="menu__button">
-                          4 Stars or Higher
-                        </button>
-                        <button onClick={this.toggleFilterChoice} name="3 Stars or Higher" className="menu__button">
-                          3 Stars or Higher
-                        </button>
-                        <button onClick={this.toggleFilterChoice} name="2 Stars or Higher" className="menu__button">
-                          2 Stars or Higher
-                        </button>
-                      </div>
-                    ) : null}
-                  </div>
+                  <Button
+                    aria-owns={this.state.anchorElFilter ? "filter" : null}
+                    aria-haspopup="true"
+                    onClick={this.handleClick.bind(this, "anchorElFilter")}>
+                    {this.state.filterBy}
+                  </Button>
+                  <Menu
+                    id="filter"
+                    style={{ top: "3rem", left: "1rem" }}
+                    anchorEl={this.state.anchorElFilter}
+                    open={Boolean(this.state.anchorElFilter)}
+                    onClose={this.handleClose}>
+                    <MenuItem onClick={this.filter.bind(this, "No Filter")}>No Filter</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "5 Stars or Higher")}>5 Stars or Higher</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "4 Stars or Higher")}>4 Stars or Higher</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "3 Stars or Higher")}>3 Stars or Higher</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "2 Stars or Higher")}>2 Stars or Higher</MenuItem>
+                  </Menu>
                 </div>
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__title"> Sort By: </div>
                   <div className="dropdown__drop-container">
-                    <button className="drop-container__button" name="showsortBy" onClick={this.toggleDropDown}>
+                    <Button
+                      aria-owns={this.state.anchorElSort ? "sort" : null}
+                      aria-haspopup="true"
+                      onClick={this.handleClick.bind(this, "anchorElSort")}>
                       {this.state.sortBy}
-                    </button>
-                    {this.state.showsortBy ? (
-                      <div className="drop-container__menu">
-                        <button onClick={this.toggleSortChoice} name="Date Descending" className="menu__button">
-                          Date Descending
-                        </button>
-                        <button onClick={this.toggleSortChoice} name="Date Ascending" className="menu__button">
-                          Date Ascending
-                        </button>
-                        <button onClick={this.toggleSortChoice} name="Rating Descending" className="menu__button">
-                          Rating Descending
-                        </button>
-                        <button onClick={this.toggleSortChoice} name="Rating Descending" className="menu__button">
-                          Rating Descending
-                        </button>
-                      </div>
-                    ) : null}
+                    </Button>
+                    <Menu
+                      id="sort"
+                      style={{ top: "3rem", left: "1rem" }}
+                      anchorEl={this.state.anchorElSort}
+                      open={Boolean(this.state.anchorElSort)}
+                      onClose={this.handleClose}>
+                      <MenuItem onClick={this.sort.bind(this, "Date Descending")}>Date Descending</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Date Ascending")}>Date Ascending</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>Rating Ascending</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Rating Descending")}>Rating Descending</MenuItem>
+                    </Menu>
                   </div>
                 </div>
               </div>
