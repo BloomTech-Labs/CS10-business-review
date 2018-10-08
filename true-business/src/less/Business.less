@@ -84,9 +84,7 @@
     .reviews-container__dropdowns {
       .container(@flexDirection: row, @justifyContent: space-between);
       .dropdowns__dropdown {
-        display: flex;
-        flex-direction: row;
-        z-index: 2;
+        .containers(@flexDirection: row);
         .dropdown__title {
           .title();
         }
@@ -204,22 +202,22 @@
               .containers(@flexDirection: row, @justifyContent: flex-start);
               .title();
               .hidden();
-              padding: .5rem 0;
+              padding: 0.5rem 0;
               .review__landscape {
                 .image(@top:0);
-                position:static;
+                position: static;
                 width: 3rem;
                 min-width: 3rem;
                 max-width: 3rem;
-                height:  3rem;
-                min-height:  3rem;
-                max-height:  3rem;
+                height: 3rem;
+                min-height: 3rem;
+                max-height: 3rem;
                 border-radius: 50%;
                 margin-right: 1rem;
               }
               .review__portrait {
                 .image();
-                position:static;
+                position: static;
                 width: 3rem;
                 min-width: 3rem;
                 max-width: 3rem;
@@ -230,9 +228,9 @@
                 margin-right: 1rem;
                 object-position: 50% 0%;
               }
-              .reviewer__text{
+              .reviewer__text {
                 .hidden();
-                width:auto;
+                width: auto;
                 max-width: 50%;
               }
             }
@@ -411,4 +409,9 @@
 
 .active {
   font-weight: bolder;
+}
+
+.MuiButton-root-1 {
+  color: @textColor !important;
+  min-width: 20vw !important;
 }

@@ -59,14 +59,14 @@ const getReviewsByBusinessId = (req, res) => {
     default:
       filterNum = 0;
   }
-
   Review.find({ [search]: req.params.id })
     .find(filterNum > 0 ? { stars: filterNum } : {})
     .countDocuments()
     .then(total => {
       Review.find({ [search]: req.params.id })
         .find(filterNum > 0 ? { stars: filterNum } : {})
-        .sort(sort === "Rating Ascending" ? { stars: 1 } : { stars: -1 })
+        .sort(sort === "Rating Ascending" || sort === "Rating Descending" ? sort === "Rating Ascending" ? { stars: 1 } : { stars: -1 } : {})
+        .sort(sort === "Date Ascending" || sort === "Date Descending" ? sort === "Date Ascending" ? { createdOn: 1 } : { createdOn: -1 } : {})
         .populate("reviewer newMongoId")
         .skip(12 * req.params.currentPage)
         .limit(12)

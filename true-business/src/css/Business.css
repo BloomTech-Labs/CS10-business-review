@@ -232,7 +232,15 @@
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown {
   display: flex;
   flex-direction: row;
-  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
 }
 .business .business__reviews-container .reviews-container__dropdowns .dropdowns__dropdown .dropdown__title {
   font-size: 1.2rem;
@@ -885,4 +893,8 @@
 }
 .active {
   font-weight: bolder;
+}
+.MuiButton-root-1 {
+  color: #05386b !important;
+  min-width: 20vw !important;
 }

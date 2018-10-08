@@ -67,6 +67,9 @@
   min-height: 200px;
   border: 0.1rem dashed #05386b;
 }
+.new-review .new-review__modal .modal__body .body__drop .drop__container .drop__text--initial {
+  padding: 0.5rem;
+}
 .new-review .new-review__modal .modal__body .body__drop .drop__container:hover {
   cursor: pointer;
 }
