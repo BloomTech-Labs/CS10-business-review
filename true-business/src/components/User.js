@@ -400,34 +400,44 @@ class User extends Component {
                   <div className="modal__header">
                     <div className="header__image">
                       {/* Update reviews / user with likes */}
-                      <div className="image__buttons" />
-                      <a target="_blank" href="#" onClick={this.openImage}>
-                        <img
-                          alt={this.state.modalInfo.newMongoId.name}
-                          className={
-                            this.state.modalInfo.photos[0].width > this.state.modalInfo.photos[0].height
-                              ? "image__landscape"
-                              : "image__portrait"
-                          }
-                          src={this.state.modalInfo.photos[0].link}
-                        />
-                      </a>
+                      <div className="image__buttons">
+                        {!this.state.unliked ? (
+                          <button className="image__button" onClick={this.updateLike}>
+                            {this.state.liked ? (
+                              <div>
+                                <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-up" />
+                                <i className="fas fa-check" />
+                              </div>
+                            ) : (
+                              <i className="fas fa-thumbs-up" />
+                            )}
+                          </button>
+                        ) : null}
+                        {!this.state.liked ? (
+                          <button className="image__button" onClick={this.updateUnlike}>
+                            {this.state.unliked ? (
+                              <div>
+                                <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-down" />
+                                <i className="fas fa-check" />
+                              </div>
+                            ) : (
+                              <i className="fas fa-thumbs-down" />
+                            )}
+                          </button>
+                        ) : null}
+                      </div>
+                      <img
+                        alt={this.state.modalInfo.newMongoId.name}
+                        className="image__landscape"
+                        src={this.state.modalInfo.photos[0].link}
+                      />
                       <div className="image__buttons">
                         <button className="image__button" onClick={this.closeModal}>
                           <i className="far fa-window-close" />
                         </button>
                       </div>
                     </div>
-                    <div className="header__user">
-                      <div className="header__reviewer">
-                        <div className="reviewer__info--onclick">
-                          <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
-                          {this.state.modalInfo.reviewer.username}
-                        </div>
-                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
-                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
-                      </div>
-                    </div>
+                    
                   </div>
                   <div className="modal__body">
                     <div className="body__stars">

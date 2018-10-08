@@ -48,6 +48,15 @@ class Business extends Component {
     total: 0,
     liked: false,
     unliked: false,
+    dayIcons: [
+      "https://png.icons8.com/ultraviolet/50/000000/monday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/tuesday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/wednesday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/thursday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/friday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/saturday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/sunday.png",
+    ],
   };
 
   componentDidMount = () => {
@@ -200,84 +209,103 @@ class Business extends Component {
         {this.props.business ? (
           <div className="business">
             <div className="business__info">
-              <img
-                alt={this.props.business.name}
-                className="info__landscape"
-                src={
-                  this.props.business.photos === "No Photos Listed"
-                    ? "https://png.icons8.com/ios/50/000000/company.png"
-                    : this.props.business.photos[0].link
-                }
-              />
-              <div className="info__title">{this.props.business.name}</div>
-              <div className="info__address">
-                <div className="address__city">{this.props.business.formatted_address}</div>
-                <div className="address__icon">
-                  <a
-                    href={
-                      "https://www.google.com/maps/search/" +
-                      this.props.business.formatted_address.replace(/[, ]+/g, "+")
-                    }
-                    target="_blank">
-                    <i style={{ color: "#05386b" }} className="fas fa-map-marked-alt fa-2x" />
-                  </a>
-                </div>
+              <div className="info__image">
+                <img
+                  alt={this.props.business.name}
+                  className="info__landscape"
+                  src={
+                    this.props.business.photos === "No Photos Listed"
+                      ? "https://png.icons8.com/ios/100/000000/organization.png"
+                      : this.props.business.photos[0].link
+                  }
+                />
+                <StarRatings
+                  starDimension="40px"
+                  starSpacing="5px"
+                  rating={this.props.business.stars}
+                  starRatedColor="gold"
+                  starEmptyColor="grey"
+                  numberOfStars={5}
+                  name="rating"
+                />
               </div>
               <div className="info__details">
-                <div className="details__title"> Hours </div>
-                <div className="details__hours">
-                  {this.props.business.hasOwnProperty("opening_hours") ? (
-                    this.props.business.opening_hours.hasOwnProperty("weekday_text") ? (
-                      this.props.business.opening_hours.weekday_text.map((day, i) => {
-                        // Decide which day is current (Sun 0 --- Sat 6)
-                        // weekday_text is Mon-Sun though
-                        let dayIndex = 0;
-                        let dayNum = new Date().getDay();
-                        if (i === 6 && dayNum === 0) {
-                          dayIndex = 0;
-                          dayNum = 0;
-                        } else {
-                          dayIndex = i + 1;
-                        }
-                        let flag = dayIndex === dayNum ? true : false;
-                        return (
-                          <div style={flag ? { fontWeight: "bolder" } : null} key={day} className="hours__day">
-                            {day}
-                          </div>
-                        );
-                      })
+                <div className="details__title">{this.props.business.name}</div>
+                <div className="details__address">
+                  <div className="address__icon">
+                    <a
+                      href={
+                        "https://www.google.com/maps/search/" +
+                        this.props.business.formatted_address.replace(/[, ]+/g, "+")
+                      }
+                      target="_blank"
+                      className="icon__details">
+                      <i style={{ paddingRight: "1rem", color: "#05386b" }} className="fas fa-map-marked-alt" />
+                      {this.props.business.formatted_address}
+                    </a>
+                  </div>
+                </div>
+                <div className="details__detail">
+                  <div className="detail__hours">
+                    {this.props.business.hasOwnProperty("opening_hours") ? (
+                      this.props.business.opening_hours.hasOwnProperty("weekday_text") ? (
+                        this.props.business.opening_hours.weekday_text.map((day, i) => {
+                          // Decide which day is current (Sun 0 --- Sat 6)
+                          // weekday_text is Mon-Sun though
+                          let dayIndex = 0;
+                          let dayNum = new Date().getDay();
+                          if (i === 6 && dayNum === 0) {
+                            dayIndex = 0;
+                            dayNum = 0;
+                          } else {
+                            dayIndex = i + 1;
+                          }
+                          let flag = dayIndex === dayNum ? true : false;
+                          return (
+                            <div style={flag ? { fontWeight: "bolder" } : null} key={day} className="hours__days">
+                              <img
+                                className="hours__icon"
+                                alt={day}
+                                src={this.state.dayIcons[i]}
+                              />
+                              <div className="hours__text">{day.replace(/[A-z]*: /g, "")}</div>
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <div>Opening Hours Unlisted</div>
+                      )
                     ) : (
                       <div>Opening Hours Unlisted</div>
-                    )
-                  ) : (
-                    <div>Opening Hours Unlisted</div>
-                  )}
-                </div>
-                <div className="details__contact">
-                  <div className="contact__phone">
-                    <i className="fas fa-phone" />
-                    <div className="phone__number">
-                      {this.props.business.formatted_phone_number
-                        ? this.props.business.formatted_phone_number
-                        : "No Phone Listed"}
-                    </div>
-                  </div>
-                  <div className="contact__website">
-                    {this.props.business.website ? (
-                      <div>
-                        <i className="fab fa-chrome" />
-                        <a className="website__text" href={this.props.business.website}>
-                          {this.props.business.name}
-                          's Website
-                        </a>
-                      </div>
-                    ) : (
-                      "No Website Listed"
                     )}
+                  </div>
+                  <div className="detail__contact">
+                    <div className="contact__phone">
+                      <i className="fas fa-phone" />
+                      <div className="phone__number">
+                        {this.props.business.formatted_phone_number
+                          ? this.props.business.formatted_phone_number
+                          : "No Phone Listed"}
+                      </div>
+                    </div>
+                    <div className="contact__website">
+                      {this.props.business.website ? (
+                        <div>
+                          <i className="fab fa-chrome" />
+                          <a className="website__text" href={this.props.business.website}>
+                            {this.props.business.name}
+                            's Website
+                          </a>
+                        </div>
+                      ) : (
+                        "No Website Listed"
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
             <div className="business__reviews-container">
               <div className="reviews-container__title">
                 Reviews
@@ -456,16 +484,7 @@ class Business extends Component {
                         </button>
                       </div>
                     </div>
-                    <div className="header__user">
-                      <div className="header__reviewer">
-                        <div className="reviewer__info--onclick">
-                          <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
-                          {this.state.modalInfo.reviewer.username}
-                        </div>
-                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
-                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
-                      </div>
-                    </div>
+                    
                   </div>
                   <div className="modal__body">
                     <div className="body__stars">
