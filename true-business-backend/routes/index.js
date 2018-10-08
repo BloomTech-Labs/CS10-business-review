@@ -46,6 +46,10 @@ router.post("/api/user/register", (request, response) => {
   UserController.register(request, response);
 });
 
+router.post("/api/user/registerGoogle", (req, res) => {
+  UserController.createGoogleUser(req, res);
+});
+
 router.post("/api/user/login", (req, res) => {
   UserController.login(req, res);
 });
@@ -58,8 +62,8 @@ router.get("/api/user/random", function(req, res) {
   UserController.getRandomUser(req, res);
 });
 
-router.get("/api/user/current", function(request, response) {
-  UserController.getLoggedInUser(request, response);
+router.post("/api/user/current", function(request, response) {
+  UserController.getGoogleUser(request, response);
 });
 
 router.get("/api/user/:id", function(req, res) {

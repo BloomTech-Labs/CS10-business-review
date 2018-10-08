@@ -22,6 +22,7 @@
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
     "react-dropzone": "^5.1.0",
+    "react-google-login": "^3.2.1",
     "react-modal": "^3.5.1",
     "react-placeholder": "^3.0.1",
     "react-scripts": "1.1.5",

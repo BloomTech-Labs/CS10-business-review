@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import logo from "../imgs/logo.png";
 import { withRouter } from "react-router-dom";
+import GoogleLogin from "react-google-login";
+
 import "../css/SignIn.css";
-import googleLogo from "../imgs/google-signin.png";
+
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
 let heroku = "https://cryptic-brook-22003.herokuapp.com/";
@@ -49,22 +51,48 @@ class SignIn extends Component {
           this.props.history.push(`/user`);
         })
         .catch(err => {
-          if (err) {
-            this.setState({
-              error: true,
-              errorMessage: "Incorrect username or password",
-            });
-          }
+          this.setState({
+            error: true,
+            errorMessage: "Incorrect username or password",
+          });
         });
     }
   };
 
+  googleSignIn = google => {
+    console.log("google", google);
+    axios
+      .post(`${backend}api/user/current`, { google })
+      .then(response => {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data._doc._id);
+        localStorage.setItem("name", response.data._doc.name);
+        localStorage.setItem("accountType", response.data._doc.accountType);
+        localStorage.setItem("accountDeactivated", response.data._doc.accountDeactivated);
+        localStorage.setItem("userImage", response.data._doc.userImages[0].link);
+        this.setState({
+          error: false,
+        });
+        this.props.history.push(`/user`);
+      })
+      .catch(err => {
+        this.setState({
+          error: true,
+          errorMessage: "No Account Found for this Google Account.",
+        });
+      });
+  };
+
+  googleFail = () => {
+    this.setState({ error: true, errorMessage: "Google Sign In Failing, Sorry for the Inconvenience." });
+  };
+
   handleInputChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-    if (this.state.username !== '' && this.state.password !== '') {
+    if (this.state.username !== "" && this.state.password !== "") {
       this.setState({
         error: false,
-        errorMessage: '',
+        errorMessage: "",
       });
     }
   };
@@ -84,7 +112,7 @@ class SignIn extends Component {
           <div className="signin-container">
             <div className="signin-container__header"> Sign In </div>
             <form className="signin-container__form">
-              {this.state.errorMessage === "" ? (
+              {!this.state.error ? (
                 <div className="form__error" />
               ) : (
                 <div className="form__error"> {this.state.errorMessage} </div>
@@ -111,11 +139,11 @@ class SignIn extends Component {
               </button>
             </form>
             <hr />
-            <img
-              alt="Google Logo"
-              src={googleLogo}
-              className="signin-container__google-auth"
-              onClick={this.getLoggedInUser}
+            <GoogleLogin
+              clientId={process.env.googleClientID || process.env.REACT_APP_GOOGLEAUTHCLIENTID}
+              buttonText="Login With Google"
+              onSuccess={this.googleSignIn}
+              onFailure={this.googleFail}
             />
             <div className="signin__new">
               <div className="new__text">New To True Business Reviews?</div>

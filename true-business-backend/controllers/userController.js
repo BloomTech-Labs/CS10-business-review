@@ -6,11 +6,15 @@ function generateToken(user) {
   const options = {
     expiresIn: "1h",
   };
+  console.log("1");
   const payload = { name: user.username };
+  console.log("2");
   secret = process.env.REACT_APP_SECRET;
+  console.log("3");
   if (typeof secret !== "string") {
     secret = process.env.secret;
   }
+  console.log("4");
   return jwt.sign(payload, secret, options);
 }
 
@@ -18,36 +22,35 @@ const bcryptRounds = 10;
 
 const register = (request, response) => {
   const { name, username, password, email, accountType } = request.body;
-  if(!name || !username || !email || !password) {
-    response.status(400).json({errorMessage: "Please provide a name, username, email, and password!"});    
-  }  
-  User.findOne({username})
-  .then(user => {    
-    if(user) {
-      response.status(401).json({ errorMessage: "This username already exists"})
-    }
-    else {
-      const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
-  const token = generateToken({ username });
-  const user = new User({ accountType, name, username, password: encryptedPassword, token, email });
-  user
-    .save()
-    .then(savedUser => {
-      response.status(200).send(savedUser);
-    })
-    .catch(err => {
-      response.status(500).json({
-        errorMessage: "Error occurred while saving: " + err,
-         });
-       });
+  if (!name || !username || !email || !password) {
+    response.status(400).json({ errorMessage: "Please provide a name, username, email, and password!" });
+  }
+  User.findOne({ username })
+    .then(user => {
+      if (user) {
+        response.status(401).json({ errorMessage: "This username already exists" });
+      } else {
+        const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
+        const token = generateToken({ username });
+        const user = new User({ accountType, name, username, password: encryptedPassword, token, email });
+        user
+          .save()
+          .then(savedUser => {
+            response.status(200).send(savedUser);
+          })
+          .catch(err => {
+            response.status(500).json({
+              errorMessage: "Error occurred while saving: " + err,
+            });
+          });
       }
     })
     .catch(err => {
       response.status(500).json({
         errorMessage: "Something went wrong: " + err,
       });
-    });  
-  };
+    });
+};
 
 const login = (request, response) => {
   const { username, password } = request.body;
@@ -75,32 +78,63 @@ const login = (request, response) => {
     });
 };
 
-const getLoggedInUser = (request, response) => {
-  console.log("REQUEST", request);
-  //5bb68069adadaad4b39e0528
-  // Having some issues with the session because of the 
-  // backend and frontend having different ports and the 
-  // cookie is tied to the 3000 port.
-  // const userId = /*"5bb68069adadaad4b39e0528"*/request.session.passport.user;
-  // console.log("Looking for Logged in user:" + userId);
-  //  if(!userId) {
-  //   console.log("No session found");
-  //   response.status(500).json({
-  //     error: "No sessio found.",
-  //   });
-  // }
-  //  User.findById({ _id: userId })
-  //   .then(function(user) {
-  //     console.log(user);
-  //     response.status(200).json(user);
-  //   })
-  //   .catch(function(error) {
-  //     response.status(500).json({
-  //       error: "The user could not be retrieved.",
-  //     });
-  //   });
+const createGoogleUser = (req, res) => {
+  const { name, email, googleId, imageUrl } = req.body.google;
+  console.log("shit?", googleId)
+  User.findOne({ googleId })
+    .then(user => {
+      if (user) {
+        console.log("piss?")
+        res.status(401).json({ errorMessage: "This Google Account is Already Registered." });
+      } else {
+        const token = generateToken({ name,email });
+        console.log("cunt?")
+        const user = new User({
+          name,
+          username: name,
+          token,
+          email,
+          userImages: [
+            {
+              link: imageUrl,
+              width: 0,
+              height: 0,
+            },
+          ],
+        });
+        console.log("EHHHH?")
+        user
+          .save()
+          .then(savedUser => {
+            console.log("PUHLLLLLLLLEEEEEEEZE")
+            res.status(200).send(savedUser);
+          })
+          .catch(err => {
+            res.status(500).json({
+              errorMessage: "Error occurred while saving: " + err,
+            });
+          });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: "Something went wrong: " + err,
+      });
+    });
 };
 
+const getGoogleUser = (request, response) => {
+  User.findOne({ googleId: request.body.google.googleId })
+    .then(userFound => {
+      const token = generateToken({ userFound });
+      response.status(200).send({ ...userFound, token });
+    })
+    .catch(error => {
+      response.status(500).json({
+        error: "The user could not be retrieved.",
+      });
+    });
+};
 
 const getUserById = (request, response) => {
   User.findById({ _id: request.params.id })
@@ -203,5 +237,6 @@ module.exports = {
   updateUser,
   getAllUsers,
   getRandomUser,
-  getLoggedInUser
+  getGoogleUser,
+  createGoogleUser,
 };
