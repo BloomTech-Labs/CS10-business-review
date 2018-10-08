@@ -15,63 +15,65 @@
     margin: 1rem;
     .info__image {
       .containers();
-      min-width: 40vw;
-      max-width: 40vw;
+      min-width: 45vw;
+      max-width: 45vw;
       min-height: 50vh;
       max-height: 50vh;
       .info__landscape {
         .image(@top: 0);
-        min-width: 35vw;
-        max-width: 35vw;
+        min-width: 40vw;
+        max-width: 40vw;
         min-height: 40vh;
         max-height: 40vh;
         margin: 1rem;
       }
     }
     .info__details {
-      min-width: 30vw;
-      max-width: 30vw;
+      min-width: 25vw;
+      max-width: 25vw;
       min-height: 50vh;
       max-height: 50vh;
       .details__title {
         .header();
-        text-align: center;
-        padding: 1rem;
+        padding: 1rem 0;
       }
       .details__address {
-        .container(@flexDirection: row);
+        .container(@flexDirection: row, @justifyContent: flex-start);
         .body();
-        padding: 1rem;
-        text-align: center;
+        padding: 1rem 0;
+        .address__icon {
+          .hidden();
+          text-align: left;
+        }
       }
       .details__detail {
         .container(@justifyContent: space-between);
         .detail__hours {
           .container(@flexDirection: column, @justifyContent: space-between);
           .hours__days {
-            .containers(@flexDirection: row);
+            .containers(@flexDirection: row, @justifyContent: flex-start);
             .hours__icon {
               margin-right: 1rem;
               height: 2rem;
               width: 2rem;
             }
             .hours__text {
+              padding-left: 1rem;
               margin-left: 1rem;
             }
           }
         }
         .detail__contact {
-          .container(@width: 40vw);
+          .containers();
           .contact__phone {
-            .container(@flexDirection: row);
+            .container(@flexDirection: row, @justifyContent: flex-start);
             .phone__number {
               .body();
               padding: 1rem;
             }
           }
           .contact__website {
-            .container(@flexDirection: row);
-            width: 50%;
+            .container(@flexDirection: row, @justifyContent: flex-start);
             .website__text {
               .body();
               padding: 1rem;
@@ -88,55 +90,30 @@
     min-height: 50vh;
     .backAndBorder();
     .shadow();
-    .reviews-container__title {
-      .backAndBorder();
-      .title();
+    .reviews__header {
+      .containers(@flexDirection: row, @justifyContent:space-between);
       margin-bottom: 1rem;
-      color: @textColor;
-      padding: 0.5rem;
-    }
-    .reviews-container__button {
-      .button();
-      .header();
-      width: auto;
-      padding: 0.5rem;
-    }
-    .reviews-container__dropdowns {
-      .container(@flexDirection: row, @justifyContent: space-between);
-      .dropdowns__dropdown {
-        .containers(@flexDirection: row);
-        .dropdown__title {
-          .title();
-        }
-        .dropdown__drop-container {
-          margin-left: 2rem;
-          width: 15rem;
-          .drop-container__button {
+      .reviews-container__dropdowns {
+        .container(@flexDirection: row, @justifyContent: space-between);
+        .dropdowns__dropdown {
+          .containers(@flexDirection: row);
+          width: auto;
+          .dropdown__title {
             .title();
-            width: inherit;
-            color: @textColor;
-          }
-          .drop-container__button:hover {
-            cursor: pointer;
-          }
-          .drop-container__menu {
-            position: absolute;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            width: inherit;
-            .menu__button {
-              .title();
-              width: inherit;
-              border: none;
-              color: @textColor;
-            }
-            .menu__button:hover {
-              filter: brightness(80%);
-              cursor: pointer;
-            }
           }
         }
+      }
+      .reviews-container__title {
+        .backAndBorder();
+        .header();
+        color: @textColor;
+        text-align: left;
+      }
+      .reviews-container__button {
+        .button();
+        .title();
+        width: auto;
+        padding: 0.5rem;
       }
     }
     .reviews-container__reviews {
@@ -170,7 +147,7 @@
         flex-wrap: wrap;
         justify-content: space-around;
         flex-grow: 3;
-        margin: 2rem 1rem 0 1rem;
+        margin: 0 1rem;
         .review__info {
           .container(@justifyContent: space-between);
           .backAndBorder();
@@ -440,7 +417,9 @@
 .MuiButton-root-1 {
   color: @textColor !important;
   width: auto !important;
+  min-width: 10vw !important;
   max-width: 15vw !important;
+  font-size: 1.2rem !important;
 }
 
 a {

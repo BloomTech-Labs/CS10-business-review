@@ -4,6 +4,7 @@ import NavBar from "./NavBar.js";
 import axios from "axios";
 import StarRatings from "react-star-ratings";
 import Modal from "react-modal";
+import { Button, Menu, MenuItem } from "@material-ui/core";
 
 import { Elements, StripeProvider } from "react-stripe-elements";
 import StripePayment from "./StripePayment";
@@ -52,17 +53,15 @@ class User extends Component {
     passwordErrorLength: false,
     passwordErrorUpdate: false,
     error: false,
-    filter: ["No Filter", "4 Stars or Higher", "3 Stars or Higher", "2 Stars or Higher"],
-    sort: ["Date Descending", "Date Ascending", "Rating Descending", "Rating Ascending"],
     filterBy: "No Filter",
-    sortBy: "Date Descending",
-    showFilterBy: false,
-    showSortBy: false,
+    sortBy: "No Sorting",
+    anchorElFilter: null,
+    anchorElSort: null,
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.getReviews(0);
+    this.getReviews(0, this.state.sortBy, this.state.filterBy);
     const id = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
     const headers = { headers: { authorization: token } };
@@ -115,9 +114,13 @@ class User extends Component {
       });
   };
 
-  getReviews = currentPage => {
+  getReviews = (currentPage,sort,filter) => {
     axios
-      .get(`${backend}api/review/getReviewsByReviewerId/${localStorage.getItem("userId")}/${currentPage}`)
+      .get(
+        `${backend}api/review/getReviewsByReviewerId/${localStorage.getItem(
+          "userId",
+        )}/${currentPage}/${filter}/${sort}}`,
+      )
       .then(response => {
         this.setState({
           reviews: response.data.reviews,
@@ -297,6 +300,7 @@ class User extends Component {
 
   updatePage = currentPage => {
     this.setState({ currentPage });
+    this.getReviews(currentPage, this.state.sortBy, this.state.filterBy);
   };
 
   openModal = (event, info) => {
@@ -307,6 +311,18 @@ class User extends Component {
     this.setState({ modalIsOpen: false });
   };
 
+  sort = sortBy => {
+    this.handleClose("anchorElSort");
+    this.setState({ sortBy, currentPage: 0 });
+    this.getReviews(0, sortBy, this.state.filterBy);
+  };
+
+  filter = filterBy => {
+    this.handleClose("anchorElFilter");
+    this.setState({ filterBy, currentPage: 0 });
+    this.getReviews(0, this.state.sortBy, filterBy);
+  };
+
   loadContent = () => {
     switch (this.state.current) {
       case "My Reviews":
@@ -315,41 +331,48 @@ class User extends Component {
             <div className="content__reviews-container">
               <div className="reviews-container__dropdowns">
                 <div className="dropdowns__dropdown">
-                  <div className="dropdown__drop-container">
-                    Filter
-                    <button className="drop-container__button" name="showFilterBy" onClick={this.toggleDropDown}>
-                      {this.state.filterBy}
-                    </button>
-                    {this.state.showFilterBy ? (
-                      <div className="drop-container__menu">
-                        {this.state.filter.map(type => {
-                          return (
-                            <button key={type} onClick={this.toggleFilterChoice} name={type} className="menu__button">
-                              {type}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    ) : null}
-                  </div>
+                  <div className="dropdown__title"> Filter By: </div>
+                  <Button
+                    aria-owns={this.state.anchorElFilter ? "filter" : null}
+                    aria-haspopup="true"
+                    onClick={this.handleClick.bind(this, "anchorElFilter")}>
+                    {this.state.filterBy}
+                  </Button>
+                  <Menu
+                    id="filter"
+                    style={{ top: "3rem", left: "1rem" }}
+                    anchorEl={this.state.anchorElFilter}
+                    open={Boolean(this.state.anchorElFilter)}
+                    onClose={this.handleClose}>
+                    <MenuItem onClick={this.filter.bind(this, "No Filter")}>No Filter</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "5 Stars")}>5 Stars</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "4 Stars")}>4 Stars</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "3 Stars")}>3 Stars</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "2 Stars")}>2 Stars</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "1 Stars")}>1 Stars</MenuItem>
+                  </Menu>
                 </div>
                 <div className="dropdowns__dropdown">
+                  <div className="dropdown__title"> Sort By: </div>
                   <div className="dropdown__drop-container">
-                    Sort
-                    <button className="drop-container__button" name="showSortBy" onClick={this.toggleDropDown}>
+                    <Button
+                      aria-owns={this.state.anchorElSort ? "sort" : null}
+                      aria-haspopup="true"
+                      onClick={this.handleClick.bind(this, "anchorElSort")}>
                       {this.state.sortBy}
-                    </button>
-                    {this.state.showSortBy ? (
-                      <div className="drop-container__menu">
-                        {this.state.sort.map(type => {
-                          return (
-                            <button key={type} onClick={this.toggleSortChoice} name={type} className="menu__button">
-                              {type}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    ) : null}
+                    </Button>
+                    <Menu
+                      id="sort"
+                      style={{ top: "3rem", left: "1rem" }}
+                      anchorEl={this.state.anchorElSort}
+                      open={Boolean(this.state.anchorElSort)}
+                      onClose={this.handleClose}>
+                      <MenuItem onClick={this.sort.bind(this, "No Sorting")}>No Sorting</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>Rating Ascending</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Rating Descending")}>Rating Descending</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Date Ascending")}>Date Ascending</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Date Descending")}>Date Descending</MenuItem>
+                    </Menu>
                   </div>
                 </div>
                 {this.state.total > 8 ? this.createPagination() : null}
@@ -426,18 +449,23 @@ class User extends Component {
                           </button>
                         ) : null}
                       </div>
-                      <img
-                        alt={this.state.modalInfo.newMongoId.name}
-                        className="image__landscape"
-                        src={this.state.modalInfo.photos[0].link}
-                      />
+                      <a href={this.state.modalInfo.photos[0].link} target="_blank">
+                        <img
+                          alt={this.state.modalInfo.reviewer.name}
+                          className={
+                            this.state.modalInfo.photos[0].width > this.state.modalInfo.photos[0].height
+                              ? "image__landscape"
+                              : "image__portrait"
+                          }
+                          src={this.state.modalInfo.photos[0].link}
+                        />
+                      </a>
                       <div className="image__buttons">
                         <button className="image__button" onClick={this.closeModal}>
                           <i className="far fa-window-close" />
                         </button>
                       </div>
                     </div>
-                    
                   </div>
                   <div className="modal__body">
                     <div className="body__stars">

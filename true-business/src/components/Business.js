@@ -35,8 +35,6 @@ class Business extends Component {
   state = {
     anchorElFilter: null,
     anchorElSort: null,
-    dropdownOpenFilter: false,
-    dropdownOpenSort: false,
     filterBy: "No Filter",
     sortBy: "No Sorting",
     businessID: null,
@@ -263,11 +261,7 @@ class Business extends Component {
                           let flag = dayIndex === dayNum ? true : false;
                           return (
                             <div style={flag ? { fontWeight: "bolder" } : null} key={day} className="hours__days">
-                              <img
-                                className="hours__icon"
-                                alt={day}
-                                src={this.state.dayIcons[i]}
-                              />
+                              <img className="hours__icon" alt={day} src={this.state.dayIcons[i]} />
                               <div className="hours__text">{day.replace(/[A-z]*: /g, "")}</div>
                             </div>
                           );
@@ -289,17 +283,17 @@ class Business extends Component {
                       </div>
                     </div>
                     <div className="contact__website">
-                      {this.props.business.website ? (
-                        <div>
-                          <i className="fab fa-chrome" />
-                          <a className="website__text" href={this.props.business.website}>
+                      <i className="fas fa-desktop" />
+                      <div className="website__text">
+                        {this.props.business.website ? (
+                          <a href={this.props.business.website}>
                             {this.props.business.name}
                             's Website
                           </a>
-                        </div>
-                      ) : (
-                        "No Website Listed"
-                      )}
+                        ) : (
+                          "No Phone Listed"
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -307,8 +301,59 @@ class Business extends Component {
             </div>
 
             <div className="business__reviews-container">
-              <div className="reviews-container__title">
-                Reviews
+              <div className="reviews__header">
+                <div className="reviews-container__dropdowns">
+                  <div className="dropdowns__dropdown">
+                    <div className="dropdown__title"> Filter: </div>
+                    <Button
+                      aria-owns={this.state.anchorElFilter ? "filter" : null}
+                      aria-haspopup="true"
+                      onClick={this.handleClick.bind(this, "anchorElFilter")}>
+                      {this.state.filterBy}
+                    </Button>
+                    <Menu
+                      id="filter"
+                      style={{ top: "3rem", left: "1rem" }}
+                      anchorEl={this.state.anchorElFilter}
+                      open={Boolean(this.state.anchorElFilter)}
+                      onClose={this.handleClose}>
+                      <MenuItem onClick={this.filter.bind(this, "No Filter")}>No Filter</MenuItem>
+                      <MenuItem onClick={this.filter.bind(this, "5 Stars")}>5 Stars</MenuItem>
+                      <MenuItem onClick={this.filter.bind(this, "4 Stars")}>4 Stars</MenuItem>
+                      <MenuItem onClick={this.filter.bind(this, "3 Stars")}>3 Stars</MenuItem>
+                      <MenuItem onClick={this.filter.bind(this, "2 Stars")}>2 Stars</MenuItem>
+                      <MenuItem onClick={this.filter.bind(this, "1 Stars")}>1 Stars</MenuItem>
+                    </Menu>
+                  </div>
+                  {localStorage.getItem("token") && localStorage.getItem("userId") ? (
+                    <button id="NewReview" className="reviews-container__button" onClick={this.displayNewReview}>
+                      New Review
+                    </button>
+                  ) : null}
+                  <div className="dropdowns__dropdown">
+                    <div className="dropdown__title"> Sort: </div>
+                    <div className="dropdown__drop-container">
+                      <Button
+                        aria-owns={this.state.anchorElSort ? "sort" : null}
+                        aria-haspopup="true"
+                        onClick={this.handleClick.bind(this, "anchorElSort")}>
+                        {this.state.sortBy}
+                      </Button>
+                      <Menu
+                        id="sort"
+                        style={{ top: "3rem", left: "1rem" }}
+                        anchorEl={this.state.anchorElSort}
+                        open={Boolean(this.state.anchorElSort)}
+                        onClose={this.handleClose}>
+                        <MenuItem onClick={this.sort.bind(this, "No Sorting")}>No Sorting</MenuItem>
+                        <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>Rating Ascending</MenuItem>
+                        <MenuItem onClick={this.sort.bind(this, "Rating Descending")}>Rating Descending</MenuItem>
+                        <MenuItem onClick={this.sort.bind(this, "Date Ascending")}>Date Ascending</MenuItem>
+                        <MenuItem onClick={this.sort.bind(this, "Date Descending")}>Date Descending</MenuItem>
+                      </Menu>
+                    </div>
+                  </div>
+                </div>
                 {/* I couldn't base this on this.state.open (i.e. I couldn't figure out the proper
                 life cycle hook to use to make it work), so while this may be poor practice, for the 
                 time being, I'm going with it. */}
@@ -320,58 +365,7 @@ class Business extends Component {
                     showModal={this.showModal}
                   />
                 ) : null}
-              </div>
-              {localStorage.getItem("token") && localStorage.getItem("userId") ? (
-                <button id="NewReview" className="reviews-container__button" onClick={this.displayNewReview}>
-                  New Review
-                </button>
-              ) : null}
-              <div className="reviews-container__dropdowns">
-                <div className="dropdowns__dropdown">
-                  <div className="dropdown__title"> Filter By: </div>
-                  <Button
-                    aria-owns={this.state.anchorElFilter ? "filter" : null}
-                    aria-haspopup="true"
-                    onClick={this.handleClick.bind(this, "anchorElFilter")}>
-                    {this.state.filterBy}
-                  </Button>
-                  <Menu
-                    id="filter"
-                    style={{ top: "3rem", left: "1rem" }}
-                    anchorEl={this.state.anchorElFilter}
-                    open={Boolean(this.state.anchorElFilter)}
-                    onClose={this.handleClose}>
-                    <MenuItem onClick={this.filter.bind(this, "No Filter")}>No Filter</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "5 Stars")}>5 Stars</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "4 Stars")}>4 Stars</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "3 Stars")}>3 Stars</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "2 Stars")}>2 Stars</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "1 Stars")}>1 Stars</MenuItem>
-                  </Menu>
-                </div>
-                <div className="dropdowns__dropdown">
-                  <div className="dropdown__title"> Sort By: </div>
-                  <div className="dropdown__drop-container">
-                    <Button
-                      aria-owns={this.state.anchorElSort ? "sort" : null}
-                      aria-haspopup="true"
-                      onClick={this.handleClick.bind(this, "anchorElSort")}>
-                      {this.state.sortBy}
-                    </Button>
-                    <Menu
-                      id="sort"
-                      style={{ top: "3rem", left: "1rem" }}
-                      anchorEl={this.state.anchorElSort}
-                      open={Boolean(this.state.anchorElSort)}
-                      onClose={this.handleClose}>
-                      <MenuItem onClick={this.sort.bind(this, "No Sorting")}>No Sorting</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>Rating Ascending</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Rating Descending")}>Rating Descending</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Date Ascending")}>Date Ascending</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Date Descending")}>Date Descending</MenuItem>
-                    </Menu>
-                  </div>
-                </div>
+                {/* <div className="reviews-container__title">Reviews</div> */}
               </div>
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
@@ -473,18 +467,23 @@ class Business extends Component {
                           </button>
                         ) : null}
                       </div>
-                      <img
-                        alt={this.state.modalInfo.newMongoId.name}
-                        className="image__landscape"
-                        src={this.state.modalInfo.photos[0].link}
-                      />
+                      <a href={this.state.modalInfo.photos[0].link} target="_blank">
+                        <img
+                          alt={this.state.modalInfo.reviewer.name}
+                          className={
+                            this.state.modalInfo.photos[0].width > this.state.modalInfo.photos[0].height
+                              ? "image__landscape"
+                              : "image__portrait"
+                          }
+                          src={this.state.modalInfo.photos[0].link}
+                        />
+                      </a>
                       <div className="image__buttons">
                         <button className="image__button" onClick={this.closeModal}>
                           <i className="far fa-window-close" />
                         </button>
                       </div>
                     </div>
-                    
                   </div>
                   <div className="modal__body">
                     <div className="body__stars">

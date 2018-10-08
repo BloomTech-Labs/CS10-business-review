@@ -151,83 +151,88 @@ class LandingPage extends Component {
             </div>
           </div>
           <Modal
-              shouldCloseOnOverlayClick={false}
-              isOpen={this.state.modalIsOpen}
-              onRequestClose={this.closeModal}
-              style={modalStyles}
-              contentLabel="Review Modal">
-              {this.state.modalIsOpen ? (
-                <div className="modal">
-                  <div className="modal__header">
-                    <div className="header__image">
-                      {/* Update reviews / user with likes */}
-                      <div className="image__buttons">
-                        {!this.state.unliked ? (
-                          <button className="image__button" onClick={this.updateLike}>
-                            {this.state.liked ? (
-                              <div>
-                                <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-up" />
-                                <i className="fas fa-check" />
-                              </div>
-                            ) : (
-                              <i className="fas fa-thumbs-up" />
-                            )}
-                          </button>
-                        ) : null}
-                        {!this.state.liked ? (
-                          <button className="image__button" onClick={this.updateUnlike}>
-                            {this.state.unliked ? (
-                              <div>
-                                <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-down" />
-                                <i className="fas fa-check" />
-                              </div>
-                            ) : (
-                              <i className="fas fa-thumbs-down" />
-                            )}
-                          </button>
-                        ) : null}
-                      </div>
+            shouldCloseOnOverlayClick={false}
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeModal}
+            style={modalStyles}
+            contentLabel="Review Modal">
+            {this.state.modalIsOpen ? (
+              <div className="modal">
+                <div className="modal__header">
+                  <div className="header__image">
+                    {/* Update reviews / user with likes */}
+                    <div className="image__buttons">
+                      {!this.state.unliked ? (
+                        <button className="image__button" onClick={this.updateLike}>
+                          {this.state.liked ? (
+                            <div>
+                              <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-up" />
+                              <i className="fas fa-check" />
+                            </div>
+                          ) : (
+                            <i className="fas fa-thumbs-up" />
+                          )}
+                        </button>
+                      ) : null}
+                      {!this.state.liked ? (
+                        <button className="image__button" onClick={this.updateUnlike}>
+                          {this.state.unliked ? (
+                            <div>
+                              <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-down" />
+                              <i className="fas fa-check" />
+                            </div>
+                          ) : (
+                            <i className="fas fa-thumbs-down" />
+                          )}
+                        </button>
+                      ) : null}
+                    </div>
+                    <a href={this.state.modalInfo.photos[0].link} target="_blank">
                       <img
-                        alt={this.state.modalInfo.newMongoId.name}
-                        className="image__landscape"
+                        alt={this.state.modalInfo.reviewer.name}
+                        className={
+                          this.state.modalInfo.photos[0].width > this.state.modalInfo.photos[0].height
+                            ? "image__landscape"
+                            : "image__portrait"
+                        }
                         src={this.state.modalInfo.photos[0].link}
                       />
-                      <div className="image__buttons">
-                        <button className="image__button" onClick={this.closeModal}>
-                          <i className="far fa-window-close" />
-                        </button>
-                      </div>
-                    </div>
-                    
-                  </div>
-                  <div className="modal__body">
-                    <div className="body__stars">
-                      <div className="body__business"> {this.state.modalInfo.newMongoId.name}</div>
-                      <StarRatings
-                        starDimension="20px"
-                        starSpacing="5px"
-                        rating={this.state.modalInfo.stars}
-                        starRatedColor="gold"
-                        starEmptyColor="grey"
-                        numberOfStars={5}
-                        name="rating"
-                      />
-                      <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
-                      <div>
-                        <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
-                        {this.state.modalInfo.reviewer.username}
-                      </div>
-                    </div>
-                    <div className="body__title">
-                      {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
-                    </div>
-                    <div className="body__review">
-                      {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                    </a>
+                    <div className="image__buttons">
+                      <button className="image__button" onClick={this.closeModal}>
+                        <i className="far fa-window-close" />
+                      </button>
                     </div>
                   </div>
                 </div>
-              ) : null}
-            </Modal>
+                <div className="modal__body">
+                  <div className="body__stars">
+                    <div className="body__business"> {this.state.modalInfo.newMongoId.name}</div>
+                    <StarRatings
+                      starDimension="20px"
+                      starSpacing="5px"
+                      rating={this.state.modalInfo.stars}
+                      starRatedColor="gold"
+                      starEmptyColor="grey"
+                      numberOfStars={5}
+                      name="rating"
+                    />
+                    <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
+                    <div>
+                      <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
+                      {this.state.modalInfo.reviewer.username}
+                    </div>
+                  </div>
+                  <div className="body__title">
+                    {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
+                  </div>
+                  <div className="body__review">
+                    {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                  </div>
+                </div>
+              </div>
+            ) : null}
+          </Modal>
         </div>
       </div>
     );
