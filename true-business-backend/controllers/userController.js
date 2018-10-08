@@ -76,7 +76,7 @@ const login = (request, response) => {
 
 const createGoogleUser = (req, res) => {
   const { name, email, googleId, imageUrl } = req.body.google;
-  User.findOne({ googleId })
+  User.findOne({ googleId: req.body.google.googleId })
     .then(user => {
       if (user) {
         res.status(401).json({ errorMessage: "This Google Account is Already Registered." });
@@ -87,6 +87,7 @@ const createGoogleUser = (req, res) => {
           username: name,
           token,
           email,
+          googleId,
           userImages: [
             {
               link: imageUrl,

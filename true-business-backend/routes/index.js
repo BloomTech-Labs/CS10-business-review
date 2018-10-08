@@ -130,6 +130,11 @@ router.delete("/api/review/delete", (req, res) => {
   ReviewControler.deleteReview(req, res);
 });
 
+router.put("/api/reviews/updateLikes", (req,res) => {
+  console.log("WTF")
+  ReviewControler.updateLikes(req,res);
+})
+
 router.get("/api/review/getReviewsByReviewerId/:id/:currentPage/:filter/:sort", (req, res) => {
   ReviewControler.getReviewsByReviewerId(req, res);
 });

@@ -2,11 +2,18 @@ import React, { Component } from "react";
 import Modal from "react-modal";
 import BusinessThumbnail from "./BusinessThumbnail";
 import StarRatings from "react-star-ratings";
+import axios from "axios";
 
 import "../css/LandingPage.css";
 import "../css/GeneralStyles.css";
 
 import NavBar from "./NavBar";
+
+let backend = process.env.REACT_APP_LOCAL_BACKEND;
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
+  backend = heroku;
+}
 
 let modalStyles = {
   content: {
@@ -34,6 +41,8 @@ class LandingPage extends Component {
       modalInfo: null,
       liked: false,
       unliked: false,
+      likeError: false,
+      likeErrorMessage: "",
     };
 
     this.openModal = this.openModal.bind(this);
@@ -52,12 +61,24 @@ class LandingPage extends Component {
     this.setState({ modalIsOpen: false, liked: false });
   }
 
-  updateLike = () => {
-    this.setState({ liked: true });
-  };
-
-  updateUnlike = () => {
-    this.setState({ unliked: true });
+  updateLikes = (info, bool, event) => {
+    let reviewerId = info.reviewer._id;
+    let reviewId = info._id;
+    let userId = localStorage.getItem("userId");
+    if (localStorage.getItem("token") && userId) {
+      axios
+        .put(`${backend}api/reviews/updateLikes`, { reviewerId, reviewId, userId, bool })
+        .then(() => {
+          bool
+            ? this.setState({ liked: true, likeError: false, likeErrorMessage: "" })
+            : this.setState({ unliked: true, likeError: false, likeErrorMessage: "" });
+        })
+        .catch(err => {
+          this.setState({ likeError: true, likeErrorMessage: err.response.data.errorMessage });
+        });
+    } else {
+      this.setState({ likeError: true, likeErrorMessage: "Sign In to Like/Dislike" });
+    }
   };
 
   render() {
@@ -163,7 +184,9 @@ class LandingPage extends Component {
                     {/* Update reviews / user with likes */}
                     <div className="image__buttons">
                       {!this.state.unliked ? (
-                        <button className="image__button" onClick={this.updateLike}>
+                        <button
+                          className="image__button"
+                          onClick={this.updateLikes.bind(this, this.state.modalInfo, true)}>
                           {this.state.liked ? (
                             <div>
                               <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-up" />
@@ -175,7 +198,9 @@ class LandingPage extends Component {
                         </button>
                       ) : null}
                       {!this.state.liked ? (
-                        <button className="image__button" onClick={this.updateUnlike}>
+                        <button
+                          className="image__button"
+                          onClick={this.updateLikes.bind(this, this.state.modalInfo, false)}>
                           {this.state.unliked ? (
                             <div>
                               <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-down" />
@@ -185,6 +210,9 @@ class LandingPage extends Component {
                             <i className="fas fa-thumbs-down" />
                           )}
                         </button>
+                      ) : null}
+                      {this.state.likeError ? (
+                        <div style={{ color: "red", fontSize: ".8rem" }}>{this.state.likeErrorMessage}</div>
                       ) : null}
                     </div>
                     <a href={this.state.modalInfo.photos[0].link} target="_blank">
@@ -197,6 +225,7 @@ class LandingPage extends Component {
                         }
                         src={this.state.modalInfo.photos[0].link}
                       />
+                      {console.log("WHAT THE FUCK", this.state.modalInfo.photos[0].width > this.state.modalInfo.photos[0].height)}
                     </a>
                     <div className="image__buttons">
                       <button className="image__button" onClick={this.closeModal}>

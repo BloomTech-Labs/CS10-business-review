@@ -41,7 +41,6 @@ const reviewSchema = new mongoose.Schema({
     required: true,
     default: Date.now(),
   },
-
   photos: {
     type: Array,
     default: [
@@ -57,6 +56,12 @@ const reviewSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
+  likes: {
+    type: Array,
+  },
+  unlikes: {
+    type: Array,
+  }
 });
 
 let reviewModel = mongoose.model("Review", reviewSchema);

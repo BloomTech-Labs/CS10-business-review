@@ -1,4 +1,5 @@
 const Review = require("../models/review");
+const User = require("../models/user");
 
 const createReview = (req, res) => {
   // Todo:
@@ -128,6 +129,81 @@ const getReviewsByBusinessId = (req, res) => {
     });
 };
 
+const updateLikes = (req, res) => {
+  // reviewerId --- person whose review was liked/unliked
+  // reviewId --- review that was liked / unliked
+  // userId --- person who did the liking / unliking
+  // bool --- true === liked, false === unliked
+  let { reviewerId, reviewId, userId, bool } = req.body;
+  console.log("REVIEWER", reviewerId);
+  console.log("REVIEW", reviewId);
+  console.log("bool", bool);
+  console.log("userid", userId);
+  console.log(
+    "*************************************************************************************************************************",
+  );
+  let user = new Promise(resolve => {
+    return resolve(
+      User.findById({ _id: reviewerId })
+        .then(found => {
+          bool ? (found.numberOfLikes += 1) : (found.numberOfLikes -= 1);
+          User.findByIdAndUpdate({ _id: reviewerId }, found).then(updated => {
+            return updated;
+          });
+        })
+        .catch(err => {
+          res.status(500).json({ err });
+        }),
+    );
+  });
+  let review = new Promise(resolve => {
+    return resolve(
+      Review.findById({ _id: reviewId })
+        .then(found => {
+          if (bool) {
+            console.log("FOUND LIKES", found.likes);
+            console.log("USERID", userId);
+            found.likes.forEach(like => {
+              if (like === userId) {
+                console.log("Shouldn't see this first time");
+                return res.status(401).json({ errorMessage: "User Already Liked/Unliked" });
+              }
+            });
+            found.numberOfLikes += 1;
+            found.likes.push(userId);
+          } else {
+            found.unlikes.forEach(like => {
+              if (like.reviewer === userId) {
+                console.log("Shouldn't see this first time");
+                return res.status(401).json({ errorMessage: "User Already Liked/Unliked" });
+              }
+            });
+            found.numberOfLikes -= 1;
+            found.unlikes.push(userId);
+          }
+          console.log("FOUND", found);
+          Review.findByIdAndUpdate({ _id: reviewerId }, found)
+            .then(updated => {
+              return updated;
+            })
+            .catch(err => {
+              res.status(500).json({ err });
+            });
+        })
+        .catch(err => {
+          res.status(500).json({ err });
+        }),
+    );
+  });
+  Promise.all([user, review])
+    .then(response => {
+      res.status(200).json("Updated");
+    })
+    .catch(err => {
+      res.status(500).json({ err });
+    });
+};
+
 // For Landing Page
 const getAllReviews = (req, res) => {
   Review.find({})
@@ -162,4 +238,5 @@ module.exports = {
   getAllReviews,
   getReviewsByBusinessId,
   getReviewsByReviewerId,
+  updateLikes,
 };
