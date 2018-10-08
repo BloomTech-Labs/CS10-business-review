@@ -6,15 +6,11 @@ function generateToken(user) {
   const options = {
     expiresIn: "1h",
   };
-  console.log("1");
   const payload = { name: user.username };
-  console.log("2");
   secret = process.env.REACT_APP_SECRET;
-  console.log("3");
   if (typeof secret !== "string") {
     secret = process.env.secret;
   }
-  console.log("4");
   return jwt.sign(payload, secret, options);
 }
 
@@ -80,15 +76,12 @@ const login = (request, response) => {
 
 const createGoogleUser = (req, res) => {
   const { name, email, googleId, imageUrl } = req.body.google;
-  console.log("shit?", googleId)
   User.findOne({ googleId })
     .then(user => {
       if (user) {
-        console.log("piss?")
         res.status(401).json({ errorMessage: "This Google Account is Already Registered." });
       } else {
         const token = generateToken({ name,email });
-        console.log("cunt?")
         const user = new User({
           name,
           username: name,
@@ -102,11 +95,9 @@ const createGoogleUser = (req, res) => {
             },
           ],
         });
-        console.log("EHHHH?")
         user
           .save()
           .then(savedUser => {
-            console.log("PUHLLLLLLLLEEEEEEEZE")
             res.status(200).send(savedUser);
           })
           .catch(err => {

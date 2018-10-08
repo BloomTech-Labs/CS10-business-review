@@ -20,7 +20,6 @@ const createReview = (req, res) => {
 // For User Component
 const getReviewsByReviewerId = (req, res) => {
   let { filter, sort } = req.params;
-  console.log("SORT", sort);
   switch (filter) {
     case "5 Stars":
       filterNum = 5;

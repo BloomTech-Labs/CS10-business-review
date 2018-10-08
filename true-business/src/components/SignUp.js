@@ -81,7 +81,6 @@ class SignUp extends Component {
     axios
       .post(`${backend}api/user/registerGoogle`, { google: google.profileObj })
       .then(response => {
-        console.log("FUCK ME", response)
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data._id);
         localStorage.setItem("name", response.data.name);

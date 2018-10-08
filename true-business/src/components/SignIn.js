@@ -60,7 +60,6 @@ class SignIn extends Component {
   };
 
   googleSignIn = google => {
-    console.log("google", google);
     axios
       .post(`${backend}api/user/current`, { google })
       .then(response => {
