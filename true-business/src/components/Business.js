@@ -38,7 +38,7 @@ class Business extends Component {
     dropdownOpenFilter: false,
     dropdownOpenSort: false,
     filterBy: "No Filter",
-    sortBy: "Date Descending",
+    sortBy: "No Sorting",
     businessID: null,
     newBusinessId: null,
     reviews: [],
@@ -336,8 +336,7 @@ class Business extends Component {
                       anchorEl={this.state.anchorElSort}
                       open={Boolean(this.state.anchorElSort)}
                       onClose={this.handleClose}>
-                      <MenuItem onClick={this.sort.bind(this, "Date Descending")}>Date Descending</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Date Ascending")}>Date Ascending</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>No Sorting</MenuItem>
                       <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>Rating Ascending</MenuItem>
                       <MenuItem onClick={this.sort.bind(this, "Rating Descending")}>Rating Descending</MenuItem>
                     </Menu>

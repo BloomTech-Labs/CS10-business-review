@@ -39,6 +39,7 @@ class SearchResults extends Component {
           {this.props.searchResults ? (
             <div className="search__results">
               {this.props.searchResults.map((result, i) => {
+                console.log("result", result);
                 if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
                   return (
                     <div

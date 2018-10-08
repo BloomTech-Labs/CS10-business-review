@@ -66,36 +66,11 @@ const getReviewsByBusinessId = (req, res) => {
     .then(total => {
       Review.find({ [search]: req.params.id })
         .find(filterNum > 0 ? { stars: filterNum } : {})
+        .sort(sort === "Rating Ascending" ? { stars: 1 } : { stars: -1 })
         .populate("reviewer newMongoId")
         .skip(12 * req.params.currentPage)
         .limit(12)
         .then(reviews => {
-          switch (sort) {
-            case "Date Ascending":
-              reviews = reviews.sort((a, b) => {
-                console.log("A ", a.createdOn, "B", b.createdOn);
-                console.log(a.createdOn.getTime() < b.createdOn.getTime());
-                return a.createdOn.getTime() > b.createdOn.getTime();
-              });
-              break;
-            case "Rating Descending":
-              reviews = reviews.sort((a, b) => {
-                return a.stars < b.stars;
-              });
-              break;
-            case "Rating Ascending":
-              reviews = reviews.sort((a, b) => {
-                return a.stars > b.stars;
-              });
-              break;
-            // Date Descending
-            default:
-              reviews = reviews.sort((a, b) => {
-                console.log("A ", a.createdOn, "B", b.createdOn);
-                console.log(a.createdOn.getTime() < b.createdOn.getTime());
-                return a.createdOn.getTime() < b.createdOn.getTime();
-              });
-          }
           res.status(200).json({ reviews, total });
         });
     })
