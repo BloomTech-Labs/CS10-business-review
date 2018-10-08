@@ -1,4 +1,5 @@
 .new-review .new-review__modal {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,7 +11,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   text-align: center;
   color: #05386b;
 }
@@ -20,6 +20,7 @@
   height: auto;
 }
 .new-review .new-review__modal .modal__body {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,10 +32,10 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .new-review .new-review__modal .modal__body .body__drop {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -46,10 +47,10 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .new-review .new-review__modal .modal__body .body__drop .drop__container {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -61,7 +62,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   max-width: 200px;
   min-height: 200px;
@@ -74,6 +74,7 @@
   cursor: pointer;
 }
 .new-review .new-review__modal .modal__body .body__drop .drop__image--post {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,12 +86,12 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-width: 200px;
   min-height: 200px;
 }
 .new-review .new-review__modal .modal__body .body__title {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -101,7 +102,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   font-size: 1.2rem;
   height: 20%;
@@ -117,6 +117,7 @@
   width: 60%;
 }
 .new-review .new-review__modal .modal__body .body__review {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -128,7 +129,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   margin: 1rem;
 }
@@ -145,6 +145,7 @@
   padding: 0.5rem;
 }
 .new-review .new-review__modal .modal__footer {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -156,7 +157,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .new-review .new-review__modal .modal__footer .footer__buttons .buttons__button {

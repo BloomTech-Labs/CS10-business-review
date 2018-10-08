@@ -1,4 +1,5 @@
 .business {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,10 +11,10 @@
   line-height: 1;
   padding: 15vh 0 5vh 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .business .business__info {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -25,13 +26,12 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-width: 70vw;
   max-width: 70vw;
   min-height: 50vh;
   max-height: 50vh;
-  box-shadow: 0px 0px 40px 0px #6b6b6b;
+  box-shadow: 0px 0px 50px 0px #6b6b6b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
@@ -39,6 +39,7 @@
   margin: 1rem;
 }
 .business .business__info .info__image {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,7 +47,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -93,7 +95,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   font-size: 1rem;
   padding: 1rem 0;
@@ -107,6 +108,7 @@
   text-align: left;
 }
 .business .business__info .info__details .details__detail {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -118,10 +120,10 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .business .business__info .info__details .details__detail .detail__hours {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -133,10 +135,10 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .business .business__info .info__details .details__detail .detail__hours .hours__days {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -144,7 +146,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -159,6 +162,7 @@
   margin-left: 1rem;
 }
 .business .business__info .info__details .details__detail .detail__contact {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -166,12 +170,14 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__phone {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -183,7 +189,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__phone .phone__number {
@@ -191,6 +196,7 @@
   padding: 1rem;
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__website {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -202,7 +208,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__website .website__text {
@@ -210,6 +215,7 @@
   padding: 1rem;
 }
 .business .business__reviews-container {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -221,7 +227,6 @@
   line-height: 1;
   padding: 1rem 1rem 0 1rem;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-width: 70vw;
   max-width: 70vw;
@@ -229,23 +234,10 @@
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
-  box-shadow: 0px 0px 40px 0px #6b6b6b;
+  box-shadow: 0px 0px 50px 0px #6b6b6b;
 }
 .business .business__reviews-container .reviews__header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
-  padding: 0;
-  margin: 0;
-  color: #05386b;
-  margin-bottom: 1rem;
-}
-.business .business__reviews-container .reviews__header .reviews-container__dropdowns {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -257,10 +249,26 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
+  color: #05386b;
+  margin-bottom: 1rem;
+}
+.business .business__reviews-container .reviews__header .reviews-container__dropdowns {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
   color: #05386b;
 }
 .business .business__reviews-container .reviews__header .reviews-container__dropdowns .dropdowns__dropdown {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -268,7 +276,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -305,6 +314,7 @@
   font-weight: bolder;
 }
 .business .business__reviews-container .reviews-container__reviews {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -316,12 +326,12 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-height: 40vh;
   flex: 1;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews--no-results {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -333,7 +343,6 @@
   line-height: 1;
   padding: 15vh 0 5vh 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-height: 40vh;
 }
@@ -346,6 +355,7 @@
   margin: 1rem;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews--no-results .search__no-results {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -357,7 +367,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   font-size: 1.5rem;
   padding: 0.5rem;
@@ -381,6 +390,7 @@
   margin: 0 1rem;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -392,11 +402,10 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
-  box-shadow: 0px 0px 40px 0px #6b6b6b;
+  box-shadow: 0px 0px 50px 0px #6b6b6b;
   min-height: 30vh;
   max-height: 30vh;
   min-width: 20vw;
@@ -413,6 +422,7 @@
   opacity: 1;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -420,7 +430,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -428,6 +439,7 @@
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .header__data {
   min-width: 10vw;
   max-width: 10vw;
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -435,19 +447,22 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .header__data .data__text {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   height: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -494,6 +509,7 @@
   cursor: pointer;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -501,19 +517,21 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__reviewer {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   height: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -606,6 +624,7 @@
   flex: auto;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -617,7 +636,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
@@ -628,6 +646,7 @@
   margin: 0 0 1rem 0;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__pages {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -639,7 +658,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   max-width: 70%;
 }
@@ -673,6 +691,7 @@
   cursor: default;
 }
 .modal .modal__header {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -680,13 +699,15 @@
   height: 40vh;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0 0 0.3rem 0;
   color: #05386b;
   max-height: 40vh;
 }
 .modal .modal__header .header__image {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -694,12 +715,14 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
 }
 .modal .modal__header .header__image .image__buttons {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -707,7 +730,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -776,6 +800,7 @@
   box-shadow: 0 0 0 0;
 }
 .modal .modal__header .header__user {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -783,7 +808,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -797,6 +823,7 @@
   padding: 0.5rem;
 }
 .modal .modal__header .header__user .header__reviewer {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -804,7 +831,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -824,6 +852,7 @@
   font-size: 1rem;
 }
 .modal .modal__body {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -831,7 +860,8 @@
   height: 40vh;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -843,6 +873,7 @@
   padding: 0.5rem;
 }
 .modal .modal__body .body__stars {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -850,7 +881,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -859,6 +891,7 @@
   max-width: 90%;
 }
 .modal .modal__body .body__drop {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -866,7 +899,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -893,6 +927,7 @@
   overflow-wrap: break-word;
 }
 .modal .modal__footer {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -900,7 +935,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;

@@ -1,4 +1,5 @@
 .search {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -6,7 +7,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 15vh 0 5vh 0;
   margin: 0;
   color: #05386b;
@@ -21,6 +23,7 @@
   margin: 1rem;
 }
 .search .search__results {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -28,7 +31,8 @@
   height: auto;
   width: 90%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -36,6 +40,7 @@
   flex-wrap: wrap;
 }
 .search .search__results .results__result {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -43,14 +48,15 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 1rem 1rem 1rem 3rem;
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
-  box-shadow: 0px 0px 40px 0px #6b6b6b;
+  box-shadow: 0px 0px 50px 0px #6b6b6b;
   min-width: 40vw;
   max-width: 40vw;
   min-height: 30vh;
@@ -78,6 +84,7 @@
   cursor: pointer;
 }
 .search .search__results .results__result .result__info {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,7 +92,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 1rem;
   margin: 0;
   color: #05386b;
@@ -99,6 +107,7 @@
   box-shadow: 0 0 0 0;
 }
 .search .search__results .results__result .result__info .info__name {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -106,7 +115,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -122,6 +132,7 @@
   padding: 1rem;
 }
 .search .search__results .results__result .result__info .info__address {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -129,7 +140,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -137,6 +149,7 @@
   padding: 1rem;
 }
 .search .search__results .results__result .result__info .info__address .address__text {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -144,7 +157,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -155,6 +169,7 @@
   padding: 1rem;
 }
 .search .results__pagination {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -162,20 +177,22 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
-  box-shadow: 0px 0px 40px 0px #6b6b6b;
+  box-shadow: 0px 0px 50px 0px #6b6b6b;
   width: 10vw;
   max-width: 10vw;
   margin: 1rem 0;
   padding: 0.5rem 1rem;
 }
 .search .results__pagination .pagination__pages {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -183,7 +200,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -220,6 +238,7 @@
   cursor: default;
 }
 .search--no-results {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -227,7 +246,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 15vh 0 5vh 0;
   margin: 0;
   color: #05386b;
@@ -242,6 +262,7 @@
   margin: 1rem;
 }
 .search--no-results .search__no-results {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -249,7 +270,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;

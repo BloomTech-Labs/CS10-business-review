@@ -304,7 +304,7 @@ class Business extends Component {
               <div className="reviews__header">
                 <div className="reviews-container__dropdowns">
                   <div className="dropdowns__dropdown">
-                    <div className="dropdown__title"> Filter: </div>
+                    <div className="dropdown__title"> FILTER </div>
                     <Button
                       aria-owns={this.state.anchorElFilter ? "filter" : null}
                       aria-haspopup="true"
@@ -317,12 +317,12 @@ class Business extends Component {
                       anchorEl={this.state.anchorElFilter}
                       open={Boolean(this.state.anchorElFilter)}
                       onClose={this.handleClose}>
-                      <MenuItem onClick={this.filter.bind(this, "No Filter")}>No Filter</MenuItem>
-                      <MenuItem onClick={this.filter.bind(this, "5 Stars")}>5 Stars</MenuItem>
-                      <MenuItem onClick={this.filter.bind(this, "4 Stars")}>4 Stars</MenuItem>
-                      <MenuItem onClick={this.filter.bind(this, "3 Stars")}>3 Stars</MenuItem>
-                      <MenuItem onClick={this.filter.bind(this, "2 Stars")}>2 Stars</MenuItem>
-                      <MenuItem onClick={this.filter.bind(this, "1 Stars")}>1 Stars</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "No Filter")}>NO FILTER</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "5 Stars")}>5 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "4 Stars")}>4 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "3 Stars")}>3 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "2 Stars")}>2 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "1 Stars")}>1 STARS</MenuItem>
                     </Menu>
                   </div>
                   {localStorage.getItem("token") && localStorage.getItem("userId") ? (
@@ -331,7 +331,7 @@ class Business extends Component {
                     </button>
                   ) : null}
                   <div className="dropdowns__dropdown">
-                    <div className="dropdown__title"> Sort: </div>
+                    <div className="dropdown__title"> SORT </div>
                     <div className="dropdown__drop-container">
                       <Button
                         aria-owns={this.state.anchorElSort ? "sort" : null}
@@ -345,11 +345,11 @@ class Business extends Component {
                         anchorEl={this.state.anchorElSort}
                         open={Boolean(this.state.anchorElSort)}
                         onClose={this.handleClose}>
-                        <MenuItem onClick={this.sort.bind(this, "No Sorting")}>No Sorting</MenuItem>
-                        <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>Rating Ascending</MenuItem>
-                        <MenuItem onClick={this.sort.bind(this, "Rating Descending")}>Rating Descending</MenuItem>
-                        <MenuItem onClick={this.sort.bind(this, "Date Ascending")}>Date Ascending</MenuItem>
-                        <MenuItem onClick={this.sort.bind(this, "Date Descending")}>Date Descending</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "No Sorting")}>NO SORTING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>RATING ASCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Rating Descending")}>RATING DESCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Date Ascending")}>DATE ASCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Date Descending")}>DATE DESCENDING</MenuItem>
                       </Menu>
                     </div>
                   </div>

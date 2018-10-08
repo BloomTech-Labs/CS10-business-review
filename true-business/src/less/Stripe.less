@@ -1,27 +1,34 @@
 @import "./mixins.less";
 
 .stripe {
-  .container();
+  .containers();
+  min-height: 50vh;
+  max-height: 50vh;
+  min-width: 45vw;
+  max-width: 45vw;
+  padding: 2rem;
   .stripe__info {
-    .container();
-    .info__label {
-      .container(@justifyContent: space-between, @flexDirection: row, @alignItems: initial);
-      .title();
-      margin: 1rem;
-      .info__input {
-        border: 0.1rem solid black;
-        padding: .5rem;
-      }
+    .containers();
+    margin-bottom: 1rem;
+    .info__input {
+      width: 50%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      .shadow();
     }
   }
   .stripe__radio {
-    .container(@flexDirection: row, @alignItems: flex-start, @justifyContent: space-around);
+    .containers(@flexDirection: row, @alignItems: flex-start, @justifyContent: space-around);
     .radio__label {
+      .containers();
       .title();
-      padding: 1rem;
-    }
-    .radio__button:hover {
-      cursor: pointer;
+      width: 20vw;
+      &:hover{
+        cursor: pointer;
+      }
+      .radio__button {
+        margin-bottom: 1rem;
+      }
     }
   }
   .stripe__button {
@@ -38,10 +45,16 @@
 }
 
 .StripeElement {
-  padding: .5rem;
-  border: .1rem solid @textColor;
+  padding: 0.5rem;
+  .shadow();
 }
 
 .StripeElement--invalid {
   border: 1px solid red;
+}
+
+input[type="radio"] {
+  border: 0px;
+  width: 100%;
+  height: 2em;
 }

@@ -126,7 +126,7 @@ router.delete("/api/review/delete", (req, res) => {
   ReviewControler.deleteReview(req, res);
 });
 
-router.get("/api/review/getReviewsByReviewerId/:id/:currentPage/", (req, res) => {
+router.get("/api/review/getReviewsByReviewerId/:id/:currentPage/:filter/:sort", (req, res) => {
   ReviewControler.getReviewsByReviewerId(req, res);
 });
 

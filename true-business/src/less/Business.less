@@ -1,10 +1,10 @@
 @import "./mixins.less";
 
 .business {
-  .container(@width: inherit, @padding: 15vh 0 5vh 0);
+  .containers(@width: inherit, @padding: 15vh 0 5vh 0);
   color: @textColor;
   .business__info {
-    .container(@flexDirection: row, @justifyContent: space-around);
+    .containers(@flexDirection: row, @justifyContent: space-around);
     min-width: 70vw;
     max-width: 70vw;
     min-height: 50vh;
@@ -38,7 +38,7 @@
         padding: 1rem 0;
       }
       .details__address {
-        .container(@flexDirection: row, @justifyContent: flex-start);
+        .containers(@flexDirection: row, @justifyContent: flex-start);
         .body();
         padding: 1rem 0;
         .address__icon {
@@ -47,9 +47,9 @@
         }
       }
       .details__detail {
-        .container(@justifyContent: space-between);
+        .containers(@justifyContent: space-between);
         .detail__hours {
-          .container(@flexDirection: column, @justifyContent: space-between);
+          .containers(@flexDirection: column, @justifyContent: space-between);
           .hours__days {
             .containers(@flexDirection: row, @justifyContent: flex-start);
             .hours__icon {
@@ -66,14 +66,14 @@
         .detail__contact {
           .containers();
           .contact__phone {
-            .container(@flexDirection: row, @justifyContent: flex-start);
+            .containers(@flexDirection: row, @justifyContent: flex-start);
             .phone__number {
               .body();
               padding: 1rem;
             }
           }
           .contact__website {
-            .container(@flexDirection: row, @justifyContent: flex-start);
+            .containers(@flexDirection: row, @justifyContent: flex-start);
             .website__text {
               .body();
               padding: 1rem;
@@ -84,7 +84,7 @@
     }
   }
   .business__reviews-container {
-    .container(@width: 75%, @padding: 1rem 1rem 0 1rem, @justifyContent: space-between);
+    .containers(@width: 75%, @padding: 1rem 1rem 0 1rem, @justifyContent: space-between);
     min-width: 70vw;
     max-width: 70vw;
     min-height: 50vh;
@@ -94,7 +94,7 @@
       .containers(@flexDirection: row, @justifyContent:space-between);
       margin-bottom: 1rem;
       .reviews-container__dropdowns {
-        .container(@flexDirection: row, @justifyContent: space-between);
+        .containers(@flexDirection: row, @justifyContent: space-between);
         .dropdowns__dropdown {
           .containers(@flexDirection: row);
           width: auto;
@@ -117,11 +117,11 @@
       }
     }
     .reviews-container__reviews {
-      .container(@justifyContent: space-between);
+      .containers(@justifyContent: space-between);
       min-height: 40vh;
       flex: 1;
       .reviews--no-results {
-        .container(@padding: 15vh 0 5vh 0, @justifyContent: flex-start);
+        .containers(@padding: 15vh 0 5vh 0, @justifyContent: flex-start);
         min-height: 40vh;
         .search__title {
           .header();
@@ -129,7 +129,7 @@
           margin: 1rem;
         }
         .search__no-results {
-          .container();
+          .containers();
           .header();
           .backAndBorder();
           width: 50vw;
@@ -149,7 +149,7 @@
         flex-grow: 3;
         margin: 0 1rem;
         .review__info {
-          .container(@justifyContent: space-between);
+          .containers(@justifyContent: space-between);
           .backAndBorder();
           .shadow();
           .shadowHover();
@@ -266,14 +266,14 @@
         flex: auto;
       }
       .reviews__pagination {
-        .container(@flexDirection: row, @justifyContent: space-between);
+        .containers(@flexDirection: row, @justifyContent: space-between);
         .backAndBorder(@background: @elementBG);
         width: 50vw;
         min-width: 50%;
         padding: 0.5rem;
         margin: 0 0 1rem 0;
         .pagination__pages {
-          .container(@flexDirection: row);
+          .containers(@flexDirection: row);
           max-width: 70%;
           .pagination__page {
             .button();

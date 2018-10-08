@@ -22,11 +22,11 @@
     }
   }
   .navbar__center {
-    .container(@width: 50vw);
+    .containers(@width: 50vw);
     min-width: 50vw;
     max-width: 50vw;
     .center__search {
-      .container(@flexDirection: row);
+      .containers(@flexDirection: row);
       min-width: 100%;
       max-width: 100%;
       padding-left: 5vw;
@@ -65,7 +65,7 @@
     }
   }
   .navbar__right--logged {
-    .container(@justifyContent: flex-end, @flexDirection: row);
+    .containers(@justifyContent: flex-end, @flexDirection: row);
     min-width: 15vw;
     max-width: 15vw;
     padding-right: 2vw;
@@ -96,7 +96,7 @@
 }
 
 .modal {
-  .container();
+  .containers();
   .modal__title {
     .header();
     padding: 0.5rem;

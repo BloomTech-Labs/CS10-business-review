@@ -13,7 +13,7 @@
     }
   }
   .signup-container {
-    .container(@width: 50%);
+    .containers(@width: 50%);
     .backAndBorder();
     .shadow();
     color: @textColor;
@@ -23,10 +23,10 @@
       .header();
     }
     .signup-container__stripe {
-      .container();
+      .containers();
     }
     .signup-container__form {
-      .container();
+      .containers();
       .signup-container__input {
         border: 0.1rem solid @textColor;
         background: @elementBG;
@@ -35,7 +35,7 @@
         padding: 0.5rem;
       }
       .signup-container__buttons {
-        .container(@justifyContent: space-around);
+        .containers(@justifyContent: space-around);
         .signup-container__google-auth {
           min-width: 50%;
           max-width: 50%;

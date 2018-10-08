@@ -1,7 +1,7 @@
 @import "mixins.less";
 
 .thumbnail {
-  .container(@height: 25rem, @width: 20%, @justifyContent: space-between);
+  .containers(@height: 25rem, @width: 20%, @justifyContent: space-between);
   .backAndBorder();
   .shadowHover();
   .shadow();
@@ -18,7 +18,7 @@
     max-height: 15rem;
   }
   .thumbnail__description {
-    .container(@justifyContent: space-around);
+    .containers(@justifyContent: space-around);
     .description__title {
       .hidden();
       .title();

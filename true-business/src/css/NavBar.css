@@ -1,4 +1,5 @@
 .navbar {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -6,7 +7,8 @@
   height: 100%;
   width: 100vw;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -33,6 +35,7 @@
   cursor: pointer;
 }
 .navbar .navbar__center {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,12 +47,12 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-width: 50vw;
   max-width: 50vw;
 }
 .navbar .navbar__center .center__search {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -61,7 +64,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-width: 100%;
   max-width: 100%;
@@ -99,6 +101,7 @@
   font-weight: bolder;
 }
 .navbar .navbar__right {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -106,7 +109,8 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -121,6 +125,8 @@
   align-items: center;
   height: 100%;
   width: 100%;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
@@ -143,6 +149,7 @@
   font-weight: bolder;
 }
 .navbar .navbar__right--logged {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -154,7 +161,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-width: 15vw;
   max-width: 15vw;
@@ -170,6 +176,7 @@
   text-align: left;
 }
 .popover {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -177,7 +184,8 @@
   height: 15%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 0;
   margin: 0;
   background: #eeeeee !important;
@@ -209,6 +217,7 @@
   font-weight: bolder;
 }
 .modal {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -220,7 +229,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .modal .modal__title {

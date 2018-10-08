@@ -2,7 +2,7 @@
 
 .new-review {
   .new-review__modal {
-    .container();
+    .containers();
     text-align: center;
     color: @textColor;
     .modal__header {
@@ -10,10 +10,10 @@
       height: auto;
     }
     .modal__body {
-      .container();
+      .containers();
       .body__drop {
         .drop__container{
-          .container();
+          .containers();
           max-width: 200px;
           min-height: 200px;
           border: .1rem dashed @textColor;
@@ -24,15 +24,15 @@
         .drop__container:hover {
           cursor: pointer;
         }
-        .container(@flexDirection:row);
+        .containers(@flexDirection:row);
         .drop__image--post {
-          .container(); 
+          .containers(); 
           min-width: 200px;
           min-height: 200px;
         }
       }
       .body__title {
-        .container(@flexDirection:row, @justifyContent: flex-start);
+        .containers(@flexDirection:row, @justifyContent: flex-start);
         .title();
         height: 20%;
         margin: 1rem;
@@ -47,7 +47,7 @@
         }
       }
       .body__review {
-        .container(@flexDirection:row, @justifyContent: flex-start, @alignItems: flex-start);
+        .containers(@flexDirection:row, @justifyContent: flex-start, @alignItems: flex-start);
         margin: 1rem;
         .review__label {
           text-align: right;
@@ -68,7 +68,7 @@
       }
     }
     .modal__footer {
-      .container(@flexDirection: column);
+      .containers(@flexDirection: column);
       .footer__buttons {
         .buttons__button {
           .button();

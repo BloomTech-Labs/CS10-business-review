@@ -1,26 +1,21 @@
 @import "mixins.less";
 
 .user {
-  .container(@width: auto, @justifyContent: space-around, @alignItems: flex-start);
-  padding: 20vh 5rem 5rem 5rem;
-  .user__header {
-    .container(@flexDirection: row, @height: 5rem);
-    .header__signout {
-      .button();
-      margin-right: 5rem;
-      white-space: nowrap;
-    }
-    .header__signout:hover {
-      cursor: pointer;
-    }
-  }
+  .containers(@justifyContent: space-around);
+  padding: 20vh 0 5vh 0;
   .user__body {
-    .container(@flexDirection: row, @alignItems:flex-start, @justifyContent:space-between);
-    min-height: 100vh;
-    width: 80vw;
+    .containers(@flexDirection: row, @alignItems:flex-start, @justifyContent:space-between);
+    min-height: 75vh;
+    min-width: 80vw;
+    max-width: 80vw;
     .body__left-bar {
-      .container(@width: 20vw, @height: 25vh, @justifyContent: space-around);
+      .containers(@width: 15vw, @height: 20vh, @justifyContent: space-around);
+      min-width: 15vw;
+      max-width: 15vw;
+      min-height: 20vh;
+      max-height: 20vh;
       .backAndBorder();
+      .shadow();
       .left-bar__button {
         .backAndBorder();
         border: none;
@@ -33,25 +28,35 @@
       }
     }
     .body__content {
-      .container(@justifyContent: flex-start, @alignItems: flex-start);
+      .containers(@justifyContent: flex-start, @alignItems: flex-start);
+      .shadow();
+      .backAndBorder();
+      min-width: 60vw;
+      max-width: 60vw;
+      min-height: 50vh;
       .content__reviews-container {
-        .container(@padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        .containers(@padding: 1rem 1rem 0 1rem);
         min-width: 60vw;
         max-width: 60vw;
-        min-height: 90vh;
-        max-height: 90vh;
         .backAndBorder();
         .reviews-container__dropdowns {
-          .container(@width: inherit, @flexDirection: row, @justifyContent: space-around);
+          .containers(@flexDirection: row, @justifyContent: space-between);
+          .dropdowns__dropdown {
+            .containers(@flexDirection: row);
+            width: auto;
+            .dropdown__title {
+              .title();
+            }
+          }
           .reviews__pagination {
-            .container(@flexDirection: row, @justifyContent: space-between);
+            .containers(@flexDirection: row, @justifyContent: space-between);
             .backAndBorder(@background: @elementBG);
             width: 40%;
             min-width: 40%;
             max-width: 40%;
             padding: 0.5rem;
             .pagination__pages {
-              .container(@flexDirection: row);
+              .containers(@flexDirection: row);
               max-width: 75%;
               min-width: 75%;
               .pagination__page {
@@ -65,63 +70,14 @@
               }
             }
           }
-          .dropdowns__dropdown {
-            display: flex;
-            flex-direction: row;
-            width: 15vw;
-            min-width: 15vw;
-            max-width: 15vw;
-            z-index: 2;
-            .dropdown__title {
-              width: 15vw;
-              min-width: 15vw;
-              max-width: 15vw;
-              .title();
-            }
-            .dropdown__drop-container {
-              padding: 1rem;
-              text-align: center;
-              .drop-container__button {
-                width: 15vw;
-                min-width: 15vw;
-                max-width: 15vw;
-                .title();
-                color: @textColor;
-              }
-              .drop-container__button:hover {
-                cursor: pointer;
-              }
-              .drop-container__menu {
-                position: absolute;
-                z-index: 2;
-                display: flex;
-                flex-direction: column;
-                width: 15vw;
-                min-width: 15vw;
-                max-width: 15vw;
-                .menu__button {
-                  .title();
-                  width: 15vw;
-                  min-width: 15vw;
-                  max-width: 15vw;
-                  border: none;
-                  color: @textColor;
-                }
-                .menu__button:hover {
-                  filter: brightness(80%);
-                  cursor: pointer;
-                }
-              }
-            }
-          }
         }
         .reviews-container__button {
           .button();
         }
         .reviews-container__reviews {
-          .container(@justifyContent: space-between);
-          min-height: 80vh;
-          max-height: 80vh;
+          .containers(@justifyContent: space-between);
+          min-height: 65vh;
+          max-height: 65vh;
           flex: 1;
           .reviews__review {
             display: flex;
@@ -130,8 +86,10 @@
             width: 100%;
             height: 100%;
             .review__info {
-              .container();
+              .containers();
               .backAndBorder();
+              .shadow();
+              .shadowHover();
               min-height: 25vh;
               max-height: 25vh;
               min-width: 21%;
@@ -163,7 +121,7 @@
                 cursor: pointer;
               }
               .info__detailed {
-                .container(@justifyContent: space-around);
+                .containers(@justifyContent: space-around);
                 min-height: 50%;
                 max-height: 50%;
                 .detailed__stars {
@@ -183,16 +141,21 @@
         }
       }
       .content__billing {
-        .container(@padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        .containers(@flexDirection: row, @padding: 1rem 1rem 0 1rem);
         .backAndBorder();
         min-width: 60vw;
         max-width: 60vw;
-        min-height: 70vh;
-        max-height: 70vh;
+        min-height: 50vh;
+        max-height: 50vh;
         .billing__section {
-          .container(@width: 75%, @justifyContent: space-around, @flexDirection: row);
+          .containers(@justifyContent: flex-start);
+          min-width: 15vw;
+          max-width: 15vw;
+          min-height: 50vh;
+          max-height: 50vh;
           .section__single {
-            .container();
+            .containers();
+            padding: 1rem;
             .single__info {
               text-align: center;
             }
@@ -200,12 +163,12 @@
         }
       }
       .content__profile {
-        .container(@justifyContent: space-between, @padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        .containers(@flexDirection: row, @justifyContent: space-between);
         .backAndBorder();
         min-width: 60vw;
         max-width: 60vw;
-        min-height: 75vh;
-        max-height: 75vh;
+        min-height: 50vh;
+        max-height: 50vh;
         .profile__error {
           min-height: 1rem;
           color: red;
@@ -214,73 +177,81 @@
           margin-bottom: 1rem;
         }
         .profile__container {
-          .container(@padding: 1rem);
+          .containers(@flexDirection: row);
+          min-width: 60vw;
+          max-width: 60vw;
+          min-height: 50vh;
+          max-height: 50vh;
           .user-change__input {
             padding: 0.5rem;
           }
           .profile__image {
             .image(@top: 0);
-            width: 40%;
-            min-width: 40%;
-            height: 40%;
-            min-height: 40%;
+            min-width: 20vw;
+            max-width: 20vw;
+            min-height: 50vh;
+            max-height: 50vh;
             object-position: 50% 0%;
           }
           .container__info {
-            .container(@flexDirection: row, @justifyContent: space-between);
+            .containers(@justifyContent: space-around);
             .backAndBorder(@background: @elementBG);
             border-radius: 0.5rem;
-            padding: 1rem;
-            margin: 1rem;
+            padding: 2rem;
             height: 2rem;
-            max-height: 2rem;
-            .info__label {
-              width: 20%;
-              min-width: 20%;
-            }
-            .info__data {
-              width: 60%;
-              min-width: 60%;
-              .container();
-              .data__input {
-                width: 90%;
-                min-width: 90%;
-                max-height: 1.9rem;
-                background: @buttonBG;
+            min-height: 50vh;
+            max-height: 50vh;
+            min-width: 39vw;
+            max-width: 39vw;
+            .info__info {
+              .containers(@flexDirection: row, @alignItems: flex-start);
+              height: 15vh;
+              .info__label {
+                .title();
+                min-width: 20%;
+                max-width: 20%;
+                padding: 0.5rem;
               }
-              .data__button {
+              .info__data {
+                .containers(@justifyContent: flex-start);
+                min-width: 60%;
+                max-width: 60%;;
+                padding: 0.5rem;
+                .data__change {
+                  .containers(@justifyContent: flex-start);
+                  .change__input {
+                    width: 100%;
+                    margin-bottom: 1rem;
+                    padding: 0.5rem;
+                    .shadow();
+                  }
+                  .change__button {
+                    .button();
+                  }
+                }
+              }
+              .info__button {
                 .button();
-                margin: 0;
+                position: relative;
+                width: 10rem;
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+              .info__button--save {
+                .button();
+                margin: 0 1rem 0 0;
+                &:hover {
+                  cursor: pointer;
+                }
               }
             }
-            .noDisplay {
-              display: none;
+            .info__info:last-of-type {
+              height: 30vh;
             }
-            .info__button {
-              .button();
-              position: relative;
-              left: 1.5rem;
-              &:hover {
-                cursor: pointer;
-              }
-            }
-            .info__button--save {
-              .button();
-              margin: 0 1rem 0 0;
-              &:hover {
-                cursor: pointer;
-              }
-            }
-          }
-          .container__info--top {
-            .container__info();
-            margin-top: 3rem;
           }
         }
       }
-    }
-    .body__footer {
-      min-height: 10vh;
     }
   }
 }
@@ -310,6 +281,7 @@
         .image(@top: 0);
         .regularHover();
         min-width: 35vw;
+        max-width: 35vw;
         min-height: 35vh;
         max-height: 35vh;
         margin: 1rem 1rem 0 1rem;
@@ -318,6 +290,7 @@
         .image(@top: 0);
         .regularHover();
         min-width: 35vw;
+        max-width: 35vw;
         min-height: 35vh;
         max-height: 35vh;
         margin: 1rem 1rem 0 1rem;

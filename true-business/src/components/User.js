@@ -114,12 +114,12 @@ class User extends Component {
       });
   };
 
-  getReviews = (currentPage,sort,filter) => {
+  getReviews = (currentPage, sort, filter) => {
     axios
       .get(
         `${backend}api/review/getReviewsByReviewerId/${localStorage.getItem(
           "userId",
-        )}/${currentPage}/${filter}/${sort}}`,
+        )}/${currentPage}/${filter}/${sort}`,
       )
       .then(response => {
         this.setState({
@@ -223,7 +223,7 @@ class User extends Component {
     let lastPage =
       // Ex. 100 / 10 % 1 = 0
       // Ex. 101 / 10 % 1 != 0
-      (this.state.total / 10) % 1 === 0
+      (this.state.total / 8) % 1 === 0
         ? // 100 / 10 - 1 = 9, so pages 0-9 will show results 0-99 (10 pages, 10 each page)
           Math.floor(this.state.total / 8) - 1
         : // 101 / 10 = 10, so pages 0-10 will show results 0-100 (11 pages, 1 on the last page)
@@ -323,6 +323,15 @@ class User extends Component {
     this.getReviews(0, this.state.sortBy, filterBy);
   };
 
+  handleClick = (type, event) => {
+    event.preventDefault();
+    this.setState({ [type]: event.currentTarget });
+  };
+
+  handleClose = type => {
+    this.setState({ [type]: null });
+  };
+
   loadContent = () => {
     switch (this.state.current) {
       case "My Reviews":
@@ -331,7 +340,7 @@ class User extends Component {
             <div className="content__reviews-container">
               <div className="reviews-container__dropdowns">
                 <div className="dropdowns__dropdown">
-                  <div className="dropdown__title"> Filter By: </div>
+                  <div className="dropdown__title"> FILTER </div>
                   <Button
                     aria-owns={this.state.anchorElFilter ? "filter" : null}
                     aria-haspopup="true"
@@ -344,16 +353,16 @@ class User extends Component {
                     anchorEl={this.state.anchorElFilter}
                     open={Boolean(this.state.anchorElFilter)}
                     onClose={this.handleClose}>
-                    <MenuItem onClick={this.filter.bind(this, "No Filter")}>No Filter</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "5 Stars")}>5 Stars</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "4 Stars")}>4 Stars</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "3 Stars")}>3 Stars</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "2 Stars")}>2 Stars</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "1 Stars")}>1 Stars</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "No Filter")}>NO FILTER</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "5 Stars")}>5 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "4 Stars")}>4 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "3 Stars")}>3 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "2 Stars")}>2 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "1 Stars")}>1 STARS</MenuItem>
                   </Menu>
                 </div>
                 <div className="dropdowns__dropdown">
-                  <div className="dropdown__title"> Sort By: </div>
+                  <div className="dropdown__title"> SORT </div>
                   <div className="dropdown__drop-container">
                     <Button
                       aria-owns={this.state.anchorElSort ? "sort" : null}
@@ -367,11 +376,11 @@ class User extends Component {
                       anchorEl={this.state.anchorElSort}
                       open={Boolean(this.state.anchorElSort)}
                       onClose={this.handleClose}>
-                      <MenuItem onClick={this.sort.bind(this, "No Sorting")}>No Sorting</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>Rating Ascending</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Rating Descending")}>Rating Descending</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Date Ascending")}>Date Ascending</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Date Descending")}>Date Descending</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "No Sorting")}>NO SORTING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>RATING ASCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Rating Descending")}>RATING DESCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Date Ascending")}>DATE ASCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Date Descending")}>DATE DESCENDING</MenuItem>
                     </Menu>
                   </div>
                 </div>
@@ -383,12 +392,11 @@ class User extends Component {
                   {this.state.reviews.length ? (
                     this.state.reviews.map((review, i) => {
                       return (
-                        <div key={review._id} className="review__info">
+                        <div key={review._id} className="review__info" onClick={() => this.openModal(this, review)}>
                           <img
                             alt={review.reviewer.username}
                             className="review__landscape"
                             src={review.photos[0].link}
-                            onClick={() => this.openModal(this, review)}
                           />
                           <div className="info__detailed">
                             <StarRatings
@@ -497,116 +505,6 @@ class User extends Component {
             </Modal>
           </div>
         );
-      case "Settings":
-        return (
-          <div className="content__profile">
-            <div className="profile__container">
-              <img
-                alt={localStorage.getItem("name")}
-                className="profile__image"
-                src={localStorage.getItem("userImage")}
-              />
-              <div className="container__info--top">
-                <div className="info__label">Username:</div>
-                <div className="info__data">
-                  {this.state.usernameShow ? (
-                    <form className="data__change">
-                      <input
-                        className="change__input"
-                        placeholder={this.state.username}
-                        name="usernameUpdate"
-                        type="text"
-                        value={this.state.usernameUpdate}
-                        onChange={this.handleInputChange}
-                      />
-                      <button type="submit" name="username" className="change__button" onClick={this.updateUser}>
-                        Save
-                      </button>
-                    </form>
-                  ) : (
-                    this.state.username
-                  )}
-                </div>
-                <button name="usernameButton" className="info__button" onClick={this.buttonChange}>
-                  {this.state.usernameButton}
-                </button>
-              </div>
-              <div className="container__info">
-                <div className="info__label">Email:</div>
-                <div className="info__data">
-                  {this.state.emailShow ? (
-                    <form className="data__change">
-                      <input
-                        className="change__input"
-                        placeholder={this.state.email}
-                        name="emailUpdate"
-                        value={this.state.emailUpdate}
-                        onChange={this.handleInputChange}
-                      />
-                      <button type="submit" name="email" className="change__button" onClick={this.updateUser}>
-                        Save
-                      </button>
-                    </form>
-                  ) : (
-                    this.state.email
-                  )}
-                </div>
-                <button name="emailButton" className="info__button" onClick={this.buttonChange}>
-                  {this.state.emailButton}
-                </button>
-              </div>
-              <div className="container__info">
-                <div className="info__label">Password:</div>
-                <div id="password" className="info__data">
-                  {this.state.passwordShow ? (
-                    <form className="data__change">
-                      <input
-                        className="password-change__input"
-                        placeholder="Password"
-                        name="password"
-                        type="password"
-                        value={this.state.password}
-                        onChange={this.handleInputChange}
-                      />
-                      <input
-                        className="password-change__input"
-                        placeholder="New password"
-                        name="passwordUpdate"
-                        type="password"
-                        value={this.state.passwordUpdate}
-                        onChange={this.handleInputChange}
-                      />
-                      <input
-                        className="password-change__input"
-                        placeholder="Repeat new password"
-                        name="passwordUpdateVerify"
-                        type="password"
-                        value={this.state.passwordUpdateVerify}
-                        onChange={this.handleInputChange}
-                      />
-                      <button type="submit" name="password" className="change__button" onClick={this.checkPassword}>
-                        Save
-                      </button>
-                    </form>
-                  ) : (
-                    "****************"
-                  )}
-                </div>
-                <button name="passwordButton" className="info__button" onClick={this.buttonChange}>
-                  {this.state.passwordButton}
-                </button>
-              </div>
-            </div>
-            {this.state.passwordErrorMatch ? <div className="profile__error"> Passwords Do Not Match </div> : null}
-            {this.state.passwordErrorLength ? (
-              <div className="profile__error"> Password Must Be At Least 1 Character </div>
-            ) : null}
-            {this.state.passwordErrorUpdate ? (
-              <div className="profile__error"> Original Password Incorrect </div>
-            ) : null}
-            {this.state.error ? null : <div className="profile__error" />}
-          </div>
-        );
       case "Billing":
         return (
           <div className="content__billing">
@@ -640,20 +538,107 @@ class User extends Component {
                 className="profile__image"
                 src={localStorage.getItem("userImage")}
               />
-              <div className="container__info--top">
-                <div className="info__label">Username:</div>
-                <div className="info__data">{this.state.username}</div>
-              </div>
               <div className="container__info">
-                <div className="info__label">Email:</div>
-                <div className="info__data">{this.state.email}</div>
-              </div>
-              <div className="container__info">
-                <div className="info__label">Password:</div>
-                <div className="info__data">****************</div>
+                <div className="info__info">
+                  <div className="info__label">Username:</div>
+                  <div className="info__data">
+                    {this.state.usernameShow ? (
+                      <form className="data__change">
+                        <input
+                          className="change__input"
+                          placeholder={this.state.username}
+                          name="usernameUpdate"
+                          type="text"
+                          value={this.state.usernameUpdate}
+                          onChange={this.handleInputChange}
+                        />
+                        <button type="submit" name="username" className="change__button" onClick={this.updateUser}>
+                          Save
+                        </button>
+                      </form>
+                    ) : (
+                      this.state.username
+                    )}
+                  </div>
+                  <button name="usernameButton" className="info__button" onClick={this.buttonChange}>
+                    {this.state.usernameButton}
+                  </button>
+                </div>
+                <div className="info__info">
+                  <div className="info__label">Email:</div>
+                  <div className="info__data">
+                    {this.state.emailShow ? (
+                      <form className="data__change">
+                        <input
+                          className="change__input"
+                          placeholder={this.state.email}
+                          name="emailUpdate"
+                          value={this.state.emailUpdate}
+                          onChange={this.handleInputChange}
+                        />
+                        <button type="submit" name="email" className="change__button" onClick={this.updateUser}>
+                          Save
+                        </button>
+                      </form>
+                    ) : (
+                      this.state.email
+                    )}
+                  </div>
+                  <button name="emailButton" className="info__button" onClick={this.buttonChange}>
+                    {this.state.emailButton}
+                  </button>
+                </div>
+                <div className="info__info">
+                  <div className="info__label">Password:</div>
+                  <div id="password" className="info__data">
+                    {this.state.passwordShow ? (
+                      <form className="data__change">
+                        <input
+                          className="change__input"
+                          placeholder="Password"
+                          name="password"
+                          type="password"
+                          value={this.state.password}
+                          onChange={this.handleInputChange}
+                        />
+                        <input
+                          className="change__input"
+                          placeholder="New password"
+                          name="passwordUpdate"
+                          type="password"
+                          value={this.state.passwordUpdate}
+                          onChange={this.handleInputChange}
+                        />
+                        <input
+                          className="change__input"
+                          placeholder="Repeat new password"
+                          name="passwordUpdateVerify"
+                          type="password"
+                          value={this.state.passwordUpdateVerify}
+                          onChange={this.handleInputChange}
+                        />
+                        <button type="submit" name="password" className="change__button" onClick={this.checkPassword}>
+                          Save
+                        </button>
+                      </form>
+                    ) : (
+                      "****************"
+                    )}
+                  </div>
+                  <button name="passwordButton" className="info__button" onClick={this.buttonChange}>
+                    {this.state.passwordButton}
+                  </button>
+                </div>
               </div>
             </div>
-            <div className="profile__error" />
+            {this.state.passwordErrorMatch ? <div className="profile__error"> Passwords Do Not Match </div> : null}
+            {this.state.passwordErrorLength ? (
+              <div className="profile__error"> Password Must Be At Least 1 Character </div>
+            ) : null}
+            {this.state.passwordErrorUpdate ? (
+              <div className="profile__error"> Original Password Incorrect </div>
+            ) : null}
+            {this.state.error ? null : <div className="profile__error" />}
           </div>
         );
     }
@@ -674,9 +659,6 @@ class User extends Component {
               </button>
               <button className="left-bar__button" name="Billing" onClick={this.updateCurrent}>
                 Billing
-              </button>
-              <button className="left-bar__button" name="Settings" onClick={this.updateCurrent}>
-                Settings
               </button>
               <button className="left-bar__button" onClick={this.logout}>
                 Sign Out
