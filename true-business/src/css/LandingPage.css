@@ -46,9 +46,6 @@
   color: #05386b;
   flex-wrap: wrap;
   min-height: 100%;
-  background-image: url("../imgs/bar.gif");
-  background-size: 100% 12.5rem;
-  background-repeat: repeat;
 }
 .landing .landing__container .container__items .items__item {
   display: flex;
@@ -191,6 +188,43 @@
   margin: 0;
   color: #05386b;
 }
+.modal .modal__header .header__image .image__buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+  width: 10vw;
+  min-width: 10vw;
+  max-width: 10vw;
+  padding: 1rem;
+}
+.modal .modal__header .header__image .image__buttons .image__button {
+  border-radius: 0.5rem;
+  width: 5rem;
+  background-color: #3487d5;
+  color: #ffffff;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  height: 2.5rem;
+  width: 5vw;
+  min-width: 5vw;
+  max-width: 5vw;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+.modal .modal__header .header__image .image__buttons .image__button:hover {
+  cursor: pointer;
+  box-shadow: 0px 15px 20px #6b6b6b;
+  filter: brightness(110%);
+  font-weight: bolder;
+}
 .modal .modal__header .header__image .image__landscape {
   border-radius: 1rem;
   object-fit: cover;
@@ -198,9 +232,9 @@
   background-color: #05386b;
   top: 0;
   position: relative;
-  min-width: 30vw;
-  min-height: 30vh;
-  max-height: 30vh;
+  min-width: 35vw;
+  min-height: 35vh;
+  max-height: 35vh;
   margin: 1rem 1rem 0 1rem;
 }
 .modal .modal__header .header__image .image__landscape:hover {
@@ -218,9 +252,9 @@
   background-color: #05386b;
   top: 0;
   position: relative;
-  min-width: 30vw;
-  min-height: 30vh;
-  max-height: 30vh;
+  min-width: 35vw;
+  min-height: 35vh;
+  max-height: 35vh;
   margin: 1rem 1rem 0 1rem;
   object-position: 50% 0%;
 }
@@ -231,33 +265,6 @@
   cursor: pointer;
   opacity: 1;
   box-shadow: 0 0 0 0;
-}
-.modal .modal__header .header__image .image__button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  color: #05386b;
-  border-radius: 0.5rem;
-  background-color: #3487d5;
-  color: #ffffff;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-  height: 2.5rem;
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  width: 5rem;
-  margin: 1rem;
-}
-.modal .modal__header .header__image .image__button:hover {
-  cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
-  font-weight: bolder;
 }
 .modal .modal__header .header__user {
   display: flex;
@@ -297,14 +304,14 @@
 .modal .modal__header .header__user .header__reviewer .reviewer__info--onclick {
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 33%;
+  width: 60%;
   font-size: 1.5rem;
   padding: 0.5rem;
 }
 .modal .modal__header .header__user .header__reviewer .reviewer__info {
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 33%;
+  width: 60%;
   font-size: 1rem;
 }
 .modal .modal__body {
@@ -332,13 +339,15 @@
   justify-content: space-around;
   align-items: center;
   height: 100%;
-  width: 50%;
+  width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   padding: 0;
   margin: 0;
   color: #05386b;
   height: 10%;
+  min-width: 75%;
+  max-width: 90%;
 }
 .modal .modal__body .body__drop {
   display: flex;
@@ -357,7 +366,7 @@
   font-size: 1.5rem;
   padding: 0.5rem;
   text-decoration: underline;
-  height: 10%;
+  margin: 1rem 0 1.5rem 0;
 }
 .modal .modal__body .body__stars {
   text-align: center;

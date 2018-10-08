@@ -18,47 +18,79 @@ class SignUp extends Component {
     this.state = {
       name: "",
       username: "",
+      usernameError: false,
       email: "",
       confirmEmail: "",
       password: "",
+      passwordError: false,
       confirmPassword: "",
       error: "",
       errorMessage: "",
       payment: false,
       type: null,
+      inputError: false,
     };
   }
 
-  confirmPassword = () => {
-    return this.state.password === this.state.confirmPassword;
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
   };
 
   createUser = event => {
     event.preventDefault();
-    const user = {
-      name: this.state.name,
-      email: this.state.email,
-      username: this.state.username,
-      password: this.state.password,
-    };
-    axios
-      .post(`${backend}api/user/register`, user)
-      .then(() => {
-        this.setState({
-          error: false,
-        });
-        this.props.history.push(`/signin`);
-      })
-      .catch(err => {
-        this.setState({
-          error: true,
-          errorMessage: err,
-        });
-      });
+    if (!this.state.usernameError && !this.state.passwordError && !this.state.inputError) {
+      if (
+        this.state.name === "" ||
+        this.state.email === "" ||
+        this.state.password === "" ||
+        this.state.username === ""
+      ) {
+        this.setState({ inputError: true });
+      } else {
+        const user = {
+          name: this.state.name,
+          email: this.state.email,
+          username: this.state.username,
+          password: this.state.password,
+        };
+        axios
+          .post(`${backend}api/user/register`, user)
+          .then(() => {
+            this.setState({
+              error: false,
+            });
+            this.props.history.push(`/signin`);
+          })
+          .catch(err => {
+            this.setState({
+              error: true,
+              errorMessage: err,
+            });
+          });
+      }
+    }
   };
 
   handleInputChange = event => {
+    let password = document.getElementById("password").value;
+    let confirm = document.getElementById("confirm").value;
+    let username = document.getElementById("username").value;
+    if (password !== confirm) {
+      this.setState({ passwordError: true });
+    } else {
+      this.setState({ passwordError: false });
+    }
+    if (username.length > 20) {
+      this.setState({ usernameError: true });
+    } else {
+      this.setState({ usernameError: false });
+    }
     this.setState({ [event.target.name]: event.target.value });
+    if (
+      !(this.state.name === "" || this.state.email === "" || this.state.password === "" || this.state.username === "")
+    ) {
+      this.setState({ inputError: false });
+    }
   };
 
   render() {
@@ -97,14 +129,17 @@ class SignUp extends Component {
                 placeholder="Username"
                 name="username"
                 type="text"
+                id="username"
                 value={this.state.username}
                 onChange={this.handleInputChange}
               />
+
               <input
                 className="signup-container__input"
                 placeholder="Password"
                 name="password"
                 type="password"
+                id="password"
                 value={this.state.password}
                 onChange={this.handleInputChange}
               />
@@ -113,12 +148,27 @@ class SignUp extends Component {
                 placeholder="Confirm Password"
                 name="confirmPassword"
                 type="password"
+                id="confirm"
                 value={this.state.confirmPassword}
                 onChange={this.handleInputChange}
               />
+              {this.state.usernameError || this.state.passwordError ? (
+                this.state.passwordError ? (
+                  <div className="userError">Passwords Must Match</div>
+                ) : (
+                  <div className="userError">Username Must be less than 25 Characters</div>
+                )
+              ) : (
+                <div className="userError" />
+              )}
               <div className="signup-container__buttons ">
-                <button id="signup-submit" type="submit" className="signup-container__button" onClick={this.createUser}>
-                  Confirm Registration
+                <button
+                  id="signup-submit"
+                  type="submit"
+                  className="signup-container__button"
+                  style={this.state.inputError ? { border: ".1rem solid red" } : null}
+                  onClick={this.createUser}>
+                  {this.state.inputError ? "Missing Fields" : "Confirm Registration"}
                 </button>
                 {/* <hr />
                 <img

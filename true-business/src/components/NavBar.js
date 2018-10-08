@@ -104,8 +104,6 @@ class NavBar extends Component {
 
   handleSearch = event => {
     event.preventDefault();
-    console.log("Searchword", this.state.searchWord);
-    console.log("this.state.popoveropen", this.state.popoverOpen);
     if (this.state.searchWord !== "" && !this.state.popoverOpen) {
       this.props.search(this.state.searchWord + " " + this.state.searchCity, true);
       this.setState({ searchWord: "", searchCity: "" });
@@ -140,7 +138,7 @@ class NavBar extends Component {
             <input
               value={this.state.searchWord}
               autoComplete="off"
-              placeholder="Tacos..."
+              placeholder="Tacos, Groceries, Drugstore..."
               onClick={this.toggle}
               onChange={this.handleInputChange.bind(this)}
               name="searchWord"
@@ -150,7 +148,7 @@ class NavBar extends Component {
             <input
               value={this.state.searchCity}
               autoComplete="off"
-              placeholder="Seattle Washington..."
+              placeholder="Seattle Washington, Osaka Japan..."
               onClick={this.toggle}
               onChange={this.handleInputChange.bind(this)}
               name="searchCity"

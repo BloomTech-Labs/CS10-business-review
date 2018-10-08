@@ -504,6 +504,7 @@
   min-width: 40%;
   height: 40%;
   min-height: 40%;
+  object-position: 50% 0%;
 }
 .user .user__body .body__content .content__profile .profile__container .profile__image:hover {
   cursor: pointer;
@@ -726,91 +727,51 @@
 .user .user__body .body__footer {
   min-height: 10vh;
 }
-.modal .modal-container {
-  width: 80%;
-  height: 80vh;
-  max-height: 80vh;
-}
-.modal .modal-container .modal__header {
+.modal .modal__header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 50%;
+  height: 40vh;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0 0 0.3rem 0;
-  cursor: default;
   color: #05386b;
-  max-height: 50%;
+  max-height: 40vh;
 }
-.modal .modal-container .modal__header .header__image {
+.modal .modal__header .header__image {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+}
+.modal .modal__header .header__image .image__buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
-  height: 85%;
-  max-height: 85%;
+  width: 10vw;
+  min-width: 10vw;
+  max-width: 10vw;
+  padding: 1rem;
 }
-.modal .modal-container .modal__header .header__image .image__landscape {
-  border-radius: 1rem;
-  object-fit: cover;
-  object-position: 50% 50%;
-  background-color: #05386b;
-  top: 0;
-  position: relative;
-  width: 50%;
-  min-width: 50%;
-  height: 100%;
-  max-height: 100%;
-  margin: 1rem 1rem 0 1rem;
-}
-.modal .modal-container .modal__header .header__image .image__landscape:hover {
-  cursor: pointer;
-}
-.modal .modal-container .modal__header .header__image .image__portrait {
-  border-radius: 1rem;
-  object-fit: cover;
-  object-position: 50% 50%;
-  background-color: #05386b;
-  top: 0;
-  position: relative;
-  width: 50%;
-  min-width: 50%;
-  height: 100%;
-  max-height: 100%;
-  margin: 1rem 1rem 0 1rem;
-  object-position: 50% 0%;
-}
-.modal .modal-container .modal__header .header__image .image__portrait:hover {
-  cursor: pointer;
-}
-.modal .modal-container .modal__header .header__image .image__button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  font-size: 1.2rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  cursor: default;
-  color: #05386b;
-  height: initial;
+.modal .modal__header .header__image .image__buttons .image__button {
   border-radius: 0.5rem;
   width: 5rem;
   background-color: #3487d5;
@@ -818,41 +779,81 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   height: 2.5rem;
-  font-size: 1.5rem;
+  width: 5vw;
+  min-width: 5vw;
+  max-width: 5vw;
+  margin: 1rem;
   padding: 0.5rem;
-  width: 20%;
 }
-.modal .modal-container .modal__header .header__image .image__button:hover {
+.modal .modal__header .header__image .image__buttons .image__button:hover {
   cursor: pointer;
   box-shadow: 0px 15px 20px #6b6b6b;
   filter: brightness(110%);
   font-weight: bolder;
 }
-.modal .modal-container .modal__header .header__user {
+.modal .modal__header .header__image .image__landscape {
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background-color: #05386b;
+  top: 0;
+  position: relative;
+  min-width: 35vw;
+  min-height: 35vh;
+  max-height: 35vh;
+  margin: 1rem 1rem 0 1rem;
+}
+.modal .modal__header .header__image .image__landscape:hover {
+  cursor: pointer;
+}
+.modal .modal__header .header__image .image__landscape:hover {
+  cursor: pointer;
+  opacity: 1;
+  box-shadow: 0 0 0 0;
+}
+.modal .modal__header .header__image .image__portrait {
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background-color: #05386b;
+  top: 0;
+  position: relative;
+  min-width: 35vw;
+  min-height: 35vh;
+  max-height: 35vh;
+  margin: 1rem 1rem 0 1rem;
+  object-position: 50% 0%;
+}
+.modal .modal__header .header__image .image__portrait:hover {
+  cursor: pointer;
+}
+.modal .modal__header .header__image .image__portrait:hover {
+  cursor: pointer;
+  opacity: 1;
+  box-shadow: 0 0 0 0;
+}
+.modal .modal__header .header__user {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   height: 100%;
+  width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   text-align: center;
-  width: 100%;
-  height: 15%;
-  min-height: 15%;
-  max-height: 15%;
+  min-height: 10%;
+  max-height: 10%;
   padding: 2rem;
 }
-.modal .modal-container .modal__header .header__user .header__title {
+.modal .modal__header .header__user .header__title {
   font-size: 1.5rem;
   padding: 0.5rem;
 }
-.modal .modal-container .modal__header .header__user .header__reviewer {
+.modal .modal__header .header__user .header__reviewer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -860,61 +861,61 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   width: 50%;
 }
-.modal .modal-container .modal__header .header__user .header__reviewer .reviewer__info--onclick {
+.modal .modal__header .header__user .header__reviewer .reviewer__info--onclick {
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 33%;
+  width: 60%;
   font-size: 1.5rem;
   padding: 0.5rem;
 }
-.modal .modal-container .modal__header .header__user .header__reviewer .reviewer__info {
+.modal .modal__header .header__user .header__reviewer .reviewer__info {
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 33%;
+  width: 60%;
   font-size: 1rem;
 }
-.modal .modal-container .modal__body {
+.modal .modal__body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 45%;
+  height: 40vh;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
-  min-height: 45%;
-  max-height: 45%;
+  min-height: 40vh;
+  max-height: 40vh;
 }
-.modal .modal-container .modal__body .body__stars {
+.modal .modal__body .body__business {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+.modal .modal__body .body__stars {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   height: 100%;
-  width: 50%;
+  width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   height: 10%;
+  min-width: 75%;
+  max-width: 90%;
 }
-.modal .modal-container .modal__body .body__drop {
+.modal .modal__body .body__drop {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -922,36 +923,33 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
-.modal .modal-container .modal__body .body__title {
-  font-size: 1.2rem;
-  height: 10%;
+.modal .modal__body .body__title {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  text-decoration: underline;
+  margin: 1rem 0 1.5rem 0;
 }
-.modal .modal-container .modal__body .body__stars {
+.modal .modal__body .body__stars {
   text-align: center;
   width: 50%;
   height: 20%;
 }
-.modal .modal-container .modal__body .body__review {
-  background: #ffffff;
-  border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
+.modal .modal__body .body__review {
   font-size: 1rem;
   height: 50%;
   padding: 0.5rem;
-  width: 75%;
+  width: 90%;
   height: auto;
   max-height: 25vh;
   overflow-y: auto;
   overflow-wrap: break-word;
 }
-.modal .modal-container .modal__footer {
+.modal .modal__footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -959,14 +957,12 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
-.modal .modal-container .modal__footer .footer__button {
+.modal .modal__footer .footer__button {
   border-radius: 0.5rem;
   width: 5rem;
   background-color: #3487d5;
@@ -976,7 +972,7 @@
   height: 2.5rem;
   margin: 0.5rem 0;
 }
-.modal .modal-container .modal__footer .footer__button:hover {
+.modal .modal__footer .footer__button:hover {
   cursor: pointer;
   box-shadow: 0px 15px 20px #6b6b6b;
   filter: brightness(110%);

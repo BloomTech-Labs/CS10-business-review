@@ -27,6 +27,7 @@
   margin: 0;
   cursor: default;
   color: #05386b;
+  box-shadow: 0px 0px 40px 0px #6b6b6b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
@@ -184,6 +185,7 @@
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
+  box-shadow: 0px 0px 40px 0px #6b6b6b;
 }
 .business .business__reviews-container .reviews-container__title {
   background: #ffffff;
@@ -278,7 +280,7 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  min-height: 72vh;
+  min-height: 40vh;
   flex: 1;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews--no-results {
@@ -295,7 +297,7 @@
   margin: 0;
   cursor: default;
   color: #05386b;
-  min-height: 100vh;
+  min-height: 40vh;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews--no-results .search__title {
   font-size: 1.5rem;
@@ -333,6 +335,7 @@
 .business .business__reviews-container .reviews-container__reviews .reviews__review {
   width: 100%;
   height: 100%;
+  min-height: 40vh;
   display: flex;
   flex-wrap: wrap;
   margin: 2rem 1rem 0 1rem;
@@ -353,52 +356,196 @@
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
-  min-height: 25vh;
-  max-height: 25vh;
-  min-width: 17%;
-  max-width: 17%;
+  box-shadow: 0px 0px 40px 0px #6b6b6b;
+  min-height: 30vh;
+  max-height: 30vh;
+  min-width: 22vw;
+  max-width: 22vw;
   margin: 1rem;
   color: #05386b;
   opacity: 0.8;
   padding: 1rem;
 }
-.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape {
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info:hover {
+  cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  opacity: 1;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .header__data {
+  min-width: 10vw;
+  max-width: 10vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .header__data .data__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  width: auto;
+  max-width: 10vw;
+  padding: 0.2rem 0;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .review__landscape {
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
   background-color: #05386b;
   top: -2rem;
   position: relative;
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  width: 8vw;
+  min-width: 8vw;
+  max-width: 8vw;
   height: 15vh;
   min-height: 15vh;
   max-height: 15vh;
 }
-.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape:hover {
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .review__landscape:hover {
   cursor: pointer;
 }
-.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait {
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .review__portrait {
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
   background-color: #05386b;
   top: -2rem;
   position: relative;
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  width: 8vw;
+  min-width: 8vw;
+  max-width: 8vw;
   height: 15vh;
   min-height: 15vh;
   max-height: 15vh;
   object-position: 50% 0%;
 }
-.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait:hover {
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .review__portrait:hover {
   cursor: pointer;
 }
-.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__image:hover {
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__reviewer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__reviewer .review__landscape {
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background-color: #05386b;
+  top: 0;
+  position: relative;
+  position: static;
+  width: 3rem;
+  min-width: 3rem;
+  max-width: 3rem;
+  height: 3rem;
+  min-height: 3rem;
+  max-height: 3rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__reviewer .review__landscape:hover {
   cursor: pointer;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__reviewer .review__portrait {
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background-color: #05386b;
+  top: -2rem;
+  position: relative;
+  position: static;
+  width: 3rem;
+  min-width: 3rem;
+  max-width: 3rem;
+  height: 3rem;
+  min-height: 3rem;
+  max-height: 3rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+  object-position: 50% 0%;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__reviewer .review__portrait:hover {
+  cursor: pointer;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__reviewer .reviewer__text {
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  width: auto;
+  max-width: 50%;
+}
+.business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__review {
+  padding: 1rem 0;
+  word-wrap: break-word;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  text-align: left;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .review__stars {
   text-align: center;
@@ -485,91 +632,51 @@
   background: #efeff1;
   cursor: default;
 }
-.modal .modal-container {
-  width: 80%;
-  height: 80vh;
-  max-height: 80vh;
-}
-.modal .modal-container .modal__header {
+.modal .modal__header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 50%;
+  height: 40vh;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0 0 0.3rem 0;
-  cursor: default;
   color: #05386b;
-  max-height: 50%;
+  max-height: 40vh;
 }
-.modal .modal-container .modal__header .header__image {
+.modal .modal__header .header__image {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+}
+.modal .modal__header .header__image .image__buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
-  height: 85%;
-  max-height: 85%;
+  width: 10vw;
+  min-width: 10vw;
+  max-width: 10vw;
+  padding: 1rem;
 }
-.modal .modal-container .modal__header .header__image .image__landscape {
-  border-radius: 1rem;
-  object-fit: cover;
-  object-position: 50% 50%;
-  background-color: #05386b;
-  top: 0;
-  position: relative;
-  width: 50%;
-  min-width: 50%;
-  height: 100%;
-  max-height: 100%;
-  margin: 1rem 1rem 0 1rem;
-}
-.modal .modal-container .modal__header .header__image .image__landscape:hover {
-  cursor: pointer;
-}
-.modal .modal-container .modal__header .header__image .image__portrait {
-  border-radius: 1rem;
-  object-fit: cover;
-  object-position: 50% 50%;
-  background-color: #05386b;
-  top: 0;
-  position: relative;
-  width: 50%;
-  min-width: 50%;
-  height: 100%;
-  max-height: 100%;
-  margin: 1rem 1rem 0 1rem;
-  object-position: 50% 0%;
-}
-.modal .modal-container .modal__header .header__image .image__portrait:hover {
-  cursor: pointer;
-}
-.modal .modal-container .modal__header .header__image .image__button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  font-size: 1.2rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  cursor: default;
-  color: #05386b;
-  height: initial;
+.modal .modal__header .header__image .image__buttons .image__button {
   border-radius: 0.5rem;
   width: 5rem;
   background-color: #3487d5;
@@ -577,41 +684,81 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   height: 2.5rem;
-  font-size: 1.5rem;
+  width: 5vw;
+  min-width: 5vw;
+  max-width: 5vw;
+  margin: 1rem;
   padding: 0.5rem;
-  width: 20%;
 }
-.modal .modal-container .modal__header .header__image .image__button:hover {
+.modal .modal__header .header__image .image__buttons .image__button:hover {
   cursor: pointer;
   box-shadow: 0px 15px 20px #6b6b6b;
   filter: brightness(110%);
   font-weight: bolder;
 }
-.modal .modal-container .modal__header .header__user {
+.modal .modal__header .header__image .image__landscape {
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background-color: #05386b;
+  top: 0;
+  position: relative;
+  min-width: 35vw;
+  min-height: 35vh;
+  max-height: 35vh;
+  margin: 1rem 1rem 0 1rem;
+}
+.modal .modal__header .header__image .image__landscape:hover {
+  cursor: pointer;
+}
+.modal .modal__header .header__image .image__landscape:hover {
+  cursor: pointer;
+  opacity: 1;
+  box-shadow: 0 0 0 0;
+}
+.modal .modal__header .header__image .image__portrait {
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background-color: #05386b;
+  top: 0;
+  position: relative;
+  min-width: 35vw;
+  min-height: 35vh;
+  max-height: 35vh;
+  margin: 1rem 1rem 0 1rem;
+  object-position: 50% 0%;
+}
+.modal .modal__header .header__image .image__portrait:hover {
+  cursor: pointer;
+}
+.modal .modal__header .header__image .image__portrait:hover {
+  cursor: pointer;
+  opacity: 1;
+  box-shadow: 0 0 0 0;
+}
+.modal .modal__header .header__user {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   height: 100%;
+  width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   text-align: center;
-  width: 100%;
-  height: 15%;
-  min-height: 15%;
-  max-height: 15%;
+  min-height: 10%;
+  max-height: 10%;
   padding: 2rem;
 }
-.modal .modal-container .modal__header .header__user .header__title {
+.modal .modal__header .header__user .header__title {
   font-size: 1.5rem;
   padding: 0.5rem;
 }
-.modal .modal-container .modal__header .header__user .header__reviewer {
+.modal .modal__header .header__user .header__reviewer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -619,61 +766,61 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   width: 50%;
 }
-.modal .modal-container .modal__header .header__user .header__reviewer .reviewer__info--onclick {
+.modal .modal__header .header__user .header__reviewer .reviewer__info--onclick {
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 33%;
+  width: 60%;
   font-size: 1.5rem;
   padding: 0.5rem;
 }
-.modal .modal-container .modal__header .header__user .header__reviewer .reviewer__info {
+.modal .modal__header .header__user .header__reviewer .reviewer__info {
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 33%;
+  width: 60%;
   font-size: 1rem;
 }
-.modal .modal-container .modal__body {
+.modal .modal__body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 45%;
+  height: 40vh;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
-  min-height: 45%;
-  max-height: 45%;
+  min-height: 40vh;
+  max-height: 40vh;
 }
-.modal .modal-container .modal__body .body__stars {
+.modal .modal__body .body__business {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+.modal .modal__body .body__stars {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   height: 100%;
-  width: 50%;
+  width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   height: 10%;
+  min-width: 75%;
+  max-width: 90%;
 }
-.modal .modal-container .modal__body .body__drop {
+.modal .modal__body .body__drop {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -681,36 +828,33 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
-.modal .modal-container .modal__body .body__title {
-  font-size: 1.2rem;
-  height: 10%;
+.modal .modal__body .body__title {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  text-decoration: underline;
+  margin: 1rem 0 1.5rem 0;
 }
-.modal .modal-container .modal__body .body__stars {
+.modal .modal__body .body__stars {
   text-align: center;
   width: 50%;
   height: 20%;
 }
-.modal .modal-container .modal__body .body__review {
-  background: #ffffff;
-  border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
+.modal .modal__body .body__review {
   font-size: 1rem;
   height: 50%;
   padding: 0.5rem;
-  width: 75%;
+  width: 90%;
   height: auto;
   max-height: 25vh;
   overflow-y: auto;
   overflow-wrap: break-word;
 }
-.modal .modal-container .modal__footer {
+.modal .modal__footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -718,14 +862,12 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
-.modal .modal-container .modal__footer .footer__button {
+.modal .modal__footer .footer__button {
   border-radius: 0.5rem;
   width: 5rem;
   background-color: #3487d5;
@@ -735,7 +877,7 @@
   height: 2.5rem;
   margin: 0.5rem 0;
 }
-.modal .modal-container .modal__footer .footer__button:hover {
+.modal .modal__footer .footer__button:hover {
   cursor: pointer;
   box-shadow: 0px 15px 20px #6b6b6b;
   filter: brightness(110%);

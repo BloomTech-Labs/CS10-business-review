@@ -18,6 +18,10 @@ class SearchResults extends Component {
     lastPage: 0,
   };
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   // Reset the currentPage to 0 if a new search is made
   componentDidUpdate = prevProps => {
     if (this.props.searchResults && this.props.searchResults !== prevProps.searchResults) {

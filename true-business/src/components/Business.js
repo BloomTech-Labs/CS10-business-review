@@ -46,9 +46,12 @@ class Business extends Component {
     modalInfo: null,
     currentPage: 0,
     total: 0,
+    liked: false,
+    unliked: false,
   };
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     if (this.props.business !== null) {
       this.getReviews(0, this.state.sortBy, this.state.filterBy);
     }
@@ -60,7 +63,6 @@ class Business extends Component {
   };
 
   handleClose = type => {
-    console.log("handleClose Firing");
     this.setState({ [type]: null });
   };
 
@@ -89,7 +91,6 @@ class Business extends Component {
           }/${currentPage}/${filter}/${sort}`,
         )
         .then(response => {
-          console.log("Axios Response", response);
           this.setState({
             reviews: response.data.reviews,
             total: response.data.total,
@@ -117,13 +118,7 @@ class Business extends Component {
 
   createPagination = () => {
     let lastPage =
-      // Ex. 100 / 10 % 1 = 0
-      // Ex. 101 / 10 % 1 != 0
-      (this.state.total / 10) % 1 === 0
-        ? // 100 / 10 - 1 = 9, so pages 0-9 will show results 0-99 (10 pages, 10 each page)
-          Math.floor(this.state.total / 10) - 1
-        : // 101 / 10 = 10, so pages 0-10 will show results 0-100 (11 pages, 1 on the last page)
-          Math.floor(this.state.total / 10);
+      (this.state.total / 12) % 1 === 0 ? Math.floor(this.state.total / 12) - 1 : Math.floor(this.state.total / 12);
 
     // Set is the lazy / quick way if there is only one page
     let pages = new Set([0, lastPage]);
@@ -179,21 +174,26 @@ class Business extends Component {
   };
 
   sort = sortBy => {
-    console.log("Sort Firing", sortBy);
     this.handleClose("anchorElSort");
-    this.setState({ sortBy });
+    this.setState({ sortBy, currentPage: 0 });
     this.getReviews(0, sortBy, this.state.filterBy);
   };
 
   filter = filterBy => {
-    console.log("Filter Firing", filterBy);
     this.handleClose("anchorElFilter");
-    this.setState({ filterBy });
+    this.setState({ filterBy, currentPage: 0 });
     this.getReviews(0, this.state.sortBy, filterBy);
   };
 
+  updateLike = () => {
+    this.setState({ liked: true });
+  };
+
+  updateUnlike = () => {
+    this.setState({ unliked: true });
+  };
+
   render() {
-    console.log("This.state", this.state);
     return (
       <div>
         <NavBar search={this.props.search} />
@@ -229,11 +229,16 @@ class Business extends Component {
                   {this.props.business.hasOwnProperty("opening_hours") ? (
                     this.props.business.opening_hours.hasOwnProperty("weekday_text") ? (
                       this.props.business.opening_hours.weekday_text.map((day, i) => {
+                        // Decide which day is current (Sun 0 --- Sat 6)
+                        // weekday_text is Mon-Sun though
                         let dayIndex = 0;
                         let dayNum = new Date().getDay();
-                        i + 1 > this.props.business.opening_hours.weekday_text.length
-                          ? (dayIndex = i)
-                          : (dayIndex = i + 1);
+                        if (i === 6 && dayNum === 0) {
+                          dayIndex = 0;
+                          dayNum = 0;
+                        } else {
+                          dayIndex = i + 1;
+                        }
                         let flag = dayIndex === dayNum ? true : false;
                         return (
                           <div style={flag ? { fontWeight: "bolder" } : null} key={day} className="hours__day">
@@ -309,10 +314,11 @@ class Business extends Component {
                     open={Boolean(this.state.anchorElFilter)}
                     onClose={this.handleClose}>
                     <MenuItem onClick={this.filter.bind(this, "No Filter")}>No Filter</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "5 Stars or Higher")}>5 Stars or Higher</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "4 Stars or Higher")}>4 Stars or Higher</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "3 Stars or Higher")}>3 Stars or Higher</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "2 Stars or Higher")}>2 Stars or Higher</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "5 Stars")}>5 Stars</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "4 Stars")}>4 Stars</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "3 Stars")}>3 Stars</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "2 Stars")}>2 Stars</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "1 Stars")}>1 Stars</MenuItem>
                   </Menu>
                 </div>
                 <div className="dropdowns__dropdown">
@@ -344,27 +350,51 @@ class Business extends Component {
                   {this.state.reviews.length ? (
                     this.state.reviews.map(review => {
                       return (
-                        <div key={review._id} className="review__info">
-                          <img
-                            alt={review.reviewer.username}
-                            className={
-                              review.photos[0].width > review.photos[0].height
-                                ? "review__landscape"
-                                : "review__portrait"
-                            }
-                            src={review.photos[0].link}
-                            onClick={() => this.openModal(this, review)}
-                          />
-                          <StarRatings
-                            starDimension="20px"
-                            starSpacing="5px"
-                            rating={review.stars}
-                            starRatedColor="gold"
-                            starEmptyColor="grey"
-                            numberOfStars={5}
-                            name="rating"
-                          />
-                          <div className="review__reviewer">@{review.reviewer.username}</div>
+                        <div key={review._id} className="review__info" onClick={() => this.openModal(this, review)}>
+                          <div className="info__header">
+                            <div className="header__data">
+                              <div className="data__text">{review.title ? review.title : "No Title"}</div>
+                              <div className="data__text">
+                                <span style={{ marginRight: "1rem" }}>
+                                  <StarRatings
+                                    starDimension="20px"
+                                    starSpacing="5px"
+                                    rating={review.stars}
+                                    starRatedColor="gold"
+                                    starEmptyColor="grey"
+                                    numberOfStars={5}
+                                    name="rating"
+                                  />
+                                </span>
+                                {review.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}
+                              </div>
+                            </div>
+                            <img
+                              alt={review.reviewer.username}
+                              className={
+                                review.photos[0].width > review.photos[0].height
+                                  ? "review__landscape"
+                                  : "review__portrait"
+                              }
+                              src={review.photos[0].link}
+                            />
+                          </div>
+                          <div className="info__body">
+                            <div className="body__reviewer">
+                              <img
+                                alt={review.reviewer.userImages[0]}
+                                className={
+                                  review.reviewer.userImages[0].width > review.reviewer.userImages[0].height
+                                    ? "review__landscape"
+                                    : "review__portrait"
+                                }
+                                src={review.reviewer.userImages[0].link}
+                                onClick={() => this.openModal(this, review)}
+                              />
+                              <div className="reviewer__text">{review.reviewer.username}</div>
+                            </div>
+                            <div className="body__review">{review.body ? review.body : "No Review"}</div>
+                          </div>
                         </div>
                       );
                     })
@@ -374,71 +404,95 @@ class Business extends Component {
                     </div>
                   )}
                 </div>
-                <div>{this.props.business.totalReviews > 10 ? this.createPagination() : null}</div>
+                <div>{this.state.total > 12 ? this.createPagination() : null}</div>
               </div>
             </div>
             <Modal
               shouldCloseOnOverlayClick={false}
               isOpen={this.state.modalIsOpen}
+              onRequestClose={this.closeModal}
               style={modalStyles}
               contentLabel="Review Modal">
-              <div className="modal">
-                {this.state.modalIsOpen ? (
-                  <div className="modal-container">
-                    <div className="modal__header">
-                      <div className="header__image">
+              {this.state.modalIsOpen ? (
+                <div className="modal">
+                  <div className="modal__header">
+                    <div className="header__image">
+                      {/* Update reviews / user with likes */}
+                      <div className="image__buttons">
+                        {!this.state.unliked ? (
+                          <button className="image__button" onClick={this.updateLike}>
+                            {this.state.liked ? (
+                              <div>
+                                <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-up" />
+                                <i className="fas fa-check" />
+                              </div>
+                            ) : (
+                              <i className="fas fa-thumbs-up" />
+                            )}
+                          </button>
+                        ) : null}
+                        {!this.state.liked ? (
+                          <button className="image__button" onClick={this.updateUnlike}>
+                            {this.state.unliked ? (
+                              <div>
+                                <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-down" />
+                                <i className="fas fa-check" />
+                              </div>
+                            ) : (
+                              <i className="fas fa-thumbs-down" />
+                            )}
+                          </button>
+                        ) : null}
+                      </div>
+                      <img
+                        alt={this.state.modalInfo.newMongoId.name}
+                        className="image__landscape"
+                        src={this.state.modalInfo.photos[0].link}
+                      />
+                      <div className="image__buttons">
                         <button className="image__button" onClick={this.closeModal}>
-                          Close
                           <i className="far fa-window-close" />
                         </button>
-                        {/* Update reviews / user with likes */}
-                        <button className="image__button">
-                          Like
-                          <i className="fas fa-thumbs-up" />
-                        </button>
-                        <img
-                          alt={this.state.modalInfo.newMongoId.name}
-                          className={
-                            this.state.modalInfo.photos[0].width > this.state.modalInfo.photos[0].height
-                              ? "image__landscape"
-                              : "image__portrait"
-                          }
-                          src={this.state.modalInfo.photos[0].link}
-                        />
-                      </div>
-                      <div className="header__user">
-                        {/* Onclick to go to the user component whenever we get to that... */}
-                        <div className="header__reviewer">
-                          <div className="reviewer__info--onclick">@{this.state.modalInfo.reviewer.username}</div>
-                          <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
-                          <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
-                        </div>
                       </div>
                     </div>
-                    <div className="modal__body">
-                      <div className="body__stars">
-                        <div className="stars__title"> {this.state.modalInfo.newMongoId.name}</div>
-                        <StarRatings
-                          starDimension="20px"
-                          starSpacing="5px"
-                          rating={this.state.modalInfo.stars}
-                          starRatedColor="gold"
-                          starEmptyColor="grey"
-                          numberOfStars={5}
-                          name="rating"
-                        />
-                        <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
-                      </div>
-                      <div className="body__title">
-                        {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
-                      </div>
-                      <div className="body__review">
-                        {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                    <div className="header__user">
+                      <div className="header__reviewer">
+                        <div className="reviewer__info--onclick">
+                          <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
+                          {this.state.modalInfo.reviewer.username}
+                        </div>
+                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
+                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
                       </div>
                     </div>
                   </div>
-                ) : null}
-              </div>
+                  <div className="modal__body">
+                    <div className="body__stars">
+                      <div className="body__business"> {this.state.modalInfo.newMongoId.name}</div>
+                      <StarRatings
+                        starDimension="20px"
+                        starSpacing="5px"
+                        rating={this.state.modalInfo.stars}
+                        starRatedColor="gold"
+                        starEmptyColor="grey"
+                        numberOfStars={5}
+                        name="rating"
+                      />
+                      <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
+                      <div>
+                        <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
+                        {this.state.modalInfo.reviewer.username}
+                      </div>
+                    </div>
+                    <div className="body__title">
+                      {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
+                    </div>
+                    <div className="body__review">
+                      {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                    </div>
+                  </div>
+                </div>
+              ) : null}
             </Modal>
           </div>
         ) : (

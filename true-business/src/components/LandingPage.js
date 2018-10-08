@@ -33,11 +33,16 @@ class LandingPage extends Component {
       modalIsOpen: false,
       modalInfo: null,
       liked: false,
+      unliked: false,
     };
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
 
   openModal(event, info) {
     this.setState({ modalIsOpen: true, modalInfo: info });
@@ -47,12 +52,12 @@ class LandingPage extends Component {
     this.setState({ modalIsOpen: false, liked: false });
   }
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
   updateLike = () => {
     this.setState({ liked: true });
+  };
+
+  updateUnlike = () => {
+    this.setState({ unliked: true });
   };
 
   render() {
@@ -156,23 +161,47 @@ class LandingPage extends Component {
                 <div className="modal__header">
                   <div className="header__image">
                     {/* Update reviews / user with likes */}
-                    <button className="image__button" onClick={this.updateLike}>
-                      {this.state.liked ? <i className="fas fa-check" /> : <i className="fas fa-thumbs-up" />}
-                    </button>
+                    <div className="image__buttons">
+                      {!this.state.unliked ? (
+                        <button className="image__button" onClick={this.updateLike}>
+                          {this.state.liked ? (
+                            <div>
+                              <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-up" />
+                              <i className="fas fa-check" />
+                            </div>
+                          ) : (
+                            <i className="fas fa-thumbs-up" />
+                          )}
+                        </button>
+                      ) : null}
+                      {!this.state.liked ? (
+                        <button className="image__button" onClick={this.updateUnlike}>
+                          {this.state.unliked ? (
+                            <div>
+                              <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-down" />
+                              <i className="fas fa-check" />
+                            </div>
+                          ) : (
+                            <i className="fas fa-thumbs-down" />
+                          )}
+                        </button>
+                      ) : null}
+                    </div>
                     <img
                       alt={this.state.modalInfo.newMongoId.name}
                       className="image__landscape"
                       src={this.state.modalInfo.photos[0].link}
                     />
-                    <button className="image__button" onClick={this.closeModal}>
-                      <i className="far fa-window-close" />
-                    </button>
+                    <div className="image__buttons">
+                      <button className="image__button" onClick={this.closeModal}>
+                        <i className="far fa-window-close" />
+                      </button>
+                    </div>
                   </div>
                   <div className="header__user">
                     <div className="header__reviewer">
                       <div className="reviewer__info--onclick">
-                        {" "}
-                        <i style={{ paddingRight: ".5rem" }} class="fas fa-user" />
+                        <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
                         {this.state.modalInfo.reviewer.username}
                       </div>
                       <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
@@ -193,6 +222,7 @@ class LandingPage extends Component {
                       name="rating"
                     />
                     <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
+                    <div><i style={{ paddingRight: ".5rem" }} className="fas fa-user" />{this.state.modalInfo.reviewer.username}</div>
                   </div>
                   <div className="body__title">
                     {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}

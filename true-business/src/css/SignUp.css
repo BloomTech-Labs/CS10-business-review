@@ -161,3 +161,8 @@
   filter: brightness(110%);
   font-weight: bolder;
 }
+.userError {
+  color: red;
+  padding: 0.5rem;
+  min-height: 2.2rem;
+}

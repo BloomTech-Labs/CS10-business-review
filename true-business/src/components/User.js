@@ -61,6 +61,7 @@ class User extends Component {
   };
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     this.getReviews(0);
     const id = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
@@ -157,10 +158,6 @@ class User extends Component {
         let password = this.state.passwordButton === "Change" ? "Cancel" : "Change";
         this.setState({ passwordButton: password, passwordShow: !this.state.passwordShow });
     }
-  };
-
-  updateCurrent = event => {
-    this.setState({ current: event.target.name });
   };
 
   toggleDropDown = event => {
@@ -288,6 +285,20 @@ class User extends Component {
     ) : null;
   };
 
+  openImage = event => {
+    var newTab = window.open();
+    let image = document.createElement("img");
+    image.src = event.target.src;
+    image.classList.add("image__landscape");
+    setTimeout(() => {
+      newTab.document.body.appendChild(image);
+    }, 100);
+  };
+
+  updatePage = currentPage => {
+    this.setState({ currentPage });
+  };
+
   openModal = (event, info) => {
     this.setState({ modalIsOpen: true, modalInfo: info });
   };
@@ -384,59 +395,67 @@ class User extends Component {
               onRequestClose={this.closeModal}
               style={modalStyles}
               contentLabel="Review Modal">
-              <div className="modal">
-                {this.state.modalIsOpen ? (
-                  <div className="modal-container">
-                    <div className="modal__header">
-                      <div className="header__image">
-                        <button className="image__button" onClick={this.closeModal}>
-                          Close
-                          <i className="far fa-window-close" />
-                        </button>
-                        {/* Update reviews / user with likes */}
-                        <button className="image__button">
-                          Like
-                          <i className="fas fa-thumbs-up" />
-                        </button>
+              {this.state.modalIsOpen ? (
+                <div className="modal">
+                  <div className="modal__header">
+                    <div className="header__image">
+                      {/* Update reviews / user with likes */}
+                      <div className="image__buttons" />
+                      <a target="_blank" href="#" onClick={this.openImage}>
                         <img
                           alt={this.state.modalInfo.newMongoId.name}
-                          className="image__landscape"
+                          className={
+                            this.state.modalInfo.photos[0].width > this.state.modalInfo.photos[0].height
+                              ? "image__landscape"
+                              : "image__portrait"
+                          }
                           src={this.state.modalInfo.photos[0].link}
                         />
-                      </div>
-                      <div className="header__user">
-                        <div className="header__title"> {this.state.modalInfo.newMongoId.name}</div>
-                        {/* Onclick to go to the user component whenever we get to that... */}
-                        <div className="header__reviewer">
-                          <div className="reviewer__info--onclick">@{this.state.modalInfo.reviewer.username}</div>
-                          <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
-                          <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
-                        </div>
+                      </a>
+                      <div className="image__buttons">
+                        <button className="image__button" onClick={this.closeModal}>
+                          <i className="far fa-window-close" />
+                        </button>
                       </div>
                     </div>
-                    <div className="modal__body">
-                      <div className="body__stars">
-                        <StarRatings
-                          starDimension="20px"
-                          starSpacing="5px"
-                          rating={this.state.modalInfo.stars}
-                          starRatedColor="gold"
-                          starEmptyColor="grey"
-                          numberOfStars={5}
-                          name="rating"
-                        />
-                        <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
-                      </div>
-                      <div className="body__title">
-                        {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
-                      </div>
-                      <div className="body__review">
-                        {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                    <div className="header__user">
+                      <div className="header__reviewer">
+                        <div className="reviewer__info--onclick">
+                          <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
+                          {this.state.modalInfo.reviewer.username}
+                        </div>
+                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfReviews} Reviews</div>
+                        <div className="reviewer__info">{this.state.modalInfo.reviewer.numberOfLikes} Likes</div>
                       </div>
                     </div>
                   </div>
-                ) : null}
-              </div>
+                  <div className="modal__body">
+                    <div className="body__stars">
+                      <div className="body__business"> {this.state.modalInfo.newMongoId.name}</div>
+                      <StarRatings
+                        starDimension="20px"
+                        starSpacing="5px"
+                        rating={this.state.modalInfo.stars}
+                        starRatedColor="gold"
+                        starEmptyColor="grey"
+                        numberOfStars={5}
+                        name="rating"
+                      />
+                      <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
+                      <div>
+                        <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
+                        {this.state.modalInfo.reviewer.username}
+                      </div>
+                    </div>
+                    <div className="body__title">
+                      {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
+                    </div>
+                    <div className="body__review">
+                      {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                    </div>
+                  </div>
+                </div>
+              ) : null}
             </Modal>
           </div>
         );
@@ -540,21 +559,13 @@ class User extends Component {
                 </button>
               </div>
             </div>
-            {this.state.passwordErrorMatch ? (
-              <div className="profile__error"> Passwords Do Not Match </div>
-            ) : (
-              null
-            )}
+            {this.state.passwordErrorMatch ? <div className="profile__error"> Passwords Do Not Match </div> : null}
             {this.state.passwordErrorLength ? (
               <div className="profile__error"> Password Must Be At Least 1 Character </div>
-            ) : (
-              null
-            )}
+            ) : null}
             {this.state.passwordErrorUpdate ? (
               <div className="profile__error"> Original Password Incorrect </div>
-            ) : (
-              null
-            )}
+            ) : null}
             {this.state.error ? null : <div className="profile__error" />}
           </div>
         );

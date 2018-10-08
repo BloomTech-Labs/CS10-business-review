@@ -39,67 +39,62 @@ const getReviewsByReviewerId = (req, res) => {
 const getReviewsByBusinessId = (req, res) => {
   let { filter, sort } = req.params;
   let search = req.params.landing === "true" ? "newMongoId" : "newGoogleId";
+  switch (filter) {
+    case "5 Stars":
+      filterNum = 5;
+      break;
+    case "4 Stars":
+      filterNum = 4;
+      break;
+    case "3 Stars":
+      filterNum = 3;
+      break;
+    case "2 Stars":
+      filterNum = 2;
+      break;
+    case "1 Stars":
+      filterNum = 1;
+      break;
+    // NoFilter
+    default:
+      filterNum = 0;
+  }
+
   Review.find({ [search]: req.params.id })
-    .skip(10 * req.params.currentPage)
-    .limit(10)
-    .populate("reviewer newMongoId")
-    .then(reviews => {
+    .find(filterNum > 0 ? { stars: filterNum } : {})
+    .countDocuments()
+    .then(total => {
       Review.find({ [search]: req.params.id })
-        .count()
-        .then(total => {
-          console.log("Filter", filter);
-          // console.log("params------------------", req.params);
-          switch (filter) {
-            case "5 Stars or Higher":
-              console.log("4 stars or higher");
-              reviews = reviews.filter(review => {
-                return review.stars === 5;
-              });
-              break;
-            case "4 Stars or Higher":
-              console.log("4 stars or higher");
-              reviews = reviews.filter(review => {
-                return review.stars >= 4;
-              });
-              break;
-            case "3 Stars or Higher":
-              console.log("3 stars or higher");
-              reviews = reviews.filter(review => {
-                console.log("review.stars", review.stars);
-                return review.stars >= 3;
-              });
-              break;
-            case "2 Stars or Higher":
-              console.log("2 stars or higher");
-              reviews = reviews.filter(review => {
-                return review.stars >= 2;
-              });
-              break;
-            // No Filter
-            default:
-              null;
-          }
+        .find(filterNum > 0 ? { stars: filterNum } : {})
+        .populate("reviewer newMongoId")
+        .skip(12 * req.params.currentPage)
+        .limit(12)
+        .then(reviews => {
           switch (sort) {
             case "Date Ascending":
               reviews = reviews.sort((a, b) => {
-                return a.createdOn.getTime() < b.createdOn.getTime();
+                console.log("A ", a.createdOn, "B", b.createdOn);
+                console.log(a.createdOn.getTime() < b.createdOn.getTime());
+                return a.createdOn.getTime() > b.createdOn.getTime();
               });
               break;
             case "Rating Descending":
               reviews = reviews.sort((a, b) => {
-                return a.stars > b.stars;
+                return a.stars < b.stars;
               });
               break;
             case "Rating Ascending":
               reviews = reviews.sort((a, b) => {
-                return a.stars < b.stars;
+                return a.stars > b.stars;
               });
               break;
             // Date Descending
             default:
-            reviews = reviews.sort((a, b) => {
-              return a.createdOn.getTime() > b.createdOn.getTime();
-            });
+              reviews = reviews.sort((a, b) => {
+                console.log("A ", a.createdOn, "B", b.createdOn);
+                console.log(a.createdOn.getTime() < b.createdOn.getTime());
+                return a.createdOn.getTime() < b.createdOn.getTime();
+              });
           }
           res.status(200).json({ reviews, total });
         });

@@ -22,6 +22,10 @@ class SignIn extends Component {
     };
   }
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   signIn = event => {
     event.preventDefault();
     axios

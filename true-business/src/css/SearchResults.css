@@ -34,9 +34,6 @@
   color: #05386b;
   min-height: inherit;
   flex-wrap: wrap;
-  background-image: url("../imgs/bar.gif");
-  background-size: 100% 34vh;
-  background-repeat: repeat;
 }
 .search .search__results .results__result {
   display: flex;
