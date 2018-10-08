@@ -31,7 +31,7 @@ let modalStyles = {
     overflow: "hidden",
   },
 };
-
+ 
 class User extends Component {
   state = {
     current: "Home",

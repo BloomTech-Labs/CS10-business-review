@@ -105,13 +105,13 @@ class StripePayment extends Component {
         </div>
         <div className="stripe__radio">
           <div>
-            <label className="radio__label">
+            <label className="radio__label" onChange={this.handleRadioChange}>
               <input
                 className="radio__button"
                 type="radio"
                 id="oneMonth"
                 checked={this.state.selectedRadio === "oneMonth"}
-                onChange={this.handleRadioChange}
+                
               />
               1 Month: $9.99
             </label>

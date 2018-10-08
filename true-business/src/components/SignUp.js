@@ -17,6 +17,7 @@ class SignUp extends Component {
     super(props);
     this.state = {
       name: "",
+      email: "",
       username: "",
       usernameError: false,
       email: "",
@@ -24,7 +25,7 @@ class SignUp extends Component {
       password: "",
       passwordError: false,
       confirmPassword: "",
-      error: "",
+      error: false,
       errorMessage: "",
       payment: false,
       type: null,
@@ -62,10 +63,12 @@ class SignUp extends Component {
             this.props.history.push(`/signin`);
           })
           .catch(err => {
-            this.setState({
-              error: true,
-              errorMessage: err,
-            });
+            if (err) {
+              this.setState({
+                error: true,
+                errorMessage: "This username already exists!",
+              });
+            }
           });
       }
     }
@@ -108,6 +111,7 @@ class SignUp extends Component {
           <div className="signup-container">
             <div className="signup-container__header"> Sign Up </div>
             <form className="signup-container__form">
+              {this.state.errorMessage === '' ? <div className="form__error"/> : <div className="form__error"> {this.state.errorMessage} </div>}
               <input
                 className="signup-container__input"
                 placeholder="Full Name"

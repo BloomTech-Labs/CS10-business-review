@@ -24,6 +24,12 @@
     }
     .signin-container__form {
       .containers(@height: auto);
+      .form__error{
+        .body();
+        min-height: 2rem;
+        max-height: 2rem;
+        color: red;
+      }
       .signin-container__input {
         border: 0.1rem solid @textColor;
         background: @elementBG;

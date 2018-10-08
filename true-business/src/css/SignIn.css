@@ -63,6 +63,12 @@
   margin: 0;
   color: #05386b;
 }
+.signin .signin-container .signin-container__form .form__error {
+  font-size: 1rem;
+  min-height: 2rem;
+  max-height: 2rem;
+  color: red;
+}
 .signin .signin-container .signin-container__form .signin-container__input {
   border: 0.1rem solid #05386b;
   background: #ffffff;

@@ -17,7 +17,7 @@ class SignIn extends Component {
     this.state = {
       username: "",
       password: "",
-      error: "",
+      error: false,
       errorMessage: "",
     };
   }
@@ -28,30 +28,45 @@ class SignIn extends Component {
 
   signIn = event => {
     event.preventDefault();
-    axios
-      .post(`${backend}api/user/login`, { username: this.state.username, password: this.state.password })
-      .then(response => {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data._doc._id);
-        localStorage.setItem("name", response.data._doc.name);
-        localStorage.setItem("accountType", response.data._doc.accountType);
-        localStorage.setItem("accountDeactivated", response.data._doc.accountDeactivated);
-        localStorage.setItem("userImage", response.data._doc.userImages[0].link);
-        this.setState({
-          error: false,
-        });
-        this.props.history.push(`/user`);
-      })
-      .catch(err => {
-        this.setState({
-          error: true,
-          errorMessage: err.response.data.error,
-        });
+    if (!this.state.username || !this.state.password) {
+      this.setState({
+        error: true,
+        errorMessage: "Please provide a username and password!",
       });
+    } else {
+      axios
+        .post(`${backend}api/user/login`, { username: this.state.username, password: this.state.password })
+        .then(response => {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("userId", response.data._doc._id);
+          localStorage.setItem("name", response.data._doc.name);
+          localStorage.setItem("accountType", response.data._doc.accountType);
+          localStorage.setItem("accountDeactivated", response.data._doc.accountDeactivated);
+          localStorage.setItem("userImage", response.data._doc.userImages[0].link);
+          this.setState({
+            error: false,
+          });
+          this.props.history.push(`/user`);
+        })
+        .catch(err => {
+          if (err) {
+            this.setState({
+              error: true,
+              errorMessage: "Incorrect username or password",
+            });
+          }
+        });
+    }
   };
 
   handleInputChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+    if (this.state.username !== '' && this.state.password !== '') {
+      this.setState({
+        error: false,
+        errorMessage: '',
+      });
+    }
   };
 
   render() {
@@ -69,6 +84,11 @@ class SignIn extends Component {
           <div className="signin-container">
             <div className="signin-container__header"> Sign In </div>
             <form className="signin-container__form">
+              {this.state.errorMessage === "" ? (
+                <div className="form__error" />
+              ) : (
+                <div className="form__error"> {this.state.errorMessage} </div>
+              )}
               <input
                 className="signin-container__input"
                 placeholder="Username"

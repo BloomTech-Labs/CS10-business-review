@@ -18,7 +18,16 @@ const bcryptRounds = 10;
 
 const register = (request, response) => {
   const { name, username, password, email, accountType } = request.body;
-  const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
+  if(!name || !username || !email || !password) {
+    response.status(400).json({errorMessage: "Please provide a name, username, email, and password!"});    
+  }  
+  User.findOne({username})
+  .then(user => {    
+    if(user) {
+      response.status(401).json({ errorMessage: "This username already exists"})
+    }
+    else {
+      const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
   const token = generateToken({ username });
   const user = new User({ accountType, name, username, password: encryptedPassword, token, email });
   user
@@ -27,11 +36,18 @@ const register = (request, response) => {
       response.status(200).send(savedUser);
     })
     .catch(err => {
-      response.status(500).send({
+      response.status(500).json({
         errorMessage: "Error occurred while saving: " + err,
+         });
+       });
+      }
+    })
+    .catch(err => {
+      response.status(500).json({
+        errorMessage: "Something went wrong: " + err,
       });
-    });
-};
+    });  
+  };
 
 const login = (request, response) => {
   const { username, password } = request.body;
