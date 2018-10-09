@@ -276,6 +276,7 @@
   opacity: 1;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape {
+  background-color: #e9e9e9;
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
@@ -295,6 +296,7 @@
   cursor: default;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait {
+  background-color: #e9e9e9;
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
@@ -456,6 +458,7 @@
   padding: 0.5rem;
 }
 .user .user__body .body__content .content__profile .profile__container .profile__image {
+  background-color: #e9e9e9;
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
