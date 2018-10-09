@@ -45,7 +45,7 @@
   min-height: 40vh;
 }
 .signin .signin-container .signin-container__header {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
 }
 .signin .signin-container .signin-container__form {
@@ -64,7 +64,7 @@
   color: #05386b;
 }
 .signin .signin-container .signin-container__form .form__error {
-  font-size: 1rem;
+  font-size: 0.7rem;
   min-height: 2rem;
   max-height: 2rem;
   color: red;
@@ -108,7 +108,7 @@
   margin-top: 2rem;
 }
 .signin .signin-container .signin__new .new__text {
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 .signin .signin-container .signin__new .new__button {
   border-radius: 0.5rem;

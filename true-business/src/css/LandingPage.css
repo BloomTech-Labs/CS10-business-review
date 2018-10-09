@@ -32,7 +32,7 @@
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
   margin: 1rem;
 }
@@ -138,7 +138,7 @@
   color: #05386b;
 }
 .landing .landing__container .container__items .items__item .item__description .item__title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   white-space: nowrap;
   width: 100%;
   overflow: hidden;
@@ -302,7 +302,7 @@
   padding: 2rem;
 }
 .modal .modal__header .header__user .header__title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
 }
 .modal .modal__header .header__user .header__reviewer {
@@ -325,14 +325,14 @@
   text-overflow: ellipsis;
   overflow: hidden;
   width: 60%;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
 }
 .modal .modal__header .header__user .header__reviewer .reviewer__info {
   text-overflow: ellipsis;
   overflow: hidden;
   width: 60%;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 .modal .modal__body {
   font-size: 1rem;
@@ -352,7 +352,7 @@
   max-height: 40vh;
 }
 .modal .modal__body .body__business {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
 }
 .modal .modal__body .body__stars {
@@ -389,7 +389,7 @@
   color: #05386b;
 }
 .modal .modal__body .body__title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
   text-decoration: underline;
   margin: 1rem 0 1.5rem 0;
@@ -400,7 +400,7 @@
   height: 20%;
 }
 .modal .modal__body .body__review {
-  font-size: 1rem;
+  font-size: 0.7rem;
   height: 50%;
   padding: 0.5rem;
   width: 90%;

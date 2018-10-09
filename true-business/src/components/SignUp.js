@@ -208,13 +208,13 @@ class SignUp extends Component {
                   onClick={this.createUser}>
                   {this.state.inputError ? "Missing Fields" : "Confirm Registration"}
                 </button>
-                <hr />
+                {/* <hr />
                 <GoogleLogin
                   clientId={process.env.googleClientID || process.env.REACT_APP_GOOGLEAUTHCLIENTID}
                   buttonText="Sign Up With Google"
                   onSuccess={this.createGoogleUser}
                   onFailure={this.googleFail}
-                />
+                /> */}
               </div>
             </form>
             <div className="signup__returning">
