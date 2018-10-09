@@ -114,9 +114,10 @@
   padding: 1rem 1rem 0 1rem;
   margin: 0;
   color: #05386b;
-  min-width: 70vw;
-  max-width: 70vw;
-  min-height: 50vh;
+  min-width: 68vw;
+  max-width: 68vw;
+  min-height: 40vh;
+  margin-top: 2rem;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;

@@ -298,7 +298,7 @@ class Business extends Component {
                       <i className="fas fa-desktop" />
                       <div className="website__text">
                         {this.props.business.website ? (
-                          <a href={this.props.business.website}>
+                          <a href={this.props.business.website} target="_blank">
                             {this.props.business.name}
                             's Website
                           </a>
