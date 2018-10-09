@@ -45,8 +45,7 @@
   min-height: 40vh;
 }
 .signin .signin-container .signin-container__header {
-  font-size: 1.3rem;
-  padding: 0.5rem;
+  font-size: 1.1rem;
 }
 .signin .signin-container .signin-container__form {
   font-size: 1rem;
@@ -64,7 +63,7 @@
   color: #05386b;
 }
 .signin .signin-container .signin-container__form .form__error {
-  font-size: 0.7rem;
+  font-size: 1rem;
   min-height: 2rem;
   max-height: 2rem;
   color: red;
@@ -82,7 +81,7 @@
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   height: 2.5rem;
 }
 .signin .signin-container .signin-container__form .signin-container__button:hover {
@@ -108,7 +107,7 @@
   margin-top: 2rem;
 }
 .signin .signin-container .signin__new .new__text {
-  font-size: 0.7rem;
+  font-size: 1rem;
 }
 .signin .signin-container .signin__new .new__button {
   border-radius: 0.5rem;
@@ -116,7 +115,7 @@
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   height: 2.5rem;
   margin-left: 1rem;
 }
@@ -137,7 +136,7 @@
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   height: 2.5rem;
 }
 .signin-container__google-auth:hover {
