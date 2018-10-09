@@ -447,5 +447,5 @@
 .ReactModal__Content--after-open {
   padding: 0 !important;
   overflow: hidden;
-  max-height: 80vh;
+  max-height: 90vh;
 }
