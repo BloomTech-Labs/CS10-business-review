@@ -21,7 +21,7 @@ let modalStyles = {
     left: "50%",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "90vh",
+    height: "100vh",
     width: "60vw",
     zIndex: "5",
     backgroundColor: "rgb(255,255,255)",
