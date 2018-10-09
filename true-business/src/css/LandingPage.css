@@ -32,8 +32,7 @@
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
-  font-size: 1.3rem;
-  padding: 0.5rem;
+  font-size: 1.1rem;
   margin: 1rem;
 }
 .landing .landing__container .container__items {
@@ -138,7 +137,7 @@
   color: #05386b;
 }
 .landing .landing__container .container__items .items__item .item__description .item__title {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   white-space: nowrap;
   width: 100%;
   overflow: hidden;
@@ -147,6 +146,7 @@
   padding: 0.5rem;
 }
 .landing .landing__container .container__items .items__item .item__description .item__info {
+  font-size: 1rem;
   white-space: nowrap;
   width: 100%;
   overflow: hidden;
@@ -155,6 +155,7 @@
   padding: 0.5rem 0;
 }
 .landing .landing__container .container__items .items__item .item__description .item__info--hover {
+  font-size: 1rem;
   white-space: nowrap;
   width: 100%;
   overflow: hidden;
@@ -225,7 +226,7 @@
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   height: 2.5rem;
   width: 5vw;
   min-width: 5vw;
@@ -302,8 +303,7 @@
   padding: 2rem;
 }
 .modal .modal__header .header__user .header__title {
-  font-size: 1.3rem;
-  padding: 0.5rem;
+  font-size: 1.1rem;
 }
 .modal .modal__header .header__user .header__reviewer {
   font-size: 1rem;
@@ -325,14 +325,13 @@
   text-overflow: ellipsis;
   overflow: hidden;
   width: 60%;
-  font-size: 1.3rem;
-  padding: 0.5rem;
+  font-size: 1.1rem;
 }
 .modal .modal__header .header__user .header__reviewer .reviewer__info {
   text-overflow: ellipsis;
   overflow: hidden;
   width: 60%;
-  font-size: 0.7rem;
+  font-size: 1rem;
 }
 .modal .modal__body {
   font-size: 1rem;
@@ -352,8 +351,7 @@
   max-height: 40vh;
 }
 .modal .modal__body .body__business {
-  font-size: 1.3rem;
-  padding: 0.5rem;
+  font-size: 1.1rem;
 }
 .modal .modal__body .body__stars {
   font-size: 1rem;
@@ -389,8 +387,7 @@
   color: #05386b;
 }
 .modal .modal__body .body__title {
-  font-size: 1.3rem;
-  padding: 0.5rem;
+  font-size: 1.1rem;
   text-decoration: underline;
   margin: 1rem 0 1.5rem 0;
 }
@@ -400,7 +397,7 @@
   height: 20%;
 }
 .modal .modal__body .body__review {
-  font-size: 0.7rem;
+  font-size: 1rem;
   height: 50%;
   padding: 0.5rem;
   width: 90%;
@@ -430,7 +427,7 @@
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   height: 2.5rem;
   margin: 0.5rem 0;
 }

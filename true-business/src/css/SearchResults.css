@@ -15,8 +15,7 @@
   min-height: 100vh;
 }
 .search .search__title {
-  font-size: 1.3rem;
-  padding: 0.5rem;
+  font-size: 1.1rem;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
@@ -123,13 +122,13 @@
   color: #05386b;
 }
 .search .search__results .results__result .result__info .info__name .name__title {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   width: 100%;
   padding: 1rem;
 }
 .search .search__results .results__result .result__info .info__name .name__rating {
   width: 100%;
-  font-size: 0.7rem;
+  font-size: 1rem;
   padding: 1rem;
 }
 .search .search__results .results__result .result__info .info__address {
@@ -214,7 +213,7 @@
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   height: 2.5rem;
   width: 20%;
   margin: 0 0.2rem;
@@ -255,8 +254,7 @@
   min-height: 100vh;
 }
 .search--no-results .search__title {
-  font-size: 1.3rem;
-  padding: 0.5rem;
+  font-size: 1.1rem;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
@@ -276,8 +274,7 @@
   padding: 0;
   margin: 0;
   color: #05386b;
-  font-size: 1.3rem;
-  padding: 0.5rem;
+  font-size: 1.1rem;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;

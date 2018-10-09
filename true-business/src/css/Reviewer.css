@@ -100,7 +100,7 @@
 }
 .reviewer .reviewer__profile .profile__info .info__details .details__text {
   margin-left: 1rem;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
 }
 .reviewer .reviewer__reviews {
   font-size: 1rem;
@@ -284,7 +284,7 @@
   padding: 0;
   margin: 0;
   color: #05386b;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   white-space: nowrap;
   width: 100%;
   overflow: hidden;
@@ -418,7 +418,7 @@
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   height: 2.5rem;
   width: 5%;
   margin: 0 0.5rem;

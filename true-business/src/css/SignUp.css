@@ -45,8 +45,7 @@
   min-height: 60vh;
 }
 .signup .signup-container .signup-container__header {
-  font-size: 1.3rem;
-  padding: 0.5rem;
+  font-size: 1.1rem;
 }
 .signup .signup-container .signup-container__stripe {
   font-size: 1rem;
@@ -121,7 +120,7 @@
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   height: 2.5rem;
   width: auto;
   padding: 0 0.5rem;
@@ -152,7 +151,7 @@
   margin-top: 2rem;
 }
 .signup .signup-container .signup__returning .returning__text {
-  font-size: 0.7rem;
+  font-size: 1rem;
 }
 .signup .signup-container .signup__returning .returning__button {
   border-radius: 0.5rem;
@@ -160,7 +159,7 @@
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   height: 2.5rem;
   margin-left: 1rem;
 }

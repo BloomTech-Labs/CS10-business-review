@@ -64,11 +64,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   padding: 0.5rem;
 }
 .thumbnail .thumbnail__description .description__info {
-  font-size: 0.7rem;
+  font-size: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
