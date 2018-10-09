@@ -16,17 +16,17 @@ let modalStyles = {
   content: {
     top: "50%",
     left: "50%",
-    right: "auto",
-    bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "100vh",
-    width: "50vw",
+    height: "90vh",
+    width: "60vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
+    overflow: "hidden",
   },
 };
+
 
 Modal.setAppElement("div");
 
