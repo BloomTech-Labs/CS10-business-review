@@ -58,6 +58,7 @@
   max-height: 50vh;
 }
 .business .business__info .info__image .info__landscape {
+  background-color: #e9e9e9;
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
@@ -477,6 +478,7 @@
   padding: 0.2rem 0;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .review__landscape {
+  background-color: #e9e9e9;
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
@@ -493,6 +495,7 @@
   cursor: pointer;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .review__portrait {
+  background-color: #e9e9e9;
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
@@ -545,6 +548,7 @@
   padding: 0.5rem 0;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__reviewer .review__landscape {
+  background-color: #e9e9e9;
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
@@ -564,6 +568,7 @@
   cursor: pointer;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__reviewer .review__portrait {
+  background-color: #e9e9e9;
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
@@ -762,6 +767,7 @@
   font-weight: bolder;
 }
 .modal .modal__header .header__image .image__landscape {
+  background-color: #e9e9e9;
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
@@ -781,6 +787,7 @@
   box-shadow: 0 0 0 0;
 }
 .modal .modal__header .header__image .image__portrait {
+  background-color: #e9e9e9;
   border-radius: 1rem;
   object-fit: cover;
   object-position: 50% 50%;
