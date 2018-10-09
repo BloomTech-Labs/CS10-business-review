@@ -200,7 +200,6 @@ const updateUser = (request, response) => {
 const getAllUsers = (request, response) => {
   User.find({})
     .sort({ numberOfLikes: -1, numberOfReviews: -1 })
-    .sort({})
     .limit(4)
     .then(results => {
       response.status(200).json(results);

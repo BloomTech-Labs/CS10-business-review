@@ -97,6 +97,7 @@ class App extends Component {
             <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
             <Route path="/signin" render={() => <SignIn search={this.searchResults} authUser={this.authUser} />} />
             <Route
+              exact
               path="/business"
               render={() => (
                 <Business
@@ -118,20 +119,19 @@ class App extends Component {
     );
   }
 
+  // populate landing page
   getDBBusinesses = () => {
     axios
       .get(`${backend}api/business`)
       .then(businesses => {
-        let featuredBusinesses = businesses.data.filter(business => {
-          return business.stars >= 0;
-        });
-        this.setState({ featuredBusinesses });
+        this.setState({ featuredBusinesses: businesses.data });
       })
       .catch(err => {
         console.log("Error:", err);
       });
   };
 
+  // populate landing page
   getDBReviews = () => {
     axios
       .get(`${backend}api/review/getAllReviews`)
@@ -143,14 +143,12 @@ class App extends Component {
       });
   };
 
+  // populate landing page
   getDBUsers = () => {
     axios
       .get(`${backend}api/user`)
       .then(users => {
-        let featuredUsers = users.data.filter(user => {
-          return user.numberOfLikes >= 0;
-        });
-        this.setState({ featuredUsers });
+        this.setState({ featuredUsers: users.data });
       })
       .catch(err => {
         console.log("Error:", err);
@@ -174,29 +172,17 @@ class App extends Component {
         })
         .catch(error => console.log({ error }));
     } else {
-      console.log("BUSINESS in getgoogle", business);
-
       axios
-        .get(`${backend}api/business/google/${business.place_id}`)
+        .post(`${backend}api/business/placeSearch`, {
+          id: business.place_id,
+        })
         .then(response => {
-          this.setState({ business: response.data });
+          this.setState({ business: response.data, landingBusiness: false });
         })
         .then(() => {
-          this.props.history.push("/business");
+          this.props.history.push(`/business`);
         })
-        .catch(err => {
-          axios
-            .post(`${backend}api/business/placeSearch`, {
-              id: business.place_id,
-            })
-            .then(response => {
-              this.setState({ business: response.data, landingBusiness: false });
-            })
-            .then(() => {
-              this.props.history.push(`/business`);
-            })
-            .catch(error => console.log("Error", error));
-        });
+        .catch(error => console.log("Error", error));
     }
   };
 
