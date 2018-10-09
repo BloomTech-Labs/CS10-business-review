@@ -1,15 +1,21 @@
 @import "./mixins.less";
 
 .navbar {
-  .containers(@width: 100vw, @flexDirection:row, @justifyContent: space-between);
-  .backAndBorder();
-  border-width: 0 0 0.1rem 0;
+  .containers(@width: 100vw, @flexDirection: row, @justifyContent: space-between);
+  .backAndBorder(@borderRadius: 0);
+  min-width: 100vw;
+  max-height: 100vw;
+  min-height: 15vh;
+  max-height: 15vh;
   position: fixed;
   z-index: 5;
-  max-height: 15vh;
+  border: .1rem solid @siteColor;
+  border-width: 0 0 0.1rem 0;
   .navbar__logo {
-    width: 10vw;
-    height: 85%;
+    min-width: 10vw;
+    max-width: 10vw;
+    min-height: 10vh;
+    max-height: 10vh;
     margin: 0.5rem;
     &:hover {
       cursor: pointer;
@@ -17,108 +23,91 @@
   }
   .navbar__center {
     .containers(@width: 50vw);
+    min-width: 50vw;
     max-width: 50vw;
     .center__search {
       .containers(@flexDirection: row);
       min-width: 100%;
-      padding-left: 10vw;
+      max-width: 100%;
+      padding-left: 5vw;
       .search__input {
-        border: 0.1rem solid black;
+        .input(@borderRadius: 0);
+        border: 0.1rem solid @siteColor;
         border-right: 0.1rem solid grey;
         border-right-style: dashed;
-        width: 50%;
         min-width: 50%;
-        font-size: 1rem;
-        padding: 0.5rem;
-        min-height: 1.5rem;
+        max-width: 50%;
+        min-height: 2.5rem;
       }
       .search__input:last-of-type {
         border-left: 0;
         border-right: 0;
-        width: 40%;
         min-width: 40%;
+        max-width: 40%;
       }
       .search__button {
-        margin: 0;
-        width: 10%;
-        min-width: 10%;
-        min-height: 2.5rem;
-        border-radius: 0;
-        background-color: @buttonBG;
-        color: white;
-        font-family: @fontFamily;
-        font-size: 1rem;
-        &:hover {
-          cursor: pointer;
-          filter: brightness(110%);
-          font-weight: bolder;
-        }
+        .button(@borderRadius: 0);
       }
     }
   }
   .navbar__right {
-    .containers(@justifyContent: space-around, @flexDirection: row, @fontSize: 2rem);
+    .containers(@justifyContent: space-around, @flexDirection: row);
     min-width: 20vw;
     max-width: 20vw;
     padding-right: 2vw;
     .right__sign {
       .containers();
-      .buttons();
-      padding: 1rem 0;
-      width: 35%;
+      .button();
+      min-width: 35%;
       max-width: 35%;
-      height: 35%;
+      min-height: 35%;
       max-height: 35%;
-    }
-    .right__sign:last-of-type {
-      margin-left: 1rem;
     }
   }
   .navbar__right--logged {
-    .containers(@justifyContent: flex-start, @flexDirection: row, @fontSize: 2rem);
+    .containers(@justifyContent: flex-end, @flexDirection: row);
     min-width: 15vw;
     max-width: 15vw;
     padding-right: 2vw;
     .right--logged__text {
       .hidden();
       padding: 0 0.2rem;
-
       text-align: left;
-      font-size: 1.2rem;
     }
   }
 }
-// .popover {
-//   .containers(@height: 25%, @fontSize: 1.5rem);
-//   background: @elementBG !important;
-//   color: @textColor;
-//   border: 0.1rem solid black;
-//   text-align: center;
-//   top: -40px !important;
-//   width: 60% !important;
-//   z-index: 10;
-//   .popover-header {
-//     .headers(@fontSize: 2rem, @margin: 0.2rem);
-//   }
-//   .popover-body {
-//     .body(@fontSize: 1.5rem);
-//   }
-//   .popover-button {
-//     .buttons();
-//   }
-// }
+.popover {
+  .containers(@height: 15%);
+  background: @altBG !important;
+  color: @siteColor;
+  border: 0.1rem solid black;
+  text-align: center;
+  top: -5% !important;
+  left: 10.5% !important;
+  width: 42% !important;
+  z-index: 10;
+  .popover__text {
+    margin: 0.5rem 0 0 0;
+  }
+  .popover__button {
+    .button();
+    margin: 0.5rem 0 0 0;
+  }
+}
 
 .modal {
   .containers();
   .modal__title {
-    .headers();
+    .header();
+    padding: 0.5rem;
   }
   .modal__body {
+    padding: 0.5rem;
     .body();
   }
   .modal__footer {
     .footer__button {
-      .buttons();
+      .button();
     }
   }
 }

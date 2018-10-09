@@ -57,6 +57,7 @@ class App extends Component {
   render() {
     return (
       <div className="app-container">
+        <div id="animate-area">
         <Switch>
           <Route
             exact
@@ -76,6 +77,7 @@ class App extends Component {
             path="/results"
             render={() => (
               <SearchResults
+                currentPage="0"
                 business={this.getBusiness}
                 search={this.searchResults}
                 searchResults={this.state.searchResults}
@@ -99,9 +101,11 @@ class App extends Component {
           <Route path="/user" render={() => <User search={this.searchResults} />} /> ):(
           <Route path="/user" render={() => <Redirect search={this.searchResults} />} />)}
         </Switch>
+        </div>
       </div>
     );
   }
+
   getDBBusinesses = () => {
     axios
       .get(`${backend}api/business`)

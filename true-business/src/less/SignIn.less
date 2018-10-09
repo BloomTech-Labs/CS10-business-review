@@ -1,58 +1,73 @@
-@import 'mixins.less';
+@import "mixins.less";
 
 .signin {
-  .containers();
-  padding-top: 20vh;
-  min-height: 100%;
-  cursor: default;
+  .containers(@padding: 5vh 0 5vh 0);
+  .signin__logo {
+    min-width: 15vw;
+    max-width: 15vw;
+    min-height: 15vh;
+    max-height: 15vh;
+    margin: 2rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
   .signin-container {
     .containers(@width: 50%);
     .backAndBorder();
+    .shadow();
     color: @textColor;
     padding: 1rem;
     min-height: 40vh;
     .signin-container__header {
-      .headers();
+      .header();
     }
     .signin-container__form {
-      .danger {
+      .containers(@height: auto);
+      .form__error{
+        .body();
+        min-height: 2rem;
+        max-height: 2rem;
         color: red;
       }
-      .containers(@height: auto);
       .signin-container__input {
         border: 0.1rem solid @textColor;
         background: @elementBG;
         margin-bottom: 1rem;
-        width: 75%;
-        font-size: 1.25rem;
-        padding: .5rem;
+        width: 50%;
+        padding: 0.5rem;
       }
-      .signin-container__buttons {
-        .containers(@justifyContent: space-around);
-        .signin-container__google-auth {
-          min-width: 50%;
-          max-width: 50%;
-          min-height: 10vh;
-          max-height: 10vh;
-          border-radius: 1rem;
-        }
-        .signin-container__google-auth:hover {
-          cursor: pointer;
-        }
-        .signin-container__button {
-          .buttons();
-        }
-        .signin-container__button:hover {
-          cursor: pointer;
-        }
+      .signin-container__button {
+        .button();
+      }
+    }
+    .signin__new {
+      .containers(@flexDirection: row);
+      margin-top: 2rem;
+      .new__text {
+        .body();
+      }
+      .new__button {
+        .button();
+        margin-left: 1rem;
       }
     }
   }
+
+}
+
+.signin-container__google-auth {
+  min-width: 30%;
+  max-width: 30%;
+  min-height: 5vh;
+  max-height: 5vh;
+  border-radius: 1rem;
+  .button();
 }
 
 hr {
-  border: .2rem solid @textColor;
-  margin: 2rem 0;
-  width: 100%;
-  height: 1rem;
+  border: 0.1rem solid @textColor;
+  margin: 1rem 0;
+  padding: .1rem;
+  width: 50%;
 }

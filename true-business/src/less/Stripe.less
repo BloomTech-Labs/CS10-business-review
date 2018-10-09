@@ -1,31 +1,38 @@
 @import "./mixins.less";
 
 .stripe {
-  .containers(@fontSize: 1.5rem);
+  .containers();
+  min-height: 50vh;
+  max-height: 50vh;
+  min-width: 45vw;
+  max-width: 45vw;
+  padding: 2rem;
   .stripe__info {
     .containers();
-    .info__label {
-      .containers(@justifyContent: space-between, @flexDirection: row, @alignItems: initial);
-      margin: 1rem;
-      font-size: 1.5rem;
-      .info__input {
-        border: 0.1rem solid black;
-        font-size: 1.5rem;
-      }
+    margin-bottom: 1rem;
+    .info__input {
+      width: 50%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      .shadow();
     }
   }
   .stripe__radio {
     .containers(@flexDirection: row, @alignItems: flex-start, @justifyContent: space-around);
     .radio__label {
-      padding: 1rem;
-      font-size: 1.5rem;
-    }
-    .radio__button:hover {
-      cursor: pointer;
+      .containers();
+      .title();
+      width: 20vw;
+      &:hover{
+        cursor: pointer;
+      }
+      .radio__button {
+        margin-bottom: 1rem;
+      }
     }
   }
   .stripe__button {
-    .buttons();
+    .button();
     width: 30%;
   }
   .stripe__element {
@@ -33,16 +40,21 @@
     float: right;
     position: relative;
     top: 50%;
-    font-size: 2rem;
     margin: 2rem;
   }
 }
 
 .StripeElement {
-  padding: 1rem;
-  border: .1rem solid @textColor;
+  padding: 0.5rem;
+  .shadow();
 }
 
 .StripeElement--invalid {
   border: 1px solid red;
+}
+
+input[type="radio"] {
+  border: 0px;
+  width: 100%;
+  height: 2em;
 }

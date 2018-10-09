@@ -1,4 +1,5 @@
 .signup {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,13 +9,22 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
   line-height: 1;
-  padding: 0;
+  padding: 5vh 0 5vh 0;
   margin: 0;
   color: #05386b;
-  padding-top: 20vh;
-  cursor: default;
+}
+.signup .signup__logo {
+  min-width: 15vw;
+  max-width: 15vw;
+  min-height: 15vh;
+  max-height: 15vh;
+  margin: 2rem;
+}
+.signup .signup__logo:hover {
+  cursor: pointer;
 }
 .signup .signup-container {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,20 +36,20 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   background: #ffffff;
-  border: 0.1rem solid #05386b;
-  border-radius: 1rem;
+  border: 0.1rem solid #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 50px 0px #6b6b6b;
   color: #05386b;
   padding: 1rem;
   min-height: 60vh;
 }
 .signup .signup-container .signup-container__header {
   font-size: 1.5rem;
-  margin: 1rem;
   padding: 0.5rem;
 }
 .signup .signup-container .signup-container__stripe {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,10 +61,10 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .signup .signup-container .signup-container__form {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,21 +76,22 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
-.signup .signup-container .signup-container__form .danger {
+.signup .signup-container .signup-container__form .form__error {
+  min-height: 2rem;
+  max-height: 2rem;
   color: red;
 }
 .signup .signup-container .signup-container__form .signup-container__input {
   border: 0.1rem solid #05386b;
-  background: #efeff1;
+  background: #ffffff;
   margin-bottom: 1rem;
-  width: 75%;
-  font-size: 1.25rem;
-  padding: .5rem;
+  width: 50%;
+  padding: 0.5rem;
 }
 .signup .signup-container .signup-container__form .signup-container__buttons {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -92,7 +103,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .signup .signup-container .signup-container__form .signup-container__buttons .signup-container__google-auth {
@@ -107,12 +117,14 @@
 }
 .signup .signup-container .signup-container__form .signup-container__buttons .signup-container__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   height: 2.5rem;
+  width: auto;
+  padding: 0 0.5rem;
 }
 .signup .signup-container .signup-container__form .signup-container__buttons .signup-container__button:hover {
   cursor: pointer;
@@ -122,4 +134,44 @@
 }
 .signup .signup-container .signup-container__form .signup-container__buttons .signup-container__button:hover {
   cursor: pointer;
+}
+.signup .signup-container .signup__returning {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+  margin-top: 2rem;
+}
+.signup .signup-container .signup__returning .returning__text {
+  font-size: 1rem;
+}
+.signup .signup-container .signup__returning .returning__button {
+  border-radius: 0.5rem;
+  width: 5rem;
+  background-color: #3487d5;
+  color: #ffffff;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  height: 2.5rem;
+  margin-left: 1rem;
+}
+.signup .signup-container .signup__returning .returning__button:hover {
+  cursor: pointer;
+  box-shadow: 0px 15px 20px #6b6b6b;
+  filter: brightness(110%);
+  font-weight: bolder;
+}
+.userError {
+  color: red;
+  padding: 0.5rem;
+  min-height: 2.2rem;
 }

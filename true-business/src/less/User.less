@@ -1,41 +1,21 @@
 @import "mixins.less";
 
 .user {
-  .containers(@width: auto, @justifyContent: space-around, @alignItems: flex-start);
-  padding: 20vh 5rem 5rem 5rem;
-  .user__header {
-    .containers(@flexDirection: row, @height: 5rem);
-    .header__breadcrumbs {
-      .containers(@flexDirection:row, @height:inherit, @justifyContent: flex-start);
-      font-size: 1.5rem;
-      .breadcrumbs__breadcrumb {
-        .buttons();
-        width: auto;
-        padding: 0 1rem;
-        .breadcrumb__arrow {
-          padding: 0 1rem;
-        }
-        .breadcrumb__arrow:hover {
-          cursor: default;
-        }
-      }
-    }
-    .header__signout {
-      .buttons();
-      margin-right: 5rem;
-      white-space: nowrap;
-    }
-    .header__signout:hover {
-      cursor: pointer;
-    }
-  }
+  .containers(@justifyContent: space-around);
+  padding: 20vh 0 5vh 0;
   .user__body {
     .containers(@flexDirection: row, @alignItems:flex-start, @justifyContent:space-between);
-    min-height: 100vh;
-    width: 80vw;
+    min-height: 75vh;
+    min-width: 80vw;
+    max-width: 80vw;
     .body__left-bar {
-      .containers(@width: 20vw, @height: 25vh, @justifyContent: space-around);
+      .containers(@width: 15vw, @height: 20vh, @justifyContent: space-around);
+      min-width: 15vw;
+      max-width: 15vw;
+      min-height: 20vh;
+      max-height: 20vh;
       .backAndBorder();
+      .shadow();
       .left-bar__button {
         .backAndBorder();
         border: none;
@@ -49,15 +29,25 @@
     }
     .body__content {
       .containers(@justifyContent: flex-start, @alignItems: flex-start);
+      .shadow();
+      .backAndBorder();
+      min-width: 60vw;
+      max-width: 60vw;
+      min-height: 50vh;
       .content__reviews-container {
-        .containers(@padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        .containers(@padding: 1rem 1rem 0 1rem);
         min-width: 60vw;
         max-width: 60vw;
-        min-height: 90vh;
-        max-height: 90vh;
         .backAndBorder();
         .reviews-container__dropdowns {
-          .containers(@width: inherit, @flexDirection: row, @justifyContent: space-around);
+          .containers(@flexDirection: row, @justifyContent: space-between);
+          .dropdowns__dropdown {
+            .containers(@flexDirection: row);
+            width: auto;
+            .dropdown__title {
+              .title();
+            }
+          }
           .reviews__pagination {
             .containers(@flexDirection: row, @justifyContent: space-between);
             .backAndBorder(@background: @elementBG);
@@ -70,7 +60,7 @@
               max-width: 75%;
               min-width: 75%;
               .pagination__page {
-                .buttons();
+                .button();
                 width: 10%;
                 margin: 0 0.2rem;
               }
@@ -80,55 +70,14 @@
               }
             }
           }
-          .dropdowns__dropdown {
-            display: flex;
-            flex-direction: row;
-            width: 25%;
-            min-width: 25%;
-            max-width: 25%;
-            z-index: 2;
-            .dropdown__title {
-              font-size: 2rem;
-            }
-            .dropdown__drop-container {
-              padding: 1rem;
-              text-align: center;
-              width: 100%;
-              .drop-container__button {
-                width: inherit;
-                font-size: 1.5rem;
-                color: @textColor;
-              }
-              .drop-container__button:hover {
-                cursor: pointer;
-              }
-              .drop-container__menu {
-                position: absolute;
-                z-index: 2;
-                display: flex;
-                flex-direction: column;
-                width: inherit;
-                .menu__button {
-                  width: inherit;
-                  border: none;
-                  font-size: 1.5rem;
-                  color: @textColor;
-                }
-                .menu__button:hover {
-                  filter: brightness(80%);
-                  cursor: pointer;
-                }
-              }
-            }
-          }
         }
         .reviews-container__button {
-          .buttons();
+          .button();
         }
         .reviews-container__reviews {
           .containers(@justifyContent: space-between);
-          min-height: 80vh;
-          max-height: 80vh;
+          min-height: 65vh;
+          max-height: 65vh;
           flex: 1;
           .reviews__review {
             display: flex;
@@ -139,6 +88,8 @@
             .review__info {
               .containers();
               .backAndBorder();
+              .shadow();
+              .shadowHover();
               min-height: 25vh;
               max-height: 25vh;
               min-width: 21%;
@@ -148,7 +99,7 @@
               color: @textColor;
               opacity: 0.8;
               .review__landscape {
-                .images();
+                .image();
                 width: 100%;
                 min-width: 100%;
                 max-width: 100%;
@@ -157,7 +108,7 @@
                 max-height: 15vh;
               }
               .review__portrait {
-                .images();
+                .image();
                 width: 100%;
                 min-width: 100%;
                 max-width: 100%;
@@ -177,7 +128,6 @@
                   text-align: center;
                 }
                 .detailed__business {
-                  .body(@fontSize: 1.5rem);
                   .hidden();
                   max-width: 100%;
                   text-align: center;
@@ -191,220 +141,231 @@
         }
       }
       .content__billing {
-        .containers(@padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        .containers(@flexDirection: row, @padding: 1rem 1rem 0 1rem);
         .backAndBorder();
         min-width: 60vw;
         max-width: 60vw;
-        min-height: 70vh;
-        max-height: 70vh;
+        min-height: 50vh;
+        max-height: 50vh;
         .billing__section {
-          .containers(@width: 75%, @justifyContent: space-around, @flexDirection: row);
+          .containers(@justifyContent: flex-start);
+          min-width: 15vw;
+          max-width: 15vw;
+          min-height: 50vh;
+          max-height: 50vh;
           .section__single {
             .containers();
+            padding: 1rem;
             .single__info {
               text-align: center;
-              .body(@fontSize: 1.5rem);
             }
           }
         }
       }
       .content__profile {
-        .containers(@justifyContent: space-between, @padding: 1rem 1rem 0 1rem, @margin: 0 1rem);
+        .containers(@flexDirection: row, @justifyContent: space-between);
         .backAndBorder();
         min-width: 60vw;
         max-width: 60vw;
-        min-height: 75vh;
-        max-height: 75vh;
+        min-height: 50vh;
+        max-height: 50vh;
         .profile__error {
           min-height: 1rem;
-          height: 1rem;
-          font-size: 1rem;
           color: red;
           text-align: center;
           width: 100%;
           margin-bottom: 1rem;
         }
         .profile__container {
-          .containers(@padding: 1rem);
+          .containers(@flexDirection: row);
+          min-width: 60vw;
+          max-width: 60vw;
+          min-height: 50vh;
+          max-height: 50vh;
           .user-change__input {
             padding: 0.5rem;
-            font-size: 1.25rem;
           }
           .profile__image {
-            .images(@top: 0);
-            width: 40%;
-            min-width: 40%;
-            height: 40%;
-            min-height: 40%;
+            .image(@top: 0);
+            min-width: 20vw;
+            max-width: 20vw;
+            min-height: 50vh;
+            max-height: 50vh;
+            object-position: 50% 0%;
           }
-          
           .container__info {
-            .containers(@flexDirection: row, @justifyContent: space-between);
+            .containers(@justifyContent: space-around);
             .backAndBorder(@background: @elementBG);
-            border-radius: .5rem;
-            padding: 1rem;
-            margin: 1rem;
+            border-radius: 0.5rem;
+            padding: 2rem;
             height: 2rem;
-            max-height: 2rem;
-            .info__label {
-              font-size: 1.5rem;
-              width: 20%;
-              min-width: 20%;
-            }
-            .info__data {
-              width: 60%;
-              min-width: 60%;
-              font-size: 1.5rem;
-              .containers();
-              .data__input {
-                width: 90%;
-                min-width: 90%;
-                font-size: 1.5rem;
-                max-height: 1.9rem;
-                background: @buttonBG;
+            min-height: 50vh;
+            max-height: 50vh;
+            min-width: 39vw;
+            max-width: 39vw;
+            .info__info {
+              .containers(@flexDirection: row, @alignItems: flex-start);
+              height: 15vh;
+              .info__label {
+                .title();
+                min-width: 20%;
+                max-width: 20%;
+                padding: 0.5rem;
               }
-              .data__button {
-                .buttons();
-                margin: 0;
+              .info__data {
+                .containers(@justifyContent: flex-start);
+                min-width: 60%;
+                max-width: 60%;;
+                padding: 0.5rem;
+                .data__change {
+                  .containers(@justifyContent: flex-start);
+                  .change__input {
+                    width: 100%;
+                    margin-bottom: 1rem;
+                    padding: 0.5rem;
+                    .shadow();
+                  }
+                  .change__button {
+                    .button();
+                  }
+                }
+              }
+              .info__button {
+                .button();
+                position: relative;
+                width: 10rem;
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+              .info__button--save {
+                .button();
+                margin: 0 1rem 0 0;
+                &:hover {
+                  cursor: pointer;
+                }
               }
             }
-            .noDisplay {
-              display: none;
+            .info__info:last-of-type {
+              height: 30vh;
             }
-            .info__button {
-              .buttons();
-              position: relative;
-              left: 1.5rem;
-              &:hover {
-                cursor: pointer;
-              }
-            }
-            .info__button--save {
-              .buttons();
-              margin: 0 1rem 0 0;
-              &:hover {
-                cursor: pointer;
-              }
-            }
-            
-          }
-          .container__info--top {
-            .container__info();
-            margin-top: 3rem;
           }
         }
       }
-    }
-    .body__footer {
-      min-height: 10vh;
     }
   }
 }
 
 .modal {
-  .modal-container {
-    width: 80%;
-    height: 80vh;
-    max-height: 80vh;
-    .modal__header {
-      .containers(@height:50%, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
-      max-height: 50%;
-      .header__image {
-        .containers(@justifyContent: space-between; @flexDirection: row);
-        height: 85%;
-        max-height: 85%;
-        .image__landscape {
-          .images(@top: 0);
-          width: 50%;
-          min-width: 50%;
-          height: 100%;
-          max-height: 100%;
-          margin: 1rem 1rem 0 1rem;
-        }
-        .image__portrait {
-          .images(@top: 0);
-          width: 50%;
-          min-width: 50%;
-          height: 100%;
-          max-height: 100%;
-          margin: 1rem 1rem 0 1rem;
-          object-position: 50% 0%;
-        }
+  .modal__header {
+    .containers(@height:40vh, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
+    max-height: 40vh;
+    .header__image {
+      .containers(@alignItems: flex-start, @justifyContent: space-between, @flexDirection: row);
+      .image__buttons {
+        .containers(@justifyContent: flex-start);
+        width: 10vw;
+        min-width: 10vw;
+        max-width: 10vw;
+        padding: 1rem;
         .image__button {
-          .containers(@flexDirection: row, @justifyContent: space-around);
-          height: initial;
-          .buttons();
-          .headers();
-          width: 20%;
+          .button();
+          width: 5vw;
+          min-width: 5vw;
+          max-width: 5vw;
+          margin: 1rem;
+          padding: 0.5rem;
         }
       }
-      .header__user {
+      .image__landscape {
+        .image(@top: 0);
+        .regularHover();
+        min-width: 35vw;
+        max-width: 35vw;
+        min-height: 35vh;
+        max-height: 35vh;
+        margin: 1rem 1rem 0 1rem;
+      }
+      .image__portrait {
+        .image(@top: 0);
+        .regularHover();
+        min-width: 35vw;
+        max-width: 35vw;
+        min-height: 35vh;
+        max-height: 35vh;
+        margin: 1rem 1rem 0 1rem;
+        object-position: 50% 0%;
+      }
+    }
+    .header__user {
+      .containers(@flexDirection: row, @justifyContent: space-around);
+      text-align: center;
+      min-height: 10%;
+      max-height: 10%;
+      padding: 2rem;
+      .header__title {
+        .header();
+      }
+      .header__reviewer {
         .containers(@flexDirection: row, @justifyContent: space-around);
-        text-align: center;
-        width: 100%;
-        height: 15%;
-        min-height: 15%;
-        max-height: 15%;
-        padding: 2rem;
-        .header__title {
-          .headers(@margin: 0);
-        }
-        .header__reviewer {
-          .containers(@flexDirection: row, @justifyContent: space-around);
-          width: 50%;
-          .reviewer__info--onclick {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            width: 33%;
-            .headers();
-          }
-          .reviewer__info {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            width: 33%;
-            .body();
-          }
-        }
-      }
-    }
-    .modal__body {
-      .containers(@justifyContent: flex-start, @height: 45%);
-      min-height: 45%;
-      max-height: 45%;
-      .body__stars {
-        .containers(@flexDirection: row, @width: 50%, @justifyContent: space-around);
-        height: 10%;
-      }
-      .body__drop {
-        .containers();
-      }
-      .body__title {
-        font-size: 1.5rem;
-        height: 10%;
-      }
-      .body__stars {
-        text-align: center;
         width: 50%;
-        height: 20%;
-      }
-      .body__review {
-        .backAndBorder();
-        .body();
-        height: 50%;
-        padding: 0.5rem;
-        width: 75%;
-        height: auto;
-        max-height: 25vh;
-        overflow-y: auto;
-        overflow-wrap: break-word;
+        .reviewer__info--onclick {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 60%;
+          .header();
+        }
+        .reviewer__info {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 60%;
+          .body();
+        }
       }
     }
-    .modal__footer {
+  }
+  .modal__body {
+    .containers(@justifyContent: flex-start, @height: 40vh);
+    min-height: 40vh;
+    max-height: 40vh;
+    .body__business {
+      .header();
+    }
+    .body__stars {
+      .containers(@flexDirection: row, @justifyContent: space-around);
+      height: 10%;
+      min-width: 75%;
+      max-width: 90%;
+    }
+    .body__drop {
       .containers();
-      .footer__button {
-        .buttons();
-        margin: 0.5rem 0;
-      }
+    }
+    .body__title {
+      .header();
+      text-decoration: underline;
+      margin: 1rem 0 1.5rem 0;
+    }
+    .body__stars {
+      text-align: center;
+      width: 50%;
+      height: 20%;
+    }
+    .body__review {
+      .body();
+      height: 50%;
+      padding: 0.5rem;
+      width: 90%;
+      height: auto;
+      max-height: 25vh;
+      overflow-y: auto;
+      overflow-wrap: break-word;
+    }
+  }
+  .modal__footer {
+    .containers();
+    .footer__button {
+      .button();
+      margin: 0.5rem 0;
     }
   }
 }

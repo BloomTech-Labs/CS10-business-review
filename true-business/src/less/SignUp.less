@@ -1,24 +1,34 @@
-@import 'mixins.less';
+@import "mixins.less";
 
 .signup {
-  .containers();
-  padding-top: 20vh;
-  cursor: default;
+  .containers(@padding: 5vh 0 5vh 0);
+  .signup__logo {
+    min-width: 15vw;
+    max-width: 15vw;
+    min-height: 15vh;
+    max-height: 15vh;
+    margin: 2rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
   .signup-container {
     .containers(@width: 50%);
     .backAndBorder();
+    .shadow();
     color: @textColor;
     padding: 1rem;
     min-height: 60vh;
     .signup-container__header {
-      .headers();
-    
+      .header();
     }
     .signup-container__stripe {
       .containers();
     }
     .signup-container__form {
-      .danger{
+      .form__error{
+        min-height: 2rem;
+        max-height: 2rem;
         color: red;
       }
       .containers();
@@ -26,9 +36,8 @@
         border: 0.1rem solid @textColor;
         background: @elementBG;
         margin-bottom: 1rem;
-        width: 75%;
-        font-size: 1.25rem;
-        padding: .5rem;
+        width: 50%;
+        padding: 0.5rem;
       }
       .signup-container__buttons {
         .containers(@justifyContent: space-around);
@@ -43,12 +52,31 @@
           cursor: pointer;
         }
         .signup-container__button {
-          .buttons();
+          .button();
+          width: auto;
+          padding: 0 0.5rem;
         }
         .signup-container__button:hover {
           cursor: pointer;
         }
       }
     }
+    .signup__returning {
+      .containers(@flexDirection: row);
+      margin-top: 2rem;
+      .returning__text {
+        .body();
+      }
+      .returning__button {
+        .button();
+        margin-left: 1rem;
+      }
+    }
   }
+}
+
+.userError {
+  color: red;
+  padding: .5rem;
+  min-height: 2.2rem;
 }

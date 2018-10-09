@@ -1,16 +1,17 @@
 @import "mixins.less";
 
 .thumbnail {
-  .containers(@height: 25rem, @width: 20%, @justifyContent: space-between, @fontSize: 1.5rem);
+  .containers(@height: 25rem, @width: 20%, @justifyContent: space-between);
   .backAndBorder();
-  opacity: 0.8;
+  .shadowHover();
+  .shadow();
   margin: 1rem;
   padding: 1rem;
   min-height: 25rem;
   min-width: 20%;
   text-align: center;
   .thumbnail__landscape {
-    .images();
+    .image();
     width: 100%;
     min-width: 100%;
     min-height: 15rem;
@@ -20,8 +21,7 @@
     .containers(@justifyContent: space-around);
     .description__title {
       .hidden();
-      .titles();
-      font-size: 1.5rem;
+      .title();
       padding: 0.5rem;
     }
     .description__info {

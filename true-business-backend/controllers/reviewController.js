@@ -19,14 +19,52 @@ const createReview = (req, res) => {
 };
 // For User Component
 const getReviewsByReviewerId = (req, res) => {
+  let { filter, sort } = req.params;
+  console.log("SORT", sort);
+  switch (filter) {
+    case "5 Stars":
+      filterNum = 5;
+      break;
+    case "4 Stars":
+      filterNum = 4;
+      break;
+    case "3 Stars":
+      filterNum = 3;
+      break;
+    case "2 Stars":
+      filterNum = 2;
+      break;
+    case "1 Stars":
+      filterNum = 1;
+      break;
+    // NoFilter
+    default:
+      filterNum = 0;
+  }
   Review.find({ reviewer: req.params.id })
-    .skip(8 * req.params.currentPage)
-    .limit(8)
-    .populate("reviewer newMongoId")
-    .then(reviews => {
+    .find(filterNum > 0 ? { stars: filterNum } : {})
+    .countDocuments()
+    .then(total => {
       Review.find({ reviewer: req.params.id })
-        .count()
-        .then(total => {
+        .find(filterNum > 0 ? { stars: filterNum } : {})
+        .sort(
+          sort === "Rating Ascending" || sort === "Rating Descending"
+            ? sort === "Rating Ascending"
+              ? { stars: 1 }
+              : { stars: -1 }
+            : {},
+        )
+        .sort(
+          sort === "Date Ascending" || sort === "Date Descending"
+            ? sort === "Date Ascending"
+              ? { createdOn: 1 }
+              : { createdOn: -1 }
+            : {},
+        )
+        .populate("reviewer newMongoId")
+        .skip(8 * req.params.currentPage)
+        .limit(8)
+        .then(reviews => {
           res.status(200).json({ reviews, total });
         });
     })
@@ -37,20 +75,57 @@ const getReviewsByReviewerId = (req, res) => {
 
 // For Business Component
 const getReviewsByBusinessId = (req, res) => {
+  let { filter, sort } = req.params;
   let search = req.params.landing === "true" ? "newMongoId" : "newGoogleId";
+  switch (filter) {
+    case "5 Stars":
+      filterNum = 5;
+      break;
+    case "4 Stars":
+      filterNum = 4;
+      break;
+    case "3 Stars":
+      filterNum = 3;
+      break;
+    case "2 Stars":
+      filterNum = 2;
+      break;
+    case "1 Stars":
+      filterNum = 1;
+      break;
+    // NoFilter
+    default:
+      filterNum = 0;
+  }
   Review.find({ [search]: req.params.id })
-    .skip(10 * req.params.currentPage)
-    .limit(10)
-    .populate("reviewer newMongoId")
-    .then(reviews => {
+    .find(filterNum > 0 ? { stars: filterNum } : {})
+    .countDocuments()
+    .then(total => {
       Review.find({ [search]: req.params.id })
-        .count()
-        .then(total => {
+        .find(filterNum > 0 ? { stars: filterNum } : {})
+        .sort(
+          sort === "Rating Ascending" || sort === "Rating Descending"
+            ? sort === "Rating Ascending"
+              ? { stars: 1 }
+              : { stars: -1 }
+            : {},
+        )
+        .sort(
+          sort === "Date Ascending" || sort === "Date Descending"
+            ? sort === "Date Ascending"
+              ? { createdOn: 1 }
+              : { createdOn: -1 }
+            : {},
+        )
+        .populate("reviewer newMongoId")
+        .skip(12 * req.params.currentPage)
+        .limit(12)
+        .then(reviews => {
           res.status(200).json({ reviews, total });
         });
     })
     .catch(error => {
-      res.status(200).json({ "ERROR BIATCH": error });
+      res.status(200).json({ error });
     });
 };
 
@@ -59,7 +134,7 @@ const getAllReviews = (req, res) => {
   Review.find({})
     // Don't include this when we get likes
     .limit(4)
-    .populate('newMongoId reviewer')
+    .populate("newMongoId reviewer")
     .then(reviews => {
       // let featured = [];
       // let likes = 100;

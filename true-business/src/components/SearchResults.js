@@ -18,16 +18,15 @@ class SearchResults extends Component {
     lastPage: 0,
   };
 
-  // Error Handler if there isn't a logo on clearbit
-  handleError = id => {
-    let broken = document.getElementById(id);
-    broken.src = "https://png.icons8.com/ios/50/000000/cancel.png";
-    broken.style.color = "#05386b";
-    let text = document.createTextNode("No Logo");
-    let div = document.createElement("div");
-    div.classList.add("no-logo");
-    div.appendChild(text);
-    broken.parentNode.appendChild(div);
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
+  // Reset the currentPage to 0 if a new search is made
+  componentDidUpdate = prevProps => {
+    if (this.props.searchResults && this.props.searchResults !== prevProps.searchResults) {
+      this.setState({ currentPage: 0 });
+    }
   };
 
   render() {
@@ -36,10 +35,11 @@ class SearchResults extends Component {
         <NavBar search={this.props.search} />
         <div className={this.props.searchResults ? "search" : "search--no-results"}>
           <div className="search__title"> Search Results </div>
-          {this.props.searchResults ? this.createPagination() : null}
+          {this.props.searchResults > 10 ? this.createPagination() : null}
           {this.props.searchResults ? (
             <div className="search__results">
               {this.props.searchResults.map((result, i) => {
+                console.log("result", result);
                 if (i < this.state.currentPage * 10 + 10 && i >= this.state.currentPage * 10) {
                   return (
                     <div
@@ -70,21 +70,31 @@ class SearchResults extends Component {
                             />
                           </div>
                         </div>
-                        <div className="info__address">
-                          <div className="address__city">{result.formatted_address}</div>
-                          <div className="address__icon">
-                            <a
-                              href={
-                                "https://www.google.com/maps/search/" + result.formatted_address.replace(/[, ]+/g, "+")
-                              }
-                              target="_blank">
-                              <i style={{ color: "#05386b" }} className="fas fa-map-marked-alt fa-2x" />
-                            </a>
+                        <a
+                          href={"https://www.google.com/maps/search/" + result.formatted_address.replace(/[, ]+/g, "+")}
+                          target="_blank"
+                          onClick={this.mapOnly}
+                          className="info__address">
+                          <i
+                            style={{ paddingRight: "1rem", color: "#05386b" }}
+                            className="fas fa-map-marked-alt fa-2x"
+                          />
+                          <div className="address__text">
+                            <div className="text__info">
+                              {result.formatted_address
+                                .split(",")
+                                .splice(0, 1)
+                                .toString()}
+                            </div>
+                            <div className="text__info">
+                              {result.formatted_address
+                                .split(",")
+                                .splice(1, 2)
+                                .join(",")
+                                .trim()}
+                            </div>
                           </div>
-                        </div>
-                        <div className="info__type">
-                          {(result.types[0].charAt(0).toUpperCase() + result.types[0].slice(1)).replace(/_/g, " ")}
-                        </div>
+                        </a>
                       </div>
                     </div>
                   );
@@ -99,7 +109,7 @@ class SearchResults extends Component {
               <div className="no-results__text">No Results Found</div>
             </div>
           )}
-          {this.props.searchResults ? this.createPagination() : null}
+          {this.props.searchResults ? (this.props.searchResults.length > 10 ? this.createPagination() : null) : null}
         </div>
       </div>
     );
@@ -107,6 +117,10 @@ class SearchResults extends Component {
 
   handleBusiness = (business, event) => {
     this.props.business(business);
+  };
+
+  mapOnly = event => {
+    event.stopPropagation();
   };
 
   updatePage = currentPage => {
@@ -119,7 +133,7 @@ class SearchResults extends Component {
     pages = [...pages].sort((x, y) => x - y);
     return (
       <div className="results__pagination">
-        Page {this.state.currentPage} / {lastPage}
+        {this.state.currentPage} / {lastPage}
         <div id="pagination" className="pagination__pages">
           {pages.map((page, i) => {
             return (

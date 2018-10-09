@@ -1,4 +1,5 @@
 .stripe {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,14 +7,19 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
+  min-height: 50vh;
+  max-height: 50vh;
+  min-width: 45vw;
+  max-width: 45vw;
+  padding: 2rem;
 }
 .stripe .stripe__info {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,31 +31,17 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
+  margin-bottom: 1rem;
 }
-.stripe .stripe__info .info__label {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: initial;
-  height: 100%;
-  width: 100%;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  cursor: default;
-  color: #05386b;
-  margin: 1rem;
-  font-size: 1.5rem;
-}
-.stripe .stripe__info .info__label .info__input {
-  border: 0.1rem solid black;
-  font-size: 1.5rem;
+.stripe .stripe__info .info__input {
+  width: 50%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0px 0px 50px 0px #6b6b6b;
 }
 .stripe .stripe__radio {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -61,19 +53,33 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .stripe .stripe__radio .radio__label {
-  padding: 1rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+  font-size: 1.2rem;
+  width: 20vw;
 }
-.stripe .stripe__radio .radio__button:hover {
+.stripe .stripe__radio .radio__label:hover {
   cursor: pointer;
+}
+.stripe .stripe__radio .radio__label .radio__button {
+  margin-bottom: 1rem;
 }
 .stripe .stripe__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -92,13 +98,17 @@
   float: right;
   position: relative;
   top: 50%;
-  font-size: 2rem;
   margin: 2rem;
 }
 .StripeElement {
-  padding: 1rem;
-  border: 0.1rem solid #05386b;
+  padding: 0.5rem;
+  box-shadow: 0px 0px 50px 0px #6b6b6b;
 }
 .StripeElement--invalid {
   border: 1px solid red;
+}
+input[type="radio"] {
+  border: 0px;
+  width: 100%;
+  height: 2em;
 }

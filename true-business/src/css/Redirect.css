@@ -1,18 +1,20 @@
 .user-redirect {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.2rem;
+  line-height: 1;
   padding: 25vh 0 0 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
-.user-redirect .text:hover {
+.user-redirect:hover {
   cursor: pointer;
-  filter: brightness(60%);
   opacity: 1;
-  color: blue;
+  box-shadow: 0 0 0 0;
 }
