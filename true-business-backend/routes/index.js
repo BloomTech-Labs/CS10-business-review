@@ -131,7 +131,6 @@ router.delete("/api/review/delete", (req, res) => {
 });
 
 router.put("/api/reviews/updateLikes", (req,res) => {
-  console.log("WTF")
   ReviewControler.updateLikes(req,res);
 })
 

@@ -58,7 +58,7 @@ class LandingPage extends Component {
   }
 
   closeModal() {
-    this.setState({ modalIsOpen: false, liked: false });
+    this.setState({ modalIsOpen: false, liked: false, unliked: false, likeError: false, likeErrorMessage: "" });
   }
 
   updateLikes = (info, bool, event) => {
@@ -89,39 +89,32 @@ class LandingPage extends Component {
           <div className="landing__container">
             <div className="container__header">Popular Reviews</div>
             <div id="containerOne" className="container__items">
-              {this.props.reviews.map((review, i) => {
-                if (i < 4) {
-                  return (
-                    // Need to write a component that shows all the reviews by a certain user
-                    // Whenever they click on the username in this section or in the bottom section
-                    // <div key={review._id} onClick={() => this.props.userReviews(user)}>
-                    <div key={review._id} className="items__item" onClick={() => this.openModal(this, review)}>
-                      <img
-                        alt={review.newMongoId.name}
-                        src={review.photos[0].link}
-                        className={
-                          review.photos[0].width > review.photos[0].height ? "item__landscape" : "item__portrait"
-                        }
-                      />
-                      <div className="item__description">
-                        <div className="item__title">{review.newMongoId.name}</div>
-                        <StarRatings
-                          starDimension="20px"
-                          starSpacing="5px"
-                          rating={review.stars}
-                          starRatedColor="gold"
-                          starEmptyColor="grey"
-                          numberOfStars={5}
-                          name="rating"
-                        />
-                        <div className="item__info--hover">
-                          <i style={{ paddingRight: ".5rem" }} className="fas fa-user" /> {review.reviewer.username}
-                        </div>
-                      </div>
+              {this.props.reviews.map(review => {
+                // Need to write a component that shows all the reviews by a certain user
+                // Whenever they click on the username in this section or in the bottom section
+                // <div key={review._id} onClick={() => this.props.userReviews(user)}>
+                return <div key={review._id} className="items__item" onClick={() => this.openModal(this, review)}>
+                  <img
+                    alt={review.newMongoId.name}
+                    src={review.photos[0].link}
+                    className={review.photos[0].width > review.photos[0].height ? "item__landscape" : "item__portrait"}
+                  />
+                  <div className="item__description">
+                    <div className="item__title">{review.newMongoId.name}</div>
+                    <StarRatings
+                      starDimension="20px"
+                      starSpacing="5px"
+                      rating={review.stars}
+                      starRatedColor="gold"
+                      starEmptyColor="grey"
+                      numberOfStars={5}
+                      name="rating"
+                    />
+                    <div className="item__info--hover">
+                      <i style={{ paddingRight: ".5rem" }} className="fas fa-user" /> {review.reviewer.username}
                     </div>
-                  );
-                }
-                return null;
+                  </div>
+                </div>;
               })}
             </div>
           </div>
@@ -225,7 +218,6 @@ class LandingPage extends Component {
                         }
                         src={this.state.modalInfo.photos[0].link}
                       />
-                      {console.log("WHAT THE FUCK", this.state.modalInfo.photos[0].width > this.state.modalInfo.photos[0].height)}
                     </a>
                     <div className="image__buttons">
                       <button className="image__button" onClick={this.closeModal}>

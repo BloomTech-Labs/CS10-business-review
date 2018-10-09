@@ -124,10 +124,7 @@ class App extends Component {
     axios
       .get(`${backend}api/review/getAllReviews`)
       .then(reviews => {
-        let featuredReviews = reviews.data.filter(review => {
-          return review.numberOfLikes >= 0;
-        });
-        this.setState({ featuredReviews });
+        this.setState({ featuredReviews: reviews.data });
       })
       .catch(err => {
         console.log("Error:", err);

@@ -290,8 +290,8 @@ const getAllBusiness = (request, response) => {
       let flag = false;
       // While we don't have 4 featured business
       while (featured.length < 4 && stars >= 0 && reviews >= 0) {
-        // Get Ideally 4 stars & 100 Reviews
-        // Then 4 stars & 80 Reviews
+        // Get Ideally 5 stars & 100 Reviews
+        // Then 4 stars & 100 Reviews
         // ...
         // Worst Case 0 stars & 0 Reviews
         // While we have an empty DB this may be slow...
@@ -300,12 +300,12 @@ const getAllBusiness = (request, response) => {
             featured.push(business);
           }
         });
-        if (flag === false && reviews === 0) {
-          stars -= 1;
-          reviews = 100;
+        if (flag === false && stars === 0) {
+          stars = 5;
+          reviews -= 20;
           flag = true;
         } else {
-          reviews -= 20;
+          stars -= 1;
           flag = false;
         }
       }

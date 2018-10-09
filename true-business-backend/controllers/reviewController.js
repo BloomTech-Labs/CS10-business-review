@@ -135,17 +135,12 @@ const updateLikes = (req, res) => {
   // userId --- person who did the liking / unliking
   // bool --- true === liked, false === unliked
   let { reviewerId, reviewId, userId, bool } = req.body;
-  console.log("REVIEWER", reviewerId);
-  console.log("REVIEW", reviewId);
-  console.log("bool", bool);
-  console.log("userid", userId);
-  console.log(
-    "*************************************************************************************************************************",
-  );
+  console.log("FUCKING REQ>BDOY", req.body)
   let user = new Promise(resolve => {
     return resolve(
       User.findById({ _id: reviewerId })
         .then(found => {
+          console.log("MOTHERFUCK")
           bool ? (found.numberOfLikes += 1) : (found.numberOfLikes -= 1);
           User.findByIdAndUpdate({ _id: reviewerId }, found).then(updated => {
             return updated;
@@ -160,29 +155,25 @@ const updateLikes = (req, res) => {
     return resolve(
       Review.findById({ _id: reviewId })
         .then(found => {
+          console.log("GOD DAMENT CUNT")
           if (bool) {
-            console.log("FOUND LIKES", found.likes);
-            console.log("USERID", userId);
             found.likes.forEach(like => {
               if (like === userId) {
-                console.log("Shouldn't see this first time");
-                return res.status(401).json({ errorMessage: "User Already Liked/Unliked" });
+                return res.status(401).json({ errorMessage: "User Already Liked" });
               }
             });
             found.numberOfLikes += 1;
             found.likes.push(userId);
           } else {
             found.unlikes.forEach(like => {
-              if (like.reviewer === userId) {
-                console.log("Shouldn't see this first time");
-                return res.status(401).json({ errorMessage: "User Already Liked/Unliked" });
+              if (like === userId) {
+                return res.status(401).json({ errorMessage: "User Already UnLiked" });
               }
             });
             found.numberOfLikes -= 1;
             found.unlikes.push(userId);
           }
-          console.log("FOUND", found);
-          Review.findByIdAndUpdate({ _id: reviewerId }, found)
+          Review.findByIdAndUpdate({ _id: reviewId }, found, {new: true})
             .then(updated => {
               return updated;
             })
@@ -206,30 +197,16 @@ const updateLikes = (req, res) => {
 
 // For Landing Page
 const getAllReviews = (req, res) => {
-  Review.find({})
-    // Don't include this when we get likes
+  Review.find({ })
+    .sort({ numberOfLikes: -1})
     .limit(4)
     .populate("newMongoId reviewer")
-    .then(reviews => {
-      // let featured = [];
-      // let likes = 100;
-      // While we don't have 4 featured reviews
-      // When we get likes going, do the same things users
-      // while (featured.length < 4 && reviews >= 0) {
-      //   // While we have an empty DB this may be slow...
-      //   users.forEach(user => {
-      //     if (user.numberOfReviews > reviews && !featured.includes(user)) {
-      //       featured.push(user);
-      //     }
-      //   });
-      //   reviews -= 10;
-      // }
-      res.status(200).json(reviews);
+    .then(response => {
+      console.log(response.length);
+      res.status(200).json(response)
     })
-    .catch(function(error) {
-      response.status(500).json({
-        error: "The information could not be retrieved.",
-      });
+    .catch(error => {
+      res.status(500).json({ error });
     });
 };
 
