@@ -137,13 +137,13 @@ class SignIn extends Component {
                 Continue
               </button>
             </form>
-            <hr />
+            {/* <hr />
             <GoogleLogin
               clientId={process.env.googleClientID || process.env.REACT_APP_GOOGLEAUTHCLIENTID}
               buttonText="Login With Google"
               onSuccess={this.googleSignIn}
               onFailure={this.googleFail}
-            />
+            /> */}
             <div className="signin__new">
               <div className="new__text">New To True Business Reviews?</div>
               <button className="new__button" onClick={() => this.props.history.push(`/signup`)}>

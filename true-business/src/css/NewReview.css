@@ -15,7 +15,7 @@
   color: #05386b;
 }
 .new-review .new-review__modal .modal__header {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
   height: auto;
 }
@@ -99,11 +99,12 @@
   height: 100%;
   width: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   height: 20%;
   margin: 1rem;
 }

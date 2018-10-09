@@ -45,7 +45,7 @@
   min-height: 60vh;
 }
 .signup .signup-container .signup-container__header {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
 }
 .signup .signup-container .signup-container__stripe {
@@ -152,7 +152,7 @@
   margin-top: 2rem;
 }
 .signup .signup-container .signup__returning .returning__text {
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 .signup .signup-container .signup__returning .returning__button {
   border-radius: 0.5rem;

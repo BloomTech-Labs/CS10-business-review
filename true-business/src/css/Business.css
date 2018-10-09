@@ -80,11 +80,12 @@
   max-height: 50vh;
 }
 .business .business__info .info__details .details__title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
   padding: 1rem 0;
 }
 .business .business__info .info__details .details__address {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -97,7 +98,7 @@
   padding: 0;
   margin: 0;
   color: #05386b;
-  font-size: 1rem;
+  font-size: 0.7rem;
   padding: 1rem 0;
 }
 .business .business__info .info__details .details__address .address__icon {
@@ -193,7 +194,7 @@
   color: #05386b;
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__phone .phone__number {
-  font-size: 1rem;
+  font-size: 0.7rem;
   padding: 1rem;
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__website {
@@ -212,7 +213,7 @@
   color: #05386b;
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__website .website__text {
-  font-size: 1rem;
+  font-size: 0.7rem;
   padding: 1rem;
 }
 .business .business__reviews-container {
@@ -286,13 +287,13 @@
   max-width: 20vw;
 }
 .business .business__reviews-container .reviews__header .reviews-container__dropdowns .dropdowns__dropdown .dropdown__title {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
 }
 .business .business__reviews-container .reviews__header .reviews-container__title {
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
   color: #05386b;
   text-align: left;
@@ -305,7 +306,7 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   height: 2.5rem;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   width: auto;
   padding: 0.5rem;
 }
@@ -349,7 +350,7 @@
   min-height: 40vh;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews--no-results .search__title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
@@ -370,7 +371,7 @@
   padding: 0;
   margin: 0;
   color: #05386b;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
@@ -535,11 +536,12 @@
   align-items: center;
   height: 100%;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
   color: #05386b;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   white-space: nowrap;
   width: 100%;
   overflow: hidden;
@@ -827,7 +829,7 @@
   padding: 2rem;
 }
 .modal .modal__header .header__user .header__title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
 }
 .modal .modal__header .header__user .header__reviewer {
@@ -850,14 +852,14 @@
   text-overflow: ellipsis;
   overflow: hidden;
   width: 60%;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
 }
 .modal .modal__header .header__user .header__reviewer .reviewer__info {
   text-overflow: ellipsis;
   overflow: hidden;
   width: 60%;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 .modal .modal__body {
   font-size: 1rem;
@@ -877,7 +879,7 @@
   max-height: 40vh;
 }
 .modal .modal__body .body__business {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
 }
 .modal .modal__body .body__stars {
@@ -914,7 +916,7 @@
   color: #05386b;
 }
 .modal .modal__body .body__title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 0.5rem;
   text-decoration: underline;
   margin: 1rem 0 1.5rem 0;
@@ -925,7 +927,7 @@
   height: 20%;
 }
 .modal .modal__body .body__review {
-  font-size: 1rem;
+  font-size: 0.7rem;
   height: 50%;
   padding: 0.5rem;
   width: 90%;
