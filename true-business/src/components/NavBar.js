@@ -15,20 +15,20 @@ let popoverStyles = {
   },
 };
 
-let modalStyles = {
-  content: {
-    top: "15%",
-    left: "50%",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    height: "20vh",
-    width: "30vw",
-    zIndex: "5",
-    backgroundColor: "rgb(238,238,238)",
-    color: "rgb(5,56,107)",
-    overflow: "hidden",
-  },
-};
+// let modalStyles = {
+//   content: {
+//     top: "15%",
+//     left: "50%",
+//     marginRight: "-50%",
+//     transform: "translate(-50%, -50%)",
+//     height: "20vh",
+//     width: "30vw",
+//     zIndex: "5",
+//     backgroundColor: "rgb(238,238,238)",
+//     color: "rgb(5,56,107)",
+//     overflow: "hidden",
+//   },
+// };
 
 Modal.setAppElement("div");
 

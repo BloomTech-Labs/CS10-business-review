@@ -4,7 +4,6 @@ import NavBar from "./NavBar.js";
 import axios from "axios";
 import StarRatings from "react-star-ratings";
 import Modal from "react-modal";
-import { Button, Menu, MenuItem } from "@material-ui/core";
 
 import "../css/Reviewer.css";
 

@@ -474,7 +474,7 @@
   font-size: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -508,7 +508,8 @@
   padding: 0;
   margin: 0;
   color: #05386b;
-  height: 5vh;
+  min-height: 12vh;
+  max-height: 12vh;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__label {
   font-size: 1.2rem;
@@ -533,6 +534,8 @@
   min-width: 60%;
   max-width: 60%;
   padding: 0.5rem;
+  max-height: 5vh;
+  min-height: 12vh;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__data .data__change {
   font-size: 1rem;
@@ -563,15 +566,13 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1rem;
   height: 2.5rem;
+  min-height: 2.5rem;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__data .data__change .change__button:hover {
   cursor: pointer;
   box-shadow: 0px 15px 20px #6b6b6b;
   filter: brightness(110%);
   font-weight: bolder;
-}
-.user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__data .data__change:last-of-type {
-  height: 30vh;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__button {
   border-radius: 0.5rem;
@@ -613,5 +614,5 @@
   cursor: pointer;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info:last-of-type {
-  height: 30vh;
+  height: 22vh;
 }

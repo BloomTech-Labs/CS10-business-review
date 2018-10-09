@@ -197,7 +197,7 @@
             object-position: 50% 0%;
           }
           .container__info {
-            .containers(@justifyContent: space-around);
+            .containers(@justifyContent: flex-start);
             .backAndBorder(@background: @elementBG);
             border-radius: 0.5rem;
             padding: 1rem 2rem;
@@ -208,7 +208,8 @@
             max-width: 39vw;
             .info__info {
               .containers(@flexDirection: row, @alignItems: flex-start);
-              height: 5vh;
+              min-height: 12vh;
+              max-height: 12vh;
               .info__label {
                 .title();
                 min-width: 20%;
@@ -221,6 +222,8 @@
                 min-width: 60%;
                 max-width: 60%;
                 padding: 0.5rem;
+                max-height: 5vh;
+                min-height: 12vh;
                 .data__change {
                   .containers(@justifyContent: flex-start);
                   .change__input {
@@ -231,10 +234,8 @@
                   }
                   .change__button {
                     .button();
+                    min-height: 2.5rem;
                   }
-                }
-                .data__change:last-of-type {
-                  height: 30vh;
                 }
               }
               .info__button {
@@ -253,8 +254,8 @@
                 }
               }
             }
-            .info__info:last-of-type {
-              height: 30vh;
+            .info__info:last-of-type{
+              height: 22vh
             }
           }
         }
