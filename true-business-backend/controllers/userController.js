@@ -130,6 +130,7 @@ const getGoogleUser = (request, response) => {
 
 const getUserById = (request, response) => {
   User.findById({ _id: request.params.id })
+    .populate("reviews")
     .then(function(user) {
       response.status(200).json(user);
     })

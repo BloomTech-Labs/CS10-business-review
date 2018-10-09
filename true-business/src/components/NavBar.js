@@ -108,7 +108,7 @@ class NavBar extends Component {
       this.props.search(this.state.searchWord + " " + this.state.searchCity, true);
       this.setState({ searchWord: "", searchCity: "" });
     } else {
-      this.openModal();
+      window.alert("Enter Search Term and City")
     }
   };
 
@@ -158,7 +158,7 @@ class NavBar extends Component {
               <i className="fa fa-search" />
             </button>
           </form>
-          <Modal
+          {/* <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={modalStyles}
@@ -176,7 +176,7 @@ class NavBar extends Component {
                 </div>
               ) : null}
             </div>
-          </Modal>
+          </Modal> */}
           {this.state.signedIn ? null : (
             <Popover
               styles={{ popoverStyles }}

@@ -140,7 +140,7 @@ class LandingPage extends Component {
                     // Need to write a component that shows all the reviews by a certain user
                     // Whenever they click on the username in this section or in the bottom section
                     // <div key={review._id} onClick={() => this.props.userReviews(user)}>
-                    <div key={user._id} className="items__item">
+                    <div key={user._id} className="items__item" onClick={() => this.props.sendReviewer(user._id)}>
                       <img
                         alt={user.username}
                         src={user.userImages[0].link}

@@ -102,6 +102,10 @@ router.get("/api/business/:id", function(req, res) {
   BusinessController.getBusinessById(req, res);
 });
 
+router.get("/api/business/google/:id", function(req, res) {
+  BusinessController.getBusinessByGoogleId(req, res);
+});
+
 router.get("/api/user/random", function(req, res) {
   UserController.getRandomUser(req, res);
 });

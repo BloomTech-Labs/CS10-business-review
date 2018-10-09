@@ -184,12 +184,11 @@ class Business extends Component {
     this.getReviews(0, this.state.sortBy, filterBy);
   };
 
-  openModal(event, info) {
+  openModal = (event, info) => {
     this.setState({ modalIsOpen: true, modalInfo: info });
   }
 
-  closeModal() {
-    console.log("WHAT THE FUCK")
+  closeModal = () => {
     this.setState({ modalIsOpen: false, liked: false, unliked: false, likeError: false, likeErrorMessage: "" });
   }
 

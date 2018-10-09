@@ -291,6 +291,9 @@
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape:hover {
   cursor: pointer;
 }
+.user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape:hover {
+  cursor: default;
+}
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait {
   border-radius: 1rem;
   object-fit: cover;
@@ -306,9 +309,6 @@
   object-position: 50% 0%;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait:hover {
-  cursor: pointer;
-}
-.user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__image:hover {
   cursor: pointer;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .info__detailed {
@@ -421,15 +421,17 @@
   border-radius: 0.5rem;
   min-width: 60vw;
   max-width: 60vw;
-  min-height: 50vh;
-  max-height: 50vh;
+  min-height: 55vh;
+  max-height: 55vh;
 }
 .user .user__body .body__content .content__profile .profile__error {
-  min-height: 1rem;
   color: red;
   text-align: center;
-  width: 100%;
-  margin-bottom: 1rem;
+  min-width: 5vw;
+  font-size: 0.8rem;
+  position: relative;
+  top: 10vh;
+  left: -6vw;
 }
 .user .user__body .body__content .content__profile .profile__container {
   font-size: 1rem;
@@ -447,8 +449,8 @@
   color: #05386b;
   min-width: 60vw;
   max-width: 60vw;
-  min-height: 50vh;
-  max-height: 50vh;
+  min-height: 55vh;
+  max-height: 55vh;
 }
 .user .user__body .body__content .content__profile .profile__container .user-change__input {
   padding: 0.5rem;
@@ -485,10 +487,10 @@
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.5rem;
-  padding: 2rem;
+  padding: 1rem 2rem;
   height: 2rem;
-  min-height: 50vh;
-  max-height: 50vh;
+  min-height: 55vh;
+  max-height: 55vh;
   min-width: 39vw;
   max-width: 39vw;
 }
@@ -506,7 +508,7 @@
   padding: 0;
   margin: 0;
   color: #05386b;
-  height: 15vh;
+  height: 5vh;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__label {
   font-size: 1.2rem;
@@ -567,6 +569,9 @@
   box-shadow: 0px 15px 20px #6b6b6b;
   filter: brightness(110%);
   font-weight: bolder;
+}
+.user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__data .data__change:last-of-type {
+  height: 30vh;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__button {
   border-radius: 0.5rem;

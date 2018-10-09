@@ -106,6 +106,9 @@
                 height: 15vh;
                 min-height: 15vh;
                 max-height: 15vh;
+                &:hover{
+                  cursor: default;
+                }
               }
               .review__portrait {
                 .image();
@@ -116,9 +119,6 @@
                 min-height: 15vh;
                 max-height: 15vh;
                 object-position: 50% 0%;
-              }
-              .review__image:hover {
-                cursor: pointer;
               }
               .info__detailed {
                 .containers(@justifyContent: space-around);
@@ -167,21 +167,24 @@
         .backAndBorder();
         min-width: 60vw;
         max-width: 60vw;
-        min-height: 50vh;
-        max-height: 50vh;
+        min-height: 55vh;
+        max-height: 55vh;
+        // Super Hacky way of doing the error message
         .profile__error {
-          min-height: 1rem;
           color: red;
           text-align: center;
-          width: 100%;
-          margin-bottom: 1rem;
+          min-width: 5vw;
+          font-size: 0.8rem;
+          position: relative;
+          top: 10vh;
+          left: -6vw;
         }
         .profile__container {
           .containers(@flexDirection: row);
           min-width: 60vw;
           max-width: 60vw;
-          min-height: 50vh;
-          max-height: 50vh;
+          min-height: 55vh;
+          max-height: 55vh;
           .user-change__input {
             padding: 0.5rem;
           }
@@ -197,15 +200,15 @@
             .containers(@justifyContent: space-around);
             .backAndBorder(@background: @elementBG);
             border-radius: 0.5rem;
-            padding: 2rem;
+            padding: 1rem 2rem;
             height: 2rem;
-            min-height: 50vh;
-            max-height: 50vh;
+            min-height: 55vh;
+            max-height: 55vh;
             min-width: 39vw;
             max-width: 39vw;
             .info__info {
               .containers(@flexDirection: row, @alignItems: flex-start);
-              height: 15vh;
+              height: 5vh;
               .info__label {
                 .title();
                 min-width: 20%;
@@ -214,8 +217,9 @@
               }
               .info__data {
                 .containers(@justifyContent: flex-start);
+                // .hidden();
                 min-width: 60%;
-                max-width: 60%;;
+                max-width: 60%;
                 padding: 0.5rem;
                 .data__change {
                   .containers(@justifyContent: flex-start);
@@ -228,6 +232,9 @@
                   .change__button {
                     .button();
                   }
+                }
+                .data__change:last-of-type {
+                  height: 30vh;
                 }
               }
               .info__button {

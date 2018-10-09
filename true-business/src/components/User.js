@@ -31,7 +31,7 @@ let modalStyles = {
     overflow: "hidden",
   },
 };
- 
+
 class User extends Component {
   state = {
     current: "Home",
@@ -40,6 +40,7 @@ class User extends Component {
     usernameShow: false,
     usernameButton: "Change",
     usernameUpdate: "",
+    usernameError: false,
     email: "",
     emailShow: false,
     emailButton: "Change",
@@ -65,12 +66,17 @@ class User extends Component {
     const id = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
     const headers = { headers: { authorization: token } };
-    axios.get(`${backend}api/user/${id}`, headers).then(response => {
-      this.setState({
-        username: response.data.username,
-        email: response.data.email,
+    axios
+      .get(`${backend}api/user/${id}`, headers)
+      .then(response => {
+        this.setState({
+          username: response.data.username,
+          email: response.data.email,
+        });
+      })
+      .catch(error => {
+        console.log("error", error);
       });
-    });
   };
 
   updateUser = event => {
@@ -143,6 +149,14 @@ class User extends Component {
   };
 
   handleInputChange = event => {
+    if (event.target.id === "username") {
+      let username = document.getElementById("username").value;
+      if (username.length > 20) {
+        this.setState({ usernameError: true, error: true });
+      } else {
+        this.setState({ usernameError: false, error: false });
+      }
+    }
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -545,6 +559,7 @@ class User extends Component {
                     {this.state.usernameShow ? (
                       <form className="data__change">
                         <input
+                          id="username"
                           className="change__input"
                           placeholder={this.state.username}
                           name="usernameUpdate"
@@ -630,15 +645,16 @@ class User extends Component {
                   </button>
                 </div>
               </div>
+              {this.state.passwordErrorMatch ? <div className="profile__error"> Passwords Do Not Match </div> : null}
+              {this.state.passwordErrorLength ? (
+                <div className="profile__error"> Password Must Be At Least 1 Character </div>
+              ) : null}
+              {this.state.passwordErrorUpdate ? (
+                <div className="profile__error"> Original Password Incorrect </div>
+              ) : null}
+              {this.state.usernameError ? <div className="profile__error"> Username Character Limit of 20 </div> : null}
+              {this.state.error ? null : <div className="profile__error" />}
             </div>
-            {this.state.passwordErrorMatch ? <div className="profile__error"> Passwords Do Not Match </div> : null}
-            {this.state.passwordErrorLength ? (
-              <div className="profile__error"> Password Must Be At Least 1 Character </div>
-            ) : null}
-            {this.state.passwordErrorUpdate ? (
-              <div className="profile__error"> Original Password Incorrect </div>
-            ) : null}
-            {this.state.error ? null : <div className="profile__error" />}
           </div>
         );
     }

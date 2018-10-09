@@ -239,6 +239,19 @@ const getBusinessById = (request, response) => {
     });
 };
 
+const getBusinessByGoogleId = (request, response) => {
+  const { id } = request.params;
+  Business.findOne({  place_id: id })
+    .then(function(business) {
+      response.status(200).json(business);
+    })
+    .catch(function(error) {
+      response.status(500).json({
+        error: "The information could not be retrieved.",
+      });
+    });
+};
+
 const getRandomBusiness = (request, response) => {
   Business.count().exec(function(err, count) {
     const random = Math.floor(Math.random() * count);
@@ -322,6 +335,7 @@ module.exports = {
   createBusiness,
   getBusinessByName,
   getBusinessById,
+  getBusinessByGoogleId,
   deleteBusinessById,
   getAllBusiness,
   placesSearch,
