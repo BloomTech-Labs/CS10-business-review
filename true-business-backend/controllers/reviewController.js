@@ -62,8 +62,8 @@ const getReviewsByReviewerId = (req, res) => {
             : {},
         )
         .populate("reviewer newMongoId")
-        .skip(8 * req.params.currentPage)
-        .limit(8)
+        .skip(9 * req.params.currentPage)
+        .limit(9)
         .then(reviews => {
           res.status(200).json({ reviews, total });
         });

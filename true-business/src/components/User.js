@@ -237,11 +237,11 @@ class User extends Component {
     let lastPage =
       // Ex. 100 / 10 % 1 = 0
       // Ex. 101 / 10 % 1 != 0
-      (this.state.total / 8) % 1 === 0
+      (this.state.total / 9) % 1 === 0
         ? // 100 / 10 - 1 = 9, so pages 0-9 will show results 0-99 (10 pages, 10 each page)
-          Math.floor(this.state.total / 8) - 1
+          Math.floor(this.state.total / 9) - 1
         : // 101 / 10 = 10, so pages 0-10 will show results 0-100 (11 pages, 1 on the last page)
-          Math.floor(this.state.total / 8);
+          Math.floor(this.state.total / 9);
 
     // Set is the lazy / quick way if there is only one page
     let pages = new Set([0, lastPage]);

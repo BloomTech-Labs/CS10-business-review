@@ -24,7 +24,7 @@ let modalStyles = {
     height: "90vh",
     width: "60vw",
     zIndex: "5",
-    backgroundColor: "rgb(255,255,255)",
+    backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
     overflow: "hidden",
   },
