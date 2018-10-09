@@ -102,6 +102,10 @@ router.get("/api/business/:id", function(req, res) {
   BusinessController.getBusinessById(req, res);
 });
 
+router.get("/api/business/google/:id", function(req, res) {
+  BusinessController.getBusinessByGoogleId(req, res);
+});
+
 router.get("/api/user/random", function(req, res) {
   UserController.getRandomUser(req, res);
 });
@@ -129,6 +133,10 @@ router.post("/api/review/update", (req, res) => {
 router.delete("/api/review/delete", (req, res) => {
   ReviewControler.deleteReview(req, res);
 });
+
+router.put("/api/reviews/updateLikes", (req,res) => {
+  ReviewControler.updateLikes(req,res);
+})
 
 router.get("/api/review/getReviewsByReviewerId/:id/:currentPage/:filter/:sort", (req, res) => {
   ReviewControler.getReviewsByReviewerId(req, res);

@@ -1,4 +1,5 @@
 const Review = require("../models/review");
+const User = require("../models/user");
 
 const createReview = (req, res) => {
   // Todo:
@@ -128,32 +129,100 @@ const getReviewsByBusinessId = (req, res) => {
     });
 };
 
+const updateLikes = (req, res) => {
+  // reviewerId --- person whose review was liked/unliked
+  // reviewId --- review that was liked / unliked
+  // userId --- person who did the liking / unliking
+  // bool --- true === liked, false === unliked
+  let { reviewerId, reviewId, userId, bool } = req.body;
+  let review = new Promise(resolve => {
+    return resolve(
+      Review.findById({ _id: reviewId })
+        .then(found => {
+          let flag = true;
+          if (bool) {
+            for (let i = 0; i < found.likes.length; i++) {
+              if (found.likes[i] === userId) {
+                flag = false;
+                break;
+              }
+            }
+            if (flag) {
+              found.numberOfLikes += 1;
+              found.likes.push(userId);
+              User.findById({ _id: reviewerId })
+                .then(found => {
+                  bool ? (found.numberOfLikes += 1) : (found.numberOfLikes -= 1);
+                  User.findByIdAndUpdate({ _id: reviewerId }, found).then(updated => {
+                    return updated;
+                  });
+                })
+                .catch(err => {
+                  res.status(500).json({ err });
+                });
+              Review.findByIdAndUpdate({ _id: reviewId }, found, { new: true })
+                .then(updated => {
+                  return updated;
+                })
+                .catch(err => {
+                  res.status(500).json({ err });
+                });
+            }
+          } else {
+            for (let i = 0; i < found.unlikes.length; i++) {
+              if (found.unlikes[i] === userId) {
+                flag = false;
+                break;
+              }
+            }
+            if (flag) {
+              found.numberOfLikes -= 1;
+              found.unlikes.push(userId);
+              User.findById({ _id: reviewerId })
+                .then(found => {
+                  bool ? (found.numberOfLikes += 1) : (found.numberOfLikes -= 1);
+                  User.findByIdAndUpdate({ _id: reviewerId }, found).then(updated => {
+                    return updated;
+                  });
+                })
+                .catch(err => {
+                  res.status(500).json({ err });
+                });
+              Review.findByIdAndUpdate({ _id: reviewId }, found, { new: true })
+                .then(updated => {
+                  return updated;
+                })
+                .catch(err => {
+                  res.status(500).json({ err });
+                });
+            }
+          }
+        })
+        .catch(err => {
+          res.status(500).json({ err });
+        }),
+    );
+  });
+  Promise.all([review])
+    .then(response => {
+      res.status(200).json("Updated");
+    })
+    .catch(err => {
+      res.status(500).json({ err });
+    });
+};
+
 // For Landing Page
 const getAllReviews = (req, res) => {
   Review.find({})
-    // Don't include this when we get likes
+    .sort({ numberOfLikes: -1 })
     .limit(4)
     .populate("newMongoId reviewer")
-    .then(reviews => {
-      // let featured = [];
-      // let likes = 100;
-      // While we don't have 4 featured reviews
-      // When we get likes going, do the same things users
-      // while (featured.length < 4 && reviews >= 0) {
-      //   // While we have an empty DB this may be slow...
-      //   users.forEach(user => {
-      //     if (user.numberOfReviews > reviews && !featured.includes(user)) {
-      //       featured.push(user);
-      //     }
-      //   });
-      //   reviews -= 10;
-      // }
-      res.status(200).json(reviews);
+    .then(response => {
+      res.status(200).json(response);
     })
-    .catch(function(error) {
-      response.status(500).json({
-        error: "The information could not be retrieved.",
-      });
+    .catch(error => {
+      res.status(500).json({ error });
     });
 };
 
@@ -162,4 +231,5 @@ module.exports = {
   getAllReviews,
   getReviewsByBusinessId,
   getReviewsByReviewerId,
+  updateLikes,
 };

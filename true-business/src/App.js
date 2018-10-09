@@ -10,11 +10,12 @@ import SearchResults from "./components/SearchResults";
 import Business from "./components/Business";
 import User from "./components/User";
 import Redirect from "./components/Redirect";
+import Reviewer from "./components/Reviewer";
 import "./css/App.css";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
-if (typeof(backend) !== 'string') {
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
   backend = heroku;
 }
 
@@ -27,6 +28,8 @@ class App extends Component {
     featuredReviews: [],
     featuredUsers: [],
     business: null,
+    reviewerId: null,
+    reviews: null,
   };
 
   componentWillMount = () => {
@@ -53,54 +56,63 @@ class App extends Component {
       this.resetSearch();
     }
   };
-  
+
   render() {
     return (
       <div className="app-container">
         <div id="animate-area">
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <LandingPage
-                business={this.getBusiness}
-                businesses={this.state.featuredBusinesses}
-                reviews={this.state.featuredReviews}
-                users={this.state.featuredUsers}
-                search={this.searchResults}
-                getBusiness={this.getBusiness}
-              />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <LandingPage
+                  business={this.getBusiness}
+                  businesses={this.state.featuredBusinesses}
+                  reviews={this.state.featuredReviews}
+                  users={this.state.featuredUsers}
+                  search={this.searchResults}
+                  getBusiness={this.getBusiness}
+                  sendReviewer={this.sendReviewer}
+                />
+              )}
+            />
+            <Route
+              path="/results"
+              render={() => (
+                <SearchResults
+                  currentPage="0"
+                  business={this.getBusiness}
+                  search={this.searchResults}
+                  searchResults={this.state.searchResults}
+                />
+              )}
+            />
+            <Route
+              path="/reviewer"
+              render={() => (
+                <Reviewer search={this.searchResults} reviewer={this.state.reviewer} reviews={this.state.reviews} />
+              )}
+            />
+            <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
+            <Route path="/signin" render={() => <SignIn search={this.searchResults} authUser={this.authUser} />} />
+            <Route
+              path="/business"
+              render={() => (
+                <Business
+                  landingBusiness={this.state.landingBusiness}
+                  search={this.searchResults}
+                  business={this.state.business}
+                  createBusiness={this.createBusiness}
+                />
+              )}
+            />
+            {localStorage.getItem("token") && localStorage.getItem("userId") ? (
+              <Route path="/user" render={() => <User search={this.searchResults} />} />
+            ) : (
+              <Route path="/user" render={() => <Redirect search={this.searchResults} />} />
             )}
-          />
-          <Route
-            path="/results"
-            render={() => (
-              <SearchResults
-                currentPage="0"
-                business={this.getBusiness}
-                search={this.searchResults}
-                searchResults={this.state.searchResults}
-              />
-            )}
-          />
-          <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
-          <Route path="/signin" render={() => <SignIn search={this.searchResults} authUser={this.authUser} />} />
-          <Route
-            path="/business"
-            render={() => (
-              <Business
-                landingBusiness={this.state.landingBusiness}
-                search={this.searchResults}
-                business={this.state.business}
-                createBusiness={this.createBusiness}
-              />
-            )}
-          />
-          {localStorage.getItem('token') &&  localStorage.getItem('userId') ? (
-          <Route path="/user" render={() => <User search={this.searchResults} />} /> ):(
-          <Route path="/user" render={() => <Redirect search={this.searchResults} />} />)}
-        </Switch>
+          </Switch>
         </div>
       </div>
     );
@@ -124,10 +136,7 @@ class App extends Component {
     axios
       .get(`${backend}api/review/getAllReviews`)
       .then(reviews => {
-        let featuredReviews = reviews.data.filter(review => {
-          return review.numberOfLikes >= 0;
-        });
-        this.setState({ featuredReviews });
+        this.setState({ featuredReviews: reviews.data });
       })
       .catch(err => {
         console.log("Error:", err);
@@ -165,17 +174,29 @@ class App extends Component {
         })
         .catch(error => console.log({ error }));
     } else {
+      console.log("BUSINESS in getgoogle", business);
+
       axios
-        .post(`${backend}api/business/placeSearch`, {
-          id: business.place_id,
-        })
+        .get(`${backend}api/business/google/${business.place_id}`)
         .then(response => {
-          this.setState({ business: response.data, landingBusiness: false });
+          this.setState({ business: response.data });
         })
         .then(() => {
-          this.props.history.push(`/business`);
+          this.props.history.push("/business");
         })
-        .catch(error => console.log("Error", error));
+        .catch(err => {
+          axios
+            .post(`${backend}api/business/placeSearch`, {
+              id: business.place_id,
+            })
+            .then(response => {
+              this.setState({ business: response.data, landingBusiness: false });
+            })
+            .then(() => {
+              this.props.history.push(`/business`);
+            })
+            .catch(error => console.log("Error", error));
+        });
     }
   };
 
@@ -204,6 +225,40 @@ class App extends Component {
 
   resetSearch = () => {
     this.setState({ searchResults: null });
+  };
+
+  sendReviewer = reviewerId => {
+    let user = new Promise(resolve => {
+      return resolve(
+        axios
+          .get(`${backend}api/user/${reviewerId}`)
+          .then(response => {
+            this.setState({ reviewer: response.data });
+          })
+          .catch(err => {
+            console.log("Error", err);
+          }),
+      );
+    });
+    let reviews = new Promise(resolve => {
+      return resolve(
+        axios
+          .get(`${backend}api/review/getReviewsByReviewerId/${reviewerId}/${0}/${"No Filter"}/${"No Sorting"}`)
+          .then(response => {
+            this.setState({ reviews: response.data.reviews });
+          })
+          .catch(err => {
+            console.log("Error", err);
+          }),
+      );
+    });
+    Promise.all([user, reviews])
+      .then(() => {
+        this.props.history.push(`/reviewer`);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 }
 

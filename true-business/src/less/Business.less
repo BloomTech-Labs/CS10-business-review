@@ -96,8 +96,9 @@
       .reviews-container__dropdowns {
         .containers(@flexDirection: row, @justifyContent: space-between);
         .dropdowns__dropdown {
-          .containers(@flexDirection: row);
-          width: auto;
+          .containers(@flexDirection: row, @justifyContent: flex-start);
+          min-width: 20vw;
+          max-width: 20vw;
           .dropdown__title {
             .title();
           }

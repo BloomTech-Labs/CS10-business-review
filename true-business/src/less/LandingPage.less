@@ -47,17 +47,14 @@
             .header();
             .hidden();
             padding: 0.5rem;
-            width: auto;
           }
           .item__info {
             .hidden();
-
             padding: 0.5rem 0;
           }
           .item__info--hover {
             .hidden();
             .shadowHover();
-            width: auto;
             padding: 0.5rem;
             border-radius: 0.5rem;
           }
@@ -92,6 +89,7 @@
         .image(@top: 0);
         .regularHover();
         min-width: 35vw;
+        max-width: 35vw;
         min-height: 35vh;
         max-height: 35vh;
         margin: 1rem 1rem 0 1rem;
@@ -99,7 +97,8 @@
       .image__portrait {
         .image(@top: 0);
         .regularHover();
-        min-width: 35vw;
+        min-width: 15vw;
+        max-width: 35vw;
         min-height: 35vh;
         max-height: 35vh;
         margin: 1rem 1rem 0 1rem;

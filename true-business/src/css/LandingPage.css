@@ -143,7 +143,6 @@
   text-overflow: ellipsis;
   text-align: center;
   padding: 0.5rem;
-  width: auto;
 }
 .landing .landing__container .container__items .items__item .item__description .item__info {
   white-space: nowrap;
@@ -159,7 +158,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
-  width: auto;
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
@@ -246,6 +244,7 @@
   top: 0;
   position: relative;
   min-width: 35vw;
+  max-width: 35vw;
   min-height: 35vh;
   max-height: 35vh;
   margin: 1rem 1rem 0 1rem;
@@ -264,7 +263,8 @@
   object-position: 50% 50%;
   top: 0;
   position: relative;
-  min-width: 35vw;
+  min-width: 15vw;
+  max-width: 35vw;
   min-height: 35vh;
   max-height: 35vh;
   margin: 1rem 1rem 0 1rem;

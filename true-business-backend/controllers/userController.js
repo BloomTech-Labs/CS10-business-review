@@ -76,17 +76,18 @@ const login = (request, response) => {
 
 const createGoogleUser = (req, res) => {
   const { name, email, googleId, imageUrl } = req.body.google;
-  User.findOne({ googleId })
+  User.findOne({ googleId: req.body.google.googleId })
     .then(user => {
       if (user) {
         res.status(401).json({ errorMessage: "This Google Account is Already Registered." });
       } else {
-        const token = generateToken({ name,email });
+        const token = generateToken({ name, email });
         const user = new User({
           name,
           username: name,
           token,
           email,
+          googleId,
           userImages: [
             {
               link: imageUrl,
@@ -129,6 +130,7 @@ const getGoogleUser = (request, response) => {
 
 const getUserById = (request, response) => {
   User.findById({ _id: request.params.id })
+    .populate("reviews")
     .then(function(user) {
       response.status(200).json(user);
     })
@@ -197,26 +199,13 @@ const updateUser = (request, response) => {
 
 const getAllUsers = (request, response) => {
   User.find({})
-    .then(function(users) {
-      let featured = [];
-      let reviews = 100;
-      // While we don't have 4 featured users
-      // When we get likes going, do the same thing we did in businessController
-      while (featured.length < 4 && reviews >= 0) {
-        // While we have an empty DB this may be slow...
-        users.forEach(user => {
-          if (user.numberOfReviews > reviews && !featured.includes(user)) {
-            featured.push(user);
-          }
-        });
-        reviews -= 10;
-      }
-      response.status(200).json(featured);
+    .sort({ numberOfLikes: -1 })
+    .limit(4)
+    .then(results => {
+      response.status(200).json(results);
     })
-    .catch(function(error) {
-      response.status(500).json({
-        error: "The information could not be retrieved.",
-      });
+    .catch(error => {
+      response.status(500).json({ error });
     });
 };
 
