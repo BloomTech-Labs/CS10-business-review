@@ -15,10 +15,10 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      subscribername: "",
       password: "",
       error: "",
-      errorMessage: "",
+      errorMessage: ""
     };
   }
 
@@ -30,20 +30,17 @@ class SignIn extends Component {
     axios
       .post(`${backend}api/user/login`, this.state)
       .then(response => {
-        console.log("Fire!", response);
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data.userId);
-        localStorage.setItem("name", response.data.name);
+        // localStorage.setItem('token', response.data.token)
+        // localStorage.setItem('subscribername', this.state.subscribername)
         this.setState({
-          error: false,
+          error: false
         });
-        console.log(this.props.history)
-        this.props.history.push(`/user`);
+        this.props.history.push(`/subscriber`);
       })
       .catch(err => {
         this.setState({
           error: true,
-          errorMessage: err.response.data.error,
+          errorMessage: err.response.data.error
         });
       });
   };
@@ -62,10 +59,10 @@ class SignIn extends Component {
             <div className="signin-container__form">
               <input
                 className="signin-container__input"
-                placeholder="Username"
-                name="username"
+                placeholder="Subscribername"
+                name="subscribername"
                 type="text"
-                value={this.state.username}
+                value={this.state.subscribername}
                 onChange={this.handleInputChange}
                 autoComplete="off"
               />
@@ -78,7 +75,11 @@ class SignIn extends Component {
                 onChange={this.handleInputChange}
               />
               <div className="signin-container__buttons ">
-                <button type="submit" className="signin-container__button" onClick={this.signIn}>
+                <button
+                  type="submit"
+                  className="signin-container__button"
+                  onClick={this.signIn}
+                >
                   Sign In
                 </button>
                 <img

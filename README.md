@@ -30,7 +30,7 @@ A clean presentation with a white-based palette has been chosen in order to prov
 
 The general frontend structure consists on:
 
-- The Landing page, with sign up and log in modal with OAuth option.
+- The Landing page, with sign up and log in modal.
 - A display page that features a filtered search option, popular businesses, popular reviews, and popular reviewers.
 - An "Add review" option for users to add their own experiences and photos via Cloudinary by way of React-Dropzone.
 - The "User Settings" page, accessed by clicking on the username on the top right corner of the application. Here the premium subscription can be aquired by [Stripe](https://stripe.com) payment, as well as the option to change the password.
@@ -41,7 +41,7 @@ The general frontend structure consists on:
 https://cryptic-brook-22003.herokuapp.com
 ```
 
-True Business Review's backend is created with [Node.js](https://nodejs.org) and [Express](https://www.npmjs.com/package/express) to communicate with the databases needed for the frontend. We have implemented [Stripe](https://stripe.com), [OAuth](https://oauth.net), [Cloudinary](https://cloudinary.com/), [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), [cors](https://www.npmjs.com/package/cors), [helmet](https://www.npmjs.com/package/helmet), [mongoose](https://www.npmjs.com/package/mongoose), [morgan](https://www.npmjs.com/package/morgan) and [Passport](http://www.passportjs.org/) with [Google](https://www.npmjs.com/package/passport-google-oauth20).
+True Business Review's backend is created with [Node.js](https://nodejs.org) and [Express](https://www.npmjs.com/package/express) to communicate with the databases needed for the frontend. We have implemented [Stripe](https://stripe.com), [OAuth](https://oauth.net), [Cloudinary](https://cloudinary.com/), [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), [cors](https://www.npmjs.com/package/cors), [helmet](https://www.npmjs.com/package/helmet), [mongoose](https://www.npmjs.com/package/mongoose), [morgan](https://www.npmjs.com/package/morgan).
 
 ### **Additional Information**
 
@@ -85,38 +85,6 @@ The Mongo URI should be then copied and pasted in the newly created `.env` file.
 ```
  DB_URI=mongodb://user:password@dsXXXXX.mlab.com:XXXXX/your-db-name
 ```
-
-### _APIs Setup_
-
-Next, we need to create the necessary APIs to enable OAuth:
-
-_Google+ API_
-
-You need a standard [Google](www.gmail.com) account, create one if needed.
-
-Go to Google's [_developers page_](https://console.developers.google.com) and create the Google + API.
-
-Copy the client ID and secret and paste it in your `.env` file. It should look like this:
-
-```
-CLIENT_ID=XXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.apps.googleusercontent.com
-CLIENT_SECRET=XXXX_XXXXXXXXXXXXXXXXXXX
-```
-
-Then, add the following credentials:
-
-- Authorized origins
-
-  - https://localhost:3000/
-  - http://localhost:3000/
-
-- Authorized Redirect URIs
-  - https://localhost:3000/auth/google/redirect
-  - http://localhost:3000/auth/google/redirect
-
-Finally, don't forget to enable the API.
-
-_Stripe, etc._
 
 The credentials and keys should be added to your local `.env` file.
 

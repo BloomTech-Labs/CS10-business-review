@@ -9,8 +9,8 @@ import StripePayment from "./StripePayment";
 import "../css/SignUp.css";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
-if (typeof(backend) !== 'string') {
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
   backend = heroku;
 }
 
@@ -18,8 +18,7 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      username: "",
+      subscribername: "",
       email: "",
       confirmEmail: "",
       password: "",
@@ -27,7 +26,7 @@ class SignUp extends Component {
       error: "",
       errorMessage: "",
       payment: false,
-      type: null,
+      type: null
     };
   }
 
@@ -39,31 +38,34 @@ class SignUp extends Component {
     return this.state.password === this.state.confirmPassword;
   };
 
-  createUser = event => {
+  confirmEmail = () => {
+    return this.state.email === this.state.confirmEmail;
+  };
+
+  createSubscriber = event => {
     event.preventDefault();
-    const user = {
-      name: this.state.name,
+    const subscriber = {
       email: this.state.email,
-      username: this.state.username,
+      subscribername: this.state.subscribername,
       password: this.state.password,
-      accountType: this.state.type,
+      accountType: this.state.type
     };
-    console.log("BACKEND", backend);
-    console.log("USER", user)
-    axios
-      .post(`${backend}api/user/register`, user)
-      .then(() => {
-        this.setState({
-          error: false,
-        });
-        this.props.history.push(`/signin`);
-      })
-      .catch(err => {
-        this.setState({
-          error: true,
-          errorMessage: err,
-        });
-      });
+    this.state.payment
+      ? axios
+          .post("http://localhost:3001/register", subscriber)
+          .then(() => {
+            this.setState({
+              error: false
+            });
+            this.props.history.push(`/signin`);
+          })
+          .catch(err => {
+            this.setState({
+              error: true,
+              errorMessage: err
+            });
+          })
+      : window.alert("You must submit payment first");
   };
 
   handleInputChange = event => {
@@ -96,10 +98,10 @@ class SignUp extends Component {
               />
               <input
                 className="signup-container__input"
-                placeholder="Username"
-                name="username"
+                placeholder="Subscribername"
+                name="subscribername"
                 type="text"
-                value={this.state.username}
+                value={this.state.subscribername}
                 onChange={this.handleInputChange}
               />
               <input
@@ -126,15 +128,14 @@ class SignUp extends Component {
                 </div>
               </StripeProvider>
               <div className="signup-container__buttons ">
-                {this.state.payment ? (
-                  <button
-                    id="signup-submit"
-                    type="submit"
-                    className="signup-container__button"
-                    onClick={this.createUser}>
-                    Confirm Registration
-                  </button>
-                ) : null}
+                <button
+                  id="signup-submit"
+                  type="submit"
+                  className="signup-container__button"
+                  onClick={this.createSubscriber}
+                >
+                  Confirm
+                </button>
               </div>
             </form>
           </div>
