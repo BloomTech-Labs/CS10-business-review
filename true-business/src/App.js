@@ -118,20 +118,19 @@ class App extends Component {
     );
   }
 
+  // populate landing page
   getDBBusinesses = () => {
     axios
       .get(`${backend}api/business`)
       .then(businesses => {
-        let featuredBusinesses = businesses.data.filter(business => {
-          return business.stars >= 0;
-        });
-        this.setState({ featuredBusinesses });
+        this.setState({ featuredBusinesses: businesses.data });
       })
       .catch(err => {
         console.log("Error:", err);
       });
   };
 
+  // populate landing page
   getDBReviews = () => {
     axios
       .get(`${backend}api/review/getAllReviews`)
@@ -143,14 +142,12 @@ class App extends Component {
       });
   };
 
+  // populate landing page
   getDBUsers = () => {
     axios
       .get(`${backend}api/user`)
       .then(users => {
-        let featuredUsers = users.data.filter(user => {
-          return user.numberOfLikes >= 0;
-        });
-        this.setState({ featuredUsers });
+        this.setState({ featuredUsers: users.data });
       })
       .catch(err => {
         console.log("Error:", err);
