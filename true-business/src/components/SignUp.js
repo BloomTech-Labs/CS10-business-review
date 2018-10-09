@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import logo from "../imgs/logo.png";
-// import signUp from "../imgs/signup.png";
+import GoogleLogin from "react-google-login";
 
 import "../css/SignUp.css";
 
@@ -20,7 +20,6 @@ class SignUp extends Component {
       email: "",
       username: "",
       usernameError: false,
-      email: "",
       confirmEmail: "",
       password: "",
       passwordError: false,
@@ -56,22 +55,53 @@ class SignUp extends Component {
         };
         axios
           .post(`${backend}api/user/register`, user)
-          .then(() => {
+          .then(response => {
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("userId", response.data._id);
+            localStorage.setItem("name", response.data.name);
+            localStorage.setItem("accountType", response.data.accountType);
+            localStorage.setItem("accountDeactivated", response.data.accountDeactivated);
+            localStorage.setItem("userImage", response.data.userImages[0].link);
             this.setState({
               error: false,
             });
-            this.props.history.push(`/signin`);
+            this.props.history.push(`/user`);
           })
           .catch(err => {
-            if (err) {
-              this.setState({
-                error: true,
-                errorMessage: "This username already exists!",
-              });
-            }
+            this.setState({
+              error: true,
+              errorMessage: "This username already exists!",
+            });
           });
       }
     }
+  };
+
+  createGoogleUser = google => {
+    axios
+      .post(`${backend}api/user/registerGoogle`, { google: google.profileObj })
+      .then(response => {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data._id);
+        localStorage.setItem("name", response.data.name);
+        localStorage.setItem("accountType", response.data.accountType);
+        localStorage.setItem("accountDeactivated", response.data.accountDeactivated);
+        localStorage.setItem("userImage", response.data.userImages[0].link);
+        this.setState({
+          error: false,
+        });
+        this.props.history.push(`/user`);
+      })
+      .catch(err => {
+        this.setState({
+          error: true,
+          errorMessage: err.response.data.errorMessage,
+        });
+      });
+  };
+
+  googleFail = () => {
+    this.setState({ error: true, errorMessage: "Google Sign In Failing, Sorry for the Inconvenience." });
   };
 
   handleInputChange = event => {
@@ -111,7 +141,11 @@ class SignUp extends Component {
           <div className="signup-container">
             <div className="signup-container__header"> Sign Up </div>
             <form className="signup-container__form">
-              {this.state.errorMessage === '' ? <div className="form__error"/> : <div className="form__error"> {this.state.errorMessage} </div>}
+              {!this.state.error ? (
+                <div className="form__error" />
+              ) : (
+                <div className="form__error"> {this.state.errorMessage} </div>
+              )}
               <input
                 className="signup-container__input"
                 placeholder="Full Name"
@@ -174,15 +208,13 @@ class SignUp extends Component {
                   onClick={this.createUser}>
                   {this.state.inputError ? "Missing Fields" : "Confirm Registration"}
                 </button>
-                {/* <hr />
-                <img
-                  alt="Google Logo"
-                  src={signUp}
-                  className="signup-container__google-auth"
-                  onClick={() => {
-                    window.location = `${backend}auth/google`;
-                  }}
-                /> */}
+                <hr />
+                <GoogleLogin
+                  clientId={process.env.googleClientID || process.env.REACT_APP_GOOGLEAUTHCLIENTID}
+                  buttonText="Sign Up With Google"
+                  onSuccess={this.createGoogleUser}
+                  onFailure={this.googleFail}
+                />
               </div>
             </form>
             <div className="signup__returning">
