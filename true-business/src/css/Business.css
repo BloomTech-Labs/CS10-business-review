@@ -29,14 +29,21 @@
   color: #05386b;
   min-width: 70vw;
   max-width: 70vw;
-  min-height: 70vh;
-  max-height: 70vh;
-  box-shadow: 0px 0px 50px 0px #6b6b6b;
+  min-height: 60vh;
+  max-height: 60vh;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
-  padding: 1rem;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
   margin: 1rem;
+  cursor: default;
+}
+.business .business__info:hover {
+  cursor: pointer;
+  filter: brightness(105%);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 2px -1px rgba(0, 0, 0, 0.12);
+  opacity: 1;
 }
 .business .business__info .info__image {
   font-size: 1rem;
@@ -59,7 +66,7 @@
 }
 .business .business__info .info__image .info__landscape {
   background-color: #e9e9e9;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   object-fit: cover;
   object-position: 50% 50%;
   top: 0;
@@ -68,7 +75,6 @@
   max-width: 40vw;
   min-height: 40vh;
   max-height: 40vh;
-  margin: 1rem;
 }
 .business .business__info .info__image .info__landscape:hover {
   cursor: pointer;
@@ -81,7 +87,8 @@
 }
 .business .business__info .info__details .details__title {
   font-size: 1.1rem;
-  padding: 1rem 0;
+  text-align: center;
+  padding: 0.25rem 0;
 }
 .business .business__info .info__details .details__address {
   display: flex;
@@ -97,7 +104,7 @@
   margin: 0;
   color: #05386b;
   font-size: 1rem;
-  padding: 1rem 0;
+  padding: 0.25rem 0;
 }
 .business .business__info .info__details .details__address .address__icon {
   white-space: nowrap;
@@ -158,8 +165,8 @@
   width: 2rem;
 }
 .business .business__info .info__details .details__detail .detail__hours .hours__days .hours__text {
-  padding-left: 1rem;
-  margin-left: 1rem;
+  padding-left: 25%;
+  font-size: 1rem;
 }
 .business .business__info .info__details .details__detail .detail__contact {
   font-size: 1rem;
@@ -193,7 +200,7 @@
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__phone .phone__number {
   font-size: 1rem;
-  padding: 1rem;
+  padding: 0.25rem;
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__website {
   font-size: 1rem;
@@ -212,7 +219,7 @@
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__website .website__text {
   font-size: 1rem;
-  padding: 1rem;
+  padding: 0.25rem;
 }
 .business .business__reviews-container {
   font-size: 1rem;
@@ -225,7 +232,7 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
   line-height: 1;
-  padding: 1rem 1rem 0 1rem;
+  padding: 0.5rem 0.5rem 0 0.5rem;
   margin: 0;
   color: #05386b;
   min-width: 70vw;
@@ -233,8 +240,8 @@
   min-height: 50vh;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 50px 0px #6b6b6b;
+  border-radius: 0.25rem;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 .business .business__reviews-container .reviews__header {
   font-size: 1rem;
@@ -287,16 +294,37 @@
 .business .business__reviews-container .reviews__header .reviews-container__dropdowns .dropdowns__dropdown .dropdown__title {
   font-size: 1.1rem;
 }
+.business .business__reviews-container .reviews__header .reviews-container__dropdowns .dropdowns__dropdown--left {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+  min-width: 20vw;
+  max-width: 20vw;
+  justify-content: flex-end;
+}
+.business .business__reviews-container .reviews__header .reviews-container__dropdowns .dropdowns__dropdown--left .dropdown__title {
+  font-size: 1.1rem;
+}
 .business .business__reviews-container .reviews__header .reviews-container__title {
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   font-size: 1.1rem;
   color: #05386b;
   text-align: left;
 }
 .business .business__reviews-container .reviews__header .reviews-container__button {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
@@ -309,8 +337,8 @@
 }
 .business .business__reviews-container .reviews__header .reviews-container__button:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  filter: brightness(105%);
   font-weight: bolder;
 }
 .business .business__reviews-container .reviews-container__reviews {
@@ -350,7 +378,7 @@
   font-size: 1.1rem;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   margin: 1rem;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews--no-results .search__no-results {
@@ -370,7 +398,7 @@
   font-size: 1.1rem;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 50vw;
   margin: 2rem;
 }
@@ -402,8 +430,8 @@
   margin: 0;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 50px 0px #6b6b6b;
+  border-radius: 0.25rem;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   min-height: 30vh;
   max-height: 30vh;
   min-width: 20vw;
@@ -415,8 +443,8 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  filter: brightness(105%);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 2px -1px rgba(0, 0, 0, 0.12);
   opacity: 1;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header {
@@ -475,7 +503,7 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .review__landscape {
   background-color: #e9e9e9;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   object-fit: cover;
   object-position: 50% 50%;
   top: -2rem;
@@ -492,7 +520,7 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__header .review__portrait {
   background-color: #e9e9e9;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   object-fit: cover;
   object-position: 50% 50%;
   top: -2rem;
@@ -546,7 +574,7 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__reviewer .review__landscape {
   background-color: #e9e9e9;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   object-fit: cover;
   object-position: 50% 50%;
   top: 0;
@@ -566,7 +594,7 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__review .review__info .info__body .body__reviewer .review__portrait {
   background-color: #e9e9e9;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   object-fit: cover;
   object-position: 50% 50%;
   top: -2rem;
@@ -642,7 +670,7 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 50vw;
   min-width: 50%;
   padding: 0.5rem;
@@ -665,7 +693,7 @@
   max-width: 70%;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__pages .pagination__page {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
@@ -677,8 +705,8 @@
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__pages .pagination__page:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  filter: brightness(105%);
   font-weight: bolder;
 }
 .business .business__reviews-container .reviews-container__reviews .reviews__pagination .pagination__pages .pagination__page:hover {
@@ -744,7 +772,7 @@
   padding: 1rem;
 }
 .modal .modal__header .header__image .image__buttons .image__button {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
@@ -759,13 +787,13 @@
 }
 .modal .modal__header .header__image .image__buttons .image__button:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  filter: brightness(105%);
   font-weight: bolder;
 }
 .modal .modal__header .header__image .image__landscape {
   background-color: #e9e9e9;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   object-fit: cover;
   object-position: 50% 50%;
   top: 0;
@@ -785,7 +813,7 @@
 }
 .modal .modal__header .header__image .image__portrait {
   background-color: #e9e9e9;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   object-fit: cover;
   object-position: 50% 50%;
   top: 0;
@@ -943,7 +971,7 @@
   color: #05386b;
 }
 .modal .modal__footer .footer__button {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
@@ -954,8 +982,8 @@
 }
 .modal .modal__footer .footer__button:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  filter: brightness(105%);
   font-weight: bolder;
 }
 .active {

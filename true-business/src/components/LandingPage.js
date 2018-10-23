@@ -110,7 +110,7 @@ class LandingPage extends Component {
                       numberOfStars={5}
                       name="rating"
                     />
-                    <div className="item__info--hover">
+                    <div className="item__info">
                       <i style={{ paddingRight: ".5rem" }} className="fas fa-user" /> {review.reviewer.username}
                     </div>
                   </div>
@@ -150,7 +150,7 @@ class LandingPage extends Component {
                         // onClick={() => this.openModal(this, user)}
                       />
                       <div className="item__description">
-                        <div className="item__info--hover">
+                        <div className="item__info">
                           <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
                           {user.username}
                         </div>

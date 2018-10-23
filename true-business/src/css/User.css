@@ -52,16 +52,15 @@
   max-height: 20vh;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 50px 0px #6b6b6b;
+  border-radius: 0.25rem;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 .user .user__body .body__left-bar .left-bar__button {
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   border: none;
-  width: 95%;
-  padding: 1rem;
+  padding: 0.25rem;
 }
 .user .user__body .body__left-bar .left-bar__button:hover {
   font-weight: bolder;
@@ -81,10 +80,10 @@
   padding: 0;
   margin: 0;
   color: #05386b;
-  box-shadow: 0px 0px 50px 0px #6b6b6b;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   min-width: 60vw;
   max-width: 60vw;
   min-height: 50vh;
@@ -107,7 +106,7 @@
   max-width: 60vw;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns {
   font-size: 1rem;
@@ -159,7 +158,7 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 40%;
   min-width: 40%;
   max-width: 40%;
@@ -183,7 +182,7 @@
   min-width: 75%;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .reviews__pagination .pagination__pages .pagination__page {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
@@ -195,8 +194,8 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .reviews__pagination .pagination__pages .pagination__page:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  filter: brightness(105%);
   font-weight: bolder;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__dropdowns .reviews__pagination .pagination__pages .pagination__page--no-hover {
@@ -204,7 +203,7 @@
   cursor: default;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__button {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
@@ -214,8 +213,8 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__button:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  filter: brightness(105%);
   font-weight: bolder;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews {
@@ -258,8 +257,8 @@
   margin: 0;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 50px 0px #6b6b6b;
+  border-radius: 0.25rem;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   min-height: 28vh;
   max-height: 28vh;
   min-width: 29%;
@@ -271,13 +270,13 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info:hover {
   cursor: pointer;
-  filter: brightness(110%);
-  box-shadow: 0px 0px 50px 10px #6b6b6b;
+  filter: brightness(105%);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 2px -1px rgba(0, 0, 0, 0.12);
   opacity: 1;
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__landscape {
   background-color: #e9e9e9;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   object-fit: cover;
   object-position: 50% 50%;
   top: -2rem;
@@ -297,7 +296,7 @@
 }
 .user .user__body .body__content .content__reviews-container .reviews-container__reviews .reviews__review .review__info .review__portrait {
   background-color: #e9e9e9;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   object-fit: cover;
   object-position: 50% 50%;
   top: -2rem;
@@ -360,11 +359,11 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
-  min-width: 60vw;
-  max-width: 60vw;
-  min-height: 50vh;
-  max-height: 50vh;
+  border-radius: 0.25rem;
+  min-width: 55vw;
+  max-width: 55vw;
+  min-height: 55vh;
+  max-height: 55vh;
 }
 .user .user__body .body__content .content__billing .billing__section {
   font-size: 1rem;
@@ -420,9 +419,9 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
-  border-radius: 0.5rem;
-  min-width: 60vw;
-  max-width: 60vw;
+  border-radius: 0.25rem;
+  min-width: 55vw;
+  max-width: 55vw;
   min-height: 55vh;
   max-height: 55vh;
 }
@@ -433,7 +432,7 @@
   font-size: 0.8rem;
   position: relative;
   top: 10vh;
-  left: -6vw;
+  left: 2rem;
 }
 .user .user__body .body__content .content__profile .profile__container {
   font-size: 1rem;
@@ -459,7 +458,7 @@
 }
 .user .user__body .body__content .content__profile .profile__container .profile__image {
   background-color: #e9e9e9;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   object-fit: cover;
   object-position: 50% 50%;
   top: 0;
@@ -489,8 +488,9 @@
   color: #05386b;
   background: #ffffff;
   border: 0.1rem solid #ffffff;
+  border-radius: 0.25rem;
   border-radius: 0.5rem;
-  padding: 1rem 2rem;
+  padding: 0.5rem 0 0.5rem 1rem;
   height: 2rem;
   min-height: 55vh;
   max-height: 55vh;
@@ -511,8 +511,8 @@
   padding: 0;
   margin: 0;
   color: #05386b;
-  min-height: 12vh;
-  max-height: 12vh;
+  min-height: 13vh;
+  max-height: 13vh;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__label {
   font-size: 1.1rem;
@@ -536,9 +536,9 @@
   color: #05386b;
   min-width: 60%;
   max-width: 60%;
-  padding: 0.5rem;
   max-height: 5vh;
   min-height: 12vh;
+  padding: 0.5rem;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__data .data__change {
   font-size: 1rem;
@@ -556,13 +556,15 @@
   color: #05386b;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__data .data__change .change__input {
+  position: relative;
+  top: -0.5rem;
   width: 100%;
   margin-bottom: 1rem;
   padding: 0.5rem;
-  box-shadow: 0px 0px 50px 0px #6b6b6b;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__data .data__change .change__button {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
@@ -573,12 +575,12 @@
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__data .data__change .change__button:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  filter: brightness(105%);
   font-weight: bolder;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__button {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
@@ -590,15 +592,15 @@
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__button:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  filter: brightness(105%);
   font-weight: bolder;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__button:hover {
   cursor: pointer;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__button--save {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
@@ -609,8 +611,8 @@
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__button--save:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  filter: brightness(105%);
   font-weight: bolder;
 }
 .user .user__body .body__content .content__profile .profile__container .container__info .info__info .info__button--save:hover {

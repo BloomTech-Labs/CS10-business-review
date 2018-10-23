@@ -1,13 +1,13 @@
-@import "mixins.less";
+@import 'mixins.less';
 
 .thumbnail {
-  .containers(@height: 25rem, @width: 20%, @justifyContent: space-between);
+  .containers(@width: 20%, @justifyContent: space-between);
   .backAndBorder();
   .shadowHover();
   .shadow();
   margin: 1rem;
-  padding: 1rem;
-  min-height: 28rem;
+  padding: 0.5rem;
+  min-height: 23rem;
   min-width: 20%;
   text-align: center;
   .thumbnail__landscape {
@@ -24,11 +24,21 @@
       .title();
       padding: 0.5rem;
     }
+    .description__rating {
+      .containers(@flexDirection: row);
+      .rating__count {
+        margin: 0 0.5rem;
+      }
+    }
     .description__info {
       .body();
       .hidden();
-      padding-top: .5em;
+      padding: 0.5em 0;
       width: 100%;
+      color: @textColor;
+    }
+    .description__map {
+      color: @textColor;
     }
   }
 }

@@ -14,8 +14,8 @@
   color: #05386b;
   min-height: 50vh;
   max-height: 50vh;
-  min-width: 45vw;
-  max-width: 45vw;
+  min-width: 35vw;
+  max-width: 35vw;
   padding: 2rem;
 }
 .stripe .stripe__info {
@@ -35,10 +35,10 @@
   margin-bottom: 1rem;
 }
 .stripe .stripe__info .info__input {
-  width: 50%;
+  width: 75%;
   margin-bottom: 1rem;
   padding: 0.5rem;
-  box-shadow: 0px 0px 50px 0px #6b6b6b;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 .stripe .stripe__radio {
   font-size: 1rem;
@@ -55,10 +55,10 @@
   margin: 0;
   color: #05386b;
 }
-.stripe .stripe__radio .radio__label {
+.stripe .stripe__radio .radio__section {
   font-size: 1rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -70,16 +70,15 @@
   margin: 0;
   color: #05386b;
   font-size: 1.1rem;
-  width: 20vw;
 }
-.stripe .stripe__radio .radio__label:hover {
+.stripe .stripe__radio .radio__section:hover {
   cursor: pointer;
 }
-.stripe .stripe__radio .radio__label .radio__button {
-  margin-bottom: 1rem;
+.stripe .stripe__radio .radio__section .radio__label {
+  margin: 0 0.5rem;
 }
 .stripe .stripe__button {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
@@ -90,8 +89,8 @@
 }
 .stripe .stripe__button:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  filter: brightness(105%);
   font-weight: bolder;
 }
 .stripe .stripe__element {
@@ -103,13 +102,13 @@
 }
 .StripeElement {
   padding: 0.5rem;
-  box-shadow: 0px 0px 50px 0px #6b6b6b;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 .StripeElement--invalid {
   border: 1px solid red;
 }
 input[type="radio"] {
   border: 0px;
-  width: 100%;
-  height: 2em;
+  width: 1.5rem;
+  height: 1.5rem;
 }
