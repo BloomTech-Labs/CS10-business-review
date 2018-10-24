@@ -29,21 +29,14 @@
   color: #05386b;
   min-width: 70vw;
   max-width: 70vw;
-  min-height: 60vh;
-  max-height: 60vh;
+  min-height: 55vh;
+  max-height: 55vh;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   background: #ffffff;
   border: 0.1rem solid #ffffff;
   border-radius: 0.25rem;
   padding: 0.5rem;
   margin: 1rem;
-  cursor: default;
-}
-.business .business__info:hover {
-  cursor: pointer;
-  filter: brightness(105%);
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 2px -1px rgba(0, 0, 0, 0.12);
-  opacity: 1;
 }
 .business .business__info .info__image {
   font-size: 1rem;
@@ -71,6 +64,7 @@
   object-position: 50% 50%;
   top: 0;
   position: relative;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   min-width: 40vw;
   max-width: 40vw;
   min-height: 40vh;
@@ -79,11 +73,27 @@
 .business .business__info .info__image .info__landscape:hover {
   cursor: pointer;
 }
+.business .business__info .info__image .info__landscape:hover {
+  cursor: default;
+}
 .business .business__info .info__details {
-  min-width: 25vw;
-  max-width: 25vw;
-  min-height: 50vh;
-  max-height: 50vh;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  color: #05386b;
+  min-width: 35%;
+  max-width: 35%;
+  min-height: 90%;
+  max-height: 90%;
 }
 .business .business__info .info__details .details__title {
   font-size: 1.1rem;
@@ -182,6 +192,7 @@
   padding: 0;
   margin: 0;
   color: #05386b;
+  padding: 0.5rem 0;
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__phone {
   font-size: 1rem;
@@ -216,6 +227,7 @@
   padding: 0;
   margin: 0;
   color: #05386b;
+  padding: 0.25rem 0;
 }
 .business .business__info .info__details .details__detail .detail__contact .contact__website .website__text {
   font-size: 1rem;
@@ -497,7 +509,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
-  width: auto;
   max-width: 10vw;
   padding: 0.2rem 0;
 }

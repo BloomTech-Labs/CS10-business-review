@@ -7,14 +7,12 @@
     .containers(@flexDirection: row, @justifyContent: space-around);
     min-width: 70vw;
     max-width: 70vw;
-    min-height: 60vh;
-    max-height: 60vh;
+    min-height: 55vh;
+    max-height: 55vh;
     .shadow();
-    .shadowHover();
     .backAndBorder();
     padding: .5rem;
     margin: 1rem;
-    cursor: default;
     .info__image {
       .containers();
       min-width: 45vw;
@@ -23,17 +21,22 @@
       max-height: 50vh;
       .info__landscape {
         .image(@top: 0);
+        .shadow();
         min-width: 40vw;
         max-width: 40vw;
         min-height: 40vh;
         max-height: 40vh;
+        &:hover {
+          cursor: default;
+        }
       }
     }
     .info__details {
-      min-width: 25vw;
-      max-width: 25vw;
-      min-height: 50vh;
-      max-height: 50vh;
+      .containers(@justifyContent: space-around);
+      min-width: 35%;
+      max-width: 35%;
+      min-height: 90%;
+      max-height: 90%;
       .details__title {
         .title();
         text-align: center;
@@ -67,6 +70,7 @@
         }
         .detail__contact {
           .containers();
+          padding: .5rem 0;
           .contact__phone {
             .containers(@flexDirection: row, @justifyContent: flex-start);
             .phone__number {
@@ -76,6 +80,7 @@
           }
           .contact__website {
             .containers(@flexDirection: row, @justifyContent: flex-start);
+            padding: .25rem 0;
             .website__text {
               .body();
               padding: .25rem;
@@ -177,7 +182,6 @@
               .data__text {
                 .containers(@alignItems:flex-start);
                 .hidden();
-                width: auto;
                 max-width: 10vw;
                 padding: 0.2rem 0;
               }

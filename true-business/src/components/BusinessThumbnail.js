@@ -56,7 +56,6 @@ export default BusinessThumbnail;
 //     .splice(0, 1)
 //     .toString()}
 // </div>
-{
   /* <div className="description__info">
   {props.business.formatted_address
     .split(",")
@@ -71,4 +70,4 @@ export default BusinessThumbnail;
     .toString()
     .trim()}
 </div>  */
-}
+

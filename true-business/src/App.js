@@ -219,6 +219,7 @@ class App extends Component {
         axios
           .get(`${backend}api/user/${reviewerId}`)
           .then(response => {
+            
             this.setState({ reviewer: response.data });
           })
           .catch(err => {
