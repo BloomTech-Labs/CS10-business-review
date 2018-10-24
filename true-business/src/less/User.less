@@ -1,4 +1,4 @@
-@import "mixins.less";
+@import 'mixins.less';
 
 .user {
   .containers(@justifyContent: space-around);
@@ -19,7 +19,7 @@
       .left-bar__button {
         .backAndBorder();
         border: none;
-        padding: .25rem;
+        padding: 0.25rem;
         &:hover {
           font-weight: bolder;
           cursor: pointer;
@@ -43,21 +43,25 @@
           .dropdowns__dropdown {
             .containers(@flexDirection: row);
             width: auto;
+            min-height: 2.75rem;
+            padding: .5rem;
             .dropdown__title {
               .title();
             }
           }
           .reviews__pagination {
-            .containers(@flexDirection: row, @justifyContent: space-between);
+            .containers(@flexDirection: row, @justifyContent: flex-end);
             .backAndBorder(@background: @elementBG);
-            width: 40%;
             min-width: 40%;
-            max-width: 40%;
+            max-width: 50%;
             padding: 0.5rem;
+            width: auto;
+            white-space: nowrap;
             .pagination__pages {
               .containers(@flexDirection: row);
+              width: 50%;
+              min-width: 50%;
               max-width: 75%;
-              min-width: 75%;
               .pagination__page {
                 .button();
                 width: 10%;
@@ -105,7 +109,7 @@
                 height: 15vh;
                 min-height: 15vh;
                 max-height: 15vh;
-                &:hover{
+                &:hover {
                   cursor: default;
                 }
               }
@@ -199,8 +203,8 @@
             .containers(@justifyContent: flex-start);
             .backAndBorder(@background: @elementBG);
             border-radius: 0.5rem;
-            padding: .5rem 0 .5rem 1rem;
-            
+            padding: 0.5rem 0 0.5rem 1rem;
+
             height: 2rem;
             min-height: 55vh;
             max-height: 55vh;
@@ -222,12 +226,12 @@
                 max-width: 60%;
                 max-height: 5vh;
                 min-height: 12vh;
-                padding: .5rem;
+                padding: 0.5rem;
                 .data__change {
                   .containers(@justifyContent: flex-start);
                   .change__input {
                     position: relative;
-                    top: -.5rem;
+                    top: -0.5rem;
                     width: 100%;
                     margin-bottom: 1rem;
                     padding: 0.5rem;
@@ -255,8 +259,8 @@
                 }
               }
             }
-            .info__info:last-of-type{
-              height: 22vh
+            .info__info:last-of-type {
+              height: 22vh;
             }
           }
         }
@@ -264,117 +268,3 @@
     }
   }
 }
-
-// .modal {
-//   .modal__header {
-//     .containers(@height:40vh, @margin: 0 0 0.3rem 0, @justifyContent: space-between);
-//     max-height: 40vh;
-//     .header__image {
-//       .containers(@alignItems: flex-start, @justifyContent: space-between, @flexDirection: row);
-//       .image__buttons {
-//         .containers(@justifyContent: flex-start);
-//         width: 10vw;
-//         min-width: 10vw;
-//         max-width: 10vw;
-//         padding: 1rem;
-//         .image__button {
-//           .button();
-//           width: 5vw;
-//           min-width: 5vw;
-//           max-width: 5vw;
-//           margin: 1rem;
-//           padding: 0.5rem;
-//         }
-//       }
-//       .image__landscape {
-//         .image(@top: 0);
-//         .regularHover();
-//         min-width: 35vw;
-//         max-width: 35vw;
-//         min-height: 35vh;
-//         max-height: 35vh;
-//         margin: 1rem 1rem 0 1rem;
-//       }
-//       .image__portrait {
-//         .image(@top: 0);
-//         .regularHover();
-//         min-width: 35vw;
-//         max-width: 35vw;
-//         min-height: 35vh;
-//         max-height: 35vh;
-//         margin: 1rem 1rem 0 1rem;
-//         object-position: 50% 0%;
-//       }
-//     }
-//     .header__user {
-//       .containers(@flexDirection: row, @justifyContent: space-around);
-//       text-align: center;
-//       min-height: 10%;
-//       max-height: 10%;
-//       padding: 2rem;
-//       .header__title {
-//         .header();
-//       }
-//       .header__reviewer {
-//         .containers(@flexDirection: row, @justifyContent: space-around);
-//         width: 50%;
-//         .reviewer__info--onclick {
-//           text-overflow: ellipsis;
-//           overflow: hidden;
-//           width: 60%;
-//           .header();
-//         }
-//         .reviewer__info {
-//           text-overflow: ellipsis;
-//           overflow: hidden;
-//           width: 60%;
-//           .body();
-//         }
-//       }
-//     }
-//   }
-//   .modal__body {
-//     .containers(@justifyContent: flex-start, @height: 40vh);
-//     min-height: 40vh;
-//     max-height: 40vh;
-//     .body__business {
-//       .header();
-//     }
-//     .body__stars {
-//       .containers(@flexDirection: row, @justifyContent: space-around);
-//       height: 10%;
-//       min-width: 75%;
-//       max-width: 90%;
-//     }
-//     .body__drop {
-//       .containers();
-//     }
-//     .body__title {
-//       .header();
-//       text-decoration: underline;
-//       margin: 1rem 0 1.5rem 0;
-//     }
-//     .body__stars {
-//       text-align: center;
-//       width: 50%;
-//       height: 20%;
-//     }
-//     .body__review {
-//       .body();
-//       height: 50%;
-//       padding: 0.5rem;
-//       width: 90%;
-//       height: auto;
-//       max-height: 25vh;
-//       overflow-y: auto;
-//       overflow-wrap: break-word;
-//     }
-//   }
-//   .modal__footer {
-//     .containers();
-//     .footer__button {
-//       .button();
-//       margin: 0.5rem 0;
-//     }
-//   }
-// }

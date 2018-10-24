@@ -1,61 +1,61 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import NavBar from "./NavBar.js";
-import axios from "axios";
-import StarRatings from "react-star-ratings";
-import Modal from "react-modal";
-import { Button, Menu, MenuItem } from "@material-ui/core";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import NavBar from './NavBar.js';
+import axios from 'axios';
+import StarRatings from 'react-star-ratings';
+import Modal from 'react-modal';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 
-import { Elements, StripeProvider } from "react-stripe-elements";
-import StripePayment from "./StripePayment";
+import { Elements, StripeProvider } from 'react-stripe-elements';
+import StripePayment from './StripePayment';
 
-import "../css/User.css";
+import '../css/User.css';
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = "https://cryptic-brook-22003.herokuapp.com/";
-if (typeof backend !== "string") {
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof backend !== 'string') {
   backend = heroku;
 }
 
 let modalStyles = {
   content: {
-    top: "50%",
-    left: "50%",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    height: "90vh",
-    width: "60vw",
-    zIndex: "5",
-    backgroundColor: "rgb(238,238,238)",
-    color: "rgb(5,56,107)",
-    overflow: "hidden",
+    top: '50%',
+    left: '50%',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    height: '90vh',
+    width: '60vw',
+    zIndex: '5',
+    backgroundColor: 'rgb(238,238,238)',
+    color: 'rgb(5,56,107)',
+    overflow: 'hidden',
   },
 };
 
 class User extends Component {
   state = {
-    current: "Home",
+    current: 'Home',
     currentPage: 0,
-    username: "",
+    username: '',
     usernameShow: false,
-    usernameButton: "Change",
-    usernameUpdate: "",
+    usernameButton: 'Change',
+    usernameUpdate: '',
     usernameError: false,
-    email: "",
+    email: '',
     emailShow: false,
-    emailButton: "Change",
-    emailUpdate: "",
-    password: "",
+    emailButton: 'Change',
+    emailUpdate: '',
+    password: '',
     passwordShow: false,
-    passwordButton: "Change",
-    passwordUpdate: "",
-    passwordUpdateVerify: "",
+    passwordButton: 'Change',
+    passwordUpdate: '',
+    passwordUpdateVerify: '',
     passwordErrorMatch: false,
     passwordErrorLength: false,
     passwordErrorUpdate: false,
     error: false,
-    filterBy: "No Filter",
-    sortBy: "No Sorting",
+    filterBy: 'No Filter',
+    sortBy: 'No Sorting',
     anchorElFilter: null,
     anchorElSort: null,
   };
@@ -63,8 +63,8 @@ class User extends Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
     this.getReviews(0, this.state.sortBy, this.state.filterBy);
-    const id = localStorage.getItem("userId");
-    const token = localStorage.getItem("token");
+    const id = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
     const headers = { headers: { authorization: token } };
     axios
       .get(`${backend}api/user/${id}`, headers)
@@ -75,7 +75,7 @@ class User extends Component {
         });
       })
       .catch(error => {
-        console.log("error", error);
+        console.log('error', error);
       });
   };
 
@@ -83,39 +83,39 @@ class User extends Component {
     event.preventDefault();
     let field = event.target.name;
     let update =
-      field === "password"
+      field === 'password'
         ? {
             password: this.state.password,
             passwordUpdate: this.state.passwordUpdate,
           }
-        : this.state[field + "Update"];
-    let userId = localStorage.getItem("userId");
+        : this.state[field + 'Update'];
+    let userId = localStorage.getItem('userId');
     axios
       .put(`${backend}api/user/update/${userId}`, { field: field, update })
       .then(response => {
-        field === "password"
+        field === 'password'
           ? this.setState({
-              password: "",
-              passwordUpdate: "",
-              passwordUpdateVerify: "",
+              password: '',
+              passwordUpdate: '',
+              passwordUpdateVerify: '',
               passwordShow: false,
-              passwordButton: "Change",
+              passwordButton: 'Change',
             })
           : this.setState({
               [field]: response.data[field],
-              [field + "Show"]: false,
-              [field + "Button"]: "Change",
+              [field + 'Show']: false,
+              [field + 'Button']: 'Change',
             });
       })
       .catch(err => {
         this.setState({
           error: true,
           passwordErrorUpdate: true,
-          password: "",
-          passwordUpdate: "",
-          passwordUpdateVerify: "",
+          password: '',
+          passwordUpdate: '',
+          passwordUpdateVerify: '',
           passwordShow: false,
-          passwordButton: "Change",
+          passwordButton: 'Change',
         });
       });
   };
@@ -124,7 +124,7 @@ class User extends Component {
     axios
       .get(
         `${backend}api/review/getReviewsByReviewerId/${localStorage.getItem(
-          "userId",
+          'userId',
         )}/${currentPage}/${filter}/${sort}`,
       )
       .then(response => {
@@ -134,23 +134,23 @@ class User extends Component {
         });
       })
       .catch(error => {
-        console.log("Error", error);
+        console.log('Error', error);
       });
   };
 
   logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("name");
-    localStorage.removeItem("accountType");
-    localStorage.removeItem("accountDeactivated");
-    localStorage.removeItem("userImage");
-    this.props.history.push("/");
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('name');
+    localStorage.removeItem('accountType');
+    localStorage.removeItem('accountDeactivated');
+    localStorage.removeItem('userImage');
+    this.props.history.push('/');
   };
 
   handleInputChange = event => {
-    if (event.target.id === "username") {
-      let username = document.getElementById("username").value;
+    if (event.target.id === 'username') {
+      let username = document.getElementById('username').value;
       if (username.length > 20) {
         this.setState({ usernameError: true, error: true });
       } else {
@@ -162,26 +162,26 @@ class User extends Component {
 
   buttonChange = event => {
     switch (event.target.name) {
-      case "emailButton":
-        let email = this.state.emailButton === "Change" ? "Cancel" : "Change";
+      case 'emailButton':
+        let email = this.state.emailButton === 'Change' ? 'Cancel' : 'Change';
         this.setState({ emailButton: email, emailShow: !this.state.emailShow });
         break;
-      case "usernameButton":
-        let username = this.state.usernameButton === "Change" ? "Cancel" : "Change";
+      case 'usernameButton':
+        let username = this.state.usernameButton === 'Change' ? 'Cancel' : 'Change';
         this.setState({ usernameButton: username, usernameShow: !this.state.usernameShow });
         break;
       //password
       default:
-        let password = this.state.passwordButton === "Change" ? "Cancel" : "Change";
+        let password = this.state.passwordButton === 'Change' ? 'Cancel' : 'Change';
         this.setState({ passwordButton: password, passwordShow: !this.state.passwordShow });
     }
   };
 
   toggleDropDown = event => {
     let toggle = event.target.name;
-    let other = "showFilterBy";
-    if (toggle === "showFilterBy") {
-      other = "showSortBy";
+    let other = 'showFilterBy';
+    if (toggle === 'showFilterBy') {
+      other = 'showSortBy';
     }
     let inverse = this.state[toggle];
     this.setState({ [toggle]: !inverse, [other]: false });
@@ -201,14 +201,14 @@ class User extends Component {
     event.preventDefault();
     if (
       this.state.passwordUpdate === this.state.passwordUpdateVerify &&
-      (this.state.password !== "" || this.state.passwordUpdate !== "")
+      (this.state.password !== '' || this.state.passwordUpdate !== '')
     ) {
       this.updateUser(event);
       this.setState({ passwordErrorMatch: false, passwordErrorLength: false, error: false });
     } else if (
-      this.state.password === "" ||
-      this.state.passwordUpdate === "" ||
-      this.state.passwordUpdateVerify === ""
+      this.state.password === '' ||
+      this.state.passwordUpdate === '' ||
+      this.state.passwordUpdateVerify === ''
     ) {
       this.setState({ passwordErrorLength: true, error: true });
     } else {
@@ -224,12 +224,12 @@ class User extends Component {
       passwordErrorUpdate: false,
       error: false,
       emailShow: false,
-      emailUpdate: "",
+      emailUpdate: '',
       usernameShow: false,
-      usernameUpdate: "",
+      usernameUpdate: '',
       passwordShow: false,
-      passwordUpdate: "",
-      passwordUpdateVerify: "",
+      passwordUpdate: '',
+      passwordUpdateVerify: '',
     });
   };
 
@@ -271,12 +271,12 @@ class User extends Component {
       pages = [...pages].sort((a, b) => a - b);
       // Add an elipsis if more than 3 away from the first page
       if (this.state.currentPage > 2) {
-        pages.splice(1, 0, "...");
+        pages.splice(1, 0, '...');
       }
 
       // Add an elipsis if more than 3 away from the last page
       if (this.state.currentPage < lastPage - 2) {
-        pages.splice(pages.length - 1, 0, "...");
+        pages.splice(pages.length - 1, 0, '...');
       }
     }
     return pages.length > 1 ? (
@@ -284,7 +284,7 @@ class User extends Component {
         Page {this.state.currentPage + 1} / {lastPage + 1}
         <div id="pagination" className="pagination__pages">
           {pages.map((page, i) => {
-            if (page === "...") {
+            if (page === '...') {
               return (
                 <button key={i + page} id={page} className="pagination__page--no-hover">
                   {page}
@@ -304,9 +304,9 @@ class User extends Component {
 
   openImage = event => {
     var newTab = window.open();
-    let image = document.createElement("img");
+    let image = document.createElement('img');
     image.src = event.target.src;
-    image.classList.add("image__landscape");
+    image.classList.add('image__landscape');
     setTimeout(() => {
       newTab.document.body.appendChild(image);
     }, 100);
@@ -326,13 +326,13 @@ class User extends Component {
   };
 
   sort = sortBy => {
-    this.handleClose("anchorElSort");
+    this.handleClose('anchorElSort');
     this.setState({ sortBy, currentPage: 0 });
     this.getReviews(0, sortBy, this.state.filterBy);
   };
 
   filter = filterBy => {
-    this.handleClose("anchorElFilter");
+    this.handleClose('anchorElFilter');
     this.setState({ filterBy, currentPage: 0 });
     this.getReviews(0, this.state.sortBy, filterBy);
   };
@@ -348,7 +348,7 @@ class User extends Component {
 
   loadContent = () => {
     switch (this.state.current) {
-      case "My Reviews":
+      case 'My Reviews':
         return (
           <div>
             <div className="content__reviews-container">
@@ -356,45 +356,45 @@ class User extends Component {
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__title"> FILTER </div>
                   <Button
-                    aria-owns={this.state.anchorElFilter ? "filter" : null}
+                    aria-owns={this.state.anchorElFilter ? 'filter' : null}
                     aria-haspopup="true"
-                    onClick={this.handleClick.bind(this, "anchorElFilter")}>
+                    onClick={this.handleClick.bind(this, 'anchorElFilter')}>
                     {this.state.filterBy}
                   </Button>
                   <Menu
                     id="filter"
-                    style={{ top: "3rem", left: "1rem" }}
+                    style={{ top: '3rem', left: '1rem' }}
                     anchorEl={this.state.anchorElFilter}
                     open={Boolean(this.state.anchorElFilter)}
                     onClose={this.handleClose}>
-                    <MenuItem onClick={this.filter.bind(this, "No Filter")}>NO FILTER</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "5 Stars")}>5 STARS</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "4 Stars")}>4 STARS</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "3 Stars")}>3 STARS</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "2 Stars")}>2 STARS</MenuItem>
-                    <MenuItem onClick={this.filter.bind(this, "1 Stars")}>1 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, 'No Filter')}>NO FILTER</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, '5 Stars')}>5 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, '4 Stars')}>4 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, '3 Stars')}>3 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, '2 Stars')}>2 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, '1 Stars')}>1 STARS</MenuItem>
                   </Menu>
                 </div>
                 <div className="dropdowns__dropdown">
                   <div className="dropdown__title"> SORT </div>
                   <div className="dropdown__drop-container">
                     <Button
-                      aria-owns={this.state.anchorElSort ? "sort" : null}
+                      aria-owns={this.state.anchorElSort ? 'sort' : null}
                       aria-haspopup="true"
-                      onClick={this.handleClick.bind(this, "anchorElSort")}>
+                      onClick={this.handleClick.bind(this, 'anchorElSort')}>
                       {this.state.sortBy}
                     </Button>
                     <Menu
                       id="sort"
-                      style={{ top: "3rem", left: "1rem" }}
+                      style={{ top: '3rem', left: '1rem' }}
                       anchorEl={this.state.anchorElSort}
                       open={Boolean(this.state.anchorElSort)}
                       onClose={this.handleClose}>
-                      <MenuItem onClick={this.sort.bind(this, "No Sorting")}>NO SORTING</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>RATING ASCENDING</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Rating Descending")}>RATING DESCENDING</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Date Ascending")}>DATE ASCENDING</MenuItem>
-                      <MenuItem onClick={this.sort.bind(this, "Date Descending")}>DATE DESCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, 'No Sorting')}>NO SORTING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, 'Rating Ascending')}>RATING ASCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, 'Rating Descending')}>RATING DESCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, 'Date Ascending')}>DATE ASCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, 'Date Descending')}>DATE DESCENDING</MenuItem>
                     </Menu>
                   </div>
                 </div>
@@ -445,39 +445,14 @@ class User extends Component {
                   <div className="modal__header">
                     <div className="header__image">
                       {/* Update reviews / user with likes */}
-                      <div className="image__buttons">
-                        {!this.state.unliked ? (
-                          <button className="image__button" onClick={this.updateLike}>
-                            {this.state.liked ? (
-                              <div>
-                                <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-up" />
-                                <i className="fas fa-check" />
-                              </div>
-                            ) : (
-                              <i className="fas fa-thumbs-up" />
-                            )}
-                          </button>
-                        ) : null}
-                        {!this.state.liked ? (
-                          <button className="image__button" onClick={this.updateUnlike}>
-                            {this.state.unliked ? (
-                              <div>
-                                <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-down" />
-                                <i className="fas fa-check" />
-                              </div>
-                            ) : (
-                              <i className="fas fa-thumbs-down" />
-                            )}
-                          </button>
-                        ) : null}
-                      </div>
+                      <div className="image__buttons" />
                       <a href={this.state.modalInfo.photos[0].link} target="_blank">
                         <img
                           alt={this.state.modalInfo.reviewer.name}
                           className={
                             this.state.modalInfo.photos[0].width > this.state.modalInfo.photos[0].height
-                              ? "image__landscape"
-                              : "image__portrait"
+                              ? 'image__landscape'
+                              : 'image__portrait'
                           }
                           src={this.state.modalInfo.photos[0].link}
                         />
@@ -501,17 +476,17 @@ class User extends Component {
                         numberOfStars={5}
                         name="rating"
                       />
-                      <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
+                      <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, '')}</div>
                       <div>
-                        <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
+                        <i style={{ paddingRight: '.5rem' }} className="fas fa-user" />
                         {this.state.modalInfo.reviewer.username}
                       </div>
                     </div>
                     <div className="body__title">
-                      {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
+                      {this.state.modalInfo.title ? this.state.modalInfo.title : '***Untitled***'}
                     </div>
                     <div className="body__review">
-                      {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                      {this.state.modalInfo.body ? this.state.modalInfo.body : '***No Body***'}
                     </div>
                   </div>
                 </div>
@@ -519,18 +494,18 @@ class User extends Component {
             </Modal>
           </div>
         );
-      case "Billing":
+      case 'Billing':
         return (
           <div className="content__billing">
             <div className="billing__section">
               <div className="section__single">
                 <div className="single__info">Current Account Type:</div>
-                <div className="single__info">{localStorage.getItem("accountType")}</div>
+                <div className="single__info">{localStorage.getItem('accountType')}</div>
               </div>
               <div className="section__single">
                 <div className="single__info">Account Deactivates:</div>
                 <div className="single__info">
-                  {localStorage.getItem("accountDeactivated").replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}
+                  {localStorage.getItem('accountDeactivated').replace(/[^\d{4}-\d{2}-\d{2}].*/, '')}
                 </div>
               </div>
             </div>
@@ -548,9 +523,9 @@ class User extends Component {
           <div className="content__profile">
             <div className="profile__container">
               <img
-                alt={localStorage.getItem("name")}
+                alt={localStorage.getItem('name')}
                 className="profile__image"
-                src={localStorage.getItem("userImage")}
+                src={localStorage.getItem('userImage')}
               />
               <div className="container__info">
                 <div className="info__info">
@@ -637,7 +612,7 @@ class User extends Component {
                         </button>
                       </form>
                     ) : (
-                      "****************"
+                      '****************'
                     )}
                   </div>
                   <button name="passwordButton" className="info__button" onClick={this.buttonChange}>

@@ -46,9 +46,13 @@
             padding: 0.5rem;
           }
           .item__info {
+            .containers(@flexDirection: row);
             .body();
             .hidden();
             padding: 0.5rem 0;
+            .info__detail {
+              padding: 0 .5rem;
+            }
           }
           .item__info--hover {
             .body();

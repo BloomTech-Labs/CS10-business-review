@@ -2,8 +2,6 @@ const Review = require("../models/review");
 const User = require("../models/user");
 
 const createReview = (req, res) => {
-  // Todo:
-  // Sign In Users so a review can be assigned to the actual reviewer
   // Allows for default photos
   if (!req.body.photos.length) {
     delete req.body.photos;
@@ -18,8 +16,10 @@ const createReview = (req, res) => {
       res.status(500).json({ error });
     });
 };
+
 // For User Component
 const getReviewsByReviewerId = (req, res) => {
+  console.log("Req.params", req.params)
   let { filter, sort } = req.params;
   switch (filter) {
     case "5 Stars":
