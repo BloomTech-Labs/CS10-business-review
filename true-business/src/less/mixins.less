@@ -56,7 +56,7 @@
 }
 
 // Have everything be a default and be able to be changed EXCEPT font-family, font-size, background-color, color
-.button(@width: 5rem, @borderRadius: .5rem) {
+.button(@width: 5rem, @borderRadius: .25rem) {
   border-radius: @borderRadius;
   width: @width;
   background-color: @buttonBG;
@@ -66,13 +66,13 @@
   height: 2.5rem;
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 15px 20px @boxShadow;
-    filter: brightness(110%);
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    filter: brightness(105%);
     font-weight: bolder;
   }
 }
 
-.input(@padding: .5rem, @borderRadius: .5rem){
+.input(@padding: .5rem, @borderRadius: .25rem){
   padding: @padding;
   border-radius: @borderRadius;
 }
@@ -95,7 +95,7 @@
 
 .image(@top: -2rem) {
   background-color: rgb(233, 233, 233);
-  border-radius: 1rem;
+  border-radius: .25rem;
   object-fit: cover;
   object-position: 50% 50%;
   top: @top;
@@ -106,7 +106,7 @@
 }
 
 // White Background, Blue Border
-.backAndBorder(@background: @whiteBG, @border: 0.1rem solid @whiteBG, @borderRadius: .5rem) {
+.backAndBorder(@background: @whiteBG, @border: 0.1rem solid @whiteBG, @borderRadius: .25rem) {
   background: @background;
   border: @border;
   border-radius: @borderRadius;
@@ -127,14 +127,14 @@
 .shadowHover() {
   &:hover {
     cursor: pointer;
-    filter: brightness(110%);
-    box-shadow: 0px 0px 50px 10px @boxShadow;
+    filter: brightness(105%);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 2px -1px rgba(0, 0, 0, 0.12);
     opacity: 1;
   }
 }
 
 .shadow() {
-  box-shadow: 0px 0px 50px 0px @boxShadow;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
 .noHover() {

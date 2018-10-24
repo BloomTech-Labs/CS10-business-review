@@ -315,7 +315,7 @@ class Business extends Component {
             <div className="business__reviews-container">
               <div className="reviews__header">
                 <div className="reviews-container__dropdowns">
-                  <div className="dropdowns__dropdown">
+                  <div className="dropdowns__dropdown--left">
                     <div className="dropdown__title"> FILTER </div>
                     <Button
                       aria-owns={this.state.anchorElFilter ? "filter" : null}

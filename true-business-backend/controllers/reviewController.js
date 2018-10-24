@@ -219,9 +219,6 @@ const getAllReviews = (req, res) => {
     .limit(4)
     .populate("newMongoId reviewer")
     .then(response => {
-      response.forEach(review => {
-        console.log("response", review);
-      });
       res.status(200).json(response);
     })
     .catch(error => {

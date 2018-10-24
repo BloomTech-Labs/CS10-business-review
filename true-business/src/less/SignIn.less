@@ -17,18 +17,19 @@
     .backAndBorder();
     .shadow();
     color: @textColor;
-    padding: 1rem;
-    min-height: 40vh;
+    padding: .5rem;
+    min-height: 35vh;
     .signin-container__header {
       .title();
+      padding: .25rem;
     }
     .signin-container__form {
       .containers(@height: auto);
       .form__error{
-        .body();
-        min-height: 2rem;
-        max-height: 2rem;
         color: red;
+        padding: .5rem;
+        min-height: 2.0rem;
+        font-size: 1rem;
       }
       .signin-container__input {
         border: 0.1rem solid @textColor;
@@ -43,7 +44,7 @@
     }
     .signin__new {
       .containers(@flexDirection: row);
-      margin-top: 2rem;
+      margin-top: 1rem;
       .new__text {
         .body();
       }
@@ -67,7 +68,6 @@
 
 hr {
   border: 0.1rem solid @textColor;
-  margin: 1rem 0;
   padding: .1rem;
-  width: 50%;
+  width: 75%;
 }

@@ -160,7 +160,7 @@
   color: #05386b;
 }
 .new-review .new-review__modal .modal__footer .footer__buttons .buttons__button {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
@@ -171,8 +171,8 @@
 }
 .new-review .new-review__modal .modal__footer .footer__buttons .buttons__button:hover {
   cursor: pointer;
-  box-shadow: 0px 15px 20px #6b6b6b;
-  filter: brightness(110%);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  filter: brightness(105%);
   font-weight: bolder;
 }
 .new-review .new-review__modal .modal__footer .footer__buttons .buttons__button:last-of-type {

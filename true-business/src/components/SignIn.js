@@ -1,15 +1,13 @@
-import React, { Component } from "react";
-import axios from "axios";
-import logo from "../imgs/logo.png";
-import { withRouter } from "react-router-dom";
-import GoogleLogin from "react-google-login";
+import React, { Component } from 'react';
+import axios from 'axios';
+import logo from '../imgs/logo.png';
+import { withRouter } from 'react-router-dom';
 
-import "../css/SignIn.css";
-
+import '../css/SignIn.css';
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = "https://cryptic-brook-22003.herokuapp.com/";
-if (typeof backend !== "string") {
+let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
+if (typeof backend !== 'string') {
   backend = heroku;
 }
 
@@ -17,10 +15,10 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       error: false,
-      errorMessage: "",
+      errorMessage: '',
     };
   }
 
@@ -33,18 +31,18 @@ class SignIn extends Component {
     if (!this.state.username || !this.state.password) {
       this.setState({
         error: true,
-        errorMessage: "Please provide a username and password!",
+        errorMessage: 'Please provide a username and password!',
       });
     } else {
       axios
         .post(`${backend}api/user/login`, { username: this.state.username, password: this.state.password })
         .then(response => {
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("userId", response.data._doc._id);
-          localStorage.setItem("name", response.data._doc.name);
-          localStorage.setItem("accountType", response.data._doc.accountType);
-          localStorage.setItem("accountDeactivated", response.data._doc.accountDeactivated);
-          localStorage.setItem("userImage", response.data._doc.userImages[0].link);
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('userId', response.data._doc._id);
+          localStorage.setItem('name', response.data._doc.name);
+          localStorage.setItem('accountType', response.data._doc.accountType);
+          localStorage.setItem('accountDeactivated', response.data._doc.accountDeactivated);
+          localStorage.setItem('userImage', response.data._doc.userImages[0].link);
           this.setState({
             error: false,
           });
@@ -53,7 +51,7 @@ class SignIn extends Component {
         .catch(err => {
           this.setState({
             error: true,
-            errorMessage: "Incorrect username or password",
+            errorMessage: 'Incorrect username or password',
           });
         });
     }
@@ -63,12 +61,12 @@ class SignIn extends Component {
     axios
       .post(`${backend}api/user/current`, { google })
       .then(response => {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data._doc._id);
-        localStorage.setItem("name", response.data._doc.name);
-        localStorage.setItem("accountType", response.data._doc.accountType);
-        localStorage.setItem("accountDeactivated", response.data._doc.accountDeactivated);
-        localStorage.setItem("userImage", response.data._doc.userImages[0].link);
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userId', response.data._doc._id);
+        localStorage.setItem('name', response.data._doc.name);
+        localStorage.setItem('accountType', response.data._doc.accountType);
+        localStorage.setItem('accountDeactivated', response.data._doc.accountDeactivated);
+        localStorage.setItem('userImage', response.data._doc.userImages[0].link);
         this.setState({
           error: false,
         });
@@ -77,21 +75,21 @@ class SignIn extends Component {
       .catch(err => {
         this.setState({
           error: true,
-          errorMessage: "No Account Found for this Google Account.",
+          errorMessage: 'No Account Found for this Google Account.',
         });
       });
   };
 
   googleFail = () => {
-    this.setState({ error: true, errorMessage: "Google Sign In Failing, Sorry for the Inconvenience." });
+    this.setState({ error: true, errorMessage: 'Google Sign In Failing, Sorry for the Inconvenience.' });
   };
 
   handleInputChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-    if (this.state.username !== "" && this.state.password !== "") {
+    if (this.state.username !== '' && this.state.password !== '') {
       this.setState({
         error: false,
-        errorMessage: "",
+        errorMessage: '',
       });
     }
   };
@@ -111,11 +109,6 @@ class SignIn extends Component {
           <div className="signin-container">
             <div className="signin-container__header"> Sign In </div>
             <form className="signin-container__form">
-              {!this.state.error ? (
-                <div className="form__error" />
-              ) : (
-                <div className="form__error"> {this.state.errorMessage} </div>
-              )}
               <input
                 className="signin-container__input"
                 placeholder="Username"
@@ -136,14 +129,13 @@ class SignIn extends Component {
               <button type="submit" className="signin-container__button" onClick={this.signIn}>
                 Continue
               </button>
+              {!this.state.error ? (
+                <div className="form__error" />
+              ) : (
+                <div className="form__error"> {this.state.errorMessage} </div>
+              )}
             </form>
-            {/* <hr />
-            <GoogleLogin
-              clientId={process.env.googleClientID || process.env.REACT_APP_GOOGLEAUTHCLIENTID}
-              buttonText="Login With Google"
-              onSuccess={this.googleSignIn}
-              onFailure={this.googleFail}
-            /> */}
+            <hr/>
             <div className="signin__new">
               <div className="new__text">New To True Business Reviews?</div>
               <button className="new__button" onClick={() => this.props.history.push(`/signup`)}>
