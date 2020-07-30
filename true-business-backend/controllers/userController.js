@@ -19,17 +19,32 @@ const bcryptRounds = 10;
 const register = (request, response) => {
   console.log("Registering...")
   const { name, username, password, email, accountType } = request.body;
-  const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
-  const token = generateToken({ username });
-  const user = new User({ accountType, name, username, password: encryptedPassword, token, email });
-  user
-    .save()
-    .then(savedUser => {
-      response.status(200).send(savedUser);
+  if (!name || !username || !email || !password) {
+    response.status(400).json({ errorMessage: "Please provide a name, username, email, and password!" });
+  }
+  User.findOne({ username })
+    .then(user => {
+      if (user) {
+        response.status(401).json({ errorMessage: "This username already exists" });
+      } else {
+        const encryptedPassword = bcrypt.hashSync(password, bcryptRounds);
+        const token = generateToken({ username });
+        const user = new User({ accountType, name, username, password: encryptedPassword, token, email });
+        user
+          .save()
+          .then(savedUser => {
+            response.status(200).send(savedUser);
+          })
+          .catch(err => {
+            response.status(500).json({
+              errorMessage: "Error occurred while saving: " + err,
+            });
+          });
+      }
     })
     .catch(err => {
-      response.status(500).send({
-        errorMessage: "Error occurred while saving: " + err,
+      response.status(500).json({
+        errorMessage: "Something went wrong: " + err,
       });
     });
 };
@@ -61,6 +76,7 @@ const login = (request, response) => {
     });
 };
 
+<<<<<<< HEAD
 const getLoggedInUser = (request, response) => {
   //5bb68069adadaad4b39e0528
   // Having some issues with the session because of the 
@@ -82,6 +98,56 @@ const getLoggedInUser = (request, response) => {
       response.status(200).json(user);
     })
     .catch(function(error) {
+=======
+const createGoogleUser = (req, res) => {
+  const { name, email, googleId, imageUrl } = req.body.google;
+  User.findOne({ googleId: req.body.google.googleId })
+    .then(user => {
+      if (user) {
+        res.status(401).json({ errorMessage: "This Google Account is Already Registered." });
+      } else {
+        const token = generateToken({ name, email });
+        const user = new User({
+          name,
+          username: name,
+          token,
+          email,
+          googleId,
+          userImages: [
+            {
+              link: imageUrl,
+              width: 0,
+              height: 0,
+            },
+          ],
+        });
+        user
+          .save()
+          .then(savedUser => {
+            res.status(200).send(savedUser);
+          })
+          .catch(err => {
+            res.status(500).json({
+              errorMessage: "Error occurred while saving: " + err,
+            });
+          });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: "Something went wrong: " + err,
+      });
+    });
+};
+
+const getGoogleUser = (request, response) => {
+  User.findOne({ googleId: request.body.google.googleId })
+    .then(userFound => {
+      const token = generateToken({ userFound });
+      response.status(200).send({ ...userFound, token });
+    })
+    .catch(error => {
+>>>>>>> ba420f0d1505bf2fdc9b7398954099462efa3350
       response.status(500).json({
         error: "The user could not be retrieved.",
       });
@@ -90,6 +156,7 @@ const getLoggedInUser = (request, response) => {
 
 const getUserById = (request, response) => {
   User.findById({ _id: request.params.id })
+    .populate("reviews")
     .then(function(user) {
       response.status(200).json(user);
     })
@@ -130,73 +197,46 @@ const deleteUserById = (request, response) => {
 };
 
 const updateUser = (request, response) => {
+<<<<<<< HEAD
   console.log("Updating user..");
   const { _id, username, email } = request.body;
+=======
+>>>>>>> ba420f0d1505bf2fdc9b7398954099462efa3350
   User.findById({ _id: request.params.id })
     .then(function(user) {
       if (user) {
-        (user.username = username), (user.email = email);
-        User.findByIdAndUpdate({ _id: request.params.id }, user)
+        if (request.body.field === "password") {
+          if (bcrypt.compareSync(request.body.update.password, user.password)) {
+            user.password = bcrypt.hashSync(request.body.update.passwordUpdate, bcryptRounds);
+          } else {
+            return response.status(500).json({ "Error Updating Password": error });
+          }
+        } else {
+          user[request.body.field] = request.body.update;
+        }
+        User.findByIdAndUpdate({ _id: request.params.id }, user, { new: true })
           .then(user => {
             response.status(200).json(user);
           })
           .catch(err => {
-            response.status(500).json(`message: Error username or email: ${err}`);
+            response.status(500).json({ "Error Updating Username or Email": error });
           });
       }
     })
     .catch(function(error) {
-      response.status(500).json(`message: Error username or email: ${error}`);
+      response.status(500).json({ "Error Updating User": error });
     });
 };
 
 const getAllUsers = (request, response) => {
   User.find({})
-    .then(function(users) {
-      let featured = [];
-      let reviews = 100;
-      // While we don't have 4 featured users
-      // When we get likes going, do the same thing we did in businessController
-      while (featured.length < 4 && reviews >= 0) {
-        // While we have an empty DB this may be slow...
-        users.forEach(user => {
-          if (user.numberOfReviews > reviews && !featured.includes(user)) {
-            featured.push(user);
-          }
-        });
-        reviews -= 10;
-      }
-      response.status(200).json(featured);
+    .sort({ numberOfLikes: -1, numberOfReviews: -1 })
+    .limit(4)
+    .then(results => {
+      response.status(200).json(results);
     })
-    .catch(function(error) {
-      response.status(500).json({
-        error: "The information could not be retrieved.",
-      });
-    });
-};
-
-const reset_password = function(request, response) {
-  console.log("Fire password");
-  const { _id, password, newPassword, verifyPassword } = request.body;
-  User.findById({ _id: request.params._id })
-    .then(function(user) {
-      if (user) {
-        if (bcrypt.compareSync(password, user.password)) {
-          if (newPassword === verifyPassword) {
-            user.password = bcrypt.hashSync(newPassword, bcryptRounds);
-            User.findByIdAndUpdate({ _id: request.params._id }, user)
-              .then(user => {
-                response.status(200).json(user);
-              })
-              .catch(err => {
-                response.status(500).json(`message: Error reseting password: ${err}`);
-              });
-          }
-        }
-      }
-    })
-    .catch(function(error) {
-      response.status(500).json(`message: Error reseting password: ${error}`);
+    .catch(error => {
+      response.status(500).json({ error });
     });
 };
 
@@ -207,7 +247,11 @@ module.exports = {
   deleteUserById,
   updateUser,
   getAllUsers,
-  reset_password,
   getRandomUser,
+<<<<<<< HEAD
   getLoggedInUser
+=======
+  getGoogleUser,
+  createGoogleUser,
+>>>>>>> ba420f0d1505bf2fdc9b7398954099462efa3350
 };

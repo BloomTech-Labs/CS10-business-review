@@ -4,13 +4,11 @@ import { CardElement, injectStripe } from "react-stripe-elements";
 
 import "../css/Stripe.css";
 
-
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
-if (typeof(backend) !== 'string') {
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
   backend = heroku;
 }
-
 
 class StripePayment extends Component {
   constructor(props) {
@@ -72,75 +70,62 @@ class StripePayment extends Component {
     return (
       <div className="stripe">
         <div className="stripe__info">
-          <div className="info__label">
-            Name on CC:
-            <input
-              className="info__input"
-              placeholder="John M. Smith..."
-              name="name"
-              type="name"
-              value={this.state.name}
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <div className="info__label">
-            Street:
-            <input
-              className="info__input"
-              placeholder="123 Main St...."
-              name="street"
-              type="street"
-              value={this.state.street}
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <div className="info__label">
-            City:
-            <input
-              className="info__input"
-              placeholder="Knoxville..."
-              name="city"
-              type="city"
-              value={this.state.city}
-              onChange={this.handleInputChange}
-            />
-          </div>
-          {/* Turn this into a dropdown eventually */}
-          <div className="info__label">
-            State:
-            <input
-              className="info__input"
-              placeholder="TN..."
-              name="state"
-              type="state"
-              value={this.state.state}
-              onChange={this.handleInputChange}
-            />
-          </div>
+          <input
+            className="info__input"
+            placeholder="Name on CC: John M. Smith..."
+            name="name"
+            type="name"
+            value={this.state.name}
+            onChange={this.handleInputChange}
+          />
+          <input
+            className="info__input"
+            placeholder="Street: 123 Main St...."
+            name="street"
+            type="street"
+            value={this.state.street}
+            onChange={this.handleInputChange}
+          />
+          <input
+            className="info__input"
+            placeholder="City: Knoxville..."
+            name="city"
+            type="city"
+            value={this.state.city}
+            onChange={this.handleInputChange}
+          />
+          <input
+            className="info__input"
+            placeholder="State: TN..."
+            name="state"
+            type="state"
+            value={this.state.state}
+            onChange={this.handleInputChange}
+          />
         </div>
         <div className="stripe__radio">
           <div>
-            <label className="radio__label">
+            <label className="radio__label" onChange={this.handleRadioChange}>
               <input
                 className="radio__button"
                 type="radio"
                 id="oneMonth"
                 checked={this.state.selectedRadio === "oneMonth"}
-                onChange={this.handleRadioChange}
+                
               />
-              -- 1 Month: $9.99
+              1 Month: $9.99
             </label>
           </div>
           <div>
-            <label className="radio__label">
+            <label className="radio__label" onChange={this.handleRadioChange}>
               <input
                 className="radio__button"
                 type="radio"
                 id="oneYear"
                 checked={this.state.selectedRadio === "oneYear"}
-                onChange={this.handleRadioChange}
+                
               />
-              -- 1 Year: $49.99 (Save $69.89)
+              1 Year: $49.99
             </label>
           </div>
         </div>

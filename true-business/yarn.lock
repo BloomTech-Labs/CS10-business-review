@@ -6821,6 +6821,13 @@ react-flip-move@^3.0.1:
   resolved "https://registry.yarnpkg.com/react-flip-move/-/react-flip-move-3.0.2.tgz#2f6f16ca6cb0a8490fba15a98b3440a76127e825"
   integrity sha512-mWqUd2HTkRUmSBVPoh78JFKgjx192rPamnSRFeFCH6709NzhTx8xrIsD6u+GAMesn0D1USwkozoArwZcUn4JKA==
 
+react-google-login@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-3.2.1.tgz#9ab6ac3694d0e6e2974f1e588c53cf7b903a36e6"
+  dependencies:
+    "@types/react" "*"
+    prop-types "^15.6.0"
+
 react-images-upload@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/react-images-upload/-/react-images-upload-1.2.3.tgz#bfa3a21c9be3f3653e5626de495a930583a67449"

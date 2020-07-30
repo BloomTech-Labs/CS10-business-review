@@ -5,6 +5,7 @@ import axios from "axios";
 import Modal from "react-modal";
 import NewReview from "./NewReview";
 import NavBar from "./NavBar";
+import { Button, Menu, MenuItem } from "@material-ui/core";
 
 import "../css/Business.css";
 import "../css/GeneralStyles.css";
@@ -19,26 +20,23 @@ let modalStyles = {
   content: {
     top: "50%",
     left: "50%",
-    right: "auto",
-    bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "75%",
-    width: "50%",
+    height: "90vh",
+    width: "60vw",
     zIndex: "5",
     backgroundColor: "rgb(238,238,238)",
     color: "rgb(5,56,107)",
+    overflow: "hidden",
   },
 };
 
 class Business extends Component {
   state = {
-    dropdownOpenFilter: false,
-    dropdownOpenSort: false,
+    anchorElFilter: null,
+    anchorElSort: null,
     filterBy: "No Filter",
-    showfilterBy: false,
-    sortBy: "Date Descending",
-    showsortBy: false,
+    sortBy: "No Sorting",
     businessID: null,
     newBusinessId: null,
     reviews: [],
@@ -46,33 +44,33 @@ class Business extends Component {
     modalInfo: null,
     currentPage: 0,
     total: 0,
+    liked: false,
+    unliked: false,
+    dayIcons: [
+      "https://png.icons8.com/ultraviolet/50/000000/monday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/tuesday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/wednesday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/thursday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/friday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/saturday.png",
+      "https://png.icons8.com/ultraviolet/50/000000/sunday.png",
+    ],
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
     if (this.props.business !== null) {
-      this.getReviews(0);
+      this.getReviews(0, this.state.sortBy, this.state.filterBy);
     }
   };
 
-  toggleDropDown = event => {
-    let toggle = event.target.name;
-    let other = "showfilterBy";
-    if (toggle === "showfilterBy") {
-      other = "showsortBy";
-    }
-    let inverse = this.state[toggle];
-    this.setState({ [toggle]: !inverse, [other]: false });
+  handleClick = (type, event) => {
+    event.preventDefault();
+    this.setState({ [type]: event.currentTarget });
   };
 
-  toggleFilterChoice = event => {
-    let toggle = event.target.name;
-    this.setState({ filterBy: toggle, showfilterBy: false });
-  };
-
-  toggleSortChoice = event => {
-    let toggle = event.target.name;
-    this.setState({ sortBy: toggle, showsortBy: false });
+  handleClose = type => {
+    this.setState({ [type]: null });
   };
 
   displayNewReview = () => {
@@ -87,14 +85,18 @@ class Business extends Component {
   showModal = show => {
     this.setState({ open: show });
     // Cheap way to re-render with the new review showing
-    this.getReviews(this.state.currentPage);
+    this.getReviews(this.state.currentPage, this.state.sortBy, this.state.filterBy);
   };
 
-  getReviews = currentPage => {
+  getReviews = (currentPage, sort, filter) => {
     if (this.props.business) {
       let id = this.props.landingBusiness ? this.props.business._id : this.props.business.place_id;
       axios
-        .get(`${backend}api/review/getReviewsByBusinessId/${id}/${this.props.landingBusiness}/${currentPage}`)
+        .get(
+          `${backend}api/review/getReviewsByBusinessId/${id}/${
+            this.props.landingBusiness
+          }/${currentPage}/${filter}/${sort}`,
+        )
         .then(response => {
           this.setState({
             reviews: response.data.reviews,
@@ -107,29 +109,15 @@ class Business extends Component {
         });
     }
   };
-
-  openModal = (event, info) => {
-    this.setState({ modalIsOpen: true, modalInfo: info });
-  };
-
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
-  };
-
+  
   updatePage = currentPage => {
     this.setState({ currentPage });
-    this.getReviews(currentPage);
+    this.getReviews(currentPage, this.state.sortBy, this.state.filterBy);
   };
 
   createPagination = () => {
     let lastPage =
-      // Ex. 100 / 10 % 1 = 0
-      // Ex. 101 / 10 % 1 != 0
-      (this.state.total / 10) % 1 === 0
-        ? // 100 / 10 - 1 = 9, so pages 0-9 will show results 0-99 (10 pages, 10 each page)
-          Math.floor(this.state.total / 10) - 1
-        : // 101 / 10 = 10, so pages 0-10 will show results 0-100 (11 pages, 1 on the last page)
-          Math.floor(this.state.total / 10);
+      (this.state.total / 12) % 1 === 0 ? Math.floor(this.state.total / 12) - 1 : Math.floor(this.state.total / 12);
 
     // Set is the lazy / quick way if there is only one page
     let pages = new Set([0, lastPage]);
@@ -184,6 +172,46 @@ class Business extends Component {
     ) : null;
   };
 
+  sort = sortBy => {
+    this.handleClose("anchorElSort");
+    this.setState({ sortBy, currentPage: 0 });
+    this.getReviews(0, sortBy, this.state.filterBy);
+  };
+
+  filter = filterBy => {
+    this.handleClose("anchorElFilter");
+    this.setState({ filterBy, currentPage: 0 });
+    this.getReviews(0, this.state.sortBy, filterBy);
+  };
+
+  openModal = (event, info) => {
+    this.setState({ modalIsOpen: true, modalInfo: info });
+  }
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false, liked: false, unliked: false, likeError: false, likeErrorMessage: "" });
+  }
+
+  updateLikes = (info, bool, event) => {
+    let reviewerId = info.reviewer._id;
+    let reviewId = info._id;
+    let userId = localStorage.getItem("userId");
+    if (localStorage.getItem("token") && userId) {
+      axios
+        .put(`${backend}api/reviews/updateLikes`, { reviewerId, reviewId, userId, bool })
+        .then(() => {
+          bool
+            ? this.setState({ liked: true, likeError: false, likeErrorMessage: "" })
+            : this.setState({ unliked: true, likeError: false, likeErrorMessage: "" });
+        })
+        .catch(err => {
+          this.setState({ likeError: true, likeErrorMessage: err.response.data.errorMessage });
+        });
+    } else {
+      this.setState({ likeError: true, likeErrorMessage: "Sign In to Like/Dislike" });
+    }
+  };
+
   render() {
     return (
       <div>
@@ -191,52 +219,153 @@ class Business extends Component {
         {this.props.business ? (
           <div className="business">
             <div className="business__info">
-              <img
-                alt={this.props.business.name}
-                className="info__landscape"
-                src={this.props.business.photos[0].link}
-              />
-              <div className="info__title">{this.props.business.name}</div>
-              <div className="info__street">{this.props.business.formatted_address}</div>
+              <div className="info__image">
+                <img
+                  alt={this.props.business.name}
+                  className="info__landscape"
+                  src={
+                    this.props.business.photos === "No Photos Listed"
+                      ? "https://png.icons8.com/ios/100/000000/organization.png"
+                      : this.props.business.photos[0].link
+                  }
+                />
+                <StarRatings
+                  starDimension="40px"
+                  starSpacing="5px"
+                  rating={this.props.business.stars}
+                  starRatedColor="gold"
+                  starEmptyColor="grey"
+                  numberOfStars={5}
+                  name="rating"
+                />
+              </div>
               <div className="info__details">
-                <div className="details__hours">
-                  <div className="hours__title"> Hours </div>
-                  {this.props.business.hasOwnProperty("opening_hours") ? (
-                    this.props.business.opening_hours.hasOwnProperty("weekday_text") ? (
-                      this.props.business.opening_hours.weekday_text.map(day => {
-                        return (
-                          <div key={day} className="hours__day">
-                            {day}
-                          </div>
-                        );
-                      })
+                <div className="details__title">{this.props.business.name}</div>
+                <div className="details__address">
+                  <div className="address__icon">
+                    <a
+                      href={
+                        "https://www.google.com/maps/search/" +
+                        this.props.business.formatted_address.replace(/[, ]+/g, "+")
+                      }
+                      target="_blank"
+                      className="icon__details">
+                      <i style={{ paddingRight: "1rem", color: "#05386b" }} className="fas fa-map-marked-alt" />
+                      {this.props.business.formatted_address}
+                    </a>
+                  </div>
+                </div>
+                <div className="details__detail">
+                  <div className="detail__hours">
+                    {this.props.business.hasOwnProperty("opening_hours") ? (
+                      this.props.business.opening_hours.hasOwnProperty("weekday_text") ? (
+                        this.props.business.opening_hours.weekday_text.map((day, i) => {
+                          // Decide which day is current (Sun 0 --- Sat 6)
+                          // weekday_text is Mon-Sun though
+                          let dayIndex = 0;
+                          let dayNum = new Date().getDay();
+                          if (i === 6 && dayNum === 0) {
+                            dayIndex = 0;
+                            dayNum = 0;
+                          } else {
+                            dayIndex = i + 1;
+                          }
+                          let flag = dayIndex === dayNum ? true : false;
+                          return (
+                            <div style={flag ? { fontWeight: "bolder" } : null} key={day} className="hours__days">
+                              <img className="hours__icon" alt={day} src={this.state.dayIcons[i]} />
+                              <div className="hours__text">{day.replace(/[A-z]*: /g, "")}</div>
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <div>Opening Hours Unlisted</div>
+                      )
                     ) : (
                       <div>Opening Hours Unlisted</div>
-                    )
-                  ) : (
-                    <div>Opening Hours Unlisted</div>
-                  )}
-                </div>
-                <div className="details__contact">
-                  <div className="contact__phone">
-                    <div className="phone__number">{this.props.business.formatted_phone_number}</div>
-                  </div>
-                  <div className="contact__website">
-                    {this.props.business.website ? (
-                      <a href={this.props.business.website}>
-                        {this.props.business.name}
-                        's Website
-                      </a>
-                    ) : (
-                      "No Website Listed"
                     )}
+                  </div>
+                  <div className="detail__contact">
+                    <div className="contact__phone">
+                      <i className="fas fa-phone" />
+                      <div className="phone__number">
+                        {this.props.business.formatted_phone_number
+                          ? this.props.business.formatted_phone_number
+                          : "No Phone Listed"}
+                      </div>
+                    </div>
+                    <div className="contact__website">
+                      <i className="fas fa-desktop" />
+                      <div className="website__text">
+                        {this.props.business.website ? (
+                          <a href={this.props.business.website} target="_blank">
+                            {this.props.business.name}
+                            's Website
+                          </a>
+                        ) : (
+                          "No Phone Listed"
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
             <div className="business__reviews-container">
-              <div className="reviews-container__title">
-                Reviews
+              <div className="reviews__header">
+                <div className="reviews-container__dropdowns">
+                  <div className="dropdowns__dropdown">
+                    <div className="dropdown__title"> FILTER </div>
+                    <Button
+                      aria-owns={this.state.anchorElFilter ? "filter" : null}
+                      aria-haspopup="true"
+                      onClick={this.handleClick.bind(this, "anchorElFilter")}>
+                      {this.state.filterBy}
+                    </Button>
+                    <Menu
+                      id="filter"
+                      style={{ top: "3rem", left: "1rem" }}
+                      anchorEl={this.state.anchorElFilter}
+                      open={Boolean(this.state.anchorElFilter)}
+                      onClose={this.handleClose}>
+                    <MenuItem onClick={this.filter.bind(this, "No Filter")}>NO FILTER</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "5 Stars")}>5 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "4 Stars")}>4 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "3 Stars")}>3 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "2 Stars")}>2 STARS</MenuItem>
+                    <MenuItem onClick={this.filter.bind(this, "1 Stars")}>1 STARS</MenuItem>
+                    </Menu>
+                  </div>
+                  {localStorage.getItem("token") && localStorage.getItem("userId") ? (
+                    <button id="NewReview" className="reviews-container__button" onClick={this.displayNewReview}>
+                      New Review
+                    </button>
+                  ) : null}
+                  <div className="dropdowns__dropdown">
+                    <div className="dropdown__title"> SORT </div>
+                    <div className="dropdown__drop-container">
+                      <Button
+                        aria-owns={this.state.anchorElSort ? "sort" : null}
+                        aria-haspopup="true"
+                        onClick={this.handleClick.bind(this, "anchorElSort")}>
+                        {this.state.sortBy}
+                      </Button>
+                      <Menu
+                        id="sort"
+                        style={{ top: "3rem", left: "1rem" }}
+                        anchorEl={this.state.anchorElSort}
+                        open={Boolean(this.state.anchorElSort)}
+                        onClose={this.handleClose}>
+                      <MenuItem onClick={this.sort.bind(this, "No Sorting")}>NO SORTING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Rating Ascending")}>RATING ASCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Rating Descending")}>RATING DESCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Date Ascending")}>DATE ASCENDING</MenuItem>
+                      <MenuItem onClick={this.sort.bind(this, "Date Descending")}>DATE DESCENDING</MenuItem>
+                      </Menu>
+                    </div>
+                  </div>
+                </div>
                 {/* I couldn't base this on this.state.open (i.e. I couldn't figure out the proper
                 life cycle hook to use to make it work), so while this may be poor practice, for the 
                 time being, I'm going with it. */}
@@ -248,60 +377,7 @@ class Business extends Component {
                     showModal={this.showModal}
                   />
                 ) : null}
-              </div>
-              {
-               localStorage.getItem('token') &&  localStorage.getItem('userId') ? (
-              <button id="NewReview" className="reviews-container__button" onClick={this.displayNewReview}> New Review </button>
-               ) : (null)}
-              <div className="reviews-container__dropdowns">
-                <div className="dropdowns__dropdown">
-                  <div className="dropdown__title"> Filter By: </div>
-                  <div className="dropdown__drop-container">
-                    <button className="drop-container__button" name="showfilterBy" onClick={this.toggleDropDown}>
-                      {this.state.filterBy}
-                    </button>
-                    {this.state.showfilterBy ? (
-                      <div className="drop-container__menu">
-                        <button onClick={this.toggleFilterChoice} name="No Filter" className="menu__button">
-                          No Filter
-                        </button>
-                        <button onClick={this.toggleFilterChoice} name="4 Stars or Higher" className="menu__button">
-                          4 Stars or Higher
-                        </button>
-                        <button onClick={this.toggleFilterChoice} name="3 Stars or Higher" className="menu__button">
-                          3 Stars or Higher
-                        </button>
-                        <button onClick={this.toggleFilterChoice} name="2 Stars or Higher" className="menu__button">
-                          2 Stars or Higher
-                        </button>
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-                <div className="dropdowns__dropdown">
-                  <div className="dropdown__title"> Sort By: </div>
-                  <div className="dropdown__drop-container">
-                    <button className="drop-container__button" name="showsortBy" onClick={this.toggleDropDown}>
-                      {this.state.sortBy}
-                    </button>
-                    {this.state.showsortBy ? (
-                      <div className="drop-container__menu">
-                        <button onClick={this.toggleSortChoice} name="Date Descending" className="menu__button">
-                          Date Descending
-                        </button>
-                        <button onClick={this.toggleSortChoice} name="Date Ascending" className="menu__button">
-                          Date Ascending
-                        </button>
-                        <button onClick={this.toggleSortChoice} name="Rating Descending" className="menu__button">
-                          Rating Descending
-                        </button>
-                        <button onClick={this.toggleSortChoice} name="Rating Descending" className="menu__button">
-                          Rating Descending
-                        </button>
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
+                {/* <div className="reviews-container__title">Reviews</div> */}
               </div>
               <div className="reviews-container__reviews">
                 {/* onClick should render a modal that shows the review, similar to the landing page */}
@@ -309,77 +385,153 @@ class Business extends Component {
                   {this.state.reviews.length ? (
                     this.state.reviews.map(review => {
                       return (
-                        <div key={review._id} className="review__info">
-                          <img
-                            alt={review.reviewer.username}
-                            className="review__landscape"
-                            src={review.photos[0].link}
-                            onClick={() => this.openModal(this, review)}
-                          />
-                          <StarRatings
-                            starDimension="20px"
-                            starSpacing="5px"
-                            rating={review.stars}
-                            starRatedColor="gold"
-                            starEmptyColor="grey"
-                            numberOfStars={5}
-                            name="rating"
-                          />
-                          <div className="review__reviewer">@{review.reviewer.username}</div>{" "}
+                        <div key={review._id} className="review__info" onClick={() => this.openModal(this, review)}>
+                          <div className="info__header">
+                            <div className="header__data">
+                              <div className="data__text">{review.title ? review.title : "No Title"}</div>
+                              <div className="data__text">
+                                <span style={{ marginRight: "1rem" }}>
+                                  <StarRatings
+                                    starDimension="20px"
+                                    starSpacing="5px"
+                                    rating={review.stars}
+                                    starRatedColor="gold"
+                                    starEmptyColor="grey"
+                                    numberOfStars={5}
+                                    name="rating"
+                                  />
+                                </span>
+                                {review.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}
+                              </div>
+                            </div>
+                            <img
+                              alt={review.reviewer.username}
+                              className={
+                                review.photos[0].width > review.photos[0].height
+                                  ? "review__landscape"
+                                  : "review__portrait"
+                              }
+                              src={review.photos[0].link}
+                            />
+                          </div>
+                          <div className="info__body">
+                            <div className="body__reviewer">
+                              <img
+                                alt={review.reviewer.userImages[0]}
+                                className={
+                                  review.reviewer.userImages[0].width > review.reviewer.userImages[0].height
+                                    ? "review__landscape"
+                                    : "review__portrait"
+                                }
+                                src={review.reviewer.userImages[0].link}
+                                onClick={() => this.openModal(this, review)}
+                              />
+                              <div className="reviewer__text">{review.reviewer.username}</div>
+                            </div>
+                            <div className="body__review">{review.body ? review.body : "No Review"}</div>
+                          </div>
                         </div>
                       );
                     })
                   ) : (
-                    <div>No Reviews</div>
+                    <div className="reviews--no-results">
+                      <div className="no-results__text">No Reviews</div>
+                    </div>
                   )}
                 </div>
-                <div>{this.createPagination()}</div>
+                <div>{this.state.total > 12 ? this.createPagination() : null}</div>
               </div>
             </div>
             <Modal
-              shouldCloseOnOverlayClick={false}
-              isOpen={this.state.modalIsOpen}
-              onRequestClose={this.closeModal}
-              style={modalStyles}
-              contentLabel="Review Modal">
-              <div className="landing-container__modal">
-                {this.state.modalIsOpen ? (
-                  <div className="modal-container">
-                    <div className="modal__header">
-                      <div className="header__title">{this.state.modalInfo.newMongoId.name}</div>
-                      <div className="header__reviewer">@{this.state.modalInfo.reviewer.username}</div>
+            shouldCloseOnOverlayClick={false}
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeModal}
+            style={modalStyles}
+            contentLabel="Review Modal">
+            {this.state.modalIsOpen ? (
+              <div className="modal">
+                <div className="modal__header">
+                  <div className="header__image">
+                    {/* Update reviews / user with likes */}
+                    <div className="image__buttons">
+                      {!this.state.unliked ? (
+                        <button
+                          className="image__button"
+                          onClick={this.updateLikes.bind(this, this.state.modalInfo, true)}>
+                          {this.state.liked ? (
+                            <div>
+                              <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-up" />
+                              <i className="fas fa-check" />
+                            </div>
+                          ) : (
+                            <i className="fas fa-thumbs-up" />
+                          )}
+                        </button>
+                      ) : null}
+                      {!this.state.liked ? (
+                        <button
+                          className="image__button"
+                          onClick={this.updateLikes.bind(this, this.state.modalInfo, false)}>
+                          {this.state.unliked ? (
+                            <div>
+                              <i style={{ marginRight: ".5rem" }} className="fas fa-thumbs-down" />
+                              <i className="fas fa-check" />
+                            </div>
+                          ) : (
+                            <i className="fas fa-thumbs-down" />
+                          )}
+                        </button>
+                      ) : null}
+                      {this.state.likeError ? (
+                        <div style={{ color: "red", fontSize: ".8rem" }}>{this.state.likeErrorMessage}</div>
+                      ) : null}
                     </div>
-                    <div className="modal__body">
+                    <a href={this.state.modalInfo.photos[0].link} target="_blank">
                       <img
-                        alt={this.state.modalInfo.name}
-                        className="body__landscape"
+                        alt={this.state.modalInfo.reviewer.name}
+                        className={
+                          this.state.modalInfo.photos[0].width > this.state.modalInfo.photos[0].height
+                            ? "image__landscape"
+                            : "image__portrait"
+                        }
                         src={this.state.modalInfo.photos[0].link}
-                        onClick={this.openModal}
                       />
-                      <div className="body__stars">
-                        {" "}
-                        <StarRatings
-                          starDimension="20px"
-                          starSpacing="5px"
-                          rating={this.state.modalInfo.stars}
-                          starRatedColor="gold"
-                          starEmptyColor="grey"
-                          numberOfStars={5}
-                          name="rating"
-                        />
-                      </div>
-                      <div>{this.state.modalInfo.title}</div>
-                      <div className="body__review">{this.state.modalInfo.body}</div>
-                    </div>
-                    <div className="modal__footer">
-                      <button className="footer__button" onClick={this.closeModal}>
-                        close
+                    </a>
+                    <div className="image__buttons">
+                      <button className="image__button" onClick={this.closeModal}>
+                        <i className="far fa-window-close" />
                       </button>
                     </div>
                   </div>
-                ) : null}
+                </div>
+                <div className="modal__body">
+                  <div className="body__stars">
+                    <div className="body__business"> {this.state.modalInfo.newMongoId.name}</div>
+                    <StarRatings
+                      starDimension="20px"
+                      starSpacing="5px"
+                      rating={this.state.modalInfo.stars}
+                      starRatedColor="gold"
+                      starEmptyColor="grey"
+                      numberOfStars={5}
+                      name="rating"
+                    />
+                    <div>{this.state.modalInfo.createdOn.replace(/[^\d{4}-\d{2}-\d{2}].*/, "")}</div>
+                    <div>
+                      <i style={{ paddingRight: ".5rem" }} className="fas fa-user" />
+                      {this.state.modalInfo.reviewer.username}
+                    </div>
+                  </div>
+                  <div className="body__title">
+                    {this.state.modalInfo.title ? this.state.modalInfo.title : "***Untitled***"}
+                  </div>
+                  <div className="body__review">
+                    {this.state.modalInfo.body ? this.state.modalInfo.body : "***No Body***"}
+                  </div>
+                </div>
               </div>
-            </Modal>
+            ) : null}
+          </Modal>
           </div>
         ) : (
           <div>{this.props.history.push("/")}</div>

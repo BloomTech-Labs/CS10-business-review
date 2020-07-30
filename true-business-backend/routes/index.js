@@ -24,8 +24,7 @@ mongoose.Promise = global.Promise;
 const stripe = require("stripe")("sk_test_5RHmYt9hi15VdwLeAkvxGHUx");
 
 const restricted = (request, response, next) => {
-  const token = request.headers.authorization;
-
+  const token = request.header.authorization;
   if (token) {
     jwt.verify(token, process.env.REACT_APP_SECRET, (err, decodedToken) => {
       if (err) {
@@ -47,6 +46,10 @@ router.post("/api/user/register", (request, response) => {
   UserController.register(request, response);
 });
 
+router.post("/api/user/registerGoogle", (req, res) => {
+  UserController.createGoogleUser(req, res);
+});
+
 router.post("/api/user/login", (req, res) => {
   UserController.login(req, res);
 });
@@ -55,6 +58,7 @@ router.put("/api/user/update/:id", function(request, response) {
   UserController.updateUser(request, response);
 });
 
+<<<<<<< HEAD
 router.get("/api/user/current", function(request, response) {
   UserController.getLoggedInUser(request, response);
 });
@@ -63,8 +67,14 @@ router.put("/api/user/resetpassword/:_id", (request, response) => {
   UserController.reset_password(request, response);
 });
 
+=======
+>>>>>>> ba420f0d1505bf2fdc9b7398954099462efa3350
 router.get("/api/user/random", function(req, res) {
   UserController.getRandomUser(req, res);
+});
+
+router.post("/api/user/current", function(request, response) {
+  UserController.getGoogleUser(request, response);
 });
 
 router.get("/api/user/:id", function(req, res) {
@@ -103,6 +113,10 @@ router.get("/api/business/:id", function(req, res) {
   BusinessController.getBusinessById(req, res);
 });
 
+router.get("/api/business/google/:id", function(req, res) {
+  BusinessController.getBusinessByGoogleId(req, res);
+});
+
 router.get("/api/user/random", function(req, res) {
   UserController.getRandomUser(req, res);
 });
@@ -131,7 +145,11 @@ router.delete("/api/review/delete", (req, res) => {
   ReviewControler.deleteReview(req, res);
 });
 
-router.get("/api/review/getReviewsByReviewerId/:id/:currentPage", (req, res) => {
+router.put("/api/reviews/updateLikes", (req,res) => {
+  ReviewControler.updateLikes(req,res);
+})
+
+router.get("/api/review/getReviewsByReviewerId/:id/:currentPage/:filter/:sort", (req, res) => {
   ReviewControler.getReviewsByReviewerId(req, res);
 });
 
@@ -139,7 +157,7 @@ router.get("/api/review/getAllReviews/", (req, res) => {
   ReviewControler.getAllReviews(req, res);
 });
 
-router.get("/api/review/getReviewsByBusinessId/:id/:landing/:currentPage", (req, res) => {
+router.get("/api/review/getReviewsByBusinessId/:id/:landing/:currentPage/:filter/:sort", (req, res) => {
   ReviewControler.getReviewsByBusinessId(req, res);
 });
 

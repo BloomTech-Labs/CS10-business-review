@@ -22,10 +22,10 @@ const BusinessThumbnail = props => {
           starEmptyColor="grey"
           numberOfStars={5}
           name="rating"
-        />
+        />({props.business.totalReviews})
         <div className="description__info">
           <a href={"https://www.google.com/maps/place/" + props.business.formatted_address} target="_blank">
-            <i style={{color:'#05386b'}}className="fas fa-map-marked-alt fa-2x" />
+            <i alt="Click to See Google Map" style={{color:'#05386b'}}className="fas fa-map-marked-alt fa-2x" />
           </a>
         </div>
         <div className="description__info">

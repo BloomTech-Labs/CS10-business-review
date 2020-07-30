@@ -41,14 +41,13 @@ const reviewSchema = new mongoose.Schema({
     required: true,
     default: Date.now(),
   },
-
   photos: {
     type: Array,
     default: [
       {
-        link: "https://png.icons8.com/ios/50/000000/no-camera.png",
-        width: 3024,
-        height: 4032,
+        link: "https://png.icons8.com/ios/100/000000/picture.png",
+        width: 100,
+        height: 100,
       },
     ],
   },
@@ -57,6 +56,12 @@ const reviewSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
+  likes: {
+    type: Array,
+  },
+  unlikes: {
+    type: Array,
+  }
 });
 
 let reviewModel = mongoose.model("Review", reviewSchema);

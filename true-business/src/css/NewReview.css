@@ -1,4 +1,5 @@
 .new-review .new-review__modal {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,15 +11,15 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   text-align: center;
   color: #05386b;
 }
 .new-review .new-review__modal .modal__header {
+  font-size: 1.1rem;
   height: auto;
-  font-size: 3rem;
 }
 .new-review .new-review__modal .modal__body {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,10 +31,10 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .new-review .new-review__modal .modal__body .body__drop {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -45,10 +46,10 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .new-review .new-review__modal .modal__body .body__drop .drop__container {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,19 +61,19 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   max-width: 200px;
   min-height: 200px;
   border: 0.1rem dashed #05386b;
 }
+.new-review .new-review__modal .modal__body .body__drop .drop__container .drop__text--initial {
+  padding: 0.5rem;
+}
 .new-review .new-review__modal .modal__body .body__drop .drop__container:hover {
   cursor: pointer;
 }
-.new-review .new-review__modal .modal__body .body__drop .drop__text--initial {
-  font-size: 1rem;
-}
 .new-review .new-review__modal .modal__body .body__drop .drop__image--post {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,12 +85,12 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   min-width: 200px;
   min-height: 200px;
 }
 .new-review .new-review__modal .modal__body .body__title {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -101,8 +102,8 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
+  font-size: 1.1rem;
   height: 20%;
   margin: 1rem;
 }
@@ -112,10 +113,11 @@
   padding-right: 2rem;
 }
 .new-review .new-review__modal .modal__body .body__title .title__info {
-  font-size: 1.5rem;
+  padding: 0.5rem;
   width: 60%;
 }
 .new-review .new-review__modal .modal__body .body__review {
+  font-size: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -127,7 +129,6 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
   margin: 1rem;
 }
@@ -137,11 +138,14 @@
   width: 20%;
 }
 .new-review .new-review__modal .modal__body .body__review .review__info {
-  font-size: 1.5rem;
   width: 60%;
-  height: 10rem;
+  height: 20vh;
+  min-height: 20vh;
+  max-height: 20vh;
+  padding: 0.5rem;
 }
 .new-review .new-review__modal .modal__footer {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -153,17 +157,17 @@
   line-height: 1;
   padding: 0;
   margin: 0;
-  cursor: default;
   color: #05386b;
 }
 .new-review .new-review__modal .modal__footer .footer__buttons .buttons__button {
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 5rem;
   background-color: #3487d5;
   color: #ffffff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   height: 2.5rem;
+  margin: 1rem 0;
 }
 .new-review .new-review__modal .modal__footer .footer__buttons .buttons__button:hover {
   cursor: pointer;
@@ -171,8 +175,10 @@
   filter: brightness(110%);
   font-weight: bolder;
 }
+.new-review .new-review__modal .modal__footer .footer__buttons .buttons__button:last-of-type {
+  margin-left: 1rem;
+}
 .new-review .new-review__modal .modal__footer .footer__text {
   color: red;
   height: 1rem;
-  font-size: 1rem;
 }

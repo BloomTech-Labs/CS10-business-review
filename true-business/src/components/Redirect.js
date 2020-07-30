@@ -6,7 +6,9 @@ import "../css/Redirect.css";
 
 
  class Redirect extends Component {
-
+    componentDidMount = () => {
+        window.scrollTo(0, 0);
+      };
 
     render() {
         return (

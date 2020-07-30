@@ -10,11 +10,12 @@ import SearchResults from "./components/SearchResults";
 import Business from "./components/Business";
 import User from "./components/User";
 import Redirect from "./components/Redirect";
+import Reviewer from "./components/Reviewer";
 import "./css/App.css";
 
 let backend = process.env.REACT_APP_LOCAL_BACKEND;
-let heroku = 'https://cryptic-brook-22003.herokuapp.com/';
-if (typeof(backend) !== 'string') {
+let heroku = "https://cryptic-brook-22003.herokuapp.com/";
+if (typeof backend !== "string") {
   backend = heroku;
 }
 
@@ -27,6 +28,8 @@ class App extends Component {
     featuredReviews: [],
     featuredUsers: [],
     business: null,
+    reviewerId: null,
+    reviews: null,
   };
 
   componentWillMount = () => {
@@ -45,10 +48,6 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    if ("scrollRestoration" in window.history) {
-      window.history.scrollRestoration = "manual";
-    }
-    window.scrollTo(0, 0);
     this.resetSearch();
     this.getDBBusinesses();
   };
@@ -58,104 +57,99 @@ class App extends Component {
       this.resetSearch();
     }
   };
-  
-  getLoggedInUser = () => {
-    axios
-    .get(`${backend}api/user/current`/*, { withCredentials: true }*/)
-    .then(response => {
-      localStorage.setItem("userId", response.data._id);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("name", response.data.name);
-    })
-    .catch(err => {
-      console.log("Error:", err);
-    });
-  };
 
   render() {
     return (
       <div className="app-container">
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <LandingPage
-                business={this.getBusiness}
-                businesses={this.state.featuredBusinesses}
-                reviews={this.state.featuredReviews}
-                users={this.state.featuredUsers}
-                search={this.searchResults}
-                getBusiness={this.getBusiness}
-              />
+        <div id="animate-area">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <LandingPage
+                  business={this.getBusiness}
+                  businesses={this.state.featuredBusinesses}
+                  reviews={this.state.featuredReviews}
+                  users={this.state.featuredUsers}
+                  search={this.searchResults}
+                  getBusiness={this.getBusiness}
+                  sendReviewer={this.sendReviewer}
+                />
+              )}
+            />
+            <Route
+              path="/results"
+              render={() => (
+                <SearchResults
+                  currentPage="0"
+                  business={this.getBusiness}
+                  search={this.searchResults}
+                  searchResults={this.state.searchResults}
+                />
+              )}
+            />
+            <Route
+              path="/reviewer"
+              render={() => (
+                <Reviewer search={this.searchResults} reviewer={this.state.reviewer} reviews={this.state.reviews} />
+              )}
+            />
+            <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
+            <Route path="/signin" render={() => <SignIn search={this.searchResults} authUser={this.authUser} />} />
+            <Route
+              exact
+              path="/business"
+              render={() => (
+                <Business
+                  landingBusiness={this.state.landingBusiness}
+                  search={this.searchResults}
+                  business={this.state.business}
+                  createBusiness={this.createBusiness}
+                />
+              )}
+            />
+            {localStorage.getItem("token") && localStorage.getItem("userId") ? (
+              <Route path="/user" render={() => <User search={this.searchResults} />} />
+            ) : (
+              <Route path="/user" render={() => <Redirect search={this.searchResults} />} />
             )}
-          />
-          <Route
-            path="/results"
-            render={() => (
-              <SearchResults
-                business={this.getBusiness}
-                search={this.searchResults}
-                searchResults={this.state.searchResults}
-              />
-            )}
-          />
-          <Route path="/signup" render={() => <SignUp search={this.searchResults} />} />
-          <Route path="/signin" render={() => <SignIn search={this.searchResults} authUser={this.authUser} />} />
-          <Route
-            path="/business"
-            render={() => (
-              <Business
-                landingBusiness={this.state.landingBusiness}
-                search={this.searchResults}
-                business={this.state.business}
-                createBusiness={this.createBusiness}
-              />
-            )}
-          />
-          {localStorage.getItem('token') &&  localStorage.getItem('userId') ? (
-          <Route path="/user" render={() => <User search={this.searchResults} />} /> ):(
-          <Route path="/user" render={() => <Redirect search={this.searchResults} />} />)}
-        </Switch>
+          </Switch>
+        </div>
       </div>
     );
   }
+
+  // populate landing page
   getDBBusinesses = () => {
     axios
       .get(`${backend}api/business`)
       .then(businesses => {
-        let featuredBusinesses = businesses.data.filter(business => {
-          return business.stars >= 0;
-        });
-        this.setState({ featuredBusinesses });
+        this.setState({ featuredBusinesses: businesses.data });
       })
       .catch(err => {
         console.log("Error:", err);
       });
   };
 
+  // populate landing page
   getDBReviews = () => {
     axios
       .get(`${backend}api/review/getAllReviews`)
       .then(reviews => {
-        let featuredReviews = reviews.data.filter(review => {
-          return review.numberOfLikes >= 0;
-        });
-        this.setState({ featuredReviews });
+        this.setState({ featuredReviews: reviews.data });
       })
       .catch(err => {
         console.log("Error:", err);
       });
   };
 
+  // populate landing page
   getDBUsers = () => {
     axios
       .get(`${backend}api/user`)
       .then(users => {
-        let featuredUsers = users.data.filter(user => {
-          return user.numberOfLikes >= 0;
-        });
-        this.setState({ featuredUsers });
+        this.setState({ featuredUsers: users.data });
       })
       .catch(err => {
         console.log("Error:", err);
@@ -218,6 +212,40 @@ class App extends Component {
 
   resetSearch = () => {
     this.setState({ searchResults: null });
+  };
+
+  sendReviewer = reviewerId => {
+    let user = new Promise(resolve => {
+      return resolve(
+        axios
+          .get(`${backend}api/user/${reviewerId}`)
+          .then(response => {
+            this.setState({ reviewer: response.data });
+          })
+          .catch(err => {
+            console.log("Error", err);
+          }),
+      );
+    });
+    let reviews = new Promise(resolve => {
+      return resolve(
+        axios
+          .get(`${backend}api/review/getReviewsByReviewerId/${reviewerId}/${0}/${"No Filter"}/${"No Sorting"}`)
+          .then(response => {
+            this.setState({ reviews: response.data.reviews });
+          })
+          .catch(err => {
+            console.log("Error", err);
+          }),
+      );
+    });
+    Promise.all([user, reviews])
+      .then(() => {
+        this.props.history.push(`/reviewer`);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 }
 

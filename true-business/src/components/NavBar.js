@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Modal from "react-modal";
-import { Popover, PopoverHeader, PopoverBody } from "reactstrap";
+import { Popover, PopoverBody } from "reactstrap";
 import { Button, Menu, MenuItem } from "@material-ui/core";
 
 import logo from "../imgs/logo.png";
@@ -15,20 +15,20 @@ let popoverStyles = {
   },
 };
 
-let modalStyles = {
-  content: {
-    top: "15%",
-    left: "50%",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    height: "20vh",
-    width: "55vw",
-    zIndex: "5",
-    backgroundColor: "rgb(238,238,238)",
-    color: "rgb(5,56,107)",
-    overflow: "hidden",
-  },
-};
+// let modalStyles = {
+//   content: {
+//     top: "15%",
+//     left: "50%",
+//     marginRight: "-50%",
+//     transform: "translate(-50%, -50%)",
+//     height: "20vh",
+//     width: "30vw",
+//     zIndex: "5",
+//     backgroundColor: "rgb(238,238,238)",
+//     color: "rgb(5,56,107)",
+//     overflow: "hidden",
+//   },
+// };
 
 Modal.setAppElement("div");
 
@@ -80,6 +80,14 @@ class NavBar extends Component {
     }
   };
 
+  componentDidMount = () => {
+    if (this.state.signedIn && this.state.popoverOpen) this.setState({ popoverOpen: false });
+  };
+
+  componentDidUpdate = () => {
+    if (this.state.signedIn && this.state.popoverOpen) this.setState({ popoverOpen: false });
+  };
+
   toggle = event => {
     // Only fires the popover the first time they click on the search bar
     if (!this.state.popoverFired) {
@@ -96,11 +104,11 @@ class NavBar extends Component {
 
   handleSearch = event => {
     event.preventDefault();
-    if (this.state.searchWord !== "") {
+    if (this.state.searchWord !== "" && !this.state.popoverOpen) {
       this.props.search(this.state.searchWord + " " + this.state.searchCity, true);
       this.setState({ searchWord: "", searchCity: "" });
     } else {
-      this.openModal();
+      window.alert("Enter Search Term and City")
     }
   };
 
@@ -115,7 +123,6 @@ class NavBar extends Component {
   };
 
   render() {
-    const { anchorEl } = this.state;
     return (
       <div className="navbar">
         <img
@@ -131,7 +138,7 @@ class NavBar extends Component {
             <input
               value={this.state.searchWord}
               autoComplete="off"
-              placeholder="Tacos..."
+              placeholder="Tacos, Groceries, Drugstore..."
               onClick={this.toggle}
               onChange={this.handleInputChange.bind(this)}
               name="searchWord"
@@ -141,7 +148,7 @@ class NavBar extends Component {
             <input
               value={this.state.searchCity}
               autoComplete="off"
-              placeholder="Seattle Washington..."
+              placeholder="Seattle Washington, Osaka Japan..."
               onClick={this.toggle}
               onChange={this.handleInputChange.bind(this)}
               name="searchCity"
@@ -151,7 +158,7 @@ class NavBar extends Component {
               <i className="fa fa-search" />
             </button>
           </form>
-          <Modal
+          {/* <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={modalStyles}
@@ -169,7 +176,7 @@ class NavBar extends Component {
                 </div>
               ) : null}
             </div>
-          </Modal>{" "}
+          </Modal> */}
           {this.state.signedIn ? null : (
             <Popover
               styles={{ popoverStyles }}
@@ -177,9 +184,11 @@ class NavBar extends Component {
               isOpen={this.state.popoverOpen}
               target="signInPop"
               toggle={this.toggle}>
-              <PopoverHeader>Sign In?</PopoverHeader>
-              <PopoverBody>Users who sign in can see unlimited reviews!</PopoverBody>
-              <button type="submit" className="popover-button" onClick={this.toggle}>
+              <PopoverBody>
+                <i className="far fa-smile-wink fa-2x" />
+                <div className="popover__text">Users don't see this!</div>
+              </PopoverBody>
+              <button type="submit" className="popover__button" onClick={this.toggle}>
                 Close
               </button>
             </Popover>
@@ -187,20 +196,18 @@ class NavBar extends Component {
         </div>
         {localStorage.getItem("token") && localStorage.getItem("userId") ? (
           <div className="navbar__right--logged">
-            <Button aria-owns={anchorEl ? "simple-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
-              <i
-                onClick={() => {
-                  this.props.history.push(`/user`);
-                }}
-                className="fas fa-bars fa-2x fa-fw"
-              />
+            <Button
+              aria-owns={this.state.anchorEl ? "simple-menu" : null}
+              aria-haspopup="true"
+              onClick={this.handleClick}>
+              <i className="fas fa-bars fa-2x fa-fw" />
               <div className="right--logged__text">{localStorage.getItem("name").split(" ")[0]}</div>
             </Button>
             <Menu
               id="simple-menu"
               style={{ top: "3rem", left: "1rem" }}
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
+              anchorEl={this.state.anchorEl}
+              open={Boolean(this.state.anchorEl)}
               onClose={this.handleClose}>
               <MenuItem
                 onClick={() => {

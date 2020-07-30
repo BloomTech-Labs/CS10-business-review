@@ -62,9 +62,9 @@ const userSchema = new mongoose.Schema({
     type: Array,
     default: [
       {
-        link: "https://png.icons8.com/ios/50/000000/user-filled.png",
-        width: 3024,
-        height: 4032,
+        link: "https://png.icons8.com/ios/100/000000/gender-neutral-user.png",
+        width: 100,
+        height: 100,
       },
     ],
   },
